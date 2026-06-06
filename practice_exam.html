@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1051 — Mock Exam</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0f1419;--panel:#1a212b;--ink:#e8edf2;--muted:#9fb0c0;--accent:#4f9cff;--good:#34d399;--line:#2c3a4a;--gold:#ffd166}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+  header{background:linear-gradient(135deg,#13203a,#1a103a);padding:26px 20px;text-align:center;border-bottom:1px solid var(--line)}
+  header h1{margin:0}header p{color:var(--muted);margin:4px}
+  main{max-width:860px;margin:0 auto;padding:24px 18px 80px}
+  .bar{position:sticky;top:0;background:rgba(15,20,25,.95);backdrop-filter:blur(8px);padding:10px;display:flex;gap:10px;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
+  button{background:var(--accent);color:#001833;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+  button.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+  a{color:var(--accent)}
+  h2{border-left:4px solid var(--accent);padding-left:12px;margin-top:34px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+  .q .n{color:var(--gold);font-weight:700}
+  .marks{float:right;color:var(--muted);font-size:13px}
+  .sol{display:none;margin-top:10px;padding:12px;background:#0b1622;border:1px solid #245040;border-radius:8px}
+  .sol:before{content:"✓ Solution";color:var(--good);font-weight:700;display:block;margin-bottom:6px}
+  .show .sol{display:block}
+  .timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--gold)}
+</style>
+</head>
+<body>
+<header>
+  <h1>MATH1051 — Mock Exam</h1>
+  <p>Mirrors the real paper · Part A /30 (15×2) + Part B /70 · 120 minutes · NO calculator · justify everything</p>
+  <p><a href="index.html">← back to revision hub</a></p>
+</header>
+<div class="bar">
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+  <button class="ghost" onclick="startTimer()">⏱ Start 120:00 — <span class="timer" id="tm">120:00</span></button>
+</div>
+<main>
+
+<h2>Part A — 15 questions × 2 marks (30)</h2>
+<p style="color:var(--muted)">Click any question to reveal its solution.</p>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A1.</span> Determine whether $\sum_{n=1}^\infty\left(\frac1n-\frac1{n+2}\right)$ converges.
+<div class="sol">Telescoping. Partial sum $S_N=\left(1+\frac12\right)-\frac1{N+1}-\frac1{N+2}\to\frac32$. <b>Converges</b> (to $3/2$).</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A2.</span> Determine whether $\sum_{n=1}^\infty\frac{3n+1}{n}$ converges.
+<div class="sol">$a_n=3+\frac1n\to3\ne0$. By the nth-term (divergence) test, <b>diverges</b>.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A3.</span> Determine whether $\sum_{n=1}^\infty\left(\frac34\right)^n$ converges.
+<div class="sol">Geometric, $r=\frac34$, $|r|<1$ ⇒ <b>converges</b> (to $\frac{3/4}{1-3/4}=3$).</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A4.</span> Use the comparison test to show $\sum_{n=1}^\infty\frac{1}{n^2+5}$ converges.
+<div class="sol">$0<\frac{1}{n^2+5}\le\frac1{n^2}$, and $\sum\frac1{n^2}$ converges ($p=2>1$). By comparison, <b>converges</b>.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A5.</span> Evaluate $\displaystyle\int x e^{x}\,dx$.
+<div class="sol">By parts $u=x,\,dv=e^x dx$: $xe^x-\int e^x dx=(x-1)e^x+C$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A6.</span> Evaluate $\displaystyle\int \frac{2x}{x^2+3}\,dx$.
+<div class="sol">Form $\frac{f'}{f}$ with $f=x^2+3$: $=\ln(x^2+3)+C$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A7.</span> Evaluate $\displaystyle\int \frac{1}{x(x+1)}\,dx$.
+<div class="sol">Partial fractions $\frac1x-\frac1{x+1}$: $=\ln|x|-\ln|x+1|+C=\ln\left|\frac{x}{x+1}\right|+C$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A8.</span> Calculate the determinant of $\begin{bmatrix}2&0&1\\1&3&0\\0&-1&4\end{bmatrix}$.
+<div class="sol">Expand row 1: $2(3\cdot4-0\cdot(-1))-0+1(1\cdot(-1)-3\cdot0)=2(12)+(-1)=23$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A9.</span> Is $\begin{bmatrix}2&4\\1&2\end{bmatrix}$ invertible?
+<div class="sol">$\det=2\cdot2-4\cdot1=0$ ⇒ <b>not invertible</b> (singular).</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A10.</span> Determine the eigenvalues of $\begin{bmatrix}1&1\\4&1\end{bmatrix}$.
+<div class="sol">$(1-\lambda)^2-4=0\Rightarrow1-\lambda=\pm2\Rightarrow\lambda=3,\,-1$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A11.</span> Compute the dot product $(2,1,-3)\cdot(1,4,2)$ and state whether the vectors are orthogonal.
+<div class="sol">$2+4-6=0$. Since the dot product is $0$, they ARE orthogonal.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A12.</span> Compute the cross product $(1,1,0)\times(1,2,2)$.
+<div class="sol">$i(1\cdot2-0\cdot2)-j(1\cdot2-0\cdot1)+k(1\cdot2-1\cdot1)=(2,-2,1)$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A13.</span> Is $\binom{1}{-1}$ an eigenvector of $\begin{bmatrix}1&3\\3&1\end{bmatrix}$? If so give its eigenvalue.
+<div class="sol">$A\binom1{-1}=\binom{1-3}{3-1}=\binom{-2}{2}=-2\binom1{-1}$. Yes, eigenvalue $\lambda=-2$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A14.</span> Are $\begin{pmatrix}1\\2\\1\end{pmatrix}$ and $\begin{pmatrix}2\\4\\3\end{pmatrix}$ linearly independent?
+<div class="sol">If dependent, the second $=c\times$ first: $c=2$ from first two entries gives $(2,4,2)\ne(2,4,3)$. Not a scalar multiple ⇒ <b>linearly independent</b>.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A15.</span> Determine $\frac{d}{dx}\displaystyle\int_1^{1+x}\ln t\,dt$.
+<div class="sol">FTC + chain: $\ln(1+x)\cdot\frac{d}{dx}(1+x)=\ln(1+x)$.</div></div>
+
+<h2>Part B — long questions (70)</h2>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">15</span><span class="n">B1.</span> (a) Find the Taylor series for $f(x)=e^x$ about $x=1$ and determine its radius of convergence. (b) Use part (a) to find the Taylor series for $g(x)=(x-1)e^x$ about $x=1$.
+<div class="sol"><b>(a)</b> $f^{(n)}(1)=e$ for all $n$ ⇒ $e^x=\sum_{n=0}^\infty\frac{e}{n!}(x-1)^n$. Ratio $=\frac{|x-1|}{n+1}\to0<1$ for all $x$ ⇒ $R=\infty$.<br>
+<b>(b)</b> $g(x)=(x-1)\sum\frac{e}{n!}(x-1)^n=\sum_{n=0}^\infty\frac{e}{n!}(x-1)^{n+1}$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B2.</span> Find the radius and interval of convergence of $\displaystyle\sum_{n=1}^\infty\frac{2^n}{n\,3^n}(x-1)^n$.
+<div class="sol">Ratio $\to\frac23|x-1|<1\Rightarrow R=\frac32$, interval $(-\frac12,\frac52)$ before endpoints. At $x=\frac52$: $\sum\frac1n$ diverges. At $x=-\frac12$: $\sum\frac{(-1)^n}{n}$ converges. <b>Interval: $[-\frac12,\frac52)$.</b></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">10</span><span class="n">B3.</span> For each improper integral, determine convergence and evaluate if convergent. (a) $\displaystyle\int_{-\infty}^0 2^x dx$  (b) $\displaystyle\int_1^\infty\frac{\ln x}{x}dx$.
+<div class="sol"><b>(a)</b> $\int 2^x=\frac{2^x}{\ln2}$; $\int_{-T}^0=\frac{1-2^{-T}}{\ln2}\to\frac1{\ln2}$. <b>Converges to $1/\ln2$.</b><br>
+<b>(b)</b> $u=\ln x$: antiderivative $\frac{(\ln x)^2}{2}$; $\int_1^R=\frac{(\ln R)^2}{2}\to\infty$. <b>Diverges.</b></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">10</span><span class="n">B4.</span> $F(x)=\displaystyle\int_1^{e^{x}}(\ln t)^{3}\,dt$. (a) Find $F'(x)$ without evaluating the integral. (b) Find $F'(0)$.
+<div class="sol"><b>(a)</b> FTC+chain: $F'(x)=(\ln e^x)^3\cdot e^x=x^3 e^x$. <b>(b)</b> $F'(0)=0$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">12</span><span class="n">B5.</span> True/False — prove or give a counter-example (3 marks each).
+(a) The set $\{(a,b)\in\mathbb R^2 : a-b=1\}$ with standard operations is a vector space.
+(b) For any 2×2 matrix $B$, $A=\begin{bmatrix}3&0\\0&3\end{bmatrix}$ satisfies $AB=BA$.
+(c) If $u,v$ are linearly independent then they are orthogonal.
+(d) If $A$ is $3\times3$ then $\det(3A)=3\det A$.
+<div class="sol"><b>(a) FALSE</b> — no zero vector ($0-0=0\ne1$); not closed.<br>
+<b>(b) TRUE</b> — $A=3I$, a scalar multiple of the identity, commutes with every matrix.<br>
+<b>(c) FALSE</b> — $(1,0),(1,1)$ are independent but $(1,0)\cdot(1,1)=1\ne0$.<br>
+<b>(d) FALSE</b> — $\det(3A)=3^3\det A=27\det A$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B6.</span> The augmented matrix for $Ax=b$ reduces to $\begin{bmatrix}1&0&2&|&1\\0&1&1&|&1\\0&0&0&|&k\end{bmatrix}$. For which $k$ does a solution exist? Is it unique? Also find the null space of $A$ when a solution exists.
+<div class="sol">Solution exists $\iff k=0$ (else $0=k$ is impossible). Then $x_3$ is free ⇒ <b>not unique</b> (infinitely many). Null space: set RHS $=0$: $x_1=-2x_3,\,x_2=-x_3$ ⇒ span$\{(-2,-1,1)\}$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">7</span><span class="n">B7.</span> Matrices $A,B$ are square with integer determinants, $1<\det A<\det B$, and $\det(ABAB)=36$. Find $\det A$ and $\det B$.
+<div class="sol">$\det(ABAB)=(\det A\det B)^2=36\Rightarrow\det A\det B=6$. Integers with $1<\det A<\det B$ ⇒ $\det A=2,\det B=3$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B8.</span> Determine the eigenvalues and corresponding eigenvectors of $A=\begin{bmatrix}1&6\\5&2\end{bmatrix}$.
+<div class="sol">$\det(A-\lambda I)=(1-\lambda)(2-\lambda)-30=\lambda^2-3\lambda-28=(\lambda-7)(\lambda+4)=0\Rightarrow\lambda=7,-4$.<br>
+$\lambda=7$: $\begin{bmatrix}-6&6\\5&-5\end{bmatrix}\Rightarrow x=y\Rightarrow(1,1)$.<br>
+$\lambda=-4$: $\begin{bmatrix}5&6\\5&6\end{bmatrix}\Rightarrow5x+6y=0\Rightarrow(6,-5)$.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">B9.</span> Is the span of $(1,1)$ a subspace of $\mathbb R^2$?
+<div class="sol">Yes — it contains $0$ (take scalar $0$), and is closed under addition and scalar multiplication (any combination of $(1,1)$ is again a multiple of $(1,1)$). It's the line $y=x$, a 1-dimensional subspace.</div></div>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('.q').forEach(q=>q.classList.toggle('show',shown));}
+let iv=null;
+function startTimer(){
+  if(iv)clearInterval(iv);
+  let s=120*60;const el=document.getElementById('tm');
+  iv=setInterval(()=>{s--;if(s<0){clearInterval(iv);el.textContent='TIME';return;}
+    const m=Math.floor(s/60),ss=s%60;el.textContent=`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;},1000);
+}
+</script>
+</body>
+</html>

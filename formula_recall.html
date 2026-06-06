@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1051 — Off-Sheet Recall (memorise this)</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  body{font-family:Georgia,"Times New Roman",serif;max-width:820px;margin:0 auto;padding:28px 22px;color:#111;line-height:1.55}
+  h1{text-align:center;font-size:24px;margin-bottom:2px}
+  .sub{text-align:center;color:#a00;font-weight:bold;margin-top:0}
+  h2{font-size:17px;border-bottom:2px solid #111;padding-bottom:3px;margin-top:26px}
+  .box{border:1px solid #999;border-radius:6px;padding:8px 12px;margin:8px 0;background:#fafafa}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+  td,th{border:1px solid #bbb;padding:5px 8px}th{background:#eee}
+  .g{columns:2;column-gap:24px}@media(max-width:680px){.g{columns:1}}
+  .note{font-size:13px;color:#444;font-style:italic}
+  a{color:#06c}
+  @media print{a{color:#111}.no-print{display:none}}
+</style>
+</head>
+<body>
+<h1>MATH1051 — The Off-Sheet Recall Card</h1>
+<p class="sub">EVERYTHING HERE IS NOT ON THE FORMULA SHEET. Memorise it.</p>
+<p class="note no-print">The official sheet gives you only: trig identities, derivatives (incl. arcsin/arccos/arctan), $V=\pi\int_a^b[f]^2dx$, the geometric-series sum, and the Taylor-series template. The rest is on you. (<a href="index.html">← back to hub</a>)</p>
+
+<h2>1 · Antiderivatives (no integral table is given)</h2>
+<div class="g">
+<div class="box">$\int x^a\,dx=\dfrac{x^{a+1}}{a+1}+C\ (a\ne-1)$</div>
+<div class="box">$\int \dfrac1x\,dx=\ln|x|+C$</div>
+<div class="box">$\int e^x\,dx=e^x+C$</div>
+<div class="box">$\int a^x\,dx=\dfrac{a^x}{\ln a}+C$</div>
+<div class="box">$\int \sin x\,dx=-\cos x+C$</div>
+<div class="box">$\int \cos x\,dx=\sin x+C$</div>
+<div class="box">$\int \sec^2 x\,dx=\tan x+C$</div>
+<div class="box">$\int \dfrac{1}{1+x^2}dx=\arctan x+C$</div>
+<div class="box">$\int \dfrac{1}{\sqrt{1-x^2}}dx=\arcsin x+C$</div>
+<div class="box">$\int \dfrac{f'(x)}{f(x)}dx=\ln|f(x)|+C$</div>
+</div>
+
+<h2>2 · Integration techniques</h2>
+<div class="box"><b>By parts:</b> $\int u\,dv=uv-\int v\,du$. Choose $u$ by <b>LIATE</b> (Log, Inverse-trig, Algebraic, Trig, Exp).</div>
+<div class="box"><b>u-substitution:</b> set $u=$ inner function whose derivative appears as a factor.</div>
+<div class="box"><b>Partial fractions:</b> $\dfrac{1}{(x-a)(x-b)}=\dfrac{A}{x-a}+\dfrac{B}{x-b}$, solve $A,B$ by cover-up.</div>
+<div class="box"><b>Improper:</b> swap bad limit for a variable, integrate, take limit. Finite = converges.</div>
+<div class="box"><b>FTC + chain:</b> $\dfrac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))\,g'(x)$.</div>
+
+<h2>3 · Series convergence tests</h2>
+<table>
+<tr><th>Test</th><th>Rule</th></tr>
+<tr><td>nth-term (divergence)</td><td>$a_n\not\to0\Rightarrow$ diverges. (Cannot prove convergence.)</td></tr>
+<tr><td>Geometric $\sum ar^n$</td><td>converges $\iff|r|<1$, sum $=\dfrac{a}{1-r}$</td></tr>
+<tr><td>p-series $\sum\frac1{n^p}$</td><td>converges $\iff p>1$</td></tr>
+<tr><td>Ratio</td><td>$L=\lim\left|\frac{a_{n+1}}{a_n}\right|$: $<1$ conv, $>1$ div, $=1$ inconclusive</td></tr>
+<tr><td>Comparison</td><td>$0\le a_n\le b_n$; $\sum b_n$ conv $\Rightarrow\sum a_n$ conv</td></tr>
+<tr><td>Alternating (Leibniz)</td><td>$\sum(-1)^n b_n$ conv if $b_n\downarrow0$</td></tr>
+</table>
+<div class="box"><b>Absolute</b> = $\sum|a_n|$ conv. <b>Conditional</b> = $\sum a_n$ conv but $\sum|a_n|$ div. Classic: $\sum\frac{(-1)^n}{n}$.</div>
+
+<h2>4 · Maclaurin series (know these)</h2>
+<div class="box">$e^x=\sum\dfrac{x^n}{n!}$ · $\cos x=\sum\dfrac{(-1)^n x^{2n}}{(2n)!}$ · $\sin x=\sum\dfrac{(-1)^n x^{2n+1}}{(2n+1)!}$ — all converge for all $x$.</div>
+<div class="box"><b>Radius of convergence:</b> ratio-test the power series; converges where $|x-a|<R$; then test endpoints separately.</div>
+
+<h2>5 · Linear algebra (not given)</h2>
+<table>
+<tr><td>2×2 inverse</td><td>$A^{-1}=\dfrac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$</td></tr>
+<tr><td>Determinant props</td><td>$\det(AB)=\det A\det B$; $\det(A^{-1})=\frac1{\det A}$; $\det(A^T)=\det A$; $\det(cA)=c^n\det A$</td></tr>
+<tr><td>Invertible $\iff$</td><td>$\det A\ne0\iff$ null space $\{0\}\iff$ cols independent $\iff$ unique solution</td></tr>
+<tr><td>Eigenvalues</td><td>solve $\det(A-\lambda I)=0$; 2×2: $\lambda^2-(\text{tr})\lambda+\det=0$</td></tr>
+<tr><td>Eigenvectors</td><td>null space of $(A-\lambda I)$</td></tr>
+<tr><td>Triangular matrix</td><td>eigenvalues = diagonal; $\det$ = product of diagonal</td></tr>
+<tr><td>Dot / cross</td><td>$u\cdot v=\sum u_iv_i$ ($\perp\iff0$); $u\times v=\det[i,j,k;u;v]$, $\|u\times v\|$=area</td></tr>
+</table>
+
+<h2>6 · Classifying $Ax=b$ from row-echelon form</h2>
+<table>
+<tr><td>$[0\,0\,0\,|\,k],\,k\ne0$</td><td>NO solution</td></tr>
+<tr><td>$[0\,0\,0\,|\,0]$ (a free variable)</td><td>infinitely many</td></tr>
+<tr><td>pivot in every column</td><td>unique</td></tr>
+</table>
+
+<h2>7 · Subspace / vector-space test</h2>
+<div class="box">$S$ is a subspace $\iff$ (1) <b>contains $0$</b>, (2) closed under $+$, (3) closed under scalar ×. <i>Most "is it a vector space?" answers are FALSE because $0\notin S$.</i></div>
+
+<p class="note">EXCLUDED from the exam: 8.6, 16.1, 17.8, 17.9, 17.10, 17.11.</p>
+</body>
+</html>
