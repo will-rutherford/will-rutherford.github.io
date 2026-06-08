@@ -3,33 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATH1051 — Mock Exam</title>
-<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$']]}};</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<title>ACCT1110 — Mock Exam</title>
 <style>
-  :root{--bg:#0f1419;--panel:#1a212b;--ink:#e8edf2;--muted:#9fb0c0;--accent:#4f9cff;--good:#34d399;--line:#2c3a4a;--gold:#ffd166}
+  :root{--bg:#0f1518;--panel:#18232a;--ink:#e9f1f3;--muted:#9db4bd;--accent:#2dd4bf;--good:#4ade80;--line:#273a44;--gold:#ffd166;--dr:#7dd3fc;--cr:#fca5a5}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
-  header{background:linear-gradient(135deg,#13203a,#1a103a);padding:26px 20px;text-align:center;border-bottom:1px solid var(--line)}
+  header{background:linear-gradient(135deg,#0c2d2a,#0e3030);padding:26px 20px;text-align:center;border-bottom:1px solid var(--line)}
   header h1{margin:0}header p{color:var(--muted);margin:4px}
-  main{max-width:860px;margin:0 auto;padding:24px 18px 80px}
-  .bar{position:sticky;top:0;background:rgba(15,20,25,.95);backdrop-filter:blur(8px);padding:10px;display:flex;gap:10px;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
-  button{background:var(--accent);color:#001833;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+  main{max-width:880px;margin:0 auto;padding:24px 18px 80px}
+  .bar{position:sticky;top:0;background:rgba(15,21,24,.95);backdrop-filter:blur(8px);padding:10px;display:flex;gap:10px;justify-content:center;border-bottom:1px solid var(--line);z-index:10;flex-wrap:wrap}
+  button{background:var(--accent);color:#012b27;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer}
   button.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
   a{color:var(--accent)}
-  h2{border-left:4px solid var(--accent);padding-left:12px;margin-top:34px}
+  h2{border-left:4px solid var(--accent);padding-left:12px;margin-top:30px}
   .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
   .q .n{color:var(--gold);font-weight:700}
   .marks{float:right;color:var(--muted);font-size:13px}
-  .sol{display:none;margin-top:10px;padding:12px;background:#0b1622;border:1px solid #245040;border-radius:8px}
+  .sol{display:none;margin-top:10px;padding:12px;background:#0a1417;border:1px solid #245040;border-radius:8px;font-size:14.5px}
   .sol:before{content:"✓ Solution";color:var(--good);font-weight:700;display:block;margin-bottom:6px}
   .show .sol{display:block}
   .timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--gold)}
+  .je{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px}
+  .dr{color:var(--dr)}.cr{color:var(--cr)}
+  table{border-collapse:collapse;font-size:13.5px;margin:6px 0}td{padding:1px 14px 1px 0}
 </style>
 </head>
 <body>
 <header>
-  <h1>MATH1051 — Mock Exam</h1>
-  <p>Mirrors the real paper · Part A /30 (15×2) + Part B /70 · 120 minutes · NO calculator · justify everything</p>
+  <h1>ACCT1110 — Mock Exam</h1>
+  <p>Mirrors the real paper · 6 questions · ~52 marks · 120 minutes · calculator only · SHOW WORKINGS</p>
   <p><a href="index.html">← back to revision hub</a></p>
 </header>
 <div class="bar">
@@ -37,106 +38,105 @@
   <button class="ghost" onclick="startTimer()">⏱ Start 120:00 — <span class="timer" id="tm">120:00</span></button>
 </div>
 <main>
+<p style="color:var(--muted)">Click any question to reveal its worked solution. Try it on paper first.</p>
 
-<h2>Part A — 15 questions × 2 marks (30)</h2>
-<p style="color:var(--muted)">Click any question to reveal its solution.</p>
+<h2>Q1 — Depreciation &amp; Disposal (12)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">12</span><span class="n">Q1.</span>
+Harbour Logistics Pty Ltd bought a forklift on <b>1 Sep 2025</b> for <b>$180,000</b> (GST exclusive). Residual $20,000, useful life 8 years, total capacity 40,000 hours. Year-end 31 Dec.
+<br><b>(a)</b> Straight-line depreciation for 2025 and 2026. <b>(b)</b> Diminishing-balance @ 20% for 2025 and 2026. <b>(c)</b> Units-of-production for 2025 (used 2,000 hours).
+<br><b>(d)</b> A delivery van bought 1 Jan 2020 for <b>$33,000 including 10% GST</b> (SL, 6-yr life, residual $3,000) is sold on 31 Dec 2025 for $4,000 (ex-GST). Calculate the gain or loss on disposal.
+<div class="sol">
+<b>(a) SL:</b> (180,000 − 20,000)/8 = 20,000/yr. 2025 = 20,000 × 4/12 = <b>$6,667</b>; 2026 = <b>$20,000</b>.<br>
+<b>(b) Diminishing @20%:</b> 2025 = 180,000 × 20% × 4/12 = <b>$12,000</b>; 2026 = (180,000 − 12,000) × 20% = <b>$33,600</b>.<br>
+<b>(c) Units:</b> (180,000 − 20,000) × 2,000/40,000 = <b>$8,000</b>.<br>
+<b>(d)</b> Ex-GST cost = 33,000/1.1 = 30,000. Depreciable = 30,000 − 3,000 = 27,000; SL = 4,500/yr × 6 yrs (2020–2025) = 27,000 accumulated. Carrying amount = 30,000 − 27,000 = 3,000. Proceeds 4,000 − 3,000 = <b>Gain $1,000</b>.
+</div></div>
 
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A1.</span> Determine whether $\sum_{n=1}^\infty\left(\frac1n-\frac1{n+2}\right)$ converges.
-<div class="sol">Telescoping. Partial sum $S_N=\left(1+\frac12\right)-\frac1{N+1}-\frac1{N+2}\to\frac32$. <b>Converges</b> (to $3/2$).</div></div>
+<h2>Q2 — Bank Reconciliation + Allowance (10)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">6</span><span class="n">Q2A.</span>
+Reef Diving Pty Ltd's books show Cash at Bank of <b>$5,240</b> (Dr). The bank statement shows $4,118. Bank charges $40; interest received $60; a customer's dishonoured cheque $310; outstanding deposits $1,520; a $500 receipt was recorded by the company as $608 (error $108 too high). Reconcile both sides.
+<div class="sol">
+Bank side: 4,118 + 1,520 outstanding deposits = <b>$5,638</b>.<br>
+Books side: 5,240 + 60 interest − 40 charges − 310 dishonoured − 108 error = <b>$5,638</b> ✓<br>
+<span class="muted">(The $608-vs-$500 error overstated cash by 108, so subtract it.)</span>
+</div></div>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">4</span><span class="n">Q2B.</span>
+Reef's opening allowance for doubtful debts is <b>$6,200 Cr</b>. During the year $4,100 of bad debts were written off. Year-end accounts receivable is $310,000. Bring the allowance to <b>2.5%</b> of AR. Provide journal entries (narrations not required).
+<div class="sol">
+Write-off: <span class="dr">Dr</span> Allowance 4,100 / <span class="cr">Cr</span> Accounts receivable 4,100.<br>
+Required = 2.5% × 310,000 = 7,750. Balance after write-off = 6,200 − 4,100 = 2,100 Cr. Top-up = 7,750 − 2,100 = <b>5,650</b>.<br>
+<span class="dr">Dr</span> Bad debts expense 5,650 / <span class="cr">Cr</span> Allowance for doubtful debts 5,650.
+</div></div>
 
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A2.</span> Determine whether $\sum_{n=1}^\infty\frac{3n+1}{n}$ converges.
-<div class="sol">$a_n=3+\frac1n\to3\ne0$. By the nth-term (divergence) test, <b>diverges</b>.</div></div>
+<h2>Q3 — Warranty + Share Issue + Dividends (8)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">5</span><span class="n">Q3A.</span>
+Summit Appliances Ltd offers a 12-month warranty. Opening warranty provision <b>$48,000 Cr</b>; during the year $51,200 of warranty work (labour) was performed; sales revenue $2,900,000; the warranty estimate is <b>2.0%</b> of revenue. Provide the journal entries (narrations required).
+<div class="sol">
+Work performed: <span class="dr">Dr</span> Warranty provision 51,200 / <span class="cr">Cr</span> Wages payable 51,200 <span class="muted">(warranty claims settled)</span>.<br>
+Balance after = 48,000 − 51,200 = 3,200 <b>debit</b>. Required = 2% × 2,900,000 = 58,000. Adjustment = 58,000 + 3,200 = <b>61,200</b>.<br>
+<span class="dr">Dr</span> Warranty expense 61,200 / <span class="cr">Cr</span> Warranty provision 61,200 <span class="muted">(year-end warranty provision)</span>.
+</div></div>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="n">Q3B.</span>
+On 1 Aug Quokka Ltd issued 3,000,000 shares at $1.50, fully payable on application (no over-subscription). On 20 Oct it declared a $0.10 dividend on its 9,000,000 shares, paid 5 Nov. Provide the journal entries.
+<div class="sol">
+Issue: <span class="dr">Dr</span> Cash 4,500,000 / <span class="cr">Cr</span> Share capital 4,500,000 (3M × $1.50).<br>
+Declaration: <span class="dr">Dr</span> Retained earnings 900,000 / <span class="cr">Cr</span> Dividends payable 900,000 (9M × $0.10).<br>
+Payment: <span class="dr">Dr</span> Dividends payable 900,000 / <span class="cr">Cr</span> Cash 900,000.
+</div></div>
 
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A3.</span> Determine whether $\sum_{n=1}^\infty\left(\frac34\right)^n$ converges.
-<div class="sol">Geometric, $r=\frac34$, $|r|<1$ ⇒ <b>converges</b> (to $\frac{3/4}{1-3/4}=3$).</div></div>
+<h2>Q4 — Statement of Cash Flows: DIRECT (8)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">Q4.</span>
+Lakeside Resorts Ltd, y/e 30 Jun 2026. Sales $900,000 (all on account); COGS $600,000; operating expenses $96,000 (including depreciation $24,000); income tax expense $38,000. Movements: AR <b>increased</b> $7,000; inventory <b>decreased</b> $5,000; accounts payable <b>increased</b> $4,000; prepaid expenses <b>increased</b> $2,000; income tax payable <b>increased</b> $3,000. Prepare the operating section (direct method).
+<div class="sol">
+<table>
+<tr><td>Receipts from customers</td><td>900,000 − 7,000 (↑AR)</td><td>= 893,000</td></tr>
+<tr><td>Payments to suppliers</td><td>−(600,000 − 5,000 ↓inv − 4,000 ↑AP)</td><td>= (591,000)</td></tr>
+<tr><td>Payments for operating expenses</td><td>−(96,000 − 24,000 dep + 2,000 ↑prepaid)</td><td>= (74,000)</td></tr>
+<tr><td>Payments for income tax</td><td>−(38,000 − 3,000 ↑tax payable)</td><td>= (35,000)</td></tr>
+<tr><td><b>Net cash from operating</b></td><td></td><td><b>= 193,000</b></td></tr>
+</table>
+</div></div>
 
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A4.</span> Use the comparison test to show $\sum_{n=1}^\infty\frac{1}{n^2+5}$ converges.
-<div class="sol">$0<\frac{1}{n^2+5}\le\frac1{n^2}$, and $\sum\frac1{n^2}$ converges ($p=2>1$). By comparison, <b>converges</b>.</div></div>
+<h2>Q5 — Statement of Cash Flows: INDIRECT (7)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">7</span><span class="n">Q5.</span>
+Using the same Lakeside Resorts data, reconcile operating profit to net cash from operating (indirect method). Operating profit is $166,000; depreciation $24,000. (Use the working-capital movements from Q4. Assume income tax is included in profit.)
+<div class="sol">
+<table>
+<tr><td>Operating profit</td><td>166,000</td></tr>
+<tr><td>+ Depreciation</td><td>24,000</td></tr>
+<tr><td>− Increase in AR</td><td>(7,000)</td></tr>
+<tr><td>+ Decrease in inventory</td><td>5,000</td></tr>
+<tr><td>− Increase in prepaid</td><td>(2,000)</td></tr>
+<tr><td>+ Increase in accounts payable</td><td>4,000</td></tr>
+<tr><td>+ Increase in tax payable</td><td>3,000</td></tr>
+<tr><td><b>Net cash from operating</b></td><td><b>193,000</b></td></tr>
+</table>
+<span class="muted">Ties to Q4's $193,000 — that agreement is your built-in check.</span>
+</div></div>
 
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A5.</span> Evaluate $\displaystyle\int x e^{x}\,dx$.
-<div class="sol">By parts $u=x,\,dv=e^x dx$: $xe^x-\int e^x dx=(x-1)e^x+C$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A6.</span> Evaluate $\displaystyle\int \frac{2x}{x^2+3}\,dx$.
-<div class="sol">Form $\frac{f'}{f}$ with $f=x^2+3$: $=\ln(x^2+3)+C$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A7.</span> Evaluate $\displaystyle\int \frac{1}{x(x+1)}\,dx$.
-<div class="sol">Partial fractions $\frac1x-\frac1{x+1}$: $=\ln|x|-\ln|x+1|+C=\ln\left|\frac{x}{x+1}\right|+C$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A8.</span> Calculate the determinant of $\begin{bmatrix}2&0&1\\1&3&0\\0&-1&4\end{bmatrix}$.
-<div class="sol">Expand row 1: $2(3\cdot4-0\cdot(-1))-0+1(1\cdot(-1)-3\cdot0)=2(12)+(-1)=23$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A9.</span> Is $\begin{bmatrix}2&4\\1&2\end{bmatrix}$ invertible?
-<div class="sol">$\det=2\cdot2-4\cdot1=0$ ⇒ <b>not invertible</b> (singular).</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A10.</span> Determine the eigenvalues of $\begin{bmatrix}1&1\\4&1\end{bmatrix}$.
-<div class="sol">$(1-\lambda)^2-4=0\Rightarrow1-\lambda=\pm2\Rightarrow\lambda=3,\,-1$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A11.</span> Compute the dot product $(2,1,-3)\cdot(1,4,2)$ and state whether the vectors are orthogonal.
-<div class="sol">$2+4-6=0$. Since the dot product is $0$, they ARE orthogonal.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A12.</span> Compute the cross product $(1,1,0)\times(1,2,2)$.
-<div class="sol">$i(1\cdot2-0\cdot2)-j(1\cdot2-0\cdot1)+k(1\cdot2-1\cdot1)=(2,-2,1)$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A13.</span> Is $\binom{1}{-1}$ an eigenvector of $\begin{bmatrix}1&3\\3&1\end{bmatrix}$? If so give its eigenvalue.
-<div class="sol">$A\binom1{-1}=\binom{1-3}{3-1}=\binom{-2}{2}=-2\binom1{-1}$. Yes, eigenvalue $\lambda=-2$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A14.</span> Are $\begin{pmatrix}1\\2\\1\end{pmatrix}$ and $\begin{pmatrix}2\\4\\3\end{pmatrix}$ linearly independent?
-<div class="sol">If dependent, the second $=c\times$ first: $c=2$ from first two entries gives $(2,4,2)\ne(2,4,3)$. Not a scalar multiple ⇒ <b>linearly independent</b>.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">A15.</span> Determine $\frac{d}{dx}\displaystyle\int_1^{1+x}\ln t\,dt$.
-<div class="sol">FTC + chain: $\ln(1+x)\cdot\frac{d}{dx}(1+x)=\ln(1+x)$.</div></div>
-
-<h2>Part B — long questions (70)</h2>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">15</span><span class="n">B1.</span> (a) Find the Taylor series for $f(x)=e^x$ about $x=1$ and determine its radius of convergence. (b) Use part (a) to find the Taylor series for $g(x)=(x-1)e^x$ about $x=1$.
-<div class="sol"><b>(a)</b> $f^{(n)}(1)=e$ for all $n$ ⇒ $e^x=\sum_{n=0}^\infty\frac{e}{n!}(x-1)^n$. Ratio $=\frac{|x-1|}{n+1}\to0<1$ for all $x$ ⇒ $R=\infty$.<br>
-<b>(b)</b> $g(x)=(x-1)\sum\frac{e}{n!}(x-1)^n=\sum_{n=0}^\infty\frac{e}{n!}(x-1)^{n+1}$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B2.</span> Find the radius and interval of convergence of $\displaystyle\sum_{n=1}^\infty\frac{2^n}{n\,3^n}(x-1)^n$.
-<div class="sol">Ratio $\to\frac23|x-1|<1\Rightarrow R=\frac32$, interval $(-\frac12,\frac52)$ before endpoints. At $x=\frac52$: $\sum\frac1n$ diverges. At $x=-\frac12$: $\sum\frac{(-1)^n}{n}$ converges. <b>Interval: $[-\frac12,\frac52)$.</b></div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">10</span><span class="n">B3.</span> For each improper integral, determine convergence and evaluate if convergent. (a) $\displaystyle\int_{-\infty}^0 2^x dx$  (b) $\displaystyle\int_1^\infty\frac{\ln x}{x}dx$.
-<div class="sol"><b>(a)</b> $\int 2^x=\frac{2^x}{\ln2}$; $\int_{-T}^0=\frac{1-2^{-T}}{\ln2}\to\frac1{\ln2}$. <b>Converges to $1/\ln2$.</b><br>
-<b>(b)</b> $u=\ln x$: antiderivative $\frac{(\ln x)^2}{2}$; $\int_1^R=\frac{(\ln R)^2}{2}\to\infty$. <b>Diverges.</b></div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">10</span><span class="n">B4.</span> $F(x)=\displaystyle\int_1^{e^{x}}(\ln t)^{3}\,dt$. (a) Find $F'(x)$ without evaluating the integral. (b) Find $F'(0)$.
-<div class="sol"><b>(a)</b> FTC+chain: $F'(x)=(\ln e^x)^3\cdot e^x=x^3 e^x$. <b>(b)</b> $F'(0)=0$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">12</span><span class="n">B5.</span> True/False — prove or give a counter-example (3 marks each).
-(a) The set $\{(a,b)\in\mathbb R^2 : a-b=1\}$ with standard operations is a vector space.
-(b) For any 2×2 matrix $B$, $A=\begin{bmatrix}3&0\\0&3\end{bmatrix}$ satisfies $AB=BA$.
-(c) If $u,v$ are linearly independent then they are orthogonal.
-(d) If $A$ is $3\times3$ then $\det(3A)=3\det A$.
-<div class="sol"><b>(a) FALSE</b> — no zero vector ($0-0=0\ne1$); not closed.<br>
-<b>(b) TRUE</b> — $A=3I$, a scalar multiple of the identity, commutes with every matrix.<br>
-<b>(c) FALSE</b> — $(1,0),(1,1)$ are independent but $(1,0)\cdot(1,1)=1\ne0$.<br>
-<b>(d) FALSE</b> — $\det(3A)=3^3\det A=27\det A$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B6.</span> The augmented matrix for $Ax=b$ reduces to $\begin{bmatrix}1&0&2&|&1\\0&1&1&|&1\\0&0&0&|&k\end{bmatrix}$. For which $k$ does a solution exist? Is it unique? Also find the null space of $A$ when a solution exists.
-<div class="sol">Solution exists $\iff k=0$ (else $0=k$ is impossible). Then $x_3$ is free ⇒ <b>not unique</b> (infinitely many). Null space: set RHS $=0$: $x_1=-2x_3,\,x_2=-x_3$ ⇒ span$\{(-2,-1,1)\}$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">7</span><span class="n">B7.</span> Matrices $A,B$ are square with integer determinants, $1<\det A<\det B$, and $\det(ABAB)=36$. Find $\det A$ and $\det B$.
-<div class="sol">$\det(ABAB)=(\det A\det B)^2=36\Rightarrow\det A\det B=6$. Integers with $1<\det A<\det B$ ⇒ $\det A=2,\det B=3$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">8</span><span class="n">B8.</span> Determine the eigenvalues and corresponding eigenvectors of $A=\begin{bmatrix}1&6\\5&2\end{bmatrix}$.
-<div class="sol">$\det(A-\lambda I)=(1-\lambda)(2-\lambda)-30=\lambda^2-3\lambda-28=(\lambda-7)(\lambda+4)=0\Rightarrow\lambda=7,-4$.<br>
-$\lambda=7$: $\begin{bmatrix}-6&6\\5&-5\end{bmatrix}\Rightarrow x=y\Rightarrow(1,1)$.<br>
-$\lambda=-4$: $\begin{bmatrix}5&6\\5&6\end{bmatrix}\Rightarrow5x+6y=0\Rightarrow(6,-5)$.</div></div>
-
-<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="n">B9.</span> Is the span of $(1,1)$ a subspace of $\mathbb R^2$?
-<div class="sol">Yes — it contains $0$ (take scalar $0$), and is closed under addition and scalar multiplication (any combination of $(1,1)$ is again a multiple of $(1,1)$). It's the line $y=x$, a 1-dimensional subspace.</div></div>
+<h2>Q6 — Ratios + Commentary (9)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">9</span><span class="n">Q6.</span>
+Boulder Building Ltd. Current assets $240,000 (incl. inventory $90,000, prepaid $10,000); current liabilities $80,000. Net credit sales $730,000 (sales returns $30,000 already deducted to get this); COGS $420,000. Average AR $58,000; average inventory $70,000. Net operating cash $96,000; capital expenditure $60,000.
+<br><b>(a)</b> Current ratio; quick ratio; average collection period; average days in inventory; free cash flow.
+<br><b>(b)</b> Last year the average collection period was 22 days. Comment on the change and suggest one cause.
+<div class="sol">
+<b>(a)</b><br>
+Current ratio = 240,000 / 80,000 = <b>3.0</b>.<br>
+Quick ratio = (240,000 − 90,000 − 10,000) / 80,000 = 140,000/80,000 = <b>1.75</b>.<br>
+Receivables turnover = 730,000 / 58,000 = 12.59× ⇒ Avg collection period = 365 / 12.59 = <b>29.0 days</b>.<br>
+Inventory turnover = 420,000 / 70,000 = 6.0× ⇒ Avg days in inventory = 365 / 6.0 = <b>60.8 days</b>.<br>
+Free cash flow = 96,000 − 60,000 = <b>$36,000</b>.<br>
+<b>(b)</b> The collection period rose from 22 to 29 days — a deterioration: customers are taking ~7 days longer to pay. Likely causes: a more lax credit policy, weaker collection follow-up, relaxed credit terms to win sales, or customer disputes. (Any one well-explained cause earns the mark.)
+</div></div>
 
 </main>
 <script>
 let shown=false;
 function toggleAll(){shown=!shown;document.querySelectorAll('.q').forEach(q=>q.classList.toggle('show',shown));}
 let iv=null;
-function startTimer(){
-  if(iv)clearInterval(iv);
-  let s=120*60;const el=document.getElementById('tm');
+function startTimer(){if(iv)clearInterval(iv);let s=120*60;const el=document.getElementById('tm');
   iv=setInterval(()=>{s--;if(s<0){clearInterval(iv);el.textContent='TIME';return;}
-    const m=Math.floor(s/60),ss=s%60;el.textContent=`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;},1000);
-}
+    const m=Math.floor(s/60),ss=s%60;el.textContent=`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;},1000);}
 </script>
 </body>
 </html>

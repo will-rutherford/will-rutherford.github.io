@@ -3,539 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATH1051 Exam Revision Hub</title>
-<script>
-MathJax = {
-  tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['\\[', '\\]'], ['$$','$$']] },
-  svg: { fontCache: 'global' }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<title>ACCT1110 Exam Revision Hub</title>
 <style>
   :root{
-    --bg:#0f1419; --panel:#1a212b; --panel2:#222c39; --ink:#e8edf2; --muted:#9fb0c0;
-    --accent:#4f9cff; --accent2:#7c5cff; --good:#34d399; --warn:#fbbf24; --bad:#f87171;
-    --gold:#ffd166; --line:#2c3a4a; --code:#0b1622;
+    --bg:#0f1518;--panel:#18232a;--panel2:#1f2e37;--ink:#e9f1f3;--muted:#9db4bd;
+    --accent:#2dd4bf;--accent2:#22a594;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;
+    --gold:#ffd166;--line:#273a44;--code:#0a1417;--dr:#7dd3fc;--cr:#fca5a5;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
   a{color:var(--accent);text-decoration:none}
-  header{background:linear-gradient(135deg,#13203a,#1a103a);padding:34px 20px 28px;border-bottom:1px solid var(--line);text-align:center}
-  header h1{margin:0 0 6px;font-size:30px;letter-spacing:.3px}
+  header{background:linear-gradient(135deg,#0c2d2a,#0e3030);padding:34px 20px 28px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:30px}
   header p{margin:2px 0;color:var(--muted)}
-  .badge{display:inline-block;background:var(--accent);color:#001833;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge{display:inline-block;background:var(--accent);color:#012b27;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
   .badge.gold{background:var(--gold);color:#3a2c00}
   .badge.warn{background:var(--warn);color:#3a2a00}
-  nav{position:sticky;top:0;z-index:50;background:rgba(15,20,25,.95);backdrop-filter:blur(8px);
+  nav{position:sticky;top:0;z-index:50;background:rgba(15,21,24,.95);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
   nav a{background:var(--panel2);padding:6px 12px;border-radius:8px;font-size:13px;color:var(--ink);border:1px solid var(--line)}
-  nav a:hover{background:var(--accent);color:#001833}
-  main{max-width:920px;margin:0 auto;padding:24px 18px 80px}
+  nav a:hover{background:var(--accent);color:#012b27}
+  main{max-width:940px;margin:0 auto;padding:24px 18px 80px}
   section{margin:38px 0;scroll-margin-top:60px}
   h2{font-size:23px;border-left:4px solid var(--accent);padding-left:12px;margin-top:0}
-  h3{font-size:18px;color:#cfe0f0;margin-top:26px}
-  h4{font-size:15px;color:var(--gold);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  h3{font-size:18px;color:#cdeae6;margin-top:26px}
+  h4{font-size:14px;color:var(--gold);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:720px){.grid{grid-template-columns:1fr}}
   .guaranteed{border-left:5px solid var(--gold);background:linear-gradient(90deg,rgba(255,209,102,.08),transparent)}
-  .guaranteed h3:before{content:"⭐ GUARANTEED ";color:var(--gold);font-size:13px;letter-spacing:1px}
-  .likely{border-left:5px solid var(--accent)}
   .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;margin-right:6px}
-  .pill.A{background:#1e3a5f;color:#9cf}.pill.B{background:#3a1e5f;color:#c9f}
-  .pill.must{background:#5f1e1e;color:#fca}
+  .pill.weak{background:#5f1e1e;color:#fca}.pill.q{background:#1e4f48;color:#9eeadd}
   table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
   th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
   th{background:var(--panel2);color:var(--gold)}
   tr:nth-child(even){background:rgba(255,255,255,.02)}
   .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
-  .method ol{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
   .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:10px 14px;margin:8px 0}
   .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
-  .tip{background:rgba(52,211,153,.08);border:1px solid #245040;border-radius:8px;padding:10px 14px;margin:8px 0}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:10px 14px;margin:8px 0}
   .tip:before{content:"✓ ";color:var(--good);font-weight:700}
   details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
   details[open]{padding-bottom:14px}
-  summary{cursor:pointer;padding:14px 0;font-weight:600;color:#cfe0f0;list-style:none}
+  summary{cursor:pointer;padding:14px 0;font-weight:600;color:#cdeae6;list-style:none}
   summary:before{content:"▶ ";color:var(--accent);font-size:12px}
   details[open] summary:before{content:"▼ "}
-  .formula{text-align:center;background:var(--code);border:1px dashed var(--line);border-radius:8px;padding:6px 10px;margin:8px 0}
-  .progress{height:6px;background:var(--panel2);border-radius:3px;overflow:hidden;margin:4px 0 14px}
-  .progress>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .je{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;overflow-x:auto}
+  .je table{margin:0;border:none}.je td{border:none;padding:2px 10px 2px 0}
+  .dr{color:var(--dr)}.cr{color:var(--cr)}
+  .indent{padding-left:28px}
   .timeblock{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
-  .timeblock .t{flex:0 0 90px;font-weight:700;color:var(--gold);font-size:14px}
+  .timeblock .t{flex:0 0 78px;font-weight:700;color:var(--gold);font-size:14px}
   .timeblock .d{flex:1}
-  kbd{background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px}
-  .toc-mini{columns:2;font-size:14px}.toc-mini li{margin:3px 0}
-  @media(max-width:720px){.toc-mini{columns:1}}
-  footer{text-align:center;color:var(--muted);padding:30px;border-top:1px solid var(--line);font-size:13px}
-  .flash{perspective:1000px}
+  .flash{}
   .flash .inner{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px;min-height:84px;display:flex;align-items:center;justify-content:center;text-align:center}
   .flash .a{display:none;color:var(--good)}
   .flash.show .q{display:none}.flash.show .a{display:block}
+  footer{text-align:center;color:var(--muted);padding:30px;border-top:1px solid var(--line);font-size:13px}
+  .big{font-size:15px}
+  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:13.5px}
 </style>
 </head>
 <body>
 <header>
-  <h1>MATH1051 — Calculus &amp; Linear Algebra I</h1>
-  <p>One-Day Exam Survival Pack · built from 5 past papers + worked solutions</p>
-  <p style="font-size:13px">Exam: 120 min + 10 min planning · No calculators · 100 marks · Part A /30 + Part B /70</p>
+  <h1>ACCT1110 — Accounting for Decision Making</h1>
+  <p>One-Day Exam Survival Pack · built from 5 past papers + the 2026 sample + lecture revision notes</p>
+  <p style="font-size:13px">Exam: 120 min + 10 min planning · UQ calculator only · ~50 marks · 6 questions · NO multiple choice</p>
   <div>
-    <span class="badge gold">⭐ = guaranteed-style question</span>
-    <span class="badge">Part A repeats almost verbatim every year</span>
-    <span class="badge warn">Justify everything = marks</span>
+    <span class="badge gold">⭐ Same 6 question types every paper</span>
+    <span class="badge warn">Cash Flows + Ratios = your focus</span>
+    <span class="badge">Show workings = marks</span>
   </div>
 </header>
 
 <nav>
-  <a href="#plan">🗓 1-Day Plan</a>
-  <a href="#guaranteed">⭐ Guaranteed Qs</a>
-  <a href="#memory">🧠 Must-Memorise</a>
-  <a href="#series">7-8 Series</a>
-  <a href="#integration">9 Integration</a>
-  <a href="#vectors">10-15 Vectors/Matrices</a>
-  <a href="#eigen">16 Eigen</a>
-  <a href="#vspace">17 Vector Spaces</a>
+  <a href="#plan">🗓 Plan</a>
+  <a href="#guaranteed">⭐ The 6 Questions</a>
+  <a href="#cashflow">💧 Cash Flows</a>
+  <a href="#ratios">📊 Ratios</a>
+  <a href="#ppe">🏭 Depreciation</a>
+  <a href="#bankrec">🏦 Bank Rec + AR</a>
+  <a href="#journals">📒 Journals</a>
   <a href="#flashcards">🃏 Flashcards</a>
+  <a href="ratios.html">📋 Ratio Sheet</a>
   <a href="practice_exam.html">📝 Mock Exam</a>
 </nav>
 
 <main>
 
-<!-- ============ STRATEGY ============ -->
+<!-- PLAN -->
 <section id="plan">
   <h2>🗓 The One-Day Plan</h2>
   <div class="card">
-    <p><strong>The big picture:</strong> This exam is <em>extremely</em> predictable. Part A (30 marks) is 15 short questions that barely change year to year — if you drill the patterns below you can bank ~26+/30. Part B (70 marks) is 4–9 longer questions drawn from the same recurring families. You are strong on Ch 7–9 (calculus) — that covers ~40% of the paper, so <strong>protect those marks</strong> and spend most of today on linear algebra (Ch 10–17).</p>
-    <div class="tip">Marks are awarded for <strong>justification</strong>, not just answers. "Solutions without justification will not receive full marks" is printed on the cover. Always name the test/rule you use.</div>
+    <p><strong>This exam is extremely predictable.</strong> Six long questions, the same six topics every single paper. You're solid on the basics, so today is about the <strong>two heavy, high-mark areas you flagged as weak: the Statement of Cash Flows and ratios</strong> — together they're often ~20 of the ~50 marks. Lock those down and the rest is mechanical journal/depreciation work you already half-know.</p>
+    <div class="tip">There is <strong>no multiple choice</strong>. Every mark comes from showing a method — journals, a reconciliation, a calculation, or a written comment. <strong>Always show workings</strong>; partial marks are everywhere.</div>
   </div>
 
   <h3>Suggested schedule (≈8 hrs)</h3>
   <div class="card">
-    <div class="timeblock"><div class="t">Hr 1</div><div class="d"><strong>Part A blitz.</strong> Read the <a href="#guaranteed">Guaranteed Questions</a> table. These are free marks. Make sure you can do every one in &lt;2 min.</div></div>
-    <div class="timeblock"><div class="t">Hr 2</div><div class="d"><strong>Memorise the off-sheet facts</strong> (<a href="#memory">section below</a>). The formula sheet gives you derivatives + Taylor template + geometric sum — nothing else. Integration antiderivatives, convergence tests, and the eigen-method are NOT given. Drill them.</div></div>
-    <div class="timeblock"><div class="t">Hr 3</div><div class="d"><strong>Ch 9 Integration</strong> — solidify by-parts, u-sub, partial fractions, improper integrals. (Your strong area — make it automatic.)</div></div>
-    <div class="timeblock"><div class="t">Hr 4–5</div><div class="d"><strong>Linear algebra core</strong> — determinants, inverse, Gaussian elimination, null space, eigenvalues/eigenvectors. Work the methods in <a href="#vectors">Vectors/Matrices</a> &amp; <a href="#eigen">Eigen</a> sections.</div></div>
-    <div class="timeblock"><div class="t">Hr 6</div><div class="d"><strong>Vector spaces &amp; True/False</strong> (Ch 17). The "prove or give counter-example" block is worth 9–12 marks and reuses the same 4–5 statements. <a href="#vspace">Learn them.</a></div></div>
-    <div class="timeblock"><div class="t">Hr 7</div><div class="d"><strong>Sit the <a href="practice_exam.html">mock exam</a></strong> under timed conditions. Then mark it.</div></div>
-    <div class="timeblock"><div class="t">Hr 8</div><div class="d"><strong>Flashcards + patch holes.</strong> Re-do anything you missed. Sleep.</div></div>
+    <div class="timeblock"><div class="t">Hr 1</div><div class="d">Read <a href="#guaranteed">The 6 Questions</a> map so you know exactly what's coming. Skim the whole hub.</div></div>
+    <div class="timeblock"><div class="t">Hr 2–3</div><div class="d"><strong>💧 Statement of Cash Flows</strong> — the big one. Drill direct AND indirect until automatic. <a href="#cashflow">Go →</a></div></div>
+    <div class="timeblock"><div class="t">Hr 4</div><div class="d"><strong>📊 Ratios</strong> — formulae are GIVEN, so focus on (a) plugging correctly and (b) the written commentary. <a href="#ratios">Go →</a></div></div>
+    <div class="timeblock"><div class="t">Hr 5</div><div class="d"><strong>🏭 Depreciation + disposal</strong> (Q1 every paper) — 3 methods + gain/loss + the GST trap. <a href="#ppe">Go →</a></div></div>
+    <div class="timeblock"><div class="t">Hr 6</div><div class="d"><strong>🏦 Bank rec + allowance</strong> and <strong>📒 the journal families</strong> (warranty, shares, dividends, debentures). <a href="#journals">Go →</a></div></div>
+    <div class="timeblock"><div class="t">Hr 7</div><div class="d">Sit the <a href="practice_exam.html">mock exam</a> timed. Mark it.</div></div>
+    <div class="timeblock"><div class="t">Hr 8</div><div class="d"><a href="#flashcards">Flashcards</a> + patch holes. Print the <a href="ratios.html">ratio sheet</a>. Sleep.</div></div>
   </div>
-
-  <h3>Topics &amp; your confidence</h3>
-  <table>
-    <tr><th>Chapter(s)</th><th>Topic</th><th>Exam weight</th><th>Status</th></tr>
-    <tr><td>7</td><td>Series (geometric, divergence, telescoping)</td><td>Part A ×2–3</td><td>💪 strong</td></tr>
-    <tr><td>8</td><td>Power/Taylor series + convergence tests</td><td>Part A + ⭐ Part B</td><td>💪 strong</td></tr>
-    <tr><td>9</td><td>Integration (parts, sub, partial fractions, improper, FTC)</td><td>Part A ×2–3 + ⭐ Part B</td><td>💪 strong</td></tr>
-    <tr><td>10,11,15</td><td>Vectors, matrix×vector, dot/cross product</td><td>Part A ×2–3</td><td>📖 focus</td></tr>
-    <tr><td>12</td><td>Gaussian elimination / solving systems</td><td>Part A + Part B</td><td>📖 focus</td></tr>
-    <tr><td>13,14</td><td>Inverses + determinants</td><td>Part A + ⭐ Part B</td><td>📖 focus</td></tr>
-    <tr><td>16</td><td>Eigenvalues &amp; eigenvectors <span class="pill must">excl 16.1</span></td><td>Part A + ⭐ Part B</td><td>📖 focus</td></tr>
-    <tr><td>17</td><td>Vector spaces, span, lin indep, subspace <span class="pill must">excl 17.8–17.11</span></td><td>Part A + ⭐ Part B T/F</td><td>📖 focus</td></tr>
-  </table>
-  <div class="trap">Not assessed: <strong>8.6, 16.1 (PageRank), 17.8, 17.9, 17.10, 17.11.</strong> Don't waste a minute on these.</div>
 </section>
 
-<!-- ============ GUARANTEED ============ -->
+<!-- GUARANTEED -->
 <section id="guaranteed">
-  <h2>⭐ Questions That Are (Practically) Guaranteed</h2>
-  <p class="muted">Across S1/S2 2023, 2024, 2025 the same items appear nearly verbatim. If you can do all of these, you've locked in most of the paper.</p>
-
-  <div class="card guaranteed likely">
-    <h3>Part A — appears every single year</h3>
-    <table>
-      <tr><th>Q-type</th><th>Looks like</th><th>What to write</th></tr>
-      <tr><td>Telescoping series</td><td>$\sum (\frac1n-\frac1{n+1})$ or $\sum(\frac1{\sqrt n}-\frac1{\sqrt{n+1}})$</td><td>Partial sum collapses → state limit. <strong>Converges</strong>.</td></tr>
-      <tr><td>Divergence test</td><td>$\sum \frac{n+5}{n}$, $\sum\frac{n^2}{n+1}$</td><td>$a_n\not\to0$ ⇒ <strong>diverges</strong> (nth-term test).</td></tr>
-      <tr><td>Geometric series</td><td>$\sum(\frac52)^n$, $\sum(\frac23)^n$</td><td>$|r|\ge1$ diverge; $|r|<1$ converge to $\frac{a}{1-r}$.</td></tr>
-      <tr><td>$\int x e^x\,dx$</td><td><strong>literally every year</strong></td><td>By parts: $(x-1)e^x+C$.</td></tr>
-      <tr><td>u-substitution integral</td><td>$\int x^2\sin(x^3{+}2)dx$, $\int\cos x\,e^{\sin x}dx$</td><td>Spot inner function whose derivative is present.</td></tr>
-      <tr><td>Partial-fractions integral</td><td>$\int\frac{1}{x(x+1)}dx$, $\int\frac{1}{(x-2)(x-3)}dx$</td><td>Split, integrate logs.</td></tr>
-      <tr><td>3×3 determinant</td><td>cofactor expansion</td><td>Expand along row/col with most zeros.</td></tr>
-      <tr><td>2×2 invertible?</td><td>$[[3,6],[1,2]]$</td><td>$\det=ad-bc$; $=0$ ⇒ not invertible.</td></tr>
-      <tr><td>Eigenvalues of 2×2 / triangular</td><td>$[[1,1],[4,1]]$, $[[1,2],[0,2]]$</td><td>$\det(A-\lambda I)=0$. Triangular ⇒ diagonal entries.</td></tr>
-      <tr><td>Verify / find eigenvector</td><td>"Is $(1,-1)$ an eigenvector?"</td><td>Compute $Av$; is it $\lambda v$?</td></tr>
-      <tr><td>Cross product</td><td>$(1,1,0)\times(1,2,2)$</td><td>Determinant with $i,j,k$.</td></tr>
-      <tr><td>Linear independence (2 vectors)</td><td>$(1,2,1)$ &amp; $(2,4,3)$</td><td>One a scalar multiple of other? If yes ⇒ dependent.</td></tr>
-      <tr><td>Linear combination / span</td><td>"Is $w$ a combination of $u,v$?"</td><td>Solve $\alpha u+\beta v=w$; consistent ⇒ yes.</td></tr>
-      <tr><td>FTC + chain rule</td><td>$\frac{d}{dx}\int_1^{1+x}\ln t\,dt$</td><td>Plug upper limit in, ×(its derivative).</td></tr>
-    </table>
-  </div>
-
-  <div class="card guaranteed">
-    <h3>Part B — these big-question families recur every year</h3>
-    <ol>
-      <li><span class="pill B">B</span><strong>Power/Taylor series — radius &amp; interval of convergence.</strong> Ratio test for radius, then test BOTH endpoints separately. <em>The single most reliable long question.</em> <a href="#series">Method →</a></li>
-      <li><span class="pill B">B</span><strong>FTC + chain rule</strong> with variable integral limits (sometimes "do it two ways"). <a href="#integration">Method →</a></li>
-      <li><span class="pill B">B</span><strong>Improper integral</strong> — converge or diverge + value. Usually needs partial fractions or a one-sided limit. <a href="#integration">Method →</a></li>
-      <li><span class="pill B">B</span><strong>Determinant multiplicativity puzzle</strong> e.g. $\det(ABAB)=36$ ⇒ find $\det A,\det B$. Uses $\det(AB)=\det A\det B$. <a href="#vectors">Method →</a></li>
-      <li><span class="pill B">B</span><strong>Full 2×2 eigenvalues + eigenvectors.</strong> <a href="#eigen">Method →</a></li>
-      <li><span class="pill B">B</span><strong>True / False — prove or counter-example</strong> (9–12 marks). Mixes series + linear algebra statements. <a href="#vspace">The recurring ones →</a></li>
-      <li><span class="pill B">B</span><strong>Gaussian elimination with a parameter $k$</strong> → classify no / unique / infinitely many solutions. <a href="#vectors">Method →</a></li>
-      <li><span class="pill B">B</span><strong>Vector space / subspace verification</strong> (check axioms — usually fails on "no zero vector"). <a href="#vspace">Method →</a></li>
-      <li><span class="pill B">B</span><strong>Riemann sum ↔ definite integral.</strong> Recognise $\lim\frac1n\sum f(\frac in)=\int_0^1 f$. <a href="#integration">Method →</a></li>
-    </ol>
-  </div>
+  <h2>⭐ The 6 Questions You WILL Be Asked</h2>
+  <p class="muted">Across S1/S2 2024, S1/S2 2025 and the 2026 sample, the paper is the same six families every time. Only the numbers and company names change.</p>
+  <table>
+    <tr><th>#</th><th>Topic</th><th>Typically tests</th><th>Marks</th></tr>
+    <tr><td>Q1</td><td><strong>PPE depreciation + disposal</strong></td><td>All 3 methods (SL, diminishing, units) with a part-year first year + a gain/loss on disposal. <a href="#ppe">↓</a></td><td>~10–12</td></tr>
+    <tr><td>Q?</td><td><strong>Bank reconciliation + allowance for doubtful debts</strong></td><td>Two-column reconciliation + bring allowance to % of AR. <a href="#bankrec">↓</a></td><td>~9–12</td></tr>
+    <tr><td>Q?</td><td><strong>Journals</strong> (rotating)</td><td>Warranty provision · share issue/allotment · dividends · debenture redemption · unearned revenue · notes payable. <a href="#journals">↓</a></td><td>~6–10</td></tr>
+    <tr><td>Q?</td><td><strong>💧 Statement of Cash Flows — DIRECT</strong> <span class="pill weak">your focus</span></td><td>Operating section from revenue/expenses ± working-capital changes. <a href="#cashflow">↓</a></td><td>~7–12</td></tr>
+    <tr><td>Q?</td><td><strong>💧 Statement of Cash Flows — INDIRECT</strong> <span class="pill weak">your focus</span></td><td>Reconcile profit → operating cash. Often the SAME data as the direct Q. <a href="#cashflow">↓</a></td><td>~7–8</td></tr>
+    <tr><td>Q6</td><td><strong>📊 Ratios + written commentary</strong> <span class="pill weak">your focus</span></td><td>Calculate (formulae given) + compare to last year + explain why. <a href="#ratios">↓</a></td><td>~9–13</td></tr>
+  </table>
+  <div class="tip">Both cash flow methods give the <strong>same net operating cash figure</strong> — if your direct and indirect answers differ, one is wrong. Great self-check in the exam.</div>
 </section>
 
-<!-- ============ MEMORY ============ -->
-<section id="memory">
-  <h2>🧠 Must-Memorise — NOT on the formula sheet</h2>
+<!-- CASH FLOW -->
+<section id="cashflow">
+  <h2>💧 Statement of Cash Flows <span class="pill weak">highest priority</span></h2>
   <div class="card">
-    <p>The formula sheet <strong>only</strong> gives you: trig identities, derivatives (incl. arcsin/arccos/arctan), volume of revolution $V=\pi\int_a^b[f(x)]^2dx$, the geometric-series sum, and the Taylor-series template. <strong>Everything below you must know cold</strong> — they are not provided and are needed constantly.</p>
+    <h4>First: which activity does it go in?</h4>
+    <table>
+      <tr><th>Operating</th><th>Investing</th><th>Financing</th></tr>
+      <tr><td>Day-to-day: customer receipts, payments to suppliers/employees, operating expenses, <strong>income tax</strong></td><td>Buy/sell PPE &amp; investments; <strong>interest &amp; dividends RECEIVED</strong></td><td>Issue/repay shares &amp; debt; <strong>interest &amp; dividends PAID</strong></td></tr>
+    </table>
+    <div class="trap">Interest/dividends <strong>received</strong> = investing; interest/dividends <strong>paid</strong> = financing; income <strong>tax</strong> = operating. Exam questions specify these explicitly — read carefully, it changes the answer.</div>
   </div>
 
-  <div class="grid">
-    <div class="card">
-      <h4>Antiderivatives (no integral table given!)</h4>
-      <div class="formula">$\int x^a dx=\dfrac{x^{a+1}}{a+1}+C\ (a\ne-1)$</div>
-      <div class="formula">$\int \dfrac1x dx=\ln|x|+C$</div>
-      <div class="formula">$\int e^x dx=e^x+C,\quad \int a^x dx=\dfrac{a^x}{\ln a}+C$</div>
-      <div class="formula">$\int \sin x\,dx=-\cos x+C$</div>
-      <div class="formula">$\int \cos x\,dx=\sin x+C$</div>
-      <div class="formula">$\int \sec^2x\,dx=\tan x+C$</div>
-      <div class="formula">$\int \dfrac{1}{1+x^2}dx=\arctan x+C$</div>
-      <div class="formula">$\int \dfrac{1}{\sqrt{1-x^2}}dx=\arcsin x+C$</div>
-    </div>
-
-    <div class="card">
-      <h4>Integration techniques</h4>
-      <p><strong>By parts:</strong> $\int u\,dv=uv-\int v\,du$. <span class="muted">(LIATE: pick $u$ = Log, Inverse-trig, Algebraic, Trig, Exp — in that priority.)</span></p>
-      <p><strong>u-sub:</strong> spot inner function $g$ whose derivative $g'$ multiplies the rest.</p>
-      <p><strong>Partial fractions:</strong> $\frac{1}{(x-a)(x-b)}=\frac{A}{x-a}+\frac{B}{x-b}$. Cover-up to get $A,B$.</p>
-      <p><strong>$\int\frac{f'(x)}{f(x)}dx=\ln|f(x)|+C$</strong> — e.g. $\int\frac{2x}{x^2+3}dx=\ln(x^2+3)+C$.</p>
-    </div>
-
-    <div class="card">
-      <h4>Convergence tests (NOT given)</h4>
-      <p><strong>nth-term (divergence):</strong> if $a_n\not\to0$, diverges. (Can NEVER prove convergence.)</p>
-      <p><strong>Geometric:</strong> $\sum ar^n$ converges $\iff|r|<1$, to $\frac{a}{1-r}$.</p>
-      <p><strong>p-series:</strong> $\sum\frac1{n^p}$ converges $\iff p>1$.</p>
-      <p><strong>Ratio test:</strong> $L=\lim|\frac{a_{n+1}}{a_n}|$; $L<1$ conv, $L>1$ div, $L=1$ inconclusive.</p>
-      <p><strong>Comparison:</strong> $0\le a_n\le b_n$; $\sum b_n$ conv ⇒ $\sum a_n$ conv.</p>
-      <p><strong>Alternating (Leibniz):</strong> $\sum(-1)^n b_n$ converges if $b_n\downarrow0$.</p>
-    </div>
-
-    <div class="card">
-      <h4>Absolute vs conditional</h4>
-      <p><strong>Absolutely convergent:</strong> $\sum|a_n|$ converges.</p>
-      <p><strong>Conditionally convergent:</strong> $\sum a_n$ converges but $\sum|a_n|$ diverges (e.g. alternating harmonic $\sum\frac{(-1)^n}{n}$).</p>
-      <div class="tip">$\sum\frac{(-1)^n}{n}$ converges (alternating) but NOT absolutely — classic answer.</div>
-    </div>
-
-    <div class="card">
-      <h4>Key Maclaurin series (know these 3)</h4>
-      <div class="formula">$e^x=\sum_{n=0}^\infty\dfrac{x^n}{n!}=1+x+\dfrac{x^2}{2!}+\cdots$</div>
-      <div class="formula">$\cos x=\sum_{n=0}^\infty\dfrac{(-1)^n x^{2n}}{(2n)!}=1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}-\cdots$</div>
-      <div class="formula">$\sin x=\sum_{n=0}^\infty\dfrac{(-1)^n x^{2n+1}}{(2n+1)!}$</div>
-      <p class="muted">All three converge for ALL real $x$ ($R=\infty$). Coefficient of $x^2$ in $\cos x$ is $-\tfrac12$.</p>
-    </div>
-
-    <div class="card">
-      <h4>Linear algebra facts (NOT given)</h4>
-      <p><strong>2×2 inverse:</strong> $A^{-1}=\frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$.</p>
-      <p><strong>$\det(AB)=\det A\det B$;</strong> $\det(A^{-1})=\frac{1}{\det A}$; $\det(A^T)=\det A$.</p>
-      <p><strong>$\det(cA)=c^n\det A$</strong> for $n\times n$ (so $\det(2A)=4\det A$ for 2×2).</p>
-      <p><strong>$A$ invertible $\iff\det A\ne0\iff$</strong> null space $=\{0\}$ $\iff$ columns lin. indep.</p>
-      <p><strong>Eigen:</strong> solve $\det(A-\lambda I)=0$ for $\lambda$; eigenvector = null space of $(A-\lambda I)$.</p>
-      <p><strong>Triangular matrix:</strong> eigenvalues = diagonal entries (also $\det$ = product of diagonal).</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERIES ============ -->
-<section id="series">
-  <h2>Ch 7–8 · Series, Power Series &amp; Taylor</h2>
-
-  <h3>Part A — series convergence (the decision flowchart)</h3>
+  <h3>DIRECT method — operating section</h3>
   <div class="method">
-    <ol>
-      <li><strong>Does $a_n\to0$?</strong> No ⇒ <em>diverges</em> by nth-term test. Done.</li>
-      <li><strong>Geometric</strong> ($ar^n$)? Use $|r|<1$.</li>
-      <li><strong>p-series</strong> ($\frac1{n^p}$)? $p>1$ converges.</li>
-      <li><strong>Alternating</strong> ($(-1)^n b_n$)? Leibniz: $b_n\downarrow0$ ⇒ converges.</li>
-      <li><strong>Factorials / $n$th powers?</strong> Ratio test.</li>
-      <li><strong>Looks like a known series?</strong> Comparison / limit comparison.</li>
-      <li><strong>Telescoping?</strong> Write partial sum, watch it collapse.</li>
-    </ol>
-  </div>
-  <div class="trap">The nth-term test can only prove <em>divergence</em>. $a_n\to0$ does NOT prove convergence (harmonic $\sum\frac1n$ diverges though $\frac1n\to0$).</div>
-
-  <details>
-    <summary>Worked: comparison test — show $\sum\frac{1}{n^3+n}$ converges</summary>
-    <p>For $n\ge1$, $\dfrac{1}{n^3+n}\le\dfrac{1}{n^3}$. Since $\sum\frac{1}{n^3}$ is a p-series with $p=3>1$, it converges. By the comparison test, $\sum\frac{1}{n^3+n}$ converges. ∎</p>
-  </details>
-  <details>
-    <summary>Worked: classify $\sum\frac{(-1)^n}{n}$</summary>
-    <p>Alternating, $b_n=\frac1n\downarrow0$ ⇒ converges (Leibniz). But $\sum|a_n|=\sum\frac1n$ is the harmonic series, which diverges. So it is <strong>conditionally convergent</strong>.</p>
-  </details>
-
-  <h3 class="">⭐ Part B — Radius &amp; Interval of Convergence</h3>
-  <div class="method">
-    <p><strong>For $\sum c_n(x-a)^n$:</strong></p>
-    <ol>
-      <li>Apply the <strong>ratio test</strong> to $|c_{n+1}(x-a)^{n+1}/c_n(x-a)^n|$. Take $n\to\infty$.</li>
-      <li>Set that limit $<1$ ⇒ get $|x-a|<R$. That $R$ is the <strong>radius of convergence</strong>.</li>
-      <li>Interval is centred at $a$: $(a-R,a+R)$. Now <strong>test each endpoint separately</strong> by substituting $x=a\pm R$ and checking the resulting number series.</li>
-      <li>Write the final interval with correct open/closed brackets.</li>
-    </ol>
-  </div>
-  <details>
-    <summary>Worked: $\sum\frac{2^n}{n\,3^n}(x-1)^n$ — radius &amp; interval</summary>
-    <p>Ratio: $\left|\frac{2^{n+1}(x-1)^{n+1}}{(n+1)3^{n+1}}\cdot\frac{n3^n}{2^n(x-1)^n}\right|=\frac{2}{3}\cdot\frac{n}{n+1}|x-1|\to\frac23|x-1|$.</p>
-    <p>Converges when $\frac23|x-1|<1\Rightarrow|x-1|<\frac32$, so $R=\frac32$. Centre $x=1$ ⇒ interval $(-\frac12,\frac52)$ before endpoints.</p>
-    <p><strong>$x=\frac52$:</strong> term $=\frac1n$, $\sum\frac1n$ diverges. <strong>$x=-\frac12$:</strong> term $=\frac{(-1)^n}{n}$, alternating harmonic — converges. </p>
-    <p>Interval of convergence: $\boxed{[-\tfrac12,\ \tfrac52)}$.</p>
-  </details>
-
-  <h3>⭐ Part B — Taylor series from the definition</h3>
-  <div class="method">
-    <ol>
-      <li>Compute $f(a),f'(a),f''(a),\dots$ until you see the pattern.</li>
-      <li>Plug into $\displaystyle\sum_{n=0}^\infty\frac{f^{(n)}(a)}{n!}(x-a)^n$ (this template IS on the sheet).</li>
-      <li>If asked for radius, ratio-test the result.</li>
-    </ol>
-  </div>
-  <details>
-    <summary>Worked: Taylor series for $f(x)=e^x$ about $x=1$ + radius</summary>
-    <p>$f^{(n)}(x)=e^x$ so $f^{(n)}(1)=e$ for all $n$. Hence $e^x=\sum_{n=0}^\infty\frac{e}{n!}(x-1)^n$.</p>
-    <p>Radius: ratio $=\left|\frac{(x-1)^{n+1}/(n+1)!}{(x-1)^n/n!}\right|=\frac{|x-1|}{n+1}\to0<1$ for all $x$, so $R=\infty$.</p>
-    <p><strong>Reuse trick (part b):</strong> $g(x)=(x-1)e^x=(x-1)\sum\frac{e}{n!}(x-1)^n=\sum\frac{e}{n!}(x-1)^{n+1}$ — just multiply the known series.</p>
-  </details>
-</section>
-
-<!-- ============ INTEGRATION ============ -->
-<section id="integration">
-  <h2>Ch 9 · Integration (your strong area — make it automatic)</h2>
-
-  <h3>Pick-the-technique cheat</h3>
-  <table>
-    <tr><th>If the integrand…</th><th>Use</th><th>Example</th></tr>
-    <tr><td>is product of two unlike functions ($x\cdot e^x$, $x\ln x$)</td><td>By parts</td><td>$\int xe^x=( x-1)e^x+C$</td></tr>
-    <tr><td>contains $g(x)$ and its derivative $g'(x)$</td><td>u-sub</td><td>$\int 2x\,(x^2{+}3)^4$</td></tr>
-    <tr><td>is $\frac{f'}{f}$</td><td>$\ln|f|$</td><td>$\int\frac{2x}{x^2+3}=\ln(x^2{+}3)$</td></tr>
-    <tr><td>is a proper rational function, factorable denom.</td><td>Partial fractions</td><td>$\int\frac{1}{x(x+1)}$</td></tr>
-    <tr><td>has $\infty$ limit or a singularity</td><td>Improper → limit</td><td>$\int_1^\infty\frac{\ln x}{x}dx$</td></tr>
-  </table>
-
-  <details>
-    <summary>Worked: $\int\frac{1}{x(x+1)}dx$ (partial fractions)</summary>
-    <p>$\frac{1}{x(x+1)}=\frac{1}{x}-\frac{1}{x+1}$. Integrate: $\ln|x|-\ln|x+1|+C=\ln\left|\frac{x}{x+1}\right|+C$.</p>
-  </details>
-  <details>
-    <summary>Worked: $\int \ln x\,dx$ (by parts, the sneaky one)</summary>
-    <p>Take $u=\ln x,\ dv=dx$ ⇒ $du=\frac1x dx,\ v=x$. Then $\int\ln x\,dx=x\ln x-\int x\cdot\frac1x dx=x\ln x-x+C$.</p>
-  </details>
-
-  <h3>⭐ Part B — Improper integrals</h3>
-  <div class="method">
-    <ol>
-      <li>Replace the bad limit ($\infty$ or a singularity) with a variable, e.g. $\int_1^\infty=\lim_{R\to\infty}\int_1^R$.</li>
-      <li>Integrate normally (often partial fractions first).</li>
-      <li>Take the limit. Finite ⇒ <strong>converges</strong> (give the value). $\pm\infty$ or DNE ⇒ <strong>diverges</strong>.</li>
-    </ol>
-  </div>
-  <details>
-    <summary>Worked: $\int_1^\infty\frac{\ln x}{x}dx$</summary>
-    <p>Sub $u=\ln x$: $\int\frac{\ln x}{x}dx=\frac{(\ln x)^2}{2}$. So $\int_1^R=\frac{(\ln R)^2}{2}\to\infty$. <strong>Diverges.</strong></p>
-  </details>
-  <details>
-    <summary>Worked: $\int_{-\infty}^0 2^x\,dx$</summary>
-    <p>$\int 2^x dx=\frac{2^x}{\ln 2}$. $\int_{-T}^0=\frac{1}{\ln2}-\frac{2^{-T}}{\ln2}\to\frac{1}{\ln2}$ as $T\to\infty$. <strong>Converges to $\frac{1}{\ln 2}$.</strong></p>
-  </details>
-  <div class="trap">$\int_0^\infty\cos x\,dx$: $\int_0^R\cos x=\sin R$, which oscillates — limit DNE ⇒ <strong>diverges</strong> (not "0"!).</div>
-
-  <h3>⭐ Part B — FTC + chain rule</h3>
-  <div class="method">
-    <p>If $F(x)=\displaystyle\int_{a}^{g(x)} f(t)\,dt$, then $F'(x)=f(g(x))\cdot g'(x)$. (Plug the upper limit into the integrand, multiply by the derivative of that limit.) If BOTH limits depend on $x$, subtract: $\frac{d}{dx}\int_{u(x)}^{v(x)}f=f(v)v'-f(u)u'$.</p>
-  </div>
-  <details>
-    <summary>Worked: $F(x)=\int_1^{e^x}(\ln t)^{15}dt$, find $F'(1)$</summary>
-    <p>$F'(x)=(\ln(e^x))^{15}\cdot\frac{d}{dx}e^x=(x)^{15}\cdot e^x$. At $x=1$: $F'(1)=1^{15}\cdot e^1=\boxed{e}$.</p>
-  </details>
-
-  <h3>⭐ Part B — Riemann sum ↔ integral</h3>
-  <p>Recognise $\displaystyle\lim_{n\to\infty}\frac1n\sum_{k=1}^n f\!\left(\frac kn\right)=\int_0^1 f(x)\,dx$. E.g. $\lim\frac1n\sum(\frac kn)^2=\int_0^1 x^2dx=\frac13$.</p>
-</section>
-
-<!-- ============ VECTORS/MATRICES ============ -->
-<section id="vectors">
-  <h2>Ch 10–15 · Vectors, Matrices, Determinants, Systems</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h4>Dot product</h4>
-      <p>$u\cdot v=u_1v_1+u_2v_2(+u_3v_3)=\|u\|\|v\|\cos\theta$.</p>
-      <p><strong>Orthogonal $\iff u\cdot v=0$.</strong></p>
-    </div>
-    <div class="card">
-      <h4>Cross product (3-space)</h4>
-      <p>$u\times v=\begin{vmatrix}i&j&k\\u_1&u_2&u_3\\v_1&v_2&v_3\end{vmatrix}$.</p>
-      <p>$\|u\times v\|$ = area of parallelogram. $u\times v\perp$ both.</p>
-    </div>
-  </div>
-
-  <details>
-    <summary>Worked: $(1,1,0)\times(1,2,2)$</summary>
-    <p>$i(1\cdot2-0\cdot2)-j(1\cdot2-0\cdot1)+k(1\cdot2-1\cdot1)=(2,\,-2,\,1)$.</p>
-  </details>
-
-  <h3>Determinants (Ch 14)</h3>
-  <div class="method">
-    <p><strong>2×2:</strong> $\det\begin{bmatrix}a&b\\c&d\end{bmatrix}=ad-bc$.</p>
-    <p><strong>3×3:</strong> cofactor-expand along the row/column with the most zeros. Signs alternate $\begin{smallmatrix}+&-&+\end{smallmatrix}$.</p>
-    <p><strong>Properties:</strong> $\det(AB)=\det A\det B$ · $\det(A^{-1})=1/\det A$ · $\det(A^T)=\det A$ · $\det(cA)=c^n\det A$ · triangular ⇒ product of diagonal.</p>
-  </div>
-  <details>
-    <summary>⭐ Worked: determinant puzzle — $\det(ABAB)=36$, $1<\det A<\det B$ integers</summary>
-    <p>$\det(ABAB)=(\det A\,\det B)^2=36\Rightarrow\det A\,\det B=6$. With $1<\det A<\det B$ integers ⇒ $\det A=2,\ \det B=3$.</p>
-  </details>
-  <details>
-    <summary>⭐ Worked: $\det(2A)$ when $\det A=5$ ($A$ is 2×2)</summary>
-    <p>$\det(2A)=2^2\det A=4\cdot5=20$. (Common trap: it is NOT $2\cdot5$.)</p>
-  </details>
-
-  <h3>Inverse (Ch 13)</h3>
-  <p>$A^{-1}=\frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$. Exists $\iff ad-bc\ne0$. For larger: augment $[A\,|\,I]$ and row-reduce to $[I\,|\,A^{-1}]$.</p>
-
-  <h3>⭐ Gaussian elimination &amp; classifying solutions (Ch 12)</h3>
-  <div class="method">
-    <p>Row-reduce the augmented matrix $[A\,|\,b]$. Read off the bottom row:</p>
+    <p>Convert each accrual figure to cash by adjusting for the working-capital change:</p>
     <ul>
-      <li><strong>$[0\ 0\ 0\,|\,k]$ with $k\ne0$</strong> ⇒ <strong>no solution</strong> (inconsistent).</li>
-      <li><strong>$[0\ 0\ 0\,|\,0]$</strong> ⇒ a free variable ⇒ <strong>infinitely many</strong> solutions.</li>
-      <li><strong>A pivot in every column</strong> ⇒ <strong>unique</strong> solution.</li>
+      <li><strong>Cash from customers</strong> = Sales − increase in AR (or + decrease in AR)</li>
+      <li><strong>Cash to suppliers</strong> = COGS + increase in inventory − increase in AP <span class="muted">(i.e. ± inventory, then ∓ AP)</span></li>
+      <li><strong>Cash for operating expenses</strong> = Operating exp − depreciation <span class="muted">(non-cash!)</span> + increase in prepaid − increase in accrued</li>
+      <li><strong>Cash for income tax</strong> = Tax expense − increase in tax payable</li>
     </ul>
+    <p>Net cash from operating = receipts − all payments.</p>
   </div>
   <details>
-    <summary>⭐ Worked: $\begin{bmatrix}1&0&2&|&1\\0&1&1&|&1\\0&0&0&|&k\end{bmatrix}$ — for which $k$ a solution? unique?</summary>
-    <p>Last row says $0=k$. So a solution exists <strong>only if $k=0$</strong>. When $k=0$, column 3 has no pivot ⇒ $x_3$ is free ⇒ <strong>infinitely many</strong> solutions (not unique).</p>
+    <summary>Worked (direct): Coastal Retreats — sales 825,000, COGS 570,000, op exp 88,000 (incl dep 20,500), tax 40,000</summary>
+    <div class="je big">
+      Receipts from customers = 825,000 − 3,700 (↑AR) = <b>821,300</b><br>
+      Payments to suppliers = −(570,000 + 4,000 ↑inv + 2,300 ↓AP) = <b>(576,300)</b><br>
+      Payments for operating expenses = −(88,000 − 20,500 dep) = <b>(67,500)</b><br>
+      Payments for income tax = <b>(42,000)</b><br>
+      <b>Net cash from operating = 135,500</b>
+    </div>
+    <p class="muted">Note depreciation (20,500) is stripped out — it never appears in the direct method because no cash moves.</p>
   </details>
 
-  <h3>Null space</h3>
-  <p>Null space of $A$ = all $x$ with $Ax=0$. Row-reduce, set pivots in terms of free variables, write as a span. If $A$ invertible ($\det\ne0$) the null space is just $\{0\}$.</p>
-  <details>
-    <summary>Worked: null space of $\begin{bmatrix}1&0&5\\0&1&1\\0&0&1\end{bmatrix}$</summary>
-    <p>Reduces to identity (3 pivots, $\det=1\ne0$) ⇒ only solution is $x=0$. Null space $=\{(0,0,0)\}$.</p>
-  </details>
-</section>
-
-<!-- ============ EIGEN ============ -->
-<section id="eigen">
-  <h2>Ch 16 · Eigenvalues &amp; Eigenvectors <span class="pill must">excl 16.1 PageRank</span></h2>
+  <h3>INDIRECT method — reconcile profit to cash</h3>
   <div class="method">
-    <p><strong>The method (memorise — not on sheet):</strong></p>
+    <p>Start with <strong>operating profit</strong>, then:</p>
     <ol>
-      <li><strong>Eigenvalues:</strong> solve $\det(A-\lambda I)=0$ (the characteristic equation).</li>
-      <li><strong>Eigenvectors:</strong> for each $\lambda$, find the null space of $(A-\lambda I)$ — i.e. solve $(A-\lambda I)v=0$.</li>
+      <li><strong>+ non-cash expenses:</strong> add depreciation &amp; amortisation.</li>
+      <li><strong>± gain/loss on sale of NCA:</strong> <span class="cr">subtract a gain</span>, <span class="dr">add back a loss</span> (it's not operating).</li>
+      <li><strong>± working-capital changes</strong> (table below).</li>
+      <li><strong>− tax paid</strong> if not already in profit.</li>
     </ol>
-    <p>2×2 shortcut: $\lambda^2-(\text{trace})\lambda+\det=0$, where trace $=a+d$.</p>
+    <table>
+      <tr><th>Change in…</th><th>ADD to profit</th><th>SUBTRACT from profit</th></tr>
+      <tr><td>Accounts receivable</td><td>decrease ↓</td><td>increase ↑</td></tr>
+      <tr><td>Inventory</td><td>decrease ↓</td><td>increase ↑</td></tr>
+      <tr><td>Prepaid expenses</td><td>decrease ↓</td><td>increase ↑</td></tr>
+      <tr><td>Accounts payable</td><td>increase ↑</td><td>decrease ↓</td></tr>
+      <tr><td>Accrued expenses</td><td>increase ↑</td><td>decrease ↓</td></tr>
+    </table>
+    <p class="tip" style="margin-top:6px">Memory rule: <strong>asset up = cash down</strong> (you tied money up); <strong>liability up = cash up</strong> (you delayed paying).</p>
   </div>
   <details>
-    <summary>⭐ Worked: full eigen of $A=\begin{bmatrix}1&1\\4&1\end{bmatrix}$</summary>
-    <p>$\det(A-\lambda I)=(1-\lambda)^2-4=0\Rightarrow(1-\lambda)^2=4\Rightarrow 1-\lambda=\pm2\Rightarrow\lambda=-1,\ 3$.</p>
-    <p><strong>$\lambda=3$:</strong> $(A-3I)=\begin{bmatrix}-2&1\\4&-2\end{bmatrix}$ ⇒ $-2x+y=0$ ⇒ $v=(1,2)$.</p>
-    <p><strong>$\lambda=-1$:</strong> $\begin{bmatrix}2&1\\4&2\end{bmatrix}$ ⇒ $2x+y=0$ ⇒ $v=(1,-2)$.</p>
+    <summary>Worked (indirect): Medical Marvels — profit 153,600, dep 47,980</summary>
+    <div class="je big">
+      Operating profit 153,600<br>
+      + Depreciation 47,980<br>
+      + Decrease in AR 8,840<br>
+      − Increase in inventory 25,310<br>
+      − Increase in prepaids 8,340<br>
+      − Decrease in AP 2,830<br>
+      + Increase in accrued expenses 3,730<br>
+      <b>= Net cash from operating 177,670</b>
+    </div>
   </details>
-  <details>
-    <summary>Worked: "Is $(1,-1)$ an eigenvector of $\begin{bmatrix}1&3\\3&1\end{bmatrix}$?"</summary>
-    <p>$A\binom{1}{-1}=\binom{1-3}{3-1}=\binom{-2}{2}=-2\binom{1}{-1}$. Yes — eigenvector with $\lambda=-2$.</p>
-  </details>
-  <div class="tip">Triangular / diagonal matrix ⇒ eigenvalues are the diagonal entries (no algebra needed).</div>
-  <div class="tip">Useful proofs that recur: if $\lambda$ is an eigenvalue of invertible $B$ then $\lambda\ne0$ and $1/\lambda$ is an eigenvalue of $B^{-1}$. If $A^2=A$ (idempotent), eigenvalues can only be $0$ or $1$ (since $\lambda^2=\lambda$).</div>
-</section>
 
-<!-- ============ VECTOR SPACES ============ -->
-<section id="vspace">
-  <h2>Ch 17 · Vector Spaces, Span, Independence <span class="pill must">excl 17.8–17.11</span></h2>
-
+  <h3>The two derivation tricks they always sneak in</h3>
   <div class="grid">
     <div class="card">
-      <h4>Linear independence</h4>
-      <p>$\{v_1,\dots,v_k\}$ independent $\iff$ the only solution to $\sum c_i v_i=0$ is all $c_i=0$.</p>
-      <p><strong>Two vectors:</strong> dependent $\iff$ one is a scalar multiple of the other.</p>
+      <h4>Dividends paid (from RE)</h4>
+      <p>Dividends paid = <strong>Profit − (closing RE − opening RE)</strong>.</p>
+      <p class="muted">Profit increases RE; dividends decrease it. So whatever profit didn't stick in RE was paid out.</p>
+      <p>e.g. profit 160,721, RE moved +4,600 ⇒ dividends = 156,121.</p>
     </div>
     <div class="card">
-      <h4>Span &amp; basis</h4>
-      <p>Span = all linear combinations. A <strong>basis</strong> is a linearly independent spanning set. $\dim\mathbb{R}^n=n$.</p>
+      <h4>Proceeds from sale of an asset</h4>
+      <p>Proceeds = <strong>Carrying amount + gain</strong> (or − loss).</p>
+      <p class="muted">Carrying amount = cost − accumulated depreciation.</p>
+      <p>e.g. carrying 5,300, gain 4,600 ⇒ proceeds = 9,900 (an investing inflow).</p>
+    </div>
+  </div>
+</section>
+
+<!-- RATIOS -->
+<section id="ratios">
+  <h2>📊 Ratios + Commentary <span class="pill weak">your focus</span></h2>
+  <div class="card">
+    <p><strong>Good news:</strong> the formulae are <strong>printed on the exam</strong>. You don't have to memorise them — you have to (1) pick the right numbers, (2) compute to the asked decimals/units, and (3) <strong>write 2–3 sentences</strong> on why it changed. The written part is where students drop easy marks. The full list with meanings is on the <a href="ratios.html">ratio sheet</a>.</p>
+  </div>
+
+  <h3>The number-picking traps</h3>
+  <div class="trap"><strong>"Average"</strong> means $(\text{opening} + \text{closing})/2$ — used in turnover ratios (receivables, inventory, asset), ROA, ROE, and the cash-debt-coverage ratios.</div>
+  <div class="trap"><strong>Net credit sales</strong> = sales − sales returns &amp; allowances. Use this (not total sales) for receivables turnover and average collection period.</div>
+  <div class="trap"><strong>Capital expenditure</strong> when not given = closing PPE − opening PPE + depreciation. Needed for free cash flow &amp; the capex ratio.</div>
+
+  <h3>The ratios that actually show up — grouped</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Liquidity</h4>
+      <table>
+        <tr><td>Current ratio</td><td>CA / CL</td></tr>
+        <tr><td>Quick (acid)</td><td>(CA − inventory − prepaid) / CL</td></tr>
+        <tr><td>Receivables turnover</td><td>net credit sales / avg AR</td></tr>
+        <tr><td>Avg collection period</td><td>365 / receivables turnover</td></tr>
+        <tr><td>Inventory turnover</td><td>COGS / avg inventory</td></tr>
+        <tr><td>Avg days in inventory</td><td>365 / inventory turnover</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Cash-flow based (the weak spot)</h4>
+      <table>
+        <tr><td>Free cash flow</td><td>operating cash − capex</td></tr>
+        <tr><td>Capital expenditure ratio</td><td>operating cash / capex</td></tr>
+        <tr><td>Current cash debt cover</td><td>operating cash / avg CL</td></tr>
+        <tr><td>Cash debt coverage</td><td>operating cash / avg total liab.</td></tr>
+        <tr><td>Cash return on sales</td><td>operating cash / net sales</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Profitability</h4>
+      <table>
+        <tr><td>Gross profit rate</td><td>(sales − COGS) / net sales</td></tr>
+        <tr><td>Profit margin</td><td>profit / net sales</td></tr>
+        <tr><td>Return on assets</td><td>profit / avg total assets</td></tr>
+        <tr><td>Return on equity</td><td>profit / avg equity</td></tr>
+        <tr><td>Asset turnover</td><td>net sales / avg total assets</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Solvency / PPE</h4>
+      <table>
+        <tr><td>Debt to assets</td><td>total liab. / total assets</td></tr>
+        <tr><td>Times interest earned</td><td>EBIT / interest expense</td></tr>
+        <tr><td>Avg useful life of PPE</td><td>avg cost of PPE / dep expense</td></tr>
+        <tr><td>Avg age of PPE</td><td>accum. dep / dep expense</td></tr>
+      </table>
     </div>
   </div>
 
-  <h3>⭐ Subspace test (the "is this a vector space?" question)</h3>
+  <h3>How to write the commentary (template for full marks)</h3>
   <div class="method">
-    <p>A subset $S$ is a subspace $\iff$ all three hold:</p>
     <ol>
-      <li><strong>Contains $0$</strong> (the zero vector). ← check this FIRST, it kills most.</li>
-      <li>Closed under addition: $u,v\in S\Rightarrow u+v\in S$.</li>
-      <li>Closed under scalar multiplication: $u\in S,\,c\in\mathbb R\Rightarrow cu\in S$.</li>
+      <li><strong>State the direction:</strong> "The current ratio improved from 2.75 to 3.73."</li>
+      <li><strong>Interpret it:</strong> "indicating stronger short-term liquidity — the company can comfortably cover current liabilities."</li>
+      <li><strong>Give a plausible reason / caveat:</strong> "However a ratio this high may signal excess idle cash or slow-moving inventory, i.e. inefficient working-capital management."</li>
     </ol>
   </div>
-
-  <h3>⭐ The recurring True/False statements — know the verdict + reason</h3>
-  <table>
-    <tr><th>Statement</th><th>Verdict</th><th>Reason / counter-example</th></tr>
-    <tr><td>$\{(a,b):a-b=1\}$ is a vector space</td><td class="">❌ FALSE</td><td>Doesn't contain $0$ ($0-0=0\ne1$); not closed.</td></tr>
-    <tr><td>$\{(a,b):a>0\}$ is a vector space</td><td>❌ FALSE</td><td>No zero vector; not closed under scalar mult (×$-1$ leaves it).</td></tr>
-    <tr><td>If $u,v$ linearly independent then orthogonal</td><td>❌ FALSE</td><td>$(1,0),(1,1)$ indep but dot $=1\ne0$.</td></tr>
-    <tr><td>If $\{v,w,z\}$ dependent then $v$ is a combo of $w,z$</td><td>❌ FALSE</td><td>Maybe $w,z$ are the dependent pair; $v$ need not depend on them.</td></tr>
-    <tr><td>If $A,B$ share a common eigenvector then $AB=BA$</td><td>❌ FALSE</td><td>One shared eigenvector isn't enough to force commuting.</td></tr>
-    <tr><td>If $\sum c_n x^n$ conv. abs. at $x=1$, also at $x=-1$</td><td>✅ TRUE</td><td>$\sum|c_n\cdot1^n|=\sum|c_n|=\sum|c_n(-1)^n|$.</td></tr>
-    <tr><td>$A=3I$ commutes with every 2×2 $B$ ($AB=BA$)</td><td>✅ TRUE</td><td>Scalar multiple of identity commutes with all.</td></tr>
-    <tr><td>For $3\times3$ $A$: $\det(3A)=3\det A$</td><td>❌ FALSE</td><td>$\det(3A)=3^3\det A=27\det A$.</td></tr>
-    <tr><td>If $u,v\in\text{null}(A)$ then $5u-2v\in\text{null}(A)$</td><td>✅ TRUE</td><td>Null space is a subspace (closed under lin. combos).</td></tr>
-    <tr><td>Unique solution to $Ax=b$ ⇒ $A$ invertible</td><td>✅ TRUE</td><td>Uniqueness $\iff\det A\ne0$.</td></tr>
-  </table>
-  <div class="tip">Strategy: for "prove or counter-example", a FALSE statement just needs ONE concrete counter-example. A TRUE statement needs a short general argument. Always state which you're doing.</div>
+  <details>
+    <summary>Stock phrases that score (memorise a few)</summary>
+    <ul>
+      <li><strong>Days in inventory ↑</strong> = slower-moving / possibly obsolete stock, overstocking, or a shift in product mix.</li>
+      <li><strong>Days in inventory ↓</strong> = better inventory management, promotions clearing stock, JIT, less obsolescence.</li>
+      <li><strong>Collection period ↑</strong> = lax credit policy, weaker collections, customer disputes, slower-paying customers.</li>
+      <li><strong>Quick ratio &lt; 1</strong> = a liquidity concern; reliant on selling inventory to meet short-term debts.</li>
+      <li><strong>Current ratio very high</strong> = strong liquidity but possibly inefficient use of working capital.</li>
+      <li><strong>Times interest earned &lt; ~2–3</strong> = solvency concern; may struggle to service interest.</li>
+    </ul>
+  </details>
 </section>
 
-<!-- ============ FLASHCARDS ============ -->
+<!-- PPE -->
+<section id="ppe">
+  <h2>🏭 Depreciation &amp; Disposal (Q1 every paper)</h2>
+  <div class="method">
+    <h4>The 3 methods</h4>
+    <ul>
+      <li><strong>Straight-line</strong> = (cost − residual) / useful life. Same each full year.</li>
+      <li><strong>Diminishing-balance</strong> = carrying amount × rate. <span class="cr">Ignores residual</span>; carrying amount = cost − accumulated dep so far.</li>
+      <li><strong>Units-of-production</strong> = (cost − residual) × (units this period / total units).</li>
+    </ul>
+    <p><strong>First (part) year:</strong> multiply by months/12 (for SL and diminishing). e.g. bought 1 Sep, Dec year-end ⇒ ×4/12.</p>
+  </div>
+  <div class="trap"><strong>GST:</strong> if the cost is given "<em>including 10% GST</em>", divide by 1.1 first to get the GST-exclusive cost. All depreciation uses the ex-GST figure.</div>
+
+  <details>
+    <summary>Worked: machine $207,000 (ex-GST), residual $25,900, 8-yr, 30,000 hrs, bought 1 Sep, Dec year-end</summary>
+    <div class="je big">
+      <b>Straight-line:</b> (207,000 − 25,900)/8 = 22,638/yr.<br>
+      &nbsp;&nbsp;Year 1 = 22,638 × 4/12 = <b>7,546</b>; Year 2 = <b>22,638</b>.<br><br>
+      <b>Diminishing @25%:</b> Year 1 = 207,000 × 25% × 4/12 = <b>17,250</b>;<br>
+      &nbsp;&nbsp;Year 2 = (207,000 − 17,250) × 25% = <b>47,438</b>.<br><br>
+      <b>Units (1,750 hrs):</b> (207,000 − 25,900) × 1,750/30,000 = <b>10,564</b>.
+    </div>
+  </details>
+
+  <h3>Disposal gain/loss</h3>
+  <div class="method">
+    <ol>
+      <li>Update depreciation to the disposal date.</li>
+      <li>Carrying amount = cost − accumulated depreciation.</li>
+      <li><strong>Gain/loss = proceeds − carrying amount</strong> (positive = gain, negative = loss).</li>
+    </ol>
+    <div class="je">
+      <span class="dr">Dr</span> Cash (proceeds)<br>
+      <span class="dr">Dr</span> Accumulated depreciation<br>
+      <span class="dr">Dr</span> Loss on disposal &nbsp;<span class="muted">(if any)</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Asset (original cost)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Gain on disposal &nbsp;<span class="muted">(if any)</span>
+    </div>
+  </div>
+  <details>
+    <summary>Worked: truck cost $24,750 incl 10% GST, SL 5-yr, residual $2,250, scrapped (proceeds $0)</summary>
+    <p>Ex-GST cost = 24,750/1.1 = 22,500. Depreciable = 22,500 − 2,250 = 20,250. SL = 4,050/yr × 5 yrs = 20,250 accumulated. Carrying amount = 22,500 − 20,250 = 2,250. Proceeds 0 − 2,250 = <b>Loss $2,250</b>.</p>
+  </details>
+</section>
+
+<!-- BANK REC -->
+<section id="bankrec">
+  <h2>🏦 Bank Reconciliation + Allowance for Doubtful Debts</h2>
+
+  <h3>Bank reconciliation (two columns)</h3>
+  <div class="method">
+    <table>
+      <tr><th>BANK STATEMENT side</th><th>COMPANY BOOKS side</th></tr>
+      <tr><td>Balance per bank statement<br>+ outstanding deposits<br>− unpresented (outstanding) cheques</td><td>Balance per books (cash at bank)<br>+ interest/notes collected by bank, error corrections that increase cash<br>− bank charges, dishonoured cheques, errors that decrease cash</td></tr>
+    </table>
+    <p>Both sides must reconcile to the <strong>same adjusted figure</strong>.</p>
+    <p class="tip"><strong>Adjusting journal entries are made ONLY for the BOOKS-side items</strong> (interest, charges, dishonoured cheques, errors). Never for outstanding deposits / unpresented cheques — those are timing differences the bank will catch up on.</p>
+  </div>
+  <details>
+    <summary>Worked: books $3,551; +interest 17; −charges 35; recording error +27; −dishonoured 260; outstanding deposits 450; bank stmt 2,850</summary>
+    <div class="je big">
+      Bank side: 2,850 + 450 = <b>3,300</b><br>
+      Books side: 3,551 + 17 + 27 − 260 − 35 = <b>3,300</b> ✓
+    </div>
+  </details>
+
+  <h3>Allowance for doubtful debts</h3>
+  <div class="method">
+    <ol>
+      <li><strong>Write-off</strong> during the period: <span class="dr">Dr</span> Allowance for doubtful debts / <span class="cr">Cr</span> Accounts receivable.</li>
+      <li><strong>Required allowance</strong> = % × accounts receivable (closing).</li>
+      <li><strong>Balance after write-offs</strong> = opening allowance − write-offs.</li>
+      <li><strong>Top-up (the bad debts expense)</strong> = required allowance − balance after write-offs.<br>
+      <span class="dr">Dr</span> Bad debts expense / <span class="cr">Cr</span> Allowance for doubtful debts.</li>
+    </ol>
+  </div>
+  <details>
+    <summary>Worked: opening allowance 8,650 Cr; write off 3,500; AR 524,000; bring to 2.0%</summary>
+    <p>Write-off: Dr Allowance 3,500 / Cr AR 3,500. Required = 2% × 524,000 = 10,480. Balance after = 8,650 − 3,500 = 5,150 Cr. Top-up = 10,480 − 5,150 = <b>5,330</b>: Dr Bad debts expense 5,330 / Cr Allowance 5,330.</p>
+  </details>
+</section>
+
+<!-- JOURNALS -->
+<section id="journals">
+  <h2>📒 The Journal-Entry Families</h2>
+  <div class="tip">Watch the instruction "<strong>narrations required</strong>" — if it says so, write a one-line description under each entry or you lose marks.</div>
+
+  <details>
+    <summary>Warranty provision</summary>
+    <p><strong>Claims incurred:</strong> Dr Warranty provision / Cr Wages payable (or Cash/Inventory).<br>
+    <strong>Year-end adjustment:</strong> required = % × revenue; balance after claims = opening − claims (may go to a debit!); top-up = required + debit balance (or required − credit balance).</p>
+    <p class="big">e.g. opening 74,690 Cr, claims 77,500 ⇒ balance = 2,810 <em>debit</em>. Required = 2% × 3,830,000 = 76,600. Adjustment = 76,600 + 2,810 = <b>79,410</b>: Dr Warranty expense 79,410 / Cr Warranty provision 79,410.</p>
+  </details>
+
+  <details>
+    <summary>Share issue — application &amp; allotment (via Cash Trust)</summary>
+    <div class="je">
+      On application money received: <span class="dr">Dr</span> Cash Trust / <span class="cr">Cr</span> Application<br>
+      On allotment (shares issued): <span class="dr">Dr</span> Application / <span class="cr">Cr</span> Share capital<br>
+      &nbsp;&nbsp;and <span class="dr">Dr</span> Cash / <span class="cr">Cr</span> Cash Trust (transfer out of trust)<br>
+      <span class="dr">Dr</span> Allotment receivable / <span class="cr">Cr</span> Share capital (for the allotment instalment)
+    </div>
+    <p class="muted">Simple fully-paid-on-application issue: Dr Cash / Cr Share capital (shares × price applied).</p>
+  </details>
+
+  <details>
+    <summary>Dividends — declare then pay</summary>
+    <div class="je">
+      Declaration: <span class="dr">Dr</span> Retained earnings (Dividends declared) / <span class="cr">Cr</span> Dividends payable<br>
+      Payment: <span class="dr">Dr</span> Dividends payable / <span class="cr">Cr</span> Cash
+    </div>
+    <p class="muted">Amount = shares on issue × dividend per share.</p>
+  </details>
+
+  <details>
+    <summary>Debenture / note redemption (gain or loss)</summary>
+    <p>Redeemed <strong>above</strong> face (e.g. at 102) ⇒ a <strong>loss</strong>: Dr Debentures payable (face), Dr Loss on redemption / Cr Cash.<br>
+    Redeemed <strong>below</strong> face (e.g. at 98) ⇒ a <strong>gain</strong>: Dr Debentures payable (face) / Cr Gain on redemption, Cr Cash.</p>
+  </details>
+
+  <details>
+    <summary>Notes payable + accrued interest</summary>
+    <p>Issue: Dr Cash / Cr Notes payable. Accrue interest at period-end: Dr Interest expense / Cr Interest payable (= principal × rate × months/12). At maturity: Dr Notes payable, Dr Interest payable, Dr Interest expense / Cr Cash.</p>
+  </details>
+
+  <details>
+    <summary>Revenue received in advance (unearned)</summary>
+    <p>On receipt: Dr Cash / Cr Unearned revenue (revenue received in advance). As earned: Dr Unearned revenue / Cr Revenue.</p>
+    <p class="big">e.g. 5,000 season tickets × $550 = 2,750,000 unearned over 11 matches ⇒ per match 250,000; after 2 matches: Dr Unearned revenue 500,000 / Cr Revenue 500,000.</p>
+  </details>
+</section>
+
+<!-- FLASHCARDS -->
 <section id="flashcards">
   <h2>🃏 Rapid Flashcards</h2>
-  <p class="muted">Click a card to flip. Cover the answer and quiz yourself.</p>
+  <p class="muted">Click a card to flip.</p>
   <div class="grid" id="cards"></div>
 </section>
 
 <footer>
-  <p>MATH1051 One-Day Pack · pair with <a href="practice_exam.html">the mock exam</a> and <a href="formula_recall.html">the off-sheet recall sheet</a>.</p>
-  <p>Built from your 13 past papers + ch07–17 worked solutions. Good luck — you've got this. 🎯</p>
+  <p>ACCT1110 One-Day Pack · pair with the <a href="ratios.html">ratio reference sheet</a> and the <a href="practice_exam.html">mock exam</a>.</p>
+  <p>Built from your 5 past papers + the 2026 sample + lecture 6–11 revision notes. Smash it. 🎯</p>
 </footer>
 </main>
 
 <script>
 const cards = [
-  ["∫ x eˣ dx = ?","(x − 1)eˣ + C  (by parts)"],
-  ["When does Σarⁿ converge?","|r| < 1, to a/(1−r)"],
-  ["p-series Σ1/nᵖ converges when?","p > 1"],
-  ["nth-term test proves…","DIVERGENCE only (aₙ↛0). Never convergence."],
-  ["Coefficient of x² in Maclaurin cos x","−1/2"],
-  ["det(2A) for 2×2 with det A = 5","2²·5 = 20"],
-  ["det(AB) = ?","det(A)·det(B)"],
-  ["A invertible ⟺ …","det A ≠ 0 ⟺ null space {0} ⟺ cols indep"],
-  ["Eigenvalues: solve…","det(A − λI) = 0"],
-  ["Eigenvector for λ: find…","null space of (A − λI)"],
-  ["Triangular matrix eigenvalues","the diagonal entries"],
-  ["Bottom row [0 0 0 | k], k≠0 means","NO solution (inconsistent)"],
-  ["Bottom row [0 0 0 | 0] means","free variable → ∞ many solutions"],
-  ["Two vectors are dependent ⟺","one is a scalar multiple of the other"],
-  ["Subspace test — check first?","Does it contain the zero vector?"],
-  ["u ⊥ v ⟺","u·v = 0"],
-  ["d/dx ∫₁^{g(x)} f(t)dt","f(g(x))·g′(x)  (FTC + chain)"],
-  ["∫ f′/f dx","ln|f| + C"],
-  ["∫ ln x dx","x ln x − x + C"],
-  ["Conditionally convergent example","Σ(−1)ⁿ/n (alternating harmonic)"],
-  ["Σ(−1)ⁿ/n: converges?","Yes (Leibniz), but only conditionally"],
-  ["Radius of conv. method","ratio test → |x−a| < R, then test endpoints"],
-  ["∫₀^∞ cos x dx","diverges (sin R oscillates, no limit)"],
-  ["2×2 inverse formula","1/(ad−bc) · [[d,−b],[−c,a]]"],
+  ["Interest RECEIVED goes in which cash-flow activity?","Investing"],
+  ["Interest PAID goes in which activity?","Financing"],
+  ["Income tax goes in which activity?","Operating"],
+  ["Indirect method: an INCREASE in inventory…","is SUBTRACTED from profit (cash tied up)"],
+  ["Indirect method: an INCREASE in accounts payable…","is ADDED to profit (delayed paying cash)"],
+  ["Depreciation in the DIRECT method?","Excluded entirely — it's non-cash"],
+  ["Loss on sale of NCA in indirect method?","ADD it back (it's not operating)"],
+  ["Gain on sale of NCA in indirect method?","SUBTRACT it"],
+  ["Dividends paid formula (from RE)","Profit − (closing RE − opening RE)"],
+  ["Proceeds from sale of an asset","Carrying amount + gain (or − loss)"],
+  ["Cash from customers (direct)","Sales − increase in AR"],
+  ["Cash to suppliers (direct)","COGS + ↑inventory − ↑accounts payable"],
+  ["Straight-line depreciation","(cost − residual) / useful life"],
+  ["Diminishing-balance depreciation","carrying amount × rate (ignores residual)"],
+  ["Units-of-production depreciation","(cost − residual) × units used / total units"],
+  ["Cost given 'incl 10% GST' — first step","Divide by 1.1 to get ex-GST cost"],
+  ["Disposal gain/loss","proceeds − carrying amount"],
+  ["Bank rec: bank statement side adjusts for…","outstanding deposits (+) & unpresented cheques (−)"],
+  ["Adjusting JEs are made for which bank-rec items?","ONLY books-side (interest, charges, dishonoured, errors)"],
+  ["Bad debts expense (allowance method)","required allowance − allowance balance after write-offs"],
+  ["Required allowance","% × closing accounts receivable"],
+  ["Net credit sales","sales − sales returns & allowances"],
+  ["Quick ratio","(current assets − inventory − prepaid) / current liabilities"],
+  ["Free cash flow","net operating cash − capital expenditure"],
+  ["Capex when not given","closing PPE − opening PPE + depreciation"],
+  ["'Average' in a ratio means","(opening + closing) / 2"],
+  ["Both cash-flow methods should give…","the SAME net operating cash (self-check!)"],
+  ["Warranty: opening 74,690 Cr, claims 77,500 → balance?","2,810 DEBIT (claims exceeded provision)"],
 ];
-const wrap = document.getElementById('cards');
-cards.forEach(([q,a])=>{
-  const d=document.createElement('div');d.className='flash';
+const wrap=document.getElementById('cards');
+cards.forEach(([q,a])=>{const d=document.createElement('div');d.className='flash';
   d.innerHTML=`<div class="inner"><div class="q">${q}</div><div class="a">${a}</div></div>`;
-  d.querySelector('.inner').onclick=()=>d.classList.toggle('show');
-  wrap.appendChild(d);
-});
+  d.querySelector('.inner').onclick=()=>d.classList.toggle('show');wrap.appendChild(d);});
 </script>
 </body>
 </html>
