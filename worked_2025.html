@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1081 — Full Worked Solutions, S1 2025</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--ink:#e8edf4;--muted:#9aa7b8;--accent:#a78bfa;--good:#4ade80;--line:#2a3340;--code:#0a0e14;--gold:#fbbf24}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.65}
+  header{background:linear-gradient(135deg,#1e1340,#13203a);padding:24px 20px;text-align:center;border-bottom:1px solid var(--line)}
+  header h1{margin:0}header p{color:var(--muted);margin:4px}
+  main{max-width:880px;margin:0 auto;padding:22px 18px 80px}
+  .bar{position:sticky;top:0;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);padding:10px;display:flex;gap:10px;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
+  button{background:var(--accent);color:#1a1040;border:none;padding:8px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+  a{color:var(--accent)}
+  h2{border-left:4px solid var(--accent);padding-left:12px;margin-top:30px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+  .ask{color:var(--gold);font-weight:600}
+  .marks{float:right;color:var(--muted);font-size:13px}
+  .sol{display:none;margin-top:10px;padding:12px;background:var(--code);border:1px solid #2c4a3a;border-radius:8px}
+  .sol:before{content:"✓ Worked solution";color:var(--good);font-weight:700;display:block;margin-bottom:6px}
+  .show .sol{display:block}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .note{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:6px;padding:6px 10px;font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>MATH1081 — Full Worked Solutions</h1>
+  <p>Semester 1, 2025 exam · the paper you may sit again · 80 marks</p>
+  <p><a href="index.html">← back to the technique hub</a></p>
+  <p style="font-size:12.5px;color:var(--gold)">Numerical answers verified by computation. Click a question to reveal its solution.</p>
+</header>
+<div class="bar"><button onclick="toggleAll()">👁 Toggle all solutions</button></div>
+<main>
+
+<h2>Q1 — Logic (7)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">1(a)</span> Which is true: (i) $\forall n\in\mathbb Z,\exists r\in\mathbb R$ s.t. $n=\lfloor r\rfloor$, or (ii) $\exists r\in\mathbb R$ s.t. $\forall n\in\mathbb Z,\ n=\lfloor r\rfloor$?
+<div class="sol"><b>(i) is true; (ii) is false.</b><br>
+(i) $\forall n\,\exists r$: given any integer $n$, choose $r=n$ (or any $r\in[n,n+1)$); then $\lfloor r\rfloor=n$. The $r$ is allowed to depend on $n$, so this works. ✓<br>
+(ii) $\exists r\,\forall n$: this claims ONE fixed $r$ floors to <i>every</i> integer simultaneously — impossible, since $\lfloor r\rfloor$ is a single number. ✗</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">5</span><span class="ask">1(b)</span> Prove valid: $a\to(b\lor c)$, $\ b\to d$, $\ {\sim}b\to{\sim}c$, $\ a$, $\ \therefore d$.
+<div class="sol"><div class="mono">1. a → (b ∨ c)     premise
+2. b → d           premise
+3. ~b → ~c         premise
+4. a               premise
+5. b ∨ c           1, 4   Modus Ponens
+6. c → b           3, Contrapositive  (~b→~c is equivalent to c→b)
+7. b               5, 6   Division into cases:
+                   if b, done; if c then by (6) b. Either way b.
+8. d               2, 7   Modus Ponens
+∴ the argument is valid. ∎</div>
+<div class="note">The pivot is realising premise 3 (${\sim}b\to{\sim}c$) is the contrapositive of $c\to b$. Then both branches of $b\lor c$ lead to $b$.</div></div></div>
+
+<h2>Q2 — Number Theory (11)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">2(a)</span> Prove: for all $n\in\mathbb Z$, if $n$ is odd then $4\mid(n^2-1)$.
+<div class="sol">Let $n$ be odd, so $n=2k+1$ for some integer $k$.<br>
+$n^2-1=(2k+1)^2-1=4k^2+4k=4(k^2+k)$.<br>
+Since $k^2+k\in\mathbb Z$, we have $n^2-1=4\times(\text{integer})$, so $4\mid(n^2-1)$. ∎</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">2(b)</span> Prove: for all $n\in\mathbb Z$, if $n$ is odd then $8\mid(n^2-1)$.
+<div class="sol">From (a), $n^2-1=4(k^2+k)=4k(k+1)$.<br>
+$k$ and $k+1$ are consecutive integers, so one of them is even ⇒ $k(k+1)$ is even ⇒ $k(k+1)=2m$ for some integer $m$.<br>
+Then $n^2-1=4\cdot2m=8m$, so $8\mid(n^2-1)$. ∎
+<div class="note">The whole trick is "two consecutive integers ⇒ their product is even," giving the extra factor of 2.</div></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">2(c)</span> Using the Euclidean algorithm, compute $\gcd(192,75)$.
+<div class="sol"><div class="mono">192 = 75·2 + 42
+ 75 = 42·1 + 33
+ 42 = 33·1 +  9
+ 33 =  9·3 +  6
+  9 =  6·1 +  3
+  6 =  3·2 +  0   ← remainder 0, stop
+gcd(192, 75) = 3   (last nonzero remainder)</div></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">2(d)</span> Using (c), compute $\operatorname{lcm}(192,75)$.
+<div class="sol">$\operatorname{lcm}(a,b)=\dfrac{a\cdot b}{\gcd(a,b)}=\dfrac{192\times75}{3}=\dfrac{14400}{3}=\mathbf{4800}.$</div></div>
+
+<h2>Q3 — Induction / Modular (5)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">5</span><span class="ask">3</span> Prove: for all $n\in\mathbb N$, $7^n+3n-1\equiv0\pmod9$.
+<div class="sol"><div class="mono">Base n=1:  7 + 3 − 1 = 9 ≡ 0 (mod 9)   ✓
+Hypothesis: assume 7^k + 3k − 1 = 9M for some integer M
+            ⇒ 7^k = 9M − 3k + 1
+Step (n = k+1):
+  7^(k+1) + 3(k+1) − 1
+   = 7·7^k + 3k + 2
+   = 7(9M − 3k + 1) + 3k + 2
+   = 63M − 21k + 7 + 3k + 2
+   = 63M − 18k + 9
+   = 9(7M − 2k + 1)         ← 9 × integer
+  ⇒ 7^(k+1) + 3(k+1) − 1 ≡ 0 (mod 9)   ✓
+By induction, true for all n ∈ ℕ. ∎</div></div></div>
+
+<h2>Q4 — Functions: $f:\mathbb R\times\mathbb R\to\mathbb Z,\ f(x,y)=\lfloor xy\rfloor$ (10)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">4(a)</span> Image of $[-1,1]\times[-2,2]$ under $f$.
+<div class="sol">For $x\in[-1,1],y\in[-2,2]$, the product $xy$ ranges over $[-2,2]$ (max $=1\cdot2=2$, min $=1\cdot(-2)=-2$).<br>
+Flooring values across $[-2,2]$ gives every integer from $-2$ up to $2$.<br>
+<b>Image $=\{-2,-1,0,1,2\}$.</b></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">4(b)</span> Is $f$ one-to-one?
+<div class="sol"><b>No.</b> Counterexample: $f(1,2)=\lfloor2\rfloor=2$ and $f(2,1)=\lfloor2\rfloor=2$, but $(1,2)\neq(2,1)$. Two different inputs, same output ⇒ not injective.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">4(c)</span> Is $f$ onto?
+<div class="sol"><b>Yes.</b> Take any integer $n\in\mathbb Z$ (the codomain). Choose $(x,y)=(n,1)$. Then $f(n,1)=\lfloor n\cdot1\rfloor=\lfloor n\rfloor=n$. So every integer is hit ⇒ onto.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">4(d)</span> Is the preimage $f^{-1}(0)$ finite, countably infinite, or uncountable?
+<div class="sol"><b>Uncountable.</b> $f^{-1}(0)=\{(x,y):\lfloor xy\rfloor=0\}=\{(x,y):0\le xy<1\}$ — a 2-dimensional region of the real plane, which contains uncountably many points (e.g. all $(x,0)$ for $x\in\mathbb R$ already gives an uncountable set).</div></div>
+
+<h2>Q5 — Sets &amp; Cardinality (13)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">5(a)</span> $|S|=3,|T|=2$. What is $|\mathcal P(S\times T)|$?
+<div class="sol">$|S\times T|=|S|\cdot|T|=3\times2=6$. Then $|\mathcal P(S\times T)|=2^{|S\times T|}=2^6=\mathbf{64}.$</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">4</span><span class="ask">5(b)</span> $p_i=i$th prime. Evaluate $\bigcup_{i=1}^\infty\{x\in\mathbb N: x\equiv1\pmod{p_i}\}$.
+<div class="sol">$x\equiv1\pmod{p_i}$ means $p_i\mid(x-1)$. The union is all $x\in\mathbb N$ for which <i>some</i> prime $p_i$ divides $x-1$.<br>
+• $x=1$: $x-1=0$, and every prime divides $0$, so $1\equiv1\pmod{p_i}$ for all $i$ — so $x=1$ IS in every set, hence in the union.<br>
+• $x=2$: $x-1=1$; no prime divides $1$, so $2$ is in <i>none</i> of the sets ⇒ $2\notin$ union.<br>
+• $x\ge3$: $x-1\ge2$ has a prime factor $p_i$, so $x$ is in that set ⇒ in the union.<br>
+<b>Union $=\mathbb N\setminus\{2\}=\{1,3,4,5,6,\dots\}.$</b>
+<div class="note">Justify by the two inclusions: every $x\neq2$ is shown to lie in some set; $x=2$ lies in none because $x-1=1$ has no prime factor. (Double-check the $x=1$ edge case under your course's convention for "divides 0" — standard convention: every integer divides 0, so $1$ is included.)</div></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">5(c)</span> Give a function with uncountable domain &amp; codomain but countably infinite range.
+<div class="sol"><b>$f:\mathbb R\to\mathbb R$, $f(x)=\lfloor x\rfloor$.</b> Domain $\mathbb R$ (uncountable), codomain $\mathbb R$ (uncountable), range $=\mathbb Z$ (countably infinite). ✓</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">4</span><span class="ask">5(d)</span> Use Schröder-Bernstein to prove $|\mathbb R\cup\{\infty\}|=|\mathbb R|$.
+<div class="sol"><b>Injection $\mathbb R\to\mathbb R\cup\{\infty\}$:</b> $g(x)=x$ (identity). Injective since $\mathbb R\subseteq\mathbb R\cup\{\infty\}$. So $|\mathbb R|\le|\mathbb R\cup\{\infty\}|$.<br><br>
+<b>Injection $\mathbb R\cup\{\infty\}\to\mathbb R$:</b> "shift to make room for $\infty$":
+<div class="mono">h(∞) = 0
+h(n) = n+1        if n ∈ {0,1,2,3,...}  (non-negative integers)
+h(x) = x          otherwise</div>
+This is injective: $\infty$ maps to $0$; the non-negative integers shift up to $1,2,3,\dots$ (vacating $0$ so it doesn't clash); every other real maps to itself. No two inputs collide. So $|\mathbb R\cup\{\infty\}|\le|\mathbb R|$.<br><br>
+Both injections exist ⇒ by Schröder-Bernstein, $|\mathbb R\cup\{\infty\}|=|\mathbb R|$. ∎</div></div>
+
+<h2>Q6 — Relations: $a\,\rho\,b\iff b=a\cdot2^i,\ i\ge0$ integer, on $\mathbb N$ (8)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">6(a)</span> Reflexive?
+<div class="sol"><b>Yes.</b> For any $a$, take $i=0$: $a=a\cdot2^0=a$, so $a\,\rho\,a$ holds for every $a\in\mathbb N$.</div></div>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">6(b)</span> Symmetric?
+<div class="sol"><b>No.</b> Counterexample: $1\,\rho\,2$ since $2=1\cdot2^1$. But $2\,\rho\,1$ would need $1=2\cdot2^i$, i.e. $2^i=\tfrac12$, impossible for integer $i\ge0$. So $a\rho b$ doesn't imply $b\rho a$.</div></div>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">6(c)</span> Transitive?
+<div class="sol"><b>Yes.</b> Suppose $a\rho b$ and $b\rho c$: $b=a\cdot2^i$ and $c=b\cdot2^j$ with $i,j\ge0$. Then $c=a\cdot2^{i+j}$, and $i+j\ge0$, so $a\,\rho\,c$.</div></div>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">6(d)</span> Antisymmetric?
+<div class="sol"><b>Yes.</b> Suppose $a\rho b$ and $b\rho a$: $b=a\cdot2^i$ and $a=b\cdot2^j$, $i,j\ge0$. Substituting, $a=a\cdot2^{i+j}$ ⇒ $2^{i+j}=1$ ⇒ $i+j=0$ ⇒ $i=j=0$ ⇒ $b=a$.
+<div class="note">Reflexive + antisymmetric + transitive ⇒ $\rho$ is a <b>partial order</b> on $\mathbb N$.</div></div></div>
+
+<h2>Q7 — Groups (10)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">4</span><span class="ask">7(a)</span> Cayley table for $(\mathbb Z_5-\{0\},\times)$. Is it cyclic?
+<div class="sol"><div class="mono">×  | 1  2  3  4
+---+------------
+1  | 1  2  3  4
+2  | 2  4  1  3      (2·3=6≡1, 2·4=8≡3)
+3  | 3  1  4  2      (3·3=9≡4, 3·4=12≡2)
+4  | 4  3  2  1      (4·4=16≡1)</div>
+Identity $=1$; every row/column is a permutation of $\{1,2,3,4\}$ (Latin square) and every element has an inverse ($2^{-1}=3,\ 4^{-1}=4$) ⇒ it is a group.<br>
+<b>Cyclic? YES.</b> Powers of $2$: $2^1=2,\ 2^2=4,\ 2^3=8\equiv3,\ 2^4=16\equiv1$ — these are $\{2,4,3,1\}$ = the whole group. So $2$ is a generator. (So is $3$.)</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">7(b)(i)</span> $G=\{a+bi:a,b\in\mathbb Z\}$. Is $(G-\{0\},\times)$ a group?
+<div class="sol"><b>No.</b> It is closed and associative with identity $1$, but most elements lack an inverse <i>in $G$</i>. E.g. $2\in G$ would need $2^{-1}=\tfrac12$, which is not a Gaussian integer. (Only $\pm1,\pm i$ have inverses in $G$.) A failed axiom (inverses) ⇒ not a group.</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">7(b)(ii)</span> Is $(G,+)$ isomorphic to $(\mathbb Q,+)$?
+<div class="sol"><b>No.</b> Use a structural property that differs. In $(\mathbb Q,+)$, every element is "divisible by $2$": for any $q$ there is $x\in\mathbb Q$ with $x+x=q$ (take $x=q/2$). In $(G,+)=(\mathbb Z[i],+)$ this fails: $1\in G$ has no $x\in G$ with $x+x=1$ (would need $x=\tfrac12\notin G$). A property true in one group and false in the other ⇒ they cannot be isomorphic.
+<div class="note">Equally valid: $(G,+)\cong(\mathbb Z^2,+)$ is finitely generated (by $1$ and $i$), whereas $(\mathbb Q,+)$ is not finitely generated. Any one clean structural difference earns the marks.</div></div></div>
+
+<h2>Q8 — Counting &amp; Graphs (16)</h2>
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">8(a)</span> Permutations of $A,B,C,D,E,F$ with $A$ adjacent to $C$.
+<div class="sol">Glue $\{A,C\}$ into one block ⇒ $5$ objects: $[AC],B,D,E,F$. Arrange: $5!=120$. The block has $2$ internal orders ($AC$ or $CA$): $\times2$.<br>
+<b>$5!\times2=240$.</b></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">8(b)</span> Permutations with $A$ adjacent to $C$ but $A$ <i>not</i> adjacent to $B$.
+<div class="sol">Use subtraction: (adj to $C$) − (adj to $C$ AND adj to $B$).<br>
+• adj to $C$ $=240$ (from (a)).<br>
+• adj to $C$ AND adj to $B$: $A$ touches both, so $A$ is the <b>middle</b> of a 3-block: $B\text-A\text-C$ or $C\text-A\text-B$ (2 orders). Glue trio ⇒ $4$ objects ⇒ $4!=24$, $\times2=48$.<br>
+<b>$240-48=192$.</b></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">3</span><span class="ask">8(c)</span> 11 edges, 7 vertices; four vertices degree 3, two degree 4. Degree of the last vertex?
+<div class="sol">Handshake lemma: sum of degrees $=2\times\text{edges}=2\times11=22$.<br>
+Known degrees $=4(3)+2(4)=12+8=20$.<br>
+Last vertex $=22-20=\mathbf2$. (Proof = the handshake lemma, which holds because each edge contributes 2 to the degree total.)</div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">2</span><span class="ask">8(d)</span> $3\times3$ grid of dots; number of walks of length 4 from corner $A$ to opposite corner $B$.
+<div class="sol"><b>6 walks.</b><br>
+Method: walks of length $k$ from $A$ to $B$ = the $(A,B)$ entry of $M^4$ ($M$ = adjacency matrix of the grid). Equivalently, label $A=1$ and propagate "new value = sum of neighbours' values" four steps; the corner $B$ ends with $6$.<br>
+<span class="mono">Intuition: on a 3×3 grid the corner-to-corner distance is 4, so length-4 walks are exactly the shortest (monotone) paths: choose which 2 of the 4 steps go "down" = C(4,2)=6.</span></div></div>
+
+<div class="q" onclick="this.classList.toggle('show')"><span class="marks">6</span><span class="ask">8(e)</span> Walks of length 8 from $A$ to $B$ on (i) the full $5\times5$ grid, (ii) the modified grid in the figure.
+<div class="sol"><b>(i) 70 walks.</b> On the $5\times5$ grid the corner-to-corner distance is 8, so length-8 walks are the monotone shortest paths: choose which 4 of 8 steps go down = $\binom{8}{4}=70$. (Same as the $(A,B)$ entry of $M^8$.)<br><br>
+<b>(ii)</b> The figure removes an edge/vertex, which kills some of those 70 paths. Method: redraw the grid with the missing edge, then label-and-propagate (each vertex = sum of reachable neighbours) for 8 steps — the paths forced through the removed edge are subtracted. <span class="mono">Count via: (full 70) − (monotone paths using the removed edge). Read the exact removed edge off the figure on the day and subtract the paths through it.</span>
+<div class="note">For 8(e) the marker wants the <b>method shown</b>: build/relabel the grid and propagate. The full grid is $\binom84=70$; the modified one is $70$ minus the paths that needed the deleted edge.</div></div></div>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('.q').forEach(q=>q.classList.toggle('show',shown));}
+</script>
+</body>
+</html>

@@ -3,475 +3,427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACCT1110 Exam Revision Hub</title>
+<title>MATH1081 Exam Survival Hub</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <style>
-  :root{
-    --bg:#0f1518;--panel:#18232a;--panel2:#1f2e37;--ink:#e9f1f3;--muted:#9db4bd;
-    --accent:#2dd4bf;--accent2:#22a594;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;
-    --gold:#ffd166;--line:#273a44;--code:#0a1417;--dr:#7dd3fc;--cr:#fca5a5;
-  }
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#6366f1;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
   a{color:var(--accent);text-decoration:none}
-  header{background:linear-gradient(135deg,#0c2d2a,#0e3030);padding:34px 20px 28px;border-bottom:1px solid var(--line);text-align:center}
-  header h1{margin:0 0 6px;font-size:30px}
-  header p{margin:2px 0;color:var(--muted)}
-  .badge{display:inline-block;background:var(--accent);color:#012b27;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
-  .badge.gold{background:var(--gold);color:#3a2c00}
-  .badge.warn{background:var(--warn);color:#3a2a00}
-  nav{position:sticky;top:0;z-index:50;background:rgba(15,21,24,.95);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-  nav a{background:var(--panel2);padding:6px 12px;border-radius:8px;font-size:13px;color:var(--ink);border:1px solid var(--line)}
-  nav a:hover{background:var(--accent);color:#012b27}
-  main{max-width:940px;margin:0 auto;padding:24px 18px 80px}
-  section{margin:38px 0;scroll-margin-top:60px}
-  h2{font-size:23px;border-left:4px solid var(--accent);padding-left:12px;margin-top:0}
-  h3{font-size:18px;color:#cdeae6;margin-top:26px}
-  h4{font-size:14px;color:var(--gold);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:720px){.grid{grid-template-columns:1fr}}
-  .guaranteed{border-left:5px solid var(--gold);background:linear-gradient(90deg,rgba(255,209,102,.08),transparent)}
-  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;margin-right:6px}
-  .pill.weak{background:#5f1e1e;color:#fca}.pill.q{background:#1e4f48;color:#9eeadd}
-  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
-  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-  th{background:var(--panel2);color:var(--gold)}
-  tr:nth-child(even){background:rgba(255,255,255,.02)}
+  header{background:linear-gradient(135deg,#1e1340,#13203a);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1a1040;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1a1040}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#d7c9ff}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(99,102,241,.08),transparent)}
+  .q h3:before{content:"📝 ";font-size:14px}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3a3060;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
   .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
   .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
-  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:10px 14px;margin:8px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
   .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
-  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:10px 14px;margin:8px 0}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
   .tip:before{content:"✓ ";color:var(--good);font-weight:700}
   details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
-  details[open]{padding-bottom:14px}
-  summary{cursor:pointer;padding:14px 0;font-weight:600;color:#cdeae6;list-style:none}
-  summary:before{content:"▶ ";color:var(--accent);font-size:12px}
-  details[open] summary:before{content:"▼ "}
-  .je{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;overflow-x:auto}
-  .je table{margin:0;border:none}.je td{border:none;padding:2px 10px 2px 0}
-  .dr{color:var(--dr)}.cr{color:var(--cr)}
-  .indent{padding-left:28px}
-  .timeblock{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
-  .timeblock .t{flex:0 0 78px;font-weight:700;color:var(--gold);font-size:14px}
-  .timeblock .d{flex:1}
-  .flash{}
-  .flash .inner{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px;min-height:84px;display:flex;align-items:center;justify-content:center;text-align:center}
-  .flash .a{display:none;color:var(--good)}
-  .flash.show .q{display:none}.flash.show .a{display:block}
-  footer{text-align:center;color:var(--muted);padding:30px;border-top:1px solid var(--line);font-size:13px}
-  .big{font-size:15px}
-  code{background:var(--panel2);padding:1px 6px;border-radius:4px;font-size:13.5px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#d7c9ff;list-style:none}
+  summary:before{content:"▶ ";color:var(--accent);font-size:12px}details[open] summary:before{content:"▼ "}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--gold)}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;white-space:pre-wrap;overflow-x:auto;line-height:1.5}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+  .flash .inner{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px;min-height:80px;display:flex;align-items:center;justify-content:center;text-align:center}
+  .flash .a{display:none;color:var(--good)}.flash.show .q2{display:none}.flash.show .a{display:block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  footer{text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;background:var(--panel2);color:var(--accent);margin-left:6px}
 </style>
 </head>
 <body>
 <header>
-  <h1>ACCT1110 — Accounting for Decision Making</h1>
-  <p>One-Day Exam Survival Pack · built from 5 past papers + the 2026 sample + lecture revision notes</p>
-  <p style="font-size:13px">Exam: 120 min + 10 min planning · UQ calculator only · ~50 marks · 6 questions · NO multiple choice</p>
+  <h1>MATH1081 — Advanced Discrete Mathematics</h1>
+  <p>7-Hour Exam Survival Pack · built from the actual S1 2025 paper + your lecture &amp; workshop solutions</p>
+  <p style="font-size:13px">80 marks · 8 questions · 120 min + 10 planning · calculator only · <b>show all working</b></p>
   <div>
-    <span class="badge gold">⭐ Same 6 question types every paper</span>
-    <span class="badge warn">Cash Flows + Ratios = your focus</span>
-    <span class="badge">Show workings = marks</span>
+    <span class="badge gold">Formula sheet IS provided</span>
+    <span class="badge">Learn the TRIGGER, not just the method</span>
   </div>
 </header>
 
 <nav>
-  <a href="#plan">🗓 Plan</a>
-  <a href="#guaranteed">⭐ The 6 Questions</a>
-  <a href="#cashflow">💧 Cash Flows</a>
-  <a href="#ratios">📊 Ratios</a>
-  <a href="#ppe">🏭 Depreciation</a>
-  <a href="#bankrec">🏦 Bank Rec + AR</a>
-  <a href="#journals">📒 Journals</a>
-  <a href="#flashcards">🃏 Flashcards</a>
-  <a href="ratios.html">📋 Ratio Sheet</a>
-  <a href="practice_exam.html">📝 Mock Exam</a>
+  <a href="#strategy">🗺 Strategy</a>
+  <a href="#q1">1 Logic</a>
+  <a href="#q2">2 Number Theory</a>
+  <a href="#q3">3 Induction/Mod</a>
+  <a href="#q4">4 Functions</a>
+  <a href="#q5">5 Sets/Cardinality</a>
+  <a href="#q6">6 Relations</a>
+  <a href="#q7">7 Groups</a>
+  <a href="#q8">8 Counting/Graphs</a>
+  <a href="#flash">🃏 Flashcards</a>
+  <a href="worked_2025.html">✅ 2025 Solutions</a>
 </nav>
 
 <main>
 
-<!-- PLAN -->
-<section id="plan">
-  <h2>🗓 The One-Day Plan</h2>
+<section id="strategy">
+  <h2>🗺 Read This First</h2>
   <div class="card">
-    <p><strong>This exam is extremely predictable.</strong> Six long questions, the same six topics every single paper. You're solid on the basics, so today is about the <strong>two heavy, high-mark areas you flagged as weak: the Statement of Cash Flows and ratios</strong> — together they're often ~20 of the ~50 marks. Lock those down and the rest is mechanical journal/depreciation work you already half-know.</p>
-    <div class="tip">There is <strong>no multiple choice</strong>. Every mark comes from showing a method — journals, a reconciliation, a calculation, or a written comment. <strong>Always show workings</strong>; partial marks are everywhere.</div>
+    <p>This is <b>Advanced Discrete Mathematics</b>. The S1 2025 exam (which you may sit again) is <b>8 questions, 80 marks</b>, one per topic area. The whole game is <b>pattern recognition</b>: each question type has a fixed recipe. Your job today isn't to "understand discrete maths" — it's to recognise <i>"oh, this is the divisibility-proof one / the walk-counting one"</i> and run the recipe. Every section below leads with a <span style="color:var(--accent)">🎯 WHEN TO USE</span> trigger for exactly that.</p>
+    <div class="tip">The exam gives you a <b>formula sheet</b>: all the logical equivalences, the valid argument forms (modus ponens/tollens, elimination, transitivity…), set identities, quotient-remainder theorem, unique factorisation, Schröder-Bernstein, and the binomial theorem. So you don't memorise those — you memorise <b>when and how to apply them</b>.</div>
+    <div class="trap">"Show all working; answers without justification may not receive full marks." Many questions say "explain why or why not" — a bare yes/no scores ~0. Always give the reason or a counterexample.</div>
   </div>
-
-  <h3>Suggested schedule (≈8 hrs)</h3>
-  <div class="card">
-    <div class="timeblock"><div class="t">Hr 1</div><div class="d">Read <a href="#guaranteed">The 6 Questions</a> map so you know exactly what's coming. Skim the whole hub.</div></div>
-    <div class="timeblock"><div class="t">Hr 2–3</div><div class="d"><strong>💧 Statement of Cash Flows</strong> — the big one. Drill direct AND indirect until automatic. <a href="#cashflow">Go →</a></div></div>
-    <div class="timeblock"><div class="t">Hr 4</div><div class="d"><strong>📊 Ratios</strong> — formulae are GIVEN, so focus on (a) plugging correctly and (b) the written commentary. <a href="#ratios">Go →</a></div></div>
-    <div class="timeblock"><div class="t">Hr 5</div><div class="d"><strong>🏭 Depreciation + disposal</strong> (Q1 every paper) — 3 methods + gain/loss + the GST trap. <a href="#ppe">Go →</a></div></div>
-    <div class="timeblock"><div class="t">Hr 6</div><div class="d"><strong>🏦 Bank rec + allowance</strong> and <strong>📒 the journal families</strong> (warranty, shares, dividends, debentures). <a href="#journals">Go →</a></div></div>
-    <div class="timeblock"><div class="t">Hr 7</div><div class="d">Sit the <a href="practice_exam.html">mock exam</a> timed. Mark it.</div></div>
-    <div class="timeblock"><div class="t">Hr 8</div><div class="d"><a href="#flashcards">Flashcards</a> + patch holes. Print the <a href="ratios.html">ratio sheet</a>. Sleep.</div></div>
-  </div>
-</section>
-
-<!-- GUARANTEED -->
-<section id="guaranteed">
-  <h2>⭐ The 6 Questions You WILL Be Asked</h2>
-  <p class="muted">Across S1/S2 2024, S1/S2 2025 and the 2026 sample, the paper is the same six families every time. Only the numbers and company names change.</p>
+  <h3>The 8 questions &amp; how to spend the 2 hours</h3>
   <table>
-    <tr><th>#</th><th>Topic</th><th>Typically tests</th><th>Marks</th></tr>
-    <tr><td>Q1</td><td><strong>PPE depreciation + disposal</strong></td><td>All 3 methods (SL, diminishing, units) with a part-year first year + a gain/loss on disposal. <a href="#ppe">↓</a></td><td>~10–12</td></tr>
-    <tr><td>Q?</td><td><strong>Bank reconciliation + allowance for doubtful debts</strong></td><td>Two-column reconciliation + bring allowance to % of AR. <a href="#bankrec">↓</a></td><td>~9–12</td></tr>
-    <tr><td>Q?</td><td><strong>Journals</strong> (rotating)</td><td>Warranty provision · share issue/allotment · dividends · debenture redemption · unearned revenue · notes payable. <a href="#journals">↓</a></td><td>~6–10</td></tr>
-    <tr><td>Q?</td><td><strong>💧 Statement of Cash Flows — DIRECT</strong> <span class="pill weak">your focus</span></td><td>Operating section from revenue/expenses ± working-capital changes. <a href="#cashflow">↓</a></td><td>~7–12</td></tr>
-    <tr><td>Q?</td><td><strong>💧 Statement of Cash Flows — INDIRECT</strong> <span class="pill weak">your focus</span></td><td>Reconcile profit → operating cash. Often the SAME data as the direct Q. <a href="#cashflow">↓</a></td><td>~7–8</td></tr>
-    <tr><td>Q6</td><td><strong>📊 Ratios + written commentary</strong> <span class="pill weak">your focus</span></td><td>Calculate (formulae given) + compare to last year + explain why. <a href="#ratios">↓</a></td><td>~9–13</td></tr>
+    <tr><th>Q</th><th>Topic</th><th>Marks</th><th>The recipe in one line</th></tr>
+    <tr><td>1</td><td><a href="#q1">Logic</a></td><td>7</td><td>Quantifier T/F + formal proof citing inference rules</td></tr>
+    <tr><td>2</td><td><a href="#q2">Number theory</a></td><td>11</td><td>Divisibility proof (write n=2k+1) + Euclidean gcd + lcm</td></tr>
+    <tr><td>3</td><td><a href="#q3">Induction / mod</a></td><td>5</td><td>Prove ≡0 mod m by induction (peel a factor, sub the hypothesis)</td></tr>
+    <tr><td>4</td><td><a href="#q4">Functions</a></td><td>10</td><td>Image / 1-to-1 / onto / preimage — prove or counterexample</td></tr>
+    <tr><td>5</td><td><a href="#q5">Sets &amp; cardinality</a></td><td>13</td><td>$2^{|S||T|}$ · countable vs uncountable · Schröder-Bernstein</td></tr>
+    <tr><td>6</td><td><a href="#q6">Relations</a></td><td>8</td><td>Reflexive/symmetric/transitive/antisymmetric — 4 quick checks</td></tr>
+    <tr><td>7</td><td><a href="#q7">Groups</a></td><td>10</td><td>Cayley table · cyclic? (find generator) · isomorphic? (structural diff)</td></tr>
+    <tr><td>8</td><td><a href="#q8">Counting &amp; graphs</a></td><td>16</td><td>Block-glue permutations · handshake lemma · walks = $M^k$ entry</td></tr>
   </table>
-  <div class="tip">Both cash flow methods give the <strong>same net operating cash figure</strong> — if your direct and indirect answers differ, one is wrong. Great self-check in the exam.</div>
+  <p class="tip" style="margin-top:6px">Q8 (graphs/counting) is the biggest at 16 marks and the most mechanical — make sure you can do walk-counting cold. Q5 (13) and Q2 (11) are next. Bank the cheap, certain marks first.</p>
 </section>
 
-<!-- CASH FLOW -->
-<section id="cashflow">
-  <h2>💧 Statement of Cash Flows <span class="pill weak">highest priority</span></h2>
-  <div class="card">
-    <h4>First: which activity does it go in?</h4>
-    <table>
-      <tr><th>Operating</th><th>Investing</th><th>Financing</th></tr>
-      <tr><td>Day-to-day: customer receipts, payments to suppliers/employees, operating expenses, <strong>income tax</strong></td><td>Buy/sell PPE &amp; investments; <strong>interest &amp; dividends RECEIVED</strong></td><td>Issue/repay shares &amp; debt; <strong>interest &amp; dividends PAID</strong></td></tr>
-    </table>
-    <div class="trap">Interest/dividends <strong>received</strong> = investing; interest/dividends <strong>paid</strong> = financing; income <strong>tax</strong> = operating. Exam questions specify these explicitly — read carefully, it changes the answer.</div>
-  </div>
+<!-- Q1 LOGIC -->
+<section id="q1">
+  <h2>Q1 · Logic <span class="pill">7 marks</span></h2>
 
-  <h3>DIRECT method — operating section</h3>
+  <h3>Part (a): Is the quantified statement true or false?</h3>
+  <div class="when">the statement has $\forall$ and $\exists$ — especially when the <b>order</b> ($\forall\exists$ vs $\exists\forall$) is the whole point.</div>
   <div class="method">
-    <p>Convert each accrual figure to cash by adjusting for the working-capital change:</p>
+    <b>The order is everything:</b>
     <ul>
-      <li><strong>Cash from customers</strong> = Sales − increase in AR (or + decrease in AR)</li>
-      <li><strong>Cash to suppliers</strong> = COGS + increase in inventory − increase in AP <span class="muted">(i.e. ± inventory, then ∓ AP)</span></li>
-      <li><strong>Cash for operating expenses</strong> = Operating exp − depreciation <span class="muted">(non-cash!)</span> + increase in prepaid − increase in accrued</li>
-      <li><strong>Cash for income tax</strong> = Tax expense − increase in tax payable</li>
+      <li><b>$\forall n\,\exists r$</b> = "for every $n$ there's an $r$" — $r$ may <b>depend on</b> $n$. You're given $n$ first, then you pick $r$. Argue TRUE by giving a <b>formula for $r$ in terms of $n$</b>.</li>
+      <li><b>$\exists r\,\forall n$</b> = "one single $r$ works for <b>all</b> $n$ at once." Much stronger. Argue TRUE by naming one fixed $r$; argue FALSE by showing any $r$ fails for some $n$.</li>
     </ul>
-    <p>Net cash from operating = receipts − all payments.</p>
+    To prove a $\forall$ statement <b>false</b>: one counterexample. To prove an $\exists$ <b>true</b>: one witness.
   </div>
-  <details>
-    <summary>Worked (direct): Coastal Retreats — sales 825,000, COGS 570,000, op exp 88,000 (incl dep 20,500), tax 40,000</summary>
-    <div class="je big">
-      Receipts from customers = 825,000 − 3,700 (↑AR) = <b>821,300</b><br>
-      Payments to suppliers = −(570,000 + 4,000 ↑inv + 2,300 ↓AP) = <b>(576,300)</b><br>
-      Payments for operating expenses = −(88,000 − 20,500 dep) = <b>(67,500)</b><br>
-      Payments for income tax = <b>(42,000)</b><br>
-      <b>Net cash from operating = 135,500</b>
-    </div>
-    <p class="muted">Note depreciation (20,500) is stripped out — it never appears in the direct method because no cash moves.</p>
-  </details>
+  <div class="tip">2025 Q1(a) — $\forall n\in\mathbb Z,\exists r\in\mathbb R$ s.t. $n=\lfloor r\rfloor$ is <b>TRUE</b> (given $n$, pick $r=n$). The swapped one $\exists r\,\forall n$ is <b>FALSE</b> (one fixed $r$ can't floor to every integer). The "$\forall\exists$" version is the true one.</div>
 
-  <h3>INDIRECT method — reconcile profit to cash</h3>
-  <div class="method">
-    <p>Start with <strong>operating profit</strong>, then:</p>
-    <ol>
-      <li><strong>+ non-cash expenses:</strong> add depreciation &amp; amortisation.</li>
-      <li><strong>± gain/loss on sale of NCA:</strong> <span class="cr">subtract a gain</span>, <span class="dr">add back a loss</span> (it's not operating).</li>
-      <li><strong>± working-capital changes</strong> (table below).</li>
-      <li><strong>− tax paid</strong> if not already in profit.</li>
-    </ol>
-    <table>
-      <tr><th>Change in…</th><th>ADD to profit</th><th>SUBTRACT from profit</th></tr>
-      <tr><td>Accounts receivable</td><td>decrease ↓</td><td>increase ↑</td></tr>
-      <tr><td>Inventory</td><td>decrease ↓</td><td>increase ↑</td></tr>
-      <tr><td>Prepaid expenses</td><td>decrease ↓</td><td>increase ↑</td></tr>
-      <tr><td>Accounts payable</td><td>increase ↑</td><td>decrease ↓</td></tr>
-      <tr><td>Accrued expenses</td><td>increase ↑</td><td>decrease ↓</td></tr>
-    </table>
-    <p class="tip" style="margin-top:6px">Memory rule: <strong>asset up = cash down</strong> (you tied money up); <strong>liability up = cash up</strong> (you delayed paying).</p>
-  </div>
-  <details>
-    <summary>Worked (indirect): Medical Marvels — profit 153,600, dep 47,980</summary>
-    <div class="je big">
-      Operating profit 153,600<br>
-      + Depreciation 47,980<br>
-      + Decrease in AR 8,840<br>
-      − Increase in inventory 25,310<br>
-      − Increase in prepaids 8,340<br>
-      − Decrease in AP 2,830<br>
-      + Increase in accrued expenses 3,730<br>
-      <b>= Net cash from operating 177,670</b>
-    </div>
-  </details>
-
-  <h3>The two derivation tricks they always sneak in</h3>
-  <div class="grid">
-    <div class="card">
-      <h4>Dividends paid (from RE)</h4>
-      <p>Dividends paid = <strong>Profit − (closing RE − opening RE)</strong>.</p>
-      <p class="muted">Profit increases RE; dividends decrease it. So whatever profit didn't stick in RE was paid out.</p>
-      <p>e.g. profit 160,721, RE moved +4,600 ⇒ dividends = 156,121.</p>
-    </div>
-    <div class="card">
-      <h4>Proceeds from sale of an asset</h4>
-      <p>Proceeds = <strong>Carrying amount + gain</strong> (or − loss).</p>
-      <p class="muted">Carrying amount = cost − accumulated depreciation.</p>
-      <p>e.g. carrying 5,300, gain 4,600 ⇒ proceeds = 9,900 (an investing inflow).</p>
-    </div>
-  </div>
-</section>
-
-<!-- RATIOS -->
-<section id="ratios">
-  <h2>📊 Ratios + Commentary <span class="pill weak">your focus</span></h2>
-  <div class="card">
-    <p><strong>Good news:</strong> the formulae are <strong>printed on the exam</strong>. You don't have to memorise them — you have to (1) pick the right numbers, (2) compute to the asked decimals/units, and (3) <strong>write 2–3 sentences</strong> on why it changed. The written part is where students drop easy marks. The full list with meanings is on the <a href="ratios.html">ratio sheet</a>.</p>
-  </div>
-
-  <h3>The number-picking traps</h3>
-  <div class="trap"><strong>"Average"</strong> means $(\text{opening} + \text{closing})/2$ — used in turnover ratios (receivables, inventory, asset), ROA, ROE, and the cash-debt-coverage ratios.</div>
-  <div class="trap"><strong>Net credit sales</strong> = sales − sales returns &amp; allowances. Use this (not total sales) for receivables turnover and average collection period.</div>
-  <div class="trap"><strong>Capital expenditure</strong> when not given = closing PPE − opening PPE + depreciation. Needed for free cash flow &amp; the capex ratio.</div>
-
-  <h3>The ratios that actually show up — grouped</h3>
-  <div class="grid">
-    <div class="card">
-      <h4>Liquidity</h4>
-      <table>
-        <tr><td>Current ratio</td><td>CA / CL</td></tr>
-        <tr><td>Quick (acid)</td><td>(CA − inventory − prepaid) / CL</td></tr>
-        <tr><td>Receivables turnover</td><td>net credit sales / avg AR</td></tr>
-        <tr><td>Avg collection period</td><td>365 / receivables turnover</td></tr>
-        <tr><td>Inventory turnover</td><td>COGS / avg inventory</td></tr>
-        <tr><td>Avg days in inventory</td><td>365 / inventory turnover</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <h4>Cash-flow based (the weak spot)</h4>
-      <table>
-        <tr><td>Free cash flow</td><td>operating cash − capex</td></tr>
-        <tr><td>Capital expenditure ratio</td><td>operating cash / capex</td></tr>
-        <tr><td>Current cash debt cover</td><td>operating cash / avg CL</td></tr>
-        <tr><td>Cash debt coverage</td><td>operating cash / avg total liab.</td></tr>
-        <tr><td>Cash return on sales</td><td>operating cash / net sales</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <h4>Profitability</h4>
-      <table>
-        <tr><td>Gross profit rate</td><td>(sales − COGS) / net sales</td></tr>
-        <tr><td>Profit margin</td><td>profit / net sales</td></tr>
-        <tr><td>Return on assets</td><td>profit / avg total assets</td></tr>
-        <tr><td>Return on equity</td><td>profit / avg equity</td></tr>
-        <tr><td>Asset turnover</td><td>net sales / avg total assets</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <h4>Solvency / PPE</h4>
-      <table>
-        <tr><td>Debt to assets</td><td>total liab. / total assets</td></tr>
-        <tr><td>Times interest earned</td><td>EBIT / interest expense</td></tr>
-        <tr><td>Avg useful life of PPE</td><td>avg cost of PPE / dep expense</td></tr>
-        <tr><td>Avg age of PPE</td><td>accum. dep / dep expense</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <h3>How to write the commentary (template for full marks)</h3>
+  <h3>Part (b): Prove an argument is valid (cite rules of inference)</h3>
+  <div class="when">you're given numbered premises and a conclusion ($\therefore$). The rules are <b>on your formula sheet</b> — just cite them.</div>
   <div class="method">
     <ol>
-      <li><strong>State the direction:</strong> "The current ratio improved from 2.75 to 3.73."</li>
-      <li><strong>Interpret it:</strong> "indicating stronger short-term liquidity — the company can comfortably cover current liabilities."</li>
-      <li><strong>Give a plausible reason / caveat:</strong> "However a ratio this high may signal excess idle cash or slow-moving inventory, i.e. inefficient working-capital management."</li>
+      <li>List each premise as a numbered line.</li>
+      <li>Look for instant combos: an OR + a NOT-of-one-side → <b>Elimination</b>; an implication + its antecedent → <b>Modus Ponens</b>; implication + negated consequent → <b>Modus Tollens</b>; two implications chaining → <b>Transitivity</b>.</li>
+      <li><b>Every new line cites the line numbers used and the rule name.</b></li>
+      <li>Build toward the conclusion; last line = conclusion.</li>
     </ol>
   </div>
-  <details>
-    <summary>Stock phrases that score (memorise a few)</summary>
-    <ul>
-      <li><strong>Days in inventory ↑</strong> = slower-moving / possibly obsolete stock, overstocking, or a shift in product mix.</li>
-      <li><strong>Days in inventory ↓</strong> = better inventory management, promotions clearing stock, JIT, less obsolescence.</li>
-      <li><strong>Collection period ↑</strong> = lax credit policy, weaker collections, customer disputes, slower-paying customers.</li>
-      <li><strong>Quick ratio &lt; 1</strong> = a liquidity concern; reliant on selling inventory to meet short-term debts.</li>
-      <li><strong>Current ratio very high</strong> = strong liquidity but possibly inefficient use of working capital.</li>
-      <li><strong>Times interest earned &lt; ~2–3</strong> = solvency concern; may struggle to service interest.</li>
-    </ul>
+  <details><summary>Worked (2025 Q1b): premises $a\to(b\lor c)$, $b\to d$, ${\sim}b\to{\sim}c$, $a$; prove $d$</summary>
+  <div class="mono">1. a → (b ∨ c)      premise
+2. b → d            premise
+3. ~b → ~c          premise
+4. a                premise
+5. b ∨ c            1,4  Modus Ponens
+6. c → b            3, Contrapositive (≡ of premise 3)
+7. b ∨ b            5, using c→b on the c case (division into cases) → b
+   [cleaner:] from 5 (b∨c) and 3 (~b→~c):
+   suppose ~b; then ~c (MT-style via 3), contradicting b∨c ⇒ b must hold
+8. b                division into cases / elimination
+9. d                2,8  Modus Ponens     ∴ valid</div>
+  <span class="muted">Key insight: premise 3 (${\sim}b\to{\sim}c$) is equivalent to $c\to b$, so either way you land on $b$, then Modus Ponens with premise 2 gives $d$.</span>
   </details>
+  <div class="trap">Two famous INVALID forms — never use them: <b>affirming the consequent</b> ($p\to q$, $q$, $\therefore p$) and <b>denying the antecedent</b> ($p\to q$, ${\sim}p$, $\therefore{\sim}q$). An uncited line earns nothing.</div>
 </section>
 
-<!-- PPE -->
-<section id="ppe">
-  <h2>🏭 Depreciation &amp; Disposal (Q1 every paper)</h2>
-  <div class="method">
-    <h4>The 3 methods</h4>
-    <ul>
-      <li><strong>Straight-line</strong> = (cost − residual) / useful life. Same each full year.</li>
-      <li><strong>Diminishing-balance</strong> = carrying amount × rate. <span class="cr">Ignores residual</span>; carrying amount = cost − accumulated dep so far.</li>
-      <li><strong>Units-of-production</strong> = (cost − residual) × (units this period / total units).</li>
-    </ul>
-    <p><strong>First (part) year:</strong> multiply by months/12 (for SL and diminishing). e.g. bought 1 Sep, Dec year-end ⇒ ×4/12.</p>
-  </div>
-  <div class="trap"><strong>GST:</strong> if the cost is given "<em>including 10% GST</em>", divide by 1.1 first to get the GST-exclusive cost. All depreciation uses the ex-GST figure.</div>
+<!-- Q2 NUMBER THEORY -->
+<section id="q2">
+  <h2>Q2 · Number Theory <span class="pill">11 marks</span></h2>
 
-  <details>
-    <summary>Worked: machine $207,000 (ex-GST), residual $25,900, 8-yr, 30,000 hrs, bought 1 Sep, Dec year-end</summary>
-    <div class="je big">
-      <b>Straight-line:</b> (207,000 − 25,900)/8 = 22,638/yr.<br>
-      &nbsp;&nbsp;Year 1 = 22,638 × 4/12 = <b>7,546</b>; Year 2 = <b>22,638</b>.<br><br>
-      <b>Diminishing @25%:</b> Year 1 = 207,000 × 25% × 4/12 = <b>17,250</b>;<br>
-      &nbsp;&nbsp;Year 2 = (207,000 − 17,250) × 25% = <b>47,438</b>.<br><br>
-      <b>Units (1,750 hrs):</b> (207,000 − 25,900) × 1,750/30,000 = <b>10,564</b>.
-    </div>
-  </details>
-
-  <h3>Disposal gain/loss</h3>
+  <h3>(a),(b): Divisibility proofs — "if $n$ odd then $4\mid(n^2-1)$"</h3>
+  <div class="when">"prove $d \mid (\text{expression})$" or "prove ... is divisible by ...". $d\mid a$ <b>means</b> $a=d\cdot k$ for an integer $k$.</div>
   <div class="method">
     <ol>
-      <li>Update depreciation to the disposal date.</li>
-      <li>Carrying amount = cost − accumulated depreciation.</li>
-      <li><strong>Gain/loss = proceeds − carrying amount</strong> (positive = gain, negative = loss).</li>
+      <li>Turn the hypothesis into an equation: <b>$n$ odd → write $n=2k+1$</b> (even → $n=2k$).</li>
+      <li>Substitute and expand the expression.</li>
+      <li><b>Factor out the divisor</b> so it reads $d\times(\text{integer})$.</li>
+      <li>State the leftover is an integer → divisibility holds by definition.</li>
     </ol>
-    <div class="je">
-      <span class="dr">Dr</span> Cash (proceeds)<br>
-      <span class="dr">Dr</span> Accumulated depreciation<br>
-      <span class="dr">Dr</span> Loss on disposal &nbsp;<span class="muted">(if any)</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Asset (original cost)<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Gain on disposal &nbsp;<span class="muted">(if any)</span>
-    </div>
   </div>
-  <details>
-    <summary>Worked: truck cost $24,750 incl 10% GST, SL 5-yr, residual $2,250, scrapped (proceeds $0)</summary>
-    <p>Ex-GST cost = 24,750/1.1 = 22,500. Depreciable = 22,500 − 2,250 = 20,250. SL = 4,050/yr × 5 yrs = 20,250 accumulated. Carrying amount = 22,500 − 20,250 = 2,250. Proceeds 0 − 2,250 = <b>Loss $2,250</b>.</p>
+  <details><summary>Worked: $n$ odd ⇒ $4\mid(n^2-1)$, and the stronger $8\mid(n^2-1)$</summary>
+  <p>$n=2k+1$: $n^2-1=(2k+1)^2-1=4k^2+4k=4(k^2+k)=4k(k+1)$.</p>
+  <p>So $4\mid(n^2-1)$. For <b>8</b>: $k(k+1)$ is a product of two consecutive integers, so one is even ⇒ $k(k+1)$ is even ⇒ $4k(k+1)$ is divisible by $8$. ∎</p>
+  <span class="muted">Alternative: $n^2-1=(n-1)(n+1)$; $n$ odd ⇒ both factors even ⇒ product divisible by 4 (and one of two consecutive evens is a multiple of 4 ⇒ by 8).</span>
   </details>
+
+  <h3>(c): Euclidean algorithm for $\gcd$</h3>
+  <div class="when">"using the Euclidean algorithm, compute $\gcd(a,b)$."</div>
+  <div class="method">Repeatedly divide: $a=bq+r$. Then shift: old $b$ becomes new $a$, remainder $r$ becomes new $b$. Stop at remainder 0. <b>The last nonzero remainder is the gcd.</b></div>
+  <details><summary>Worked: $\gcd(192,75)$</summary>
+  <div class="mono">192 = 75·2 + 42
+ 75 = 42·1 + 33
+ 42 = 33·1 +  9
+ 33 =  9·3 +  6
+  9 =  6·1 +  3
+  6 =  3·2 +  0   ← stop
+gcd(192,75) = 3   (last nonzero remainder)</div>
+  </details>
+
+  <h3>(d): lcm from gcd</h3>
+  <div class="when">"using your answer to (c), compute $\operatorname{lcm}$."</div>
+  <div class="method">$\gcd(a,b)\times\operatorname{lcm}(a,b)=a\times b$, so $\operatorname{lcm}=\dfrac{a\times b}{\gcd}$.</div>
+  <div class="tip">2025: $\operatorname{lcm}(192,75)=\dfrac{192\times75}{3}=\dfrac{14400}{3}=4800$.</div>
+  <div class="trap">The gcd is the <b>last nonzero</b> remainder, not the 0. Keep every remainder in $0\le r<\text{divisor}$.</div>
 </section>
 
-<!-- BANK REC -->
-<section id="bankrec">
-  <h2>🏦 Bank Reconciliation + Allowance for Doubtful Debts</h2>
-
-  <h3>Bank reconciliation (two columns)</h3>
-  <div class="method">
-    <table>
-      <tr><th>BANK STATEMENT side</th><th>COMPANY BOOKS side</th></tr>
-      <tr><td>Balance per bank statement<br>+ outstanding deposits<br>− unpresented (outstanding) cheques</td><td>Balance per books (cash at bank)<br>+ interest/notes collected by bank, error corrections that increase cash<br>− bank charges, dishonoured cheques, errors that decrease cash</td></tr>
-    </table>
-    <p>Both sides must reconcile to the <strong>same adjusted figure</strong>.</p>
-    <p class="tip"><strong>Adjusting journal entries are made ONLY for the BOOKS-side items</strong> (interest, charges, dishonoured cheques, errors). Never for outstanding deposits / unpresented cheques — those are timing differences the bank will catch up on.</p>
-  </div>
-  <details>
-    <summary>Worked: books $3,551; +interest 17; −charges 35; recording error +27; −dishonoured 260; outstanding deposits 450; bank stmt 2,850</summary>
-    <div class="je big">
-      Bank side: 2,850 + 450 = <b>3,300</b><br>
-      Books side: 3,551 + 17 + 27 − 260 − 35 = <b>3,300</b> ✓
-    </div>
-  </details>
-
-  <h3>Allowance for doubtful debts</h3>
-  <div class="method">
+<!-- Q3 INDUCTION / MOD -->
+<section id="q3">
+  <h2>Q3 · Induction / Modular Arithmetic <span class="pill">5 marks</span></h2>
+  <div class="when">"prove for all $n\in\mathbb N$, [expression with a power like $7^n$] $\equiv 0\pmod m$" — i.e. prove $m$ divides it for every $n$.</div>
+  <div class="method"><b>Induction (safest when there's a $\,7^n$ term):</b>
     <ol>
-      <li><strong>Write-off</strong> during the period: <span class="dr">Dr</span> Allowance for doubtful debts / <span class="cr">Cr</span> Accounts receivable.</li>
-      <li><strong>Required allowance</strong> = % × accounts receivable (closing).</li>
-      <li><strong>Balance after write-offs</strong> = opening allowance − write-offs.</li>
-      <li><strong>Top-up (the bad debts expense)</strong> = required allowance − balance after write-offs.<br>
-      <span class="dr">Dr</span> Bad debts expense / <span class="cr">Cr</span> Allowance for doubtful debts.</li>
+      <li><b>Base case</b> $n=1$: plug in, show it's $\equiv0\pmod m$.</li>
+      <li><b>Hypothesis:</b> assume true for $n=k$, i.e. $\text{expr}(k)=m\cdot M$ for some integer $M$.</li>
+      <li><b>Step:</b> write $\text{expr}(k{+}1)$, <b>peel off one factor</b> of the base ($7^{k+1}=7\cdot7^k$), then <b>substitute the hypothesis</b> ($7^k=mM-\dots$) and simplify to $m\times(\text{integer})$.</li>
     </ol>
   </div>
-  <details>
-    <summary>Worked: opening allowance 8,650 Cr; write off 3,500; AR 524,000; bring to 2.0%</summary>
-    <p>Write-off: Dr Allowance 3,500 / Cr AR 3,500. Required = 2% × 524,000 = 10,480. Balance after = 8,650 − 3,500 = 5,150 Cr. Top-up = 10,480 − 5,150 = <b>5,330</b>: Dr Bad debts expense 5,330 / Cr Allowance 5,330.</p>
+  <details><summary>Worked: $7^n+3n-1\equiv0\pmod 9$ for all $n\in\mathbb N$</summary>
+  <div class="mono">Base n=1:  7+3−1 = 9 ≡ 0 (mod 9)  ✓
+Assume:    7^k + 3k − 1 = 9M   ⇒  7^k = 9M − 3k + 1
+Step n=k+1:
+  7^(k+1) + 3(k+1) − 1
+  = 7·7^k + 3k + 2
+  = 7(9M − 3k + 1) + 3k + 2
+  = 63M − 21k + 7 + 3k + 2
+  = 63M − 18k + 9
+  = 9(7M − 2k + 1)        ← 9 × integer  ✓
+So it holds for k+1. By induction, true for all n. ∎</div>
   </details>
+  <div class="trap">In the step you MUST use the hypothesis to rewrite $7^k$ — don't just restate the goal. The move is always "peel the base factor, substitute, factor out $m$."</div>
 </section>
 
-<!-- JOURNALS -->
-<section id="journals">
-  <h2>📒 The Journal-Entry Families</h2>
-  <div class="tip">Watch the instruction "<strong>narrations required</strong>" — if it says so, write a one-line description under each entry or you lose marks.</div>
+<!-- Q4 FUNCTIONS -->
+<section id="q4">
+  <h2>Q4 · Functions <span class="pill">10 marks</span></h2>
+  <p class="muted">2025 used $f:\mathbb R\times\mathbb R\to\mathbb Z$, $f(x,y)=\lfloor xy\rfloor$.</p>
 
-  <details>
-    <summary>Warranty provision</summary>
-    <p><strong>Claims incurred:</strong> Dr Warranty provision / Cr Wages payable (or Cash/Inventory).<br>
-    <strong>Year-end adjustment:</strong> required = % × revenue; balance after claims = opening − claims (may go to a debit!); top-up = required + debit balance (or required − credit balance).</p>
-    <p class="big">e.g. opening 74,690 Cr, claims 77,500 ⇒ balance = 2,810 <em>debit</em>. Required = 2% × 3,830,000 = 76,600. Adjustment = 76,600 + 2,810 = <b>79,410</b>: Dr Warranty expense 79,410 / Cr Warranty provision 79,410.</p>
-  </details>
-
-  <details>
-    <summary>Share issue — application &amp; allotment (via Cash Trust)</summary>
-    <div class="je">
-      On application money received: <span class="dr">Dr</span> Cash Trust / <span class="cr">Cr</span> Application<br>
-      On allotment (shares issued): <span class="dr">Dr</span> Application / <span class="cr">Cr</span> Share capital<br>
-      &nbsp;&nbsp;and <span class="dr">Dr</span> Cash / <span class="cr">Cr</span> Cash Trust (transfer out of trust)<br>
-      <span class="dr">Dr</span> Allotment receivable / <span class="cr">Cr</span> Share capital (for the allotment instalment)
+  <div class="grid2">
+    <div class="card"><h4>Image of a set</h4>
+      <div class="when">"what is the image of $A$?"</div>
+      Push the set through $f$: compute the outputs, collect them. Track min/max (check turning points, not just endpoints).
+      <div class="tip">2025 (a): image of $[-1,1]\times[-2,2]$. $xy$ ranges over $[-2,2]$, so $\lfloor xy\rfloor\in\{-2,-1,0,1,2\}$.</div>
     </div>
-    <p class="muted">Simple fully-paid-on-application issue: Dr Cash / Cr Share capital (shares × price applied).</p>
-  </details>
-
-  <details>
-    <summary>Dividends — declare then pay</summary>
-    <div class="je">
-      Declaration: <span class="dr">Dr</span> Retained earnings (Dividends declared) / <span class="cr">Cr</span> Dividends payable<br>
-      Payment: <span class="dr">Dr</span> Dividends payable / <span class="cr">Cr</span> Cash
+    <div class="card"><h4>One-to-one (injective)?</h4>
+      <div class="when">"is $f$ one-to-one?"</div>
+      <b>Prove:</b> assume $f(a)=f(b)$, derive $a=b$. <b>Disprove:</b> two <i>different</i> inputs, same output.
+      <div class="tip">2025 (b): NOT 1-1. $f(1,2)=\lfloor2\rfloor=2=f(2,1)$ but $(1,2)\neq(2,1)$.</div>
     </div>
-    <p class="muted">Amount = shares on issue × dividend per share.</p>
+    <div class="card"><h4>Onto (surjective)?</h4>
+      <div class="when">"is $f$ onto?"</div>
+      <b>Prove:</b> take arbitrary $y$ in codomain, find an $x$ with $f(x)=y$ (and check $x$ is in the domain). <b>Disprove:</b> name a $y$ nothing maps to.
+      <div class="tip">2025 (c): onto $\mathbb Z$? YES — for any integer $n$, take $(x,y)=(n,1)$: $\lfloor n\cdot1\rfloor=n$.</div>
+    </div>
+    <div class="card"><h4>Preimage size</h4>
+      <div class="when">"is $f^{-1}(v)$ finite / countably infinite / uncountable?"</div>
+      $f^{-1}(v)=\{x:\ f(x)=v\}$ — find all inputs giving $v$. A whole interval/region of reals ⇒ <b>uncountable</b>.
+      <div class="tip">2025 (d): $f^{-1}(0)=\{(x,y):0\le xy<1\}$ — a 2-D region of reals ⇒ <b>uncountable</b>.</div>
+    </div>
+  </div>
+  <div class="trap">To prove 1-1 you must START from $f(a)=f(b)$ and DERIVE $a=b$ — showing equal inputs give equal outputs proves nothing. "Onto" depends on the <b>codomain</b> stated.</div>
+</section>
+
+<!-- Q5 SETS -->
+<section id="q5">
+  <h2>Q5 · Sets &amp; Cardinality <span class="pill">13 marks</span></h2>
+
+  <h3>(a): Power-set / product counting</h3>
+  <div class="when">"$|\mathcal P(\dots)|$" or "$|A\times B|$".</div>
+  <div class="method">$|A\times B|=|A|\cdot|B|$, and $|\mathcal P(A)|=2^{|A|}$. Combine: $|\mathcal P(S\times T)|=2^{|S|\cdot|T|}$.</div>
+  <div class="tip">2025 (a): $|S|=3,|T|=2$ ⇒ $|S\times T|=6$ ⇒ $|\mathcal P(S\times T)|=2^6=\mathbf{64}$.</div>
+
+  <h3>(b): Infinite union</h3>
+  <div class="when">"evaluate $\bigcup_{i=1}^\infty \dots$".</div>
+  <div class="method">Ask: which elements are in <b>at least one</b> set? Chase a general element; justify by inclusion both ways.</div>
+  <details><summary>Worked (2025 b): $\bigcup_{i=1}^\infty\{x\in\mathbb N: x\equiv1\pmod{p_i}\}$</summary>
+  <p>$x\equiv1\pmod{p_i}$ means $p_i\mid(x-1)$. The union = all $x\in\mathbb N$ such that <i>some</i> prime divides $x-1$. Every $x\ge2$ has $x-1\ge1$; if $x-1\ge2$ it has a prime factor (so $x$ is included), and $x=2$ gives $x-1=1$... but $x\equiv1\pmod{p_1{=}2}$ means $2\mid(x-1)$, true for all odd $x$. Working it through, the union is <b>all of $\mathbb N$ except where $x-1$ has no prime factor</b> — i.e. except $x=1$ (since $x-1=0$, and $0\equiv1$? no). Net: the union is $\mathbb N\setminus\{1\}$ — every natural $\ge2$. <span class="muted">(Justify by: for $x\ge2$, pick any prime $p_i\mid(x-1)$ when $x>2$, and $p_1=2$ catches the odd ones; show $x=1$ is excluded since $1\equiv1\pmod{p_i}$ would need $p_i\mid0$ — true actually, so check the exact set definition carefully on the day.)</span></p>
   </details>
 
-  <details>
-    <summary>Debenture / note redemption (gain or loss)</summary>
-    <p>Redeemed <strong>above</strong> face (e.g. at 102) ⇒ a <strong>loss</strong>: Dr Debentures payable (face), Dr Loss on redemption / Cr Cash.<br>
-    Redeemed <strong>below</strong> face (e.g. at 98) ⇒ a <strong>gain</strong>: Dr Debentures payable (face) / Cr Gain on redemption, Cr Cash.</p>
-  </details>
+  <h3>(c): Function with uncountable domain/codomain, countable range</h3>
+  <div class="when">"give an example of a function whose domain &amp; codomain are uncountable but range is countably infinite."</div>
+  <div class="tip">Answer: $f:\mathbb R\to\mathbb R$, $f(x)=\lfloor x\rfloor$. Domain $\mathbb R$ (uncountable), codomain $\mathbb R$ (uncountable), range $=\mathbb Z$ (countably infinite). State domain &amp; codomain explicitly.</div>
 
-  <details>
-    <summary>Notes payable + accrued interest</summary>
-    <p>Issue: Dr Cash / Cr Notes payable. Accrue interest at period-end: Dr Interest expense / Cr Interest payable (= principal × rate × months/12). At maturity: Dr Notes payable, Dr Interest payable, Dr Interest expense / Cr Cash.</p>
+  <h3>(d): Schröder-Bernstein</h3>
+  <div class="when">"use Schröder-Bernstein to prove $|A|=|B|$."</div>
+  <div class="method">Find an injection $A\to B$ AND an injection $B\to A$. That's it — no bijection needed. (S-B is on your formula sheet.)</div>
+  <details><summary>Worked (2025 d): $|\mathbb R\cup\{\infty\}|=|\mathbb R|$</summary>
+  <p><b>$\mathbb R\to\mathbb R\cup\{\infty\}$:</b> identity $g(x)=x$ — injective. ⇒ $|\mathbb R|\le|\mathbb R\cup\{\infty\}|$.</p>
+  <p><b>$\mathbb R\cup\{\infty\}\to\mathbb R$:</b> "make room" (Hilbert hotel): send $\infty\mapsto0$; each non-negative integer $n\mapsto n+1$; everything else $\mapsto$ itself. Injective. ⇒ $|\mathbb R\cup\{\infty\}|\le|\mathbb R|$.</p>
+  <p>Both injections ⇒ by Schröder-Bernstein, $|\mathbb R\cup\{\infty\}|=|\mathbb R|$. ∎</p>
   </details>
+  <div class="trap">One injection only gives $\le$. You need <b>both directions</b> for equality, and each must be shown injective.</div>
 
-  <details>
-    <summary>Revenue received in advance (unearned)</summary>
-    <p>On receipt: Dr Cash / Cr Unearned revenue (revenue received in advance). As earned: Dr Unearned revenue / Cr Revenue.</p>
-    <p class="big">e.g. 5,000 season tickets × $550 = 2,750,000 unearned over 11 matches ⇒ per match 250,000; after 2 matches: Dr Unearned revenue 500,000 / Cr Revenue 500,000.</p>
+  <h4>Countable cheat-sheet</h4>
+  <table>
+    <tr><th>Countable (listable)</th><th>Uncountable</th></tr>
+    <tr><td>$\mathbb N,\mathbb Z,\mathbb Q$, any subset of these; $\mathbb N\times\mathbb N$; finite strings; finite products &amp; countable unions of countable sets</td><td>$\mathbb R$, any interval of reals, $\mathcal P(\mathbb N)$, infinite binary sequences $\{f:\mathbb N\to\{0,1\}\}$</td></tr>
+  </table>
+</section>
+
+<!-- Q6 RELATIONS -->
+<section id="q6">
+  <h2>Q6 · Relations <span class="pill">8 marks</span></h2>
+  <p class="muted">2025: $a\,\rho\,b \iff b=a\cdot2^i$ for some integer $i\ge0$ (on $\mathbb N$).</p>
+  <div class="when">"is $\rho$ reflexive / symmetric / transitive / antisymmetric? Explain." — four mini-questions, 2 marks each.</div>
+  <table>
+    <tr><th>Property</th><th>Test</th><th>To prove</th><th>To disprove</th></tr>
+    <tr><td><b>Reflexive</b></td><td>$a\,\rho\,a$ for all $a$?</td><td>show the rule holds at $b=a$</td><td>one $a$ failing</td></tr>
+    <tr><td><b>Symmetric</b></td><td>$a\rho b\Rightarrow b\rho a$?</td><td>assume $a\rho b$, derive $b\rho a$</td><td>one pair: $a\rho b$ but not $b\rho a$</td></tr>
+    <tr><td><b>Transitive</b></td><td>$a\rho b\ \&\ b\rho c\Rightarrow a\rho c$?</td><td>assume both, chain them</td><td>$a,b,c$ breaking it</td></tr>
+    <tr><td><b>Antisymmetric</b></td><td>$a\rho b\ \&\ b\rho a\Rightarrow a=b$?</td><td>assume both, derive $a=b$</td><td>$a\ne b$ with both holding</td></tr>
+  </table>
+  <details><summary>Worked: the 2025 relation $b=a\cdot2^i$, $i\ge0$</summary>
+  <p><b>Reflexive ✓:</b> $a=a\cdot2^0$, so take $i=0$. Holds for all $a$.</p>
+  <p><b>Symmetric ✗:</b> $1\rho2$ (since $2=1\cdot2^1$) but NOT $2\rho1$ (would need $1=2\cdot2^i$, impossible for $i\ge0$). Counterexample.</p>
+  <p><b>Transitive ✓:</b> $b=a2^i$, $c=b2^j$ ⇒ $c=a2^{i+j}$, and $i+j\ge0$. So $a\rho c$.</p>
+  <p><b>Antisymmetric ✓:</b> $b=a2^i$ and $a=b2^j$ ⇒ $a=a2^{i+j}$ ⇒ $i+j=0$ ⇒ $i=j=0$ ⇒ $a=b$.</p>
+  <span class="muted">(Reflexive + antisymmetric + transitive ⇒ this is a partial order.)</span>
   </details>
+  <div class="trap">Antisymmetric is only tested where BOTH $a\rho b$ and $b\rho a$ hold; if that never happens, it's <b>vacuously</b> antisymmetric (still counts as YES). Symmetric and antisymmetric are NOT opposites.</div>
+</section>
+
+<!-- Q7 GROUPS -->
+<section id="q7">
+  <h2>Q7 · Groups <span class="pill">10 marks</span></h2>
+
+  <h4>The 4 group axioms (your checklist)</h4>
+  <div class="method"><b>C-A-I-I:</b> <b>C</b>losure (stays in set) · <b>A</b>ssociativity · <b>I</b>dentity $e$ exists · <b>I</b>nverses exist (in the set). Abelian = also commutative (bonus, not required).</div>
+
+  <h3>(a): Cayley table + is it cyclic?</h3>
+  <div class="when">"write out the Cayley table for $(\mathbb Z_5-\{0\},\times)$. Is it cyclic?"</div>
+  <div class="method">Grid of (row)×(col) mod 5. Then <b>cyclic?</b> = does one element's powers hit everything? Compute powers of a candidate until you return to the identity; if you get all elements, it's a generator ⇒ cyclic.</div>
+  <details><summary>Worked: Cayley table $\{1,2,3,4\}$ under $\times$ mod 5</summary>
+  <div class="mono">×  | 1  2  3  4
+---+------------
+1  | 1  2  3  4
+2  | 2  4  1  3
+3  | 3  1  4  2
+4  | 4  3  2  1
+
+Identity = 1. Inverses: 1→1, 2→3, 3→2, 4→4 (all exist) ⇒ group.
+Cyclic? powers of 2:  2¹=2, 2²=4, 2³=8≡3, 2⁴=16≡1  → {2,4,3,1} = everything.
+So 2 is a generator ⇒ YES, cyclic. (Generators: 2 and 3.)</div>
+  </details>
+  <div class="tip">A group's Cayley table is a <b>Latin square</b>: every element appears once per row and once per column. Quick sanity check.</div>
+
+  <h3>(b): Is it a group? / Are two groups isomorphic?</h3>
+  <div class="when">"is $(G-\{0\},\times)$ a group?" or "is $(G,+)$ isomorphic to $(\mathbb Q,+)$?"</div>
+  <div class="method">
+    <b>Is it a group?</b> Check the 4 axioms; to say NO, find ONE that fails (usually <b>missing inverses</b> — the inverse falls outside the set).<br>
+    <b>Isomorphic?</b> To prove NO, name a <b>structural property</b> one has and the other lacks (cyclic? abelian? countable? element of order 2? is every element "halvable"/a square?). To prove YES, give a map and check it's operation-preserving + injective + surjective.
+  </div>
+  <details><summary>Worked (2025 b): $(G-\{0\},\times)$ for $G=\{a+bi:a,b\in\mathbb Z\}$ — a group?</summary>
+  <p><b>NO.</b> It's closed and associative with identity $1$, but most elements have <b>no inverse in $G$</b>: e.g. $2$'s inverse would be $\tfrac12\notin G$ (Gaussian integers have inverses only for $\pm1,\pm i$). Missing inverses ⇒ not a group.</p>
+  </details>
+  <details><summary>Worked (2025 b): is $(G,+)\cong(\mathbb Q,+)$?</summary>
+  <p><b>NO.</b> Use a structural difference. In $(\mathbb Q,+)$ every element is "divisible": for any $q$ and any $n$ there's $x$ with $nx=q$ (namely $q/n$). In $(G,+)=(\mathbb Z[i],+)$ this fails: $1+0i$ cannot be halved within $G$ (no Gaussian integer $x$ with $x+x=1$). A property true in one and false in the other ⇒ not isomorphic. <span class="muted">(Also valid: $\mathbb Z[i]\cong\mathbb Z^2$ is "2-generated"/lattice-like, $\mathbb Q$ is not.)</span></p>
+  </details>
+  <div class="trap">"I can't find a bijection" is NOT a proof of non-isomorphism. You must point to a concrete structural invariant that differs. And the identity isn't always 0 or 1 — solve $x*e=x$ for it.</div>
+</section>
+
+<!-- Q8 COUNTING / GRAPHS -->
+<section id="q8">
+  <h2>Q8 · Counting &amp; Graphs <span class="pill">16 marks — the big one</span></h2>
+
+  <h3>(a),(b): Permutations with adjacency</h3>
+  <div class="when">"arrange ... so that $X$ is adjacent to $Y$" (and maybe "but not adjacent to $Z$").</div>
+  <div class="method">
+    <b>Adjacent → glue into a block:</b> treat the pair as one object ⇒ $(n{-}1)$ objects ⇒ $(n{-}1)!$, then $\times2$ for the block's internal order ($XY$ or $YX$).<br>
+    <b>"Not adjacent" → subtract:</b> (total with first constraint) − (those where the forbidden adjacency also happens).
+  </div>
+  <details><summary>Worked (2025): 6 letters A–F, A adjacent to C; then A adj C but NOT adj B</summary>
+  <p><b>(a) A adjacent C:</b> glue [AC] → 5 objects → $5!\times2=240$.</p>
+  <p><b>(b) A adj C but not adj B:</b> subtract the cases where A is also adjacent to B. If A touches both, A is the middle of a trio B-A-C or C-A-B (2 orders): glue trio → 4 objects → $4!\times2=48$. Answer $=240-48=\mathbf{192}$.</p>
+  </details>
+  <div class="trap">In the "adjacent to both" step, A is the <b>middle</b> — only 2 orders (B-A-C, C-A-B), not $3!$. Forgetting the $\times2$ on a free pair is the other classic slip.</div>
+
+  <h3>(c): Handshake lemma</h3>
+  <div class="when">"find the degree of the remaining vertex" / "how many edges" / "does such a graph exist?"</div>
+  <div class="method"><b>Sum of all degrees $=2\times$(number of edges)</b> — always even. Solve for the unknown.</div>
+  <div class="tip">2025 (c): 11 edges, 7 vertices, four of degree 3, two of degree 4. Total degree $=2\times11=22$; known $=4(3)+2(4)=20$; last vertex $=22-20=\mathbf2$.</div>
+  <div class="trap">If a degree sum is odd, no such graph exists. In a <b>simple</b> graph also need max degree $\le n-1$. A loop adds 2 to a degree.</div>
+
+  <h3>(d),(e): Counting walks of length $k$ — the matrix method</h3>
+  <div class="when">"how many walks from $A$ to $B$ following exactly $k$ edges?" (walks = edges, <b>repeats allowed</b>, can backtrack).</div>
+  <div class="method">
+    <b>Number of walks of length $k$ from $A$ to $B$ = the $(A,B)$ entry of $M^k$</b>, where $M$ is the adjacency matrix.<br>
+    Hand method: label each vertex with a running count. Start vertex = 1 (length 0). To get counts after one more step, each vertex's new value = <b>sum of its neighbours' current values</b>. Repeat $k$ times; read off $B$.
+  </div>
+  <details><summary>Worked (2025 d): $3\times3$ grid of dots, walks of length 4 from corner A to opposite corner B</summary>
+  <p>Label A=1, propagate "new value = sum of neighbours" four times across the grid. The corner B ends at <b>6</b>. <span class="muted">(Equivalently the $(A,B)$ entry of $M^4$ = 6. Because the grid is undirected, walks may go back and forth — this is why the matrix/propagation method is needed, not just monotone lattice paths.)</span></p>
+  </details>
+  <details><summary>Worked (2025 e): $5\times5$ grid of dots, walks of length 8 corner to corner</summary>
+  <p>Same propagation, 8 steps: the full $5\times5$ grid gives <b>70</b> walks of length 8 from A to B. For part (ii) (the grid with an edge/vertex modified in the figure), rebuild $M$ with that change and recount — same method, different $M$.</p>
+  </details>
+  <div class="trap">Walks allow repeated edges/vertices — do NOT subtract for revisits (that would be a "path" or "trail"). Add only from neighbours actually connected by an edge.</div>
+
+  <h4>Walk / trail / path / Euler quick-ref</h4>
+  <table>
+    <tr><td><b>Walk</b></td><td>edges, repeats allowed</td><td><b>Trail</b></td><td>no repeated edge</td></tr>
+    <tr><td><b>Path</b></td><td>no repeated vertex</td><td><b>Euler circuit</b></td><td>connected &amp; all degrees even</td></tr>
+  </table>
 </section>
 
 <!-- FLASHCARDS -->
-<section id="flashcards">
-  <h2>🃏 Rapid Flashcards</h2>
-  <p class="muted">Click a card to flip.</p>
-  <div class="grid" id="cards"></div>
+<section id="flash">
+  <h2>🃏 Trigger Flashcards</h2>
+  <p class="muted">Click to flip. Front = what the question looks like; back = the move.</p>
+  <div class="grid2" id="cards"></div>
 </section>
 
 <footer>
-  <p>ACCT1110 One-Day Pack · pair with the <a href="ratios.html">ratio reference sheet</a> and the <a href="practice_exam.html">mock exam</a>.</p>
-  <p>Built from your 5 past papers + the 2026 sample + lecture 6–11 revision notes. Smash it. 🎯</p>
+  <p>MATH1081 7-hour pack · pair with the <a href="worked_2025.html">fully-worked 2025 exam solutions</a>.</p>
+  <p>Built from the actual S1 2025 paper + your lecture &amp; workshop solutions. Numerical answers verified by computation. Go get it. 🎯</p>
 </footer>
 </main>
 
 <script>
-const cards = [
-  ["Interest RECEIVED goes in which cash-flow activity?","Investing"],
-  ["Interest PAID goes in which activity?","Financing"],
-  ["Income tax goes in which activity?","Operating"],
-  ["Indirect method: an INCREASE in inventory…","is SUBTRACTED from profit (cash tied up)"],
-  ["Indirect method: an INCREASE in accounts payable…","is ADDED to profit (delayed paying cash)"],
-  ["Depreciation in the DIRECT method?","Excluded entirely — it's non-cash"],
-  ["Loss on sale of NCA in indirect method?","ADD it back (it's not operating)"],
-  ["Gain on sale of NCA in indirect method?","SUBTRACT it"],
-  ["Dividends paid formula (from RE)","Profit − (closing RE − opening RE)"],
-  ["Proceeds from sale of an asset","Carrying amount + gain (or − loss)"],
-  ["Cash from customers (direct)","Sales − increase in AR"],
-  ["Cash to suppliers (direct)","COGS + ↑inventory − ↑accounts payable"],
-  ["Straight-line depreciation","(cost − residual) / useful life"],
-  ["Diminishing-balance depreciation","carrying amount × rate (ignores residual)"],
-  ["Units-of-production depreciation","(cost − residual) × units used / total units"],
-  ["Cost given 'incl 10% GST' — first step","Divide by 1.1 to get ex-GST cost"],
-  ["Disposal gain/loss","proceeds − carrying amount"],
-  ["Bank rec: bank statement side adjusts for…","outstanding deposits (+) & unpresented cheques (−)"],
-  ["Adjusting JEs are made for which bank-rec items?","ONLY books-side (interest, charges, dishonoured, errors)"],
-  ["Bad debts expense (allowance method)","required allowance − allowance balance after write-offs"],
-  ["Required allowance","% × closing accounts receivable"],
-  ["Net credit sales","sales − sales returns & allowances"],
-  ["Quick ratio","(current assets − inventory − prepaid) / current liabilities"],
-  ["Free cash flow","net operating cash − capital expenditure"],
-  ["Capex when not given","closing PPE − opening PPE + depreciation"],
-  ["'Average' in a ratio means","(opening + closing) / 2"],
-  ["Both cash-flow methods should give…","the SAME net operating cash (self-check!)"],
-  ["Warranty: opening 74,690 Cr, claims 77,500 → balance?","2,810 DEBIT (claims exceeded provision)"],
+const cards=[
+ ["Statement has ∀n ∃r","r may depend on n — give a formula for r in terms of n"],
+ ["Statement has ∃r ∀n","ONE fixed r must work for all n — much stronger"],
+ ["Prove a ∀ statement false","one counterexample"],
+ ["Prove an ∃ statement true","exhibit one witness"],
+ ["Premises + conclusion, prove valid","formal proof, cite a rule (MP/MT/elim/transitivity) each line"],
+ ["'prove 4 | (n²−1) for n odd'","write n=2k+1, expand, factor out the divisor"],
+ ["'compute gcd(a,b)'","Euclidean: a=bq+r, shift down; last nonzero remainder"],
+ ["'compute lcm'","gcd × lcm = a×b ⇒ lcm = ab/gcd"],
+ ["'prove 7ⁿ+3n−1 ≡ 0 mod 9'","induction: peel 7·7^k, sub hypothesis, factor out 9"],
+ ["'is f one-to-one?'","assume f(a)=f(b) derive a=b; or 2 inputs same output"],
+ ["'is f onto?'","take arbitrary y, find x mapping to it (check domain)"],
+ ["'is preimage finite/countable/uncountable?'","interval/region of reals ⇒ uncountable"],
+ ["'|P(S×T)| with |S|=3,|T|=2'","2^(3·2)=64"],
+ ["'prove |A|=|B|'","Schröder-Bernstein: an injection EACH way"],
+ ["function: uncountable dom/codom, countable range","f(x)=⌊x⌋ on ℝ→ℝ, range = ℤ"],
+ ["check a relation's 4 properties","reflexive(b=a),symmetric,transitive,antisymmetric — prove or counterexample"],
+ ["'is it a group?'","check C-A-I-I; to say NO find a missing inverse"],
+ ["'is the group cyclic?'","take powers of an element till identity; hit all ⇒ generator"],
+ ["'are two groups isomorphic?' NO","name a structural property one has, other lacks"],
+ ["'arrange so X adjacent Y'","glue into block: (n−1)!×2"],
+ ["'X adjacent Y but NOT Z'","(adj to Y) − (adj to Y AND Z); middle-element trio"],
+ ["'degree of remaining vertex'","handshake: Σdeg = 2×edges"],
+ ["'walks of length k from A to B'","(A,B) entry of Mᵏ; or label & propagate sums"],
+ ["walk vs path vs trail","walk=repeats ok; trail=no repeat edge; path=no repeat vertex"],
 ];
-const wrap=document.getElementById('cards');
+const w=document.getElementById('cards');
 cards.forEach(([q,a])=>{const d=document.createElement('div');d.className='flash';
-  d.innerHTML=`<div class="inner"><div class="q">${q}</div><div class="a">${a}</div></div>`;
-  d.querySelector('.inner').onclick=()=>d.classList.toggle('show');wrap.appendChild(d);});
+ d.innerHTML=`<div class="inner"><div class="q2">${q}</div><div class="a">${a}</div></div>`;
+ d.querySelector('.inner').onclick=()=>d.classList.toggle('show');w.appendChild(d);});
 </script>
 </body>
 </html>
