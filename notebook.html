@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — The Notebook</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:#a7f3d0}
+  td.f{white-space:nowrap;font-weight:600}
+  td.m{width:34px;text-align:center;font-size:16px}
+  .gold-card{background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(52,211,153,.06));border:1px solid #5a4a1a;border-radius:12px;padding:16px 20px;margin:12px 0}
+  .gold-card ol{margin:8px 0 0 20px;padding:0}.gold-card li{margin:7px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>📓 The Notebook</h1>
+  <p>Crucial formulas &amp; rules only — one line each. This is what you hand-copy into your "most important notes" book.</p>
+  <span class="badge">80 marks · 5 questions</span>
+  <span class="badge gold">Formula sheet PROVIDED in exam</span>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="#ch12">Ch1–2</a>
+  <a href="#ch3">Ch3</a>
+  <a href="#ch45">Ch4–5</a>
+  <a href="#ch6">Ch6</a>
+  <a href="#ch7">Ch7</a>
+  <a href="#ch8">Ch8</a>
+  <a href="#ch910">Ch9–10</a>
+  <a href="#ch11">Ch11</a>
+  <a href="#top10">🏆 Top 10</a>
+  <a href="formulas.html">📄 Formulas</a>
+  <a href="exam-2025.html">📝 Exams</a>
+</nav>
+
+<main>
+
+<div class="card">
+  <b>How to read this page.</b> The exam <em>gives</em> you the formula sheet and tables, so your notebook shouldn't
+  copy the sheet — it should hold what the sheet <em>doesn't</em> do for you.
+  <br>📄 = <b>on the provided sheet</b> — don't memorise it; write it down so you <em>recognise it instantly and know when to grab it</em>.
+  <br>🧠 = <b>NOT on the sheet</b> — must know cold: decision rules, df rules, recognition cues, sentence templates.
+</div>
+
+<section id="ch12">
+<h2>Ch 1–2 · Probability &amp; Distributions <span class="badge">always Q1</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">\(\int f(x)\,dx = 1\) over the support</td><td>Every "find the constant \(c\)" question starts here — normalise the pdf.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Two unknowns \(\Rightarrow\) two equations</td><td>If the pdf has \(c\) AND \(a\), pair \(\int f = 1\) with the given probability condition (2025 Q1 trick: divide the two integrals to eliminate \(c\)).</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(F(x)=\int_{\min}^{x} f(t)\,dt\); \(P(X\gt a)=1-F(a)\)</td><td>Build the cdf once, then every probability, the median and quartiles fall out of it.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Median: solve \(F(m)=0.5\) · Mode: maximise \(f\)</td><td>Mode of a monotone pdf is at the endpoint of the support — no calculus needed.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\mathrm{Var}(X)=E[X^2]-(E[X])^2\)</td><td>Always compute variance via the shortcut form — two integrals, one subtraction.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Binomial recognition: fixed \(n\), independent trials, same \(p\)</td><td>"At least one" \(=1-P(\text{none})\) — the complement is nearly always the fast route.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(Z=\dfrac{X-\mu}{\sigma}\), then use the Normal table</td><td>Any "normally distributed" probability or quantile question is standardise → table.</td></tr>
+<tr><td class="m">📄</td><td class="f">Bayes: \(P(A\mid B)=\dfrac{P(B\mid A)P(A)}{P(B)}\), with \(P(B)\) by total probability</td><td>Trigger wording: "given that the test is positive…" — draw the tree first.</td></tr>
+</table>
+</section>
+
+<section id="ch3">
+<h2>Ch 3 · Multiple Random Variables <span class="badge">often Q2</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Marginal pmf = row/column totals \(\div\; n\)</td><td>First move on every joint-frequency-table question.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\mathrm{Cov}(X,Y)=E[XY]-E[X]E[Y]\); \(\rho=\dfrac{\mathrm{Cov}}{\sigma_X\sigma_Y}\)</td><td>Compute \(E[XY]\) cell-by-cell from the table, then it's plug-in.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Independent \(\iff f(x,y)=f_X(x)f_Y(y)\) for ALL cells</td><td>One failing cell is a complete proof of dependence.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\mathrm{Var}(aX+bY)=a^2\mathrm{Var}X+b^2\mathrm{Var}Y+2ab\,\mathrm{Cov}\)</td><td>Covariance term drops when independent — say so explicitly for the mark.</td></tr>
+<tr><td class="m">🧠</td><td class="f">CLT: \(\bar X \approx N\!\left(\mu,\ \sigma^2/n\right)\) for large \(n\)</td><td>Trigger: "approximate the probability that the mean/sum exceeds…" — whatever the original distribution.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Estimator checks: unbiased if \(E[\hat\theta]=\theta\); precision = \(\mathrm{Var}(\hat\theta)\)</td><td>Q2 estimator-theory parts are exactly these two computations plus a CLT normality statement.</td></tr>
+</table>
+</section>
+
+<section id="ch45">
+<h2>Ch 4–5 · Studies, Data &amp; Descriptives <span class="badge">embedded marks</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Randomised experiment → causation; observational → association only</td><td>The word "randomised" is your licence to say "causes" — otherwise never.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Mean &amp; SD are not robust; median &amp; IQR are</td><td>Right skew pulls mean above median — that comparison IS the skew answer.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2\)</td><td>Divisor is \(n-1\) — the classic calculator-mode mark-loser.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Outlier fences: \(Q_1 - 1.5\,\mathrm{IQR}\), \(Q_3 + 1.5\,\mathrm{IQR}\)</td><td>Points beyond the fences are the boxplot's dots — name them "potential outliers".</td></tr>
+<tr><td class="m">🧠</td><td class="f">Plot-commentary formula: shape · centre · spread · outliers</td><td>"Comment on the distribution/assumptions using Figure X" = say something about each of the four, in context.</td></tr>
+</table>
+</section>
+
+<section id="ch6">
+<h2>Ch 6 · Estimation &amp; CIs <span class="badge">core of Q3</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">📄</td><td class="f">\(\bar x \pm t_{n-1,\,\alpha/2}\dfrac{s}{\sqrt n}\)</td><td>THE workhorse CI — this course uses \(t\) even for large \(n\) (read the \(\infty\) row of the t-table).</td></tr>
+<tr><td class="m">🧠</td><td class="f">"We are 95% <b>confident</b> the population mean [context] lies between L and U."</td><td>The full-marks interpretation sentence — never say "95% probability".</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\hat p \pm z_{\alpha/2}\sqrt{\hat p(1-\hat p)/n}\)</td><td>Proportions always use \(z\), never \(t\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Sample size: \(n=\left(\dfrac{z\,\sigma}{\mathrm{ME}}\right)^2\), round <b>UP</b></td><td>Trigger: "how large a sample so the margin of error is at most…" — ceiling, never rounding down.</td></tr>
+<tr><td class="m">🧠</td><td class="f">CI for \(\sigma^2\): \(\left(\dfrac{(n-1)s^2}{\chi^2_{\alpha/2}},\ \dfrac{(n-1)s^2}{\chi^2_{1-\alpha/2}}\right)\)</td><td>2024's ambush — "CI for the standard deviation" means chi-squared, not t, and the UPPER quantile makes the LOWER bound (then √ for σ).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Which CI? mean vs proportion → t vs z; one vs two samples; paired → CI on differences</td><td>Identify (data type, #samples, paired?) before touching the sheet.</td></tr>
+</table>
+</section>
+
+<section id="ch7">
+<h2>Ch 7 · Hypothesis Testing <span class="badge">core of Q3</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">The ritual: hypotheses → test+assumptions → statistic → null dist+df → P-value → conclusion in context</td><td>Every "perform an appropriate test" is these six steps, in order, every time.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Template: \(H_0:\mu=\mu_0\) vs \(H_1:\mu\neq\mu_0\), "where \(\mu\) is the population mean [context]"</td><td>"Explain all notation" marks are earned by that where-clause.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Same subjects measured twice → PAIRED → one-sample t on differences</td><td>"Measured at baseline and again after…" is the tell; the sheet has no paired template — you form \(d_i\) yourself.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(t=\dfrac{\bar x-\mu_0}{s/\sqrt n}\), df \(=n-1\)</td><td>One-sample and paired tests are the same engine.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Two samples: pooled if SD ratio \(\lt 2\) (course default), else Welch (df \(=\min(m,n)-1\) by hand)</td><td>Always justify the choice in one sentence — it's a stated mark in recent papers.</td></tr>
+<tr><td class="m">🧠</td><td class="f">P-value from t-table = bracketing: "0.02 \(\lt P \lt\) 0.05" (double the tail if two-sided)</td><td>You can't read exact P-values off tables — brackets ARE the exam answer.</td></tr>
+<tr><td class="m">🧠</td><td class="f">"At least k more/larger" claims → \(H_0\) with \(\delta_0=k\), one-sided</td><td>Recent papers love non-zero nulls — don't autopilot to \(\delta_0=0\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Type I = reject a true \(H_0\) (prob \(\alpha\)) · Power = P(reject \(H_0\mid H_1\) true)</td><td>State them in the story's language, not abstractly.</td></tr>
+</table>
+</section>
+
+<section id="ch8">
+<h2>Ch 8 · ANOVA <span class="badge">always Q4</span> <span class="badge pre">PRE-LECTURE</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">DF rules: factors \(a-1\), \(b-1\); interaction \((a-1)(b-1)\); residual \(N-ab\); total \(N-1\) (one-way: \(k-1,\ N-k\))</td><td>DF column first — it unlocks every "complete the table" question.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Table algorithm: SS's add to Total · MS = SS/DF · F = MS/MSE</td><td>Three identities recover every missing X cell (2025 Q4).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Interaction plot: parallel lines → no interaction; crossing/converging → possible interaction</td><td>That one sentence, referencing the plot, is the whole 2-mark answer.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Each F-test: \(F=\mathrm{MS}_{\text{effect}}/\mathrm{MSE} \sim F(\mathrm{df}_{\text{eff}},\,\mathrm{df}_{\text{res}})\) under \(H_0\)</td><td>Quote both df's — "the distribution of the F-statistic under \(H_0\)" is a stated mark.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Assumptions: normality within groups · equal variances · independence</td><td>Assess from the given plots/SDs — largest/smallest SD ratio \(\lt 2\) is the quick equal-variance check.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Many t-tests inflate overall Type I error → use Bonferroni multiple comparisons</td><td>The standing conceptual question; "which differ?" = read which Bonferroni CIs exclude 0.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(R^2 = \mathrm{SS}_{\text{model}}/\mathrm{SS}_{\text{total}}\)</td><td>"Proportion of variability in [response] explained by the model."</td></tr>
+</table>
+</section>
+
+<section id="ch910">
+<h2>Ch 9–10 · Regression &amp; Linear Model <span class="badge">always Q5</span> <span class="badge pre">PRE-LECTURE</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Fitted model = Estimate column: \(\hat y = b_0 + b_1 x\)</td><td>First line of every regression answer — copy the numbers out of the R output.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Slope sentence: "each 1-unit increase in \(x\) changes \(y\) by \(b_1\) on average"</td><td>Add "holding the other predictors constant" for multiple regression.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Significance: \(t=\mathrm{Estimate}/\mathrm{SE}\), df \(=n-2\); slope CI: \(b_1 \pm t_{n-2}\,\mathrm{SE}(b_1)\)</td><td>df row of the output gives you \(n\) back: \(n = \mathrm{df}+2\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">CI for the MEAN response vs PI for a NEW observation — PI is always wider</td><td>As \(n\to\infty\) the CI shrinks to 0 but the PI floors at \(\pm z\sigma\) (2025's conceptual part).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Residual plot: random cloud = OK; curve → transform (log); funnel → unequal variance; straight Q–Q → normal</td><td>The complete diagnostics vocabulary in one line.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Prediction outside the observed \(x\)-range = extrapolation → don't trust it</td><td>"Would you trust this prediction?" is asking exactly this.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(R^2\): proportion of variability in \(y\) explained by the model</td><td>Quote it as a percentage with the response named.</td></tr>
+</table>
+</section>
+
+<section id="ch11">
+<h2>Ch 11 · Chi-squared Tests <span class="badge">embedded 5–6 marks</span> <span class="badge pre">PRE-LECTURE</span></h2>
+<table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Expected counts: \(E=\dfrac{\text{row total}\times\text{col total}}{n}\)</td><td>NOT on the sheet — the single most important line in this chapter.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\chi^2=\sum\dfrac{(O-E)^2}{E}\)</td><td>Sum over every cell; keep 3+ decimals until the end.</td></tr>
+<tr><td class="m">🧠</td><td class="f">df: independence \((r-1)(c-1)\) · goodness-of-fit \(k-1\) (minus any estimated parameters)</td><td>The df mix-up is the classic mark-loser between the two test types.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Validity: all expected counts \(\ge 5\)</td><td>One sentence checking this earns the assumptions mark.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Conclusion: reject/fail to reject + "there is (no) evidence of an association between [X] and [Y]" + direction</td><td>Naming which cells drive the association (compare O vs E) upgrades a good answer to full marks.</td></tr>
+</table>
+</section>
+
+<section id="top10">
+<h2>🏆 The 10 lines that pay the most rent</h2>
+<div class="gold-card">
+<ol>
+  <li>🧠 <b>The 6-step test ritual</b> — hypotheses → test+assumptions → statistic → null dist+df → P-value → conclusion in context. (Q3, Q4, Q5, every year.)</li>
+  <li>📄 <b>\(\bar x \pm t_{n-1,\alpha/2}\, s/\sqrt n\)</b> — the CI workhorse; \(t\) even for large \(n\).</li>
+  <li>🧠 <b>"We are 95% confident … lies between L and U"</b> — the only accepted CI sentence.</li>
+  <li>🧠 <b>Same subjects twice → paired → t-test on differences</b> — the sheet won't tell you this.</li>
+  <li>🧠 <b>\(\int f=1\), then \(F(m)=0.5\)</b> — unlocks Q1 (constants, probabilities, median) every year.</li>
+  <li>🧠 <b>ANOVA DF rules + SS additivity + MS=SS/DF + F=MS/MSE</b> — completes any gapped table.</li>
+  <li>🧠 <b>\(E=\text{row}\times\text{col}/n\), df \(=(r-1)(c-1)\), all \(E\ge 5\)</b> — the entire embedded χ² part.</li>
+  <li>🧠 <b>\(t=\mathrm{Est}/\mathrm{SE}\), df \(=n-2\)</b> — reads significance straight off any R output.</li>
+  <li>🧠 <b>CLT: \(\bar X\approx N(\mu,\sigma^2/n)\)</b> — any "probability the mean exceeds…" question.</li>
+  <li>🧠 <b>Conclusion template</b> — "Since P \(\lt \alpha\) (or \(\gt\)), we (fail to) reject \(H_0\) at the 5% level; there is (in)sufficient evidence that [claim, in the story's words]."</li>
+</ol>
+</div>
+<div class="tip">Everything here is distilled from the chapter pages — if a line feels unfamiliar, that's your signal to open the matching chapter and drill it.</div>
+</section>
+
+</main>
+</body>
+</html>
