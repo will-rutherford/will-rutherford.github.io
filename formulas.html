@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Your Exam Weapons: the Formula Sheet & Tables, Decoded</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  nav a.here{background:var(--accent);color:#032117;font-weight:700}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--muted);font-size:11px;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:middle}
+  .num{color:var(--gold);font-weight:700}
+  .scroller{overflow-x:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Your Exam Weapons</h1>
+  <p>The provided formula sheet &amp; statistical tables — decoded, section by section.</p>
+  <p style="font-size:13.5px;max-width:640px;margin:10px auto 0">You do <b>not</b> memorise these. They are printed in the exam (pp 8–16 of every paper). Marks are lost <b>recognising which one to grab</b> and <b>reading the tables under pressure</b>. This page fixes both.</p>
+  <span class="badge gold">SHEET COMPANION</span>
+  <span class="badge">9 pages · 93 numbered items</span>
+  <span class="badge">z · t · χ² · F tables</span>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-02-probability.html">Ch1–2</a>
+  <a href="ch03-multiple-rvs.html">Ch3</a>
+  <a href="ch04-05-data-descriptives.html">Ch4–5</a>
+  <a href="ch06-estimation-cis.html">Ch6</a>
+  <a href="ch07-hypothesis-testing.html">Ch7</a>
+  <a href="ch08-anova.html">Ch8</a>
+  <a href="ch09-10-regression.html">Ch9–10</a>
+  <a href="ch11-chi-squared.html">Ch11</a>
+  <a href="formulas.html" class="here">🧰 Formulas</a>
+  <a href="exam-2025.html">📝 Exams</a>
+</nav>
+
+<main>
+
+<!-- ============ HOW TO USE ============ -->
+<section id="how">
+  <h2>How to weaponise the sheet</h2>
+  <div class="card">
+    <p>The sheet is laid out in a fixed order across two columns. Burn this map into memory so you can flick to the right block in seconds:</p>
+    <div class="scroller"><table>
+      <tr><th>Sheet region</th><th>Items</th><th>What lives there</th><th>Chapter</th></tr>
+      <tr><td>Probability</td><td>1–20</td><td>Model, counting, conditional prob, Bayes, cdf/pmf/pdf</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td>Expectation &amp; Variance</td><td>21–26</td><td>\(\mathbb{E}X\), \(\operatorname{Var}(X)\), their algebra rules</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td>Named distributions</td><td>27–43</td><td>Ber, Bin, Uniform, Normal: pmf/pdf, mean, var</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td>Multiple RVs</td><td>44–59</td><td>Joint laws, Cov, correlation, LLN, CLT, cont. correction</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td>Statistics</td><td>60–61</td><td>Sample mean \(\bar X\), sample variance \(S^2\)</td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+      <tr><td>Confidence Intervals</td><td>62–68</td><td>7 CI templates (mean, variance, difference, proportion)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td>Hypothesis Testing</td><td>69–77</td><td>7 steps, P-value, t-tests, z-tests, χ² test</td><td><a href="ch07-hypothesis-testing.html">Ch7</a> · <a href="ch11-chi-squared.html">Ch11</a></td></tr>
+      <tr><td>Linear Models</td><td>78–85</td><td>ANOVA model + table, regression models</td><td><a href="ch08-anova.html">Ch8</a> · <a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td>Other maths</td><td>86–93</td><td>Binomial thm, geometric sum, logs, calculus</td><td>—</td></tr>
+      <tr><td>Tables (pp 4–9)</td><td>—</td><td>Standard Normal Φ, t, χ², F (γ = .99/.975/.95)</td><td>all inference</td></tr>
+    </table></div>
+    <div class="tip">Item numbers below match the numbers <b>printed on the sheet</b>. In the exam you can literally write "by (72)" to justify a test statistic — examiners recognise the numbering.</div>
+    <div class="trap">The sheet gives you the <b>formula</b>, never the <b>decision</b>. It will not tell you equal-vs-unequal variance, one-vs-two-tail, or which df to use. That judgement is the exam. The <a href="#not">"What's NOT on the sheet"</a> section is where the marks actually hide.</div>
+  </div>
+</section>
+
+<!-- ============ WALKTHROUGH: PROBABILITY ============ -->
+<section id="prob">
+  <h2>Sheet walkthrough · Probability <span class="tag">items 1–20</span></h2>
+  <div class="card">
+    <p>Foundational plumbing. Rarely the whole question, but every conditional-probability / Bayes part is built from these.</p>
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Formula</th><th>Name / meaning</th><th>Triggered by</th></tr>
+      <tr><td>1,17–20</td><td>cdf \(F(x)=\mathbb P(X\le x)\); pmf \(f(x)=\mathbb P(X=x)\); pdf \(f=F'\), \(F=\int f\)</td><td>Definitions of the distribution objects</td><td>"find the cdf/pdf", "\(\mathbb P(a\lt X\le b)=F(b)-F(a)\)"</td></tr>
+      <tr><td>7</td><td>\(\mathbb P(A^c)=1-\mathbb P(A)\)</td><td>Complement rule</td><td>"at least one" → do \(1-\mathbb P(\text{none})\)</td></tr>
+      <tr><td>8</td><td>\(\mathbb P(A\cup B)=\mathbb P(A)+\mathbb P(B)-\mathbb P(A\cap B)\)</td><td>Addition (inclusion–exclusion)</td><td>"A or B"</td></tr>
+      <tr><td>9</td><td>\(\mathbb P(A)=|A|/|\Omega|\)</td><td>Equally-likely counting</td><td>dice, cards, "chosen at random"</td></tr>
+      <tr><td>10</td><td>\(n^k\), \(\tfrac{n!}{(n-k)!}\), \(\binom{n}{k}\)</td><td>Ordered/unordered, with/without replacement counts</td><td>"how many ways", "how many arrangements"</td></tr>
+      <tr><td>11</td><td>\(\mathbb P(A\mid B)=\dfrac{\mathbb P(A\cap B)}{\mathbb P(B)}\)</td><td>Conditional probability</td><td>"given that…", "if we know…"</td></tr>
+      <tr><td>12</td><td>\(\mathbb P(A\cap B)=\mathbb P(A)\mathbb P(B)\)</td><td>Independence test / multiply</td><td>"independent", "and" for independent events</td></tr>
+      <tr><td>13–14</td><td>Product / chain rule</td><td>\(\mathbb P(A_1\cdots A_n)\) step by step</td><td>sequential draws "without replacement"</td></tr>
+      <tr><td>15</td><td>Law of Total Probability</td><td>Split over a partition \(E_1,\dots,E_k\)</td><td>"tree" problems, staged experiments</td></tr>
+      <tr><td>16</td><td>Bayes: \(\mathbb P(A\mid B)=\dfrac{\mathbb P(B\mid A)\mathbb P(A)}{\mathbb P(B)}\)</td><td>Reverse the conditioning</td><td>"positive test — prob actually has disease"</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (item 16 · Bayes).</b><br>
+    Disease prevalence \(\mathbb P(D)=0.01\); test sensitivity \(\mathbb P(+\mid D)=0.99\), false-positive \(\mathbb P(+\mid D^c)=0.05\).<br>
+    \(\mathbb P(D\mid +)=\dfrac{0.99(0.01)}{0.99(0.01)+0.05(0.99)}=0.1667\) — denominator is item 15.</div>
+    <div class="tip">Item 10's table is the single most misread block. Read it as <b>ordered?</b> (rows) × <b>replacement?</b> (columns). Combinations \(\binom{n}{k}\) = <i>unordered, no replacement</i> (bottom-right).</div>
+  </div>
+</section>
+
+<!-- ============ EXPECTATION & VARIANCE ============ -->
+<section id="ev">
+  <h2>Sheet walkthrough · Expectation &amp; Variance <span class="tag">items 21–26</span></h2>
+  <div class="card">
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Formula</th><th>Use it when…</th></tr>
+      <tr><td>21–23</td><td>\(\mathbb E X=\sum_x x f(x)\) (discrete), \(\int x f(x)\,dx\) (continuous), \(\mathbb E g(X)=\sum g(x)f(x)\)</td><td>"find the expected value / mean of \(X\) (or of \(g(X)\))"</td></tr>
+      <tr><td>24</td><td>\(\mathbb E(aX+b)=a\mathbb E X+b\); \(\mathbb E(g+h)=\mathbb E g+\mathbb E h\)</td><td>linearity — expectation always passes through sums &amp; linear maps</td></tr>
+      <tr><td>25</td><td>\(\operatorname{Var}(X)=\mathbb E(X-\mu)^2\)</td><td>definition of variance</td></tr>
+      <tr><td>26a</td><td>\(\operatorname{Var}(X)=\mathbb E X^2-(\mathbb E X)^2\)</td><td><b>the computational shortcut</b> — find \(\mathbb E X^2\) then subtract \(\mu^2\)</td></tr>
+      <tr><td>26b</td><td>\(\operatorname{Var}(a+bX)=b^2\operatorname{Var}(X)\)</td><td>scaling: constants add nothing, multipliers square</td></tr>
+      <tr><td>26c</td><td>\(\text{s.d.}(X)=\sqrt{\operatorname{Var}(X)}\)</td><td>convert variance ↔ standard deviation</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (items 21 &amp; 26a).</b> \(X\): \(\mathbb P(0)=0.5,\mathbb P(1)=0.3,\mathbb P(2)=0.2\).<br>
+    \(\mathbb E X=0.7\); \(\mathbb E X^2=0(.5)+1(.3)+4(.2)=1.1\); \(\operatorname{Var}=1.1-0.7^2=0.61\).</div>
+    <div class="trap">Item 26b: a common slip is \(\operatorname{Var}(a+bX)=b\operatorname{Var}(X)\). It is \(b^2\). And \(\operatorname{Var}(X-Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)\) for independent \(X,Y\) — a <b>plus</b>, from item 52.</div>
+  </div>
+</section>
+
+<!-- ============ NAMED DISTRIBUTIONS ============ -->
+<section id="dists">
+  <h2>Sheet walkthrough · Named distributions <span class="tag">items 27–43</span></h2>
+  <div class="card">
+    <p>The sheet hands you pmf/pdf, mean and variance for four distributions. Recognition = matching the story to the row.</p>
+    <div class="scroller"><table>
+      <tr><th>Dist. (#)</th><th>Law</th><th>\(\mathbb E X\)</th><th>\(\operatorname{Var}(X)\)</th><th>Story trigger</th></tr>
+      <tr><td>Bernoulli (27–30)</td><td>\(\mathbb P(1)=p\)</td><td>\(p\)</td><td>\(p(1-p)\)</td><td>one trial, success/fail</td></tr>
+      <tr><td>Binomial (31–34)</td><td>\(\binom{n}{x}p^x(1-p)^{n-x}\)</td><td>\(np\)</td><td>\(np(1-p)\)</td><td>fixed \(n\) trials, count successes</td></tr>
+      <tr><td>Uniform (35–38)</td><td>\(f=\tfrac1{b-a}\) on \([a,b]\)</td><td>\(\tfrac{a+b}{2}\)</td><td>\(\tfrac{(b-a)^2}{12}\)</td><td>"equally likely over an interval"</td></tr>
+      <tr><td>Normal (39–43)</td><td>\(\tfrac1{\sigma\sqrt{2\pi}}e^{-\frac12(\frac{x-\mu}{\sigma})^2}\)</td><td>\(\mu\)</td><td>\(\sigma^2\)</td><td>"normally distributed", bell curve</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (item 32 · Binomial).</b> \(X\sim\mathsf{Bin}(10,0.3)\):<br>
+    \(\mathbb P(X=4)=\binom{10}{4}0.3^4\,0.7^{6}=0.2001\).</div>
+    <div class="method"><b>Usage example (item 43 · Standardization).</b> \(X\sim\mathsf N(100,15^2)\):<br>
+    \(\mathbb P(X\lt 115)=\Phi\!\big(\tfrac{115-100}{15}\big)=\Phi(1)=0.8413\) — read from the <a href="#tbl-z">Φ table</a>.</div>
+    <div class="tip">Item 43 — \(\dfrac{X-\mu}{\sigma}\sim\mathsf N(0,1)\) — is the bridge to <b>every</b> z-table lookup. No Normal probability is found without it.</div>
+  </div>
+</section>
+
+<!-- ============ MULTIPLE RVs ============ -->
+<section id="multi">
+  <h2>Sheet walkthrough · Multiple random variables <span class="tag">items 44–59</span></h2>
+  <div class="card">
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Formula</th><th>Triggered by</th></tr>
+      <tr><td>44–47</td><td>Joint cdf/pmf/pdf; independence \(f=f_{X_1}\cdots f_{X_n}\)</td><td>"joint distribution", "show independent"</td></tr>
+      <tr><td>48</td><td>\(\operatorname{Cov}(X,Y)=\mathbb E[(X-\mu_X)(Y-\mu_Y)]\)</td><td>"covariance"</td></tr>
+      <tr><td>49</td><td>\(\rho(X,Y)=\dfrac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}\)</td><td>"correlation coefficient"</td></tr>
+      <tr><td>50</td><td>Cov/Var algebra: \(\operatorname{Cov}(X,Y)=\mathbb E XY-\mathbb E X\,\mathbb E Y\); \(\operatorname{Var}(X+Y)=\operatorname{Var}X+\operatorname{Var}Y+2\operatorname{Cov}(X,Y)\)</td><td>"variance of a sum", "are they correlated"</td></tr>
+      <tr><td>51</td><td>\(\mathbb E(a+\sum b_iX_i)=a+\sum b_i\mathbb E X_i\)</td><td>expected value of any linear combination</td></tr>
+      <tr><td>52</td><td>\(\operatorname{Var}(\sum b_iX_i)=\sum b_i^2\operatorname{Var}(X_i)\) <i>(independent)</i></td><td>variance of a linear combination of <b>independent</b> RVs</td></tr>
+      <tr><td>53</td><td>\(\mathbb E[\prod X_i]=\prod \mathbb E X_i\) <i>(independent)</i></td><td>expected value of a product</td></tr>
+      <tr><td>54</td><td>Linear combo of independent Normals is Normal</td><td>"\(aX+bY\) where both Normal" → still Normal, use 51 &amp; 52 for params</td></tr>
+      <tr><td>55</td><td>LLN: \(\bar X\to\mu\)</td><td>"as \(n\) grows, the average approaches…"</td></tr>
+      <tr><td>56–57</td><td><b>CLT</b>: \(\sum X_i\approx\mathsf N(n\mu,n\sigma^2)\); \(\bar X\approx\mathsf N(\mu,\sigma^2/n)\)</td><td>"large sample", "approximate the probability that the mean/total…"</td></tr>
+      <tr><td>58</td><td>\(\mathsf{Bin}(n,p)\approx\mathsf N(np,np(1-p))\)</td><td>Normal approximation to a binomial count</td></tr>
+      <tr><td>59</td><td>Continuity correction (±0.5)</td><td>using the Normal approx for a <b>discrete</b> count — always adjust by 0.5</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (item 57 · CLT for the mean).</b> \(n=36\) claims, \(\mu=200,\sigma=60\):<br>
+    \(\bar X\approx\mathsf N(200,60^2/36)=\mathsf N(200,100)\), so \(\mathbb P(\bar X\gt 210)=1-\Phi(1)=0.1587\).</div>
+    <div class="trap">Item 52 needs <b>independence</b>. If they are correlated you must fall back to item 50 and keep the \(2\operatorname{Cov}\) term. Item 59: forgetting the ±0.5 continuity correction is a standard 1-mark loss whenever you approximate a Binomial with a Normal.</div>
+  </div>
+</section>
+
+<!-- ============ STATISTICS + CIs ============ -->
+<section id="stats-ci">
+  <h2>Sheet walkthrough · Statistics &amp; Confidence Intervals <span class="tag">items 60–68</span></h2>
+  <p style="color:var(--muted)">This is exam gold. Every CI part maps to exactly one of items 62–68. Match the <b>data type</b> to the template, plug the right quantile from the tables.</p>
+
+  <div class="card">
+    <h3>Items 60–61 · The building blocks</h3>
+    <div class="method">\(\bar X=\dfrac1n\sum X_i\) (60) &nbsp;·&nbsp; \(S^2=\dfrac1{n-1}\sum(X_i-\bar X)^2=\dfrac1{n-1}\big(\sum X_i^2-n\bar X^2\big)\) (61)</div>
+    <div class="tip">Use the right-hand form of \(S^2\) with your calculator: accumulate \(\sum X_i\) and \(\sum X_i^2\), then \(S^2=\tfrac1{n-1}(\sum X_i^2-n\bar X^2)\). The FX82's SD mode gives \(S\) directly — but know this by hand as backup.</div>
+  </div>
+
+  <div class="card">
+    <h3>The CI decision table (items 62–68)</h3>
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Parameter &amp; situation</th><th>Interval</th><th>Quantile from</th></tr>
+      <tr><td>62</td><td>Mean \(\mu\), 1 sample, iid (σ unknown)</td><td>\(\bar X\pm q\,\dfrac{S}{\sqrt n}\)</td><td>\(t_{n-1}\)</td></tr>
+      <tr><td>63</td><td>Variance \(\sigma^2\), 1 sample Normal</td><td>\(\Big(\dfrac{(n-1)S^2}{q_2},\dfrac{(n-1)S^2}{q_1}\Big)\)</td><td>\(\chi^2_{n-1}\) (\(q_1{=}\alpha/2,\ q_2{=}1{-}\alpha/2\))</td></tr>
+      <tr><td>64</td><td>Pooled variance \(S_p^2\) (helper for 65)</td><td>\(\dfrac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2}\)</td><td>—</td></tr>
+      <tr><td>65</td><td>\(\mu_X-\mu_Y\), 2 sample, <b>equal</b> variances</td><td>\(\bar X-\bar Y\pm q\,S_p\sqrt{\tfrac1m+\tfrac1n}\)</td><td>\(t_{m+n-2}\)</td></tr>
+      <tr><td>66</td><td>\(\mu_X-\mu_Y\), 2 sample, <b>unequal</b> variances</td><td>\(\bar X-\bar Y\pm q\sqrt{\tfrac{S_X^2}{m}+\tfrac{S_Y^2}{n}}\)</td><td>\(t_{\text{df}}\) (Welch / conservative — item 75)</td></tr>
+      <tr><td>67</td><td>Proportion \(p\), 1 sample binomial</td><td>\(\hat P\pm q\sqrt{\dfrac{\hat P(1-\hat P)}{n}}\)</td><td>\(\mathsf N(0,1)\) &nbsp;(z!)</td></tr>
+      <tr><td>68</td><td>\(p_X-p_Y\), 2 sample binomial</td><td>\(\hat P_X-\hat P_Y\pm q\sqrt{\tfrac{\hat P_X(1-\hat P_X)}{m}+\tfrac{\hat P_Y(1-\hat P_Y)}{n}}\)</td><td>\(\mathsf N(0,1)\) &nbsp;(z!)</td></tr>
+    </table></div>
+    <div class="trap">The <b>single biggest CI trap</b>: means use a <b>t</b>-quantile, proportions use a <b>z</b>-quantile. Items 62/65/66 → t-table. Items 67/68 → Normal table. Mixing them up is a guaranteed lost mark, every year.</div>
+
+    <div class="method"><b>Usage example (item 62 · mean CI).</b> \(n=16,\ \bar X=52,\ S=6\), 95%:<br>
+    \(q=t_{0.975,15}=2.131\); CI \(=52\pm2.131\cdot\tfrac{6}{\sqrt{16}}=52\pm3.20=(48.80,\ 55.20)\).</div>
+    <div class="method"><b>Usage example (item 67 · proportion CI).</b> \(X=45\) of \(n=200\), 95%:<br>
+    \(\hat P=0.225,\ q=1.96\); CI \(=0.225\pm1.96\sqrt{\tfrac{0.225\cdot0.775}{200}}=(0.167,\ 0.283)\).</div>
+    <div class="method"><b>Usage example (item 63 · variance CI).</b> \(n=10,\ S^2=25\), 95%:<br>
+    \(q_1=\chi^2_{0.025,9}=2.70,\ q_2=\chi^2_{0.975,9}=19.02\); CI \(=\big(\tfrac{9\cdot25}{19.02},\tfrac{9\cdot25}{2.70}\big)=(11.83,\ 83.32)\). Note the <b>bigger</b> quantile makes the <b>lower</b> bound.</div>
+    <div class="tip"><b>"\(1-\alpha/2\) quantile" decode:</b> for a 95% CI, \(\alpha=0.05\), so you want the \(0.975\) quantile. For 99% → \(0.995\); for 90% → \(0.95\). This is the number you look up in the <i>column headers</i> of the t / χ² tables.</div>
+  </div>
+</section>
+
+<!-- ============ HYPOTHESIS TESTING ============ -->
+<section id="ht">
+  <h2>Sheet walkthrough · Hypothesis Testing <span class="tag">items 69–77</span></h2>
+  <div class="card">
+    <h3>Items 69–71 · The scaffolding</h3>
+    <ul>
+      <li><b>69</b> — the 7 steps: model · hypotheses · test statistic · its distribution under \(H_0\) · observed value · P-value · accept/reject. <b>Write these headers as your answer skeleton.</b></li>
+      <li><b>70</b> — P-value = prob (under \(H_0\)) the statistic is <b>as or more extreme</b> than observed. "Extreme" is defined by \(H_1\) → sets one-vs-two tail.</li>
+      <li><b>71</b> — Type I = reject a true \(H_0\); Type II = fail to reject a false \(H_0\); Power = \(\mathbb P(\text{reject}\mid H_1\text{ true})\).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>The test-statistic decision table (items 72–77)</h3>
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Test</th><th>Statistic</th><th>Null distribution</th></tr>
+      <tr><td>72</td><td>1-sample \(t\) (mean)</td><td>\(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\)</td><td>\(t_{n-1}\)</td></tr>
+      <tr><td>73</td><td>1-sample proportion (z)</td><td>\(Z=\dfrac{\hat P-p_0}{\sqrt{p_0(1-p_0)/n}}\)</td><td>\(\mathsf N(0,1)\)</td></tr>
+      <tr><td>74</td><td>2-sample \(t\), <b>equal</b> var</td><td>\(T=\dfrac{\bar X-\bar Y}{S_p\sqrt{\frac1m+\frac1n}}\)</td><td>\(t_{m+n-2}\)</td></tr>
+      <tr><td>75</td><td>2-sample \(t\), <b>unequal</b> var</td><td>\(T=\dfrac{\bar X-\bar Y}{\sqrt{S_X^2/m+S_Y^2/n}}\)</td><td>\(t_{\text{df}}\) — Welch df formula, or conservative \(\min(m{-}1,n{-}1)\)</td></tr>
+      <tr><td>76</td><td>2-sample proportion (z)</td><td>\(Z=\dfrac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)(\frac1m+\frac1n)}}\)</td><td>\(\mathsf N(0,1)\); pooled \(\hat P=\frac{X+Y}{m+n}\)</td></tr>
+      <tr><td>77</td><td>Chi-squared (indep./GoF)</td><td>\(\chi^2=\sum\dfrac{(O-E)^2}{E}\)</td><td>\(\chi^2_{(r-1)(c-1)}\); \(E=\frac{\text{row}\times\text{col}}{\text{total}}\)</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (item 72 · one-sample t-test).</b> \(H_0{:}\ \mu=50\), data \(n=16,\bar X=52,S=6\):<br>
+    \(T=\dfrac{52-50}{6/\sqrt{16}}=1.333\) on \(t_{15}\); \(|T|\lt t_{0.975,15}=2.131\) → do not reject at 5%.</div>
+    <div class="method"><b>Usage example (item 76 · two-proportion z).</b> Note the <b>pooled</b> \(\hat P\) in the test (item 76) differs from the <b>unpooled</b> se in the CI (item 68). Testing uses pooled; the interval does not.</div>
+    <div class="trap">Item 75 vs 74: choosing equal-variance (pooled) when variances clearly differ, or vice-versa. If the question says "assume equal variances" → 74. If it says "do not assume" or the sample SDs are very different → 75. Getting the wrong one changes both the statistic and the df.</div>
+    <div class="trap">Item 73/76 use a <b>z</b> statistic (Normal table). Item 72/74/75 use <b>t</b>. Same mean-vs-proportion split as the CIs — keep it straight.</div>
+  </div>
+</section>
+
+<!-- ============ LINEAR MODELS ============ -->
+<section id="lm">
+  <h2>Sheet walkthrough · Linear Models: ANOVA &amp; Regression <span class="tag">items 78–85</span></h2>
+  <div class="card">
+    <h3>Items 78–80 · One-factor ANOVA</h3>
+    <p>Model (78): \(Y_{ik}=\mu_i+\varepsilon_{ik}\), \(\varepsilon\overset{iid}{\sim}\mathsf N(0,\sigma^2)\). Test (79): \(H_0{:}\) all \(\mu_i\) equal, \(F=\dfrac{\text{MSF}}{\text{MSE}}\sim\mathsf F(d-1,\,n-d)\).</p>
+    <h4>The ANOVA table (item 80) — memorise the shape, the sheet only gives the skeleton</h4>
+    <div class="scroller"><table>
+      <tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+      <tr><td>Factor</td><td>\(d-1\)</td><td>SSF</td><td>\(\dfrac{\text{SSF}}{d-1}\)</td><td>\(\dfrac{\text{MSF}}{\text{MSE}}\)</td></tr>
+      <tr><td>Error</td><td>\(n-d\)</td><td>SSE</td><td>\(\dfrac{\text{SSE}}{n-d}\)</td><td></td></tr>
+      <tr><td>Total</td><td>\(n-1\)</td><td>SST</td><td></td><td></td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (items 79–80).</b> \(d=3\) groups, \(n=24\), SSF=120, SSE=200:<br>
+    MSF \(=120/2=60\), MSE \(=200/21=9.524\), \(F=6.30\) on \(\mathsf F(2,21)\); crit \(F_{0.95}(2,21)=3.47\) → reject \(H_0\).</div>
+    <div class="tip">\(n\) is the <b>total</b> observations, \(d\) the number of groups. DF always add: \((d-1)+(n-d)=n-1\). Use that to back-fill a missing DF in a partial table (a classic exam part).</div>
+  </div>
+
+  <div class="card">
+    <h3>Items 81–85 · Two-factor ANOVA &amp; regression models</h3>
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Model / formula</th><th>What it is</th></tr>
+      <tr><td>81</td><td>\(Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk}\)</td><td>two-factor ANOVA with interaction \(\gamma_{ij}\)</td></tr>
+      <tr><td>82</td><td>\(R^2=(SST-SSE)/SST\)</td><td>proportion of variation explained (regression fit quality)</td></tr>
+      <tr><td>83</td><td>\(Y_i=\beta_0+\beta_1x_i+\varepsilon_i\)</td><td>simple linear regression</td></tr>
+      <tr><td>84</td><td>\(Y_i=\beta_0+\beta_1x_{i1}+\cdots+\beta_dx_{id}+\varepsilon_i\)</td><td>multiple linear regression</td></tr>
+      <tr><td>85</td><td>\(\mathbf Y=\mathcal X\boldsymbol\beta+\boldsymbol\varepsilon\)</td><td>normal linear model in matrix form</td></tr>
+    </table></div>
+    <div class="method"><b>Usage example (item 82 · \(R^2\)).</b> SST = 500, SSE = 125 → \(R^2=(500-125)/500=0.75\): the model explains 75% of the variation in \(Y\).</div>
+    <div class="tip">Regression coefficient CIs/tests are <b>not</b> a template on the sheet — they use \(\hat\beta_j\pm t\cdot\text{se}(\hat\beta_j)\) on \(t_{n-p}\), with se and df coming from the R output. Read them off the software table; the sheet only gives you the model (83–85) and \(R^2\) (82).</div>
+  </div>
+</section>
+
+<!-- ============ OTHER MATH ============ -->
+<section id="othermath">
+  <h2>Sheet walkthrough · Other mathematical formulas <span class="tag">items 86–93</span></h2>
+  <div class="card">
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Formula</th><th>Where it shows up</th></tr>
+      <tr><td>86</td><td>Binomial theorem \((a+b)^n=\sum\binom{n}{k}a^kb^{n-k}\)</td><td>expanding, verifying a pmf sums to 1</td></tr>
+      <tr><td>87</td><td>Geometric sum \(1+a+\cdots+a^n=\frac{1-a^{n+1}}{1-a}\); \(\sum_{0}^{\infty}=\frac1{1-a}\) (\(|a|\lt1\))</td><td>geometric-distribution sums, normalising constants</td></tr>
+      <tr><td>88</td><td>Logs: \(\log(xy)=\log x+\log y\), \(e^{\log x}=x\)</td><td>log-likelihood algebra</td></tr>
+      <tr><td>89</td><td>Exponential series / \(e^{x+y}=e^xe^y\)</td><td>mgf / Poisson-type manipulation</td></tr>
+      <tr><td>90–91</td><td>Derivatives + chain rule</td><td>maximising a (log-)likelihood: set derivative = 0</td></tr>
+      <tr><td>92–93</td><td>\(\int_a^b f=[F]_a^b\); integration by parts</td><td>continuous \(\mathbb E X\), normalising a pdf, \(\mathbb P(a\lt X\le b)\)</td></tr>
+    </table></div>
+    <div class="tip">These are the calculus toolkit for Ch 1–2 continuous-RV parts (find \(c\) so \(\int f=1\), then \(\mathbb E X=\int xf\)). Items 90 &amp; 92 are the workhorses.</div>
+  </div>
+</section>
+
+<!-- ============ READING THE TABLES ============ -->
+<section id="tables">
+  <h2>Reading the statistical tables — worked micro-drills</h2>
+  <p style="color:var(--muted)">All numbers below verified with <span class="mono">scipy.stats</span>. The tables use a single convention you must internalise: <b>they list γ-quantiles</b>, i.e. the value with probability γ <b>to its left</b>. So "the \(1-\alpha/2\) quantile" is a <i>left-tail</i> cumulative probability.</p>
+
+  <!-- Z TABLE -->
+  <div class="card" id="tbl-z">
+    <h3>1 · Standard Normal Φ (sheet p. 4)</h3>
+    <p>The table gives \(\Phi(z)=\mathbb P(Z\le z)\) for \(z\ge0\), to 4 dp (leading "0." omitted: entry 9505 means 0.9505). Row = \(z\) to 1 dp, column = second decimal.</p>
+    <div class="method"><b>Direct lookup.</b> \(\Phi(1.65)\): row 1.6, col .05 → <span class="num">0.9505</span>. \(\Phi(1.96)\): row 1.9, col .06 → <span class="num">0.9750</span>.</div>
+    <div class="method"><b>Left tail / negative z</b> (no negative rows printed): use symmetry \(\Phi(-z)=1-\Phi(z)\).<br>
+    \(\mathbb P(Z\le-1.5)=1-\Phi(1.5)=1-0.9332=\) <span class="num">0.0668</span>.</div>
+    <div class="method"><b>Upper tail.</b> \(\mathbb P(Z\gt1.23)=1-\Phi(1.23)=1-0.8907=\) <span class="num">0.1093</span>.</div>
+    <div class="method"><b>Between.</b> \(\mathbb P(0.5\lt Z\lt1.5)=\Phi(1.5)-\Phi(0.5)=0.9332-0.6915=\) <span class="num">0.2417</span>.</div>
+    <div class="method"><b>Reverse (find the z for a probability = critical value).</b> Hunt the body for the probability, read off the margins.<br>
+    Need \(z\) with \(\Phi(z)=0.975\) → body entry 9750 sits at row 1.9, col .06 → \(z=\) <span class="num">1.96</span>. For \(0.95\): 0.9505 (z=1.65) and 0.9495 (z=1.64) bracket it → \(z\approx\) <span class="num">1.645</span>.</div>
+    <div class="tip"><b>Memorise the four critical z's</b> so you barely need the table: 90%→1.645, 95%→1.96, 98%→2.33, 99%→2.576. These are the \(q\) in every proportion CI/test (items 67, 68, 73, 76).</div>
+    <div class="trap">The z-table is used for <b>proportions</b> and for <b>Normal-approx probabilities</b> — NOT for a mean CI (that's t). Also: this table only goes to \(z=3.6\) (Φ ≈ 0.9998); beyond that quote "\(\gt0.9999\)".</div>
+  </div>
+
+  <!-- T TABLE -->
+  <div class="card" id="tbl-t">
+    <h3>2 · Student's t (sheet p. 5)</h3>
+    <p>Rows = df; columns = γ-quantile (\(0.90,0.95,0.975,0.99,0.995,\dots\)). Entry = the \(t\)-value with probability γ to its <b>left</b>. Bottom row (∞) is the Normal.</p>
+    <div class="method"><b>Find \(t_{0.025,14}\)</b> — the value cutting off 0.025 in the <b>upper</b> tail with df 14. Upper 0.025 = lower 0.975, so read df=14, column 0.975 → <span class="num">2.14</span> (exact 2.145). This is the \(q\) for a 95% mean CI with \(n=15\).</div>
+    <div class="method"><b>Find \(t_{0.95,5}\)</b> (the 0.95-quantile, df 5): row 5, col 0.95 → <span class="num">2.02</span> (exact 2.015). This is the sheet's own worked example.</div>
+    <div class="method"><b>Bracket the P-value for \(t=2.31\), df 20, two-tailed.</b> In row 20: 2.09 (col .975) &lt; 2.31 &lt; 2.53 (col .99). So upper-tail prob is between 0.01 and 0.025; <b>two-tailed</b> P-value is between <span class="num">0.02 and 0.05</span> (exact 0.0317). Conclusion: reject at 5%, not at 1%.</div>
+    <div class="method"><b>One-tailed version</b> of the same: P between 0.01 and 0.025 (exact 0.0158).</div>
+    <div class="tip"><b>One-tail vs two-tail rule.</b> Column γ = 0.975 gives the critical value for a <b>two-sided</b> 5% test (α/2 = 0.025 each tail) <i>and</i> for a <b>one-sided</b> 2.5% test. For a one-sided 5% test use column 0.95. Always translate α into a <i>left-tail</i> quantile first.</div>
+    <div class="trap"><b>Interpolation.</b> df not listed (e.g. 45)? The convention in this course is <b>conservative</b>: use the nearest <i>smaller</i> df in the table (round df down → 40). This gives a slightly wider CI / larger critical value, never anti-conservative. Do not linearly interpolate unless asked.</div>
+    <div class="trap">Reading \(t\) as if columns were tail areas. Column headers are <b>cumulative (left) probabilities γ</b>, not α. \(t_{0.99}\) is bigger than \(t_{0.95}\) — if your "critical value" got smaller as you demanded more confidence, you read the wrong column.</div>
+  </div>
+
+  <!-- CHI-SQUARED TABLE -->
+  <div class="card" id="tbl-chi">
+    <h3>3 · Chi-squared χ² (sheet p. 6)</h3>
+    <p>Rows = df; columns = γ-quantiles (\(.005,.01,.025,.05,.10,.25,.75,.90,.95,.975,.99,.995\)). Asymmetric distribution → both tails are tabulated separately.</p>
+    <div class="method"><b>Find \(\chi^2_{0.05,2}\)</b> — upper-tail 0.05 critical value, df 2. Upper 0.05 = the 0.95 quantile: row 2, col .950 → <span class="num">5.99</span> (exact 5.991). This is the critical value for a χ² test with 2 df at 5%.</div>
+    <div class="method"><b>Find \(\chi^2_{0.05,9}\)</b>: row 9, col .950 → <span class="num">16.9</span> (exact 16.919).</div>
+    <div class="method"><b>Variance-CI quantiles (item 63).</b> For 95%, df 9 you need both: \(q_1=\chi^2_{0.025,9}\) = col .025 → <span class="num">2.70</span>; \(q_2=\chi^2_{0.975,9}\) = col .975 → <span class="num">19.0</span> (exact 19.02).</div>
+    <div class="method"><b>Bracket a P-value.</b> Test stat \(=9.24\) on df 5: row 5 has 9.24 exactly at col .90, so \(\mathbb P(X\le9.24)=0.90\) → upper-tail P-value \(=\) <span class="num">0.10</span> (exact 0.0999). Don't reject at 5%.</div>
+    <div class="trap"><b>χ² tests are one-tailed (upper).</b> Only large \(\sum(O-E)^2/E\) signals a bad fit, so you always compare against the <b>upper</b> critical value (col .95 for 5%). The lower columns (.005–.10) exist only for variance CIs — do not use them for a goodness-of-fit/independence test.</div>
+    <div class="trap"><b>df for the χ² test</b> (item 77) is \((r-1)(c-1)\) for a contingency table, or (categories − 1 − #estimated params) for goodness-of-fit — <b>not</b> \(n-1\). Wrong df → wrong row → wrong conclusion.</div>
+  </div>
+
+  <!-- F TABLE -->
+  <div class="card" id="tbl-f">
+    <h3>4 · F-distribution (sheet pp. 7–9)</h3>
+    <p>Three pages, one per γ (0.99, 0.975, 0.95). Within a page: columns = numerator df \(m\), rows = denominator df \(n\). Entry = the γ-quantile of \(\mathsf F_{m,n}\). For a 5% ANOVA test you want the <b>0.95</b> page (upper 5%).</p>
+    <div class="method"><b>Find \(F_{0.05}(2,54)\)</b> — upper-5% critical value, \(m=2\) numerator, \(n=54\) denominator. Go to the γ = 0.95 page, column \(m=2\). Row \(n=54\) isn't listed (rows jump 40 → 60): use the <b>conservative</b> smaller-\(n\) row, \(n=40\) → <span class="num">3.23</span>. (True value 3.17; \(n=60\) gives 3.15.)</div>
+    <div class="method"><b>Sheet's worked example.</b> \(F_{7,10}\): γ=0.95 page, col \(m=7\), row \(n=10\) → <span class="num">3.14</span>, i.e. \(\mathbb P(X\le3.14)=0.95\). The 0.975 page gives 3.95; the 0.99 page gives 5.20.</div>
+    <div class="method"><b>Bracket an ANOVA P-value.</b> Observed \(F=4.0\) on \((3,20)\): 0.95-page value is 3.10, 0.99-page is 4.94. Since \(3.10\lt4.0\lt4.94\), \(0.01\lt P\lt0.05\) → reject at 5%, not at 1%.</div>
+    <div class="tip"><b>Numerator vs denominator order matters:</b> \(m\) = the df on top of the F ratio (Factor/MSF df, \(d-1\)), \(n\) = the bottom (Error/MSE df, \(n_{\text{tot}}-d\)). \(\mathsf F_{2,20}\ne\mathsf F_{20,2}\). Column first, then row.</div>
+    <div class="trap"><b>Only upper tails are tabulated</b> and the pages are the .95/.975/.99 quantiles, so F is treated as a <b>one-tailed upper</b> test (ANOVA rejects only for large F). If you ever need a lower F critical value, use \(F_{\alpha}(m,n)=1/F_{1-\alpha}(n,m)\) — but STAT1301 ANOVA never needs it.</div>
+    <div class="trap">Grabbing the 0.99 page for a 5% test. The page γ <b>is</b> the confidence level of the left tail: 5% test → 0.95 page, 2.5% → 0.975, 1% → 0.99.</div>
+  </div>
+</section>
+
+<!-- ============ NOT ON THE SHEET ============ -->
+<section id="not">
+  <h2>What's NOT on the sheet — know these cold</h2>
+  <p style="color:var(--muted)">The sheet gives formulas; it never gives <b>decisions, df rules, or words</b>. This is where marks are won and lost.</p>
+
+  <div class="card">
+    <h4>Decision rules (which formula?)</h4>
+    <ul>
+      <li><b>Mean vs proportion → t vs z.</b> The sheet lists both but won't tell you which. Continuous/measured data on a mean → t. Count/"proportion of"/success-fail → z.</li>
+      <li><b>Equal vs unequal variances</b> (items 65/74 vs 66/75). Decide from the wording ("assume equal") or from the ratio of sample variances. Not stated on the sheet.</li>
+      <li><b>Paired vs two-sample.</b> The sheet has <i>no</i> paired-test formula. If measurements are paired (before/after, same subject), form differences \(D_i\) and run a <b>one-sample</b> t-test (item 72) on the \(D\)'s. Recognising this is entirely on you.</li>
+      <li><b>One-tail vs two-tail.</b> Driven by \(H_1\) (\(\ne\) → two-tail; \(\lt\) or \(\gt\) → one-tail). Changes the quantile column and the P-value doubling.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Degrees-of-freedom rules (mostly implicit)</h4>
+    <div class="scroller"><table>
+      <tr><th>Procedure</th><th>df</th></tr>
+      <tr><td>1-sample t (62, 72)</td><td>\(n-1\)</td></tr>
+      <tr><td>2-sample t, equal var (65, 74)</td><td>\(m+n-2\)</td></tr>
+      <tr><td>2-sample t, unequal var (66, 75)</td><td>Welch (printed) or conservative \(\min(m-1,n-1)\)</td></tr>
+      <tr><td>Variance CI (63)</td><td>\(n-1\)</td></tr>
+      <tr><td>ANOVA F (79)</td><td>\((d-1,\ n-d)\)</td></tr>
+      <tr><td>χ² independence (77)</td><td>\((r-1)(c-1)\)</td></tr>
+      <tr><td>χ² goodness-of-fit</td><td>categories − 1 − (#params estimated)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h4>Assumptions to state (examiners award marks for these)</h4>
+    <ul>
+      <li>t-procedures: data (or the differences) approximately <b>Normal</b>, or \(n\) large (CLT). Items 62/65 say "exact when Normal".</li>
+      <li>Proportion z (67/73): Normal approx valid when \(np_0\) and \(n(1-p_0)\) both \(\ge\) ~5–10.</li>
+      <li>ANOVA: independent groups, equal variances, Normal errors (item 78).</li>
+      <li>χ² test: all <b>expected</b> counts \(E\ge5\); observations independent.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>The interpretation sentence (never on the sheet, always worth a mark)</h4>
+    <div class="tip"><b>CI template:</b> "We are 95% confident the [parameter, in context] lies between [L] and [U] [units]."</div>
+    <div class="tip"><b>Test template:</b> "Since P = [value] \(\lt/\gt\) 0.05, we [reject / do not reject] \(H_0\); there is [strong / insufficient] evidence that [\(H_1\) in the story's words]."</div>
+    <div class="trap">"Show your working and state conclusions where appropriate. Give at least 3 significant figures." — a bare number with no conclusion sentence, or a 2-sig-fig answer, loses marks even when the arithmetic is right.</div>
+  </div>
+</section>
+
+<!-- ============ SPEED DRILL ============ -->
+<section id="drill">
+  <h2>Speed drill · "Which formula?" — 10 rapid prompts</h2>
+  <p style="color:var(--muted)">Cover the answers. For each, name the sheet <b>item number</b> and the table you'd read. Aim for &lt;10 s each.</p>
+
+  <details><summary>1. "A random sample of 25 rods has mean length 4.02 cm, s = 0.11. Give a 95% CI for the true mean length."</summary>
+  Item <b>62</b> (1-sample mean CI). Quantile \(t_{0.975,24}=2.06\) from the <b>t-table</b>. df = 24.</details>
+
+  <details><summary>2. "In 300 trials, 78 were successes. 99% CI for the success probability."</summary>
+  Item <b>67</b> (1-sample proportion CI). Quantile \(z=2.576\) from the <b>Normal table</b>. It's a proportion → z, not t.</details>
+
+  <details><summary>3. "Test whether three fertilisers give different mean yields."</summary>
+  One-factor ANOVA: model <b>78</b>, statistic <b>79</b> \(F=\text{MSF}/\text{MSE}\), table <b>80</b>. Read the <b>F-table</b> (0.95 page) at \((d-1,\,n-d)\).</details>
+
+  <details><summary>4. "Are eye colour and handedness associated?" (a two-way count table)</summary>
+  Item <b>77</b> chi-squared test of independence. \(E=\frac{\text{row}\times\text{col}}{\text{total}}\), df \((r-1)(c-1)\), <b>χ² table</b> upper tail.</details>
+
+  <details><summary>5. "Each of 12 subjects measured before and after a drug; test for a mean change."</summary>
+  Trick — <b>paired</b>. Not on the sheet as a template: form \(D_i\)=after−before, run one-sample t (item <b>72</b>) on the \(D\)'s, df = 11, <b>t-table</b>.</details>
+
+  <details><summary>6. "95% CI for the variance of a Normally-distributed measurement, n = 20."</summary>
+  Item <b>63</b>. Two quantiles from the <b>χ² table</b>, df 19: \(q_1=\chi^2_{0.025,19},\ q_2=\chi^2_{0.975,19}\). Bigger quantile → lower bound.</details>
+
+  <details><summary>7. "Compare mean income of two cities; sample SDs are 12 and 31 (very different)."</summary>
+  Unequal variances → item <b>66</b> (CI) / <b>75</b> (test). Welch df, or conservative \(\min(m-1,n-1)\), <b>t-table</b>.</details>
+
+  <details><summary>8. "P(a Normal(50, 8²) reading exceeds 62)?"</summary>
+  Standardize (item <b>43</b>): \(z=(62-50)/8=1.5\), then \(1-\Phi(1.5)=0.0668\) from the <b>Normal table</b>. No test — just a probability.</details>
+
+  <details><summary>9. "Compare proportions of defectives from two machines."</summary>
+  Two-sample proportions: CI item <b>68</b> (unpooled se) or test item <b>76</b> (pooled \(\hat P=\frac{X+Y}{m+n}\)). <b>Normal table</b> for z.</details>
+
+  <details><summary>10. "The regression output reports SST = 840, SSE = 210. How much variation is explained?"</summary>
+  Item <b>82</b>: \(R^2=(840-210)/840=0.75\) → 75% explained. Pure plug-in, no table.</details>
+</section>
+
+<section id="foot">
+  <div class="card" style="text-align:center">
+    <p>Sheet companion for <a href="index.html">the STAT1301 hub</a>. Every table-reading number here was checked in <span class="mono">scipy.stats</span>.</p>
+    <p style="color:var(--muted);font-size:13px">Formula sheet = <span class="mono">STAT1301_formula.pdf</span> ≡ pp 8–16 of every past paper (identical). Next: drill the <a href="exam-2025.html">worked 2025 exam</a> with the sheet open.</p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

@@ -3,31 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATH1081 Exam Survival Hub</title>
+<title>STAT1301 — Exam Command Hub</title>
 <script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <style>
   :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
-    --accent:#a78bfa;--accent2:#6366f1;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
   a{color:var(--accent);text-decoration:none}
-  header{background:linear-gradient(135deg,#1e1340,#13203a);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
   header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
-  .badge{display:inline-block;background:var(--accent);color:#1a1040;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
   .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
   nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
   nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
-  nav a:hover{background:var(--accent);color:#1a1040}
+  nav a:hover{background:var(--accent);color:#032117}
   main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
   section{margin:34px 0;scroll-margin-top:58px}
   h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
-  h3{font-size:17px;color:#d7c9ff}
+  h3{font-size:17px;color:#a7f3d0}
   h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
-  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(99,102,241,.08),transparent)}
-  .q h3:before{content:"📝 ";font-size:14px}
-  .when{background:rgba(167,139,250,.1);border:1px solid #3a3060;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
   .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
   .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
   .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
@@ -37,393 +37,451 @@
   .tip:before{content:"✓ ";color:var(--good);font-weight:700}
   details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
   details[open]{padding-bottom:12px}
-  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#d7c9ff;list-style:none}
-  summary:before{content:"▶ ";color:var(--accent);font-size:12px}details[open] summary:before{content:"▼ "}
-  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
-  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
-  th{background:var(--panel2);color:var(--gold)}
-  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;white-space:pre-wrap;overflow-x:auto;line-height:1.5}
-  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
-  .flash .inner{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px;min-height:80px;display:flex;align-items:center;justify-content:center;text-align:center}
-  .flash .a{display:none;color:var(--good)}.flash.show .q2{display:none}.flash.show .a{display:block}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
-  footer{text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px}
-  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;background:var(--panel2);color:var(--accent);margin-left:6px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* ---- hub-specific ---- */
+  .hero-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .stat{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:8px 16px;min-width:90px}
+  .stat b{display:block;font-size:22px;color:var(--accent)}
+  .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .chapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .chapcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.15s;color:var(--ink)}
+  .chapcard:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--panel2)}
+  .chapcard .ct{font-size:11px;color:var(--accent2);font-weight:700;letter-spacing:.5px}
+  .chapcard h3{margin:4px 0 6px;font-size:16px;color:#a7f3d0}
+  .chapcard p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .chapcard .wt{display:inline-block;margin-top:9px;font-size:11px;font-weight:700;background:rgba(52,211,153,.12);color:var(--accent);border:1px solid #1d4a3a;border-radius:6px;padding:2px 8px}
+  .chapcard .wt.hi{background:rgba(251,191,36,.14);color:var(--gold);border-color:#5a4718}
+  .examrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .examrow a{text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px;font-weight:700}
+  .examrow a:hover{background:var(--accent);color:#032117}
+  /* decision tree */
+  .tree{margin:10px 0}
+  .node{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:8px;padding:10px 14px;margin:8px 0}
+  .node>.qn{font-weight:700;color:#a7f3d0}
+  .branch{margin:8px 0 8px 18px;border-left:2px dashed var(--line);padding-left:14px}
+  .opt{font-size:13.5px;margin:6px 0}
+  .opt .lbl{display:inline-block;background:rgba(14,165,233,.15);border:1px solid #1d3a4a;color:#7dd3fc;border-radius:6px;padding:1px 8px;font-weight:700;font-size:12px;margin-right:6px}
+  .leaf{background:var(--code);border:1px solid #245040;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:13.5px}
+  .leaf b{color:var(--accent)}
+  .fs{color:var(--muted);font-size:12px}
+  .trigtag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:5px;background:var(--panel2);border:1px solid var(--line);color:#a7f3d0;white-space:nowrap}
+  .sticky-th th{position:sticky;top:46px;z-index:5}
+  .tablewrap{overflow-x:auto}
+  .conc{background:var(--code);border:1px dashed #245040;border-radius:8px;padding:10px 13px;margin:8px 0;font-size:13.5px}
+  .conc b{color:var(--good)}
+  code{background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px}
 </style>
 </head>
 <body>
 <header>
-  <h1>MATH1081 — Advanced Discrete Mathematics</h1>
-  <p>7-Hour Exam Survival Pack · built from the actual S1 2025 paper + your lecture &amp; workshop solutions</p>
-  <p style="font-size:13px">80 marks · 8 questions · 120 min + 10 planning · calculator only · <b>show all working</b></p>
-  <div>
-    <span class="badge gold">Formula sheet IS provided</span>
-    <span class="badge">Learn the TRIGGER, not just the method</span>
+  <h1>STAT1301 · Exam Command Hub</h1>
+  <p><b>Advanced Analysis of Scientific Data</b> — final exam <b>~November 2026</b></p>
+  <div class="hero-stats">
+    <div class="stat"><b>80</b><span>marks</span></div>
+    <div class="stat"><b>5</b><span>questions</span></div>
+    <div class="stat"><b>120</b><span>minutes</span></div>
+    <div class="stat"><b>+10</b><span>min planning</span></div>
   </div>
+  <p style="margin-top:12px">
+    <span class="badge gold">Formula sheet + tables PROVIDED</span>
+    <span class="badge">Casio FX82 only</span>
+    <span class="badge">≥ 3 significant figures</span>
+  </p>
+  <p class="fs">You are not memorising formulas — they are given. The exam tests one thing:
+  <b style="color:var(--ink)">can you read a question, recognise the method, and execute it cleanly?</b> This hub trains exactly that.</p>
 </header>
 
 <nav>
-  <a href="#strategy">🗺 Strategy</a>
-  <a href="#q1">1 Logic</a>
-  <a href="#q2">2 Number Theory</a>
-  <a href="#q3">3 Induction/Mod</a>
-  <a href="#q4">4 Functions</a>
-  <a href="#q5">5 Sets/Cardinality</a>
-  <a href="#q6">6 Relations</a>
-  <a href="#q7">7 Groups</a>
-  <a href="#q8">8 Counting/Graphs</a>
-  <a href="#flash">🃏 Flashcards</a>
-  <a href="worked_2025.html">✅ 2025 Solutions</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-02-probability.html">Ch1–2</a>
+  <a href="ch03-multiple-rvs.html">Ch3</a>
+  <a href="ch04-05-data-descriptives.html">Ch4–5</a>
+  <a href="ch06-estimation-cis.html">Ch6</a>
+  <a href="ch07-hypothesis-testing.html">Ch7</a>
+  <a href="ch08-anova.html">Ch8</a>
+  <a href="ch09-10-regression.html">Ch9–10</a>
+  <a href="ch11-chi-squared.html">Ch11</a>
+  <a href="formulas.html">📄 Formulas</a>
+  <a href="exam-2025.html">📝 Exams</a>
+  <a href="#engine">⚙️ Decision Engine</a>
+  <a href="#strategy">⏱️ Strategy</a>
 </nav>
 
 <main>
 
+<!-- ============ CHAPTER DIRECTORY ============ -->
+<section id="chapters">
+  <h2>Chapter directory</h2>
+  <p>Eleven chapters, grouped into eight study pages. Weights are the share of exam marks each area
+  historically attracts (from the 2023–2025 papers). <span class="badge pre">PRE-LECTURE</span> pages
+  (Ch 8–11) were built ahead of 2026 lectures — verify against lecture content when it drops.</p>
+
+  <div class="chapgrid">
+    <a class="chapcard" href="ch01-02-probability.html">
+      <div class="ct">CHAPTERS 1–2</div>
+      <h3>Probability &amp; Distributions</h3>
+      <p>Probability rules, counting, conditional probability &amp; Bayes; discrete/continuous RVs, pdf/cdf,
+      E &amp; Var; Bernoulli, Binomial, Uniform, Normal.</p>
+      <span class="wt hi">≈ 10–15 marks · always Q1</span>
+    </a>
+    <a class="chapcard" href="ch03-multiple-rvs.html">
+      <div class="ct">CHAPTER 3</div>
+      <h3>Multiple Random Variables</h3>
+      <p>Joint pmf/pdf, marginals, independence, covariance &amp; correlation; linear combinations, CLT.
+      Estimator theory (bias, variance) lives here too.</p>
+      <span class="wt hi">≈ 10–16 marks · often Q2</span>
+    </a>
+    <a class="chapcard" href="ch04-05-data-descriptives.html">
+      <div class="ct">CHAPTERS 4–5</div>
+      <h3>Studies, Data &amp; Descriptives</h3>
+      <p>Study design, sampling, bias, ethics, data manipulation terms; descriptive statistics, boxplots,
+      reading summary tables. Underpins every applied question.</p>
+      <span class="wt">≈ 2–6 marks · MCQ + embedded</span>
+    </a>
+    <a class="chapcard" href="ch06-estimation-cis.html">
+      <div class="ct">CHAPTER 6</div>
+      <h3>Estimation &amp; Confidence Intervals</h3>
+      <p>Point estimators, unbiasedness, sampling distributions; 1- &amp; 2-sample CIs for means, proportions,
+      variance; margin of error &amp; sample-size calculations.</p>
+      <span class="wt hi">≈ 12–19 marks · core of Q3</span>
+    </a>
+    <a class="chapcard" href="ch07-hypothesis-testing.html">
+      <div class="ct">CHAPTER 7</div>
+      <h3>Hypothesis Testing</h3>
+      <p>The 7-step test; z/t, one/two-sample, paired, proportions; P-values, Type I/II error, power,
+      one- vs two-sided; conclusions in context.</p>
+      <span class="wt hi">≈ 12–19 marks · core of Q3</span>
+    </a>
+    <a class="chapcard" href="ch08-anova.html">
+      <div class="ct">CHAPTER 8 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>ANOVA</h3>
+      <p>One- &amp; two-way ANOVA, completing the ANOVA table, the F-test, assumptions, interaction plots,
+      post-hoc (Bonferroni) comparisons, R².</p>
+      <span class="wt hi">≈ 17–18 marks · always Q4</span>
+    </a>
+    <a class="chapcard" href="ch09-10-regression.html">
+      <div class="ct">CHAPTERS 9–10 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>Regression &amp; the Linear Model</h3>
+      <p>Simple linear regression, reading <code>lm()</code> output, prediction &amp; residuals, CI for the slope,
+      significance, diagnostic plots, CI vs prediction interval.</p>
+      <span class="wt hi">≈ 15–18 marks · always Q5</span>
+    </a>
+    <a class="chapcard" href="ch11-chi-squared.html">
+      <div class="ct">CHAPTER 11 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>Chi-squared Tests</h3>
+      <p>Tests of association in contingency tables; expected counts, χ² statistic, df = (r−1)(c−1),
+      P-value and conclusion. Usually embedded as a sub-part.</p>
+      <span class="wt">≈ 5–6 marks · embedded part</span>
+    </a>
+  </div>
+
+  <h3>Reference &amp; past papers</h3>
+  <div class="card" style="margin-bottom:10px">
+    <a href="formulas.html" style="font-weight:700">📄 formulas.html</a> — a guided tour of the provided formula
+    sheet &amp; statistical tables (Normal, t, χ², F). Learn <em>where each formula lives</em> so you can find it in seconds under pressure.
+  </div>
+  <div class="examrow">
+    <a href="exam-2021.html">2021</a>
+    <a href="exam-2022.html">2022</a>
+    <a href="exam-2023.html">2023</a>
+    <a href="exam-2024.html">2024</a>
+    <a href="exam-2025.html">2025</a>
+  </div>
+</section>
+
+<!-- ============ MASTER DECISION ENGINE ============ -->
+<section id="engine">
+  <h2>⚙️ The Master Decision Engine</h2>
+  <p>The exam never says "use a paired t-test." It describes a situation and asks a question. The single
+  most valuable exam skill is <b>translating wording → method</b>. This is that translator. Use the
+  <b>trigger table</b> to decode individual phrasings, then the <b>decision tree</b> to lock in the exact
+  inference procedure.</p>
+
+  <div class="tip">Read the <em>verb</em> and the <em>data structure</em> first. "Construct / determine / find" = compute.
+  "Perform an appropriate test / is there evidence" = full 7-step test. "Comment / discuss / interpret" = words, in the story's context.
+  "State the assumptions" = list them AND judge each against the given plots/table.</div>
+
+  <h3>A. Wording-trigger table — every phrasing → method → page</h3>
+  <p class="fs">Mined from the 2023, 2024 &amp; 2025 papers (and the formula sheet). Exact exam phrasings are quoted.</p>
+  <div class="tablewrap">
+  <table>
+    <thead class="sticky-th"><tr><th>When the exam says…</th><th>It's asking for…</th><th>Method / formula</th><th>Study</th></tr></thead>
+    <tbody>
+      <!-- PROBABILITY / RV -->
+      <tr><td><em>"Determine the value of \(k\)"</em> for a pdf \(f(x)=kx^3\)</td><td>Normalising constant</td><td>Set \(\int f(x)\,dx=1\) over the support, solve for \(k\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine \(E(X)\)"</em> / <em>"the expected value"</em></td><td>Mean of a distribution</td><td>Discrete \(\sum x f(x)\); continuous \(\int x f(x)\,dx\) (sheet #21–22)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine Var(X)"</em></td><td>Variance</td><td>\(\operatorname{Var}(X)=E(X^2)-(E X)^2\) (sheet #25–26)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the cumulative distribution function"</em></td><td>CDF from pdf</td><td>\(F(x)=\int_{-\infty}^{x} f(t)\,dt\); state it piecewise (0 below, 1 above)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the median of \(X\)"</em></td><td>50th percentile</td><td>Solve \(F(m)=0.5\) for \(m\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the mode of \(X\)"</em></td><td>Peak of pdf</td><td>Maximise \(f(x)\) on the support (check endpoints for monotone pdf)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine \(P(X&gt;4)\)"</em>, <em>"\(P(X\lt \tfrac54)\)"</em></td><td>A probability</td><td>Integrate pdf, or \(1-F(x)\) / \(F(b)-F(a)\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+
+      <!-- ESTIMATORS -->
+      <tr><td><em>"Determine \(E(\hat\theta)\) and whether \(\hat\theta\) is unbiased"</em></td><td>Bias check</td><td>Compute \(E(\hat\theta)\) via linearity; unbiased ⇔ \(E(\hat\theta)=\theta\) (sheet #51)</td><td><a href="ch03-multiple-rvs.html">Ch3</a>·<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Determine Var(\(\hat\theta\))"</em> for an estimator</td><td>Estimator variance</td><td>\(\operatorname{Var}(\sum a_iX_i)=\sum a_i^2\operatorname{Var}(X_i)\), independence (sheet #52)</td><td><a href="ch03-multiple-rvs.html">Ch3</a>·<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"What is the (approximate) distribution of \(\hat\theta\) when \(n\) is large?"</em></td><td>CLT</td><td>\(\hat\theta \stackrel{approx}{\sim} N(\theta,\operatorname{Var}(\hat\theta))\) by the CLT (sheet #57)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Find the pdf of \(X\)"</em> given the cdf \(F(x;\theta)\)</td><td>Differentiate</td><td>\(f(x)=\frac{d}{dx}F(x)\) (sheet #20)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+
+      <!-- MULTIPLE RV -->
+      <tr><td><em>"Find the value of \(p\)"</em> in a joint pmf table</td><td>Probabilities sum to 1</td><td>Set \(\sum\sum f(x,y)=1\), solve the resulting equation</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"What is the marginal pmf of A / of X?"</em></td><td>Marginal distribution</td><td>Sum the joint over the other variable (row/column totals)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Determine the covariance and correlation between A and B"</em></td><td>Cov &amp; ρ</td><td>\(\operatorname{Cov}=E(XY)-E X\,E Y\); \(\rho=\operatorname{Cov}/(\sigma_X\sigma_Y)\) (sheet #48–49)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Determine the correlation between X and Y"</em></td><td>Correlation coefficient</td><td>Build marginals → \(E X,EY,\operatorname{Var}\) → \(E(XY)\) → \(\rho\)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+
+      <!-- STUDY DESIGN -->
+      <tr><td><em>"This data manipulation best falls under…"</em> (trimming/cooking/fudging)</td><td>Data-integrity term</td><td>Match definition: dropping inconvenient data ≈ <b>trimming</b></td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+      <tr><td><em>"a significant ethical concern about this study"</em></td><td>Research ethics</td><td>Privacy/consent/harm/anonymity — pick the design-fixable concern</td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+      <tr><td><em>"identify the response / explanatory variable / confounder"</em></td><td>Study-design vocabulary</td><td>Response = measured outcome; explanatory = manipulated/grouping</td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+
+      <!-- CONFIDENCE INTERVALS -->
+      <tr><td><em>"Construct / Calculate a 95% confidence interval for the mean"</em> (one group)</td><td>1-sample CI for μ</td><td>\(\bar X \pm q\,S/\sqrt n\), \(q=t_{n-1,0.975}\) (sheet #62)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for the mean difference"</em> between two independent groups</td><td>2-sample CI for μ₁−μ₂</td><td>Pooled (#65) if SDs ~equal, else Welch (#66); decide via the tree below</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for the mean difference"</em>, one value measured twice per subject</td><td>Paired CI</td><td>Reduce to differences \(d_i\): \(\bar d \pm t_{n-1,0.975}\,s_d/\sqrt n\)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Construct a 95% CI for the standard deviation σ"</em></td><td>CI for variance/SD</td><td>\(\big(\tfrac{(n-1)S^2}{q_2},\tfrac{(n-1)S^2}{q_1}\big)\) with χ²; sqrt for σ (sheet #63)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for a proportion / for p"</em></td><td>1-sample proportion CI</td><td>\(\hat P \pm q\sqrt{\hat P(1-\hat P)/n}\), \(q=z_{0.975}\) (sheet #67)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"smallest number of subjects… within a margin of error of no more than…"</em></td><td>Sample-size calc</td><td>Set margin \(q\,\sigma/\sqrt n \le E\), solve for \(n\), round <b>up</b></td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Interpret the interval in the context of the study"</em></td><td>CI interpretation</td><td>"We are 95% confident the true [quantity] lies between … and … [units]"</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+
+      <!-- HYPOTHESIS TESTING -->
+      <tr><td><em>"State the null and alternative hypotheses… Explain any notation"</em></td><td>Set up H₀/H₁</td><td>Define parameters in words + symbols; direction from the claim (sheet #69–71)</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Perform an appropriate hypothesis test"</em> / <em>"Perform a relevant test"</em></td><td>Full 7-step test</td><td>Pick statistic via the tree → compute → P-value/critical → conclude in context</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Perform a suitable test to check their claim"</em> (e.g. "at least 2g more")</td><td>One-sided test, μ₀≠0</td><td>Shift the null: \(H_0:\mu_1-\mu_2=2\) vs one-sided \(H_1\); t-statistic</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Report the P-value and a conclusion in context"</em></td><td>P-value decision</td><td>If \(P\lt\alpha\) reject H₀; then one plain-English sentence in the story</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"report the t-statistic to two significant figures"</em></td><td>Test statistic</td><td>Compute \(T\), round to 2sf <b>only for the reported value</b> (keep full precision mid-calc)</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+
+      <!-- ANOVA -->
+      <tr><td><em>"complete the ANOVA table"</em> / <em>"find the missing values"</em></td><td>Fill DF, SS, MS, F</td><td>DF from design; \(MS=SS/DF\); \(F=MSF/MSE\); \(SSE=SST-SSF\) (sheet #80)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"significant difference in mean … between the … groups"</em></td><td>One-way ANOVA F-test</td><td>\(F=MSF/MSE\sim F_{d-1,\,n-d}\); compare to \(F\)-table (sheet #79)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"is there evidence of a significant interaction"</em></td><td>Two-way ANOVA, interaction row</td><td>\(F_{\text{int}}=MS_{\text{int}}/MSE\); df \((d_1-1)(d_2-1)\) (sheet #81)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Using Figure 2 comment on whether there could be an interaction"</em></td><td>Read interaction plot</td><td>Parallel lines ⇒ no interaction; crossing/diverging ⇒ interaction</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"What are the assumptions of the test? … whether they are met"</em></td><td>ANOVA assumptions</td><td>Independence, normality (QQ), equal variance (boxplot spreads) — judge each</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"why … multiple t-tests … is flawed"</em></td><td>Multiple-comparisons concept</td><td>Inflated family-wise Type I error → use ANOVA then post-hoc with correction</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Pairwise comparisons … bonferroni … which treatments are significantly different"</em></td><td>Read post-hoc output</td><td>Adjusted \(P\lt0.05\) ⇒ that pair differs; state in context</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Calculate the \(R^2\) value and interpret"</em> (ANOVA)</td><td>Proportion of variance</td><td>\(R^2=(SST-SSE)/SST=SSF/SST\) (sheet #82)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+
+      <!-- REGRESSION -->
+      <tr><td><em>"Write the fitted regression equation… define all notation"</em></td><td>Read lm() coefficients</td><td>\(\hat y=\hat\beta_0+\hat\beta_1 x\) from the Estimate column</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"what is the expected [Y] when [X] is …"</em></td><td>Prediction</td><td>Substitute \(x\) into fitted equation</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"what is the residual for this observation?"</em></td><td>Residual</td><td>\(e=y_{\text{obs}}-\hat y\) at that \(x\)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"Construct a 95% CI for the slope… is the linear relationship significant?"</em></td><td>CI &amp; test for β₁</td><td>\(\hat\beta_1\pm t_{n-2,0.975}\cdot SE(\hat\beta_1)\); significant if 0 ∉ CI (equiv. lm P-value)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"State the assumptions of the model… whether each appears valid"</em> (diagnostics)</td><td>Regression assumptions</td><td>Linearity + independence + equal var (Resid vs Fitted) + normality (QQ)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"What is the sample size?"</em> from lm output</td><td>Recover n</td><td>\(n = \text{residual df} + 2\) (simple linear regression)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"how the width of the CI / prediction interval changes as \(n\) grows large"</em></td><td>CI vs PI concept</td><td>CI for mean → 0; PI → \(2\cdot1.96\,\sigma\) (irreducible noise remains)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+
+      <!-- CHI-SQUARED -->
+      <tr><td><em>"is there an association between … and …"</em> (a contingency table)</td><td>χ² test of association</td><td>expected \(=\frac{\text{row}\times\text{col}}{\text{total}}\); \(\chi^2=\sum\frac{(O-E)^2}{E}\), df \((r-1)(c-1)\) (sheet #77)</td><td><a href="ch11-chi-squared.html">Ch11</a></td></tr>
+      <tr><td><em>"screen use is associated with sleep quality"</em> — joint frequency table</td><td>χ² test (same)</td><td>Marginal totals → expecteds → χ² → compare to χ²-table → conclude</td><td><a href="ch11-chi-squared.html">Ch11</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>B. Decision tree — which inference procedure?</h3>
+  <p>Once you know it's an <em>inference</em> question (CI or test), walk this tree top-down. Answer each
+  question from the wording and the data given.</p>
+
+  <div class="tree">
+    <div class="node">
+      <div class="qn">① What am I being asked to produce?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Complete a table</span> ANOVA table with blanks → go to <b>ANOVA</b> (⑤).</div>
+        <div class="opt"><span class="lbl">A regression thing</span> slope/prediction/residual/<code>lm()</code> → go to <b>Regression</b> (⑥).</div>
+        <div class="opt"><span class="lbl">An interval</span> "construct/calculate a CI" → build a CI (②, use CI formula for the case).</div>
+        <div class="opt"><span class="lbl">A yes/no on a claim</span> "perform a test / is there evidence / test the claim" → run a test (②, use the matching statistic).</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">② What kind of data / how many samples?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Counts in a table</span> two categorical variables cross-tabulated → <b>χ² test of association</b> (④).</div>
+        <div class="opt"><span class="lbl">3+ group means</span> comparing means across 3 or more groups → <b>ANOVA</b> (⑤).</div>
+        <div class="opt"><span class="lbl">Proportion(s)</span> "proportion / percentage / p" → proportion z-procedure (③-P).</div>
+        <div class="opt"><span class="lbl">Mean(s), numeric</span> continue to ③.</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">③ Means: how many samples, and are they linked?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One sample</span> compare one group's mean to a fixed number \(\mu_0\).
+          <div class="leaf">Test: <b>1-sample t</b> \(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\sim t_{n-1}\) (sheet #72). CI: \(\bar X\pm t_{n-1}\,S/\sqrt n\) (#62). <span class="fs">2025 Q3(a).</span></div>
+        </div>
+        <div class="opt"><span class="lbl">Two samples · PAIRED</span> same subject measured twice (before/after, two sites on one person, a "difference" column already given).
+          <div class="leaf">Reduce to differences \(d_i\): <b>1-sample t on the differences</b>, \(T=\dfrac{\bar d-\mu_0}{s_d/\sqrt n}\sim t_{n-1}\). <span class="fs">2024 Q3 (forearm − upper arm, difference SD given = the tell).</span></div>
+        </div>
+        <div class="opt"><span class="lbl">Two samples · INDEPENDENT</span> two separate groups. Now check the SDs:</div>
+        <div class="branch">
+          <div class="opt"><span class="lbl">SDs ≈ equal</span> sample SDs close, or told to assume equal variance.
+            <div class="leaf"><b>Pooled 2-sample t</b>: \(S_p^2=\dfrac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2}\), \(T=\dfrac{\bar X-\bar Y}{S_p\sqrt{1/m+1/n}}\sim t_{m+n-2}\) (#64,#74). CI: #65. <span class="fs">2023 Q4 (both SD 0.17 → pooled); 2025 Q3.</span></div>
+          </div>
+          <div class="opt"><span class="lbl">SDs clearly unequal</span> one SD much bigger, or told unequal.
+            <div class="leaf"><b>Welch 2-sample t</b>: \(T=\dfrac{\bar X-\bar Y}{\sqrt{S_X^2/m+S_Y^2/n}}\), \(t_{\text{df}}\) via Welch/conservative \(\min(m-1,n-1)\) (#66,#75). CI: #66.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">③-P Proportions</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One proportion</span> \(Z=\dfrac{\hat P-p_0}{\sqrt{p_0(1-p_0)/n}}\sim N(0,1)\) (#73). CI: \(\hat P\pm z\sqrt{\hat P(1-\hat P)/n}\) (#67).</div>
+        <div class="opt"><span class="lbl">Two proportions</span> pooled \(\hat P=\frac{X+Y}{m+n}\), \(Z=\dfrac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)(1/m+1/n)}}\) (#76). CI: #68.</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">④ χ² test of association (categorical × categorical)</div>
+      <div class="leaf">expected \(=\dfrac{\text{row total}\times\text{col total}}{\text{grand total}}\); \(\chi^2=\sum\dfrac{(O-E)^2}{E}\sim\chi^2_{(r-1)(c-1)}\) (#77). Compare to χ²-table. <span class="fs">2023 Q5(e), 2024 Q5(e), 2025 Q2(d).</span></div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑤ ANOVA (means of 3+ groups)</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One factor</span> one grouping variable → <b>one-way</b>. df: Factor \(d-1\), Error \(n-d\), Total \(n-1\). \(F=MSF/MSE\sim F_{d-1,\,n-d}\) (#79–80). <span class="fs">2023 Q5, 2024 Q4.</span></div>
+        <div class="opt"><span class="lbl">Two factors</span> two grouping variables (+ interaction) → <b>two-way</b>. Rows: A, B, Interaction, Residuals, Total (#81). <span class="fs">2025 Q4.</span></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑥ Regression (relationship between two numeric variables)</div>
+      <div class="leaf">Model \(Y=\beta_0+\beta_1 x+\varepsilon\), \(\varepsilon\sim N(0,\sigma^2)\) (#83). Read <code>lm()</code>: Estimate = coefficients, Std. Error → CI for slope \(\hat\beta_1\pm t_{n-2}\,SE\), Pr(&gt;|t|) = significance of \(\beta_1\), Residual df + 2 = \(n\). <span class="fs">2023 Q6, 2024 Q5, 2025 Q5.</span></div>
+    </div>
+  </div>
+
+  <div class="trap">The <b>paired vs independent</b> fork is the classic mark-loser. Tell-tale signs of <b>paired</b>: the
+  question gives a "difference" column with its own mean and SD, or the two measurements come from the
+  <em>same</em> unit (same person's two arms, before/after). If you'd need <code>1/m+1/n</code> you're doing it wrong — paired uses a single differenced sample.</div>
+  <div class="trap"><b>Pooled vs Welch:</b> in this course, if the two sample SDs are close (or the question says "assuming
+  equal variances") use <b>pooled</b>; if one SD is much larger, use <b>Welch</b> and state your choice. 2023 Q4 gave
+  identical SDs (0.17, 0.17) — a deliberate nudge to pool.</div>
+</section>
+
+<!-- ============ EXAM-DAY STRATEGY ============ -->
 <section id="strategy">
-  <h2>🗺 Read This First</h2>
-  <div class="card">
-    <p>This is <b>Advanced Discrete Mathematics</b>. The S1 2025 exam (which you may sit again) is <b>8 questions, 80 marks</b>, one per topic area. The whole game is <b>pattern recognition</b>: each question type has a fixed recipe. Your job today isn't to "understand discrete maths" — it's to recognise <i>"oh, this is the divisibility-proof one / the walk-counting one"</i> and run the recipe. Every section below leads with a <span style="color:var(--accent)">🎯 WHEN TO USE</span> trigger for exactly that.</p>
-    <div class="tip">The exam gives you a <b>formula sheet</b>: all the logical equivalences, the valid argument forms (modus ponens/tollens, elimination, transitivity…), set identities, quotient-remainder theorem, unique factorisation, Schröder-Bernstein, and the binomial theorem. So you don't memorise those — you memorise <b>when and how to apply them</b>.</div>
-    <div class="trap">"Show all working; answers without justification may not receive full marks." Many questions say "explain why or why not" — a bare yes/no scores ~0. Always give the reason or a counterexample.</div>
-  </div>
-  <h3>The 8 questions &amp; how to spend the 2 hours</h3>
-  <table>
-    <tr><th>Q</th><th>Topic</th><th>Marks</th><th>The recipe in one line</th></tr>
-    <tr><td>1</td><td><a href="#q1">Logic</a></td><td>7</td><td>Quantifier T/F + formal proof citing inference rules</td></tr>
-    <tr><td>2</td><td><a href="#q2">Number theory</a></td><td>11</td><td>Divisibility proof (write n=2k+1) + Euclidean gcd + lcm</td></tr>
-    <tr><td>3</td><td><a href="#q3">Induction / mod</a></td><td>5</td><td>Prove ≡0 mod m by induction (peel a factor, sub the hypothesis)</td></tr>
-    <tr><td>4</td><td><a href="#q4">Functions</a></td><td>10</td><td>Image / 1-to-1 / onto / preimage — prove or counterexample</td></tr>
-    <tr><td>5</td><td><a href="#q5">Sets &amp; cardinality</a></td><td>13</td><td>$2^{|S||T|}$ · countable vs uncountable · Schröder-Bernstein</td></tr>
-    <tr><td>6</td><td><a href="#q6">Relations</a></td><td>8</td><td>Reflexive/symmetric/transitive/antisymmetric — 4 quick checks</td></tr>
-    <tr><td>7</td><td><a href="#q7">Groups</a></td><td>10</td><td>Cayley table · cyclic? (find generator) · isomorphic? (structural diff)</td></tr>
-    <tr><td>8</td><td><a href="#q8">Counting &amp; graphs</a></td><td>16</td><td>Block-glue permutations · handshake lemma · walks = $M^k$ entry</td></tr>
-  </table>
-  <p class="tip" style="margin-top:6px">Q8 (graphs/counting) is the biggest at 16 marks and the most mechanical — make sure you can do walk-counting cold. Q5 (13) and Q2 (11) are next. Bank the cheap, certain marks first.</p>
-</section>
+  <h2>⏱️ Exam-day strategy</h2>
 
-<!-- Q1 LOGIC -->
-<section id="q1">
-  <h2>Q1 · Logic <span class="pill">7 marks</span></h2>
-
-  <h3>Part (a): Is the quantified statement true or false?</h3>
-  <div class="when">the statement has $\forall$ and $\exists$ — especially when the <b>order</b> ($\forall\exists$ vs $\exists\forall$) is the whole point.</div>
+  <h3>The 10-minute planning playbook</h3>
+  <p>You get 10 minutes of <b>perusal</b> before writing. Do not stare — triage.</p>
   <div class="method">
-    <b>The order is everything:</b>
+    <ol>
+      <li><b>Skim all 5 questions</b> and label each with its area (Q1 probability, Q2 estimator/joint, Q3 two-sample inference, Q4 ANOVA, Q5 regression — that's the usual layout).</li>
+      <li><b>Score each part's difficulty</b> in the margin: ✓ (instant), ~ (routine), ? (need to think). This becomes your running order.</li>
+      <li><b>Spot the method for every "perform a test / construct a CI" part</b> using the decision tree — write the statistic name next to it so you don't re-derive under pressure.</li>
+      <li><b>Locate the formulas</b> you'll need on the sheet (note the numbers, e.g. "#65 pooled CI", "#77 χ²") and the right table (t vs χ² vs F).</li>
+      <li><b>Start with your strongest full question</b> when writing begins — bank marks and confidence early.</li>
+    </ol>
+  </div>
+
+  <h3>Mark-per-minute budgeting</h3>
+  <p><b>80 marks in 120 minutes = exactly 1.5 min per mark.</b> There is no slack built into that, so aim for
+  <b>~1.4 min/mark</b> while working and bank the difference as a checking buffer. Post a marks-to-minutes
+  budget in your head at the start of each question:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Question worth…</th><th>Target time</th><th>Hard stop (move on)</th></tr></thead>
+    <tbody>
+      <tr><td>10 marks</td><td>14 min</td><td>17 min</td></tr>
+      <tr><td>12 marks</td><td>17 min</td><td>20 min</td></tr>
+      <tr><td>16 marks</td><td>22 min</td><td>26 min</td></tr>
+      <tr><td>18 marks</td><td>25 min</td><td>29 min</td></tr>
+      <tr><td>20 marks</td><td>28 min</td><td>32 min</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip">If you hit a part's hard stop, <b>write down the method and move on</b> — an examiner gives method
+  marks even without the final number. A stalled 2-mark part is not worth a rushed 7-mark part elsewhere.</div>
+
+  <h3>"Show your working" conventions</h3>
+  <div class="method">
     <ul>
-      <li><b>$\forall n\,\exists r$</b> = "for every $n$ there's an $r$" — $r$ may <b>depend on</b> $n$. You're given $n$ first, then you pick $r$. Argue TRUE by giving a <b>formula for $r$ in terms of $n$</b>.</li>
-      <li><b>$\exists r\,\forall n$</b> = "one single $r$ works for <b>all</b> $n$ at once." Much stronger. Argue TRUE by naming one fixed $r$; argue FALSE by showing any $r$ fails for some $n$.</li>
+      <li><b>State the formula before numbers.</b> Write \(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\) then substitute — that line alone earns method marks.</li>
+      <li><b>Define every symbol you introduce.</b> "\(\mu_1\) = true mean protein of 100g sheep pâté" — the exam explicitly asks you to "explain notation."</li>
+      <li><b>State the distribution &amp; df</b> of your test statistic (\(\sim t_{10}\), \(\sim F_{2,87}\), \(\sim\chi^2_2\)) — required and easy marks.</li>
+      <li><b>Quote the table value you used</b> (e.g. "\(t_{10,0.975}=2.23\)", "\(\chi^2_{2,0.95}=5.99\)").</li>
+      <li><b>Every test ends with a decision AND a context sentence.</b> Two separate things — see below.</li>
     </ul>
-    To prove a $\forall$ statement <b>false</b>: one counterexample. To prove an $\exists$ <b>true</b>: one witness.
   </div>
-  <div class="tip">2025 Q1(a) — $\forall n\in\mathbb Z,\exists r\in\mathbb R$ s.t. $n=\lfloor r\rfloor$ is <b>TRUE</b> (given $n$, pick $r=n$). The swapped one $\exists r\,\forall n$ is <b>FALSE</b> (one fixed $r$ can't floor to every integer). The "$\forall\exists$" version is the true one.</div>
 
-  <h3>Part (b): Prove an argument is valid (cite rules of inference)</h3>
-  <div class="when">you're given numbered premises and a conclusion ($\therefore$). The rules are <b>on your formula sheet</b> — just cite them.</div>
-  <div class="method">
-    <ol>
-      <li>List each premise as a numbered line.</li>
-      <li>Look for instant combos: an OR + a NOT-of-one-side → <b>Elimination</b>; an implication + its antecedent → <b>Modus Ponens</b>; implication + negated consequent → <b>Modus Tollens</b>; two implications chaining → <b>Transitivity</b>.</li>
-      <li><b>Every new line cites the line numbers used and the rule name.</b></li>
-      <li>Build toward the conclusion; last line = conclusion.</li>
-    </ol>
+  <h3>The 3-significant-figure rule</h3>
+  <div class="trap">Instruction on every paper: <em>"Give at least 3 significant figures."</em> This governs <b>reported</b>
+  answers, not intermediate steps. <b>Keep full precision on your calculator through the whole calculation</b>
+  and round only the final number. Rounding \(S_p\) or a test statistic early and carrying it forward is a
+  guaranteed accuracy-mark loss. Where a part says "to two significant figures" (e.g. report the t-statistic),
+  obey <em>that</em> part's instruction for its reported value only.</div>
+
+  <h3>What a full-marks "conclusion in context" looks like</h3>
+  <p>Almost every inference part ends with "conclusion in context." Full marks = <b>two sentences</b>: the
+  statistical decision, then the plain-English meaning in the story's own words.</p>
+  <div class="conc">
+    <b>Statistical:</b> "Since \(P = 0.003 \lt 0.05\), we reject \(H_0\)." <br>
+    <b>In context:</b> "There is strong evidence that the mean plaque-score difference is not the same across the
+    three toothpastes." <span class="fs">(2023 Q5 style)</span>
   </div>
-  <details><summary>Worked (2025 Q1b): premises $a\to(b\lor c)$, $b\to d$, ${\sim}b\to{\sim}c$, $a$; prove $d$</summary>
-  <div class="mono">1. a → (b ∨ c)      premise
-2. b → d            premise
-3. ~b → ~c          premise
-4. a                premise
-5. b ∨ c            1,4  Modus Ponens
-6. c → b            3, Contrapositive (≡ of premise 3)
-7. b ∨ b            5, using c→b on the c case (division into cases) → b
-   [cleaner:] from 5 (b∨c) and 3 (~b→~c):
-   suppose ~b; then ~c (MT-style via 3), contradicting b∨c ⇒ b must hold
-8. b                division into cases / elimination
-9. d                2,8  Modus Ponens     ∴ valid</div>
-  <span class="muted">Key insight: premise 3 (${\sim}b\to{\sim}c$) is equivalent to $c\to b$, so either way you land on $b$, then Modus Ponens with premise 2 gives $d$.</span>
-  </details>
-  <div class="trap">Two famous INVALID forms — never use them: <b>affirming the consequent</b> ($p\to q$, $q$, $\therefore p$) and <b>denying the antecedent</b> ($p\to q$, ${\sim}p$, $\therefore{\sim}q$). An uncited line earns nothing.</div>
+  <div class="conc">
+    <b>From a CI:</b> "We are 95% confident the true mean difference in protein content between 100g sheep and
+    goat pâté lies between <b>1.28 g</b> and <b>1.72 g</b>. As the interval is entirely above 0, sheep pâté has
+    significantly more protein on average." <span class="fs">(2023 Q4(b), verified.)</span>
+  </div>
+  <div class="trap">Losing the context mark is the most common avoidable slip. "Reject \(H_0\)" alone is <b>half</b> the
+  conclusion — you must translate it back into pâté / blood pressure / plaque / tree-age language, using the
+  units and the direction of the effect.</div>
 </section>
 
-<!-- Q2 NUMBER THEORY -->
-<section id="q2">
-  <h2>Q2 · Number Theory <span class="pill">11 marks</span></h2>
+<!-- ============ QUESTION → CHAPTER PATTERN ============ -->
+<section id="pattern">
+  <h2>How the 5 questions map to chapters</h2>
+  <p>Across the 2023, 2024 and 2025 papers the structure is <b>strikingly stable</b>. Learn the map — it tells
+  you what's coming before you turn the page. (2023 ran 6 questions; from 2024 the paper settled to 5, which is
+  the format for 2026.)</p>
 
-  <h3>(a),(b): Divisibility proofs — "if $n$ odd then $4\mid(n^2-1)$"</h3>
-  <div class="when">"prove $d \mid (\text{expression})$" or "prove ... is divisible by ...". $d\mid a$ <b>means</b> $a=d\cdot k$ for an integer $k$.</div>
-  <div class="method">
-    <ol>
-      <li>Turn the hypothesis into an equation: <b>$n$ odd → write $n=2k+1$</b> (even → $n=2k$).</li>
-      <li>Substitute and expand the expression.</li>
-      <li><b>Factor out the divisor</b> so it reads $d\times(\text{integer})$.</li>
-      <li>State the leftover is an integer → divisibility holds by definition.</li>
-    </ol>
-  </div>
-  <details><summary>Worked: $n$ odd ⇒ $4\mid(n^2-1)$, and the stronger $8\mid(n^2-1)$</summary>
-  <p>$n=2k+1$: $n^2-1=(2k+1)^2-1=4k^2+4k=4(k^2+k)=4k(k+1)$.</p>
-  <p>So $4\mid(n^2-1)$. For <b>8</b>: $k(k+1)$ is a product of two consecutive integers, so one is even ⇒ $k(k+1)$ is even ⇒ $4k(k+1)$ is divisible by $8$. ∎</p>
-  <span class="muted">Alternative: $n^2-1=(n-1)(n+1)$; $n$ odd ⇒ both factors even ⇒ product divisible by 4 (and one of two consecutive evens is a multiple of 4 ⇒ by 8).</span>
-  </details>
-
-  <h3>(c): Euclidean algorithm for $\gcd$</h3>
-  <div class="when">"using the Euclidean algorithm, compute $\gcd(a,b)$."</div>
-  <div class="method">Repeatedly divide: $a=bq+r$. Then shift: old $b$ becomes new $a$, remainder $r$ becomes new $b$. Stop at remainder 0. <b>The last nonzero remainder is the gcd.</b></div>
-  <details><summary>Worked: $\gcd(192,75)$</summary>
-  <div class="mono">192 = 75·2 + 42
- 75 = 42·1 + 33
- 42 = 33·1 +  9
- 33 =  9·3 +  6
-  9 =  6·1 +  3
-  6 =  3·2 +  0   ← stop
-gcd(192,75) = 3   (last nonzero remainder)</div>
-  </details>
-
-  <h3>(d): lcm from gcd</h3>
-  <div class="when">"using your answer to (c), compute $\operatorname{lcm}$."</div>
-  <div class="method">$\gcd(a,b)\times\operatorname{lcm}(a,b)=a\times b$, so $\operatorname{lcm}=\dfrac{a\times b}{\gcd}$.</div>
-  <div class="tip">2025: $\operatorname{lcm}(192,75)=\dfrac{192\times75}{3}=\dfrac{14400}{3}=4800$.</div>
-  <div class="trap">The gcd is the <b>last nonzero</b> remainder, not the 0. Keep every remainder in $0\le r<\text{divisor}$.</div>
-</section>
-
-<!-- Q3 INDUCTION / MOD -->
-<section id="q3">
-  <h2>Q3 · Induction / Modular Arithmetic <span class="pill">5 marks</span></h2>
-  <div class="when">"prove for all $n\in\mathbb N$, [expression with a power like $7^n$] $\equiv 0\pmod m$" — i.e. prove $m$ divides it for every $n$.</div>
-  <div class="method"><b>Induction (safest when there's a $\,7^n$ term):</b>
-    <ol>
-      <li><b>Base case</b> $n=1$: plug in, show it's $\equiv0\pmod m$.</li>
-      <li><b>Hypothesis:</b> assume true for $n=k$, i.e. $\text{expr}(k)=m\cdot M$ for some integer $M$.</li>
-      <li><b>Step:</b> write $\text{expr}(k{+}1)$, <b>peel off one factor</b> of the base ($7^{k+1}=7\cdot7^k$), then <b>substitute the hypothesis</b> ($7^k=mM-\dots$) and simplify to $m\times(\text{integer})$.</li>
-    </ol>
-  </div>
-  <details><summary>Worked: $7^n+3n-1\equiv0\pmod 9$ for all $n\in\mathbb N$</summary>
-  <div class="mono">Base n=1:  7+3−1 = 9 ≡ 0 (mod 9)  ✓
-Assume:    7^k + 3k − 1 = 9M   ⇒  7^k = 9M − 3k + 1
-Step n=k+1:
-  7^(k+1) + 3(k+1) − 1
-  = 7·7^k + 3k + 2
-  = 7(9M − 3k + 1) + 3k + 2
-  = 63M − 21k + 7 + 3k + 2
-  = 63M − 18k + 9
-  = 9(7M − 2k + 1)        ← 9 × integer  ✓
-So it holds for k+1. By induction, true for all n. ∎</div>
-  </details>
-  <div class="trap">In the step you MUST use the hypothesis to rewrite $7^k$ — don't just restate the goal. The move is always "peel the base factor, substitute, factor out $m$."</div>
-</section>
-
-<!-- Q4 FUNCTIONS -->
-<section id="q4">
-  <h2>Q4 · Functions <span class="pill">10 marks</span></h2>
-  <p class="muted">2025 used $f:\mathbb R\times\mathbb R\to\mathbb Z$, $f(x,y)=\lfloor xy\rfloor$.</p>
-
-  <div class="grid2">
-    <div class="card"><h4>Image of a set</h4>
-      <div class="when">"what is the image of $A$?"</div>
-      Push the set through $f$: compute the outputs, collect them. Track min/max (check turning points, not just endpoints).
-      <div class="tip">2025 (a): image of $[-1,1]\times[-2,2]$. $xy$ ranges over $[-2,2]$, so $\lfloor xy\rfloor\in\{-2,-1,0,1,2\}$.</div>
-    </div>
-    <div class="card"><h4>One-to-one (injective)?</h4>
-      <div class="when">"is $f$ one-to-one?"</div>
-      <b>Prove:</b> assume $f(a)=f(b)$, derive $a=b$. <b>Disprove:</b> two <i>different</i> inputs, same output.
-      <div class="tip">2025 (b): NOT 1-1. $f(1,2)=\lfloor2\rfloor=2=f(2,1)$ but $(1,2)\neq(2,1)$.</div>
-    </div>
-    <div class="card"><h4>Onto (surjective)?</h4>
-      <div class="when">"is $f$ onto?"</div>
-      <b>Prove:</b> take arbitrary $y$ in codomain, find an $x$ with $f(x)=y$ (and check $x$ is in the domain). <b>Disprove:</b> name a $y$ nothing maps to.
-      <div class="tip">2025 (c): onto $\mathbb Z$? YES — for any integer $n$, take $(x,y)=(n,1)$: $\lfloor n\cdot1\rfloor=n$.</div>
-    </div>
-    <div class="card"><h4>Preimage size</h4>
-      <div class="when">"is $f^{-1}(v)$ finite / countably infinite / uncountable?"</div>
-      $f^{-1}(v)=\{x:\ f(x)=v\}$ — find all inputs giving $v$. A whole interval/region of reals ⇒ <b>uncountable</b>.
-      <div class="tip">2025 (d): $f^{-1}(0)=\{(x,y):0\le xy<1\}$ — a 2-D region of reals ⇒ <b>uncountable</b>.</div>
-    </div>
-  </div>
-  <div class="trap">To prove 1-1 you must START from $f(a)=f(b)$ and DERIVE $a=b$ — showing equal inputs give equal outputs proves nothing. "Onto" depends on the <b>codomain</b> stated.</div>
-</section>
-
-<!-- Q5 SETS -->
-<section id="q5">
-  <h2>Q5 · Sets &amp; Cardinality <span class="pill">13 marks</span></h2>
-
-  <h3>(a): Power-set / product counting</h3>
-  <div class="when">"$|\mathcal P(\dots)|$" or "$|A\times B|$".</div>
-  <div class="method">$|A\times B|=|A|\cdot|B|$, and $|\mathcal P(A)|=2^{|A|}$. Combine: $|\mathcal P(S\times T)|=2^{|S|\cdot|T|}$.</div>
-  <div class="tip">2025 (a): $|S|=3,|T|=2$ ⇒ $|S\times T|=6$ ⇒ $|\mathcal P(S\times T)|=2^6=\mathbf{64}$.</div>
-
-  <h3>(b): Infinite union</h3>
-  <div class="when">"evaluate $\bigcup_{i=1}^\infty \dots$".</div>
-  <div class="method">Ask: which elements are in <b>at least one</b> set? Chase a general element; justify by inclusion both ways.</div>
-  <details><summary>Worked (2025 b): $\bigcup_{i=1}^\infty\{x\in\mathbb N: x\equiv1\pmod{p_i}\}$</summary>
-  <p>$x\equiv1\pmod{p_i}$ means $p_i\mid(x-1)$. The union = all $x\in\mathbb N$ such that <i>some</i> prime divides $x-1$. Every $x\ge2$ has $x-1\ge1$; if $x-1\ge2$ it has a prime factor (so $x$ is included), and $x=2$ gives $x-1=1$... but $x\equiv1\pmod{p_1{=}2}$ means $2\mid(x-1)$, true for all odd $x$. Working it through, the union is <b>all of $\mathbb N$ except where $x-1$ has no prime factor</b> — i.e. except $x=1$ (since $x-1=0$, and $0\equiv1$? no). Net: the union is $\mathbb N\setminus\{1\}$ — every natural $\ge2$. <span class="muted">(Justify by: for $x\ge2$, pick any prime $p_i\mid(x-1)$ when $x>2$, and $p_1=2$ catches the odd ones; show $x=1$ is excluded since $1\equiv1\pmod{p_i}$ would need $p_i\mid0$ — true actually, so check the exact set definition carefully on the day.)</span></p>
-  </details>
-
-  <h3>(c): Function with uncountable domain/codomain, countable range</h3>
-  <div class="when">"give an example of a function whose domain &amp; codomain are uncountable but range is countably infinite."</div>
-  <div class="tip">Answer: $f:\mathbb R\to\mathbb R$, $f(x)=\lfloor x\rfloor$. Domain $\mathbb R$ (uncountable), codomain $\mathbb R$ (uncountable), range $=\mathbb Z$ (countably infinite). State domain &amp; codomain explicitly.</div>
-
-  <h3>(d): Schröder-Bernstein</h3>
-  <div class="when">"use Schröder-Bernstein to prove $|A|=|B|$."</div>
-  <div class="method">Find an injection $A\to B$ AND an injection $B\to A$. That's it — no bijection needed. (S-B is on your formula sheet.)</div>
-  <details><summary>Worked (2025 d): $|\mathbb R\cup\{\infty\}|=|\mathbb R|$</summary>
-  <p><b>$\mathbb R\to\mathbb R\cup\{\infty\}$:</b> identity $g(x)=x$ — injective. ⇒ $|\mathbb R|\le|\mathbb R\cup\{\infty\}|$.</p>
-  <p><b>$\mathbb R\cup\{\infty\}\to\mathbb R$:</b> "make room" (Hilbert hotel): send $\infty\mapsto0$; each non-negative integer $n\mapsto n+1$; everything else $\mapsto$ itself. Injective. ⇒ $|\mathbb R\cup\{\infty\}|\le|\mathbb R|$.</p>
-  <p>Both injections ⇒ by Schröder-Bernstein, $|\mathbb R\cup\{\infty\}|=|\mathbb R|$. ∎</p>
-  </details>
-  <div class="trap">One injection only gives $\le$. You need <b>both directions</b> for equality, and each must be shown injective.</div>
-
-  <h4>Countable cheat-sheet</h4>
+  <div class="tablewrap">
   <table>
-    <tr><th>Countable (listable)</th><th>Uncountable</th></tr>
-    <tr><td>$\mathbb N,\mathbb Z,\mathbb Q$, any subset of these; $\mathbb N\times\mathbb N$; finite strings; finite products &amp; countable unions of countable sets</td><td>$\mathbb R$, any interval of reals, $\mathcal P(\mathbb N)$, infinite binary sequences $\{f:\mathbb N\to\{0,1\}\}$</td></tr>
+    <thead><tr><th>Slot</th><th>Reliable theme</th><th>2023</th><th>2024</th><th>2025</th><th>Study</th></tr></thead>
+    <tbody>
+      <tr><td><b>Q1</b></td><td>Probability / a single random variable — pdf → \(k\), \(E\), Var, CDF, median/mode</td><td>Q1 [15] continuous pdf \(kx^3\)</td><td>Q1 [12] joint pmf (tanks)</td><td>Q1 [10] continuous pdf \(cx^a\)</td><td><a href="ch01-02-probability.html">Ch1–2</a>/<a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><b>Q2</b></td><td>Estimator theory or joint distributions — unbiasedness, Var, CLT, covariance/correlation</td><td>Q2 [10] estimator \(\hat\theta\)</td><td>Q2 [12] estimator from cdf</td><td>Q2 [16] joint table + χ²</td><td><a href="ch03-multiple-rvs.html">Ch3</a>/<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><b>Q3</b></td><td>Two-sample / paired inference — CI + hypothesis test (+ a claim, + assumptions)</td><td>Q4 [18] pooled-t, pâté</td><td>Q3 [20] paired-t, BP</td><td>Q3 [19] two-sample, diet</td><td><a href="ch06-estimation-cis.html">Ch6</a>+<a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><b>Q4</b></td><td>ANOVA — complete the table, F-test, assumptions, post-hoc / R²</td><td>Q5 [18] one-way, toothpaste</td><td>Q4 [18] one-way, pollution</td><td>Q4 [17] two-way, plaque</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><b>Q5</b></td><td>Regression — read <code>lm()</code>, prediction/residual, CI for slope, diagnostics</td><td>Q6 [15] tree age~diameter</td><td>Q5 [18] frog call~temp</td><td>Q5 [18] Old Faithful</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><b>+</b></td><td><b>χ² association</b> is not its own question — it rides inside another (usually Q4/Q5/Q2) as a 5–6 mark part; and a short <b>study-design / ethics MCQ</b> can appear (2023 Q3).</td><td>Q5(e) χ², Q3 MCQ</td><td>Q5(e) χ²</td><td>Q2(d) χ²</td><td><a href="ch11-chi-squared.html">Ch11</a>/<a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+    </tbody>
   </table>
-</section>
-
-<!-- Q6 RELATIONS -->
-<section id="q6">
-  <h2>Q6 · Relations <span class="pill">8 marks</span></h2>
-  <p class="muted">2025: $a\,\rho\,b \iff b=a\cdot2^i$ for some integer $i\ge0$ (on $\mathbb N$).</p>
-  <div class="when">"is $\rho$ reflexive / symmetric / transitive / antisymmetric? Explain." — four mini-questions, 2 marks each.</div>
-  <table>
-    <tr><th>Property</th><th>Test</th><th>To prove</th><th>To disprove</th></tr>
-    <tr><td><b>Reflexive</b></td><td>$a\,\rho\,a$ for all $a$?</td><td>show the rule holds at $b=a$</td><td>one $a$ failing</td></tr>
-    <tr><td><b>Symmetric</b></td><td>$a\rho b\Rightarrow b\rho a$?</td><td>assume $a\rho b$, derive $b\rho a$</td><td>one pair: $a\rho b$ but not $b\rho a$</td></tr>
-    <tr><td><b>Transitive</b></td><td>$a\rho b\ \&\ b\rho c\Rightarrow a\rho c$?</td><td>assume both, chain them</td><td>$a,b,c$ breaking it</td></tr>
-    <tr><td><b>Antisymmetric</b></td><td>$a\rho b\ \&\ b\rho a\Rightarrow a=b$?</td><td>assume both, derive $a=b$</td><td>$a\ne b$ with both holding</td></tr>
-  </table>
-  <details><summary>Worked: the 2025 relation $b=a\cdot2^i$, $i\ge0$</summary>
-  <p><b>Reflexive ✓:</b> $a=a\cdot2^0$, so take $i=0$. Holds for all $a$.</p>
-  <p><b>Symmetric ✗:</b> $1\rho2$ (since $2=1\cdot2^1$) but NOT $2\rho1$ (would need $1=2\cdot2^i$, impossible for $i\ge0$). Counterexample.</p>
-  <p><b>Transitive ✓:</b> $b=a2^i$, $c=b2^j$ ⇒ $c=a2^{i+j}$, and $i+j\ge0$. So $a\rho c$.</p>
-  <p><b>Antisymmetric ✓:</b> $b=a2^i$ and $a=b2^j$ ⇒ $a=a2^{i+j}$ ⇒ $i+j=0$ ⇒ $i=j=0$ ⇒ $a=b$.</p>
-  <span class="muted">(Reflexive + antisymmetric + transitive ⇒ this is a partial order.)</span>
-  </details>
-  <div class="trap">Antisymmetric is only tested where BOTH $a\rho b$ and $b\rho a$ hold; if that never happens, it's <b>vacuously</b> antisymmetric (still counts as YES). Symmetric and antisymmetric are NOT opposites.</div>
-</section>
-
-<!-- Q7 GROUPS -->
-<section id="q7">
-  <h2>Q7 · Groups <span class="pill">10 marks</span></h2>
-
-  <h4>The 4 group axioms (your checklist)</h4>
-  <div class="method"><b>C-A-I-I:</b> <b>C</b>losure (stays in set) · <b>A</b>ssociativity · <b>I</b>dentity $e$ exists · <b>I</b>nverses exist (in the set). Abelian = also commutative (bonus, not required).</div>
-
-  <h3>(a): Cayley table + is it cyclic?</h3>
-  <div class="when">"write out the Cayley table for $(\mathbb Z_5-\{0\},\times)$. Is it cyclic?"</div>
-  <div class="method">Grid of (row)×(col) mod 5. Then <b>cyclic?</b> = does one element's powers hit everything? Compute powers of a candidate until you return to the identity; if you get all elements, it's a generator ⇒ cyclic.</div>
-  <details><summary>Worked: Cayley table $\{1,2,3,4\}$ under $\times$ mod 5</summary>
-  <div class="mono">×  | 1  2  3  4
----+------------
-1  | 1  2  3  4
-2  | 2  4  1  3
-3  | 3  1  4  2
-4  | 4  3  2  1
-
-Identity = 1. Inverses: 1→1, 2→3, 3→2, 4→4 (all exist) ⇒ group.
-Cyclic? powers of 2:  2¹=2, 2²=4, 2³=8≡3, 2⁴=16≡1  → {2,4,3,1} = everything.
-So 2 is a generator ⇒ YES, cyclic. (Generators: 2 and 3.)</div>
-  </details>
-  <div class="tip">A group's Cayley table is a <b>Latin square</b>: every element appears once per row and once per column. Quick sanity check.</div>
-
-  <h3>(b): Is it a group? / Are two groups isomorphic?</h3>
-  <div class="when">"is $(G-\{0\},\times)$ a group?" or "is $(G,+)$ isomorphic to $(\mathbb Q,+)$?"</div>
-  <div class="method">
-    <b>Is it a group?</b> Check the 4 axioms; to say NO, find ONE that fails (usually <b>missing inverses</b> — the inverse falls outside the set).<br>
-    <b>Isomorphic?</b> To prove NO, name a <b>structural property</b> one has and the other lacks (cyclic? abelian? countable? element of order 2? is every element "halvable"/a square?). To prove YES, give a map and check it's operation-preserving + injective + surjective.
   </div>
-  <details><summary>Worked (2025 b): $(G-\{0\},\times)$ for $G=\{a+bi:a,b\in\mathbb Z\}$ — a group?</summary>
-  <p><b>NO.</b> It's closed and associative with identity $1$, but most elements have <b>no inverse in $G$</b>: e.g. $2$'s inverse would be $\tfrac12\notin G$ (Gaussian integers have inverses only for $\pm1,\pm i$). Missing inverses ⇒ not a group.</p>
-  </details>
-  <details><summary>Worked (2025 b): is $(G,+)\cong(\mathbb Q,+)$?</summary>
-  <p><b>NO.</b> Use a structural difference. In $(\mathbb Q,+)$ every element is "divisible": for any $q$ and any $n$ there's $x$ with $nx=q$ (namely $q/n$). In $(G,+)=(\mathbb Z[i],+)$ this fails: $1+0i$ cannot be halved within $G$ (no Gaussian integer $x$ with $x+x=1$). A property true in one and false in the other ⇒ not isomorphic. <span class="muted">(Also valid: $\mathbb Z[i]\cong\mathbb Z^2$ is "2-generated"/lattice-like, $\mathbb Q$ is not.)</span></p>
-  </details>
-  <div class="trap">"I can't find a bijection" is NOT a proof of non-isomorphism. You must point to a concrete structural invariant that differs. And the identity isn't always 0 or 1 — solve $x*e=x$ for it.</div>
-</section>
 
-<!-- Q8 COUNTING / GRAPHS -->
-<section id="q8">
-  <h2>Q8 · Counting &amp; Graphs <span class="pill">16 marks — the big one</span></h2>
+  <div class="tip">Translation of the pattern into a study plan: <b>Q1–Q2 are pure technique</b> (probability &amp;
+  estimators) — drill them until they're automatic to bank ~25 marks fast. <b>Q3–Q5 are the applied core</b>
+  (two-sample inference, ANOVA, regression) worth ~55 marks and rewarding clean method + context sentences.
+  Ch 11 (χ²) is small but almost <em>guaranteed</em> somewhere — never skip it.</div>
 
-  <h3>(a),(b): Permutations with adjacency</h3>
-  <div class="when">"arrange ... so that $X$ is adjacent to $Y$" (and maybe "but not adjacent to $Z$").</div>
-  <div class="method">
-    <b>Adjacent → glue into a block:</b> treat the pair as one object ⇒ $(n{-}1)$ objects ⇒ $(n{-}1)!$, then $\times2$ for the block's internal order ($XY$ or $YX$).<br>
-    <b>"Not adjacent" → subtract:</b> (total with first constraint) − (those where the forbidden adjacency also happens).
+  <div class="card q">
+    <h3 style="margin-top:0">Surprises worth knowing (from the papers themselves)</h3>
+    <ul style="margin:0">
+      <li><b>The "claim" twist.</b> After a standard test, a part often bolts on a claim with a non-zero null —
+      "at least 2g more" (2023 Q4c), "3mmHg larger" (2024 Q3c). You must shift the null to \(\mu_1-\mu_2=2\)
+      (or 3) and go <b>one-sided</b>. Easy to miss.</li>
+      <li><b>CI for a standard deviation.</b> 2024 Q3(d) asked for a CI for \(\sigma\) — that's the χ² interval
+      (#63), not a t-interval. A different table entirely.</li>
+      <li><b>Conceptual, no-calculation parts.</b> 2024 Q4(e) "why multiple t-tests is flawed", 2025 Q5(e) "how
+      CI vs prediction-interval width behaves as \(n\to\infty\)". Marks for <em>understanding</em>, not arithmetic.</li>
+      <li><b>Two-way ANOVA arrived in 2025</b> (Q4, mouth-rinse × flossing, with an interaction row and interaction
+      plots). Expect it to stay — know how to fill a two-way table and read an interaction plot.</li>
+      <li><b>Everything is applied.</b> Sheep pâté, blood pressure, pollution, geysers, tree frogs — the context
+      changes but the method set is fixed. Don't be thrown by the story; extract \(n,\bar x,s\) and route it.</li>
+    </ul>
   </div>
-  <details><summary>Worked (2025): 6 letters A–F, A adjacent to C; then A adj C but NOT adj B</summary>
-  <p><b>(a) A adjacent C:</b> glue [AC] → 5 objects → $5!\times2=240$.</p>
-  <p><b>(b) A adj C but not adj B:</b> subtract the cases where A is also adjacent to B. If A touches both, A is the middle of a trio B-A-C or C-A-B (2 orders): glue trio → 4 objects → $4!\times2=48$. Answer $=240-48=\mathbf{192}$.</p>
-  </details>
-  <div class="trap">In the "adjacent to both" step, A is the <b>middle</b> — only 2 orders (B-A-C, C-A-B), not $3!$. Forgetting the $\times2$ on a free pair is the other classic slip.</div>
-
-  <h3>(c): Handshake lemma</h3>
-  <div class="when">"find the degree of the remaining vertex" / "how many edges" / "does such a graph exist?"</div>
-  <div class="method"><b>Sum of all degrees $=2\times$(number of edges)</b> — always even. Solve for the unknown.</div>
-  <div class="tip">2025 (c): 11 edges, 7 vertices, four of degree 3, two of degree 4. Total degree $=2\times11=22$; known $=4(3)+2(4)=20$; last vertex $=22-20=\mathbf2$.</div>
-  <div class="trap">If a degree sum is odd, no such graph exists. In a <b>simple</b> graph also need max degree $\le n-1$. A loop adds 2 to a degree.</div>
-
-  <h3>(d),(e): Counting walks of length $k$ — the matrix method</h3>
-  <div class="when">"how many walks from $A$ to $B$ following exactly $k$ edges?" (walks = edges, <b>repeats allowed</b>, can backtrack).</div>
-  <div class="method">
-    <b>Number of walks of length $k$ from $A$ to $B$ = the $(A,B)$ entry of $M^k$</b>, where $M$ is the adjacency matrix.<br>
-    Hand method: label each vertex with a running count. Start vertex = 1 (length 0). To get counts after one more step, each vertex's new value = <b>sum of its neighbours' current values</b>. Repeat $k$ times; read off $B$.
-  </div>
-  <details><summary>Worked (2025 d): $3\times3$ grid of dots, walks of length 4 from corner A to opposite corner B</summary>
-  <p>Label A=1, propagate "new value = sum of neighbours" four times across the grid. The corner B ends at <b>6</b>. <span class="muted">(Equivalently the $(A,B)$ entry of $M^4$ = 6. Because the grid is undirected, walks may go back and forth — this is why the matrix/propagation method is needed, not just monotone lattice paths.)</span></p>
-  </details>
-  <details><summary>Worked (2025 e): $5\times5$ grid of dots, walks of length 8 corner to corner</summary>
-  <p>Same propagation, 8 steps: the full $5\times5$ grid gives <b>70</b> walks of length 8 from A to B. For part (ii) (the grid with an edge/vertex modified in the figure), rebuild $M$ with that change and recount — same method, different $M$.</p>
-  </details>
-  <div class="trap">Walks allow repeated edges/vertices — do NOT subtract for revisits (that would be a "path" or "trail"). Add only from neighbours actually connected by an edge.</div>
-
-  <h4>Walk / trail / path / Euler quick-ref</h4>
-  <table>
-    <tr><td><b>Walk</b></td><td>edges, repeats allowed</td><td><b>Trail</b></td><td>no repeated edge</td></tr>
-    <tr><td><b>Path</b></td><td>no repeated vertex</td><td><b>Euler circuit</b></td><td>connected &amp; all degrees even</td></tr>
-  </table>
 </section>
 
-<!-- FLASHCARDS -->
-<section id="flash">
-  <h2>🃏 Trigger Flashcards</h2>
-  <p class="muted">Click to flip. Front = what the question looks like; back = the move.</p>
-  <div class="grid2" id="cards"></div>
-</section>
+<p class="fs" style="text-align:center;margin-top:40px">STAT1301 Exam Command Hub · built from the 2023–2025 papers &amp; the provided formula sheet ·
+verify PRE-LECTURE chapters (8–11) against 2026 lectures.</p>
 
-<footer>
-  <p>MATH1081 7-hour pack · pair with the <a href="worked_2025.html">fully-worked 2025 exam solutions</a>.</p>
-  <p>Built from the actual S1 2025 paper + your lecture &amp; workshop solutions. Numerical answers verified by computation. Go get it. 🎯</p>
-</footer>
 </main>
-
-<script>
-const cards=[
- ["Statement has ∀n ∃r","r may depend on n — give a formula for r in terms of n"],
- ["Statement has ∃r ∀n","ONE fixed r must work for all n — much stronger"],
- ["Prove a ∀ statement false","one counterexample"],
- ["Prove an ∃ statement true","exhibit one witness"],
- ["Premises + conclusion, prove valid","formal proof, cite a rule (MP/MT/elim/transitivity) each line"],
- ["'prove 4 | (n²−1) for n odd'","write n=2k+1, expand, factor out the divisor"],
- ["'compute gcd(a,b)'","Euclidean: a=bq+r, shift down; last nonzero remainder"],
- ["'compute lcm'","gcd × lcm = a×b ⇒ lcm = ab/gcd"],
- ["'prove 7ⁿ+3n−1 ≡ 0 mod 9'","induction: peel 7·7^k, sub hypothesis, factor out 9"],
- ["'is f one-to-one?'","assume f(a)=f(b) derive a=b; or 2 inputs same output"],
- ["'is f onto?'","take arbitrary y, find x mapping to it (check domain)"],
- ["'is preimage finite/countable/uncountable?'","interval/region of reals ⇒ uncountable"],
- ["'|P(S×T)| with |S|=3,|T|=2'","2^(3·2)=64"],
- ["'prove |A|=|B|'","Schröder-Bernstein: an injection EACH way"],
- ["function: uncountable dom/codom, countable range","f(x)=⌊x⌋ on ℝ→ℝ, range = ℤ"],
- ["check a relation's 4 properties","reflexive(b=a),symmetric,transitive,antisymmetric — prove or counterexample"],
- ["'is it a group?'","check C-A-I-I; to say NO find a missing inverse"],
- ["'is the group cyclic?'","take powers of an element till identity; hit all ⇒ generator"],
- ["'are two groups isomorphic?' NO","name a structural property one has, other lacks"],
- ["'arrange so X adjacent Y'","glue into block: (n−1)!×2"],
- ["'X adjacent Y but NOT Z'","(adj to Y) − (adj to Y AND Z); middle-element trio"],
- ["'degree of remaining vertex'","handshake: Σdeg = 2×edges"],
- ["'walks of length k from A to B'","(A,B) entry of Mᵏ; or label & propagate sums"],
- ["walk vs path vs trail","walk=repeats ok; trail=no repeat edge; path=no repeat vertex"],
-];
-const w=document.getElementById('cards');
-cards.forEach(([q,a])=>{const d=document.createElement('div');d.className='flash';
- d.innerHTML=`<div class="inner"><div class="q2">${q}</div><div class="a">${a}</div></div>`;
- d.querySelector('.inner').onclick=()=>d.classList.toggle('show');w.appendChild(d);});
-</script>
 </body>
 </html>

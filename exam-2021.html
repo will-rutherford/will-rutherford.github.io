@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Worked Exam: Semester 2, 2021</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  nav a.here{background:var(--accent);color:#032117;font-weight:700}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;color:var(--warn);font-weight:700;font-size:13px;background:rgba(251,191,36,.1);border:1px solid #5a4a1a;border-radius:6px;padding:1px 8px}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(14,165,233,.08);border:1px solid #1d3a4a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"🗣 CONCLUSION IN CONTEXT — ";color:var(--accent2);font-weight:700}
+  .ans{background:rgba(251,191,36,.12);border:1px solid #5a4a1a;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  .ans:before{content:"➤ ANSWER: ";color:var(--gold);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ reveal worked solution";color:var(--accent)}
+  details[open] summary:before{content:"▾ worked solution"}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .toolbar{text-align:center;margin:16px 0}
+  .toolbar button{background:var(--accent);color:#032117;border:none;padding:9px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 — Fully Worked Exam</h1>
+  <p><b>Semester Two Final Examination, 2021</b></p>
+  <p>90 marks · 5 questions · 120 min + 10 min planning · Casio FX82 + provided formula sheet &amp; tables</p>
+  <span class="badge gold">FORMAT NOTE</span>
+  <p style="max-width:640px;margin:8px auto 0;font-size:13px">This is a <b>90-mark</b> paper (the current exam is 80 marks). Structure is otherwise identical to today's format: 5 multi-part questions spanning distributions, joint RVs/CLT, two-sample inference, ANOVA and regression. Every question type here is still examinable.</p>
+  <p style="font-size:12.5px;color:var(--gold);margin-top:8px">Every numerical answer below verified with Python (scipy/sympy). Table look-ups shown as in-exam bracketing.</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="exam-2021.html" class="here">2021</a>
+  <a href="exam-2022.html">2022</a>
+  <a href="exam-2023.html">2023</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+</nav>
+<div class="toolbar"><button onclick="toggleAll()">👁 Toggle all solutions</button></div>
+<main>
+
+<!-- ============ Q1 ============ -->
+<section id="q1">
+<h2>Question 1 — Continuous random variable <span class="marks">18 marks</span></h2>
+<div class="card q">
+A continuous random variable $X$ has probability density function
+$$f(x)=\begin{cases} h, & 0\le x \lt 1,\\ h/2, & 1\le x\le 2,\\ 0,&\text{otherwise,}\end{cases}$$
+where $h$ is a positive real number.
+</div>
+
+<h3>(a) Determine the value of $h$. <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">A density must integrate to 1 over its support. "Determine the constant" → set $\int_{-\infty}^{\infty} f=1$ and solve.</div>
+The pdf is a step function, so the total area is two rectangles:
+$$\int_0^1 h\,dx+\int_1^2 \tfrac{h}{2}\,dx = h(1)+\tfrac{h}{2}(1)=\tfrac{3h}{2}=1.$$
+$$\Rightarrow\; h=\tfrac{2}{3}.$$
+<div class="ans">$h=\dfrac{2}{3}\approx 0.667$.</div>
+<div class="tip">Sanity check: $\tfrac23(1)+\tfrac13(1)=1$. Always confirm the area equals 1 before moving on — it is used in every later part.</div>
+</details>
+
+<h3>(b) Determine the cumulative distribution function $F(x)$. <span class="marks">5</span></h3>
+<details><summary></summary>
+<div class="when">"Determine the CDF" for a piecewise pdf → integrate the pdf piece-by-piece, $F(x)=\int_{-\infty}^x f(t)\,dt$, and carry forward the accumulated area across breakpoints.</div>
+For $x\lt 0$: $F(x)=0$.<br>
+For $0\le x\lt 1$: $\displaystyle F(x)=\int_0^x \tfrac23\,dt=\tfrac23 x$. (At $x=1$ this reaches $\tfrac23$.)<br>
+For $1\le x\le 2$: start from the accumulated $\tfrac23$, then add the second piece:
+$$F(x)=\tfrac23+\int_1^x \tfrac13\,dt=\tfrac23+\tfrac13(x-1).$$
+For $x\gt 2$: $F(x)=1$. Check: at $x=2$, $\tfrac23+\tfrac13(1)=1$. ✓
+<div class="method"><b>Final CDF</b>
+$$F(x)=\begin{cases}0,& x\lt 0\\[2pt] \tfrac23 x,& 0\le x\lt 1\\[2pt] \tfrac23+\tfrac13(x-1),& 1\le x\le 2\\[2pt] 1,& x\gt 2\end{cases}$$</div>
+<div class="trap">The single most common lost mark: forgetting to add the $\tfrac23$ carried from the first interval, giving $\tfrac13(x-1)$ alone. Then $F(2)=\tfrac13\ne 1$ — a dead giveaway. Always verify $F$ reaches 1 at the top of the support.</div>
+</details>
+
+<h3>(c) Determine the expectation of $X$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">"Expectation of a continuous RV" → $\mathbb E X=\int x f(x)\,dx$ (formula sheet #22), integrate over each piece.</div>
+$$\mathbb E X=\int_0^1 x\,h\,dx+\int_1^2 x\,\tfrac h2\,dx
+= h\left[\tfrac{x^2}{2}\right]_0^1+\tfrac h2\left[\tfrac{x^2}{2}\right]_1^2
+= h\cdot\tfrac12+\tfrac h2\cdot\tfrac32=\tfrac{5h}{4}.$$
+With $h=\tfrac23$: $\mathbb E X=\tfrac54\cdot\tfrac23=\tfrac{10}{12}=\tfrac{5}{6}$.
+<div class="ans">$\mathbb E X=\dfrac56\approx 0.833$.</div>
+</details>
+
+<h3>(d) Determine the standard deviation of $X$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">"Standard deviation" → get $\mathbb E X^2$, then $\operatorname{Var}(X)=\mathbb E X^2-(\mathbb E X)^2$ (formula #26a), then take the square root.</div>
+$$\mathbb E X^2=\int_0^1 x^2 h\,dx+\int_1^2 x^2\tfrac h2\,dx=h\cdot\tfrac13+\tfrac h2\cdot\tfrac{7}{3}=\tfrac{3h}{2}=\tfrac32\cdot\tfrac23=1.$$
+$$\operatorname{Var}(X)=1-\left(\tfrac56\right)^2=1-\tfrac{25}{36}=\tfrac{11}{36}\approx0.3056.$$
+$$\text{s.d.}(X)=\sqrt{\tfrac{11}{36}}=\tfrac{\sqrt{11}}{6}\approx 0.553.$$
+<div class="ans">$\operatorname{Var}(X)=\tfrac{11}{36}\approx0.306$, s.d. $\approx 0.553$.</div>
+<div class="trap">Do not report the variance when the question asks for the standard deviation — you lose the final mark. Take the square root, and keep $\ge 3$ sig figs.</div>
+</details>
+
+<h3>(e) Determine the inter-quartile range for $X$. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"IQR" → solve $F(x)=0.25$ for $Q_1$ and $F(x)=0.75$ for $Q_3$, then $\text{IQR}=Q_3-Q_1$. Use the CDF from (b) and pick the correct piece for each quartile.</div>
+$Q_1$: since $F$ reaches $\tfrac23\approx0.667$ only at $x=1$, the quartile $0.25$ lies in the first piece:
+$$\tfrac23 Q_1=0.25\;\Rightarrow\;Q_1=0.375.$$
+$Q_3$: $0.75\gt \tfrac23$, so $Q_3$ is in the second piece:
+$$\tfrac23+\tfrac13(Q_3-1)=0.75\;\Rightarrow\;\tfrac13(Q_3-1)=0.0833\;\Rightarrow\;Q_3=1.25.$$
+$$\text{IQR}=1.25-0.375=0.875.$$
+<div class="ans">$Q_1=0.375$, $Q_3=1.25$, $\text{IQR}=0.875$.</div>
+<div class="trap">Check which interval each quartile falls in first. Because $F(1)=\tfrac23$, any probability above $0.667$ (like $Q_3$) is in the second piece — plugging $0.75$ into $\tfrac23x$ would wrongly give $x=1.125$.</div>
+</details>
+
+<h3>(f) Derive $\operatorname{Var}(\overline X-\overline Y)$ for independent samples of sizes $m,n$ with common variance $\sigma^2$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">"Derive … including justification of key steps" → an algebra proof. Use independence (variance of a sum = sum of variances, #52) and the scaling rule $\operatorname{Var}(aX)=a^2\operatorname{Var}(X)$ (#26b).</div>
+<b>Step 1 — variance of one sample mean.</b> Since $X_1,\dots,X_m$ are independent, each with variance $\sigma^2$,
+$$\operatorname{Var}(\overline X)=\operatorname{Var}\!\Big(\tfrac1m\sum_{i=1}^m X_i\Big)=\tfrac1{m^2}\sum_{i=1}^m\operatorname{Var}(X_i)=\tfrac1{m^2}\,(m\sigma^2)=\tfrac{\sigma^2}{m}.$$
+Likewise $\operatorname{Var}(\overline Y)=\dfrac{\sigma^2}{n}$.<br>
+<b>Step 2 — combine.</b> $\overline X$ and $\overline Y$ use disjoint, independent samples, so $\operatorname{Cov}(\overline X,\overline Y)=0$ and
+$$\operatorname{Var}(\overline X-\overline Y)=\operatorname{Var}(\overline X)+(-1)^2\operatorname{Var}(\overline Y)=\frac{\sigma^2}{m}+\frac{\sigma^2}{n}.$$
+<div class="ans">$\operatorname{Var}(\overline X-\overline Y)=\sigma^2\!\left(\dfrac1m+\dfrac1n\right)$.</div>
+<div class="tip">Examiners want the <b>named justifications</b>: (i) independence lets variances add, (ii) the $\tfrac1{m^2}$ comes from the squared constant, (iii) the minus sign squares to $+1$. State each explicitly. This exact derivation reappears in 2022 Q2(a).</div>
+</details>
+</section>
+
+<!-- ============ Q2 ============ -->
+<section id="q2">
+<h2>Question 2 — Joint distribution &amp; CLT <span class="marks">21 marks</span></h2>
+<div class="card q">
+Shoppers at a Brisbane beach-clothing retailer. $X$ = number of days (0, 1 or 2) a shopper plans to visit a beach over the first weekend of December; $Y=1$ if they like to swim in the sea, $0$ otherwise. Joint pmf:
+<table>
+<tr><th>$Y \backslash X$</th><th>0</th><th>1</th><th>2</th></tr>
+<tr><th>0</th><td>0.42</td><td>0.175</td><td>0.105</td></tr>
+<tr><th>1</th><td>0.18</td><td>0.075</td><td>0.045</td></tr>
+</table>
+</div>
+
+<h3>(a) Marginal pmf of $X$. <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">"Marginal of $X$" → sum each column over $Y$ (formula #45 logic: $f_X(x)=\sum_y f(x,y)$).</div>
+$$P(X{=}0)=0.42+0.18=0.60,\quad P(X{=}1)=0.175+0.075=0.25,\quad P(X{=}2)=0.105+0.045=0.15.$$
+<div class="ans">$f_X:\ (0.60,\ 0.25,\ 0.15)$ for $X=0,1,2$. Sums to 1. ✓</div>
+</details>
+
+<h3>(b) Marginal pmf of $Y$. <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">"Marginal of $Y$" → sum each row over $X$.</div>
+$$P(Y{=}0)=0.42+0.175+0.105=0.70,\qquad P(Y{=}1)=0.18+0.075+0.045=0.30.$$
+<div class="ans">$f_Y:\ P(Y{=}0)=0.70,\ P(Y{=}1)=0.30$.</div>
+</details>
+
+<h3>(c) Expectation and standard deviation of $X$, and separately of $Y$. <span class="marks">5</span></h3>
+<details><summary></summary>
+<div class="when">Use the marginals from (a)/(b): $\mathbb E X=\sum x f_X(x)$, $\operatorname{Var}(X)=\mathbb E X^2-(\mathbb E X)^2$.</div>
+<b>$X$:</b> $\mathbb E X=0(0.6)+1(0.25)+2(0.15)=0.55$;
+$\mathbb E X^2=0+1(0.25)+4(0.15)=0.85$;
+$\operatorname{Var}(X)=0.85-0.55^2=0.5475$, s.d.$=\sqrt{0.5475}=0.740$.<br>
+<b>$Y$ (Bernoulli, $p=0.3$):</b> $\mathbb E Y=0.30$; $\operatorname{Var}(Y)=p(1-p)=0.3(0.7)=0.21$, s.d.$=\sqrt{0.21}=0.458$.
+<div class="ans">$\mathbb E X=0.550$, s.d.$(X)=0.740$; $\;\mathbb E Y=0.300$, s.d.$(Y)=0.458$.</div>
+<div class="tip">$Y$ is Bernoulli, so $\operatorname{Var}(Y)=p(1-p)$ is instant (formula #30) — no need to build a table.</div>
+</details>
+
+<h3>(d) Covariance and correlation between $X$ and $Y$. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Covariance" → $\operatorname{Cov}(X,Y)=\mathbb E XY-\mathbb E X\,\mathbb E Y$ (#50); "correlation" → divide by the two s.d.'s (#49).</div>
+Only cells with $x\ne0$ and $y\ne0$ contribute to $\mathbb E XY$:
+$$\mathbb E XY=(1)(1)(0.075)+(2)(1)(0.045)=0.075+0.090=0.165.$$
+$$\operatorname{Cov}(X,Y)=0.165-(0.55)(0.30)=0.165-0.165=0.$$
+$$\rho(X,Y)=\frac{0}{(0.740)(0.458)}=0.$$
+<div class="ans">$\operatorname{Cov}(X,Y)=0$, $\;\rho(X,Y)=0$.</div>
+</details>
+
+<h3>(e) Are $X$ and $Y$ independent? Give reasons. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Are they independent?" → independence requires $f(x,y)=f_X(x)f_Y(y)$ for <b>every</b> cell (#47), not merely zero covariance.</div>
+Check the factorisation against the marginals $(0.6,0.25,0.15)$ and $(0.7,0.3)$:
+<table>
+<tr><th>cell</th><th>observed</th><th>$f_X f_Y$</th></tr>
+<tr><td>$(0,0)$</td><td>0.42</td><td>$0.6(0.7)=0.42$</td></tr>
+<tr><td>$(1,0)$</td><td>0.175</td><td>$0.25(0.7)=0.175$</td></tr>
+<tr><td>$(2,0)$</td><td>0.105</td><td>$0.15(0.7)=0.105$</td></tr>
+<tr><td>$(0,1)$</td><td>0.18</td><td>$0.6(0.3)=0.18$</td></tr>
+<tr><td>$(1,1)$</td><td>0.075</td><td>$0.25(0.3)=0.075$</td></tr>
+<tr><td>$(2,1)$</td><td>0.045</td><td>$0.15(0.3)=0.045$</td></tr>
+</table>
+Every cell factorises exactly, so <b>$X$ and $Y$ are independent.</b>
+<div class="trap">This is a deliberate "gotcha": zero covariance does <i>not</i> by itself prove independence. Here they happen to be independent, but you must verify the full factorisation to earn the marks — never argue "$\operatorname{Cov}=0\Rightarrow$ independent". (The converse — independent $\Rightarrow \operatorname{Cov}=0$ — is always true, #50.)</div>
+</details>
+
+<h3>(f) If 1000 shoppers are surveyed, use the CLT to approximate $P(\text{fewer than }130\text{ go to the beach both days})$. <span class="marks">6</span></h3>
+<details><summary></summary>
+<div class="when">"Use the central limit theorem to approximate a count out of $n$" → the count is Binomial; approximate $S\sim\mathsf{Bin}(n,p)$ by $\mathsf N(np,np(1-p))$ (formula #58), standardise, read $\Phi$ from the normal table.</div>
+"Both days" means $X=2$, with $p=P(X{=}2)=0.15$. Let $S$ = number of the 1000 shoppers who go both days, $S\sim\mathsf{Bin}(1000,0.15)$.<br>
+Mean $=np=150$; variance $=np(1-p)=1000(0.15)(0.85)=127.5$; s.d.$=\sqrt{127.5}=11.29$.
+$$P(S\lt 130)\approx P\!\left(Z\lt \frac{130-150}{11.29}\right)=P(Z\lt -1.771).$$
+<b>From tables:</b> $\Phi(1.77)=0.9616$, so $P(Z\lt -1.77)=1-0.9616=0.0384$.
+<div class="ans">$P(S\lt 130)\approx 0.0384$ (about 3.8%).</div>
+<div class="tip">With a continuity correction ($129.5$): $z=-1.816$, $P\approx0.0347$; the exact binomial is $0.0328$. Any of these earns full marks — the CLT formula on the sheet (#58) does not require the correction, so $0.0384$ is the "expected" answer. State which you used.</div>
+<div class="trap">Identify the right event: "both days" is $X=2$ only ($p=0.15$), not "at least one day". Using the wrong $p$ cascades into every later number.</div>
+</details>
+</section>
+
+<!-- ============ Q3 ============ -->
+<section id="q3">
+<h2>Question 3 — Two-sample proportions <span class="marks">18 marks</span></h2>
+<div class="card q">
+Two designs of tension link. It matters that ultimate tensile strength exceeds 1000 MPa. In a random sample of 50 links of each design, <b>30 of design 1</b> and <b>19 of design 2</b> exceeded 1000 MPa. Is there evidence of a difference between the two designs in the proportion exceeding 1000 MPa?
+</div>
+
+<h3>(a) Describe a relevant hypothesis test and check its conditions. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Difference between two proportions" from two independent samples → <b>two-sample test for proportions</b> (two-sample binomial / two-proportion $z$-test, formula #74).</div>
+<b>Test:</b> a two-sample test for a difference in proportions, using the normal approximation to the binomial.<br>
+<b>Conditions:</b> (i) two independent random samples; (ii) each response is a binary "exceeds 1000 MPa / not"; (iii) large enough samples for the normal approximation — the usual rule is $m\hat p,\,m(1-\hat p),\,n\hat p,\,n(1-\hat p)\ge 5$. Here the smallest count is $50(0.38)=19$ and $50(1-0.62)=19$, all $\ge5$, so the approximation is valid.
+<div class="tip">"50 links of <i>each</i> design" and two independent groups → two-sample, not one-sample. The word "difference" (not "greater") signals a two-sided test.</div>
+</details>
+
+<h3>(b) State the hypotheses in mathematical form and explain the notation. <span class="marks">3</span></h3>
+<details><summary></summary>
+Let $p_1$ and $p_2$ be the true (population) proportions of links of design 1 and design 2, respectively, whose tensile strength exceeds 1000 MPa.
+$$H_0:\;p_1=p_2 \qquad\text{vs}\qquad H_1:\;p_1\ne p_2.$$
+<div class="tip">"Evidence of a <b>difference</b>" → two-sided $H_1$ ($\ne$). Always define $p_1,p_2$ in words tied to the context, or you lose an explanation mark.</div>
+</details>
+
+<h3>(c) Determine the test statistic and $p$-value. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">Two-sample binomial test statistic (#74) uses the <b>pooled</b> proportion $\hat p=\frac{X+Y}{m+n}$ under $H_0$.</div>
+$\hat p_1=\tfrac{30}{50}=0.60$, $\hat p_2=\tfrac{19}{50}=0.38$, pooled $\hat p=\tfrac{30+19}{100}=0.49$.
+$$Z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac1m+\frac1n\right)}}=\frac{0.22}{\sqrt{0.49(0.51)(\tfrac1{50}+\tfrac1{50})}}=\frac{0.22}{\sqrt{0.009996}}=\frac{0.22}{0.09998}=2.200.$$
+<b>$p$-value</b> (two-sided): from tables $\Phi(2.20)=0.9861$, so
+$$p=2\big(1-\Phi(2.20)\big)=2(0.0139)=0.0278.$$
+<div class="ans">$Z=2.20$, $\;p\text{-value}=0.0278$.</div>
+<div class="trap">The test statistic uses the <b>pooled</b> $\hat p=0.49$ in the standard error, but the CI in part (e) uses the <b>separate</b> $\hat p_1,\hat p_2$. Mixing these up is the classic error here.</div>
+</details>
+
+<h3>(d) At the 5% level, make a conclusion about the hypotheses and in context. <span class="marks">4</span></h3>
+<details><summary></summary>
+Since $p\text{-value}=0.0278\lt 0.05$, we <b>reject $H_0$</b>.
+<div class="concl">There is significant evidence at the 5% level of a difference between the two designs in the proportion of links whose tensile strength exceeds 1000 MPa. The sample suggests design 1 produces a higher proportion of links exceeding 1000 MPa (60% vs 38%).</div>
+<div class="tip">Two marks are for the statistical decision ("reject $H_0$, $p\lt0.05$"), two for translating it into the engineering story. Do both.</div>
+</details>
+
+<h3>(e) Produce a 99% confidence interval for the difference in proportions. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">"CI for a difference in two proportions" → formula #67 with <b>separate</b> $\hat p$'s (no pooling in a CI).</div>
+$$(\hat p_1-\hat p_2)\pm q\sqrt{\frac{\hat p_1(1-\hat p_1)}{m}+\frac{\hat p_2(1-\hat p_2)}{n}},$$
+where $q$ is the $0.995$ quantile of $\mathsf N(0,1)$. <b>From tables:</b> $\Phi(2.58)\approx0.9951$, so $q=2.58$ (exact $2.576$).
+$$\text{SE}=\sqrt{\frac{0.6(0.4)}{50}+\frac{0.38(0.62)}{50}}=\sqrt{0.0048+0.004712}=\sqrt{0.009512}=0.09753.$$
+$$0.22\pm 2.58(0.09753)=0.22\pm 0.2516=(-0.0316,\ 0.472).$$
+<div class="ans">99% CI for $p_1-p_2$: $(-0.0316,\ 0.472)$ (using $q=2.58$; with $q=2.576$: $(-0.0312,\ 0.471)$).</div>
+<div class="tip">Note the tension: the 99% CI <b>contains 0</b>, yet we rejected at the 5% level in (d). No contradiction — a 99% CI corresponds to a 1% two-sided test, and at the stricter 1% level we would <i>not</i> reject ($p=0.0278\gt0.01$). Different confidence levels, different conclusions.</div>
+</details>
+</section>
+
+<!-- ============ Q4 ============ -->
+<section id="q4">
+<h2>Question 4 — One-way ANOVA (cuckoo eggs) <span class="marks">17 marks</span></h2>
+<div class="card q">
+60 channel-billed cuckoo eggs from three host species (Pipit, Warbler, Wren), 20 each. Boxplot summary and statistics:
+<table>
+<tr><th></th><th>$n$</th><th>$\bar x$ (mm)</th><th>$s$</th></tr>
+<tr><th>Pipit</th><td>20</td><td>22.7140</td><td>0.8396</td></tr>
+<tr><th>Warbler</th><td>20</td><td>21.1745</td><td>1.2132</td></tr>
+<tr><th>Wren</th><td>20</td><td>21.0005</td><td>0.9374</td></tr>
+</table>
+<b>Figure (described):</b> three side-by-side boxplots of egg length. Pipit sits highest (box roughly 22.0–23.3, median ≈22.6, fairly symmetric); Warbler and Wren sit lower and overlap each other (medians ≈21.1), with Warbler showing the widest spread and a long lower whisker. Between-group $SS=35.879$; residual $SS=55.850$.
+</div>
+
+<h3>(a) Discuss the plot: shape per species and relative locations. <span class="marks">2</span></h3>
+<details><summary></summary>
+Pipit eggs are the <b>longest</b> on average (median ≈22.6 mm) and reasonably symmetric with the smallest spread ($s=0.84$). Warbler and Wren have <b>similar, lower</b> centres (≈21.0–21.2 mm) and overlap substantially; Warbler is the most variable ($s=1.21$, long lower whisker suggesting mild left skew), Wren is intermediate. Overall: one high group (Pipit) and two similar low groups (Warbler ≈ Wren).
+<div class="tip">For "discuss the plot" marks, hit all three: <b>centre</b> (location/median), <b>spread</b>, and <b>shape</b> (symmetry/skew/outliers) — and explicitly <i>compare</i> groups.</div>
+</details>
+
+<h3>(b) State $H_0$ and $H_1$ in words. <span class="marks">2</span></h3>
+<details><summary></summary>
+$H_0$: the mean cuckoo egg length is the same for all three host species ($\mu_{\text{Pipit}}=\mu_{\text{Warbler}}=\mu_{\text{Wren}}$).<br>
+$H_1$: at least one host species has a different mean cuckoo egg length (the means are not all equal).
+<div class="trap">Do <b>not</b> write $H_1:\mu_1\ne\mu_2\ne\mu_3$. The alternative for ANOVA is simply "not all means equal" — at least one differs.</div>
+</details>
+
+<h3>(c) Complete the ANOVA table. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">One-way ANOVA with $d=3$ groups, total $N=60$: $df_{\text{group}}=d-1$, $df_{\text{resid}}=N-d$, $df_{\text{total}}=N-1$; $MS=SS/df$; $F=MS_{\text{group}}/MS_{\text{resid}}$.</div>
+$df_{\text{group}}=2$, $df_{\text{resid}}=60-3=57$, $df_{\text{total}}=59$; $SS_{\text{total}}=35.879+55.850=91.729$.
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Host species</td><td>2</td><td>35.879</td><td>17.940</td><td>18.31</td></tr>
+<tr><td>Residuals</td><td>57</td><td>55.850</td><td>0.9798</td><td></td></tr>
+<tr><td>Total</td><td>59</td><td>91.729</td><td></td><td></td></tr>
+</table>
+$MS_{\text{group}}=35.879/2=17.940$; $MS_{\text{resid}}=55.850/57=0.9798$; $F=17.940/0.9798=18.31$.
+<div class="ans">$F=18.3$ on $(2,57)$ df.</div>
+</details>
+
+<h3>(d) What is $R^2$? Interpret it. <span class="marks">2</span></h3>
+<details><summary></summary>
+$$R^2=\frac{SS_{\text{group}}}{SS_{\text{total}}}=\frac{35.879}{91.729}=0.391.$$
+<div class="concl">About 39.1% of the total variation in cuckoo egg length is explained by (associated with) the host species; the remaining ~61% is within-species (residual) variation.</div>
+</details>
+
+<h3>(e) Test for a difference in mean egg lengths across species at 5%. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">ANOVA $F$-test: compare $F$ to the $F_{d-1,\,N-d}$ critical value (#80). Reject $H_0$ if $F$ exceeds the $0.95$ quantile.</div>
+$F=18.31$ on $(2,57)$ df. <b>From tables</b> (using the nearest tabulated $n=60$): $F_{0.95}(2,60)=3.15$ and $F_{0.99}(2,60)=4.98$. Since $18.31\gt 4.98$, the $p$-value is $\lt 0.01$ (exact $p\approx 7.2\times10^{-7}$).<br>
+$18.31\gg 3.15\Rightarrow$ <b>reject $H_0$</b>.
+<div class="concl">There is very strong evidence ($p\lt0.01$) that mean cuckoo egg length differs across the three host species. Egg size is associated with host species — consistent with the boxplot, where Pipit eggs are clearly longer.</div>
+</details>
+
+<h3>(f) State the ANOVA assumptions and discuss whether they hold. <span class="marks">2</span></h3>
+<details><summary></summary>
+Assumptions (from the model $Y_{ik}=\mu_i+\varepsilon_{ik}$, $\varepsilon\overset{iid}{\sim}\mathsf N(0,\sigma^2)$, #79): (1) <b>independent</b> observations; (2) <b>normally</b> distributed errors within each group; (3) <b>equal variances</b> across groups (homoscedasticity).<br>
+<b>Discussion:</b> eggs from randomly selected nests → independence reasonable. Boxplots look roughly symmetric with no gross outliers → normality plausible. The s.d.'s (0.84, 1.21, 0.94) give a largest-to-smallest variance ratio of $1.21^2/0.84^2\approx 2.1$, well under the rule-of-thumb of 4, so equal variance is acceptable.
+<div class="tip">A quick, defensible equal-variance check: ratio of the largest to smallest sample variance $\lt 4$ ⇒ pooling/ANOVA is fine.</div>
+</details>
+</section>
+
+<!-- ============ Q5 ============ -->
+<section id="q5">
+<h2>Question 5 — Simple linear regression (used-car prices) <span class="marks">16 marks</span></h2>
+<div class="card q">
+Predicting the price of second-hand Toyota RAV4 vehicles from year of manufacture. A scatterplot shows price rising with year but with a <b>fan shape</b> (spread widens for newer cars) and mild curvature. First model, <span class="mono" style="padding:0 4px">lm(Price ~ Year)</span>:
+<div class="mono">Coefficients:            Estimate   Std.Error  t value  Pr(&gt;|t|)
+(Intercept)            -2.095e+06  3.610e+04  -58.04   &lt;2e-16 ***
+Year                    1.049e+03  1.794e+01   58.49   &lt;2e-16 ***
+Residual standard error: 2593 on 990 degrees of freedom
+Multiple R-squared: 0.7756,  Adjusted R-squared: 0.7753</div>
+Second model (used from part c on), <span class="mono" style="padding:0 4px">lm(log(Price) ~ Year)</span>:
+<div class="mono">Coefficients:  Estimate    Std.Error   t value  Pr(&gt;|t|)
+(Intercept)  -1.574e+02   2.069e+00
+Year          8.301e-02   1.028e-03
+Residual standard error: 0.1486 on 990 degrees of freedom
+Multiple R-squared: 0.8682,  Adjusted R-squared: 0.868</div>
+</div>
+
+<h3>(a) How many cars were in the data? <span class="marks">1</span></h3>
+<details><summary></summary>
+Residual df $=n-2=990$ (two parameters estimated), so $n=992$.
+<div class="ans">992 cars.</div>
+</details>
+
+<h3>(b) Is a linear regression model suitable, based on the scatterplot? <span class="marks">2</span></h3>
+<details><summary></summary>
+Not really. The scatter shows the spread of price <b>increasing with year</b> (a fan/funnel shape) and slight curvature. This violates the constant-variance (homoscedasticity) and linearity assumptions, so a plain linear model on the raw price is questionable — which is exactly why part (c) applies a log transform.
+<div class="tip">"Fanning out" in a scatter = non-constant variance. Naming that specific defect is what earns the mark.</div>
+</details>
+
+<h3>(c) Using the log model, estimate the price of a RAV4 manufactured in 2011. <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">Model is $\widehat{\log(\text{Price})}=\hat\beta_0+\hat\beta_1\,\text{Year}$. Predict on the log scale, then <b>back-transform</b> with $e^{(\cdot)}$.</div>
+$$\widehat{\log(\text{Price})}=-157.4+0.08301(2011)=9.533.$$
+$$\widehat{\text{Price}}=e^{9.533}\approx \$13{,}800.$$
+<div class="ans">≈ \$13,800 (using the printed coefficients).</div>
+<div class="trap">You must exponentiate — the model predicts $\log(\text{Price})$, not price. Forgetting the back-transform is an automatic lost mark. (Rounding note: the printed 4-figure intercept is sensitive; carrying full precision from R gives ≈\$13,200. Either is accepted if the method is shown.)</div>
+</details>
+
+<h3>(d) Interpret the estimated slope of the log model. <span class="marks">1</span></h3>
+<details><summary></summary>
+On the log scale each extra year adds $0.08301$ to $\log(\text{Price})$; back-transformed, price is multiplied by $e^{0.08301}=1.0866$.
+<div class="concl">Each additional year of manufacture is associated with roughly an <b>8.7% increase</b> in the predicted sale price.</div>
+<div class="tip">For a $\log(y)\sim x$ model, a slope $\beta$ means "each unit of $x$ multiplies $y$ by $e^{\beta}$" ≈ a $100\beta\%$ change for small $\beta$.</div>
+</details>
+
+<h3>(e) Is there evidence that sale price is associated with year of manufacture? <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Evidence of association" in regression → test $H_0:\beta_1=0$ vs $H_1:\beta_1\ne0$ using the slope's $t$-statistic.</div>
+$$t=\frac{\hat\beta_1}{\text{s.e.}(\hat\beta_1)}=\frac{0.08301}{0.001028}=80.7\quad\text{on }990\text{ df}.$$
+This is enormous; the $p$-value is $\lt 2\times10^{-16}$.
+<div class="concl">There is overwhelming evidence ($p\lt 0.001$) that year of manufacture is associated with (log) sale price: newer RAV4s sell for more.</div>
+</details>
+
+<h3>(f) Comment on the regression assumptions using the diagnostic plots. <span class="marks">4</span></h3>
+<details><summary></summary>
+<b>Figure (described):</b> <i>Residuals vs Fitted</i> — points scattered fairly evenly in a horizontal band around 0 with the red smoother nearly flat, and no strong funnel (a few low outliers labelled 83, 160, 269). <i>Normal Q–Q</i> — standardised residuals lie close to the diagonal through the middle, bending slightly at the lower tail.<br>
+<b>Assessment:</b>
+<ul>
+<li><b>Linearity</b> — smoother roughly flat ⇒ satisfied (the log transform fixed the curvature).</li>
+<li><b>Constant variance</b> — band of roughly even width ⇒ homoscedasticity now reasonable (the fan shape is gone).</li>
+<li><b>Normality</b> — Q–Q mostly straight with mild lower-tail departure and a few outliers ⇒ approximately normal; large $n$ makes minor deviations unimportant.</li>
+<li><b>Independence</b> — assumed from the sampling design.</li>
+</ul>
+<div class="concl">After the log transform, the assumptions are reasonably met; the log-linear model is an adequate fit, apart from a handful of unusually cheap cars in the lower tail.</div>
+</details>
+
+<h3>(g) A 2015 RAV4 is advertised for \$21,999. Is this unusual? <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">"Is a single new observation unusual?" → compare it to the <b>prediction interval</b> (not the narrower confidence interval, which is for the mean). R gives, on the log scale for Year=2015: 95% <b>prediction</b> interval $(9.531,\ 10.115)$.</div>
+Convert the advertised price to the log scale: $\log(21999)=9.999$.<br>
+Since $9.531\lt 9.999\lt 10.115$, the value lies <b>inside</b> the 95% prediction interval.
+<div class="concl">No — a price of \$21,999 for a 2015 RAV4 is <b>not unusual</b>: its log-price falls comfortably within the 95% prediction interval for cars of that year.</div>
+<div class="trap">Use the <b>prediction</b> interval $(9.531,10.115)$, not the confidence interval $(9.813,9.833)$. The confidence interval is for the <i>mean</i> log-price of all 2015 cars and is far too narrow to judge a single vehicle — using it would wrongly flag the car as unusual.</div>
+</details>
+</section>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

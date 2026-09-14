@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 1–2: Probability & Distributions</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapters 1–2 · Probability & Common Distributions</h1>
+  <p>Understanding Randomness · Bernoulli · Binomial · Uniform · Normal</p>
+  <p>STAT1301 — Advanced Analysis of Scientific Data</p>
+  <span class="badge">Foundation chapters</span>
+  <span class="badge gold">Flagship: continuous pdf f(x)=c·xᵃ</span>
+  <span class="badge">Formula sheet PROVIDED in exam</span>
+</header>
+
+<nav>
+  <a href="index.html">← Hub</a>
+  <a href="ch03-multiple-rvs.html">Ch 3 Multiple RVs →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Formulas</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Exam types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+</nav>
+
+<main>
+
+<!-- ============================ CONCEPTS ============================ -->
+<section id="concepts">
+<h2>§1 Concepts in depth</h2>
+
+<div class="card">
+<h3>The whole point: a model for randomness</h3>
+<p>A <b>random experiment</b> is any process whose outcome cannot be predicted with certainty (a die roll, a person's height, whether a chip is faulty). We tame it with three ingredients (notes §1.4):</p>
+<ul>
+<li><b>Sample space</b> \(\Omega\) — the set of <i>all</i> possible outcomes.</li>
+<li><b>Events</b> — subsets of \(\Omega\) (e.g. "sum of two dice \(\ge 10\)"). Events are sets, so union \(\cup\), intersection \(\cap\), complement \(A^c\) all apply.</li>
+<li><b>Probability measure</b> \(\mathbb{P}\) — assigns each event a number in \([0,1]\), obeying Kolmogorov's axioms: \(\mathbb{P}(A)\ge 0\), \(\mathbb{P}(\Omega)=1\), and countable additivity for disjoint events.</li>
+</ul>
+<p>Everything else in the course is built on these three objects. If you can name \(\Omega\), the event of interest, and how \(\mathbb{P}\) is assigned, you can answer any Chapter-1 question.</p>
+</div>
+
+<div class="card">
+<h3>Consequences you will actually use</h3>
+<p>From the axioms (notes Thm 1.2) come the everyday rules:</p>
+<ul>
+<li><b>Complement:</b> \(\mathbb{P}(A^c)=1-\mathbb{P}(A)\) — the single most useful trick for "at least one" problems.</li>
+<li><b>Addition rule:</b> \(\mathbb{P}(A\cup B)=\mathbb{P}(A)+\mathbb{P}(B)-\mathbb{P}(A\cap B)\). Subtract the overlap so you don't double-count.</li>
+<li><b>Equally-likely principle:</b> when \(\Omega\) is finite with all outcomes equally likely, \(\mathbb{P}(A)=|A|/|\Omega|\). Probability collapses to <b>counting</b>.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Counting — the four urn models</h3>
+<p>Drawing \(k\) balls from \(n\) reduces to two questions: does <b>order</b> matter, and is it <b>with replacement</b>? (notes §1.5)</p>
+<table>
+<tr><th>Order?</th><th>With replacement</th><th>Without replacement</th></tr>
+<tr><td><b>Yes</b> (ordered)</td><td>\(n^k\)</td><td>\({}^nP_k=\dfrac{n!}{(n-k)!}\)</td></tr>
+<tr><td><b>No</b> (unordered)</td><td>— (not examinable)</td><td>\({}^nC_k=\dbinom{n}{k}=\dfrac{n!}{(n-k)!\,k!}\)</td></tr>
+</table>
+<p>Choosing a lottery set, a poker hand, or which positions the "successes" occupy — all are \(\binom{n}{k}\). This combination is exactly what appears inside the binomial pmf, which is why counting is the bridge into Chapter 2.</p>
+</div>
+
+<div class="card">
+<h3>Conditional probability, independence, and the two big rules</h3>
+<p><b>Conditional probability</b> updates a probability once you know event \(B\) happened (notes Def 1.4):
+$$\mathbb{P}(A\mid B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}.$$
+Rearranged, this is the <b>product rule</b> \(\mathbb{P}(A\cap B)=\mathbb{P}(B)\,\mathbb{P}(A\mid B)\) — the engine for sequential "draw without replacement" problems.</p>
+<p><b>Independence</b> means knowing \(B\) tells you nothing about \(A\): \(\mathbb{P}(A\cap B)=\mathbb{P}(A)\,\mathbb{P}(B)\). Do not confuse independent with disjoint — disjoint events with positive probability are the <i>opposite</i> of independent.</p>
+<p><b>Law of Total Probability:</b> if \(B_1,\dots,B_n\) partition \(\Omega\),
+$$\mathbb{P}(A)=\sum_{i=1}^n \mathbb{P}(A\mid B_i)\,\mathbb{P}(B_i).$$
+This is how you assemble an overall probability from scenario-by-scenario pieces (which factory made the chip, which test the patient took).</p>
+<p><b>Bayes' Rule</b> flips a conditional around:
+$$\mathbb{P}(B_j\mid A)=\frac{\mathbb{P}(A\mid B_j)\,\mathbb{P}(B_j)}{\sum_i \mathbb{P}(A\mid B_i)\,\mathbb{P}(B_i)}.$$
+The classic wording is "given the test is <i>positive</i>, what is the probability the patient actually has the disease?" — you are given \(\mathbb{P}(\text{positive}\mid\text{disease})\) and asked for \(\mathbb{P}(\text{disease}\mid\text{positive})\).</p>
+</div>
+
+<div class="card">
+<h3>Random variables: cdf, pmf, pdf</h3>
+<p>A <b>random variable</b> \(X\) is a numerical measurement of the experiment — a function from \(\Omega\) to \(\mathbb{R}\). We describe its behaviour with:</p>
+<ul>
+<li><b>cdf</b> \(F(x)=\mathbb{P}(X\le x)\) — defined for every RV, always non-decreasing from 0 to 1. Then \(\mathbb{P}(a\lt X\le b)=F(b)-F(a)\).</li>
+<li><b>Discrete</b> RV → <b>pmf</b> \(f(x)=\mathbb{P}(X=x)\), with \(\sum_x f(x)=1\). Probabilities are <i>sums</i>.</li>
+<li><b>Continuous</b> RV → <b>pdf</b> \(f(x)\), with \(\int_{-\infty}^{\infty}f(x)\,dx=1\). Probabilities are <i>areas</i>: \(\mathbb{P}(a\lt X\lt b)=\int_a^b f(x)\,dx\). Crucially \(\mathbb{P}(X=c)=0\) for any single point.</li>
+</ul>
+<p>The pdf and cdf are linked by calculus: \(F(x)=\int_{-\infty}^x f(u)\,du\) and \(f(x)=F'(x)\). <b>Integrate the density to get the cdf; differentiate the cdf to get the density.</b> This single fact powers the flagship exam question.</p>
+</div>
+
+<div class="card">
+<h3>Quantiles, median, mode</h3>
+<p>The \(p\)-th <b>quantile</b> \(q(p)\) solves \(F(q(p))=p\) (notes Def 1.9). Special cases:</p>
+<ul>
+<li><b>Median</b> = the 0.5-quantile: solve \(F(m)=0.5\).</li>
+<li><b>Quartiles</b>: \(Q_1=q(0.25)\), \(Q_3=q(0.75)\); the interquartile range is \(\text{IQR}=Q_3-Q_1\).</li>
+<li><b>Mode</b> = the value that <i>maximises</i> \(f\). For a continuous RV, differentiate \(f\) (or check the endpoints if \(f\) is monotone on a closed interval).</li>
+</ul>
+<p class="tip">Median vs mode are different objects: median splits area in half (work with \(F\)); mode is the peak of the density (work with \(f\)).</p>
+</div>
+
+<div class="card">
+<h3>Expectation and variance</h3>
+<p><b>Expectation</b> (the long-run average) is a weighted average of the values \(X\) can take:
+$$\mathbb{E}(X)=\sum_x x\,f(x)\ \text{(discrete)},\qquad \mathbb{E}(X)=\int_{-\infty}^{\infty} x\,f(x)\,dx\ \text{(continuous)}.$$
+For any function \(g\), \(\mathbb{E}(g(X))=\sum_x g(x)f(x)\) or \(\int g(x)f(x)\,dx\) (Law of the Unconscious Statistician).</p>
+<p><b>Variance</b> measures spread: \(\operatorname{Var}(X)=\mathbb{E}(X-\mu)^2\), computed in practice via the shortcut
+$$\operatorname{Var}(X)=\mathbb{E}(X^2)-\big(\mathbb{E}(X)\big)^2.$$
+The standard deviation is \(\sigma=\sqrt{\operatorname{Var}(X)}\).</p>
+<p><b>Linearity / scaling</b> (notes Thm 1.10–1.11) — these are examined constantly:
+$$\mathbb{E}(aX+b)=a\,\mathbb{E}(X)+b,\qquad \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X).$$
+Note the shift \(b\) drops out of the variance, and the scale \(a\) is squared.</p>
+<p class="tip">For a <b>symmetric</b> pdf/pmf, the expectation equals the point of symmetry — often no integration needed.</p>
+</div>
+
+<div class="card">
+<h3>The four named distributions (Chapter 2)</h3>
+<p>These are the reusable "models" you fit to data. All parameters, pmfs/pdfs and moment formulas are <b>on the provided formula sheet</b> — your job is recognition and execution.</p>
+<table>
+<tr><th>Distribution</th><th>pmf / pdf</th><th>\(\mathbb{E}(X)\)</th><th>\(\operatorname{Var}(X)\)</th><th>Use for…</th></tr>
+<tr><td><b>Bernoulli</b> \(\text{Ber}(p)\)</td><td>\(\mathbb{P}(1)=p,\ \mathbb{P}(0)=1-p\)</td><td>\(p\)</td><td>\(p(1-p)\)</td><td>a single yes/no trial</td></tr>
+<tr><td><b>Binomial</b> \(\text{Bin}(n,p)\)</td><td>\(\binom{n}{x}p^x(1-p)^{n-x}\)</td><td>\(np\)</td><td>\(np(1-p)\)</td><td>count of successes in \(n\) independent trials</td></tr>
+<tr><td><b>Uniform</b> \(\mathcal U[a,b]\)</td><td>\(\dfrac{1}{b-a}\) on \([a,b]\)</td><td>\(\dfrac{a+b}{2}\)</td><td>\(\dfrac{(b-a)^2}{12}\)</td><td>"equally likely" over an interval</td></tr>
+<tr><td><b>Normal</b> \(\mathcal N(\mu,\sigma^2)\)</td><td>\(\dfrac{1}{\sigma\sqrt{2\pi}}e^{-\frac12\left(\frac{x-\mu}{\sigma}\right)^2}\)</td><td>\(\mu\)</td><td>\(\sigma^2\)</td><td>heights, measurement error, sample means (CLT)</td></tr>
+</table>
+<p class="trap">R (and the formula sheet) parameterise the Normal by the <b>standard deviation</b> \(\sigma\), but the notation \(\mathcal N(\mu,\sigma^2)\) uses the <b>variance</b>. If a question says "variance 36", then \(\sigma=6\). Mixing these up is the single most common Normal error.</p>
+</div>
+
+<div class="card">
+<h3>Standardising the Normal</h3>
+<p>There is no closed form for Normal areas, so we convert every Normal question to the <b>standard normal</b> \(Z\sim\mathcal N(0,1)\) and read the table (provided):
+$$Z=\frac{X-\mu}{\sigma},\qquad \mathbb{P}(X\le x)=\Phi\!\left(\frac{x-\mu}{\sigma}\right).$$
+Use \(\mathbb{P}(Z\ge z)=1-\Phi(z)\) and symmetry \(\Phi(-z)=1-\Phi(z)\). Going backwards ("find the value with 10% above it") uses the <b>quantile</b>: \(x=\mu+z\,\sigma\) where \(\Phi(z)=1-\alpha\).</p>
+</div>
+</section>
+
+<!-- ============================ FORMULAS ============================ -->
+<section id="formulas">
+<h2>§2 Key formulas & when to use them</h2>
+
+<div class="method">
+<b>Normalisation of a continuous pdf</b> $$\int_{\text{support}} f(x)\,dx = 1.$$
+<div class="when">You are given \(f(x)=c\,x^a\) (or any pdf with unknown constant) and must find that constant. Integrate over the stated range and set equal to 1.</div>
+</div>
+
+<div class="method">
+<b>Probability from a pdf</b> $$\mathbb{P}(a\lt X\lt b)=\int_a^b f(x)\,dx = F(b)-F(a).$$
+<div class="when">"Find \(\mathbb{P}(X\gt 4)\)", "\(\mathbb{P}(X\lt k)\)". For a "greater than", it is often fastest to use \(1-F(\text{lower limit})\).</div>
+</div>
+
+<div class="method">
+<b>cdf by integration</b> $$F(x)=\int_{\text{lower}}^{x} f(u)\,du \quad(\text{on the support}).$$
+<div class="when">"Determine the cumulative distribution function." Remember to state \(F=0\) below the support and \(F=1\) above it — full marks need the piecewise definition.</div>
+</div>
+
+<div class="method">
+<b>Median &amp; general quantile</b> $$F(m)=0.5;\qquad F(q_p)=p.$$
+<div class="when">"Find the median / quartiles / IQR." Build \(F\), set it equal to the target probability, solve for \(x\).</div>
+</div>
+
+<div class="method">
+<b>Mode</b> $$\text{maximise } f(x):\quad f'(x)=0 \text{, or check endpoints if } f \text{ is monotone.}$$
+<div class="when">"Find the mode." If \(f\) is increasing on a closed interval (e.g. \(c x^{a}\) with \(a\gt 0\)), the mode is the right endpoint.</div>
+</div>
+
+<div class="method">
+<b>Expectation &amp; variance (continuous)</b> $$\mathbb{E}(X)=\int x f(x)\,dx,\quad \mathbb{E}(X^2)=\int x^2 f(x)\,dx,\quad \operatorname{Var}(X)=\mathbb{E}(X^2)-\mathbb{E}(X)^2.$$
+<div class="when">Any "determine \(\mathbb{E}(X)\) / \(\operatorname{Var}(X)\) / \(\text{sd}(X)\)" on a pdf. Always compute \(\mathbb{E}(X^2)\) as its own integral, never \((\mathbb{E}X)^2\) by mistake.</div>
+</div>
+
+<div class="method">
+<b>Linearity &amp; scaling</b> $$\mathbb{E}(aX+b)=a\mathbb{E}(X)+b,\qquad \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X).$$
+<div class="when">Unit conversions, transformed variables \(Y=2+3X\), or deriving \(\operatorname{Var}(\bar X)\).</div>
+</div>
+
+<div class="method">
+<b>Binomial probabilities</b> $$\mathbb{P}(X=x)=\binom{n}{x}p^x(1-p)^{n-x},\quad \mathbb{E}(X)=np,\ \operatorname{Var}(X)=np(1-p).$$
+<div class="when">A fixed number \(n\) of independent yes/no trials, constant success probability \(p\), counting successes. "At least/at most \(k\)" → sum terms, using the complement trick to shorten.</div>
+</div>
+
+<div class="method">
+<b>Complement trick for counts</b> $$\mathbb{P}(X\ge 1)=1-\mathbb{P}(X=0),\qquad \mathbb{P}(X\ge k)=1-\mathbb{P}(X\le k-1).$$
+<div class="when">"At least one", "at least \(k\)". Turns a long sum into a short one.</div>
+</div>
+
+<div class="method">
+<b>Standardising the Normal</b> $$Z=\frac{X-\mu}{\sigma}\sim\mathcal N(0,1),\qquad \mathbb{P}(X\le x)=\Phi\!\left(\tfrac{x-\mu}{\sigma}\right).$$
+<div class="when">"Heights are normally distributed…", "what proportion exceeds…". Convert to \(Z\), read the table.</div>
+</div>
+
+<div class="method">
+<b>Normal quantile (reverse lookup)</b> $$x=\mu+z\,\sigma\ \text{ where }\ \Phi(z)=1-\alpha.$$
+<div class="when">"Find the temperature exceeded only 10% of the time", "95th percentile", "what mean makes the probability 10%".</div>
+</div>
+
+<div class="method">
+<b>Uniform on \([a,b]\)</b> $$f(x)=\frac{1}{b-a},\quad F(x)=\frac{x-a}{b-a},\quad \mathbb{E}(X)=\frac{a+b}{2},\ \operatorname{Var}(X)=\frac{(b-a)^2}{12}.$$
+<div class="when">"Chosen at random / equally likely" over an interval.</div>
+</div>
+
+<div class="method">
+<b>Bayes' Rule &amp; Law of Total Probability</b> $$\mathbb{P}(A)=\sum_i \mathbb{P}(A\mid B_i)\mathbb{P}(B_i),\qquad \mathbb{P}(B_j\mid A)=\frac{\mathbb{P}(A\mid B_j)\mathbb{P}(B_j)}{\mathbb{P}(A)}.$$
+<div class="when">"Given the test is positive…", "what fraction of faulty chips came from factory 1?" — a conditional whose direction is flipped from what you're told.</div>
+</div>
+</section>
+
+<!-- ============================ WORKED ============================ -->
+<section id="worked">
+<h2>§3 Worked examples</h2>
+<p>All numbers below were verified by computation. Click to reveal full solutions.</p>
+
+<details>
+<summary>Example 1 — THE FLAGSHIP: continuous pdf \(f(x)=c\,x^a\) (2025 exam Q1, 10 marks)</summary>
+<div class="q card">Let \(X\) have pdf \(f(x)=c\,x^{a}\) for \(0\le x\le 5\), where \(c\gt 0,\ a\gt 0\). Moreover \(\mathbb{P}\!\left(X\lt \tfrac54\right)=\tfrac{1}{32}\).<br>(a) Determine \(a\) and \(c\). (b) Determine \(\mathbb{P}(X\gt 4)\). (c) Determine the median and the mode.</div>
+
+<h4>(a) Find a and c — two equations</h4>
+<p><b>Equation 1 (normalisation):</b> \(\displaystyle\int_0^5 c\,x^a\,dx = \frac{c\,5^{a+1}}{a+1}=1.\)</p>
+<p><b>Equation 2 (probability condition):</b> \(\displaystyle\int_0^{5/4} c\,x^a\,dx = \frac{c\,(5/4)^{a+1}}{a+1}=\frac{1}{32}.\)</p>
+<p><b>Divide Eq 2 by Eq 1</b> to eliminate \(c\) and \(a+1\):
+$$\frac{(5/4)^{a+1}}{5^{a+1}}=\left(\frac14\right)^{a+1}=\frac{1}{32}.$$
+So \(4^{a+1}=32\Rightarrow 2^{2(a+1)}=2^{5}\Rightarrow 2(a+1)=5\Rightarrow \boxed{a=\tfrac32}.\)</p>
+<p>Substitute into Eq 1: \(c=\dfrac{a+1}{5^{a+1}}=\dfrac{2.5}{5^{2.5}}=\dfrac{2.5}{25\sqrt5}=\dfrac{\sqrt5}{50}\approx \boxed{0.0447}.\)</p>
+
+<h4>(b) P(X &gt; 4)</h4>
+<p>\(\displaystyle \mathbb{P}(X\gt4)=\int_4^5 c\,x^{3/2}\,dx=\frac{c}{2.5}\big(5^{2.5}-4^{2.5}\big)=1-\frac{c\,4^{2.5}}{2.5}=1-\frac{32\sqrt5}{125}\approx \boxed{0.428}.\)</p>
+
+<h4>(c) Median and mode</h4>
+<p><b>Median:</b> solve \(F(m)=\dfrac{c\,m^{2.5}}{2.5}=0.5\Rightarrow m^{2.5}=\dfrac{1.25}{c}=27.95\Rightarrow m=5\cdot 2^{-2/5}\approx \boxed{3.79}.\)</p>
+<p><b>Mode:</b> \(f(x)=c\,x^{3/2}\) is <i>increasing</i> on \([0,5]\) (since \(a\gt0\)), so the density peaks at the right endpoint: \(\text{mode}=\boxed{5}.\)</p>
+<p class="tip">Recipe applies to <i>any</i> \(c x^a\): (1) integrate to 1; (2) use the given probability as a second equation; (3) divide to kill \(c\); (4) then median from \(F\), mode from the shape of \(f\).</p>
+</details>
+
+<details>
+<summary>Example 2 — pdf \(f(x)=k\,x^3\): find k, E, Var, cdf, median (2023 exam Q1, 15 marks)</summary>
+<div class="q card">\(X\) has pdf \(f(x)=k\,x^{3}\) for \(1\le x\le 2\), \(k\gt0\). Find (a) \(k\); (b) \(\mathbb{E}(X)\); (c) \(\operatorname{Var}(X)\); (d) the cdf; (e) the median.</div>
+<h4>(a) k</h4>
+<p>\(\displaystyle\int_1^2 k x^3\,dx = k\cdot\frac{2^4-1^4}{4}=\frac{15k}{4}=1\Rightarrow k=\frac{4}{15}\approx 0.2667.\)</p>
+<h4>(b) E(X)</h4>
+<p>\(\displaystyle\mathbb{E}(X)=\int_1^2 x\cdot k x^3\,dx=k\cdot\frac{2^5-1}{5}=\frac{4}{15}\cdot\frac{31}{5}=\frac{124}{75}\approx 1.653.\)</p>
+<h4>(c) Var(X)</h4>
+<p>\(\displaystyle\mathbb{E}(X^2)=\int_1^2 x^2\cdot k x^3\,dx=k\cdot\frac{2^6-1}{6}=\frac{4}{15}\cdot\frac{63}{6}=\frac{252}{90}=2.8.\)</p>
+<p>\(\operatorname{Var}(X)=\mathbb{E}(X^2)-\mathbb{E}(X)^2=2.8-\left(\tfrac{124}{75}\right)^2\approx 2.8-2.7335=0.0665\) (sd \(\approx 0.258\)).</p>
+<h4>(d) cdf</h4>
+<p>For \(1\le x\le 2\): \(\displaystyle F(x)=\int_1^x k u^3\,du=\frac{k}{4}(x^4-1)=\frac{x^4-1}{15}.\) Full definition:
+$$F(x)=\begin{cases}0 & x\lt 1\\[2pt] \dfrac{x^4-1}{15} & 1\le x\le 2\\[4pt] 1 & x\gt 2.\end{cases}$$</p>
+<h4>(e) median</h4>
+<p>\(\dfrac{m^4-1}{15}=\tfrac12\Rightarrow m^4=8.5\Rightarrow m=8.5^{1/4}\approx 1.707.\)</p>
+</details>
+
+<details>
+<summary>Example 3 — Binomial "at least" with the complement trick + a Normal question</summary>
+<div class="q card">A fair-ish process: 10% of a large population are left-handed. We select \(n=100\) people. (a) What is \(\mathbb{P}(X=3)\) if instead \(X\sim\text{Bin}(10,\tfrac14)\)? (b) For the left-handers, find \(\mathbb{P}(\text{at least }15)\). (c) Female heights \(\sim\mathcal N(168,36)\) cm². What fraction of women are taller than 180 cm? (Notes Ch 2 exercises &amp; Example 2.1.)</div>
+<h4>(a) Exact binomial term</h4>
+<p>\(X\sim\text{Bin}(10,0.25)\): \(\mathbb{P}(X=3)=\binom{10}{3}(0.25)^3(0.75)^7=120\cdot0.015625\cdot0.13348\approx 0.250.\) Also \(\mathbb{E}(X)=np=2.5\), \(\text{sd}=\sqrt{np(1-p)}=\sqrt{1.875}\approx1.369.\)</p>
+<h4>(b) At least 15 — complement</h4>
+<p>\(X\sim\text{Bin}(100,0.10)\), so \(\mathbb{P}(X\ge15)=1-\mathbb{P}(X\le14)\). Exact value \(\approx 0.0726.\) The notes intend a Normal approximation: \(\mu=np=10\), \(\sigma=\sqrt{np(1-p)}=3\), giving \(\mathbb{P}(X\ge15)\approx \mathbb{P}\!\left(Z\ge\tfrac{15-10}{3}\right)=1-\Phi(1.667)\approx 0.048\) (or \(0.067\) with a continuity correction at 14.5 — closest to exact).</p>
+<h4>(c) Standardise the Normal</h4>
+<p>Variance 36 \(\Rightarrow \sigma=6\). \(\displaystyle\mathbb{P}(X\gt180)=\mathbb{P}\!\left(Z\gt\frac{180-168}{6}\right)=\mathbb{P}(Z\gt2)=1-\Phi(2)\approx 0.0228.\)</p>
+<p class="tip">"At least / at most" with a fixed count → binomial + complement. "Normally distributed … taller than" → standardise to \(Z\) and read the table.</p>
+</details>
+
+<details>
+<summary>Example 4 — Bayes / conditional probability (car faults, 2022 exam Q1, 11 marks)</summary>
+<div class="q card">For a car model in its first 5 years: \(\mathbb{P}(\text{engine fault } E)=0.05\), \(\mathbb{P}(\text{transmission fault } T)=0.02\), \(\mathbb{P}(E\cup T)=0.06\). (b) \(\mathbb{P}(E\mid T)\); (c) \(\mathbb{P}(E\mid T^c)\); (d) \(\mathbb{P}(T\mid E)\).</div>
+<h4>First get the overlap (addition rule)</h4>
+<p>\(\mathbb{P}(E\cap T)=\mathbb{P}(E)+\mathbb{P}(T)-\mathbb{P}(E\cup T)=0.05+0.02-0.06=0.01.\)</p>
+<h4>(b) faulty engine given faulty transmission</h4>
+<p>\(\mathbb{P}(E\mid T)=\dfrac{\mathbb{P}(E\cap T)}{\mathbb{P}(T)}=\dfrac{0.01}{0.02}=0.5.\)</p>
+<h4>(c) faulty engine given transmission passes</h4>
+<p>\(\mathbb{P}(E\cap T^c)=\mathbb{P}(E)-\mathbb{P}(E\cap T)=0.05-0.01=0.04\); \(\mathbb{P}(T^c)=0.98\).<br>
+\(\mathbb{P}(E\mid T^c)=\dfrac{0.04}{0.98}\approx 0.0408.\)</p>
+<h4>(d) faulty transmission given faulty engine</h4>
+<p>\(\mathbb{P}(T\mid E)=\dfrac{0.01}{0.05}=0.2.\)</p>
+<p class="tip">Set up a \(2\times2\) grid of \(\{E,E^c\}\times\{T,T^c\}\) and every conditional is one cell over a margin. The classic full-Bayes version (notes Ex 1.7): three factories with faulty rates give \(\mathbb{P}(\text{factory 1}\mid\text{faulty})=\dfrac{0.15\cdot0.01}{0.15\cdot0.01+0.35\cdot0.05+0.5\cdot0.02}\approx 0.0517.\)</p>
+</details>
+
+<details>
+<summary>Example 5 — piecewise pdf: h, cdf, E, sd, IQR (2021 exam Q1)</summary>
+<div class="q card">\(f(x)=h\) for \(0\le x\lt1\), \(f(x)=h/2\) for \(1\le x\le2\), else 0. Find (a) \(h\); (b) cdf; (c) \(\mathbb{E}(X)\); (d) sd; (e) IQR.</div>
+<h4>(a) h</h4>
+<p>Area = \(h\cdot1 + \tfrac{h}{2}\cdot1=\tfrac{3h}{2}=1\Rightarrow h=\tfrac23.\)</p>
+<h4>(b) cdf (integrate piece by piece)</h4>
+$$F(x)=\begin{cases}0 & x\lt0\\[2pt]\tfrac23 x & 0\le x\lt1\\[2pt]\tfrac23+\tfrac13(x-1) & 1\le x\le2\\[2pt]1 & x\gt2.\end{cases}$$
+<h4>(c) E(X)</h4>
+<p>\(\mathbb{E}(X)=\int_0^1 \tfrac23 x\,dx+\int_1^2 \tfrac13 x\,dx=\tfrac13+\tfrac12=\tfrac56\approx0.833.\)</p>
+<h4>(d) variance &amp; sd</h4>
+<p>\(\mathbb{E}(X^2)=\int_0^1\tfrac23 x^2+\int_1^2\tfrac13 x^2=\tfrac29+\tfrac79=1\); \(\operatorname{Var}=1-(\tfrac56)^2=\tfrac{11}{36}\approx0.306\), sd \(\approx0.553.\)</p>
+<h4>(e) IQR</h4>
+<p>\(Q_1\): \(\tfrac23 x=0.25\Rightarrow x=0.375.\) \(Q_3\): since \(F(1)=\tfrac23\lt0.75\), use the second piece: \(\tfrac23+\tfrac13(x-1)=0.75\Rightarrow x=1.25.\) So \(\text{IQR}=1.25-0.375=0.875.\)</p>
+</details>
+
+<details>
+<summary>Example 6 — pure counting → probability (notes §1.5)</summary>
+<div class="q card">(i) A 20-question, 3-choice exam: how many ways to complete it? (ii) In how many ways can 8 horses place 1st/2nd/3rd? (iii) Probability that 40 people all have different birthdays.</div>
+<p>(i) Ordered, with replacement: \(3^{20}=3\,486\,784\,401.\)</p>
+<p>(ii) Ordered, without replacement: \({}^8P_3=8\cdot7\cdot6=336.\)</p>
+<p>(iii) \(\Omega=365^{40}\) equally-likely birthday vectors; favourable \(={}^{365}P_{40}\). So \(\mathbb{P}=\dfrac{{}^{365}P_{40}}{365^{40}}\approx 0.109\) — surprisingly small.</p>
+<p class="tip">Decide order/replacement first, pick the box from the \(2\times2\) counting table, then apply \(\mathbb{P}(A)=|A|/|\Omega|\).</p>
+</details>
+</section>
+
+<!-- ============================ EXAM QUESTION TYPES ============================ -->
+<section id="types">
+<h2>§4 Exam question types</h2>
+<p>Every Chapter 1–2 style seen across the 2021–2025 papers, with the recipe and a real citation.</p>
+
+<div class="card">
+<h3>Type A ★ Continuous RV with pdf \(f(x)=c\,x^a\) (the flagship)</h3>
+<p><b>Looks like:</b> "\(X\) has pdf \(f(x)=c x^a\) on \([0,L]\), and \(\mathbb{P}(X\lt k)=\)(given). Find \(c,a\); then \(\mathbb{P}(X\gt\cdot)\), median, mode, \(\mathbb{E}\), \(\operatorname{Var}\), cdf."<br>
+<b>Marks:</b> 10–15 (a whole Question 1).</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>Set \(\int_{\text{support}} f = 1\) (Equation 1).</li>
+<li>Use the given probability as Equation 2.</li>
+<li>Divide Eq 2 / Eq 1 to cancel \(c\) → solve for the exponent; back-substitute for \(c\).</li>
+<li>\(\mathbb{P}(X\gt k)=1-F(k)\); build \(F\) by integrating.</li>
+<li>Median: solve \(F(m)=0.5\). Mode: maximise \(f\) (check endpoints if monotone).</li>
+<li>\(\mathbb{E}=\int x f\), \(\mathbb{E}(X^2)=\int x^2 f\), \(\operatorname{Var}=\mathbb{E}(X^2)-\mathbb{E}(X)^2\).</li>
+</ol></div>
+<p><b>Real examples:</b> <b>2025 Q1</b> (\(cx^a\), find \(a,c\), \(\mathbb{P}(X\gt4)\), median &amp; mode) — see Worked Ex 1. <b>2023 Q1</b> (\(kx^3\): \(k\), \(\mathbb{E}\), \(\operatorname{Var}\), cdf, median) — Worked Ex 2. <b>2021 Q1</b> (piecewise pdf: \(h\), cdf, \(\mathbb{E}\), sd, IQR) — Worked Ex 5. This type has appeared as Q1 in <i>every</i> recent paper.</p>
+</div>
+
+<div class="card">
+<h3>Type B — Conditional probability / Bayes / probability rules</h3>
+<p><b>Looks like:</b> word problem with given marginal and/or joint probabilities; asks for a conditional in the reversed direction, or "define events, sample space and probabilities."<br><b>Marks:</b> ~11.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>Name events with letters; translate every sentence into \(\mathbb{P}(\cdot)\).</li>
+<li>Use addition rule to recover \(\mathbb{P}(A\cap B)\) if only \(\mathbb{P}(A\cup B)\) is given.</li>
+<li>Apply \(\mathbb{P}(A\mid B)=\mathbb{P}(A\cap B)/\mathbb{P}(B)\), or Bayes / Law of Total Probability for reversed conditionals.</li>
+</ol></div>
+<p><b>Real example:</b> <b>2022 Q1</b> (engine/transmission faults) — Worked Ex 4. Template Bayes: notes Example 1.7 (three factories).</p>
+</div>
+
+<div class="card">
+<h3>Type C — Binomial probabilities ("at least / at most")</h3>
+<p><b>Looks like:</b> fixed number \(n\) of independent yes/no trials, constant \(p\); "probability of exactly / at least / at most \(k\) successes", or \(\mathbb{E}\)/sd of the count.<br><b>Marks:</b> 2–4 within a larger question.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>Identify \(n\) and \(p\); confirm independence &amp; constant \(p\).</li>
+<li>Exactly \(k\): \(\binom{n}{k}p^k(1-p)^{n-k}\).</li>
+<li>"At least one" → \(1-\mathbb{P}(X=0)\); "at least \(k\)" → \(1-\mathbb{P}(X\le k-1)\).</li>
+<li>\(\mathbb{E}=np,\ \operatorname{Var}=np(1-p)\).</li>
+</ol></div>
+<p><b>Real example:</b> notes Ch 2 exercise 2 (\(\text{Bin}(10,\tfrac14)\): \(\mathbb{E}\), sd, \(\mathbb{P}(X=3)\), \(\mathbb{P}(X\le3)\)); coin-fairness \(\mathbb{P}(X\ge60)\) for \(\text{Bin}(100,0.5)\approx0.0284\) (Example 1.1). Left-hander count in Worked Ex 3.</p>
+</div>
+
+<div class="card">
+<h3>Type D — Normal probability &amp; quantiles ("heights are normally distributed")</h3>
+<p><b>Looks like:</b> "\(X\) is normally distributed with mean … and variance/sd …; find \(\mathbb{P}(X\gt\cdot)\)" or "find the value exceeded 10% of the time / the 95th percentile / the mean that achieves a target probability."<br><b>Marks:</b> 2–5.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>Read off \(\mu\) and \(\sigma\) (take \(\sqrt{\cdot}\) if variance is given!).</li>
+<li>Forward: standardise \(Z=(x-\mu)/\sigma\), read \(\Phi\) from the table; use \(1-\Phi\) / symmetry as needed.</li>
+<li>Reverse: find \(z\) with \(\Phi(z)=\)target, then \(x=\mu+z\sigma\).</li>
+</ol></div>
+<p><b>Real examples:</b> notes Example 2.1 (female vs male heights, \(Z=2\) vs \(Z=3\)); Ch 2 exercise 5 (Brisbane temp \(\mathcal N(32,2^2)\): \(\mathbb{P}(\gt36)\approx0.0228\); \(\mu\) for a 10% chance \(\approx 33.44\)); exercise 3 (95% quantile of \(\mathcal N(3,4)\) \(=3+1.645\cdot2\approx6.29\)).</p>
+</div>
+
+<div class="card">
+<h3>Type E — Normal approximation / CLT</h3>
+<p><b>Looks like:</b> "use the central limit theorem to approximate the probability that fewer than … " a large count or sum; "expected number of outliers from a standard normal."<br><b>Marks:</b> 6–8.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>Identify the sum/count and its mean and variance (for a binomial count, \(\mu=np,\ \sigma^2=np(1-p)\)).</li>
+<li>Approximate by \(\mathcal N(\mu,\sigma^2)\), standardise, read the table.</li>
+</ol></div>
+<p><b>Real examples:</b> <b>2021 Q2(f)</b> ("fewer than 130 go to the beach both days" via CLT); <b>2022 Q2(b)</b> (expected outliers: \(\text{IQR}=1.349\), fence probability \(\approx0.00698\), so \(n=10/0.00698\approx1433\) to expect 10 outliers).</p>
+</div>
+
+<div class="card">
+<h3>Type F — Counting → probability</h3>
+<p><b>Looks like:</b> "how many ways…", "probability that … all different / a specific hand". <b>Marks:</b> 2–4 (sometimes embedded).</p>
+<div class="method"><b>Recipe:</b> choose order/replacement box → count \(|\Omega|\) and \(|A|\) → \(\mathbb{P}=|A|/|\Omega|\).</div>
+<p><b>Real example:</b> notes §1.5 problems (3<sup>20</sup>, \({}^8P_3=336\), \(\binom{20}{3}=1140\); birthday problem \(\approx0.109\); 4 hearts &amp; 3 diamonds \(\approx0.074\)) — Worked Ex 6.</p>
+</div>
+</section>
+
+<!-- ============================ WORDING TRIGGERS ============================ -->
+<section id="triggers">
+<h2>§5 Wording triggers</h2>
+<p>The flagship feature: exam phrase → the exact method it demands.</p>
+<table>
+<tr><th>When the exam says…</th><th>Do this</th></tr>
+<tr><td>"\(f(x)=c\,x^a\) … <b>determine \(c\)</b>" (or \(k\), \(h\))</td><td>Integrate \(f\) over the support and set \(=1\). Solve for the constant.</td></tr>
+<tr><td>"… and \(\mathbb{P}(X\lt k)=\)(value)" <b>(a second condition)</b></td><td>Write a second integral \(\int_0^k f = \)value. <b>Divide</b> the two equations to cancel the constant and solve for the exponent \(a\).</td></tr>
+<tr><td>"Determine \(\mathbb{P}(X\gt k)\)"</td><td>\(1-F(k)=1-\int_{\text{low}}^{k} f\). For "\(\lt k\)" just integrate up to \(k\).</td></tr>
+<tr><td>"Determine the <b>median</b>"</td><td>Build the cdf \(F\); solve \(F(m)=0.5\).</td></tr>
+<tr><td>"Find \(Q_1\), \(Q_3\), the <b>IQR</b> / a percentile"</td><td>Solve \(F(x)=0.25,\ 0.75\) (or \(p\)); IQR \(=Q_3-Q_1\). Watch which cdf piece the quantile lands in.</td></tr>
+<tr><td>"Determine the <b>mode</b>"</td><td>Maximise the <b>density</b> \(f\): set \(f'=0\), or take the endpoint if \(f\) is monotone (e.g. \(c x^a\), \(a\gt0\) ⇒ mode at right end).</td></tr>
+<tr><td>"Determine the <b>cumulative distribution function</b>"</td><td>Integrate the pdf from the lower support to \(x\); state the full piecewise \(F\) (0 below, 1 above).</td></tr>
+<tr><td>"Determine \(\mathbb{E}(X)\) / \(\operatorname{Var}(X)\) / <b>standard deviation</b>"</td><td>\(\mathbb{E}=\int x f\); \(\operatorname{Var}=\int x^2 f-(\mathbb{E}X)^2\); sd \(=\sqrt{\operatorname{Var}}\).</td></tr>
+<tr><td>"\(Y=aX+b\) … find \(\mathbb{E}(Y)\), \(\operatorname{Var}(Y)\)"</td><td>\(\mathbb{E}(aX+b)=a\mathbb{E}X+b\); \(\operatorname{Var}(aX+b)=a^2\operatorname{Var}X\) (shift disappears, scale squares).</td></tr>
+<tr><td>"<b>at least</b> / <b>at most</b> … (a count of successes)"</td><td>Binomial. "At least one" ⇒ \(1-\mathbb{P}(X=0)\); "at least \(k\)" ⇒ \(1-\mathbb{P}(X\le k-1)\) (<b>complement trick</b>).</td></tr>
+<tr><td>"\(n\) independent trials, each with probability \(p\)"</td><td>\(X\sim\text{Bin}(n,p)\); \(\mathbb{E}=np\), \(\operatorname{Var}=np(1-p)\).</td></tr>
+<tr><td>"<b>heights / weights are normally distributed</b>", "what proportion exceeds…"</td><td>Standardise \(Z=(x-\mu)/\sigma\) and read the \(\Phi\) table. If given <b>variance</b>, take \(\sqrt{\cdot}\) for \(\sigma\).</td></tr>
+<tr><td>"the value exceeded only 10% of the time", "95th percentile", "what \(\mu\) gives probability 0.10"</td><td>Reverse Normal: find \(z\) with \(\Phi(z)=1-\alpha\), then \(x=\mu+z\sigma\) (or solve for \(\mu\)).</td></tr>
+<tr><td>"chosen at random / equally likely over an interval"</td><td>Uniform \(\mathcal U[a,b]\): \(f=\frac{1}{b-a}\), \(\mathbb{E}=\frac{a+b}{2}\), \(\operatorname{Var}=\frac{(b-a)^2}{12}\).</td></tr>
+<tr><td>"<b>given that</b> the test is positive / the transmission failed…"</td><td>Conditional probability; if the direction is reversed from what's given, use <b>Bayes' Rule</b>.</td></tr>
+<tr><td>"produced by factory 1, 2, or 3…", "one of several scenarios"</td><td><b>Law of Total Probability</b> to combine scenarios; Bayes to invert.</td></tr>
+<tr><td>"use the <b>central limit theorem</b> to approximate…"</td><td>Sum/count ≈ \(\mathcal N(\mu,\sigma^2)\); standardise and read the table.</td></tr>
+<tr><td>"how many ways / probability all different / a specific hand"</td><td>Counting: pick order/replacement box, then \(\mathbb{P}=|A|/|\Omega|\).</td></tr>
+<tr><td>"give your answer to <b>at least 3 significant figures</b>"</td><td>Keep full precision through working; round only the final number to ≥3 s.f.</td></tr>
+</table>
+</section>
+
+<!-- ============================ TRAPS ============================ -->
+<section id="traps">
+<h2>§6 Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Variance vs standard deviation in \(\mathcal N(\mu,\sigma^2)\).</b> "Variance 36" means \(\sigma=6\), not 36. The notation carries the <i>variance</i>; R/tables want the <i>sd</i>. Halting here loses the whole Normal part.</div>
+
+<div class="trap"><b>Forgetting to divide the two equations.</b> On \(f=cx^a\), students try to solve normalisation and the probability condition simultaneously and get stuck. <b>Dividing</b> instantly cancels \(c\) and \(a+1\), leaving one clean equation in \(a\).</div>
+
+<div class="trap"><b>Computing \((\mathbb{E}X)^2\) instead of \(\mathbb{E}(X^2)\).</b> The variance shortcut needs the integral \(\int x^2 f\,dx\) as its own quantity. Squaring the mean is a different (wrong) number.</div>
+
+<div class="trap"><b>Median ≠ mode ≠ mean.</b> Median solves \(F(m)=0.5\) (area); mode maximises \(f\) (height); mean is \(\int x f\). For a skewed \(cx^a\) density these three differ — using the wrong one loses easy marks.</div>
+
+<div class="trap"><b>Incomplete cdf.</b> A cdf answer that only gives the formula on the support is incomplete. State \(F(x)=0\) for \(x\) below the support and \(F(x)=1\) above it.</div>
+
+<div class="trap"><b>Quartile in the wrong cdf piece.</b> For piecewise densities, check whether \(F\) has already passed the target probability before the boundary (e.g. \(F(1)=\tfrac23\gt0.5\)) — otherwise you solve on the wrong segment.</div>
+
+<div class="trap"><b>Mode of a monotone density.</b> For \(f=cx^a\) with \(a\gt0\), \(f'\) is never zero on \((0,L)\); the maximum is at the endpoint \(x=L\). Setting \(f'=0\) yields \(x=0\) (a <i>minimum</i>) — the opposite of the mode.</div>
+
+<div class="trap"><b>Independent vs mutually exclusive.</b> Disjoint events (\(A\cap B=\varnothing\)) with positive probability are <i>dependent</i>. Independence is \(\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B)\), which is generally non-zero.</div>
+
+<div class="trap"><b>Order/replacement mix-up in counting.</b> A committee is unordered (\(\binom{n}{k}\)); a ranked podium is ordered (\({}^nP_k\)). Choosing the wrong box changes the count by a factor of \(k!\).</div>
+
+<div class="trap"><b>"At least" without the complement.</b> Summing \(\mathbb{P}(X=15)+\dots+\mathbb{P}(X=100)\) by hand is a Casio nightmare. Use \(1-\mathbb{P}(X\le14)\).</div>
+
+<div class="trap"><b>Premature rounding.</b> The instruction asks for ≥3 s.f. Rounding \(c\) or \(z\) early and feeding it forward corrupts the final answer. Carry exact fractions/surds (e.g. \(c=\sqrt5/50\)) until the last step.</div>
+
+<div class="trap"><b>Continuity correction judgement (CLT of a discrete count).</b> Approximating \(\mathbb{P}(X\ge15)\) by \(\Phi\) can be improved by using \(14.5\); know that the un-corrected answer (\(0.048\)) and the corrected one (\(0.067\)) differ, and the corrected value is closer to the exact \(0.073\).</div>
+</section>
+
+<!-- ============================ SELF-CHECK ============================ -->
+<section id="selfcheck">
+<h2>§7 Self-check</h2>
+<p>Attempt before revealing. Numbers verified by computation.</p>
+
+<details>
+<summary>Q1. \(X\) has pdf \(f(x)=c\,x^2\) on \([0,3]\). Find \(c\) and \(\mathbb{P}(X\gt2)\).</summary>
+<p>\(\int_0^3 c x^2 = 9c=1\Rightarrow c=\tfrac19\). \(\mathbb{P}(X\gt2)=\int_2^3 \tfrac19 x^2\,dx=\tfrac{1}{27}(27-8)=\tfrac{19}{27}\approx0.704.\)</p>
+</details>
+
+<details>
+<summary>Q2. For \(f(x)=kx^3\) on \([1,2]\) (Worked Ex 2), what is the mode?</summary>
+<p>\(f\) is increasing on \([1,2]\) (since \(x^3\uparrow\)), so the mode is the right endpoint \(x=2\).</p>
+</details>
+
+<details>
+<summary>Q3. \(X\sim\text{Bin}(10,\tfrac14)\). Find \(\mathbb{E}(X)\), sd, and \(\mathbb{P}(X\le3)\).</summary>
+<p>\(\mathbb{E}=np=2.5\); sd \(=\sqrt{10\cdot0.25\cdot0.75}=\sqrt{1.875}\approx1.369\); \(\mathbb{P}(X\le3)\approx0.776.\)</p>
+</details>
+
+<details>
+<summary>Q4. Adult IQ \(\sim\mathcal N(100,15^2)\). What proportion score above 130?</summary>
+<p>\(Z=(130-100)/15=2\); \(\mathbb{P}(Z\gt2)=1-\Phi(2)\approx0.0228\) (about 2.3%).</p>
+</details>
+
+<details>
+<summary>Q5. Brisbane December max temp \(\sim\mathcal N(32,2^2)\). Above which temperature do only 10% of days fall?</summary>
+<p>Need \(z\) with \(\Phi(z)=0.90\Rightarrow z\approx1.2816\). \(x=32+1.2816\cdot2\approx34.56\)°C.</p>
+</details>
+
+<details>
+<summary>Q6. \(\mathbb{P}(A)=0.6,\ \mathbb{P}(B)=0.5,\ \mathbb{P}(A\cup B)=0.8\). Find \(\mathbb{P}(A\mid B)\) and state whether \(A,B\) are independent.</summary>
+<p>\(\mathbb{P}(A\cap B)=0.6+0.5-0.8=0.3\). \(\mathbb{P}(A\mid B)=0.3/0.5=0.6=\mathbb{P}(A)\) ⇒ <b>independent</b> (also \(0.6\cdot0.5=0.3=\mathbb{P}(A\cap B)\)).</p>
+</details>
+
+<details>
+<summary>Q7. A disease affects 1% of people. A test is 99% sensitive and 95% specific. Given a positive test, what is the probability of disease? (Bayes)</summary>
+<p>\(\mathbb{P}(D\mid+)=\dfrac{0.99\cdot0.01}{0.99\cdot0.01+0.05\cdot0.99}=\dfrac{0.0099}{0.0099+0.0495}=\dfrac{0.0099}{0.0594}\approx0.167.\) Only ~17% despite the "accurate" test — the base rate dominates.</p>
+</details>
+
+<details>
+<summary>Q8. \(X\sim\mathcal U[2,8]\). Find \(\mathbb{E}(X)\), \(\operatorname{Var}(X)\), and \(\mathbb{P}(X\gt5)\).</summary>
+<p>\(\mathbb{E}=\tfrac{2+8}{2}=5\); \(\operatorname{Var}=\tfrac{(8-2)^2}{12}=\tfrac{36}{12}=3\); \(\mathbb{P}(X\gt5)=\tfrac{8-5}{8-2}=\tfrac36=0.5.\)</p>
+</details>
+</section>
+
+<div class="card" style="text-align:center">
+<p>Next: <a href="ch03-multiple-rvs.html">Chapter 3 — Multiple Random Variables →</a> (joint pmf, covariance, correlation) · <a href="index.html">← back to Hub</a></p>
+</div>
+
+</main>
+</body>
+</html>

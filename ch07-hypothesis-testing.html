@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 7 Hypothesis Testing</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 7 — Hypothesis Testing</h1>
+  <p>The single biggest mark source on the STAT1301 paper. One- and two-sample tests for Normal and Binomial data.</p>
+  <div>
+    <span class="badge gold">⭐ Highest-yield chapter</span>
+    <span class="badge">Notes pp 137–158</span>
+    <span class="badge">Formula sheet items 69–76 provided</span>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch06-estimation-cis.html">← Ch 6 Estimation &amp; CIs</a>
+  <a href="ch08-anova.html">Ch 8 ANOVA →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key tests</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>What a hypothesis test actually is</h3>
+<p>A hypothesis test is a <b>decision procedure</b>. You have data \(\mathbf{X}\) generated by some model with an unknown parameter \(\theta\) (e.g. a mean \(\mu\) or a proportion \(p\)). You must decide between two competing statements about \(\theta\):</p>
+<ul>
+<li><b>Null hypothesis \(H_0\)</b> — the "status quo", "no effect", "nothing interesting happening". This is the statement you assume true <i>until the data forces you to abandon it</i>.</li>
+<li><b>Alternative hypothesis \(H_1\)</b> — the statement you are <i>trying to demonstrate</i> (the effect, the difference, the improvement).</li>
+</ul>
+<p>The two do <b>not</b> play equal roles. The notes' court-of-law analogy (notes §7.1): \(H_0\) = "innocent", \(H_1\) = "guilty". You only convict (reject \(H_0\)) if the evidence is strong "beyond reasonable doubt". If evidence is weak you <i>fail to reject / accept</i> \(H_0\) — this is NOT proof of innocence, just insufficient evidence to convict.</p>
+</div>
+
+<div class="card">
+<h3>The engine: test statistic, null distribution, P-value</h3>
+<p>A <b>test statistic</b> \(T\) is a function of the data only, chosen so its value discriminates between \(H_0\) and \(H_1\). Under \(H_0\) it has a <b>known distribution</b> (the null distribution) — this is what lets us judge whether the observed \(t\) is "surprising".</p>
+<p>The <b>P-value</b> is the probability that, <i>if \(H_0\) were true</i>, the test statistic would be <b>as extreme or more extreme</b> than the value we actually observed (notes §7.1, formula sheet item 70). "More extreme" is defined by \(H_1\):</p>
+<table>
+<tr><th>Alternative \(H_1\)</th><th>Direction of extreme</th><th>P-value</th></tr>
+<tr><td>\(\mu \lt \mu_0\) (left one-sided)</td><td>small \(t\) (area to <b>left</b> of \(t\), even if \(t\gt0\))</td><td>\(\mathbb{P}_{H_0}(T\le t)\)</td></tr>
+<tr><td>\(\mu \gt \mu_0\) (right one-sided)</td><td>large \(t\) (area to <b>right</b> of \(t\), even if \(t\lt0\))</td><td>\(\mathbb{P}_{H_0}(T\ge t)\)</td></tr>
+<tr><td>\(\mu \ne \mu_0\) (two-sided)</td><td>large \(|t|\) (both tails)</td><td>\(2\,\mathbb{P}_{H_0}(T\ge |t|)\)</td></tr>
+</table>
+<p class="tip">The P-value is the "surprise-o-meter". <b>Small P-value = the data would be very unlikely under \(H_0\) = strong evidence against \(H_0\).</b> It is NOT the probability that \(H_0\) is true.</p>
+</div>
+
+<div class="card">
+<h3>Strength of evidence &amp; the decision rule</h3>
+<p>The smaller the P-value, the stronger the evidence against \(H_0\). The notes' rule of thumb (Figure 7.1):</p>
+<table>
+<tr><th>P-value</th><th>Evidence against \(H_0\)</th></tr>
+<tr><td>\(P \lt 0.01\)</td><td><b>Strong</b></td></tr>
+<tr><td>\(0.01 \le P \lt 0.05\)</td><td>Moderate</td></tr>
+<tr><td>\(0.05 \le P \lt 0.10\)</td><td>Weak</td></tr>
+<tr><td>\(P \ge 0.10\)</td><td>Little / inconclusive</td></tr>
+</table>
+<p><b>Decision rule:</b> reject \(H_0\) if \(P \lt \alpha\), where \(\alpha\) is a pre-chosen <b>significance level</b> (usually 0.05). Choosing \(\alpha=0.05\) guarantees that the probability of wrongly rejecting a true \(H_0\) (a Type I error) is at most 0.05.</p>
+</div>
+
+<div class="card">
+<h3>The 7 steps of a statistical test (formula sheet item 69)</h3>
+<p>Every full-marks test answer walks these steps. Memorise the sequence — it is the skeleton for the flagship exam questions.</p>
+<div class="method">
+<ol>
+<li><b>Model</b> — state the distributional assumptions for the data (e.g. \(X_1,\dots,X_n \overset{iid}{\sim} \mathcal N(\mu,\sigma^2)\)).</li>
+<li><b>Hypotheses</b> — give \(H_0\) and \(H_1\) in mathematical form.</li>
+<li><b>Test statistic</b> — write the statistic \(T\) and what it estimates.</li>
+<li><b>Null distribution</b> — the distribution of \(T\) under \(H_0\) (incl. degrees of freedom).</li>
+<li><b>Outcome</b> — plug in the numbers, get the observed \(t\).</li>
+<li><b>P-value</b> — compute (or bracket from tables) using the \(H_1\) direction.</li>
+<li><b>Conclusion</b> — accept/reject \(H_0\), then <b>interpret in the context of the story</b>.</li>
+</ol>
+</div>
+<p class="tip">In the exam the calculator is a Casio FX82 and you only get printed tables — so steps 4 and 6 mean "name the \(t_{df}\) or \(\mathcal N(0,1)\) distribution and <b>bracket</b> the P-value between two table entries". You are graded on the recipe, not on a decimal to 6 places.</p>
+</div>
+
+<div class="card">
+<h3>Why a \(t\)-distribution and not Normal?</h3>
+<p>For a mean, the natural statistic is \(\bar X\). But we must "standardise" it by its spread. If \(\sigma\) were known we would use \(Z=(\bar X-\mu_0)/(\sigma/\sqrt n)\sim\mathcal N(0,1)\). In practice \(\sigma\) is unknown, so we plug in the sample SD \(S\). Replacing \(\sigma\) by the <i>random</i> estimator \(S\) adds extra variability, which fattens the tails: the result is a <b>Student \(t_{n-1}\)</b> distribution (notes §7.2, Theorem 6.7). The fewer the degrees of freedom, the fatter the tails. As \(df\to\infty\), \(t_{df}\to\mathcal N(0,1)\) (the last row of the \(t\)-table, item \(\infty\), IS the Normal quantiles).</p>
+<p class="trap">For <b>proportions</b> we go the other way: there is no unknown nuisance \(\sigma\) (the variance \(p_0(1-p_0)\) is fixed by \(H_0\)), so the CLT gives a \(\mathcal N(0,1)\) statistic — no \(t\), no degrees of freedom.</p>
+</div>
+
+<div class="card">
+<h3>Which test? A one-glance map of Chapter 7</h3>
+<table>
+<tr><th>Situation</th><th>Data type</th><th>Test</th><th>Null dist.</th><th>Sheet</th></tr>
+<tr><td>1 sample vs a target \(\mu_0\)</td><td>Normal, \(\sigma\) unknown</td><td>1-sample \(t\)-test</td><td>\(t_{n-1}\)</td><td>72</td></tr>
+<tr><td>1 sample vs a target \(p_0\)</td><td>Binomial / Bernoulli</td><td>1-sample proportion (binomial) test</td><td>\(\mathrm{Bin}(n,p_0)\) exact, or \(\mathcal N(0,1)\) approx</td><td>73</td></tr>
+<tr><td>2 <b>independent</b> groups, equal variances</td><td>Normal</td><td>Pooled 2-sample \(t\)</td><td>\(t_{m+n-2}\) (exact)</td><td>74</td></tr>
+<tr><td>2 <b>independent</b> groups, unequal variances</td><td>Normal</td><td>Welch 2-sample \(t\)</td><td>\(t_{df}\) (Welch, approx)</td><td>75</td></tr>
+<tr><td>2 <b>paired</b> measurements (same subjects)</td><td>Normal</td><td>Paired \(t\) = 1-sample \(t\) on differences</td><td>\(t_{n-1}\)</td><td>72</td></tr>
+<tr><td>2 groups, compare proportions</td><td>Binomial</td><td>2-sample proportion test</td><td>\(\mathcal N(0,1)\) approx</td><td>76</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 2. KEY FORMULAS ================= -->
+<section id="formulas">
+<h2>§2 · Key tests &amp; when to use them</h2>
+<p class="tip">All of these are on the provided formula sheet (items 69–76). The exam skill is <b>recognition + execution</b>, not recall. Learn the trigger for each.</p>
+
+<div class="card">
+<h3>1-sample \(t\)-test <span style="color:var(--muted);font-weight:400">(sheet 72)</span></h3>
+$$ T=\frac{\bar X-\mu_0}{S/\sqrt n}\ \overset{H_0}{\sim}\ t_{n-1}$$
+<div class="when">You have ONE sample of measurements and a claimed/reference value \(\mu_0\). \(\sigma\) is unknown (the usual case). Model: \(X_1,\dots,X_n\overset{iid}{\sim}\mathcal N(\mu,\sigma^2)\); test \(H_0:\mu=\mu_0\).</div>
+<p><b>\(H_1\) options:</b> \(\mu\ne\mu_0\) (two-sided), \(\mu\gt\mu_0\), \(\mu\lt\mu_0\). Choose by the wording ("differs" vs "greater/exceeds" vs "less").</p>
+</div>
+
+<div class="card">
+<h3>Paired \(t\)-test <span style="color:var(--muted);font-weight:400">(1-sample \(t\) on the differences)</span></h3>
+$$ D_i=X_i-Y_i,\qquad T=\frac{\bar D-\delta_0}{S_D/\sqrt n}\ \overset{H_0}{\sim}\ t_{n-1}$$
+<div class="when">Two measurements on the <b>SAME</b> experimental units — "before &amp; after", "left arm &amp; right arm", "two labs on the same 15 patients". Collapse each pair to its difference \(D_i\) and run a one-sample \(t\)-test. Usually \(\delta_0=0\) (\(H_0:\mu_X-\mu_Y=0\)), but a claim like "3 mmHg larger" sets \(\delta_0=3\).</div>
+<p class="trap">If the exam gives you a "difference" column with its own mean and SD (e.g. 2024 Q3), that is your signal it is <b>paired</b>: use \(n-1\) df where \(n\) = number of pairs, NOT \(m+n-2\).</p>
+</div>
+
+<div class="card">
+<h3>2-sample \(t\)-test — Welch (unequal variances) <span style="color:var(--muted);font-weight:400">(sheet 75)</span></h3>
+$$ T=\frac{\bar X-\bar Y}{\sqrt{\dfrac{S_X^2}{m}+\dfrac{S_Y^2}{n}}}\ \overset{H_0}{\underset{\text{approx}}{\sim}}\ t_{df},\qquad
+df=\frac{\left(\dfrac{s_X^2}{m}+\dfrac{s_Y^2}{n}\right)^2}{\dfrac{s_X^4}{m^2(m-1)}+\dfrac{s_Y^4}{n^2(n-1)}}$$
+<div class="when">Two <b>independent</b> groups (different subjects in each), and you are NOT willing to assume the two population variances are equal. This is R's <code>t.test</code> default. If using tables, <b>round the Welch df DOWN</b> to the nearest integer (notes p 150).</div>
+<p>Conservative fallback if the df formula is too fiddly: \(df=\min(m-1,\,n-1)\) (sheet 75).</p>
+</div>
+
+<div class="card">
+<h3>2-sample \(t\)-test — Pooled (equal variances) <span style="color:var(--muted);font-weight:400">(sheet 74)</span></h3>
+$$ S_p^2=\frac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2},\qquad
+T=\frac{\bar X-\bar Y}{S_p\sqrt{\dfrac1m+\dfrac1n}}\ \overset{H_0}{\sim}\ t_{m+n-2}\ \text{(exact)}$$
+<div class="when">Two independent groups AND you assume equal population variances. Gives an <b>exact</b> \(t\) distribution with the clean \(m+n-2\) df. Use when sample SDs are close (rule of thumb below) or the question tells you to "assume equal variances / use the pooled SD".</div>
+</div>
+
+<div class="card">
+<h3>Pooled vs Welch — how to decide <span style="color:var(--muted);font-weight:400">(examiners love this)</span></h3>
+<p>The course uses this pragmatic rule: look at the ratio of the larger to the smaller sample SD.</p>
+<table>
+<tr><th>Situation</th><th>Choose</th><th>Justification you write</th></tr>
+<tr><td>SD ratio \(\lesssim 2\) (and/or symmetric histograms of similar spread)</td><td><b>Pooled</b></td><td>"The sample SDs are similar (ratio \(\approx\) …), so the equal-variance assumption is reasonable; I use the pooled test which gives an exact \(t_{m+n-2}\)."</td></tr>
+<tr><td>SD ratio \(\gtrsim 2\), or clearly different spreads in the histograms</td><td><b>Welch</b></td><td>"The sample SDs differ substantially (ratio \(\approx\) …), so I do not assume equal variances and use the Welch test."</td></tr>
+</table>
+<p class="tip">Welch is <b>always safe</b> — if unsure, use Welch and say so. You lose no marks for defaulting to Welch, but you can lose marks for pooling when the spreads are obviously unequal.</p>
+</div>
+
+<div class="card">
+<h3>1-sample proportion (binomial) test <span style="color:var(--muted);font-weight:400">(sheet 73)</span></h3>
+<p><b>Exact (small \(n\)):</b> test statistic \(X\sim\mathrm{Bin}(n,p_0)\) under \(H_0:p=p_0\); P-value from binomial tail probabilities.</p>
+$$ \text{Normal approx (large }n\text{): }\quad Z=\frac{\hat P-p_0}{\sqrt{p_0(1-p_0)/n}}\ \overset{H_0}{\underset{\text{approx}}{\sim}}\ \mathcal N(0,1),\quad \hat P=\tfrac Xn$$
+<div class="when">Count / yes-no data vs a claimed proportion \(p_0\) ("is the coin fair, \(p_0=0.5\)?", "do more than 80% prefer…?"). Small \(n\): use the exact binomial. Large \(n\) (\(np_0\) and \(n(1-p_0)\ge5\)): the Normal approximation is acceptable.</div>
+<p class="trap">The variance in the denominator uses \(p_0\) (the null value), NOT \(\hat p\). This differs from the CONFIDENCE-INTERVAL formula (sheet 67) which uses \(\hat p\). Test → \(p_0\); CI → \(\hat p\).</p>
+</div>
+
+<div class="card">
+<h3>2-sample proportion test <span style="color:var(--muted);font-weight:400">(sheet 76)</span></h3>
+$$ \hat P=\frac{X+Y}{m+n}\ \text{(pooled)},\qquad
+Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}}\ \overset{H_0}{\underset{\text{approx}}{\sim}}\ \mathcal N(0,1)$$
+<div class="when">Comparing two proportions from two independent groups ("are ABC viewers more left-wing than commercial viewers?", "are males more likely to be left-handed than females?"). Under \(H_0:p_X=p_Y\) the common \(p\) is estimated by the <b>pooled</b> proportion \(\hat P\) over BOTH groups.</div>
+</div>
+
+<div class="card">
+<h3>Type I / Type II error &amp; power</h3>
+<table>
+<tr><th></th><th>\(H_0\) is TRUE</th><th>\(H_1\) is TRUE</th></tr>
+<tr><td><b>Accept \(H_0\)</b></td><td>✓ Correct</td><td><b>Type II error</b> (prob \(\beta\))</td></tr>
+<tr><td><b>Reject \(H_0\)</b></td><td><b>Type I error</b> (prob \(\alpha\))</td><td>✓ Correct — this is <b>Power</b> \(=1-\beta\)</td></tr>
+</table>
+<ul>
+<li><b>Type I error</b> = reject a true \(H_0\) (convict the innocent). Its probability is controlled at \(\le\alpha\) by the decision rule.</li>
+<li><b>Type II error</b> = fail to reject a false \(H_0\) (acquit the guilty). Its probability is \(\beta\).</li>
+<li><b>Power</b> \(=1-\beta=\) probability of correctly rejecting \(H_0\) when a specific \(H_1\) is true.</li>
+</ul>
+<p>The two errors compete: shrinking \(\alpha\) inflates \(\beta\). Power rises with larger \(n\), larger true effect size \(|\mu-\mu_0|\), smaller \(\sigma\), and larger \(\alpha\). For a \(t\)-test the power depends on \(\mu\) and \(\sigma\) only through the ratio \(\mu/\sigma\) — the "signal-to-noise ratio" (notes §7.3).</p>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Every number below is verified with <code>scipy.stats</code>. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — One-sample \(t\)-test (notes Example, Decaf pulse data)</summary>
+<p><b>Q.</b> Change in pulse rate for the Decaf (control) group: 4, 10, 7, −9, 5, 4, 5, 7, 6, 12 (\(n=10\)). Is there evidence the expected change is greater than 0?</p>
+<div class="mono">1. Model:  X₁,…,X₁₀ ~iid N(μ, σ²), σ unknown.
+2. Hypotheses:  H₀: μ = 0   vs   H₁: μ > 0   (right one-sided — "greater than 0").
+3. Statistic:  T = (X̄ − 0)/(S/√n),  where X̄ = sample mean, S = sample SD.
+4. Null dist:  T ~ t₉.
+5. Outcome:  x̄ = 5.1,  s = 5.587,  t = 5.1 / (5.587/√10) = 2.89   (verified).
+6. P-value (right tail):  P(t₉ ≥ 2.89).
+      t-table df=9:  2.82 → γ=0.99,  3.25 → γ=0.995.
+      2.82 < 2.89 < 3.25  ⇒  0.005 < P < 0.01.   (exact = 0.00899)
+7. Conclusion:  P < 0.01 ⇒ strong evidence; reject H₀.
+      In context: the mean pulse-rate change for the decaf group is
+      significantly greater than 0 — so a rise cannot be attributed to caffeine alone.</div>
+<p class="tip">This shows the money skill: <b>bracket the P-value from the \(t\)-table</b> ("\(0.005\lt P\lt0.01\)") since you have no software.</p>
+</details>
+
+<details>
+<summary>Example 2 — Two-sample Welch AND pooled \(t\)-test (notes, Alice's caffeine data)</summary>
+<p><b>Q.</b> Caffeinated group (\(m=10\)): mean 15.8, sd 8.32. Decaf (\(n=10\)): mean 5.1, sd 5.59. Does caffeine increase pulse rate?</p>
+<div class="mono">1. Model:  X₁,…,X₁₀ ~iid N(μ_X,σ_X²)  [caff],  Y₁,…,Y₁₀ ~iid N(μ_Y,σ_Y²)  [decaf],  independent.
+2. Hypotheses:  H₀: μ_X = μ_Y   vs   H₁: μ_X > μ_Y   (i.e. μ_X − μ_Y > 0).
+
+── WELCH (unequal variances) ──
+3. T = (X̄ − Ȳ)/√(S_X²/m + S_Y²/n)
+5. t = (15.8 − 5.1)/√(8.32²/10 + 5.59²/10) = 10.7/√(6.93+3.12) = 3.38   (verified 3.375)
+4. df = (a+b)² / (a²/9 + b²/9) with a=S_X²/10, b=S_Y²/10  ⇒ df = 15.74 → round DOWN to 15.
+6. P(t₁₅ ≥ 3.38):  table df=15:  3.29 → 0.9975,  3.73 → 0.999  ⇒ 0.001 < P < 0.0025.  (exact 0.00197)
+
+── POOLED (equal variances) ──
+   S_p² = (9·8.32² + 9·5.59²)/18 = 32.43 ⇒ S_p = 5.69
+   t = 10.7 / (5.69·√(1/10+1/10)) = 3.38,   df = m+n−2 = 18  (EXACT t₁₈)
+   P(t₁₈ ≥ 3.38): table df=18: 3.20→0.9975, 3.61→0.999 ⇒ 0.001 < P < 0.0025.  (exact 0.00169)
+
+7. Either way P < 0.01 ⇒ strong evidence; reject H₀.
+   In context: caffeine significantly increases the change in pulse rate.</div>
+<p class="tip">SD ratio \(8.32/5.59\approx1.5\;(\lt2)\) so pooling is defensible here; both routes give \(t=3.38\) and the same conclusion.</p>
+</details>
+
+<details>
+<summary>Example 3 — Paired \(t\)-test (notes Example 7.7/7.8, two labs, same 15 patients)</summary>
+<p><b>Q.</b> Two labs measured the same 15 patients. Is there a difference between labs? lab1 and lab2 vectors given in notes.</p>
+<div class="mono">Recognise PAIRED: same 15 patients measured by both labs ⇒ collapse to differences D = lab1 − lab2.
+1. Model:  D₁,…,D₁₅ ~iid N(μ_D, σ²).
+2. Hypotheses:  H₀: μ_D = 0  vs  H₁: μ_D ≠ 0   (two-sided — "a difference").
+3. T = (D̄ − 0)/(S_D/√15) ~ t₁₄.
+5. d̄ = −0.933,  s_D = 2.052,  t = −0.933/(2.052/√15) = −1.76   (verified).
+6. P (two-sided) = 2·P(t₁₄ ≥ 1.76):  table df=14: 1.76 → 0.95  ⇒ one tail ≈ 0.05, so P ≈ 0.10.  (exact 0.0999)
+7. P ≈ 0.10 ⇒ only weak/borderline evidence; do NOT reject H₀ at α=0.05.
+   In context: no significant evidence the two labs give different results on average.</div>
+<p class="trap">If you had wrongly treated these as two independent samples of 15 you would use \(t_{28}\) and get the wrong SE — the pairing removes patient-to-patient variability and is far more powerful.</p>
+</details>
+
+<details>
+<summary>Example 4 — One-sample proportion test (notes Example 7.4–7.6, yoghurt)</summary>
+<p><b>Q.</b> 8 of 10 people preferred the new sweetener. Evidence that the new style is preferred (\(p\gt0.5\))?</p>
+<div class="mono">1. Model:  X = # preferring new ~ Bin(10, p).
+2. Hypotheses:  H₀: p = 0.5   vs   H₁: p > 0.5.
+3. Statistic:  X  (exact test).   4. Under H₀:  X ~ Bin(10, 0.5).
+5. Outcome: x = 8.
+6. EXACT P-value = P(X ≥ 8) = Σ_{k=8}^{10} C(10,k)(0.5)^10 = 0.0547   (verified).
+   NORMAL APPROX:  p̂ = 0.8,  z = (0.8−0.5)/√(0.5·0.5/10) = 1.897,
+                   P = P(Z ≥ 1.90) = 1 − Φ(1.90) = 1 − 0.9713 = 0.0287.
+7. Exact P = 0.055 (weak evidence — borderline, do not reject at 0.05).
+   The two P-values differ a lot (0.055 vs 0.029) because n=10 is too small for the
+   Normal approximation ⇒ for small n prefer the EXACT binomial test.</div>
+</details>
+
+<details>
+<summary>Example 5 — Two-sample proportion test (notes Example 7.9/7.10, ABC viewers)</summary>
+<p><b>Q.</b> 40/70 ABC viewers vs 50/100 commercial viewers claim left-wing allegiance. Are ABC viewers more left-wing?</p>
+<div class="mono">1. Model:  X ~ Bin(70, p_X) [ABC],  Y ~ Bin(100, p_Y) [commercial],  independent.
+2. Hypotheses:  H₀: p_X = p_Y   vs   H₁: p_X > p_Y.
+3&4. Z = (p̂_X − p̂_Y)/√(p̂(1−p̂)(1/m+1/n)) ~ N(0,1),  with pooled p̂ = (X+Y)/(m+n).
+5. p̂_X = 40/70 = 0.571,  p̂_Y = 0.50,  p̂ = 90/170 = 0.529.
+   z = (0.571−0.500)/√(0.529·0.471·(1/70+1/100)) = 0.918   (verified).
+6. P = P(Z ≥ 0.92) = 1 − Φ(0.92) = 1 − 0.8212 = 0.179.
+7. P = 0.18 ⇒ little evidence; do NOT reject H₀.
+   In context: no evidence that ABC viewers are more left-wing than commercial viewers.</div>
+</details>
+
+<details>
+<summary>Example 6 — Power of a test (notes Example 7.3)</summary>
+<p><b>Q.</b> One-sample \(t\)-test, \(H_0:\mu=0\) vs \(H_1:\mu\gt0\), \(\alpha=0.05\), \(n=5\). What is the power when the truth is \(\mu=1,\sigma=2\)?</p>
+<div class="mono">Signal-to-noise: μ/σ = 0.5. Reject if t = X̄/(S/√5) exceeds t₄,0.95 = 2.13.
+Under the alternative T has a NON-CENTRAL t₄ with ncp = μ/(σ/√n) = 1/(2/√5) = 1.118.
+Power = P(reject | H₁) = 0.239   (verified; notes report 0.24).
+Same calc with n = 50 ⇒ power = 0.967.</div>
+<p class="tip">Takeaway you can be asked to explain: with a small effect (\(\mu/\sigma=0.5\)) and \(n=5\) the test almost never detects the effect (power 24%); raising \(n\) to 50 pushes power to 97%. <b>More data ⇒ more power.</b></p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>Hypothesis testing appears in <b>every</b> paper, usually as a 15–20 mark multi-part question and often the single most valuable question on the paper. Below are the styles that actually appear.</p>
+
+<div class="card q">
+<h3>Type A — Two-sample \(t\)-test from a summary table <span class="marks">flagship · ~19 marks</span></h3>
+<p><b>Looks like:</b> a table of \(n\), means and SDs for two groups; you must state hypotheses, run the test, and justify pooled vs Welch from histograms/SDs. This is the highest-value question on the paper.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>CI part first if asked (one-sample \(t\) CI on one group).</li>
+<li>State \(H_0:\mu_X=\mu_Y\) vs \(H_1\) (direction from wording) — <b>define every symbol</b>.</li>
+<li>Choose pooled vs Welch (SD ratio + histogram shape). State which.</li>
+<li>Compute \(t\) to <b>2 sig figs</b>; state df.</li>
+<li>Bracket the P-value from the \(t\)-table.</li>
+<li>Statistical conclusion + one sentence in context.</li>
+<li>State &amp; check assumptions (independence, normality) from the plots.</li>
+</ol></div>
+<p><b>Real example — 2025 Q3 (Gardner diet trial), the flagship.</b> Low-Carb: \(n=304\), mean weight change \(-5.99\) (SD 5.69). Low-Fat: \(n=305\), \(-5.29\) (SD 5.70). "Did one diet produce a <i>different</i> change than the other?"</p>
+<details>
+<summary>Full worked solution — 2025 Q3(a)–(d)</summary>
+<div class="mono">(a) 95% CI for LC mean weight change (one-sample t, df=303):
+    t₀.₉₇₅,₃₀₃ ≈ 1.97  (t-table ∞/df=200 row ≈ 1.97)
+    −5.99 ± 1.97·(5.69/√304) = −5.99 ± 0.64 = (−6.63, −5.35) kg   (verified)
+    Interpret: we are 95% confident the true mean weight change on LC is between
+    −6.63 and −5.35 kg — an average LOSS (interval entirely below 0).
+
+(b) Notation & hypotheses [explain all notation!]:
+    Let μ_LC = population mean 12-month weight change on the low-carb diet,
+        μ_LF = population mean 12-month weight change on the low-fat diet.
+    H₀: μ_LC = μ_LF   vs   H₁: μ_LC ≠ μ_LF   (two-sided — "a DIFFERENT change").
+
+(c) Two independent groups on the CHANGE scores. Perform two-sample t-test.
+    diff = −5.99 − (−5.29) = −0.70
+    SE (Welch) = √(5.69²/304 + 5.70²/305) = 0.4615
+    t = −0.70 / 0.4615 = −1.5  (to 2 sig figs)     (verified −1.52)
+    df: Welch ≈ 607 (huge) → use ∞ row of t-table.  [Pooled: t₆₀₇, identical to 2 sf.]
+    P (two-sided) = 2·P(Z ≥ 1.52):  table ∞: 1.28→0.90, 1.64→0.95
+       ⇒ one tail between 0.05 and 0.10 ⇒ 0.10 < P < 0.20.   (exact 0.13)
+    Conclusion: P ≈ 0.13 > 0.05 ⇒ do NOT reject H₀.
+    In context: no significant evidence that the two diets produce different
+    average weight change at 12 months.
+
+(d) Assumptions: (i) observations independent within & between groups
+    (randomised trial ⇒ satisfied). (ii) Approximate normality of each group's
+    change scores — histograms of "12-month change" are roughly symmetric &
+    bell-shaped, and n is large (CLT), so satisfied.
+    Pooled vs Welch: sample SDs are 5.69 and 5.70 — essentially IDENTICAL
+    (ratio ≈ 1.002 ≪ 2), so the equal-variance assumption is very reasonable.
+    Pooled is justified here; Welch gives the same answer to 2 sf.</div>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — Paired \(t\)-test (same subjects, two measurements) <span class="marks">~9–13 marks</span></h3>
+<p><b>Looks like:</b> a table with a <b>"difference" column</b> (its own mean and SD), or wording "measured at baseline and again after…" on the SAME subjects. Signals paired.</p>
+<div class="method"><b>Recipe:</b> work on the differences \(D=X-Y\). \(H_0:\mu_D=\delta_0\) (usually 0). \(t=(\bar d-\delta_0)/(s_D/\sqrt n)\sim t_{n-1}\). Bracket P, conclude in context.</div>
+<p><b>Real example — 2024 Q3 (forearm vs upper-arm blood pressure, 44 subjects).</b> Difference column: mean 2.22, SD 9.64, \(n=44\).</p>
+<details>
+<summary>Full worked solution — 2024 Q3(a)–(e)</summary>
+<div class="mono">(a) Let μ_D = mean of (Forearm − Upper-arm) systolic BP differences, per person.
+    H₀: μ_D = 0   vs   H₁: μ_D ≠ 0   (two-sided — is the forearm a valid alternative site?).
+
+(b) PAIRED (same subjects, forearm & upper arm) ⇒ one-sample t on differences.
+    t = 2.22/(9.64/√44) = 2.22/1.453 = 1.5  (2 sig figs)      (verified 1.53)
+    df = 43. P (two-sided) = 2·P(t₄₃ ≥ 1.53):
+       table df=40: 1.30→0.90, 1.68→0.95 ⇒ one tail 0.05–0.10 ⇒ 0.10 < P < 0.20.  (exact 0.134)
+    Conclusion: P ≈ 0.13 > 0.05 ⇒ do NOT reject H₀. No significant difference
+    between forearm & upper-arm measurements ⇒ forearm is a plausible alternative site.
+
+(c) Claim: forearm 3 mmHg LARGER ⇒ H₀: μ_D = 3  vs  H₁: μ_D ≠ 3.
+    t = (2.22 − 3)/(9.64/√44) = −0.78/1.453 = −0.54,  df=43.  (verified)
+    P (two-sided) huge (>0.5) ⇒ no evidence against the 3 mmHg claim.
+
+(d) 95% CI for σ of the differences (chi-squared, df=43):
+    q₁ = χ²₄₃,₀.₀₂₅ ≈ 26.8,  q₂ = χ²₄₃,₀.₉₇₅ ≈ 63.0
+    ( 43·9.64²/63.0 , 43·9.64²/26.8 ) → σ ∈ (7.96, 12.21) mmHg.   (verified)
+    Assumption: the differences are normally distributed.
+
+(e) Sample size so 95% margin of error ≤ 1 mmHg, using s_D = 9.64:
+    1.96·9.64/√n ≤ 1 ⇒ n ≥ (1.96·9.64)² = 357.0 ⇒ n = 357.   (verified)</div>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — Two-sample test + CI from small samples (pooled) <span class="marks">~18 marks</span></h3>
+<p><b>Looks like:</b> two small independent groups with near-equal SDs; asks for a CI on the mean difference and a one-sided test of a claim.</p>
+<p><b>Real example — 2023 Q4 (sheep vs goat pâté protein).</b> Sheep: \(n=6\), mean 20.7, SD 0.17. Goat: \(n=6\), mean 19.2, SD 0.17. Normally distributed.</p>
+<details>
+<summary>Full worked solution — 2023 Q4(a)–(c)</summary>
+<div class="mono">(a) Let μ_s, μ_g = population mean protein (g / 100g) of sheep & goat pâté.
+    Researcher's question ("is there a difference"): H₀: μ_s = μ_g vs H₁: μ_s ≠ μ_g.
+
+(b) SDs identical (0.17 = 0.17) ⇒ POOLED, exact t₁₀.
+    S_p = 0.17  (pooled of two equal SDs).
+    diff = 20.7 − 19.2 = 1.5.  SE = 0.17·√(1/6+1/6) = 0.0981.
+    t₀.₉₇₅,₁₀ = 2.228 ⇒ 95% CI = 1.5 ± 2.228·0.0981 = 1.5 ± 0.219 = (1.281, 1.719) g.  (verified)
+    Statistical conclusion: 0 is NOT in the interval ⇒ reject H₀ at 5%.
+    In context: sheep pâté has significantly higher mean protein than goat pâté.
+
+(c) Producer claims sheep have "at least 2g more" ⇒ test H₀: μ_s − μ_g = 2 vs H₁: μ_s − μ_g < 2.
+    t = (1.5 − 2)/0.0981 = −5.09,  df=10.  (verified −5.094)
+    P(t₁₀ ≤ −5.09): |t|=5.09 > 4.59 (=t₁₀,₀.₉₉₉₅) ⇒ P < 0.0005.  (exact 0.00023)
+    Reject H₀: strong evidence the true difference is LESS than 2g — the "≥2g more"
+    advertising claim is not supported.</div>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Proportion tests &amp; Type-I/II/power exercises <span class="marks">notes / tutorial level</span></h3>
+<p><b>Looks like:</b> count data vs a target (one-sample), two count groups (two-sample), or a "find \(\alpha\), \(\beta\), power" exercise with an explicit rejection region. See notes §7.7 Exercises 5, 6, 9 and Examples 7.4–7.10 (all worked in §3 above).</p>
+<div class="method"><b>Type-I/II drill (notes Ex 6):</b> reject \(H_0:p=0.8\) if \(X\le12\), \(X\sim\mathrm{Bin}(20,p)\).
+<ul>
+<li>\(\alpha=\mathbb{P}(X\le12\mid p=0.8)\) — Type I under the null.</li>
+<li>\(\beta(0.6)=\mathbb{P}(X\gt12\mid p=0.6)=\mathbb{P}(X\ge13\mid p=0.6)\) — Type II under that alternative.</li>
+<li>Power at \(p=0.6\) \(=1-\beta(0.6)\).</li>
+</ul></div>
+</div>
+</section>
+
+<!-- ================= 5. WORDING TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">This is the flagship of the page. The exam is won by <b>reading the phrasing and instantly knowing the method, the df, and the P-value direction</b>. Learn these mappings cold.</p>
+
+<h4>A · Structural triggers — which test?</h4>
+<table>
+<tr><th>When the exam says…</th><th>Do this</th></tr>
+<tr><td>"one sample… test whether the mean is/exceeds/differs from [number]"</td><td>1-sample \(t\)-test, \(t_{n-1}\).</td></tr>
+<tr><td>"measured at <b>baseline and again after</b>…", "before and after", "the <b>same</b> subjects/patients", or a table with a <b>difference column (mean &amp; SD)</b></td><td><b>PAIRED</b> \(t\)-test = 1-sample \(t\) on differences \(D=X-Y\), \(t_{n-1}\) with \(n=\)#pairs.</td></tr>
+<tr><td>"two groups", "two independent samples", "compare group A and group B" (different subjects)</td><td><b>Two-sample</b> \(t\)-test. Then decide pooled vs Welch.</td></tr>
+<tr><td>"assume equal variances" / "use the pooled standard deviation" / SDs are close (ratio &lt; 2)</td><td>Pooled 2-sample \(t\), exact \(t_{m+n-2}\).</td></tr>
+<tr><td>"variances may be different" / "unequal variances" / SDs clearly differ (ratio &gt; 2)</td><td>Welch 2-sample \(t\), \(t_{df}\) (round df DOWN for tables), or fallback \(\min(m-1,n-1)\).</td></tr>
+<tr><td>"proportion", "percentage", counts of yes/no or success/failure, vs a target \(p_0\)</td><td>1-sample proportion test. Small \(n\): exact binomial. Large \(n\): \(Z\) with \(\sqrt{p_0(1-p_0)/n}\).</td></tr>
+<tr><td>compare TWO proportions / two rates / a 2×2 count of "success" across two groups</td><td>2-sample proportion test, pooled \(\hat P=(X+Y)/(m+n)\), \(Z\sim\mathcal N(0,1)\).</td></tr>
+<tr><td>"association between [two categorical variables]" / a full contingency table (≥2×2 of categories)</td><td>That's a <b>chi-squared</b> test → see Ch 11, not a proportion \(Z\)-test.</td></tr>
+</table>
+
+<h4>B · Direction triggers — one-sided vs two-sided</h4>
+<table>
+<tr><th>When the exam says…</th><th>\(H_1\)</th><th>P-value</th></tr>
+<tr><td>"is there <b>a difference</b> / does it <b>differ</b> / is it <b>not equal</b> / changed"</td><td>\(\ne\) two-sided</td><td>\(2\,\mathbb{P}(T\ge|t|)\)</td></tr>
+<tr><td>"is it <b>greater / higher / more / increased / exceeds / larger / taller</b>"</td><td>\(\gt\) right</td><td>\(\mathbb{P}(T\ge t)\)</td></tr>
+<tr><td>"is it <b>less / lower / smaller / decreased / thinner / fewer</b>"</td><td>\(\lt\) left</td><td>\(\mathbb{P}(T\le t)\)</td></tr>
+<tr><td>"claims <b>at least</b> \(k\) more" (testing whether that claim holds)</td><td>set \(\delta_0=k\); \(H_1:\)diff\(\lt k\)</td><td>left tail at \(t=(\text{diff}-k)/SE\)</td></tr>
+</table>
+
+<h4>C · Instruction triggers — what the marker wants written</h4>
+<table>
+<tr><th>When the exam says…</th><th>Do this (for full marks)</th></tr>
+<tr><td>"<b>state the relevant statistical hypotheses in mathematical form; explain all notation</b>"</td><td>Write "Let \(\mu_X=\) population mean of … , \(\mu_Y=\) population mean of …" THEN \(H_0:\mu_X=\mu_Y\) vs \(H_1:\dots\). Marks are for (i) symbols defined in words, (ii) correct \(=\) in \(H_0\), (iii) correct direction in \(H_1\). Missing the notation definition loses a mark even if the symbols are right.</td></tr>
+<tr><td>"<b>perform an appropriate hypothesis test</b>"</td><td>Run the full <b>6-step ritual</b>: (1) hypotheses; (2) test choice + assumptions; (3) test statistic formula; (4) null distribution + df; (5) P-value / critical value; (6) conclusion in context. Do not skip the model/assumption line.</td></tr>
+<tr><td>"report the \(t\)-statistic <b>to two significant figures</b>"</td><td>Round the statistic (not intermediate values) to 2 s.f. — e.g. \(-1.5166\to-1.5\), \(3.375\to3.4\). Keep full precision until the last step.</td></tr>
+<tr><td>"<b>report the P-value</b>" with only tables provided</td><td><b>Bracket</b> it: find the two \(t\)-table columns your \(|t|\) falls between and quote e.g. "\(0.005\lt P\lt0.01\)". For a two-sided test double the tail bracket. Never invent a decimal you cannot compute on the FX82.</td></tr>
+<tr><td>"make a <b>statistical conclusion</b>"</td><td>Compare P to \(\alpha\): "Since \(P\lt0.05\) we reject \(H_0\)" (or "\(P\gt0.05\), we do not reject \(H_0\)").</td></tr>
+<tr><td>"<b>interpret / conclusion in the context</b> of the study"</td><td>ONE plain-English sentence in the story's own language: "there is significant evidence that caffeine increases pulse rate", not "reject \(H_0\)".</td></tr>
+<tr><td>"state the <b>assumptions</b> and comment on validity using the histograms/plots"</td><td>List: (1) independence (within &amp; between groups); (2) normality of each group — read it off the histograms/QQ (symmetric, bell-shaped?) and invoke CLT if \(n\) large; (3) for pooled, equal variances — justify from the SDs. Tie each to the figure.</td></tr>
+<tr><td>"<b>pooled or Welch</b>? justify your choice"</td><td>Quote the SD ratio and/or compare histogram spreads. Ratio &lt; 2 &amp; similar spread ⇒ pooled (exact \(t_{m+n-2}\)). Otherwise Welch. Say "Welch is always valid" as a safety net.</td></tr>
+<tr><td>"interpret a <b>Type I error / significance level</b> in context"</td><td>"A Type I error here = concluding [effect] exists when in truth it does not"; e.g. "concluding the diets differ when they actually produce the same weight change". \(\alpha\) is the probability of doing this.</td></tr>
+<tr><td>"interpret a <b>Type II error</b> / find <b>\(\beta\)</b> / <b>power</b>"</td><td>Type II = "failing to detect [effect] when it is real". Power \(=1-\beta=\) chance of correctly detecting it. \(\beta,\)power depend on \(n\), effect size, \(\sigma\), \(\alpha\).</td></tr>
+</table>
+
+<div class="card">
+<h4>Full-marks hypothesis template (copy this shape)</h4>
+<div class="mono">Let μ_X = population mean [quantity] for group X,
+    μ_Y = population mean [quantity] for group Y.        ← explain notation
+
+H₀: μ_X = μ_Y        (no difference / status quo)
+H₁: μ_X ≠ μ_Y        (two-sided)   — OR μ_X > μ_Y / μ_X < μ_Y for one-sided
+
+Test:  independent two-sample t-test (Welch, since SDs differ / pooled, since SDs similar).
+Statistic:  T = (X̄ − Ȳ)/SE,   under H₀  T ~ t_df  (state df).
+Outcome:  t = … (2 s.f.).
+P-value:  bracket from t-table → "… < P < …".
+Statistical conclusion:  P vs 0.05 → reject / do not reject H₀.
+Context:  one sentence in the story's language.
+Assumptions:  independence; normality (from histograms/CLT); equal var if pooled.</div>
+</div>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Paired vs independent.</b> The most common lost marks. "Same subjects measured twice" (before/after, two sites, two labs on same patients) is <b>paired</b> — use \(t_{n-1}\) on differences, NOT \(t_{m+n-2}\). A given "difference column" is a dead giveaway.</div>
+
+<div class="trap"><b>\(H_0\) must contain the equality.</b> \(H_0\) always has "\(=\)" (or \(\le/\ge\) with equality on the boundary). Never write \(H_0:\mu\gt\mu_0\). The strict inequality goes in \(H_1\).</div>
+
+<div class="trap"><b>One-sided vs two-sided.</b> "Different / changed" ⇒ two-sided (double the tail). "Greater/less/more/exceeds" ⇒ one-sided. Getting this wrong halves or doubles your P-value and can flip the conclusion. Read the question's verb.</div>
+
+<div class="trap"><b>Proportion test uses \(p_0\), the CI uses \(\hat p\).</b> In the test statistic the denominator is \(\sqrt{p_0(1-p_0)/n}\) (null value). The confidence interval uses \(\sqrt{\hat p(1-\hat p)/n}\). Mixing them up is a classic error.</div>
+
+<div class="trap"><b>Welch df must be rounded DOWN for tables.</b> The notes say so explicitly (p 150). A Welch df of 15.74 becomes \(t_{15}\), not \(t_{16}\). Then bracket from the table.</div>
+
+<div class="trap"><b>Don't over-round intermediate steps.</b> Keep full precision (e.g. SE) and round only the FINAL statistic to the requested sig figs. Rounding \(S_p\) early then squaring can shift the last digit.</div>
+
+<div class="trap"><b>Small-\(n\) proportion: use the EXACT binomial.</b> With \(n=10\) the Normal approximation (P = 0.029) is badly off from the exact (P = 0.055) — different conclusions at \(\alpha=0.05\)! The Normal approx needs \(np_0\ge5\) and \(n(1-p_0)\ge5\).</div>
+
+<div class="trap"><b>"Do not reject \(H_0\)" ≠ "\(H_0\) is true".</b> A large P-value means insufficient evidence, not proof of no effect. Write "no significant evidence of a difference", never "the means are equal".</div>
+
+<div class="trap"><b>Always finish with the context sentence.</b> "Reject \(H_0\)" alone typically loses the final mark. The examiner wants "there is significant evidence that [the caffeine increases pulse rate / the diets differ / …]".</div>
+
+<div class="trap"><b>Bracket the P-value; don't fabricate a decimal.</b> You have only the FX82 and printed tables — you cannot compute \(\mathbb{P}(t_{43}\ge1.53)=0.134\) exactly. Quote "\(0.10\lt P\lt0.20\)". That earns full marks; a made-up "\(P=0.13\)" without justification does not.</div>
+
+<div class="trap"><b>State assumptions even when not explicitly asked in a "perform a test" part.</b> Independence + normality (via histograms/QQ or CLT for large \(n\)) are worth marks in the flagship questions. Tie each to the provided figure.</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. A study measures each patient's cholesterol before and after a drug and asks "did cholesterol change?" Which test, what df, one- or two-sided?</summary>
+<p><b>Paired \(t\)-test</b> (same patients, before &amp; after) = one-sample \(t\) on the differences. df \(=n-1\) where \(n=\)#patients. "Change" (not "decrease") ⇒ <b>two-sided</b>.</p></details>
+
+<details><summary>2. Two independent groups, \(m=n=6\), sample SDs 0.17 and 0.17. Pooled or Welch, and what df?</summary>
+<p>SDs identical (ratio 1.0 ≪ 2) ⇒ <b>pooled</b>, exact \(t_{m+n-2}=t_{10}\). (This is 2023 Q4.)</p></details>
+
+<details><summary>3. You compute \(t=2.89\) on \(t_9\) for a right-sided test. Bracket the P-value from the \(t\)-table.</summary>
+<p>df=9 row: \(2.82\to0.99\), \(3.25\to0.995\). Since \(2.82\lt2.89\lt3.25\), one-tail \(P\) is between 0.005 and 0.01: \(\boxed{0.005\lt P\lt0.01}\). Strong evidence, reject \(H_0\).</p></details>
+
+<details><summary>4. Same \(t=2.89\), \(t_9\), but now a TWO-sided test. P-value?</summary>
+<p>Double the tail bracket: \(2\times(0.005,0.01)=\boxed{0.01\lt P\lt0.02}\). Still reject at 0.05.</p></details>
+
+<details><summary>5. 8 of 10 people prefer product A; test \(H_0:p=0.5\) vs \(H_1:p\gt0.5\). Why prefer the exact binomial over the Normal \(Z\)?</summary>
+<p>\(n=10\) is small; \(np_0=5\) is only just at the threshold. Exact P \(=\mathbb{P}(X\ge8)=0.055\) vs Normal-approx \(0.029\) — they straddle 0.05 and give different decisions. For small \(n\) the exact binomial is correct.</p></details>
+
+<details><summary>6. Write, with full notation, the hypotheses for "does low-carb produce a different mean weight change than low-fat?" (2025 Q3b)</summary>
+<p>Let \(\mu_{LC},\mu_{LF}\) be the population mean 12-month weight changes on the low-carb and low-fat diets. \(H_0:\mu_{LC}=\mu_{LF}\) vs \(H_1:\mu_{LC}\ne\mu_{LF}\) (two-sided — "different").</p></details>
+
+<details><summary>7. In the diet trial you fail to reject \(H_0\). What is a Type II error in context, and how would you increase power?</summary>
+<p>Type II error = concluding the diets produce the same weight change when in truth they differ. Increase power by: larger sample sizes, a larger true effect, smaller variability, or a larger \(\alpha\).</p></details>
+
+<details><summary>8. Two-sample proportion test: 20/153 males vs 16/154 females are left-handed. What is the pooled \(\hat P\) and the null distribution of \(Z\)?</summary>
+<p>\(\hat P=(20+16)/(153+154)=36/307=0.117\). Under \(H_0:p_M=p_F\), \(Z=\dfrac{\hat p_M-\hat p_F}{\sqrt{\hat P(1-\hat P)(1/153+1/154)}}\overset{\text{approx}}{\sim}\mathcal N(0,1)\). (Tutorial 6 / notes Ex 7.9-style.)</p></details>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+STAT1301 · Chapter 7 Hypothesis Testing · built from notes pp 137–158, formula sheet items 69–76, and past papers 2023–2025. Every published number verified with <code>scipy.stats</code>.
+<br><a href="index.html">🏠 Hub</a> · <a href="ch06-estimation-cis.html">← Ch 6</a> · <a href="ch08-anova.html">Ch 8 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

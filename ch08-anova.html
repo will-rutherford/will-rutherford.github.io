@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 8 Analysis of Variance (ANOVA)</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .fill{color:var(--gold);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 8 — Analysis of Variance (ANOVA)</h1>
+  <p>Comparing means across groups · one-way &amp; two-way · interaction, blocking, multiple comparisons</p>
+  <p>STAT1301 Advanced Analysis of Scientific Data · notes pp&nbsp;159–184</p>
+  <div>
+    <span class="badge gold">GUARANTEED big question — 17–18 marks</span>
+    <span class="badge">Ch 8 · notes §8.1–8.6</span>
+    <span class="badge pre">PRE-LECTURE — check against lectures when released</span>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch07-hypothesis-testing.html">← Ch 7 Hypothesis Testing</a>
+  <a href="ch09-10-regression.html">Ch 9–10 Regression →</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2025.html">📝 Exam 2025</a>
+</nav>
+
+<main>
+
+<!-- ============ 1. CONCEPTS ============ -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>The one-sentence idea</h3>
+<p>ANOVA answers <em>"do these groups have the same mean, or not?"</em> for <strong>more than two groups at once</strong>. The response is a <strong>quantitative</strong> variable; the group labels come from one or more <strong>categorical explanatory variables called factors</strong> (each factor tested at several <strong>levels</strong>). A two-sample \(t\)-test handles exactly two groups (notes §7.5); ANOVA generalises it to \(d\) groups — and to two crossed factors — while keeping the machinery of a single hypothesis test. (Notes §8.1.)</p>
+<div class="tip">Response = numeric (yield, plaque index, healing time). Factor = category (fertilizer, mouth-rinse, land cover). If the "predictor" is itself numeric and you fit a line, that's <em>regression</em> (Ch 9), not ANOVA.</div>
+</div>
+
+<div class="card">
+<h3>Why not just run lots of \(t\)-tests?</h3>
+<p>With 4 groups there are \(\binom{4}{2}=6\) pairwise \(t\)-tests. Each carries a Type-I error risk of \(\alpha=0.05\); run six and the chance of <em>at least one</em> false positive balloons well above 5%. ANOVA delivers a <strong>single</strong> test of "all means equal" at one controlled \(\alpha\). Only <em>after</em> ANOVA rejects do you do controlled pairwise follow-ups (multiple comparisons, §1.7). This exact "why is my friend wrong?" argument was worth 2 marks in <strong>2024 Q4(e)</strong>.</p>
+</div>
+
+<div class="card">
+<h3>One-way (single-factor) model — Definition 8.1</h3>
+<p>One factor with \(d\) levels \(i=1,\dots,d\); within level \(i\) there are \(n_i\) replicates \(k=1,\dots,n_i\); total \(n=n_1+\cdots+n_d\).</p>
+$$Y_{ik}=\mu_i+\varepsilon_{ik},\qquad \varepsilon_{ik}\overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2)$$
+<p>Each level has its own mean \(\mu_i\) but <strong>a common variance</strong> \(\sigma^2\) — equal variance is baked into the model. R uses the equivalent <strong>"factor-effects"</strong> form \(Y_{ik}=\mu_1+\alpha_i+\varepsilon_{ik}\), where \(\mu_1\) is the reference (level-1) mean and \(\alpha_i=\mu_i-\mu_1\) is the incremental effect of level \(i\). (Notes §8.2.1, eq 8.1–8.3.)</p>
+</div>
+
+<div class="card">
+<h3>Estimation — where the numbers come from</h3>
+<p><strong>Group means:</strong> \(\widehat{\mu_i}=\overline Y_i=\frac1{n_i}\sum_k Y_{ik}\) — just the sample mean within each level.</p>
+<p><strong>The variance \(\sigma^2\) is pooled</strong> across all groups (that is the whole point of assuming equal variance). Using residuals \(e_{ik}=Y_{ik}-\overline Y_i\), and losing \(d\) degrees of freedom to the \(d\) estimated group means:</p>
+$$\widehat{\sigma^2}=\frac{\sum_i\sum_k (Y_{ik}-\overline Y_i)^2}{n-d}=\frac{\text{SSE}}{n-d}=\text{MSE}.$$
+<p>MSE (mean squared residual error) is the "within-group noise" yardstick. Its square root, \(\sqrt{\text{MSE}}\), is the <strong>pooled standard deviation</strong> — a single estimate of \(\sigma\) that the exam repeatedly asks for. (Notes §8.2.2, eq 8.4.)</p>
+</div>
+
+<div class="card">
+<h3>Partitioning variability &amp; the \(F\)-test</h3>
+<p>Total variability splits cleanly into "between groups" + "within groups":</p>
+$$\underbrace{\text{SST}}_{\sum\sum(Y_{ik}-\overline Y)^2}=\underbrace{\text{SSF}}_{\text{between (factor)}}+\underbrace{\text{SSE}}_{\text{within (error)}}$$
+<p>where \(\text{SSF}=\sum_i n_i(\overline Y_i-\overline Y)^2\) measures how far the group means spread from the grand mean. Convert each SS to a mean square by dividing by its DF, then form the ratio:</p>
+$$F=\frac{\text{MSF}}{\text{MSE}}=\frac{\text{SSF}/(d-1)}{\text{SSE}/(n-d)}\ \overset{H_0}{\sim}\ F(d-1,\ n-d).$$
+<p><strong>Intuition:</strong> \(F\) compares between-group spread to within-group noise. If \(H_0:\mu_1=\cdots=\mu_d\) is true, both estimate the same \(\sigma^2\) and \(F\approx1\). Big between-group differences push \(F\) up — so it is a <strong>right-one-sided test</strong>: reject for large \(F\), P-value \(=\mathbb P(F>f)\). (Notes §8.2.3, Theorem 8.1.)</p>
+</div>
+
+<div class="card">
+<h3>The one-way ANOVA table (Table 8.2)</h3>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th><th>P-value</th></tr>
+<tr><td>Treatment (Factor)</td><td>\(d-1\)</td><td>SSF</td><td>MSF = SSF/(d−1)</td><td>MSF/MSE</td><td>\(\mathbb P(F>f)\)</td></tr>
+<tr><td>Error (Residuals)</td><td>\(n-d\)</td><td>SSE</td><td>MSE = SSE/(n−d)</td><td></td><td></td></tr>
+<tr><td>Total</td><td>\(n-1\)</td><td>SST</td><td></td><td></td><td></td></tr>
+</table>
+<p>The DF column always adds up: \((d-1)+(n-d)=n-1\). The SS column always adds up: SSF + SSE = SST. These two facts are your "complete-the-table" engine (§2).</p>
+</div>
+
+<div class="card">
+<h3>Two-way (two-factor) ANOVA — Definition 8.2</h3>
+<p>Factor 1 has \(d_1\) levels, Factor 2 has \(d_2\) levels; \(n_{ij}\) replicates in cell \((i,j)\); total \(n=\sum_i\sum_j n_{ij}\).</p>
+$$Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk},\qquad \varepsilon_{ijk}\overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2)$$
+<ul>
+<li>\(\mu\) — grand mean; \(\alpha_i\) — main effect of Factor 1; \(\beta_j\) — main effect of Factor 2;</li>
+<li>\(\gamma_{ij}\) — <strong>interaction</strong> effect (the joint effect beyond the two separate main effects).</li>
+</ul>
+<p>Total SS decomposes into <strong>four</strong> pieces: \(\text{SST}=\text{SSF1}+\text{SSF2}+\text{SSF12}+\text{SSE}\), giving <strong>three separate \(F\)-tests</strong> (Factor 1, Factor 2, Interaction), each = its MS ÷ MSE. (Notes §8.3, Table 8.4.) In R: <span class="mono">lm(y ~ A*B)</span> is shorthand for <span class="mono">A + B + A:B</span>.</p>
+</div>
+
+<div class="card">
+<h3>The two-way ANOVA table (Table 8.4) — memorise the DF column</h3>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Factor 1</td><td>\(d_1-1\)</td><td>SSF1</td><td>MSF1</td><td>MSF1/MSE</td></tr>
+<tr><td>Factor 2</td><td>\(d_2-1\)</td><td>SSF2</td><td>MSF2</td><td>MSF2/MSE</td></tr>
+<tr><td>Interaction</td><td>\((d_1-1)(d_2-1)\)</td><td>SSF12</td><td>MSF12</td><td>MSF12/MSE</td></tr>
+<tr><td>Error (Residuals)</td><td>\(n-d_1 d_2\)</td><td>SSE</td><td>MSE</td><td></td></tr>
+<tr><td>Total</td><td>\(n-1\)</td><td>SST</td><td></td><td></td></tr>
+</table>
+<div class="tip">All three \(F\)-tests share the <strong>same denominator</strong> MSE. Numerator DF differs per row; denominator DF is always \(n-d_1d_2\). So the interaction \(F\) is \(F\big((d_1-1)(d_2-1),\ n-d_1d_2\big)\).</div>
+</div>
+
+<div class="card">
+<h3>Interaction — the concept the exam loves</h3>
+<p><strong>Interaction present</strong> = the effect of one factor <em>depends on the level</em> of the other factor. On an <strong>interaction plot</strong> (mean response vs one factor, a separate line per level of the other):</p>
+<ul>
+<li><strong>Parallel lines ⇒ NO interaction</strong> — the gap between lines is constant, so each factor acts independently.</li>
+<li><strong>Non-parallel / crossing lines ⇒ possible interaction</strong> — the effect of one factor changes across levels of the other.</li>
+</ul>
+<p>"Comment on whether there could be an interaction using the plot" is a recurring 2-mark part (<strong>2025 Q4(a)</strong>). You are only asked to <em>read the picture</em> — say parallel/not-parallel and what that implies. The formal decision comes from the interaction \(F\)-test. (Notes §8.3.4, Fig 8.5.)</p>
+<div class="trap">If the interaction is significant, <strong>do not interpret the main effects</strong> in isolation — the main-effect story is misleading because each factor's effect changes across the other. Report the interaction and, if needed, analyse one factor within a fixed level of the other (R's <span class="mono">subset=</span>). (Notes p 175–176.)</div>
+</div>
+
+<div class="card">
+<h3>Randomization &amp; blocking (notes §8.4)</h3>
+<p>Designed experiments use <strong>randomization</strong> to protect against <strong>nuisance factors</strong> — variables that aren't of interest but influence the response (e.g. plot soil quality, plant location). Randomization is also how the <em>independence</em> assumption is secured.</p>
+<ul>
+<li><strong>Completely randomized design (CRD):</strong> every treatment-to-unit allocation is equally likely. Simple, but by chance a nuisance factor can end up unbalanced across treatments.</li>
+<li><strong>Randomized block design (RBD):</strong> group units into <strong>blocks</strong> that are internally homogeneous with respect to the nuisance factor (e.g. each row = a block), then randomize treatments <em>within</em> each block so every block gets each treatment equally often. This removes block-to-block variability from the error term ⇒ smaller MSE ⇒ more powerful test. A block is analysed as a second factor in a two-way ANOVA (see notes Exercise 4: fertilizer × block).</li>
+</ul>
+<div class="tip"><strong>Balanced vs unbalanced.</strong> Equal cell counts = balanced. When balanced, the Type I/II/III sums of squares all agree, so the additivity SST = ΣSS holds exactly — which is why the exam's table-completion questions specify a balanced design. Unbalanced data needs <span class="mono">car::Anova</span> (out of scope). (Notes p 177.)</div>
+</div>
+
+<div class="card">
+<h3>Multiple comparisons — which groups differ? (notes §8.5)</h3>
+<p>A significant ANOVA says "not all means are equal" but not <em>which</em> pairs differ. Follow up with pairwise tests, but control the inflated Type-I error. The course uses the <strong>Bonferroni</strong> procedure: for \(m\) comparisons, test each at \(\alpha/m\) — equivalently, R multiplies each pairwise P-value by \(m\) (capped at 1) and you compare to the ordinary \(\alpha\).</p>
+<p>R's <span class="mono">pairwise.t.test(..., p.adj="bonferroni")</span> prints a matrix of adjusted P-values. <strong>Reading rule:</strong> an entry \(&lt;\alpha\) ⇒ those two groups <em>differ significantly</em>; \(\ge\alpha\) (often shown as 1.000) ⇒ no significant difference. Interpreting this output was examined in <strong>2025 Q4(e)</strong> and <strong>2023 Q5(d)</strong>.</p>
+</div>
+
+<div class="card">
+<h3>Assumptions &amp; how to check them from plots</h3>
+<p>The ANOVA \(F\)-test requires the errors \(\varepsilon\) to be <strong>independent</strong>, <strong>normally distributed</strong>, with <strong>constant variance</strong> \(\sigma^2\) (homoscedasticity) across groups.</p>
+<table>
+<tr><th>Assumption</th><th>How to assess</th></tr>
+<tr><td><strong>Normality</strong> (within groups)</td><td>Normal Q–Q plot of residuals roughly on the straight line; group histograms/boxplots roughly symmetric.</td></tr>
+<tr><td><strong>Equal variance</strong></td><td>Residuals-vs-fitted shows an even band (no funnel); group SDs / boxplot spreads similar. Rule of thumb: largest group SD ≲ 2× smallest.</td></tr>
+<tr><td><strong>Independence</strong></td><td>Not visible in a plot — argue it from the <em>design</em> (proper randomization, no repeated measures on the same unit).</td></tr>
+</table>
+<div class="tip">\(R^2=\dfrac{\text{SSF}}{\text{SST}}=1-\dfrac{\text{SSE}}{\text{SST}}\) is the proportion of total variation in the response explained by the factor(s) — a routine follow-up part (2024 Q4(f), 2022-style). It is <em>not</em> an assumption; it's an effect-size summary.</div>
+</div>
+</section>
+
+<!-- ============ 2. FORMULAS ============ -->
+<section id="formulas">
+<h2>§2 · Key formulas &amp; when to use them</h2>
+<p class="tip">Everything here is on the provided formula sheet (<span class="mono">STAT1301_formula.pdf</span>) — marks come from <em>recognising which line to use and executing it</em>, not recall.</p>
+
+<div class="method">
+<h4>Degrees of freedom (the skeleton of every ANOVA table)</h4>
+<strong>One-way</strong> (\(d\) levels, \(n\) total): Factor \(=d-1\); Error \(=n-d\); Total \(=n-1\).<br>
+<strong>Two-way</strong> (\(d_1\times d_2\), \(n\) total): F1 \(=d_1-1\); F2 \(=d_2-1\); Interaction \(=(d_1-1)(d_2-1)\); Error \(=n-d_1d_2\); Total \(=n-1\).
+<div class="when">Any "complete the ANOVA table" / "find the X cells" question. Fill DF <em>first</em> — every other cell depends on it.</div>
+</div>
+
+<div class="method">
+<h4>Mean squares, F, and SS additivity</h4>
+$$\text{MS}=\frac{\text{SS}}{\text{DF}}\qquad F=\frac{\text{MS}_{\text{effect}}}{\text{MSE}}\qquad \text{SST}=\sum(\text{effect SS})+\text{SSE}$$
+Rearrange as needed: \(\text{SS}=\text{MS}\times\text{DF}\); \(\text{MS}_{\text{effect}}=F\times\text{MSE}\); \(\text{SSE}=\text{SST}-\sum(\text{effect SS})\).
+<div class="when">Filling any missing SS/MS/F cell. These three identities + the DF skeleton solve <em>every</em> table-completion question.</div>
+</div>
+
+<div class="method">
+<h4>The table-completion algorithm (drill this — guaranteed marks)</h4>
+<ol>
+<li><strong>DF column first</strong> from the design (counts of levels &amp; total \(n\)). Check it sums to \(n-1\).</li>
+<li><strong>Fill SS via additivity:</strong> the one missing SS = Total − (all other SS). (Balanced ⇒ exact.)</li>
+<li><strong>MS = SS/DF</strong> for each source (never for Total).</li>
+<li><strong>\(F\) = MS\(_{\text{effect}}\)/MSE</strong> for each effect row.</li>
+<li>Back-solve if given an MS or \(F\): \(\text{SS}=\text{MS}\cdot\text{DF}\), or \(\text{MS}_{\text{eff}}=F\cdot\text{MSE}\).</li>
+<li><strong>P-value</strong> = \(\mathbb P(F>f)\) from the \(F\)-table with (numerator DF, error DF).</li>
+</ol>
+</div>
+
+<div class="method">
+<h4>Test statistic distribution under \(H_0\)</h4>
+One-way: \(F=\dfrac{\text{MSF}}{\text{MSE}}\sim F(d-1,\ n-d)\).<br>
+Two-way effect: \(F=\dfrac{\text{MS}_{\text{effect}}}{\text{MSE}}\sim F(\text{DF}_{\text{effect}},\ n-d_1d_2)\).
+<div class="when">"State the distribution of the \(F\)-statistic under \(H_0\)" — quote the family AND both DF. Right-one-sided: reject if \(f>F_{\alpha}(\text{df}_1,\text{df}_2)\) or \(\mathbb P(F>f)&lt;\alpha\).</div>
+</div>
+
+<div class="method">
+<h4>Effect size &amp; pooled spread</h4>
+$$R^2=\frac{\text{SSF}}{\text{SST}}=1-\frac{\text{SSE}}{\text{SST}}\qquad s_{\text{pooled}}=\sqrt{\text{MSE}}$$
+<div class="when">"What is the \(R^2\)?" / "pooled standard deviation?" — both fall straight out of a completed table.</div>
+</div>
+
+<div class="method">
+<h4>Bonferroni multiple comparisons</h4>
+For \(m\) pairwise comparisons: test each at \(\alpha_{\text{adj}}=\alpha/m\); equivalently reject a pair if its <em>adjusted</em> P-value \(&lt;\alpha\). With \(d\) groups, \(m=\binom d2\).
+<div class="when">After a significant ANOVA, "which treatments differ?" Read the adjusted P-value matrix: entry \(&lt;\alpha\) ⇒ significant difference.</div>
+</div>
+</section>
+
+<!-- ============ 3. WORKED EXAMPLES ============ -->
+<section id="worked">
+<h2>§3 · Worked examples (fully verified)</h2>
+<p>Every number below was checked in Python. Click to reveal.</p>
+
+<details>
+<summary>WE1 — 2025 Q4 (17 marks): the flagship two-way table completion + full write-up</summary>
+<p><strong>Setup.</strong> Dental plaque study. Factor A = <em>Mouth rinse</em> (Lemongrass, Chlorhexidine, Prophylaxis) so \(d_1=3\); Factor B = <em>Flossing</em> (once / twice daily) so \(d_2=2\); balanced with 10 per cell ⇒ \(n=3\times2\times10=60\). Given partial table:</p>
+<div class="mono">Source        DF    SS      MS      F
+Mouth rinse    X   0.836    X       X
+Flossing       X    X      0.231    X
+Interaction    X    X       X      1.233
+Residuals      X   4.256    X
+Total          X   5.517</div>
+
+<p><strong>Step 1 — DF from the design.</strong></p>
+<ul>
+<li>Mouth rinse: \(d_1-1=2\)</li>
+<li>Flossing: \(d_2-1=1\)</li>
+<li>Interaction: \((d_1-1)(d_2-1)=2\times1=2\)</li>
+<li>Residuals: \(n-d_1d_2=60-6=54\)</li>
+<li>Total: \(n-1=59\) &nbsp;(check: \(2+1+2+54=59\) ✓)</li>
+</ul>
+
+<p><strong>Step 2 — MSE (the shared denominator).</strong> \(\text{MSE}=\dfrac{\text{SSE}}{54}=\dfrac{4.256}{54}=0.078815\).</p>
+
+<p><strong>Step 3 — Flossing SS from its MS.</strong> \(\text{SSF2}=\text{MS}\times\text{DF}=0.231\times1=0.231\).</p>
+
+<p><strong>Step 4 — Interaction SS via additivity.</strong>
+\(\text{SSF12}=\text{SST}-\text{SSF1}-\text{SSF2}-\text{SSE}=5.517-0.836-0.231-4.256=0.194\).
+Then \(\text{MSF12}=0.194/2=0.097\). Check: \(F_{\text{int}}=0.097/0.078815=1.231\approx1.233\) (given) ✓ — the tiny gap is rounding in the printed SSs.</p>
+
+<p><strong>Step 5 — remaining MS and \(F\).</strong>
+\(\text{MSF1}=0.836/2=0.418\Rightarrow F_{\text{MR}}=0.418/0.078815=5.30\).
+\(F_{\text{Fl}}=0.231/0.078815=2.93\).</p>
+
+<p><strong>Completed table:</strong></p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Mouth rinse</td><td class="fill">2</td><td>0.836</td><td class="fill">0.418</td><td class="fill">5.30</td></tr>
+<tr><td>Flossing</td><td class="fill">1</td><td class="fill">0.231</td><td>0.231</td><td class="fill">2.93</td></tr>
+<tr><td>Interaction</td><td class="fill">2</td><td class="fill">0.194</td><td class="fill">0.097</td><td>1.233</td></tr>
+<tr><td>Residuals</td><td class="fill">54</td><td>4.256</td><td class="fill">0.0788</td><td></td></tr>
+<tr><td>Total</td><td class="fill">59</td><td>5.517</td><td></td><td></td></tr>
+</table>
+
+<p><strong>(a) Interaction plot [2 marks].</strong> The lines in Figure 2 are close to parallel (they do not clearly cross), so there is <em>little visual evidence of an interaction</em> — the effect of flossing on plaque index looks roughly the same across mouth-rinse types. (The interaction \(F\)-test confirms this below.)</p>
+
+<p><strong>(c) Interaction test [4 marks].</strong>
+Hypotheses: \(H_0:\gamma_{ij}=0\) for all \(i,j\) (no interaction) vs \(H_1:\) at least one \(\gamma_{ij}\neq0\).
+Under \(H_0\), \(F=\text{MSF12}/\text{MSE}\sim F(2,\ 54)\). Observed \(f=1.233\); P-value \(=\mathbb P(F_{2,54}>1.233)\approx0.30\). Since \(0.30&gt;0.05\), <strong>do not reject \(H_0\)</strong> — no significant interaction between mouth-rinse and flossing on mean plaque index.</p>
+
+<p><strong>(d) Assumptions [4 marks].</strong> Errors independent, normal, equal variance. Residuals-vs-fitted (Fig 3, left) shows an even band with no funnel ⇒ constant variance looks OK; the Normal Q–Q plot points lie close to the line ⇒ normality reasonable; independence is plausible because participants were randomly allocated. Assumptions appear valid.</p>
+
+<p><strong>(e) Multiple comparisons [3 marks].</strong> From the Bonferroni pairwise matrix — Prophylaxis vs Lemongrass \(=0.036\), Prophylaxis vs Chlorhexidine \(=0.016\) (both \(&lt;0.05\)); Lemongrass vs Chlorhexidine \(=1.000\) (not significant). <strong>Conclusion:</strong> Prophylaxis differs significantly from both Lemongrass and Chlorhexidine, but Lemongrass and Chlorhexidine do not differ from each other — i.e. the Prophylaxis (control) group has a different mean plaque index from the two active rinses, which are statistically indistinguishable.</p>
+<div class="tip">Marks scheme reality: (b) is 4 marks for the 8–10 filled cells; getting DF right and the additivity step secures most of them even if a final \(F\) rounds slightly.</div>
+</details>
+
+<details>
+<summary>WE2 — 2024 Q4 (one-way, 4 groups): complete the table, test, \(R^2\)</summary>
+<p><strong>Setup.</strong> Pollutant concentration across 4 land covers (Forest, Wetland, Developed, Grassland), \(n_i=25\) each ⇒ \(d=4,\ n=100\). Given SSF (Land Cover) \(=45.96\), SST \(=510.78\).</p>
+<p><strong>DF:</strong> Factor \(=d-1=3\); Error \(=n-d=96\); Total \(=99\).</p>
+<p><strong>SS:</strong> \(\text{SSE}=\text{SST}-\text{SSF}=510.78-45.96=464.82\).</p>
+<p><strong>MS:</strong> \(\text{MSF}=45.96/3=15.32\); \(\text{MSE}=464.82/96=4.8419\).</p>
+<p><strong>\(F\):</strong> \(15.32/4.8419=3.164\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Land cover</td><td class="fill">3</td><td>45.96</td><td class="fill">15.32</td><td class="fill">3.16</td></tr>
+<tr><td>Residuals</td><td class="fill">96</td><td class="fill">464.82</td><td class="fill">4.842</td><td></td></tr>
+<tr><td>Total</td><td class="fill">99</td><td>510.78</td><td></td><td></td></tr>
+</table>
+<p><strong>Hypotheses [Q(c)]:</strong> \(H_0:\mu_{\text{For}}=\mu_{\text{Wet}}=\mu_{\text{Dev}}=\mu_{\text{Grass}}\) vs \(H_1:\) at least two means differ, where \(\mu_i\) is the mean pollutant concentration (ppb) for land cover \(i\).</p>
+<p><strong>Test [Q(d)]:</strong> \(F\sim F(3,96)\); \(f=3.16\). \(F_{0.05}(3,96)\approx2.70\); since \(3.16&gt;2.70\) (equivalently P \(\approx0.028&lt;0.05\)) <strong>reject \(H_0\)</strong>: there is significant evidence that mean pollutant concentration differs across land covers.</p>
+<p><strong>Pooled SD:</strong> \(\sqrt{4.8419}=2.20\) ppb. &nbsp; <strong>\(R^2\) [Q(f)]:</strong> \(45.96/510.78=0.090\) — land cover explains only \(9\%\) of the variation in pollutant concentration (statistically significant but a small effect).</p>
+</details>
+
+<details>
+<summary>WE3 — 2023 Q5 (one-way + Bonferroni interpretation)</summary>
+<p><strong>Setup.</strong> Plaque Score Difference for 3 toothpastes (Brand A, Brand B, Herbal), \(n_i=30\) ⇒ \(d=3,\ n=90\). SSF (Toothpaste) \(=1.170\), SST \(=13.797\).</p>
+<p><strong>DF:</strong> \(2,\ 87,\ 89\). &nbsp; <strong>SSE</strong> \(=13.797-1.170=12.627\). &nbsp; <strong>MSF</strong> \(=1.170/2=0.585\); <strong>MSE</strong> \(=12.627/87=0.14514\); <strong>\(F\)</strong> \(=0.585/0.14514=4.03\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Toothpaste</td><td class="fill">2</td><td>1.170</td><td class="fill">0.585</td><td class="fill">4.03</td></tr>
+<tr><td>Residuals</td><td class="fill">87</td><td class="fill">12.627</td><td class="fill">0.1451</td><td></td></tr>
+<tr><td>Total</td><td class="fill">89</td><td>13.797</td><td></td><td></td></tr>
+</table>
+<p><strong>Test [Q(b)]:</strong> \(H_0:\mu_A=\mu_B=\mu_H\). \(F\sim F(2,87)\), \(f=4.03\); \(F_{0.05}(2,87)\approx3.10\), P \(\approx0.021&lt;0.05\) ⇒ <strong>reject</strong>: mean PSD differs between toothpastes.</p>
+<p><strong>Bonferroni [Q(d)]:</strong> matrix gives Herbal vs Brand B \(=0.028\) (\(&lt;0.05\), significant) while Brand A vs Brand B \(=1.000\) and Herbal vs Brand A \(=0.066\) (not significant). The company claims herbal is "as effective as the other two brands" — but Herbal differs <em>significantly</em> from Brand B, so the data <strong>do not support</strong> that claim; herbal appears less effective than Brand B.</p>
+</details>
+
+<details>
+<summary>WE4 — Two-way with back-solving from \(F\) (notes Exercise 5: rats / stress)</summary>
+<p><strong>Setup.</strong> \(2\times2\): Levorphanol (yes/no) × Adrenaline (yes/no), \(n=20\), 5 per cell. Partial output gives Levorphanol \(F=12.630\), and SS: Lev \(=128801\), Adr \(=185281\), Interaction \(=61051\), Residuals \(=163164\).</p>
+<p><strong>DF:</strong> each main effect \(=1\); interaction \(=1\times1=1\); Error \(=20-4=16\); Total \(=19\).</p>
+<p><strong>MSE</strong> \(=163164/16=10197.75\). Then \(F_{\text{Adr}}=185281/10197.75=18.17\); \(F_{\text{int}}=61051/10197.75=5.99\).</p>
+<p>P-values: \(\mathbb P(F_{1,16}>12.63)=0.0026\), \(\mathbb P(F_{1,16}>18.17)=0.0006\), \(\mathbb P(F_{1,16}>5.99)=0.026\). All \(&lt;0.05\): both main effects <strong>and</strong> the interaction are significant.</p>
+<div class="trap">Because the interaction is significant here, the interaction plot lines cross / are non-parallel and you must <strong>not</strong> read the Levorphanol effect as a single number — its effect on corticosterone depends on whether adrenaline was given.</div>
+</details>
+</section>
+
+<!-- ============ 4. EXAM QUESTION TYPES ============ -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+
+<div class="card">
+<h3>Type A — "Complete the ANOVA table / find the X cells" ⭐ every year</h3>
+<p><strong>Looks like:</strong> a table with DF/SS/MS/F cells replaced by X or blanks, plus the study design and 1–2 given numbers. Mark range <strong>3–4 marks</strong>.</p>
+<div class="method">Recipe:
+<ol>
+<li>DF column from design (levels &amp; \(n\)); check sums to \(n-1\).</li>
+<li>Fill the one missing SS via additivity (SST = ΣSS).</li>
+<li>MS = SS/DF; \(F\) = MS\(_{\text{eff}}\)/MSE.</li>
+<li>Back-solve any cell from a given MS or \(F\).</li>
+</ol></div>
+<p><strong>Seen in:</strong> 2025 Q4(b) two-way; 2024 Q4(a) one-way; 2023 Q5(a) one-way; notes Ex 1(c), 2(a), 3(c), 4(b), 5(b).</p>
+</div>
+
+<div class="card">
+<h3>Type B — "Comment on whether there could be an interaction using the plot"</h3>
+<p><strong>Looks like:</strong> one/two interaction plots. Mark range <strong>2 marks</strong>.</p>
+<div class="method">Recipe: state whether the lines are (roughly) <em>parallel</em> or <em>not</em>. Parallel ⇒ little/no evidence of interaction (each factor acts independently). Non-parallel/crossing ⇒ possible interaction (effect of one factor depends on the other). Say what it means <em>in context</em>.</div>
+<p><strong>Seen in:</strong> 2025 Q4(a); drawing the plot in notes Ex 5(a).</p>
+</div>
+
+<div class="card">
+<h3>Type C — "State the hypotheses &amp; the distribution of \(F\) under \(H_0\)"</h3>
+<p><strong>Looks like:</strong> write \(H_0/H_1\) in symbols and give the \(F\) distribution. Mark range <strong>2–4 marks</strong>.</p>
+<div class="method">Templates:
+<ul>
+<li>One-way: \(H_0:\mu_1=\cdots=\mu_d\) vs \(H_1:\) not all equal; \(F\sim F(d-1,n-d)\).</li>
+<li>Two-way main effect: \(H_0:\alpha_i=0\ \forall i\) (or \(\beta_j=0\)); \(F\sim F(d_1-1,\ n-d_1d_2)\).</li>
+<li>Interaction: \(H_0:\gamma_{ij}=0\ \forall i,j\) vs \(H_1:\) some \(\gamma_{ij}\neq0\); \(F\sim F((d_1-1)(d_2-1),\ n-d_1d_2)\).</li>
+</ul>
+Always define \(\mu_i\) etc. in words ("mean response for level \(i\)").</div>
+<p><strong>Seen in:</strong> 2025 Q4(c); 2024 Q4(c); 2023 Q5(b); notes Ex 1(b), 3(b).</p>
+</div>
+
+<div class="card">
+<h3>Type D — "State the assumptions &amp; assess their validity from the plots"</h3>
+<p><strong>Looks like:</strong> residuals-vs-fitted + Normal Q–Q (and sometimes group boxplots/SD table). Mark range <strong>4 marks</strong>.</p>
+<div class="method">Recipe: name all three — normality, equal variance, independence. Q–Q on the line ⇒ normal; even band in residuals-vs-fitted (and comparable group SDs) ⇒ equal variance; randomization ⇒ independence. Give a one-line verdict per assumption <em>referring to the specific plot</em>.</div>
+<p><strong>Seen in:</strong> 2025 Q4(d); 2024 Q4(b); 2023 Q5(c); notes Ex 3(e), 5(e).</p>
+</div>
+
+<div class="card">
+<h3>Type E — "Which treatments differ?" (multiple comparisons output)</h3>
+<p><strong>Looks like:</strong> a Bonferroni pairwise P-value matrix. Mark range <strong>2–3 marks</strong>.</p>
+<div class="method">Recipe: scan each cell; entry \(&lt;\alpha\) ⇒ that pair differs significantly; \(\ge\alpha\) (e.g. 1.000) ⇒ no significant difference. Translate into context and, if a claim is given ("as effective as"), state whether the data support it.</div>
+<p><strong>Seen in:</strong> 2025 Q4(e); 2023 Q5(d); notes Ex 6.</p>
+</div>
+
+<div class="card">
+<h3>Type F — Conceptual / follow-up parts</h3>
+<ul>
+<li><strong>"Why not multiple \(t\)-tests?"</strong> → inflated Type-I error; ANOVA gives one controlled test, follow with Bonferroni. (2024 Q4(e), 2 marks.)</li>
+<li><strong>"\(R^2\) and interpret"</strong> → \(R^2=\text{SSF}/\text{SST}\); proportion of variation explained by the factor. (2024 Q4(f).)</li>
+<li><strong>"Pooled standard deviation"</strong> → \(\sqrt{\text{MSE}}\). (Notes Ex 2(b), 3(f).)</li>
+<li><strong>"How would you enter the data for R?"</strong> → <em>stacked / long format</em>: one column for the numeric response, one column for the factor level; not one column per group. (Notes Ex 1(a).)</li>
+<li><strong>"What does the block P-value tell you?"</strong> → whether blocking mattered (a significant block effect ⇒ the nuisance factor was worth removing). (Notes Ex 4(c).)</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ 5. WORDING TRIGGERS ============ -->
+<section id="triggers">
+<h2>§5 · Wording triggers — "when the exam says… → do this"</h2>
+<table>
+<tr><th>Exam wording</th><th>What to do</th></tr>
+<tr><td>"Find the values of the missing <strong>X</strong> cells" / "complete the ANOVA table"</td><td>Run the table-completion algorithm: <strong>DF first</strong> (\(d-1\), \(d_2-1\), \((d_1-1)(d_2-1)\), \(n-d_1d_2\), \(n-1\)) → fill missing SS by additivity SST=ΣSS → MS=SS/DF → \(F\)=MS\(_{\text{eff}}\)/MSE. Back-solve from any given MS/\(F\).</td></tr>
+<tr><td>"Using the study design and partial information…"</td><td>Signals a table-completion; the "design" gives you the DF (levels &amp; total \(n\)), the "partial info" gives one SS/MS/\(F\) to back-solve from.</td></tr>
+<tr><td>"Comment on whether there could be an <strong>interaction</strong> using the plot"</td><td>Read the lines: <em>parallel ⇒ no interaction</em>; <em>non-parallel/crossing ⇒ possible interaction</em>. One sentence in context. Do NOT compute anything.</td></tr>
+<tr><td>"State the mathematical hypotheses (with notation)"</td><td>Symbols + words. One-way: \(H_0:\mu_1=\cdots=\mu_d\). Interaction: \(H_0:\gamma_{ij}=0\ \forall i,j\). Define every symbol.</td></tr>
+<tr><td>"…the distribution of the \(F\)-statistic under \(H_0\)"</td><td>Quote \(F(\text{df}_{\text{num}},\ \text{df}_{\text{error}})\) with actual numbers. Error df is \(n-d\) (one-way) or \(n-d_1d_2\) (two-way).</td></tr>
+<tr><td>"its observed value and the corresponding P-value"</td><td>Give \(f\) from the table, then P \(=\mathbb P(F>f)\) from the \(F\)-table (right tail). Compare to \(\alpha\).</td></tr>
+<tr><td>"Perform a hypothesis test… conclude statistically and in context"</td><td>\(H_0/H_1\) → \(f\) → compare to \(F_\alpha\) or P vs \(\alpha\) → reject/not → <strong>one plain-English sentence</strong> in the story's language.</td></tr>
+<tr><td>"Which treatments are significantly different?" / multiple-comparison output</td><td>Read the Bonferroni matrix: adjusted P \(&lt;\alpha\) ⇒ pair differs; \(\ge\alpha\)/1.000 ⇒ no difference. State in context; address any "as effective as" claim.</td></tr>
+<tr><td>"State the assumptions… discuss validity based on the plots"</td><td>Normality (Q–Q on line), equal variance (even residual band / similar SDs), independence (from randomization). One verdict per plot.</td></tr>
+<tr><td>"Why bother with ANOVA / why not multiple \(t\)-tests?"</td><td>Multiple tests inflate Type-I error; ANOVA is one controlled test, then Bonferroni follow-up.</td></tr>
+<tr><td>"Calculate/interpret the \(R^2\)"</td><td>\(R^2=\text{SSF}/\text{SST}\); "the factor explains \(R^2\times100\%\) of the variation in the response."</td></tr>
+<tr><td>"pooled estimate of the standard deviation"</td><td>\(\sqrt{\text{MSE}}\).</td></tr>
+<tr><td>"How would you enter the data into a spreadsheet for R?"</td><td>Long/stacked format: one response column + one factor column (levels as labels). Not a column per group.</td></tr>
+<tr><td>"blocks" / "subplots" / "nuisance factor"</td><td>Randomized block design → analyse as two-way ANOVA (treatment + block); a significant block effect means blocking removed real nuisance variation.</td></tr>
+<tr><td>"balanced with … per cell"</td><td>Cell counts equal ⇒ SS additivity is exact; DF error \(=n-\)(#cells). This is your cue that table completion will work cleanly.</td></tr>
+</table>
+</section>
+
+<!-- ============ 6. TRAPS ============ -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+<div class="trap"><strong>Interaction DF is a product, not a sum.</strong> It is \((d_1-1)(d_2-1)\), not \((d_1-1)+(d_2-1)\). For a \(3\times2\): \(2\times1=2\). Getting this wrong cascades into every MS and \(F\).</div>
+<div class="trap"><strong>Error DF in two-way is \(n-d_1d_2\)</strong> (total minus number of <em>cells</em>), not \(n-d_1-d_2\). For 2025 Q4: \(60-6=54\), not \(60-5\).</div>
+<div class="trap"><strong>Never compute MS for the Total row.</strong> There is no "MS Total". Only effect rows and the error row get an MS.</div>
+<div class="trap"><strong>All two-way \(F\)-tests share MSE as the denominator.</strong> Don't divide the interaction MS by the Factor-1 MS — divide every effect MS by MSE.</div>
+<div class="trap"><strong>Interaction significant ⇒ don't interpret main effects alone.</strong> Report the interaction; if you must, examine one factor within a fixed level of the other. A common lost mark is confidently stating a main-effect direction when the interaction is significant.</div>
+<div class="trap"><strong>ANOVA is right-one-sided.</strong> The P-value is \(\mathbb P(F>f)\) only — never double it, never use a left tail. \(F\) is always \(\ge0\).</div>
+<div class="trap"><strong>Reading Bonferroni output backwards.</strong> A <em>small</em> adjusted P-value means the pair <em>differs</em>. An entry of 1.000 means "no difference," not "identical/perfect."</div>
+<div class="trap"><strong>Independence is not a plot.</strong> You cannot "see" it in a Q–Q or residual plot — justify it from the randomized design. Stating "the Q–Q plot shows independence" loses the mark.</div>
+<div class="trap"><strong>Sig figs.</strong> The rubric demands ≥3 significant figures. Carry MSE unrounded (e.g. \(0.078815\)) through to \(F\); round only the final reported value. Rounding MSE early can turn \(F=1.231\) into a visibly wrong number.</div>
+<div class="trap"><strong>Wrong data format.</strong> "How to enter for R" wants <em>long</em> format (response column + factor column). A column-per-group table is the wrong format for ANOVA (notes §8.2.4).</div>
+<div class="trap"><strong>Equal-variance assumption is part of the model.</strong> Don't forget it — one-way and two-way ANOVA both assume a single common \(\sigma^2\). Check it with residual spread / group SDs.</div>
+</section>
+
+<!-- ============ 7. SELF-CHECK ============ -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details>
+<summary>Q1. A one-way ANOVA has 5 groups of 8 observations each. Give all the DF.</summary>
+<p>\(d=5,\ n=40\). Factor \(=d-1=4\); Error \(=n-d=35\); Total \(=n-1=39\). (Check \(4+35=39\).)</p>
+</details>
+
+<details>
+<summary>Q2. A balanced \(4\times3\) two-way design has 5 replicates per cell. Give the interaction DF and the error DF.</summary>
+<p>\(d_1=4,\ d_2=3,\ n=4\times3\times5=60\). Interaction \(=(4-1)(3-1)=6\); Error \(=n-d_1d_2=60-12=48\). Total \(=59\) (check \(3+2+6+48=59\)).</p>
+</details>
+
+<details>
+<summary>Q3. One-way table: SST = 90, SSF = 30, \(d=3\), \(n=30\). Find \(F\) and \(R^2\).</summary>
+<p>SSE \(=90-30=60\). MSF \(=30/2=15\); MSE \(=60/27=2.222\); \(F=15/2.222=6.75\). \(R^2=30/90=0.333\) — the factor explains 33% of the variation.</p>
+</details>
+
+<details>
+<summary>Q4. Under \(H_0\), what is the distribution of the interaction \(F\) in a balanced \(3\times2\) design with 10 per cell?</summary>
+<p>\(F\sim F\big((3-1)(2-1),\ 60-6\big)=F(2,54)\). (This is exactly 2025 Q4's interaction test.)</p>
+</details>
+
+<details>
+<summary>Q5. An interaction plot shows two clearly crossing lines. What do you conclude, and what must you avoid?</summary>
+<p>Crossing (non-parallel) lines ⇒ evidence of a possible interaction: the effect of one factor depends on the level of the other. You must <em>not</em> interpret either main effect as a single overall number — its meaning changes across the other factor's levels.</p>
+</details>
+
+<details>
+<summary>Q6. A Bonferroni matrix shows P-values A–B = 1.000, A–C = 0.012, B–C = 0.048 (\(\alpha=0.05\)). Which groups differ?</summary>
+<p>A–C (0.012) and B–C (0.048) are both \(&lt;0.05\) ⇒ C differs significantly from both A and B. A–B (1.000) ⇒ A and B do not differ. So C stands apart while A and B are indistinguishable.</p>
+</details>
+
+<details>
+<summary>Q7. Why can't you just run all pairwise \(t\)-tests instead of ANOVA?</summary>
+<p>Each test risks a Type-I error at \(\alpha\); running many inflates the overall false-positive rate far above \(\alpha\). ANOVA gives one omnibus test at controlled \(\alpha\); only after it rejects do you run <em>adjusted</em> (Bonferroni) pairwise comparisons.</p>
+</details>
+
+<details>
+<summary>Q8. Given SSE = 4.256 on 54 DF, what is the pooled standard deviation?</summary>
+<p>MSE \(=4.256/54=0.078815\); pooled SD \(=\sqrt{0.078815}=0.281\). (This is the shared denominator's root from 2025 Q4.)</p>
+</details>
+</section>
+
+<p style="text-align:center;color:var(--muted);font-size:13px;margin-top:40px">
+STAT1301 Ch 8 · sources: notes pp 159–184, <span class="mono">STAT1301_formula.pdf</span> (ANOVA), exams 2023 Q5 · 2024 Q4 · 2025 Q4. All worked numbers verified in Python.<br>
+<span class="badge pre">PRE-LECTURE — verify against lecture material when Week 8 slides are released</span>
+</p>
+
+</main>
+</body>
+</html>

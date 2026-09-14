@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Worked Exam, Semester 2 2025</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  button{background:var(--accent);color:#032117;border:none;padding:7px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12.5px}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;background:var(--panel2);color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"📝 CONCLUSION IN CONTEXT — ";color:var(--gold);font-weight:700}
+  .ans{background:rgba(52,211,153,.12);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:block;overflow-x:auto}
+  .fig{background:var(--panel2);border:1px dashed #3a4656;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:var(--muted)}
+  .fig:before{content:"🖼 FIGURE — ";color:var(--accent2);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 — Fully Worked Exam</h1>
+  <p><b>Semester 2, 2025</b> · Advanced Analysis of Scientific Data</p>
+  <p>the paper you may re-sit · 120 min + 10 min planning · <b>80 marks · 5 questions</b></p>
+  <span class="badge gold">Every number verified in Python (scipy / sympy)</span>
+  <span class="badge">Exam-legal: FX82 + provided tables only</span>
+</header>
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2023.html">← 2023</a>
+  <a href="exam-2024.html">← 2024</a>
+  <a href="exam-2025.html" style="background:var(--accent);color:#032117">2025 (this)</a>
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+</nav>
+<main>
+
+<p class="tip">Instructions on the day: <i>"Show your working and state conclusions where appropriate. Give at least 3 significant figures."</i> Pages 8–16 give you the formula sheet + Normal, \(t\), \(\chi^2\) and \(F\) tables. You do <b>not</b> memorise formulas — you recognise which one to pull and execute it on the FX82.</p>
+
+<!-- ============================ Q1 ============================ -->
+<section id="q1">
+<h2>Question 1 — Continuous distribution <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(X\) have pdf \(f(x)=c\,x^{a}\) for \(0\le x\le 5\), where \(c>0,\ a>0\), and \(\mathbb P\!\left(X\lt \tfrac54\right)=\tfrac1{32}\).
+</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Determine the values of \(a\) and \(c\).
+<details><summary>Worked solution</summary>
+<div class="when">A pdf must integrate to 1; a probability statement gives a second equation. Two unknowns \((a,c)\) → two equations. The clean trick is to <b>divide</b> the two integrals so \(c\) cancels and \(a\) drops out alone.</div>
+<b>Equation 1 (normalisation):</b>
+$$\int_0^5 c\,x^{a}\,dx = \frac{c\,5^{a+1}}{a+1}=1.$$
+<b>Equation 2 (given probability):</b>
+$$\mathbb P\!\left(X\lt\tfrac54\right)=\int_0^{5/4} c\,x^a\,dx=\frac{c\,(5/4)^{a+1}}{a+1}=\frac1{32}.$$
+<b>Divide Eq 2 by Eq 1</b> — the \(c/(a+1)\) cancels:
+$$\left(\frac{5/4}{5}\right)^{a+1}=\left(\frac14\right)^{a+1}=\frac1{32}\;\Rightarrow\;4^{a+1}=32\;\Rightarrow\;2^{2(a+1)}=2^5.$$
+So \(2(a+1)=5\Rightarrow a+1=\tfrac52\Rightarrow \boxed{a=\tfrac32=1.5}.\)<br>
+Back-substitute into Eq 1: \(c=\dfrac{a+1}{5^{a+1}}=\dfrac{2.5}{5^{2.5}}=\dfrac{\sqrt5}{50}.\)
+<div class="ans">\(a = 1.50,\qquad c = \dfrac{\sqrt5}{50}=0.0447\) (3 s.f.).</div>
+<div class="tip">Because \(c/(a+1)=1/5^{a+1}\), the cdf collapses to the tidy form \(F(x)=\left(\dfrac{x}{5}\right)^{2.5}\) on \([0,5]\). Keep this — it makes parts (b) and (c) one-liners.</div>
+<div class="trap">Don't try to solve the two equations numerically on the FX82 blindly. Dividing to eliminate \(c\) turns it into a clean index law \(4^{a+1}=32\); students who don't divide burn time and often mis-handle the fractional power.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> Determine \(\mathbb P(X\gt 4)\).
+<details><summary>Worked solution</summary>
+<div class="when">Right-tail probability of a continuous RV → use the cdf: \(\mathbb P(X\gt4)=1-F(4)\).</div>
+Using \(F(x)=(x/5)^{2.5}\):
+$$\mathbb P(X\gt4)=1-F(4)=1-\left(\tfrac45\right)^{2.5}=1-(0.8)^{2.5}=1-0.57243.$$
+<div class="ans">\(\mathbb P(X\gt4)=0.4276\) (4 s.f.) \(\approx 0.428.\)</div>
+<div class="trap">\((0.8)^{2.5}\) on the FX82: enter <span class="mono" style="display:inline;padding:1px 4px">0.8 ^ 2.5</span>. Do not round \(2.5\) to \(2\) or \(3\) — the fractional exponent is the whole point.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(c)</b> Determine the median and the mode of \(X\).
+<details><summary>Worked solution</summary>
+<div class="when">Median \(m\): solve \(F(m)=0.5\). Mode: maximise \(f(x)\) on the support — check monotonicity / endpoints, since \(f\) may have no interior turning point.</div>
+<b>Median:</b>
+$$\left(\frac m5\right)^{2.5}=0.5\;\Rightarrow\;\frac m5=0.5^{1/2.5}=0.5^{0.4}=0.75807\;\Rightarrow\;m=5(0.75807).$$
+<div class="ans">Median \(m = 3.79\) (3 s.f.).</div>
+<b>Mode:</b> \(f(x)=c\,x^{1.5}\) with \(c>0\). Its derivative \(f'(x)=1.5\,c\,x^{0.5}\gt0\) for all \(x\in(0,5]\), so \(f\) is strictly increasing — no interior maximum. The maximum is at the right endpoint.
+<div class="ans">Mode \(=5\).</div>
+<div class="trap">Don't set \(f'(x)=0\) and "solve" — that gives \(x=0\), which is the <b>minimum</b>. When a density is monotone, the mode sits at an endpoint. State the increasing-derivative argument to earn the mark.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q2 ============================ -->
+<section id="q2">
+<h2>Question 2 — Joint pmf &amp; test of association <span style="font-size:14px;color:var(--muted)">[16 marks]</span></h2>
+<div class="card q">
+\(n=120\) people. \(X\): uses screens within 30 min of bedtime (0=No, 1=Yes). \(Y\): sleep quality (0=poor, 1=fair, 2=good). Joint frequency counts \(n_{xy}\), with \(f(x,y)=n_{xy}/120\):
+<table>
+<tr><th></th><th>Y=0 (poor)</th><th>Y=1 (fair)</th><th>Y=2 (good)</th><th>Row total</th></tr>
+<tr><th>X=0 (No)</th><td>25</td><td>8</td><td>7</td><td>40</td></tr>
+<tr><th>X=1 (Yes)</th><td>15</td><td>20</td><td>45</td><td>80</td></tr>
+<tr><th>Col total</th><td>40</td><td>28</td><td>52</td><td>120</td></tr>
+</table>
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Determine the marginal pmf of \(X\) and of \(Y\).
+<details><summary>Worked solution</summary>
+<div class="when">Marginal pmf = sum the joint over the other variable = row totals / \(n\) (for \(X\)) and column totals / \(n\) (for \(Y\)).</div>
+$$f_X(0)=\tfrac{40}{120}=\tfrac13,\qquad f_X(1)=\tfrac{80}{120}=\tfrac23.$$
+$$f_Y(0)=\tfrac{40}{120}=\tfrac13,\quad f_Y(1)=\tfrac{28}{120}=\tfrac{7}{30},\quad f_Y(2)=\tfrac{52}{120}=\tfrac{13}{30}.$$
+<div class="ans">\(f_X=(0.333,\,0.667)\); \(\;f_Y=(0.333,\,0.233,\,0.433)\).</div>
+<div class="tip">Sanity check: each marginal must sum to 1. \(\tfrac13+\tfrac{7}{30}+\tfrac{13}{30}=\tfrac{10+7+13}{30}=1\). ✓</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> Determine \(\mathbb E X\) and \(\mathbb E Y\).
+<details><summary>Worked solution</summary>
+<div class="when">\(\mathbb E X=\sum x\,f_X(x)\) using the marginals from (a).</div>
+$$\mathbb E X = 0\cdot\tfrac13+1\cdot\tfrac23=\tfrac23=0.667.$$
+$$\mathbb E Y = 0\cdot\tfrac{40}{120}+1\cdot\tfrac{28}{120}+2\cdot\tfrac{52}{120}=\tfrac{28+104}{120}=\tfrac{132}{120}=1.10.$$
+<div class="ans">\(\mathbb E X = 0.667,\qquad \mathbb E Y = 1.10.\)</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(c)</b> Determine the correlation between \(X\) and \(Y\).
+<details><summary>Worked solution</summary>
+<div class="when">Correlation \(\rho=\dfrac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var}X\,\operatorname{Var}Y}}\). Build \(\mathbb E[XY]\) from the joint table, then \(\operatorname{Cov}=\mathbb E[XY]-\mathbb E X\,\mathbb E Y\), and each variance via \(\mathbb E[\cdot^2]-(\mathbb E\cdot)^2\).</div>
+<b>\(\mathbb E[XY]\):</b> only \(X=1\) rows contribute (the \(X=0\) row gives \(x=0\)):
+$$\mathbb E[XY]=1\!\cdot\!1\!\cdot\!\tfrac{20}{120}+1\!\cdot\!2\!\cdot\!\tfrac{45}{120}=\tfrac{20+90}{120}=\tfrac{110}{120}=0.91667.$$
+<b>Covariance:</b>
+$$\operatorname{Cov}(X,Y)=0.91667-(0.66667)(1.10)=0.91667-0.73333=0.18333.$$
+<b>Variances</b> (\(X\) is Bernoulli\((\tfrac23)\)):
+$$\operatorname{Var}X=\tfrac23-\left(\tfrac23\right)^2=\tfrac29=0.22222.$$
+$$\mathbb E[Y^2]=0+1\cdot\tfrac{28}{120}+4\cdot\tfrac{52}{120}=\tfrac{236}{120}=1.96667,\quad \operatorname{Var}Y=1.96667-1.10^2=0.75667.$$
+<b>Correlation:</b>
+$$\rho=\frac{0.18333}{\sqrt{0.22222\times0.75667}}=\frac{0.18333}{0.41006}.$$
+<div class="ans">\(\operatorname{Cov}(X,Y)=0.183,\qquad \rho(X,Y)=0.447\) (3 s.f.).</div>
+<div class="concl">There is a moderate positive correlation (\(\rho\approx0.45\)) between screen use and sleep-quality score: people who use screens before bed tend to have higher \(Y\) values (more of them fall in the "good" category) in this sample.</div>
+<div class="trap">Correlation \(\ne\) causation, and \(Y\) is only an <b>ordinal</b> score coded 0/1/2 — the numeric \(\rho\) depends on that coding. That is why part (d) uses a \(\chi^2\) test of association, which does not assume the codes are equally spaced.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(d)</b> Perform an appropriate test of whether screen use is associated with sleep quality. Report the test statistic, \(P\)-value, statistical conclusion, and a conclusion in context.
+<details><summary>Worked solution</summary>
+<div class="when">"Is categorical variable A associated with categorical variable B?" on a contingency table → <b>\(\chi^2\) test of independence</b> (formula sheet #77).</div>
+<b>Hypotheses:</b> \(H_0\): screen use and sleep quality are independent; \(H_1\): they are associated (not independent).<br>
+<b>Expected counts</b> \(=\dfrac{(\text{row total})(\text{col total})}{120}\):
+<table>
+<tr><th></th><th>Y=0</th><th>Y=1</th><th>Y=2</th></tr>
+<tr><th>X=0</th><td>13.33</td><td>9.33</td><td>17.33</td></tr>
+<tr><th>X=1</th><td>26.67</td><td>18.67</td><td>34.67</td></tr>
+</table>
+<b>Test statistic</b> \(\chi^2=\sum\dfrac{(O-E)^2}{E}\):
+<div class="mono">(25−13.33)²/13.33 = 10.208
+( 8− 9.33)²/ 9.33 =  0.190
+( 7−17.33)²/17.33 =  6.160
+(15−26.67)²/26.67 =  5.104
+(20−18.67)²/18.67 =  0.095
+(45−34.67)²/34.67 =  3.080
+                χ² = 24.84</div>
+<b>Degrees of freedom:</b> \((\text{rows}-1)(\text{cols}-1)=(2-1)(3-1)=2.\)<br>
+<b>\(P\)-value from the \(\chi^2_2\) table (p.13):</b> the largest tabulated quantile at df\(=2\) is \(10.6\) (the 0.995 quantile). Since \(24.84\gt10.6\), we read <b>\(P\lt0.005\)</b>. (Exact value \(P=4.0\times10^{-6}\).)
+<div class="ans">\(\chi^2_{\text{obs}}=24.8\) on \(2\) df, \(P\lt0.005\) (exact \(4.0\times10^{-6}\)). Reject \(H_0\).</div>
+<div class="concl">There is very strong evidence (\(P\lt0.005\)) that screen use within 30 minutes of bedtime is <b>associated</b> with sleep quality: the observed counts differ markedly from what independence predicts — screen users are far more concentrated in the "good" (and away from "poor") sleep category than independence would give.</div>
+<div class="trap">Check the expected-count rule: all \(E\ge5\) here, so the \(\chi^2\) approximation is valid — state this. And use <b>observed vs expected</b>, never observed vs observed. Don't apply a continuity correction (not taught / not on the formula sheet for this test).</div>
+</details></div>
+</section>
+
+<!-- ============================ Q3 ============================ -->
+<section id="q3">
+<h2>Question 3 — Two-sample diet trial <span style="font-size:14px;color:var(--muted)">[19 marks]</span></h2>
+<div class="card q">
+Gardner et al. (2018): 609 adults randomised to Low-Carb (LC, \(n=304\)) or Low-Fat (LF, \(n=305\)). Weight (kg) at baseline and 12 months; summary of the weight <b>change</b>:
+<table>
+<tr><th>Diet</th><th>\(n\)</th><th>Baseline mean (SD)</th><th>12-mo mean (SD)</th><th>Weight change mean (SD)</th></tr>
+<tr><td>Low-Carb</td><td>304</td><td>96.30 (15.70)</td><td>90.31 (16.72)</td><td>−5.99 (5.69)</td></tr>
+<tr><td>Low-Fat</td><td>305</td><td>97.50 (14.70)</td><td>92.21 (15.59)</td><td>−5.29 (5.70)</td></tr>
+</table>
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Calculate a 95% CI for the LC population mean weight change (kg), to 2 dp, and interpret.
+<details><summary>Worked solution</summary>
+<div class="when">One sample, mean of a quantitative variable, \(\sigma\) unknown → one-sample \(t\) interval \(\bar X\pm q\,\dfrac{S}{\sqrt n}\) (formula sheet #62), \(q=t_{n-1,\,0.975}\).</div>
+Use only the LC weight-change column: \(\bar X=-5.99,\ S=5.69,\ n=304.\)<br>
+\(q=t_{303,\,0.975}\). df\(=303\) is off the table; the nearest tabulated rows are df\(=200\ (q=1.97)\) and \(\infty\ (q=1.96)\) — take \(q\approx1.97\).
+$$\text{SE}=\frac{5.69}{\sqrt{304}}=\frac{5.69}{17.436}=0.32635,\qquad \text{margin}=1.97\times0.32635=0.6429.$$
+$$-5.99\pm0.64=(-6.63,\ -5.35).$$
+<div class="ans">95% CI \(=(-6.63,\ -5.35)\) kg.</div>
+<div class="concl">We are 95% confident the true mean 12-month weight change on the low-carb diet lies between \(-6.63\) and \(-5.35\) kg. The whole interval is negative, so low-carb participants lost weight on average — a genuine (not chance) reduction.</div>
+<div class="tip">With \(q=1.96\) you get the same interval to 2 dp \((-6.63,-5.35)\), so either \(t\)-row is safe here. Large \(n\) makes \(t\) and \(z\) essentially identical.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> The aim is whether one diet produced a <i>different</i> change than the other. State the hypotheses in mathematical form; explain all notation.
+<details><summary>Worked solution</summary>
+<div class="when">"Different" (either direction) → <b>two-sided</b> test comparing two population means.</div>
+Let \(\mu_{LC}\) = population mean 12-month weight change on the low-carb diet, and \(\mu_{LF}\) = population mean 12-month weight change on the low-fat diet (both in kg).
+$$H_0:\ \mu_{LC}=\mu_{LF}\qquad\text{vs}\qquad H_1:\ \mu_{LC}\ne\mu_{LF}.$$
+<div class="ans">Equivalently \(H_0:\mu_{LC}-\mu_{LF}=0\) vs \(H_1:\mu_{LC}-\mu_{LF}\ne0\).</div>
+<div class="trap">These are population parameters (\(\mu\)), never the sample means \(\bar X\). Hypotheses are always about the population. "Different" ⇒ \(\ne\) (two-sided); do not write a one-sided \(\lt\) unless the question says "less" / "greater".</div>
+</details></div>
+
+<div class="card q"><span class="marks">7 marks</span><b>(c)</b> Perform an appropriate hypothesis test for the mean difference in weight change across the two diets. Report the \(t\)-statistic to 2 s.f. and conclude in context.
+<details><summary>Worked solution</summary>
+<div class="when">Two independent groups, quantitative outcome, compare means. The two SDs are almost identical (5.69 vs 5.70) → use the <b>pooled</b> two-sample \(t\)-test (formula sheet #74, equal variances).</div>
+<b>Pooled variance</b> (#64):
+$$S_p^2=\frac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2}=\frac{303(5.69^2)+304(5.70^2)}{607}=32.433,\quad S_p=5.6950.$$
+<b>Test statistic</b> under \(H_0:\mu_{LC}=\mu_{LF}\):
+$$T=\frac{\bar X-\bar Y}{S_p\sqrt{\tfrac1m+\tfrac1n}}=\frac{-5.99-(-5.29)}{5.6950\sqrt{\tfrac1{304}+\tfrac1{305}}}=\frac{-0.70}{5.6950(0.081044)}=\frac{-0.70}{0.46156}.$$
+$$T=-1.5166\approx-1.5\quad\text{on }m+n-2=607\text{ df}.$$
+<b>\(P\)-value:</b> two-sided with huge df, so use the \(t_\infty\) (Normal) row: \(1.28\ (0.90)\lt1.52\lt1.64\ (0.95)\), so each tail is between 0.05 and 0.10 ⇒ two-sided \(0.10\lt P\lt0.20\). (Exact \(P=0.130\).) Since \(P\gt0.05\), <b>do not reject \(H_0\)</b>.
+<div class="ans">\(T=-1.5\) (2 s.f.), df \(=607\), \(P\approx0.13\;(\gt0.05)\). Fail to reject \(H_0\).</div>
+<div class="concl">There is no significant difference in mean 12-month weight change between the low-carb and low-fat diets (\(t=-1.5,\ P\approx0.13\)). Although low-carb lost \(0.70\) kg more on average, that gap is well within sampling variation — the trial does not show one diet as superior for weight loss.</div>
+<div class="tip">Welch (unequal-variance) gives \(T=-1.52\), df \(\approx607\), \(P=0.130\) — identical conclusion. With SDs this close, pooled vs Welch makes no practical difference; state your choice and why.</div>
+<div class="trap">The outcome is the <b>weight change</b> column — don't test the baseline or 12-month weights. And the two groups are independent samples (different people), so this is a two-sample test, <b>not</b> a paired test.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(d)</b> State the assumptions for the test in (c) and comment on their validity using Figure 1 / Table 1. If two-sample, state pooled vs Welch and justify.
+<details><summary>Worked solution</summary>
+<div class="fig">Figure 1 is a 2×3 grid of histograms (rows = LC, LF; columns = baseline, 12-month, 12-month change). The "12-month change" histograms are roughly symmetric, single-peaked and bell-shaped, centred just below 0, with no severe skew or extreme outliers.</div>
+<b>Assumptions:</b>
+<ul>
+<li><b>Independence</b> — within and between groups. Valid: participants were randomised and are different individuals in each diet arm.</li>
+<li><b>Normality of the weight-change in each population</b> (or large \(n\) via CLT). Valid: the change histograms in Figure 1 are approximately symmetric/bell-shaped, and with \(n\approx300\) per group the CLT makes \(\bar X\) approximately normal regardless.</li>
+<li><b>Equal variances</b> (needed for the pooled version). Valid: sample SDs are \(5.69\) vs \(5.70\) — essentially equal — so pooling is justified.</li>
+</ul>
+<div class="ans">Assumptions (independence, approx. normality, equal variance) all appear satisfied → the pooled two-sample \(t\)-test is appropriate.</div>
+<div class="tip">Rule of thumb: if the larger SD is less than about twice the smaller, treat variances as equal (pooled). Here \(5.70/5.69\approx1.00\) — pooled is clearly fine.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q4 ============================ -->
+<section id="q4">
+<h2>Question 4 — Two-way ANOVA (dental plaque) <span style="font-size:14px;color:var(--muted)">[17 marks]</span></h2>
+<div class="card q">
+Plaque Index (PI, higher = more plaque) by <b>mouth-rinse</b> (Lemongrass, Chlorhexidine, Prophylaxis control) and <b>flossing</b> (once vs twice daily). Balanced design, <b>10 participants per combination</b> → \(N=3\times2\times10=60\). Interaction plots in Figure 2; partial ANOVA table:
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Mouth rinse</td><td>X</td><td>0.836</td><td>X</td><td>X</td></tr>
+<tr><td>Flossing</td><td>X</td><td>X</td><td>0.231</td><td></td></tr>
+<tr><td>Interaction</td><td>X</td><td></td><td></td><td>1.233</td></tr>
+<tr><td>Residuals</td><td>X</td><td>4.256</td><td>X</td><td></td></tr>
+<tr><td>Total</td><td>X</td><td>5.517</td><td></td><td></td></tr>
+</table>
+</div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(a)</b> Using Figure 2, comment on whether there could be an interaction, and why.
+<details><summary>Worked solution</summary>
+<div class="fig">Figure 2: two interaction plots of mean PI. Left (x = flossing, one line per rinse): the Prophylaxis line drops steeply from once→twice daily while the Lemongrass and Chlorhexidine lines are nearly flat. Right (x = rinse, one line per flossing frequency): the once-daily and twice-daily lines are not parallel and cross near Chlorhexidine.</div>
+<b>Reasoning:</b> in an interaction plot, <b>parallel</b> lines ⇒ no interaction; <b>non-parallel / crossing</b> lines ⇒ possible interaction. Here the lines are clearly not parallel (Prophylaxis behaves differently across flossing levels than the other rinses), so the plot <i>suggests</i> a possible interaction.
+<div class="concl">The lines are not parallel (and cross), so Figure 2 suggests the effect of flossing frequency on plaque may depend on which mouth-rinse is used — i.e. a possible mouth-rinse × flossing interaction. (Whether it is statistically significant is tested in part (c).)</div>
+<div class="tip">"Comment from the plot" ≠ "conclude significance". The plot only hints; the \(F\)-test in (c) decides. Say "suggests a possible interaction", then let the \(P\)-value rule.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Find the missing (X) cells of the ANOVA table.
+<details><summary>Worked solution</summary>
+<div class="when">Fill degrees of freedom from the design first, then MS = SS/df, then F = MS/MS<sub>res</sub>. Use SS<sub>Total</sub> = sum of component SS to back out the missing SS.</div>
+<b>Degrees of freedom</b> (levels: rinse \(a=3\), floss \(b=2\), reps \(=10\), \(N=60\)):
+<ul>
+<li>Mouth rinse: \(a-1=2\)</li>
+<li>Flossing: \(b-1=1\)</li>
+<li>Interaction: \((a-1)(b-1)=2\)</li>
+<li>Total: \(N-1=59\)</li>
+<li>Residuals: \(59-2-1-2=54\)</li>
+</ul>
+<b>Mean squares &amp; F</b>, with \(MS_{res}=\dfrac{4.256}{54}=0.078815\):
+<div class="mono">MS(rinse) = 0.836/2 = 0.418      F(rinse) = 0.418/0.078815   = 5.30
+SS(floss) = MS·df = 0.231·1 = 0.231   F(floss) = 0.231/0.078815 = 2.93
+SS(inter) = 5.517 − 0.836 − 0.231 − 4.256 = 0.194
+MS(inter) = 0.194/2 = 0.097      F(inter) = 0.097/0.078815 = 1.23  ✓ (matches given)</div>
+<b>Completed table:</b>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Mouth rinse</td><td>2</td><td>0.836</td><td>0.418</td><td>5.30</td></tr>
+<tr><td>Flossing</td><td>1</td><td>0.231</td><td>0.231</td><td>2.93</td></tr>
+<tr><td>Interaction</td><td>2</td><td>0.194</td><td>0.097</td><td>1.23</td></tr>
+<tr><td>Residuals</td><td>54</td><td>4.256</td><td>0.0788</td><td></td></tr>
+<tr><td>Total</td><td>59</td><td>5.517</td><td></td><td></td></tr>
+</table>
+<div class="ans">Key fills: df = 2, 1, 2, 54, 59; MS(rinse)=0.418; SS(inter)=0.194, MS(inter)=0.097; MS(res)=0.0788; F(rinse)=5.30, F(floss)=2.93.</div>
+<div class="trap">Residual df is \(N-1-\)(all factor + interaction df) \(=54\), <b>not</b> \(N-\)(number of cells). Getting df<sub>res</sub> wrong cascades into every MS and F below it.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(c)</b> Is there evidence of a significant interaction? State the hypotheses (with notation), the null distribution of the \(F\)-statistic, its observed value, and the \(P\)-value.
+<details><summary>Worked solution</summary>
+<div class="when">Two-way ANOVA interaction test → \(F=MS_{\text{inter}}/MS_{res}\), compared to \(F_{(a-1)(b-1),\,df_{res}}\).</div>
+Using the factor-effects model \(Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk}\) with \(\gamma_{ij}\) the interaction terms:
+$$H_0:\ \gamma_{ij}=0\ \text{for all }i,j\ (\text{no interaction})\qquad H_1:\ \text{at least one }\gamma_{ij}\ne0.$$
+Under \(H_0\), \(F\sim F_{2,\,54}\). Observed \(F=1.23\).<br>
+<b>\(P\)-value:</b> from the \(F\)-table at \(\gamma=0.95\), \(F_{2,\,54}\approx3.2\) (between \(F_{2,40}=3.23\) and \(F_{2,60}=3.15\)). Since \(1.23\ll3.2\), \(P\gg0.05\) (exact \(P=0.300\)).
+<div class="ans">\(F=1.23\sim F_{2,54}\) under \(H_0\); \(P\approx0.30\ (\gt0.05)\). Do not reject \(H_0\).</div>
+<div class="concl">There is no significant interaction between mouth-rinse and flossing frequency (\(F=1.23,\ P\approx0.30\)). Despite the non-parallel look of Figure 2, the effect of flossing does not depend significantly on which rinse is used — so the two factors can be interpreted through their main effects.</div>
+<div class="trap">The interaction \(F\) uses df \((2,54)\) — the numerator df is the <b>interaction</b> df (2), not a main-effect df. Reading the wrong df pair off the \(F\)-table is the classic lost mark here.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(d)</b> State the ANOVA assumptions and discuss their validity using the provided plots.
+<details><summary>Worked solution</summary>
+<div class="fig">Figure 3: (left) residuals vs fitted — points scatter in a roughly constant-width horizontal band about 0, no funnel; (right) normal Q-Q of standardised residuals — points lie close to the straight reference line within the confidence band, only mild wobble at the extremes.</div>
+The model is \(Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk}\) with \(\varepsilon_{ijk}\overset{iid}{\sim}\mathsf N(0,\sigma^2)\). Assumptions:
+<ul>
+<li><b>Independent errors</b> — reasonable: each participant measured once, randomised allocation.</li>
+<li><b>Constant variance (homoscedasticity)</b> — Figure 3 (left) shows an even band with no fanning ⇒ appears valid.</li>
+<li><b>Normal errors</b> — Figure 3 (right) Q-Q is close to linear within the band ⇒ appears valid.</li>
+</ul>
+<div class="ans">All three assumptions (independence, equal variance, normality) appear satisfied from the diagnostic plots, so the two-way ANOVA is trustworthy.</div>
+<div class="tip">Name the plot that checks each assumption: residuals-vs-fitted → equal variance (+ linearity); Q-Q plot → normality. Independence is argued from the study design, not a plot.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(e)</b> Multiple comparisons across mouth-rinse. From the pairwise output, which treatments differ at the 5% level? Interpret in context.
+<details><summary>Worked solution</summary>
+<div class="fig">Pairwise \(t\)-tests with pooled SD, Bonferroni-adjusted \(P\)-values:<br>
+Chlorhexidine vs Lemongrass: \(P=1.000\); Prophylaxis vs Lemongrass: \(P=0.036\); Prophylaxis vs Chlorhexidine: \(P=0.016\).</div>
+<div class="when">Post-hoc pairwise comparison: compare each adjusted \(P\) to \(\alpha=0.05\). \(P\lt0.05\) ⇒ that pair differs significantly.</div>
+<ul>
+<li>Lemongrass vs Chlorhexidine: \(P=1.000\gt0.05\) → <b>not</b> significantly different.</li>
+<li>Prophylaxis vs Lemongrass: \(P=0.036\lt0.05\) → significantly different.</li>
+<li>Prophylaxis vs Chlorhexidine: \(P=0.016\lt0.05\) → significantly different.</li>
+</ul>
+<div class="ans">Prophylaxis differs significantly from both Lemongrass and Chlorhexidine; Lemongrass and Chlorhexidine do not differ.</div>
+<div class="concl">The Prophylaxis (control) group has a significantly different mean Plaque Index from both active rinses, while Lemongrass and Chlorhexidine give statistically indistinguishable plaque levels. In context: the two active mouth-rinses lower plaque to a similar degree, and both differ from the control — but there is no detectable advantage of Chlorhexidine over Lemongrass.</div>
+<div class="trap">These \(P\)-values are already Bonferroni-adjusted, so compare directly to 0.05 — do <b>not</b> divide 0.05 by the number of comparisons again (that would double-correct).</div>
+</details></div>
+</section>
+
+<!-- ============================ Q5 ============================ -->
+<section id="q5">
+<h2>Question 5 — Simple linear regression (Old Faithful) <span style="font-size:14px;color:var(--muted)">[18 marks]</span></h2>
+<div class="card q">
+Old Faithful geyser: predict <b>waiting time</b> (min) from eruption <b>duration</b> (min). R output:
+<div class="mono">Coefficients:
+            Estimate  Std. Error  t value  Pr(>|t|)
+(Intercept)  33.4744     1.1549     28.98   &lt;2e-16 ***
+Duration     10.7296     0.3148     34.09   &lt;2e-16 ***
+
+Residual standard error: 5.914 on 270 degrees of freedom
+Multiple R-squared: 0.8115,   Adjusted R-squared: 0.8108
+F-statistic: 1162 on 1 and 270 DF,  p-value: &lt; 2.2e-16</div>
+</div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(a)</b> Write the fitted regression equation (coefficients to 2 dp) and define all notation.
+<details><summary>Worked solution</summary>
+<div class="when">Read \(\hat\beta_0\) and \(\hat\beta_1\) straight from the "Estimate" column.</div>
+$$\widehat{\text{Waiting}}=33.47+10.73\times\text{Duration}.$$
+where \(\widehat{\text{Waiting}}\) is the predicted mean waiting time (minutes) to the next eruption, and Duration is the eruption duration (minutes). \(\hat\beta_0=33.47\) min is the intercept and \(\hat\beta_1=10.73\) min/min is the slope.
+<div class="ans">\(\hat y = 33.47 + 10.73\,x\).</div>
+<div class="tip">Interpret the slope in words for full marks: each extra <b>minute</b> of eruption duration is associated with about \(10.73\) extra minutes of waiting time.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> A waiting time of 76 min was observed with duration 4.8 min. Find the residual.
+<details><summary>Worked solution</summary>
+<div class="when">Residual \(=y-\hat y\) (observed − fitted). Predict at \(x=4.8\), then subtract from 76.</div>
+$$\hat y=33.4744+10.7296(4.8)=33.4744+51.5021=84.9765.$$
+$$e=y-\hat y=76-84.9765=-8.9765.$$
+<div class="ans">Residual \(=-8.98\) min (3 s.f.).</div>
+<div class="concl">The observed waiting time was about 8.98 minutes <b>shorter</b> than the model predicts for a 4.8-minute eruption (the model over-predicts this point).</div>
+<div class="trap">Residual is observed − predicted, not predicted − observed. Sign matters: a negative residual means the model over-predicted. Use full-precision coefficients to avoid rounding the residual.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(c)</b> Construct a 95% CI for the slope; interpret and comment on significance of the linear relationship.
+<details><summary>Worked solution</summary>
+<div class="when">CI for a regression slope: \(\hat\beta_1\pm t_{n-2,\,0.975}\times\text{SE}(\hat\beta_1)\). Then "significant linear relationship" ⇔ the CI excludes 0.</div>
+\(n-2=270\) df; \(t_{270,0.975}\approx1.97\) (df\(=200\) row, \(q=1.97\)); \(\text{SE}(\hat\beta_1)=0.3148\).
+$$10.7296\pm1.97(0.3148)=10.7296\pm0.6202=(10.11,\ 11.35).$$
+<div class="ans">95% CI for slope \(=(10.11,\ 11.35)\) min per min.</div>
+<div class="concl">We are 95% confident that each additional minute of eruption duration is associated with between \(10.11\) and \(11.35\) more minutes of waiting time. The interval lies entirely above 0, so there is strong statistical evidence of a significant positive linear relationship (consistent with the tiny \(P\lt2\times10^{-16}\) for Duration).</div>
+<div class="tip">Two equivalent ways to argue significance: (i) CI excludes 0, or (ii) the \(t\)-value \(=34.09\) with \(P\lt2\times10^{-16}\). Quote one and you're done.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(d)</b> State the model assumptions and, using Figure 5, briefly say whether each appears valid.
+<details><summary>Worked solution</summary>
+<div class="fig">Figure 5: (left) residuals vs fitted — a broad, roughly even band around 0 with no clear curve or funnel; (right) normal Q-Q of standardised residuals — close to the straight line through the middle, with mild departure in the upper tail.</div>
+Model \(Y_i=\beta_0+\beta_1 x_i+\varepsilon_i,\ \varepsilon_i\overset{iid}{\sim}\mathsf N(0,\sigma^2)\). Assumptions:
+<ul>
+<li><b>Linearity</b> — residuals vs fitted show no systematic curve ⇒ valid.</li>
+<li><b>Constant variance</b> — the residual band has roughly even width (no fan) ⇒ valid.</li>
+<li><b>Normal errors</b> — Q-Q plot is near-linear, only slight upper-tail deviation ⇒ approximately valid.</li>
+<li><b>Independence</b> — errors independent; measurements are over a time period, so mild caution, but no plot contradicts it.</li>
+</ul>
+<div class="ans">Linearity, constant variance and normality all look reasonable from Figure 5, so the fitted SLR is trustworthy.</div>
+<div class="trap">Match each assumption to the right plot. Residuals-vs-fitted checks linearity + constant variance; Q-Q checks normality. Don't claim a plot shows independence — argue that from the data-collection design.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(e)</b> For a fixed \(x_0\), without formulas: how does the width of (a) the 95% <b>confidence</b> interval for the mean at \(x_0\), and (b) the 95% <b>prediction</b> interval for a new \(Y\) at \(x_0\), behave as \(n\to\infty\)?
+<details><summary>Worked solution</summary>
+<div class="when">Conceptual: a CI for the mean estimates a fixed line (only estimation error), while a PI must also swallow one new observation's random scatter \(\sigma\), which never disappears.</div>
+<b>(a) Confidence interval for the mean response:</b> its width comes only from uncertainty in the estimated line. As \(n\) grows, the coefficients are pinned down ever more precisely, so the width <b>shrinks toward 0</b>.
+<b>(b) Prediction interval for a new \(Y\):</b> its width combines the same estimation error <i>plus</i> the irreducible scatter \(\sigma\) of an individual point about the line. Estimation error vanishes, but \(\sigma\) does not, so the width <b>shrinks toward a positive constant</b> (roughly \(\pm1.96\,\sigma\)), never to 0.
+<div class="ans">(a) CI width \(\to0\). (b) PI width \(\to\) a positive constant (\(\approx\pm1.96\sigma\)), not 0.</div>
+<div class="trap">The classic error is saying both go to 0. A prediction interval is fundamentally wider than a confidence interval and stays wide because you can never predict a single random outcome exactly, no matter how much data you have.</div>
+</details></div>
+</section>
+
+<p class="tip" style="margin-top:30px">Finished. Cross-check: totals \(10+16+19+17+18=80\) marks. Every displayed number on this page was recomputed in Python (scipy/sympy) before publishing.</p>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

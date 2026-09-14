@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 3 Multiple Random Variables</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Chapter 3 — Multiple Random Variables</h1>
+  <p>Joint distributions · marginals · independence · covariance &amp; correlation · limit theorems (LLN, CLT)</p>
+  <span class="badge gold">FLAGSHIP: joint frequency table (2025 Q2, 16 marks)</span>
+  <span class="badge">Typical weight ≈ 12–16 marks / paper</span>
+  <span class="badge">notes pp 53–66</span>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-02-probability.html">← Ch 1–2 Probability</a>
+  <a href="ch04-05-data-descriptives.html">Ch 4–5 Data &amp; Descriptives →</a>
+  <a href="ch11-chi-squared.html">Ch 11 χ² test</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+</nav>
+
+<main>
+
+<!-- ============ SECTION 1: CONCEPTS ============ -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>The one-variable → many-variable jump</h3>
+<p>Everything you did in Ch 1–2 for a single random variable now has a "joint" twin. A single RV is
+described by its pmf/pdf; <b>several RVs together</b> are described by their <b>joint distribution</b>, which
+captures not just how each variable behaves on its own but <b>how they move together</b>. That coupling
+is the whole point of the chapter — and it is exactly what the flagship exam question tests.</p>
+<p>Two levels of description:</p>
+<ul>
+<li><b>Joint pmf</b> \(f(x,y)=\mathbb P(X=x,\,Y=y)\) — the probability of each <i>cell</i> (each combination). In a
+frequency table with total \(n\), \(f(x,y)=n_{xy}/n\) (notes Def 3.2; 2025 Q2 states this explicitly).</li>
+<li><b>Joint cdf</b> \(F(x,y)=\mathbb P(X\le x,\,Y\le y)\) — cumulative version, rarely needed in the exam for tables (Def 3.1).</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Marginals: collapse the table by summing</h3>
+<p>The <b>marginal pmf</b> of \(X\) is just the distribution of \(X\) alone, recovered by summing the joint pmf
+over <i>all</i> values of the other variable (notes eq 3.2):</p>
+<p>$$f_X(x)=\sum_y f(x,y),\qquad f_Y(y)=\sum_x f(x,y).$$</p>
+<p>In a table this is <b>row sums</b> (for \(X\) if \(X\) labels the rows) and <b>column sums</b> (for \(Y\)). With raw
+counts, marginal pmf = <b>row/column total ÷ n</b>. This is the entry point to almost every table question:
+you need the marginals to get \(\mathbb E[X],\mathbb E[Y]\), variances, and the expected counts for a χ² test.</p>
+<div class="trap">You <b>cannot</b> go the other way. Row and column totals do <b>not</b> determine the inside of the
+table — many different joint tables share the same margins (notes p.56). So "marginals" throw away the
+dependence information; that information lives only in the cells.</div>
+</div>
+
+<div class="card">
+<h3>Independence — the product rule for pmfs</h3>
+<p>\(X\) and \(Y\) are <b>independent</b> iff the joint pmf factorises into the product of the marginals
+<b>for every cell</b> (notes Def 3.4):</p>
+<p>$$f(x,y)=f_X(x)\,f_Y(y)\quad\text{for all }x,y.$$</p>
+<p>Practically: to <b>prove</b> independence you must check <i>every</i> cell equals row-prob × col-prob. To
+<b>disprove</b> it, <b>one</b> cell where \(f(x,y)\ne f_X(x)f_Y(y)\) is enough — state that single counterexample
+and stop.</p>
+<div class="trap">Independence \(\Rightarrow\) \(\text{Cov}=0\), but <b>the converse is false</b>. Zero covariance does
+<b>not</b> imply independence. The chapter-3 solutions and tut-sheet 3 both hammer this: "even if the
+covariance had been 0, this would not have implied independence." Always check the product rule for the
+independence part — never argue independence from \(\text{Cov}=0\).</div>
+</div>
+
+<div class="card">
+<h3>Expectations for joint distributions</h3>
+<p>For any function \(h\), \(\displaystyle\mathbb E[h(X,Y)]=\sum_{x,y}h(x,y)\,f(x,y)\) (notes eq 3.5). Two special
+cases you will use constantly:</p>
+<h4>Linearity (Theorem 3.1) — always true, no independence needed</h4>
+<p>$$\mathbb E[a+b_1X_1+\cdots+b_nX_n]=a+b_1\mu_1+\cdots+b_n\mu_n.$$</p>
+<h4>Product rule (Theorem 3.1, eq 3.7) — needs independence</h4>
+<p>$$X,Y\text{ independent}\ \Rightarrow\ \mathbb E[XY]=\mathbb E[X]\,\mathbb E[Y].$$</p>
+<p>For a table you compute \(\mathbb E[XY]=\sum_{x,y}xy\,f(x,y)\) directly from the cells — this is the engine of
+the covariance/correlation calculation, and it is where dependence shows up.</p>
+</div>
+
+<div class="card">
+<h3>Covariance &amp; correlation — measuring how they move together</h3>
+<p><b>Covariance</b> (Def 3.5) measures linear co-movement:</p>
+<p>$$\text{Cov}(X,Y)=\mathbb E[(X-\mu_X)(Y-\mu_Y)]=\mathbb E[XY]-\mathbb E[X]\,\mathbb E[Y].$$</p>
+<p>The second form (Theorem 3.2 property 3) is the exam-friendly one: get \(\mathbb E[XY]\), \(\mathbb E[X]\),
+\(\mathbb E[Y]\) from the table, subtract. Covariance has awkward units, so we scale it to the
+<b>correlation coefficient</b> \(\varrho\) (eq 3.8), which is unit-free and always in \([-1,1]\):</p>
+<p>$$\varrho(X,Y)=\frac{\text{Cov}(X,Y)}{\sigma_X\,\sigma_Y}.$$</p>
+<p>Sign = direction of the linear relationship; magnitude toward 1 = stronger linear association;
+\(\varrho=0\) = no <i>linear</i> association (but possibly still dependent).</p>
+<h4>Variance &amp; covariance toolkit (Theorem 3.2)</h4>
+<div class="method">
+1. \(\text{Var}(X)=\mathbb E[X^2]-(\mathbb E[X])^2\)<br>
+2. \(\text{Var}(a+bX)=b^2\text{Var}(X)\)<br>
+3. \(\text{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\)<br>
+4. \(\text{Cov}(X,Y)=\text{Cov}(Y,X)\)<br>
+5. \(\text{Cov}(aX+bY,Z)=a\,\text{Cov}(X,Z)+b\,\text{Cov}(Y,Z)\)<br>
+6. \(\text{Cov}(X,X)=\text{Var}(X)\)<br>
+7. \(\text{Var}(X+Y)=\text{Var}(X)+\text{Var}(Y)+2\,\text{Cov}(X,Y)\)<br>
+8. \(X,Y\) independent \(\Rightarrow\text{Cov}(X,Y)=0\)
+</div>
+</div>
+
+<div class="card">
+<h3>Linear combinations — the workhorse for "sums of normals"</h3>
+<p>For <b>independent</b> \(X_1,\dots,X_n\) (Theorem 3.3):</p>
+<p>$$\text{Var}(a+b_1X_1+\cdots+b_nX_n)=b_1^2\sigma_1^2+\cdots+b_n^2\sigma_n^2.$$</p>
+<p>Combine with linearity for the mean and you can find the distribution of any weighted sum. If, in
+addition, the \(X_i\) are <b>normal</b> (Theorem 3.6), the result is <b>exactly normal</b>:</p>
+<p>$$Y=a+\textstyle\sum b_iX_i\ \sim\ \mathcal N\!\Big(a+\sum b_i\mu_i,\ \sum b_i^2\sigma_i^2\Big).$$</p>
+<div class="tip">For a <b>difference</b> \(Y-X\) of independent normals the variances still <b>add</b>:
+\(\text{Var}(Y-X)=\sigma_Y^2+\sigma_X^2\) (the \(b=-1\) gets squared). This trips people up every year.</div>
+</div>
+
+<div class="card">
+<h3>Limit theorems — why the normal is everywhere</h3>
+<p>Take iid \(X_1,X_2,\dots\) with mean \(\mu\) and variance \(\sigma^2\). Let \(S_n=X_1+\cdots+X_n\) and
+\(\bar X=S_n/n\). Then \(\mathbb E[\bar X]=\mu\) and \(\text{Var}(\bar X)=\sigma^2/n\).</p>
+<h4>Law of Large Numbers (Theorem 3.4)</h4>
+<p>As \(n\to\infty\) the sample average \(\bar X\) converges to the true mean \(\mu\): the variance
+\(\sigma^2/n\to 0\), so averaging kills randomness. (This is why simulation works: average many draws to
+estimate an expectation.)</p>
+<h4>Central Limit Theorem (Theorem 3.5)</h4>
+<p>For <b>large \(n\)</b>, regardless of the parent distribution's shape:</p>
+<p>$$S_n=X_1+\cdots+X_n\ \overset{\text{approx}}{\sim}\ \mathcal N(n\mu,\ n\sigma^2),\qquad
+\bar X\ \overset{\text{approx}}{\sim}\ \mathcal N\!\Big(\mu,\ \tfrac{\sigma^2}{n}\Big).$$</p>
+<p>This is the bridge from "any distribution" to "normal", and it powers every confidence interval and
+\(t\)-test in Ch 6–7. A special case is the <b>normal approximation to the binomial</b>: since
+\(X\sim\text{Bin}(n,p)\) is a sum of \(n\) iid \(\text{Ber}(p)\) variables,</p>
+<p>$$X\ \overset{\text{approx}}{\sim}\ \mathcal N\big(np,\ np(1-p)\big),\quad\text{valid when }np>5\text{ and }n(1-p)>5.$$</p>
+<div class="tip">LLN says the average <i>lands on</i> \(\mu\); CLT says <i>how it's scattered</i> around \(\mu\) (normally, spread
+\(\sigma/\sqrt n\)). Different questions: "what does the average tend to?" → LLN; "probability the average
+exceeds…?" → CLT.</div>
+</div>
+</section>
+
+<!-- ============ SECTION 2: FORMULAS ============ -->
+<section id="formulas-when">
+<h2>§2 · Key formulas &amp; when to use them</h2>
+
+<div class="method">
+<h4>Marginal pmf from a table</h4>
+$$f_X(x)=\sum_y f(x,y)\quad\Big(=\tfrac{\text{row total}}{n}\Big),\qquad f_Y(y)=\sum_x f(x,y)\quad\Big(=\tfrac{\text{col total}}{n}\Big)$$
+<div class="when">You see a joint frequency/probability table and are asked for "the marginal pmf of \(X\) (or \(Y\))".
+Sum across the other variable; with counts divide totals by \(n\).</div>
+</div>
+
+<div class="method">
+<h4>Mean, variance, SD of a discrete RV</h4>
+$$\mathbb E[X]=\sum_x x\,f_X(x),\qquad \text{Var}(X)=\mathbb E[X^2]-(\mathbb E[X])^2,\qquad \sigma_X=\sqrt{\text{Var}(X)}$$
+<div class="when">Any "expectation / standard deviation of \(X\)" once you have the marginal. Always compute
+\(\mathbb E[X^2]=\sum x^2 f_X(x)\) as an intermediate for the variance.</div>
+</div>
+
+<div class="method">
+<h4>Covariance &amp; correlation from a table</h4>
+$$\mathbb E[XY]=\sum_{x,y}xy\,f(x,y),\quad \text{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y],\quad
+\varrho=\frac{\text{Cov}(X,Y)}{\sigma_X\sigma_Y}$$
+<div class="when">"Determine the covariance / correlation between \(X\) and \(Y\)." Only cells with \(x\ne0\) <i>and</i>
+\(y\ne0\) contribute to \(\mathbb E[XY]\) — the rest vanish, so the sum is shorter than it looks.</div>
+</div>
+
+<div class="method">
+<h4>Independence check</h4>
+$$X\perp Y\ \iff\ f(x,y)=f_X(x)f_Y(y)\ \text{ for ALL }x,y$$
+<div class="when">"Are \(X\) and \(Y\) independent?" To confirm: verify every cell. To reject: find one cell where it
+fails and quote it. Never argue from \(\text{Cov}=0\).</div>
+</div>
+
+<div class="method">
+<h4>Linear combinations (mean always; variance needs independence)</h4>
+$$\mathbb E\Big[a+\sum b_iX_i\Big]=a+\sum b_i\mu_i,\qquad
+\text{Var}\Big(a+\sum b_iX_i\Big)=\sum b_i^2\sigma_i^2$$
+<div class="when">Total/average of several RVs, cost = price×quantity, difference of two measurements, scaling
+(e.g. °F→°C). Variances add for both sums <b>and</b> differences of independent RVs.</div>
+</div>
+
+<div class="method">
+<h4>Sum/linear combination of independent normals is normal (Thm 3.6)</h4>
+$$Y=a+\sum b_iX_i\ \sim\ \mathcal N\Big(a+\sum b_i\mu_i,\ \sum b_i^2\sigma_i^2\Big),\qquad
+Z=\frac{Y-\mathbb E[Y]}{\text{sd}(Y)}\sim\mathcal N(0,1)$$
+<div class="when">Independent normal parents and you need a probability about a sum/difference/average.
+Build the normal, standardise, read the \(Z\)-table.</div>
+</div>
+
+<div class="method">
+<h4>Central Limit Theorem</h4>
+$$S_n\overset{\text{approx}}{\sim}\mathcal N(n\mu,\,n\sigma^2),\qquad
+\bar X\overset{\text{approx}}{\sim}\mathcal N\Big(\mu,\tfrac{\sigma^2}{n}\Big),\qquad
+\text{Bin}(n,p)\overset{\text{approx}}{\sim}\mathcal N\big(np,np(1-p)\big)$$
+<div class="when">"Sum/average of \(n\) independent…", "approximate the probability that the mean/total exceeds…",
+"for large \(n\), what is the (approximate) distribution?" Parent need <b>not</b> be normal — that's the power
+of CLT.</div>
+</div>
+
+<div class="method">
+<h4>χ² test of independence (crossover to Ch 11)</h4>
+$$E_{ij}=\frac{(\text{row}_i)(\text{col}_j)}{n},\qquad \chi^2=\sum\frac{(O_{ij}-E_{ij})^2}{E_{ij}},\qquad
+\text{df}=(r-1)(c-1)$$
+<div class="when">"Test whether \(X\) is associated with \(Y\)" / "test of association" from a table of <b>counts</b>. This is
+the natural partner of the correlation part — see the full method on
+<a href="ch11-chi-squared.html">ch11-chi-squared.html</a>. Worked in full in Example 1 below.</div>
+</div>
+</section>
+
+<!-- ============ SECTION 3: WORKED EXAMPLES ============ -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p class="tip">Every number below was verified in Python. Give at least 3 significant figures, as the exam rubric requires.</p>
+
+<details open>
+<summary>Example 1 (FLAGSHIP) — 2025 Q2: joint frequency table, screen use × sleep quality, n = 120 [16 marks]</summary>
+<div class="q card">
+<p><b>Setup.</b> \(X=\) uses screens within 30 min of bedtime (0 = No, 1 = Yes); \(Y=\) sleep quality
+(0 = poor, 1 = fair, 2 = good). \(f(x,y)=n_{xy}/120\).</p>
+<table>
+<tr><th>counts</th><th>Y=0 (poor)</th><th>Y=1 (fair)</th><th>Y=2 (good)</th><th>row total</th></tr>
+<tr><th>X=0 (No)</th><td>25</td><td>8</td><td>7</td><td><b>40</b></td></tr>
+<tr><th>X=1 (Yes)</th><td>15</td><td>20</td><td>45</td><td><b>80</b></td></tr>
+<tr><th>col total</th><td><b>40</b></td><td><b>28</b></td><td><b>52</b></td><td><b>120</b></td></tr>
+</table>
+</div>
+
+<p><b>(a) Marginal pmfs</b> — row/column totals ÷ 120:</p>
+<p class="mono">f_X:  P(X=0)=40/120=1/3≈0.333    P(X=1)=80/120=2/3≈0.667
+f_Y:  P(Y=0)=40/120=1/3≈0.333    P(Y=1)=28/120≈0.233    P(Y=2)=52/120≈0.433</p>
+
+<p><b>(b) Expectations</b> — \(\sum x f_X(x)\) and \(\sum y f_Y(y)\):</p>
+<p>$$\mathbb E[X]=0\cdot\tfrac{40}{120}+1\cdot\tfrac{80}{120}=\tfrac{80}{120}=0.667$$
+$$\mathbb E[Y]=0\cdot\tfrac{40}{120}+1\cdot\tfrac{28}{120}+2\cdot\tfrac{52}{120}=\tfrac{132}{120}=1.10$$</p>
+
+<p><b>(c) Correlation</b> \(\varrho=\dfrac{\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]}{\sigma_X\sigma_Y}\).</p>
+<p>Variances (note \(X\) is 0/1, so \(\mathbb E[X^2]=\mathbb E[X]\)):</p>
+<p class="mono">E[X²]=0.667                  Var(X)=0.667−0.667²=2/9=0.2222   σ_X=0.4714
+E[Y²]=0+1·(28/120)+4·(52/120)=236/120=1.9667
+                             Var(Y)=1.9667−1.10²=0.7567        σ_Y=0.8699</p>
+<p>\(\mathbb E[XY]\): only \(X=1\) rows survive (X=0 kills the product), and within them only \(Y\ge1\):</p>
+<p class="mono">E[XY]=1·1·(20/120)+1·2·(45/120)=(20+90)/120=110/120=0.9167
+Cov(X,Y)=0.9167 − 0.667×1.10 = 0.9167 − 0.7333 = 0.1833
+ϱ = 0.1833 / (0.4714 × 0.8699) = <b>0.447</b>  (3 s.f.)</p>
+<div class="tip">Positive, moderate correlation: screen users tend to report better-numbered sleep-quality
+codes. (Direction only — see the trap on ordinal coding.)</div>
+
+<p><b>(d) Appropriate test of association</b> → <b>χ² test of independence</b> (data are counts in a 2×3 table).</p>
+<div class="method">
+<b>H₀:</b> screen use and sleep quality are independent. &nbsp;<b>H₁:</b> they are associated.<br>
+Expected counts \(E_{ij}=\text{row}_i\times\text{col}_j/120\):
+<p class="mono">        Y=0     Y=1     Y=2
+X=0    13.33    9.33   17.33
+X=1    26.67   18.67   34.67</p>
+\(\chi^2=\sum\frac{(O-E)^2}{E}\):
+<p class="mono">(25−13.33)²/13.33 = 10.21     (8−9.33)²/9.33  = 0.19
+(7−17.33)²/17.33 =  6.16     (15−26.67)²/26.67 = 5.10
+(20−18.67)²/18.67 = 0.10     (45−34.67)²/34.67 = 3.08
+χ² = 24.84,   df = (2−1)(3−1) = 2</p>
+<b>Decision.</b> \(\chi^2_{0.05,\,2}=5.99\) and \(\chi^2_{0.01,\,2}=9.21\); observed \(24.84\) far exceeds both, so
+\(P\text{-value}\approx 4\times10^{-6}\) (\(\ll 0.05\)). <b>Reject H₀.</b><br>
+<b>In context:</b> there is very strong evidence that screen use before bed is associated with sleep quality
+in this sample.
+</div>
+<div class="tip">The correlation (c) and the χ² test (d) answer <i>different</i> questions: \(\varrho\) measures
+<i>linear</i> co-movement of the coded numbers; χ² tests <i>any</i> association and is the right formal "test".
+Full χ² method: <a href="ch11-chi-squared.html">ch11-chi-squared.html</a>.</div>
+</details>
+
+<details>
+<summary>Example 2 — 2024 Q1: parametric joint pmf table (find p, marginals, Cov, correlation) [12 marks]</summary>
+<div class="q card">
+<p>Joint pmf of leakage in tanks A, B (0 = none, 1 = leak), with \(0\le p\le 1\):</p>
+<table>
+<tr><th></th><th>B = 0</th><th>B = 1</th></tr>
+<tr><th>A = 0</th><td>\(\tfrac14 p^2\)</td><td>\(p\)</td></tr>
+<tr><th>A = 1</th><td>\(p\)</td><td>\(p^2\)</td></tr>
+</table>
+</div>
+<p><b>(a) Find p</b> — probabilities sum to 1:</p>
+<p>$$\tfrac14p^2+p+p+p^2=1\ \Rightarrow\ \tfrac54p^2+2p-1=0\ \Rightarrow\ 5p^2+8p-4=0\ \Rightarrow\ p=0.4$$
+(other root \(-2\) is rejected). Cells become \(0.04,\ 0.40,\ 0.40,\ 0.16\) (sum \(=1\) ✓).</p>
+<p><b>(b) Marginal pmf of A:</b> \(P(A=0)=0.04+0.40=0.44,\quad P(A=1)=0.40+0.16=0.56.\)</p>
+<p><b>(c) Mean and variance of A</b> (Bernoulli-type):</p>
+<p class="mono">E[A]=0.56    Var(A)=E[A²]−E[A]²=0.56−0.56²=0.2464    σ_A=0.496</p>
+<p><b>(d) Covariance &amp; correlation</b> (by symmetry \(B\) has the same margins, \(\sigma_B=\sigma_A\)):</p>
+<p class="mono">E[AB]=1·1·P(A=1,B=1)=0.16
+Cov(A,B)=0.16 − 0.56×0.56 = −0.1536
+ϱ = −0.1536 / (0.496×0.496) = <b>−0.623</b>  (3 s.f.)</p>
+<div class="tip">Negative correlation — a leak in one tank is associated with <i>no</i> leak in the other. Same table
+skeleton as 2025 Q2, but here you must first <b>solve for the parameter</b> before anything else works.</div>
+</details>
+
+<details>
+<summary>Example 3 — Tutorial 3 Q3: full covariance/correlation and independence (dependent case)</summary>
+<div class="q card">
+<p>Joint probabilities of number of tests \(T\in\{1,2,3\}\) and hours onsite \(H\in\{1,2,3,4\}\):</p>
+<table>
+<tr><th>T \ H</th><th>1</th><th>2</th><th>3</th><th>4</th><th>row</th></tr>
+<tr><th>1</th><td>0.10</td><td>0.10</td><td>0.08</td><td>0.02</td><td>0.30</td></tr>
+<tr><th>2</th><td>0.10</td><td>0.15</td><td>0.15</td><td>0.10</td><td>0.50</td></tr>
+<tr><th>3</th><td>0.02</td><td>0.03</td><td>0.05</td><td>0.10</td><td>0.20</td></tr>
+<tr><th>col</th><td>0.22</td><td>0.28</td><td>0.28</td><td>0.22</td><td>1.00</td></tr>
+</table>
+</div>
+<p><b>Marginal means &amp; SDs</b> from the row/column totals:</p>
+<p class="mono">E[T]=1(.30)+2(.50)+3(.20)=1.9        Var(T)=0.49   σ_T=0.700
+E[H]=1(.22)+2(.28)+3(.28)+4(.22)=2.5  Var(H)=1.13   σ_H=1.063</p>
+<p><b>Covariance</b> via \(\mathbb E[TH]-\mathbb E[T]\mathbb E[H]\) (or the deviation form used in the solutions):</p>
+<p class="mono">Cov(T,H)=0.26      ϱ = 0.26/(0.700×1.063) = <b>0.349</b>  (3 s.f.)</p>
+<p><b>Independent?</b> Check one cell:</p>
+<p class="mono">P(T=1,H=1)=0.10   but   P(T=1)P(H=1)=0.30×0.22=0.066   →   0.10 ≠ 0.066</p>
+<p>One failing cell is enough: \(T\) and \(H\) are <b>dependent</b>.</p>
+<div class="trap">The solutions add a warning: even a covariance of 0 would <b>not</b> prove independence — always test
+the product rule, not the covariance, for the independence part.</div>
+</details>
+
+<details>
+<summary>Example 4 — CLT for a sample mean (parent shape unknown) [exam-style]</summary>
+<div class="q card">
+<p>A call centre's handling times have mean \(\mu=30\) s and SD \(\sigma=8\) s (distribution skewed, <b>not</b>
+normal). A shift handles \(n=100\) independent calls. Find the approximate probability the <b>mean</b>
+handling time exceeds 32 s, and that the <b>total</b> exceeds 3100 s.</p>
+</div>
+<p>By CLT, even though the parent is skewed, for \(n=100\) the mean is approximately normal:</p>
+<p>$$\bar X\ \overset{\text{approx}}{\sim}\ \mathcal N\Big(30,\ \tfrac{8^2}{100}\Big)=\mathcal N(30,\,0.64),\quad
+\text{sd}(\bar X)=\tfrac{8}{\sqrt{100}}=0.8.$$</p>
+<p class="mono">P(X̄ > 32) = P(Z > (32−30)/0.8) = P(Z > 2.50) = 1 − 0.9938 = <b>0.0062</b></p>
+<p>For the total \(S_{100}\sim\mathcal N(100\cdot30,\,100\cdot8^2)=\mathcal N(3000,\,6400)\), sd \(=80\):</p>
+<p class="mono">P(S₁₀₀ > 3100) = P(Z > (3100−3000)/80) = P(Z > 1.25) = 1 − 0.8944 = <b>0.106</b></p>
+<div class="tip">The trigger phrase "approximate the probability that the mean exceeds…" with iid draws is a
+pure CLT flag. Standardise with \(\sigma/\sqrt n\) for a mean, \(\sigma\sqrt n\) for a total.</div>
+</details>
+
+<details>
+<summary>Example 5 — Linear combinations of independent normals (sums &amp; differences) [Ch-3 exercises + tut 3]</summary>
+<div class="q card">
+<p>(i) Egg weights are \(\mathcal N(60,6^2)\) g, independent. A basket has 10 eggs. (ii) Two independently
+sampled people each weigh \(\mathcal N(75,10^2)\) kg. (iii) Men's heights \(\mathcal N(176,8^2)\), women's
+\(\mathcal N(162,7^2)\) cm.</p>
+</div>
+<p><b>(i) Total of 10 eggs</b> \(Y=X_1+\cdots+X_{10}\). Mean and (by independence) variance add:</p>
+<p class="mono">E[Y]=10×60=600     Var(Y)=10×6²=360     Y ~ N(600,360)
+P(Y > 630) = P(Z > (630−600)/√360) = P(Z > 1.581) = <b>0.0569</b></p>
+<p><b>(ii) Two people together</b> \(X+Y\sim\mathcal N(150,\,200)\):</p>
+<p class="mono">P(X+Y > 180) = P(Z > (180−150)/√200) = P(Z > 2.121) = <b>0.0169</b></p>
+<p><b>(iii) Difference</b> man − woman. Means subtract; <b>variances add</b>:</p>
+<p class="mono">Mean = 176−162 = 14 cm     Var = 8²+7² = 113     sd = √113 = <b>10.63 cm</b></p>
+<div class="trap">In (iii) do <b>not</b> subtract variances. \(\text{Var}(Y-X)=(-1)^2\sigma_X^2+\sigma_Y^2=\sigma_X^2+\sigma_Y^2\).
+Subtracting gives \(\sqrt{15}=3.9\) — a classic wrong answer.</div>
+</details>
+</section>
+
+<!-- ============ SECTION 4: EXAM QUESTION TYPES ============ -->
+<section id="types">
+<h2>§4 · Exam question types</h2>
+
+<div class="card">
+<h3>Type A — Joint table → marginals, moments, covariance, correlation, independence</h3>
+<p><b>Looks like:</b> a 2-way table of counts or probabilities (possibly with a parameter to solve first),
+then a chain of parts (a)–(e). <b>Mark range:</b> 12–16 (a whole question).</p>
+<div class="method"><b>Recipe</b>
+<ol>
+<li>If a parameter appears, set \(\sum f=1\) and solve for it first.</li>
+<li>Marginals: row/column totals (÷ \(n\) for counts).</li>
+<li>\(\mathbb E[X],\mathbb E[Y]\) from marginals; \(\mathbb E[X^2],\mathbb E[Y^2]\) for variances; SDs.</li>
+<li>\(\mathbb E[XY]=\sum xy\,f(x,y)\) (skip cells with \(x=0\) or \(y=0\)).</li>
+<li>\(\text{Cov}=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\); \(\varrho=\text{Cov}/(\sigma_X\sigma_Y)\).</li>
+<li>Independence: check the product rule cell-by-cell (or one counterexample).</li>
+</ol></div>
+<p><b>Real examples:</b> 2025 Q2 (screen × sleep, 16 marks), 2024 Q1 (tank leakage, 12 marks),
+Tut 3 Q3, Ch-3 exercises Q3 (independent case).</p>
+</div>
+
+<div class="card">
+<h3>Type B — Test of association from a table (χ² crossover)</h3>
+<p><b>Looks like:</b> "is there an association between [factor] and [factor]?" with a table of counts.
+<b>Mark range:</b> 5–6.</p>
+<div class="method"><b>Recipe</b>
+<ol>
+<li>State H₀ (independent / no association) and H₁ (associated), in words.</li>
+<li>Expected counts \(E_{ij}=\text{row}\times\text{col}/n\).</li>
+<li>\(\chi^2=\sum(O-E)^2/E\); df \(=(r-1)(c-1)\).</li>
+<li>Compare to \(\chi^2\) table / report \(P\)-value; conclude in context.</li>
+</ol></div>
+<p><b>Real examples:</b> 2025 Q2(d) (5 marks), 2024 Q5(e) frog type × croaks (6 marks),
+2023 Q5(e) toothpaste × age group (5 marks). Full method: <a href="ch11-chi-squared.html">ch11-chi-squared.html</a>.</p>
+</div>
+
+<div class="card">
+<h3>Type C — Linear combinations of normals (sum / difference / scaled)</h3>
+<p><b>Looks like:</b> independent normal quantities combined (total weight, cost = price×amount, difference
+of two measurements, °F→°C conversion). <b>Mark range:</b> 3–6.</p>
+<div class="method"><b>Recipe</b>
+<ol>
+<li>Write each variable's \(\mathcal N(\mu,\sigma^2)\).</li>
+<li>Mean of the combination: linearity. Variance: \(\sum b_i^2\sigma_i^2\) (variances add for ±).</li>
+<li>Result is normal (Thm 3.6); standardise and read the \(Z\)-table.</li>
+</ol></div>
+<p><b>Real examples:</b> Ch-3 exercises Q1, Q2, Q6; Tut 3 Q4 (reagent cost sd = $63), Q5 (height difference sd = 10.63).</p>
+</div>
+
+<div class="card">
+<h3>Type D — CLT / large-sample approximation</h3>
+<p><b>Looks like:</b> "sum/average of \(n\) independent…", "approximate the probability…", or
+"for large \(n\), what is the (approximate) distribution of the estimator?" <b>Mark range:</b> 2–4.</p>
+<div class="method"><b>Recipe</b>
+<ol>
+<li>Identify \(\mu,\sigma^2\) of one observation and the sample size \(n\).</li>
+<li>Mean: \(\bar X\approx\mathcal N(\mu,\sigma^2/n)\). Total: \(S_n\approx\mathcal N(n\mu,n\sigma^2)\).</li>
+<li>Standardise and use the \(Z\)-table. (Binomial: \(\mathcal N(np,np(1-p))\).)</li>
+</ol></div>
+<p><b>Real examples:</b> notes Ex 3.4–3.6; the "approximate distribution of \(\hat\theta\) when \(n\) is large"
+parts in 2024 Q2(d) and 2023 Q2(c) are CLT-for-estimators.</p>
+</div>
+
+<div class="card">
+<h3>Type E — Continuous joint pdf (independence, E[XY], covariance)</h3>
+<p><b>Looks like:</b> a formula \(f(x,y)\) on some region; verify/refute independence, find marginals by
+integrating, compute \(\mathbb E[XY]\) or \(\text{Cov}\). <b>Mark range:</b> 4–8.</p>
+<div class="method"><b>Recipe</b>
+<ol>
+<li>Marginal \(f_X(x)=\int f(x,y)\,dy\) (and symmetrically for \(Y\)).</li>
+<li>Independent iff \(f(x,y)=f_X(x)f_Y(y)\) on the whole region (region shape matters — a non-rectangular
+support forces dependence).</li>
+<li>\(\mathbb E[XY]=\iint xy\,f(x,y)\,dx\,dy\); then \(\text{Cov}=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\).</li>
+</ol></div>
+<p><b>Real examples:</b> Ch-3 exercises Q4 (\(2e^{-x}e^{-2y}\), independent), Q7 (uniform on the unit disc —
+\(\text{Cov}=0\) but <b>not</b> independent, because the support is a disc).</p>
+</div>
+</section>
+
+<!-- ============ SECTION 5: WORDING TRIGGERS ============ -->
+<section id="triggers">
+<h2>§5 · Wording triggers</h2>
+<p>The single highest-value table on this page. Match the phrase, fire the method.</p>
+<table>
+<tr><th>When the exam says…</th><th>→ do this</th></tr>
+<tr>
+<td>"joint frequency table … <b>determine the marginal pmf</b> of \(X\) (or \(Y\))"</td>
+<td><b>Row / column sums ÷ n.</b> \(f_X(x)=\)(row total)/\(n\), \(f_Y(y)=\)(col total)/\(n\). Check they each sum to 1.</td>
+</tr>
+<tr>
+<td>"<b>determine the expectation</b> of \(X\) and \(Y\)"</td>
+<td>\(\mathbb E[X]=\sum x f_X(x)\) from the marginal. Also compute \(\mathbb E[X^2]\) now — you'll need it next part.</td>
+</tr>
+<tr>
+<td>"<b>determine the correlation</b> between \(X\) and \(Y\)"</td>
+<td>\(\varrho=\dfrac{\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]}{\sigma_X\sigma_Y}\), all pieces from the table.
+Get \(\mathbb E[XY]=\sum xy f(x,y)\) (only \(x,y\ne0\) cells matter), \(\sigma\) from \(\mathbb E[X^2]-\mathbb E[X]^2\).</td>
+</tr>
+<tr>
+<td>"<b>are \(X\) and \(Y\) independent?</b>"</td>
+<td>Check \(f(x,y)=f_X(x)f_Y(y)\) for <b>all</b> cells to confirm; <b>one</b> failing cell to reject. Never use \(\text{Cov}=0\) as the argument.</td>
+</tr>
+<tr>
+<td>"test whether \(X\) is <b>associated</b> with \(Y\)" / "test of association" (counts)</td>
+<td><b>χ² test of independence.</b> \(E=\text{row}\times\text{col}/n\), \(\chi^2=\sum(O-E)^2/E\), df \(=(r-1)(c-1)\).
+See <a href="ch11-chi-squared.html">Ch 11</a>.</td>
+</tr>
+<tr>
+<td>"perform an appropriate statistical test … report the test statistic, \(P\)-value, and a conclusion in context"</td>
+<td>State H₀/H₁ (association) → compute \(\chi^2\) → compare to table / \(P\)-value → one plain-English sentence about the actual variables.</td>
+</tr>
+<tr>
+<td>"<b>sum / average of \(n\) independent…</b>" or "for <b>large \(n\)</b>, the approximate distribution"</td>
+<td><b>CLT.</b> \(\bar X\approx\mathcal N(\mu,\sigma^2/n)\); \(S_n\approx\mathcal N(n\mu,n\sigma^2)\). Standardise, read \(Z\)-table.</td>
+</tr>
+<tr>
+<td>"<b>approximate the probability that the mean exceeds…</b>"</td>
+<td>CLT for the mean: \(P(\bar X>c)=P\!\big(Z>\tfrac{c-\mu}{\sigma/\sqrt n}\big)\). Divide by \(\sigma/\sqrt n\), not \(\sigma\).</td>
+</tr>
+<tr>
+<td>"total / combined weight of \(n\) independent normal…"</td>
+<td>Exactly normal (Thm 3.6): \(\mathcal N(n\mu,n\sigma^2)\). Standardise with sd \(=\sigma\sqrt n\).</td>
+</tr>
+<tr>
+<td>"<b>difference</b> between two independent [normal] measurements"</td>
+<td>Mean subtracts, <b>variance adds</b>: \(\mathcal N(\mu_1-\mu_2,\ \sigma_1^2+\sigma_2^2)\).</td>
+</tr>
+<tr>
+<td>"cost = \$a per unit of \(X\) and \$b per unit of \(Y\); sd of total cost?"</td>
+<td>\(\text{Var}(aX+bY)=a^2\sigma_X^2+b^2\sigma_Y^2\) (independent). Take \(\sqrt{\ }\).</td>
+</tr>
+<tr>
+<td>"the average of a large number of iid draws tends to…"</td>
+<td><b>LLN</b> — the average converges to \(\mu\). (Concept part, no calculation.)</td>
+</tr>
+<tr>
+<td>"probability that a binomial count is at least \(k\), \(n\) large"</td>
+<td>Normal approx: \(\text{Bin}(n,p)\approx\mathcal N(np,np(1-p))\) (valid if \(np>5\) and \(n(1-p)>5\)).</td>
+</tr>
+</table>
+</section>
+
+<!-- ============ SECTION 6: TRAPS ============ -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>"Cov = 0 ⇒ independent" is FALSE.</b> Zero covariance only rules out <i>linear</i> dependence.
+The unit-disc example (Ch-3 Q7) has \(\text{Cov}=0\) yet is dependent. For the independence part you must
+check the product rule \(f(x,y)=f_X(x)f_Y(y)\).</div>
+
+<div class="trap"><b>Subtracting variances for a difference.</b> \(\text{Var}(X-Y)=\sigma_X^2+\sigma_Y^2\), NOT
+\(\sigma_X^2-\sigma_Y^2\). The coefficient \(-1\) is squared. Every year this loses marks in height/measurement-difference questions.</div>
+
+<div class="trap"><b>Reconstructing the table from margins.</b> You cannot rebuild the interior of a joint table from
+row/column totals alone — infinitely many tables share the same margins (notes p.56). Don't try.</div>
+
+<div class="trap"><b>Including zero cells in \(\mathbb E[XY]\)… or forgetting the non-zero ones.</b> Cells with \(x=0\) or
+\(y=0\) contribute nothing, so the sum is short — but you must include <b>every</b> cell where both are non-zero.
+Missing one (e.g. the \(Y=2\) column) silently corrupts the covariance.</div>
+
+<div class="trap"><b>CLT standardisation mix-up.</b> For a <b>mean</b> divide by \(\sigma/\sqrt n\); for a <b>total/sum</b>
+divide by \(\sigma\sqrt n\). Using \(\sigma\) alone (forgetting \(n\)) is the most common CLT error.</div>
+
+<div class="trap"><b>Wrong df in the χ² test.</b> df \(=(r-1)(c-1)\), not \(rc-1\) and not \(n-1\). A 2×3 table has df \(=2\),
+so the 5% critical value is 5.99 — memorise the shape of that lookup.</div>
+
+<div class="trap"><b>Treating an ordinal code as a genuine quantity.</b> Coding sleep quality 0/1/2 lets you compute a
+correlation, but "0.447" describes the coded numbers, not an intrinsic scale. That's exactly why the exam
+asks for the <b>χ² test</b> in the association part — quote it as the formal test, and keep the correlation
+statement to "direction/strength of the linear relationship in the coded values".</div>
+
+<div class="trap"><b>Solve for the parameter first.</b> In parametric tables (2024 Q1) every later part depends on \(p\).
+Set \(\sum f=1\), solve the quadratic, discard the out-of-range root, then proceed. Skipping this makes every
+subsequent number wrong.</div>
+
+<div class="trap"><b>Sig figs.</b> The rubric demands ≥ 3 significant figures. Carry full precision through
+intermediate steps (don't round \(\mathbb E[XY]\) or the SDs early) and round only the final answer.</div>
+</section>
+
+<!-- ============ SECTION 7: SELF-CHECK ============ -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details>
+<summary>1. A joint table has row totals for \(X\) of 30 and 70 out of \(n=100\). What is \(f_X\), and hence \(\mathbb E[X]\) if \(X\in\{0,1\}\)?</summary>
+<p>\(f_X(0)=0.30,\ f_X(1)=0.70\). \(\mathbb E[X]=0(0.30)+1(0.70)=0.70\).</p>
+</details>
+
+<details>
+<summary>2. You find \(\text{Cov}(X,Y)=0\) for a table. Can you conclude \(X,Y\) are independent?</summary>
+<p><b>No.</b> Zero covariance rules out only linear association. Independence requires
+\(f(x,y)=f_X(x)f_Y(y)\) for every cell — check the product rule.</p>
+</details>
+
+<details>
+<summary>3. \(X\sim\mathcal N(50,4^2)\), \(Y\sim\mathcal N(45,3^2)\), independent. Distribution of \(X-Y\)?</summary>
+<p>Mean \(=50-45=5\); variance \(=4^2+3^2=25\) (variances add). So \(X-Y\sim\mathcal N(5,\,25)\), sd \(=5\).</p>
+</details>
+
+<details>
+<summary>4. Widget masses have \(\mu=20\) g, \(\sigma=5\) g (non-normal). For \(n=64\), approximate \(P(\bar X \lt 19)\).</summary>
+<p>CLT: \(\bar X\approx\mathcal N(20,\,5^2/64)\), sd \(=5/8=0.625\).
+\(P(\bar X \lt 19)=P\big(Z \lt (19-20)/0.625\big)=P(Z \lt -1.60)=0.0548.\)</p>
+</details>
+
+<details>
+<summary>5. A 2×4 contingency table of counts. What is the df for the χ² test of independence, and how do you get expected counts?</summary>
+<p>df \(=(2-1)(4-1)=3\). Expected count in a cell \(=\)(its row total)\(\times\)(its column total)\(/n\).</p>
+</details>
+
+<details>
+<summary>6. From a table \(\mathbb E[X]=0.667\), \(\mathbb E[Y]=1.10\), \(\mathbb E[XY]=0.9167\), \(\sigma_X=0.471\), \(\sigma_Y=0.870\). Correlation?</summary>
+<p>\(\text{Cov}=0.9167-0.667\times1.10=0.1833\); \(\varrho=0.1833/(0.471\times0.870)=0.447\). (This is 2025 Q2(c).)</p>
+</details>
+
+<details>
+<summary>7. Independent normals cost \$100/L (sd 0.2 L) and \$200/L (sd 0.3 L). SD of total cost?</summary>
+<p>\(\text{Var}=100^2(0.2^2)+200^2(0.3^2)=400+3600=4000\); sd \(=\sqrt{4000}\approx\$63\). (Tut 3 Q4.)</p>
+</details>
+
+<details>
+<summary>8. LLN vs CLT — which answers "what does the sample average converge to?" and which "what is the probability the average exceeds a value?"</summary>
+<p>LLN answers the first (the average converges to \(\mu\)). CLT answers the second (the average is
+\(\approx\mathcal N(\mu,\sigma^2/n)\), so standardise to get the probability).</p>
+</details>
+</section>
+
+</main>
+</body>
+</html>

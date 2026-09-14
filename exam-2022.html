@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Worked Exam: Semester 2, 2022</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  nav a.here{background:var(--accent);color:#032117;font-weight:700}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;color:var(--warn);font-weight:700;font-size:13px;background:rgba(251,191,36,.1);border:1px solid #5a4a1a;border-radius:6px;padding:1px 8px}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(14,165,233,.08);border:1px solid #1d3a4a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"🗣 CONCLUSION IN CONTEXT — ";color:var(--accent2);font-weight:700}
+  .ans{background:rgba(251,191,36,.12);border:1px solid #5a4a1a;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  .ans:before{content:"➤ ANSWER: ";color:var(--gold);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ reveal worked solution";color:var(--accent)}
+  details[open] summary:before{content:"▾ worked solution"}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .toolbar{text-align:center;margin:16px 0}
+  .toolbar button{background:var(--accent);color:#032117;border:none;padding:9px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 — Fully Worked Exam</h1>
+  <p><b>Semester Two Examination, 2022</b></p>
+  <p>80 marks · 5 questions · 120 min + 10 min planning · Casio FX82 + provided formula sheet &amp; tables</p>
+  <span class="badge">SAME FORMAT AS CURRENT</span>
+  <p style="max-width:660px;margin:8px auto 0;font-size:13px">This paper matches today's format exactly — <b>80 marks, 5 questions</b>. Coverage: conditional probability, a variance derivation + a normal-tail "expected outliers" problem, a <b>paired</b> $t$-test, one-way ANOVA with Bonferroni follow-up, and an interaction regression model.</p>
+  <p style="font-size:12.5px;color:var(--gold);margin-top:8px">Every numerical answer below verified with Python (scipy/sympy). Table look-ups shown as in-exam bracketing.</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="exam-2021.html">2021</a>
+  <a href="exam-2022.html" class="here">2022</a>
+  <a href="exam-2023.html">2023</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+</nav>
+<div class="toolbar"><button onclick="toggleAll()">👁 Toggle all solutions</button></div>
+<main>
+
+<!-- ============ Q1 ============ -->
+<section id="q1">
+<h2>Question 1 — Conditional probability <span class="marks">11 marks</span></h2>
+<div class="card q">
+For a model of car, in the first 5 years: $P(\text{engine fault})=0.05$, $P(\text{transmission fault})=0.02$, and $P(\text{engine or transmission or both})=0.06$.
+</div>
+
+<h3>(a) Define the events, sample space and known probabilities. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Define events with notation" → set up letters and translate every sentence into probability statements before computing anything.</div>
+Sample space $\Omega=$ all cars of this model in their first 5 years. Let
+$$E=\{\text{engine fault}\},\qquad T=\{\text{transmission fault}\}.$$
+Given: $P(E)=0.05$, $P(T)=0.02$, $P(E\cup T)=0.06$.<br>
+It is useful to first extract the intersection using the addition rule (#8):
+$$P(E\cap T)=P(E)+P(T)-P(E\cup T)=0.05+0.02-0.06=0.01.$$
+<div class="tip">Deriving $P(E\cap T)=0.01$ up front is the key that unlocks every remaining part — do it in (a).</div>
+</details>
+
+<h3>(b) If a car has a faulty transmission, what is $P(\text{faulty engine})$? <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Given faulty transmission" → conditional probability $P(E\mid T)=P(E\cap T)/P(T)$ (#11).</div>
+$$P(E\mid T)=\frac{P(E\cap T)}{P(T)}=\frac{0.01}{0.02}=0.5.$$
+<div class="ans">$P(E\mid T)=0.500$.</div>
+</details>
+
+<h3>(c) If a car's transmission passes all tests, what is $P(\text{faulty engine})$? <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">"Transmission passes" $=T^c$. Need $P(E\mid T^c)=P(E\cap T^c)/P(T^c)$; get $P(E\cap T^c)$ by "engine faults minus those that also have transmission faults".</div>
+$$P(E\cap T^c)=P(E)-P(E\cap T)=0.05-0.01=0.04,\qquad P(T^c)=1-0.02=0.98.$$
+$$P(E\mid T^c)=\frac{0.04}{0.98}=0.0408.$$
+<div class="ans">$P(E\mid T^c)=0.0408$.</div>
+<div class="trap">$P(E\cap T^c)\ne P(E)$. You must subtract the overlap $P(E\cap T)$. And the denominator is $P(T^c)=0.98$, not $0.02$.</div>
+</details>
+
+<h3>(d) If a car has a faulty engine, what is $P(\text{faulty transmission})$? <span class="marks">2</span></h3>
+<details><summary></summary>
+$$P(T\mid E)=\frac{P(E\cap T)}{P(E)}=\frac{0.01}{0.05}=0.2.$$
+<div class="ans">$P(T\mid E)=0.200$.</div>
+<div class="tip">Note $P(E\mid T)=0.5\ne P(T\mid E)=0.2$: conditioning is <b>not</b> symmetric. Also, since $P(E\mid T)\ne P(E)=0.05$, engine and transmission faults are <b>not independent</b>.</div>
+</details>
+</section>
+
+<!-- ============ Q2 ============ -->
+<section id="q2">
+<h2>Question 2 — Variance derivation &amp; expected outliers <span class="marks">13 marks</span></h2>
+
+<h3>(a) Derive $\operatorname{Var}(\overline X-\overline Y)$ for two independent samples ($m$ and $n$ obs.) with common variance $\sigma^2$. <span class="marks">5</span></h3>
+<details><summary></summary>
+<div class="when">"Derive … with justification" → variance algebra: independence lets variances add (#52), and $\operatorname{Var}(aX)=a^2\operatorname{Var}(X)$ (#26b).</div>
+<b>One mean.</b> With $X_1,\dots,X_m$ independent, each variance $\sigma^2$:
+$$\operatorname{Var}(\overline X)=\operatorname{Var}\!\Big(\tfrac1m\textstyle\sum_{i=1}^m X_i\Big)=\tfrac1{m^2}\sum_{i=1}^m\operatorname{Var}(X_i)=\tfrac1{m^2}(m\sigma^2)=\tfrac{\sigma^2}{m},$$
+and similarly $\operatorname{Var}(\overline Y)=\sigma^2/n$.<br>
+<b>Combine.</b> The two samples are independent, so $\operatorname{Cov}(\overline X,\overline Y)=0$ and
+$$\operatorname{Var}(\overline X-\overline Y)=\operatorname{Var}(\overline X)+(-1)^2\operatorname{Var}(\overline Y)=\frac{\sigma^2}{m}+\frac{\sigma^2}{n}.$$
+<div class="ans">$\operatorname{Var}(\overline X-\overline Y)=\sigma^2\!\left(\dfrac1m+\dfrac1n\right)$.</div>
+<div class="tip">State the three justifications explicitly: independence ⇒ variances add; the $\tfrac1{m^2}$ from squaring the constant; the minus sign squares to $+1$. (Identical to 2021 Q1(f) — a recurring bookwork item.)</div>
+</details>
+
+<h3>(b) A boxplot flags an outlier if a point is at least $1.5\times$IQR beyond a box end. For a standard normal, what sample size gives an expected 10 outliers? <span class="marks">8</span></h3>
+<details><summary></summary>
+<div class="when">Two stages: (1) find the outlier probability $p$ for one $\mathsf N(0,1)$ observation using the fences; (2) set expected count $np=10$ and solve $n=10/p$ (expectation of a Binomial, #33).</div>
+<b>Stage 1 — the fences.</b> For $\mathsf N(0,1)$ the quartiles are symmetric: from the normal table, $\Phi(z)=0.75$ at $z\approx 0.674$, so $Q_3=0.6745$, $Q_1=-0.6745$, and
+$$\text{IQR}=Q_3-Q_1=1.349.$$
+Upper fence $=Q_3+1.5\,\text{IQR}=0.6745+1.5(1.349)=2.698$; by symmetry the lower fence is $-2.698$.<br>
+<b>Outlier probability.</b>
+$$p=P(|Z|\gt 2.698)=2\big(1-\Phi(2.698)\big).$$
+<b>From tables:</b> $\Phi(2.70)=0.9965$, so $p\approx 2(1-0.9965)=2(0.0035)=0.0070$ (exact $0.006977$).<br>
+<b>Stage 2 — sample size.</b> The number of outliers among $n$ points is $\mathsf{Bin}(n,p)$ with mean $np$. Set
+$$np=10\;\Rightarrow\; n=\frac{10}{0.0070}\approx 1429\quad(\text{exact }p:\ n\approx 1433).$$
+<div class="ans">$n\approx 1.43\times10^{3}$ observations (≈1429 using the tabulated $\Phi(2.70)$; ≈1433 with full precision).</div>
+<div class="trap">A neat shortcut: because $Q_1=-Q_3$, the fence is $Q_3+1.5(2Q_3)=4Q_3$. Don't confuse the "$1.5\times$IQR" boxplot rule with the "$\pm2$ or $\pm3$ s.d." rules — the question specifies the boxplot definition.</div>
+</details>
+</section>
+
+<!-- ============ Q3 ============ -->
+<section id="q3">
+<h2>Question 3 — Paired $t$-test (ibuprofen &amp; albumin) <span class="marks">21 marks</span></h2>
+<div class="card q">
+Eight patients had blood albumin measured <b>before</b> and <b>after</b> two weeks of ibuprofen (paired data). Summary:
+<table>
+<tr><th></th><th>mean (g/L)</th><th>s.d. (g/L)</th></tr>
+<tr><th>Before</th><td>40.0</td><td>6.35</td></tr>
+<tr><th>After</th><td>37.9</td><td>5.10</td></tr>
+<tr><th>Difference (drop)</th><td>2.10</td><td>2.40</td></tr>
+</table>
+The 8 differences were approximately symmetric with no apparent outliers.
+</div>
+
+<h3>(a) State $H_0$ and $H_1$ for the effect of ibuprofen on albumin, explaining notation. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">Same subjects measured twice → <b>paired</b> design. Work with the mean of the within-subject differences $\mu_d$. "Any effect" → two-sided.</div>
+Let $\mu_d$ be the population mean difference in blood albumin (before $-$ after) for rheumatic patients on this ibuprofen regimen.
+$$H_0:\;\mu_d=0\qquad\text{vs}\qquad H_1:\;\mu_d\ne 0.$$
+<div class="trap">This is a <b>paired</b> problem — do <i>not</i> run a two-sample test with the before/after s.d.'s (6.35, 5.10). Because each patient is their own control, you use only the s.d. <b>of the differences</b> (2.40). Using a two-sample test here is the biggest single error on this question.</div>
+</details>
+
+<h3>(b) Perform the test at the 5% level; give a statistical and a contextual conclusion. <span class="marks">10</span></h3>
+<details><summary></summary>
+<div class="when">One-sample $t$-test on the differences (#70): $T=\dfrac{\bar d-0}{s_d/\sqrt n}\sim t_{n-1}$ under $H_0$.</div>
+With $\bar d=2.10$ (a drop), $s_d=2.40$, $n=8$:
+$$\text{s.e.}=\frac{s_d}{\sqrt n}=\frac{2.40}{\sqrt8}=0.8485,\qquad
+T=\frac{2.10}{0.8485}=2.475\quad\text{on }7\text{ df.}$$
+(Taking the drop as $\bar d=-2.10$ gives $T=-2.475$; only the magnitude matters for a two-sided test.)<br>
+<b>$p$-value (two-sided), from tables ($t_7$):</b> the $0.975$ quantile is $2.36$ and the $0.99$ quantile is $3.00$. Since $2.36\lt 2.475\lt 3.00$, the one-tail area is between $0.01$ and $0.025$, so
+$$0.02\lt p\lt 0.05\quad(\text{exact }p=0.0425).$$
+Since $p\lt 0.05$, <b>reject $H_0$</b>.
+<div class="concl">There is significant evidence at the 5% level that ibuprofen changes mean blood albumin in rheumatic patients. The data indicate a mean <b>drop</b> of about 2.1 g/L in albumin after two weeks of ibuprofen.</div>
+<div class="tip">Bracket the $p$-value with the two neighbouring $t$-table quantiles, state the inequality, then confirm the exact value — that is exactly the presentation examiners reward. Assumptions to note: differences approximately normal (stated symmetric, no outliers) and independent patients — both satisfied.</div>
+</details>
+
+<h3>(c) Construct a 95% CI for the mean difference (3 sig figs). <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">One-sample CI for a mean (#61): $\bar d\pm q\,s_d/\sqrt n$, with $q$ the $0.975$ quantile of $t_{n-1}$.</div>
+<b>From tables:</b> $t_{7,\,0.975}=2.36$ (exact $2.365$).
+$$\bar d\pm q\,\frac{s_d}{\sqrt n}=2.10\pm 2.36(0.8485)=2.10\pm 2.00=(0.0975,\ 4.10)\ \text{g/L drop}.$$
+Equivalently, for (after $-$ before): $(-4.10,\ -0.0975)$.
+<div class="ans">95% CI for the mean drop: $(0.0975,\ 4.10)$ g/L (using $q=2.36$).</div>
+<div class="tip">The interval excludes 0, which agrees with rejecting $H_0$ in (b): a 95% CI and a two-sided 5% test always give matching decisions.</div>
+</details>
+
+<h3>(d) Explain the meaning of a 95% confidence level. <span class="marks">3</span></h3>
+<details><summary></summary>
+A 95% confidence level refers to the <b>procedure</b>, not any single interval: if we repeated the study many times and built a 95% CI each time, about <b>95% of those intervals would contain the true</b> mean difference $\mu_d$. For our one interval, $\mu_d$ either is or isn't inside — we cannot attach a 95% probability to this specific interval.
+<div class="trap">Never say "there is a 95% probability that $\mu_d$ lies in this interval." $\mu_d$ is a fixed constant; the randomness is in the interval. The correct phrasing is about the long-run capture rate of the method.</div>
+</details>
+</section>
+
+<!-- ============ Q4 ============ -->
+<section id="q4">
+<h2>Question 4 — One-way ANOVA (diabetes treatments) <span class="marks">17 marks</span></h2>
+<div class="card q">
+800 diabetic patients randomised to four treatments; some dropped out. HbA1c (mmol/L) at end of trial. Summary:
+<table>
+<tr><th>Group</th><th>$n$</th><th>$\bar x$</th><th>$s$</th></tr>
+<tr><th>BM (bitter melon)</th><td>164</td><td>7.75</td><td>1.41</td></tr>
+<tr><th>control</th><td>206</td><td>9.53</td><td>2.11</td></tr>
+<tr><th>exercise</th><td>178</td><td>8.00</td><td>1.79</td></tr>
+<tr><th>food</th><td>196</td><td>8.46</td><td>1.93</td></tr>
+</table>
+Total $N=744$. Between-group $SS=354.72$; residual $SS=2527.46$. <b>Boxplot (described):</b> control has the highest median (≈9.5) and widest box; BM and exercise have the lowest, similar medians (≈7.7–8.0); food is slightly higher; every group shows a scatter of high outliers.
+</div>
+
+<h3>(a) Discuss the plot (shape per group, relative locations). <span class="marks">3</span></h3>
+<details><summary></summary>
+The <b>control</b> group has the highest and most spread-out HbA1c (median ≈9.5, largest box), i.e. worst blood-sugar control. <b>BM</b> and <b>exercise</b> have the lowest, near-equal medians (≈7.7–8.0) and tighter boxes; <b>food</b> sits in between. All four groups are right-skewed with several high outliers. Overall the three active treatments (BM, exercise, food) shift HbA1c below the control.
+<div class="trap">The exam's part (a) wording mistakenly says "group of hand sanitisers" — a copy-paste slip from another paper. It clearly means the four <b>diabetic treatment groups</b>; answer about those. (You could note the ambiguity, per the paper's own instruction to flag unclear wording.)</div>
+</details>
+
+<h3>(b) State $H_0$ and $H_1$ in words. <span class="marks">2</span></h3>
+<details><summary></summary>
+$H_0$: mean end-of-trial HbA1c is the same across all four treatment groups.<br>
+$H_1$: at least one treatment group has a different mean HbA1c.
+</details>
+
+<h3>(c) Complete the ANOVA table. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">$d=4$ groups, $N=744$: $df_{\text{group}}=d-1=3$, $df_{\text{resid}}=N-d=740$, $df_{\text{total}}=743$; $F=MS_{\text{group}}/MS_{\text{resid}}$.</div>
+$SS_{\text{total}}=354.72+2527.46=2882.18$.
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Treatment</td><td>3</td><td>354.72</td><td>118.24</td><td>34.6</td></tr>
+<tr><td>Residuals</td><td>740</td><td>2527.46</td><td>3.415</td><td></td></tr>
+<tr><td>Total</td><td>743</td><td>2882.18</td><td></td><td></td></tr>
+</table>
+$MS_{\text{group}}=354.72/3=118.24$; $MS_{\text{resid}}=2527.46/740=3.415$; $F=118.24/3.415=34.6$.
+<div class="ans">$F=34.6$ on $(3,740)$ df.</div>
+</details>
+
+<h3>(d) State the ANOVA assumptions and discuss. <span class="marks">3</span></h3>
+<details><summary></summary>
+Assumptions: (1) independent observations; (2) normal errors within each group; (3) equal variances across groups.<br>
+<b>Discussion:</b> patients randomised independently ⇒ independence holds. The groups are right-skewed with outliers, so within-group normality is imperfect, but the large $n$'s (164–206) mean the CLT protects the $F$-test. Variance ratio $=2.11^2/1.41^2\approx 2.24\lt 4$, so equal variance is acceptable.
+</details>
+
+<h3>(e) Test for a difference across the four groups; give test statistic, $p$-value, conclusion (5%). <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">ANOVA $F$-test (#80), compare to $F_{3,740}$.</div>
+$F=34.6$ on $(3,740)$ df. <b>From tables</b> (nearest $n=\infty$): $F_{0.95}(3,\infty)=2.60$ and $F_{0.99}(3,\infty)=3.78$. Since $34.6\gg 3.78$, the $p$-value is far below $0.01$ ($p\approx 0$).<br>
+$34.6\gg 2.60\Rightarrow$ <b>reject $H_0$</b>.
+<div class="concl">There is very strong evidence ($p\lt0.001$) that mean HbA1c differs across the four treatment groups — the treatments are not equally effective at regulating blood sugar.</div>
+</details>
+
+<h3>(f) From the Bonferroni pairwise output, which treatments differ at 5%? <span class="marks">3</span></h3>
+<details><summary></summary>
+<b>Pairwise adjusted $p$-values:</b>
+<table>
+<tr><th>pair</th><th>$p$ (Bonferroni)</th><th>significant at 5%?</th></tr>
+<tr><td>control vs BM</td><td>$\lt 2\times10^{-16}$</td><td>Yes</td></tr>
+<tr><td>exercise vs BM</td><td>1.0000</td><td>No</td></tr>
+<tr><td>exercise vs control</td><td>$1.5\times10^{-14}$</td><td>Yes</td></tr>
+<tr><td>food vs BM</td><td>0.0018</td><td>Yes</td></tr>
+<tr><td>food vs control</td><td>$6.5\times10^{-8}$</td><td>Yes</td></tr>
+<tr><td>food vs exercise</td><td>0.0941</td><td>No</td></tr>
+</table>
+<div class="concl">Significant differences ($p\lt0.05$): control differs from every active treatment (BM, exercise, food) — control has clearly higher HbA1c. Among active treatments, food differs from BM. <b>Not</b> significant: BM vs exercise, and food vs exercise. So BM and exercise give the lowest HbA1c and are statistically indistinguishable from each other; the control is worst.</div>
+<div class="tip">With Bonferroni-adjusted $p$-values you compare directly to $0.05$ — do <b>not</b> divide $0.05$ by the number of comparisons again (the adjustment is already baked into the printed $p$-values).</div>
+</details>
+</section>
+
+<!-- ============ Q5 ============ -->
+<section id="q5">
+<h2>Question 5 — Regression with interaction (face coverings) <span class="marks">18 marks</span></h2>
+<div class="card q">
+Protection efficiency (PE) of three face coverings (face shield, microfibre, surgical) vs particle diameter (µm). <b>Scatterplot (described):</b> PE rises with diameter for all three; surgical and microfibre climb steeply to ≈0.8–1.0 at large diameters, while face shields stay low (≈0.2–0.4) throughout. A model with interaction, <span class="mono" style="padding:0 4px">lm(PE ~ log(Diameter) * Type)</span> (face shield = baseline):
+<div class="mono">Coefficients:                    Estimate  Std.Error  t value  Pr(&gt;|t|)
+(Intercept)                      0.17589   0.01625   10.823   &lt; 2e-16 ***
+log(Diameter)                    0.06962   0.01535    4.536   8.53e-06 ***
+Typemicrofibre                   0.21515   0.02298    9.361   &lt; 2e-16 ***
+Typesurgical                     0.23893   0.02298   10.396   &lt; 2e-16 ***
+log(Diameter):Typemicrofibre     0.27297   0.02171   12.575   &lt; 2e-16 ***
+log(Diameter):Typesurgical       0.26455   0.02171   12.188   &lt; 2e-16 ***
+Residual standard error: 0.09606 on 279 DF
+Multiple R-squared: 0.896,  Adjusted R-squared: 0.8942</div>
+</div>
+
+<h3>(a) Describe the relationship between PE, diameter, and covering type. <span class="marks">3</span></h3>
+<details><summary></summary>
+PE <b>increases</b> with particle diameter for all three coverings (positive log-diameter effect). <b>Surgical</b> and <b>microfibre</b> masks achieve much higher PE than <b>face shields</b> across the whole range, and their PE <b>rises faster</b> with diameter (steeper slopes) — i.e. the diameter effect depends on covering type, which is why an interaction term is included. Face shields give the least protection and the flattest response.
+</details>
+
+<h3>(b) From the diagnostic plots of the first (untransformed) model, state and assess the assumptions. <span class="marks">4</span></h3>
+<details><summary></summary>
+<b>Figure (described):</b> <i>Residuals vs Fitted</i> shows a clear curved (hump-shaped) pattern with the smoother bending — residuals are positive in the middle, negative at the ends. <i>Normal Q–Q</i> is close to the diagonal.<br>
+Assumptions of the linear model: (1) <b>linearity</b> of the mean — <b>violated</b>: the curved residual pattern shows the straight-line (in raw diameter) form is wrong. (2) <b>constant variance</b> — questionable given the patterned residuals. (3) <b>normality</b> — the Q–Q plot is roughly straight, so <b>satisfied</b>. (4) <b>independence</b> — assumed by design.
+<div class="concl">The curvature in the residuals-vs-fitted plot means a linear-in-diameter model is inadequate; a transformation of diameter is warranted — motivating the $\log(\text{Diameter})$ model in part (c).</div>
+</details>
+
+<h3>(c) Choose two covering types and write their fitted regression equations. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">With a factor + interaction and face shield as baseline: microfibre/surgical intercepts add their <code>Type</code> coefficient; their slopes add the corresponding <code>log(Diameter):Type</code> coefficient.</div>
+<b>Face shield (baseline):</b>
+$$\widehat{\text{PE}}=0.17589+0.06962\,\log(\text{Diameter}).$$
+<b>Surgical:</b> intercept $0.17589+0.23893=0.41482$; slope $0.06962+0.26455=0.33417$:
+$$\widehat{\text{PE}}=0.41482+0.33417\,\log(\text{Diameter}).$$
+(For reference, microfibre: $\widehat{\text{PE}}=0.39104+0.34259\,\log(\text{Diameter})$.)
+<div class="trap">The <code>Type</code> coefficients shift only the intercept; the <b>interaction</b> coefficients shift the slope. Forgetting to add the interaction term to the slope is the standard error here.</div>
+</details>
+
+<h3>(d) At 2 µm, which covering gives the highest expected PE? <span class="marks">2</span></h3>
+<details><summary></summary>
+Evaluate each equation at Diameter $=2$, so $\log(2)=0.6931$:
+<table>
+<tr><th>covering</th><th>expected PE at 2 µm</th></tr>
+<tr><td>face shield</td><td>$0.17589+0.06962(0.6931)=0.224$</td></tr>
+<tr><td>microfibre</td><td>$0.39104+0.34259(0.6931)=0.628$</td></tr>
+<tr><td>surgical</td><td>$0.41482+0.33417(0.6931)=0.646$</td></tr>
+</table>
+<div class="ans">The <b>surgical mask</b> gives the highest expected PE at 2 µm (≈0.646), narrowly ahead of microfibre (≈0.628); the face shield is far behind (≈0.224).</div>
+</details>
+
+<h3>(e) Is there evidence that face-shield PE changes with diameter? Use a 95% CI. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">Face-shield slope = the <code>log(Diameter)</code> coefficient. "Changes with diameter?" → does its 95% CI exclude 0? $\hat\beta\pm t_{0.975,\,df}\,\text{s.e.}$</div>
+$\hat\beta=0.06962$, s.e. $=0.01535$, $df=279$. <b>From tables:</b> $t_{0.975}$ for large df is $\approx 1.97$ (between the $df=200$ value 1.97 and $df=\infty$ value 1.96).
+$$0.06962\pm 1.97(0.01535)=0.06962\pm 0.0302=(0.0394,\ 0.0999).$$
+The interval excludes 0.
+<div class="concl">Yes — the 95% CI for the face-shield slope, $(0.0394,\ 0.0999)$, lies entirely above 0, so there is evidence that face-shield PE genuinely increases with particle diameter (consistent with the tiny $p$-value $8.5\times10^{-6}$).</div>
+</details>
+
+<h3>(f) For a surgical mask, if particle size is halved, how much does expected PE change? <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">Compare the fitted values at $x$ and $x/2$. Because the predictor is $\log(\text{Diameter})$, the difference depends only on the slope, not on $x$.</div>
+Surgical slope on $\log(\text{Diameter})$ is $0.33417$. The change from $x$ to $x/2$ is
+$$\Delta\widehat{\text{PE}}=0.33417\big(\log(x/2)-\log x\big)=0.33417\,\log(\tfrac12)=0.33417(-0.6931)=-0.232.$$
+<div class="ans">Halving particle size <b>decreases</b> the expected PE of a surgical mask by about <b>0.232</b> (a drop of ~23 percentage points), regardless of the starting size.</div>
+<div class="tip">The elegance of the log predictor: multiplying diameter by a constant (here $\tfrac12$) shifts PE by a fixed amount ($\text{slope}\times\log(\text{constant})$), independent of $x$. That is why the "for any $x$" hint works.</div>
+</details>
+</section>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

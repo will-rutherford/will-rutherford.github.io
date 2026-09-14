@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Worked Exam: Semester 2, 2023</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  nav a.here{background:var(--accent);color:#032117;font-weight:700}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;color:var(--warn);font-weight:700;font-size:13px;background:rgba(251,191,36,.1);border:1px solid #5a4a1a;border-radius:6px;padding:1px 8px}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(14,165,233,.08);border:1px solid #1d3a4a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"🗣 CONCLUSION IN CONTEXT — ";color:var(--accent2);font-weight:700}
+  .ans{background:rgba(251,191,36,.12);border:1px solid #5a4a1a;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  .ans:before{content:"➤ ANSWER: ";color:var(--gold);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ reveal worked solution";color:var(--accent)}
+  details[open] summary:before{content:"▾ worked solution"}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .toolbar{text-align:center;margin:16px 0}
+  .toolbar button{background:var(--accent);color:#032117;border:none;padding:9px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 — Fully Worked Exam</h1>
+  <p><b>Semester Two Examination, 2023</b></p>
+  <p>80 marks · 6 questions · 120 min + 10 min planning · Casio FX82 + provided formula sheet &amp; tables</p>
+  <span class="badge gold">FORMAT NOTE</span>
+  <p style="max-width:680px;margin:8px auto 0;font-size:13px">80 marks, but split over <b>6 questions</b> (the current paper uses 5). Two items are unlike the 2021/2022 style: <b>Q2</b> is an estimator-theory proof (unbiasedness + variance of an estimator), and <b>Q3</b> is short multiple-choice on <b>research ethics / data manipulation</b>. Everything else (pdf mechanics, two-sample $t$, ANOVA, $\chi^2$, regression) is standard.</p>
+  <p style="font-size:12.5px;color:var(--gold);margin-top:8px">Every numerical answer below verified with Python (scipy/sympy). Table look-ups shown as in-exam bracketing.</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="exam-2021.html">2021</a>
+  <a href="exam-2022.html">2022</a>
+  <a href="exam-2023.html" class="here">2023</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+</nav>
+<div class="toolbar"><button onclick="toggleAll()">👁 Toggle all solutions</button></div>
+<main>
+
+<!-- ============ Q1 ============ -->
+<section id="q1">
+<h2>Question 1 — Continuous random variable <span class="marks">15 marks</span></h2>
+<div class="card q">
+$X$ has pdf $f(x)=k\,x^3$ for $1\le x\le 2$ (and 0 elsewhere), where $k$ is a positive constant.
+</div>
+
+<h3>(a) Determine the value of $k$. <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">Density integrates to 1 → $\int_1^2 k x^3\,dx=1$.</div>
+$$\int_1^2 k x^3\,dx=k\left[\tfrac{x^4}{4}\right]_1^2=k\cdot\tfrac{16-1}{4}=\tfrac{15k}{4}=1\;\Rightarrow\;k=\tfrac{4}{15}.$$
+<div class="ans">$k=\dfrac{4}{15}\approx 0.267$.</div>
+</details>
+
+<h3>(b) Determine $\mathbb E(X)$. <span class="marks">3</span></h3>
+<details><summary></summary>
+$$\mathbb E X=\int_1^2 x\,k x^3\,dx=k\int_1^2 x^4\,dx=k\left[\tfrac{x^5}{5}\right]_1^2=\tfrac{4}{15}\cdot\tfrac{32-1}{5}=\tfrac{4}{15}\cdot\tfrac{31}{5}=\tfrac{124}{75}.$$
+<div class="ans">$\mathbb E X=\dfrac{124}{75}\approx 1.65$.</div>
+</details>
+
+<h3>(c) Determine $\operatorname{Var}(X)$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">$\operatorname{Var}(X)=\mathbb E X^2-(\mathbb E X)^2$; get $\mathbb E X^2=\int x^2 f\,dx$.</div>
+$$\mathbb E X^2=k\int_1^2 x^5\,dx=k\left[\tfrac{x^6}{6}\right]_1^2=\tfrac{4}{15}\cdot\tfrac{64-1}{6}=\tfrac{4}{15}\cdot\tfrac{63}{6}=\tfrac{4}{15}\cdot\tfrac{21}{2}=2.8.$$
+$$\operatorname{Var}(X)=2.8-\left(\tfrac{124}{75}\right)^2=2.8-2.7335=0.0665.$$
+<div class="ans">$\operatorname{Var}(X)=0.0665$ (s.d. $\approx 0.258$).</div>
+<div class="trap">Keep $\mathbb E X$ to full precision ($124/75=1.65333\ldots$) when squaring. Rounding it to 1.65 early gives $2.7225$ and a noticeably wrong variance.</div>
+</details>
+
+<h3>(d) Determine the cumulative distribution function of $X$. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">$F(x)=\int_1^x f(t)\,dt$ on the support; 0 below, 1 above.</div>
+For $1\le x\le 2$:
+$$F(x)=\int_1^x k t^3\,dt=k\left[\tfrac{t^4}{4}\right]_1^x=\tfrac{4}{15}\cdot\tfrac{x^4-1}{4}=\frac{x^4-1}{15}.$$
+$$F(x)=\begin{cases}0,& x\lt 1\\[2pt]\dfrac{x^4-1}{15},& 1\le x\le 2\\[2pt] 1,& x\gt 2\end{cases}$$
+Check: $F(2)=\tfrac{16-1}{15}=1$. ✓
+</details>
+
+<h3>(e) Determine the median of $X$. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">Median $m$ solves $F(m)=0.5$.</div>
+$$\frac{m^4-1}{15}=0.5\;\Rightarrow\;m^4-1=7.5\;\Rightarrow\;m^4=8.5\;\Rightarrow\;m=8.5^{1/4}=1.71.$$
+<div class="ans">median $=8.5^{1/4}\approx 1.71$.</div>
+<div class="tip">On the FX82: $8.5^{1/4}=\sqrt{\sqrt{8.5}}$ — two square-root presses. Confirm $1\lt 1.71\lt 2$, so it sits inside the support.</div>
+</details>
+</section>
+
+<!-- ============ Q2 ============ -->
+<section id="q2">
+<h2>Question 2 — Properties of an estimator <span class="marks">10 marks</span></h2>
+<div class="card q">
+$X_1,\dots,X_n$ independent with $X_i\sim\mathsf N(\theta y_i,\;y_i^2)$, where $y_1,\dots,y_n$ are known non-zero constants. Estimator
+$$\hat\theta=\frac1n\sum_{i=1}^n \frac{X_i}{y_i}.$$
+</div>
+
+<h3>(a) Find $\mathbb E(\hat\theta)$ and state whether $\hat\theta$ is unbiased for $\theta$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">"Unbiased?" → compute $\mathbb E(\hat\theta)$ using linearity (#51); unbiased iff it equals $\theta$.</div>
+Since $\mathbb E(X_i)=\theta y_i$,
+$$\mathbb E(\hat\theta)=\frac1n\sum_{i=1}^n \frac{\mathbb E(X_i)}{y_i}=\frac1n\sum_{i=1}^n \frac{\theta y_i}{y_i}=\frac1n\sum_{i=1}^n \theta=\frac1n(n\theta)=\theta.$$
+<div class="concl">$\mathbb E(\hat\theta)=\theta$, so $\hat\theta$ <b>is an unbiased</b> estimator of $\theta$.</div>
+</details>
+
+<h3>(b) Determine $\operatorname{Var}(\hat\theta)$. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">Independence ⇒ variances add (#52); pull out constants with $\operatorname{Var}(aX)=a^2\operatorname{Var}(X)$. Here $\operatorname{Var}(X_i)=y_i^2$.</div>
+$$\operatorname{Var}(\hat\theta)=\frac1{n^2}\sum_{i=1}^n \operatorname{Var}\!\Big(\frac{X_i}{y_i}\Big)=\frac1{n^2}\sum_{i=1}^n \frac{\operatorname{Var}(X_i)}{y_i^2}=\frac1{n^2}\sum_{i=1}^n \frac{y_i^2}{y_i^2}=\frac1{n^2}\sum_{i=1}^n 1=\frac{n}{n^2}=\frac1n.$$
+<div class="ans">$\operatorname{Var}(\hat\theta)=\dfrac1n$.</div>
+<div class="tip">The whole point of dividing by $y_i$ is that it exactly cancels the $y_i^2$ variance, giving each term variance 1 — a clean, constant-free answer.</div>
+</details>
+
+<h3>(c) What is the distribution of $\hat\theta$? <span class="marks">2</span></h3>
+<details><summary></summary>
+A linear combination of independent <b>normal</b> random variables is itself normal (#54). Combining with (a) and (b):
+$$\hat\theta\sim\mathsf N\!\left(\theta,\ \tfrac1n\right).$$
+<div class="ans">$\hat\theta\sim\mathsf N(\theta,\,1/n)$ — exactly normal (no CLT/approximation needed, since the $X_i$ are already normal).</div>
+</details>
+</section>
+
+<!-- ============ Q3 ============ -->
+<section id="q3">
+<h2>Question 3 — Data ethics (multiple choice) <span class="marks">4 marks</span></h2>
+
+<h3>(a) Discarding data from wells where all cells died "for unknown reasons" is best described as: <span class="marks">2</span></h3>
+<div class="card q">A) Trimming &nbsp; B) Cooking &nbsp; C) Fudging &nbsp; D) Stacking</div>
+<details><summary></summary>
+<div class="when">Match the action to the classic categories of scientific data manipulation. Selectively <b>discarding results that don't fit</b> (keeping only the "good" wells) is <b>cooking</b>.</div>
+<b>B) Cooking.</b> Cooking = retaining only the observations that suit the desired outcome and quietly dropping the inconvenient ones. Here entire wells with poor (all-dead) results are thrown out, biasing what remains.
+<div class="tip">Distinguish the terms: <b>Trimming</b> = smoothing/shaving individual measurements to look tidier; <b>Cooking</b> = selectively discarding whole results; <b>Fudging/forging</b> = inventing data outright.</div>
+</details>
+
+<h3>(b) Which is a significant ethical concern about the caffeine/cognitive-failures survey? <span class="marks">2</span></h3>
+<div class="card q">The study collects caffeine, age, gender, education, and alcohol use per person. Options A–D; the key issue is data sensitivity.</div>
+<details><summary></summary>
+<b>C) Personal information is being collected, so steps must be taken to ensure participants' privacy and anonymity.</b><br>
+The survey gathers identifying and sensitive personal data (health-related behaviours, demographics). The genuine ethical obligation is <b>confidentiality / privacy / anonymity</b> — the hallmark concern of human-data research. The other options describe implausible harms or sampling quibbles, not ethics-of-design issues.
+</details>
+</section>
+
+<!-- ============ Q4 ============ -->
+<section id="q4">
+<h2>Question 4 — Two-sample $t$ (pâté protein) <span class="marks">18 marks</span></h2>
+<div class="card q">
+Protein content (g per 100 g) of sheep vs goat pâté, 6 producers each, both approximately normal:
+<table>
+<tr><th></th><th>$n$</th><th>$\bar x$ (g)</th><th>$s$ (g)</th></tr>
+<tr><th>Sheep</th><td>6</td><td>20.7</td><td>0.17</td></tr>
+<tr><th>Goat</th><td>6</td><td>19.2</td><td>0.17</td></tr>
+</table>
+</div>
+
+<h3>(a) State $H_0$ and $H_1$ for the researchers' question; explain the notation. <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">Two independent groups, testing for a difference in means → two-sample $t$. "Differences in protein content" → two-sided.</div>
+Let $\mu_S$ and $\mu_G$ be the true mean protein contents (g/100 g) of sheep and goat pâté.
+$$H_0:\;\mu_S=\mu_G\qquad\text{vs}\qquad H_1:\;\mu_S\ne\mu_G.$$
+<div class="tip">Equal sample s.d.'s (both 0.17) point to the <b>equal-variance (pooled)</b> two-sample $t$-procedure, used in (b) and (c).</div>
+</details>
+
+<h3>(b) 95% CI for the mean difference (3 sig figs); state statistical and contextual conclusions. <span class="marks">7</span></h3>
+<details><summary></summary>
+<div class="when">Equal variances → pooled variance $S_p^2$ (#63), then CI $\bar X-\bar Y\pm q\,S_p\sqrt{\tfrac1m+\tfrac1n}$ with $q=t_{0.975,\,m+n-2}$ (#64).</div>
+Pooled variance ($m=n=6$, both $s=0.17$):
+$$S_p^2=\frac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2}=\frac{5(0.17^2)+5(0.17^2)}{10}=0.17^2=0.0289,\quad S_p=0.17.$$
+$df=m+n-2=10$; <b>from tables</b> $t_{10,\,0.975}=2.23$. With $\bar X-\bar Y=20.7-19.2=1.5$:
+$$1.5\pm 2.23\,(0.17)\sqrt{\tfrac16+\tfrac16}=1.5\pm 2.23(0.0981)=1.5\pm 0.219=(1.28,\ 1.72).$$
+<div class="concl">We are 95% confident the mean protein content of sheep pâté exceeds goat pâté by between <b>1.28 and 1.72 g</b> per 100 g. As the interval lies entirely above 0, there is a statistically significant difference: sheep pâté has more protein on average.</div>
+<div class="tip">With both $s$ equal, $S_p=0.17$ falls straight out — no arithmetic needed. Report the CI to 3 sig figs as asked.</div>
+</details>
+
+<h3>(c) Test the producer's claim that sheep pâté has <i>at least 2 g</i> more protein than goat (5% level). <span class="marks">7</span></h3>
+<details><summary></summary>
+<div class="when">Claim is a difference $\ge 2$ (not $=0$), so this is a <b>one-sided</b> test against a non-zero value. $H_0$ takes the boundary $\mu_S-\mu_G=2$; the test statistic subtracts 2.</div>
+$$H_0:\;\mu_S-\mu_G=2\qquad\text{vs}\qquad H_1:\;\mu_S-\mu_G\lt 2$$
+(seeking evidence <i>against</i> the "at least 2 g" claim). Test statistic (pooled, $S_p=0.17$):
+$$T=\frac{(\bar X-\bar Y)-2}{S_p\sqrt{\tfrac1m+\tfrac1n}}=\frac{1.5-2}{0.17\sqrt{1/3}}=\frac{-0.5}{0.0981}=-5.09\quad\text{on }10\text{ df}.$$
+<b>$p$-value (one-sided), from tables ($t_{10}$):</b> the $0.9995$ quantile is $4.59$; since $|{-5.09}|\gt 4.59$, the one-tail area is $p\lt 0.0005$ (exact $p=0.000234$). Reject $H_0$.
+<div class="concl">There is strong evidence ($p\lt 0.001$) that sheep pâté does <b>not</b> have at least 2 g more protein per 100 g than goat pâté — the true mean difference is significantly less than 2 g. The producer's claim is not supported (the data put the gap around 1.5 g, per part (b)).</div>
+<div class="trap">The "2 g" goes into the numerator: $T=\frac{(\bar X-\bar Y)-2}{\text{s.e.}}$, not $\frac{\bar X-\bar Y}{\text{s.e.}}$. Testing against 0 here would answer the wrong question.</div>
+</details>
+</section>
+
+<!-- ============ Q5 ============ -->
+<section id="q5">
+<h2>Question 5 — ANOVA + Chi-squared (toothpaste) <span class="marks">18 marks</span></h2>
+<div class="card q">
+90 people randomised to three toothpastes; Plaque Score Difference (PSD, higher = more plaque removed):
+<table>
+<tr><th></th><th>$n$</th><th>$\bar x$</th><th>$s$</th></tr>
+<tr><th>Brand A</th><td>30</td><td>1.57</td><td>0.35</td></tr>
+<tr><th>Brand B</th><td>30</td><td>1.60</td><td>0.29</td></tr>
+<tr><th>Herbal</th><td>30</td><td>1.35</td><td>0.46</td></tr>
+</table>
+Between-group $SS=1.170$; total $SS=13.797$. <b>Boxplots (described):</b> Brand A and Brand B sit higher and close together (medians ≈1.6); Herbal is lower and more spread out (median ≈1.4) with a low outlier.
+</div>
+
+<h3>(a) Complete the ANOVA table. <span class="marks">3</span></h3>
+<details><summary></summary>
+<div class="when">$d=3$, $N=90$: $df_{\text{group}}=2$, $df_{\text{resid}}=87$, $df_{\text{total}}=89$; $SS_{\text{resid}}=SS_{\text{total}}-SS_{\text{group}}$.</div>
+$SS_{\text{resid}}=13.797-1.170=12.627$.
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Toothpaste</td><td>2</td><td>1.170</td><td>0.5850</td><td>4.03</td></tr>
+<tr><td>Residuals</td><td>87</td><td>12.627</td><td>0.1451</td><td></td></tr>
+<tr><td>Total</td><td>89</td><td>13.797</td><td></td><td></td></tr>
+</table>
+$MS_{\text{group}}=1.170/2=0.5850$; $MS_{\text{resid}}=12.627/87=0.1451$; $F=0.5850/0.1451=4.03$.
+<div class="ans">$F=4.03$ on $(2,87)$ df.</div>
+</details>
+
+<h3>(b) Test for a difference in mean PSD across the three groups; hypotheses, statistic, $p$-value, conclusion (5%). <span class="marks">5</span></h3>
+<details><summary></summary>
+$H_0$: mean PSD equal for all three toothpastes; $H_1$: at least one differs.<br>
+$F=4.03$ on $(2,87)$ df. <b>From tables</b> (nearest $n=60$): $F_{0.95}(2,60)=3.15$, $F_{0.975}(2,60)=3.93$, $F_{0.99}(2,60)=4.98$. Since $3.93\lt 4.03\lt 4.98$, we have $0.01\lt p\lt 0.025$ (exact $p=0.0212$).<br>
+$4.03\gt 3.15\Rightarrow$ <b>reject $H_0$</b> at 5%.
+<div class="concl">There is evidence ($p\approx0.021\lt0.05$) that mean plaque-score difference is not the same across the three toothpastes — at least one toothpaste removes plaque differently. The boxplots suggest Herbal is the weaker performer.</div>
+</details>
+
+<h3>(c) What are the test's assumptions? Are they met? <span class="marks">3</span></h3>
+<details><summary></summary>
+Assumptions: (1) independent observations; (2) normal errors within each group; (3) equal variances.<br>
+<b>Discussion:</b> participants randomised to groups ⇒ independence holds. Boxplots roughly symmetric (one Herbal low outlier) ⇒ normality broadly reasonable at $n=30$ each. Variance ratio $=0.46^2/0.29^2\approx 2.5\lt 4$ ⇒ equal-variance assumption acceptable, though Herbal is the most variable.
+</details>
+
+<h3>(d) The Bonferroni output: does it support the claim that Herbal is "as effective as" the two brands? <span class="marks">2</span></h3>
+<details><summary></summary>
+<b>Adjusted $p$-values:</b> Brand B vs Brand A $=1.000$; Herbal vs Brand A $=0.066$; Herbal vs Brand B $=0.028$.
+<div class="concl">No. Herbal vs Brand B is significant ($p=0.028\lt0.05$) — Herbal removes significantly <b>less</b> plaque than Brand B. Although Herbal vs Brand A is not significant ($p=0.066$), the significant gap with Brand B means the claim "as effective as the other two" is <b>not</b> supported.</div>
+<div class="trap">"As effective as" requires <b>no</b> significant difference with <i>either</i> brand. One significant pairwise difference (Herbal vs B) is enough to reject the claim.</div>
+</details>
+
+<h3>(e) Is there an association between toothpaste choice (herbal vs non-herbal) and age group? <span class="marks">5</span></h3>
+<details><summary></summary>
+<div class="when">Two categorical variables in a contingency table, "association?" → <b>chi-squared test of independence</b> (#75). Expected $=\frac{\text{row}\times\text{col}}{\text{total}}$; $\chi^2=\sum\frac{(O-E)^2}{E}$; $df=(r-1)(c-1)$.</div>
+Observed (row totals 152, 348; column totals 109, 244, 147; grand total 500):
+<table>
+<tr><th></th><th>Youth</th><th>Working</th><th>Senior</th><th>total</th></tr>
+<tr><th>Non-herbal</th><td>26</td><td>70</td><td>56</td><td>152</td></tr>
+<tr><th>Herbal</th><td>83</td><td>174</td><td>91</td><td>348</td></tr>
+</table>
+Expected values $E=\frac{r\times c}{500}$:
+<table>
+<tr><th></th><th>Youth</th><th>Working</th><th>Senior</th></tr>
+<tr><th>Non-herbal</th><td>33.14</td><td>74.18</td><td>44.69</td></tr>
+<tr><th>Herbal</th><td>75.86</td><td>169.82</td><td>102.31</td></tr>
+</table>
+$$\chi^2=\frac{(26-33.14)^2}{33.14}+\frac{(70-74.18)^2}{74.18}+\frac{(56-44.69)^2}{44.69}+\frac{(83-75.86)^2}{75.86}+\frac{(174-169.82)^2}{169.82}+\frac{(91-102.31)^2}{102.31}=6.66.$$
+$df=(2-1)(3-1)=2$. <b>From tables ($\chi^2_2$):</b> the $0.95$ quantile is $5.99$ and the $0.975$ quantile is $7.38$. Since $5.99\lt 6.66\lt 7.38$, we get $0.025\lt p\lt 0.05$ (exact $p=0.0358$).<br>
+$6.66\gt 5.99\Rightarrow$ <b>reject $H_0$</b> (independence).
+<div class="concl">There is evidence ($p\approx0.036\lt0.05$) of an association between toothpaste preference and age group. Inspecting the cells, seniors chose non-herbal more than expected (56 vs 44.7) while choosing herbal less (91 vs 102.3), so older people lean toward non-herbal toothpaste.</div>
+<div class="trap">$H_0$ for a $\chi^2$ association test is "the two variables are <b>independent</b>" (no association). $df=(r-1)(c-1)=2$ here, not the number of cells. Confirm all expected counts exceed 5 (they do) before trusting the test.</div>
+</details>
+</section>
+
+<!-- ============ Q6 ============ -->
+<section id="q6">
+<h2>Question 6 — Simple linear regression (tree age) <span class="marks">15 marks</span></h2>
+<div class="card q">
+Estimating pioneer-tree age (years) from trunk diameter (cm). <b>Scatterplot (described):</b> a strong positive, roughly linear cloud rising from small/young trees to large/old ones, with spread widening a little at large diameters. Fit <span class="mono" style="padding:0 4px">lm(Age ~ Diameter)</span>:
+<div class="mono">Coefficients:  Estimate  Std.Error  t value  Pr(&gt;|t|)
+(Intercept)   -1.2026    0.8534    -1.409   0.162
+Diameter       0.6372    0.0187    34.067   &lt;2e-16 ***
+Residual standard error: 5.454 on 106 degrees of freedom
+Multiple R-squared: 0.9163,  Adjusted R-squared: 0.9155
+F-statistic: 1161 on 1 and 106 DF, p-value: &lt; 2.2e-16</div>
+</div>
+
+<h3>(a) What is the sample size? <span class="marks">1</span></h3>
+<details><summary></summary>
+Residual df $=n-2=106\Rightarrow n=108$.
+<div class="ans">108 trees.</div>
+</details>
+
+<h3>(b) Expected age of a tree with diameter 50 cm? <span class="marks">2</span></h3>
+<details><summary></summary>
+$$\widehat{\text{Age}}=-1.2026+0.6372(50)=-1.2026+31.86=30.7\text{ years}.$$
+<div class="ans">≈ 30.7 years.</div>
+</details>
+
+<h3>(c) A 20 cm tree is found to be only 8 months old. Is this age unusual for that size? <span class="marks">2</span></h3>
+<details><summary></summary>
+<div class="when">Judging a <b>single</b> tree → use the <b>prediction</b> interval, not the confidence interval. R gives, for Diameter = 20: 95% prediction interval $(0.662,\ 22.42)$ years.</div>
+8 months $=8/12=0.667$ years. Since $0.667\gt 0.662$, the age lies <b>just inside</b> the lower end of the 95% prediction interval.
+<div class="concl">Strictly, no — 0.667 years falls (barely) within the 95% prediction interval $(0.662,\,22.42)$, so an 8-month-old 20 cm tree is <b>not quite</b> flagged as unusual, though it sits right at the extreme low edge. It is a borderline case: essentially as young as the model would ever predict for that diameter.</div>
+<div class="trap">Use the wider <b>prediction</b> interval for an individual observation; the confidence interval $(10.34,\,12.74)$ is for the <i>mean</i> age of all 20 cm trees and would wrongly flag this tree as extremely unusual.</div>
+</details>
+
+<h3>(d) A farmer claims it takes <i>more than five years</i> to grow 3 cm in diameter. Is there evidence against this? <span class="marks">4</span></h3>
+<details><summary></summary>
+<div class="when">Slope $\beta_1$ = years of age per cm of diameter. Growing 3 cm corresponds to $3\beta_1$ years. Claim: $3\beta_1\gt 5$, i.e. $\beta_1\gt 5/3$. Test the slope against $5/3$.</div>
+$$H_0:\;\beta_1=\tfrac{5}{3}\qquad\text{vs}\qquad H_1:\;\beta_1\lt \tfrac53\ \ (\text{evidence against the "}\gt 5\text{ yr" claim}).$$
+$$T=\frac{\hat\beta_1-5/3}{\text{s.e.}(\hat\beta_1)}=\frac{0.6372-1.6667}{0.0187}=\frac{-1.0295}{0.0187}=-55.1\quad\text{on }106\text{ df}.$$
+This is astronomically far into the tail: <b>from tables</b> even the $0.9995$ quantile of $t_{106}$ is only ≈3.4, so $p\lt 0.0005$ (exact $p\approx 4\times10^{-80}$). Reject $H_0$.
+<div class="concl">There is overwhelming evidence <b>against</b> the farmer's claim. The model estimates only $3\times0.6372\approx 1.9$ years to grow 3 cm — far less than five. Growth is much faster than the farmer believes.</div>
+<div class="trap">Translate the claim into the slope: "5 years for 3 cm" means $\beta_1$ compared with $5/3\approx1.667$, not with 0 or 5. Testing $\beta_1=0$ would just confirm the slope is non-zero — the wrong question.</div>
+</details>
+
+<h3>(e) For ±5-year accuracy, is the model feasible in practice? <span class="marks">2</span></h3>
+<details><summary></summary>
+The residual standard error is <b>5.454 years</b> — already larger than the required ±5 years, and a 95% prediction interval spans roughly $\pm 2\times5.45\approx\pm11$ years (cf. the width $(0.66,22.4)$ in (c)).
+<div class="concl">No — the model is <b>not</b> accurate enough. Typical prediction errors (≈5.5 years, with prediction intervals of ~±11 years) exceed the ±5-year tolerance, so it cannot reliably age individual trees to within 5 years despite the high $R^2$.</div>
+<div class="tip">High $R^2$ (0.916) is not the same as high predictive accuracy. Judge feasibility by the <b>residual/prediction error</b> against the stated tolerance, not by $R^2$.</div>
+</details>
+
+<h3>(f) State the model assumptions and assess them from the diagnostic plots. <span class="marks">4</span></h3>
+<details><summary></summary>
+<b>Figure (described):</b> <i>Residuals vs Fitted</i> shows a clear <b>curved</b> (dip-then-rise) pattern in the smoother, with variability seeming to grow for larger fitted values. <i>Normal Q–Q</i> is close to the diagonal in the middle with mild departures at the tails.<br>
+Assumptions of $Y_i=\beta_0+\beta_1 x_i+\varepsilon_i,\ \varepsilon_i\overset{iid}{\sim}\mathsf N(0,\sigma^2)$:
+<ul>
+<li><b>Linearity</b> — the curved residual pattern suggests the true relationship is not perfectly straight ⇒ <b>partly violated</b> (a transformation might help).</li>
+<li><b>Constant variance</b> — spread appears to widen for larger trees ⇒ mild heteroscedasticity, <b>questionable</b>.</li>
+<li><b>Normality</b> — Q–Q mostly straight ⇒ <b>reasonable</b>, minor tail deviation.</li>
+<li><b>Independence</b> — assumed from random sampling of trees.</li>
+</ul>
+<div class="concl">The straight-line model captures the strong positive trend but the residual curvature and widening spread show it is an imperfect fit — reinforcing the accuracy concerns in (e).</div>
+</details>
+</section>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 4 &amp; 5: Studies, Data &amp; Descriptive Statistics</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapters 4 &amp; 5 — Studies, Data &amp; Descriptive Statistics</h1>
+  <p>Statistical modelling · observational vs designed studies · sampling · variable types · summary statistics · boxplots, histograms, scatterplots</p>
+  <p><span class="badge gold">THE INTERPRETATION-MARKS CHAPTER</span><span class="badge">Low standalone weight · high embedded weight</span></p>
+  <p style="max-width:720px;margin:14px auto 0;font-size:14px;color:var(--ink)">These two chapters rarely appear as a whole question. Instead they are <b>how you win the 2–4 interpretation marks buried inside every big question</b> in Ch 6–11: "is this causal?", "comment on the distribution", "state the assumptions and judge them from Figure&nbsp;X". Those marks are the easiest in the paper — if you have the language ready.</p>
+</header>
+
+<nav>
+  <a href="index.html">← Hub</a>
+  <a href="ch03-multiple-rvs.html">‹ Ch 3</a>
+  <a href="ch06-estimation-cis.html">Ch 6 ›</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+</nav>
+
+<main>
+
+<!-- ============ 1. CONCEPTS ============ -->
+<section id="concepts">
+<h2>1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>Why this page matters more than its page-count suggests</h3>
+<p>Scan the past papers and you find almost <b>no standalone Ch 4/5 question</b>. What you find instead, in <em>every single exam</em>, are sub-parts like:</p>
+<ul>
+<li><b>"State the assumptions of the test and comment on their validity using Figure 1"</b> — 2025 Q3(d), 2024 Q4(b), 2023 Q5(c), 2022 Q4(d)/Q5(b), 2021 Q4(f).</li>
+<li><b>"Briefly discuss the plot, describing the shape of the distribution for each group and comparing their relative locations"</b> — 2022 Q4(a), 2021 Q4(a).</li>
+<li><b>"Based on the scatterplot, describe the relationship…"</b> — 2022 Q5(a).</li>
+</ul>
+<p>These are pure Ch 5 skills wrapped around a t-test / ANOVA / regression. This page gives you <b>ready-made sentence templates</b> so you never freeze on them. Ch 4 supplies the study-design vocabulary (causal vs association, bias, confounding) that unlocks the "interpret in context" marks.</p>
+</div>
+
+<h3>1.1 &nbsp;Statistical modelling (Ch 4.1)</h3>
+<div class="card">
+<p>A <b>statistical model</b> is a plausible probabilistic story for how the data were generated. The whole workflow (notes Fig 4.1) is a pipeline:</p>
+<p class="mono">Reality + Data  →  Model for Data  →(math analysis)→  Conclusion about Model  →  Conclusion about Reality</p>
+<p>The simplest models assume the data are <b>iid</b> (independent, identically distributed), often normal:</p>
+<div class="method">
+<b>One-sample normal:</b> \( X_1,\dots,X_n \stackrel{iid}{\sim} \mathcal N(\mu,\sigma^2) \) — e.g. heights of 300 men.<br>
+<b>Two-sample normal:</b> \( X_1,\dots,X_{n_1}\stackrel{iid}{\sim}\mathcal N(\mu_1,\sigma_1^2)\), \(Y_1,\dots,Y_{n_2}\stackrel{iid}{\sim}\mathcal N(\mu_2,\sigma_2^2)\), independent — assess \(\mu_1-\mu_2\). This is the model behind every <b>two-sample t-test</b> (Ch 7).<br>
+<b>Two-sample binomial:</b> \( X\sim\text{Bin}(n_1,p_1)\), \(Y\sim\text{Bin}(n_2,p_2)\) — assess \(p_1-p_2\) (Ch 6 proportions).
+</div>
+<p><b>Three things the notes stress about models (Remark 4.1):</b></p>
+<ul>
+<li><b>Every model is wrong.</b> Heights are really recorded on a discrete mm scale, yet \(\mathcal N(\mu,\sigma^2)\) allows negative values — but it is a <em>useful, mathematically tractable approximation</em>.</li>
+<li>Models depend on <b>unknown parameters</b> (\(\mu,\sigma^2,p\)); the job of <em>inference</em> (Ch 6+) is to learn them from data.</li>
+<li>A model must be <b>checked for suitability</b>: data simulated from it should resemble the observed data. This is exactly why the exam asks you to <em>check assumptions from plots</em>.</li>
+</ul>
+</div>
+
+<h3>1.2 &nbsp;Observational study vs designed experiment — the causation question (Ch 4.2–4.3)</h3>
+<div class="card">
+<p>This is the single most important conceptual distinction in the chapter, because it decides <b>what language you are allowed to use in your conclusion</b>.</p>
+<table>
+<tr><th></th><th>Designed (randomised) experiment</th><th>Observational study</th></tr>
+<tr><td><b>What happens</b></td><td>Experimenter <em>actively assigns</em> treatments to units, at random.</td><td>No control over variables; we just <em>observe and record</em> (e.g. survey data).</td></tr>
+<tr><td><b>Why randomise?</b></td><td>Random assignment makes the treatment groups have (approximately) the <em>same distribution of every variable — measured OR unmeasured</em>. So any group difference after treatment must be caused by the treatment.</td><td>Groups are self-selected, so they can differ in many ways at baseline.</td></tr>
+<tr><td><b>Conclusion allowed</b></td><td style="color:var(--good)"><b>Causation.</b> "The treatment <em>causes</em> the change." (RCT = gold standard, Cochrane.)</td><td style="color:var(--warn)"><b>Association only.</b> "There is an association / X is associated with Y." Never "causes".</td></tr>
+<tr><td><b>Main threat</b></td><td>Sampling bias (are subjects representative?), too-small \(n\).</td><td><b>Confounding variables</b> — an unmeasured variable driving both X and Y.</td></tr>
+</table>
+<p class="tip">The confounding classic (notes p.71): taller people appear to have shorter hair → but <b>gender</b> confounds it (females: longer hair &amp; shorter on average). Within each gender the relationship vanishes. Randomisation defeats confounding; observation cannot.</p>
+</div>
+
+<div class="card">
+<h4>Design vocabulary the exam expects you to deploy</h4>
+<ul>
+<li><b>Treatment</b> — a combination of factors set at chosen <b>levels</b> (e.g. caffeine at levels yes/no).</li>
+<li><b>Response variable</b> — the outcome of interest (a.k.a. dependent/outcome). <b>Explanatory variable</b> — the predictor/factor (a.k.a. independent/covariate).</li>
+<li><b>Control</b> — a comparison treatment identical in every way <em>except</em> the active ingredient (decaf Diet Coke vs caffeinated Diet Coke — only caffeine differs).</li>
+<li><b>Placebo</b> — a dummy treatment (sugar pill); the <b>placebo effect</b> is improvement from belief alone.</li>
+<li><b>Blind</b> — subjects don't know their group. <b>Double-blind</b> — neither subjects nor experimenters know (gold standard, removes experimenter bias).</li>
+<li><b>Randomisation</b> — assign treatments by a random mechanism (R's <span class="mono">sample()</span>). The ingredient that licences causal claims.</li>
+<li><b>Residual variability</b> — variation the model cannot explain.</li>
+</ul>
+</div>
+
+<h3>1.3 &nbsp;Sampling from a population (Ch 4.4)</h3>
+<div class="card">
+<table>
+<tr><th>Method</th><th>How</th><th>Note</th></tr>
+<tr><td><b>Simple random sample (SRS)</b></td><td>Every member of the population of size \(N\) has equal probability of selection.</td><td>The ideal most theory assumes. R: <span class="mono">sample(1:N, n)</span>.</td></tr>
+<tr><td><b>Stratified</b></td><td>Split population into <b>strata</b> (e.g. city/regional, M/F, age bands); take an SRS from each, usually \(nN_s/N\) from stratum \(s\).</td><td>Guarantees representation of each stratum; can oversample an important one.</td></tr>
+<tr><td><b>Cluster</b></td><td>Split into many small <b>clusters</b> (e.g. city blocks); randomly pick some clusters, sample within them.</td><td>Cheaper (less travel) but individuals in a cluster are correlated → slightly higher variance.</td></tr>
+<tr><td><b>Convenience</b></td><td>Take whoever is available.</td><td style="color:var(--bad)">Biased — may not generalise.</td></tr>
+<tr><td><b>Self-selected</b></td><td>People opt in (TV polls).</td><td style="color:var(--bad)">Strongly biased; not sampled independently with equal probability.</td></tr>
+</table>
+<p><b>Villagers example</b> (notes 4.4): 10 villages, \(N=5\times50+5\times100=750\); to sample \(n=100\), stratify East (250) / West (500) → take \(100\times250/750\approx33\) and \(100\times500/750\approx67\).</p>
+</div>
+
+<h3>1.4 &nbsp;Variable types (Ch 5.3)</h3>
+<div class="card">
+<p>You <em>must</em> be able to type any variable — the correct summary/plot/test all depend on it.</p>
+<div class="grid2">
+<div class="method"><b>Quantitative</b> (numbers you can average)
+<ul><li><b>Continuous</b> — any value in a range: height, serum creatinine, time.</li>
+<li><b>Discrete</b> — countable set: number of cups of tea, counts.</li></ul></div>
+<div class="method"><b>Qualitative / categorical</b> (a.k.a. <b>factors</b>)
+<ul><li><b>Nominal</b> — no natural order: sex, disease, prescription.</li>
+<li><b>Ordinal</b> — ordered categories: dosage {placebo, low, high}; age-group.</li></ul></div>
+</div>
+<p class="tip"><b>Binary (0/1) variables are called nominal</b>, even if there's a natural order — because reversing the coding is trivial (notes p.85). So sex, anaemia, death, smoking are all nominal.</p>
+<p class="trap">In R, a variable entered as numbers is treated as <em>quantitative</em> by default. A categorical variable coded 0/1 must be told to R via <span class="mono">factor()</span> or <span class="mono">colClasses=</span>, or R will wrongly average it.</p>
+</div>
+
+<h3>1.5 &nbsp;Summary statistics — location &amp; spread (Ch 5.4)</h3>
+<div class="card">
+<h4>Location (centre)</h4>
+<ul>
+<li><b>Mean</b> \(\bar x=\frac1n\sum x_i\) — the balance point. <b>Not robust</b>: a single extreme value drags it.</li>
+<li><b>Median</b> — the middle value once ordered. <b>Robust</b>: unaffected by extreme values.</li>
+</ul>
+<h4>Spread (dispersion)</h4>
+<ul>
+<li><b>Range</b> \(=\max-\min\). Grows with \(n\); dominated by outliers.</li>
+<li><b>IQR</b> \(= Q_3-Q_1\). <b>Robust</b> measure of spread (middle 50%).</li>
+<li><b>Sample variance</b> \(s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2\); <b>SD</b> \(s=\sqrt{s^2}\), in the original units. <b>Not robust.</b></li>
+</ul>
+<p class="tip"><b>The two decisions the exam loves:</b></p>
+<ul>
+<li><b>Mean vs median under skew:</b> for right-skewed data (long right tail), <b>mean &gt; median</b>; the mean is pulled toward the tail. Report the <b>median</b> for a skewed variable (e.g. income, serum creatinine).</li>
+<li><b>SD vs IQR:</b> use <b>IQR / median</b> when data are skewed or have outliers (robust); use <b>SD / mean</b> when data are roughly symmetric.</li>
+</ul>
+<p class="trap"><b>Why \(n-1\), not \(n\)?</b> Dividing by \(n-1\) makes \(s^2\) an <em>unbiased</em> estimator of the population variance \(\sigma^2\): \(\mathbb E(S^2)=\sigma^2\). Your Casio's "\(\sigma_{n-1}\)"/"sx" key gives the \(n-1\) version — use that, not \(\sigma_n\).</p>
+</div>
+
+<h3>1.6 &nbsp;Describing distributions &amp; the plots (Ch 5.5–5.6)</h3>
+<div class="card">
+<h4>Categorical variables</h4>
+<p>Summarise with <b>counts</b> and <b>proportions</b>; cross two of them in a <b>contingency table</b>. Row proportions (R's <span class="mono">margin=1</span>) answer "of those with anaemia, what fraction died?"; column proportions (<span class="mono">margin=2</span>) answer the reverse. Visualise with <b>bar charts</b> (height = count/proportion) or <b>mosaic plots</b> (area = count).</p>
+<h4>Quantitative variables — the five-number summary &amp; boxplot</h4>
+<p>The <b>five-number summary</b> is (min, \(Q_1\), median \(Q_2\), \(Q_3\), max). A <b>boxplot</b> draws it:</p>
+<ul>
+<li>Box spans \(Q_1\) to \(Q_3\); the line inside is the median.</li>
+<li>An observation is a <b>boxplot outlier</b> if it lies more than \(1.5\times\text{IQR}\) beyond a box edge — i.e. below \(Q_1-1.5\,\text{IQR}\) or above \(Q_3+1.5\,\text{IQR}\). Shown as a point/*.</li>
+<li>Whiskers reach the most extreme <em>non-outlier</em> observations.</li>
+</ul>
+<h4>Shape &amp; skewness</h4>
+<div class="grid2">
+<div class="method"><b>Right-skewed</b> (positive)<br>long tail to the <em>right</em>; mean&gt;median; box's right whisker/outliers longer. e.g. serum creatinine, salaries.</div>
+<div class="method"><b>Left-skewed</b> (negative)<br>long tail to the <em>left</em>; mean&lt;median.</div>
+</div>
+<p><b>Symmetric</b>: left and right tails mirror each other; mean≈median (normal is the bell-shaped symmetric case).</p>
+<h4>Histograms, density &amp; QQ plots</h4>
+<ul>
+<li><b>Histogram</b> — counts of observations in bins; reveals shape, peaks (modes), skew, gaps.</li>
+<li><b>Kernel density plot</b> — a smoothed histogram approximating the pdf.</li>
+<li><b>Transformations</b> — a <b>log</b> or <b>reciprocal</b> transform pulls a right-skewed variable toward symmetry/normal (notes turn serum creatinine normal-ish via \(\log_{10}\) or \(1/x\)).</li>
+<li><b>Normal Q–Q plot</b> — sample quantiles vs theoretical normal quantiles. <b>Straight line ⇒ normal.</b> An upward curve at the right end ⇒ long right tail (right skew). This is the go-to for the "is the normality assumption valid?" mark.</li>
+</ul>
+</div>
+
+<h3>1.7 &nbsp;Relationships between variables (Ch 5.7–5.8)</h3>
+<div class="card">
+<ul>
+<li><b>One categorical + one quantitative:</b> <b>side-by-side boxplots</b> (or grouped density plots), one per category — compare medians, spreads and shapes across groups. R: <span class="mono">boxplot(y ~ group)</span>. Numerical version: <span class="mono">aggregate(y, list(group), summary)</span>.</li>
+<li><b>Two quantitative:</b> <b>scatterplot</b> (explanatory on x, response on y). Add <b>jitter</b> when many points overlap. A <b>pairs plot</b> shows every pair at once.</li>
+<li><b>Correlation</b> \(r\in[-1,1]\) measures the strength of a <em>linear</em> relationship: \(+1\) lock-step increase, \(-1\) one up one down, \(0\) no linear relationship. Larger \(|r|\) = stronger. In the heart data the strongest was only \(r=-0.257\) (log serum creatinine vs serum sodium).</li>
+</ul>
+<p class="trap"><b>Correlation is linear-only.</b> \(r=0\) does <em>not</em> mean "no relationship" — a strong curved (non-linear) pattern can have \(r\approx0\). And correlation ≠ causation (Ch 4!).</p>
+</div>
+</section>
+
+<!-- ============ 2. FORMULAS ============ -->
+<section id="formulas">
+<h2>2 · Key formulas &amp; when to use them</h2>
+<p class="tip">These are all on the provided formula sheet / statistical tables. Your job is <b>recognising which to use and executing it on the Casio</b>, not memorising.</p>
+
+<div class="method"><b>Sample mean</b> \[\bar x=\frac1n\sum_{i=1}^{n}x_i\]
+<div class="when">reporting the centre of a roughly symmetric quantitative variable. On the Casio: SD/STAT mode → <span class="mono">x̄</span>.</div></div>
+
+<div class="method"><b>Median &amp; percentiles (by hand, notes p.97 method).</b> Order the data \(x_{(1)}\le\dots\le x_{(n)}\). The \(q\)th percentile is the average of the values at positions \(\lfloor (n+1)q/100\rfloor\) and \(\lceil (n+1)q/100\rceil\). Median is the 50th percentile: position \((n+1)/2\).
+<div class="when">computing a five-number summary or IQR by hand from a small dataset. <b>R interpolates differently</b> — for exam by-hand work use this averaging method.</div></div>
+
+<div class="method"><b>Range &amp; IQR</b> \[\text{range}=\max_i x_i-\min_i x_i,\qquad \text{IQR}=Q_3-Q_1\]
+<div class="when">IQR = robust spread for skewed data; range only for a quick min/max.</div></div>
+
+<div class="method"><b>Sample variance &amp; standard deviation</b> \[s^2=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar x)^2,\qquad s=\sqrt{s^2}\]
+<div class="when">spread of a symmetric quantitative variable; feeds every t-test / CI. Casio key: <span class="mono">σx&#8202;n-1</span> (a.k.a. sx). SD is in original units; variance in units².</div></div>
+
+<div class="method"><b>Boxplot outlier fences</b> \[\text{lower}=Q_1-1.5\,\text{IQR},\qquad \text{upper}=Q_3+1.5\,\text{IQR}\]
+<div class="when">deciding whether a point is a boxplot outlier, or where the whiskers stop.</div></div>
+
+<div class="method"><b>Sample correlation</b> \[r=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum(x_i-\bar x)^2}\sqrt{\sum(y_i-\bar y)^2}}\in[-1,1]\]
+<div class="when">quantifying the strength/direction of a <em>linear</em> relationship between two quantitative variables (leads into regression, Ch 9).</div></div>
+
+<div class="method"><b>Proportion (categorical summary)</b> \[\hat p=\frac{\text{count in category}}{n}\]
+<div class="when">summarising a categorical variable, or a row/column of a contingency table.</div></div>
+</section>
+
+<!-- ============ 3. WORKED EXAMPLES ============ -->
+<section id="worked">
+<h2>3 · Worked examples</h2>
+<p>Every number below is computed and verified. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Classify the study, the variables, and state what conclusion is allowed (Ch 4 Ex 5 style)</summary>
+<div class="card q">
+<p><b>Q.</b> A study recruited 24 middle-of-the-night-insomnia patients and <em>randomly allocated</em> them to three dosage groups: A (placebo), B (low dose triazolam), C (high dose). After 2 weeks, both drug groups showed increased total sleep time vs placebo (low: \(p=0.029\); high: \(p=0.004\)). (a) What type of study is this? (b) Classify <em>total time of sleep</em>. (c) Classify <em>dosage</em>. (d) Can we conclude the drug <em>causes</em> more sleep?</p>
+</div>
+<p><b>(a)</b> A <b>designed (randomised) experiment</b> — the researchers actively assigned the treatment (dosage) to patients using randomisation. Strengths: randomisation, double-blinding, placebo control, parallel groups. Weaknesses to flag: small \(n\) for 3 groups, unclear recruitment/representativeness, patients self-administer the drug (loss of control).</p>
+<p><b>(b)</b> Total time of sleep is <b>quantitative, continuous</b> (any value in \([0,1440]\) minutes).</p>
+<p><b>(c)</b> Dosage takes values {placebo, low, high} — <b>qualitative, ordinal</b> (ordered categories).</p>
+<p><b>(d)</b> <span style="color:var(--good)"><b>Yes — a causal conclusion is licensed</b></span>, because treatment was <em>randomly assigned</em>, so the groups are comparable in all other variables (measured and unmeasured). We may write: <em>"Triazolam causes a statistically significant increase in total sleep time relative to placebo."</em></p>
+<p class="tip">Contrast with the alcohol-and-school-attendance study (Ch 4 Ex 6): that is <b>observational</b> — you may only say <em>"frequent intoxication is <b>associated with</b> more missed school"</em>, never "causes", because of possible confounders (parental supervision, GPA, …).</p>
+</details>
+
+<details>
+<summary>Example 2 — Five-number summary + boxplot + skewness from a small dataset (Ch 5 Ex 2)</summary>
+<div class="card q">
+<p><b>Q.</b> LDH decrease (before − after fasting) for 7 subjects (mol/L): <span class="mono">0.19, −0.20, 0.04, 0.17, 0.21, 0.01, 0.06</span>. Give the five-number summary and describe the shape.</p>
+</div>
+<p><b>Step 1 — order the data</b> (\(n=7\)):</p>
+<p class="mono">−0.20,  0.01,  0.04,  0.06,  0.17,  0.19,  0.21</p>
+<p><b>Step 2 — median</b> (position \((n+1)/2 = 4\)): the 4th value \(= \mathbf{0.06}\).</p>
+<p><b>Step 3 — \(Q_1\)</b> (position \((n+1)\times25/100 = 2\)): the 2nd value \(= \mathbf{0.01}\).</p>
+<p><b>Step 4 — \(Q_3\)</b> (position \((n+1)\times75/100 = 6\)): the 6th value \(= \mathbf{0.19}\).</p>
+<p><b>Five-number summary:</b> min \(=-0.20\), \(Q_1=0.01\), median \(=0.06\), \(Q_3=0.19\), max \(=0.21\). &nbsp; <b>IQR</b> \(=0.19-0.01=0.18\).</p>
+<p><b>Shape:</b> the median (0.06) sits closer to \(Q_3\) than to \(Q_1\)? Check distances: \(Q_2-Q_1=0.05\), \(Q_3-Q_2=0.13\) — the upper half of the box is wider, and the lower whisker reaches far down to \(-0.20\) (distance \(0.21\)) vs the short upper whisker to \(0.21\) (distance \(0.02\)). The long <em>lower</em> tail ⇒ mild <b>left skew</b>. Outlier check: fences \(=0.01-1.5(0.18)=-0.26\) and \(0.19+1.5(0.18)=0.46\); nothing beyond, so <b>no outliers</b>.</p>
+<p class="tip">Exam phrasing to reuse: "The distribution is roughly symmetric / mildly left-skewed, with no boxplot outliers (no point beyond \(Q_1-1.5\text{IQR}\) or \(Q_3+1.5\text{IQR}\))."</p>
+</details>
+
+<details>
+<summary>Example 3 — Compute mean, median, variance, SD and IQR by hand (Casio drill)</summary>
+<div class="card q">
+<p><b>Q.</b> A small quantitative sample: <span class="mono">3, 5, 6, 7, 9</span>. Find the mean, median, sample variance, SD and IQR. Give ≥3 significant figures.</p>
+</div>
+<p><b>Mean:</b> \(\bar x=\dfrac{3+5+6+7+9}{5}=\dfrac{30}{5}=\mathbf{6.00}\).</p>
+<p><b>Median:</b> ordered, \(n=5\), position 3 → \(\mathbf{6.00}\).</p>
+<p><b>Variance</b> (deviations from 6): \(-3,-1,0,1,3\); squares \(9,1,0,1,9\); sum \(=20\).</p>
+<p>\[s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2=\frac{20}{4}=\mathbf{5.00},\qquad s=\sqrt5=\mathbf{2.236}.\]</p>
+<p><b>IQR:</b> \(Q_1\) at position \((n+1)\times0.25=1.5\) → average of 1st &amp; 2nd \(=(3+5)/2=4\); \(Q_3\) at position \(4.5\) → average of 4th &amp; 5th \(=(7+9)/2=8\); IQR \(=8-4=\mathbf{4.00}\).</p>
+<p class="trap">On the Casio, use the <b>sx / \(\sigma_{n-1}\)</b> key (divides by \(n-1=4\)) to get 2.236, <em>not</em> \(\sigma_n\) (which divides by 5 and gives 2.000). Squaring the wrong one loses the variance mark.</p>
+</details>
+
+<details>
+<summary>Example 4 — "Comment on the distribution / assess the assumptions using Figure X" (the flagship mark, 2025 Q3(d) / 2024 Q4(b) style)</summary>
+<div class="card q">
+<p><b>Q.</b> "Figure 1 shows histograms of the samples for each group. State the assumptions required for the two-sample t-test in part (c) and comment on their validity using Figure 1."</p>
+</div>
+<p>This is worth ~4 marks and it is <b>free if you have the template</b>. The two-sample t-test assumes: (i) each sample is <b>iid</b> / independent observations; (ii) the two samples are <b>independent of each other</b>; (iii) the data in each group are (approximately) <b>normally distributed</b>; and (for the pooled version) (iv) <b>equal variances</b>.</p>
+<p><b>How to read each off the plot and write it up:</b></p>
+<div class="method"><b>Normality</b> — from a histogram/density: is each group roughly <b>symmetric and bell-shaped</b>? <br>
+<em>Template:</em> "The histograms for both groups are roughly symmetric and single-peaked with no severe skew or gross outliers, so the normality assumption appears reasonable. (If the samples are large, the CLT further protects the test.)" <br>
+If instead you see a long right tail: "Group X is clearly right-skewed with a long upper tail, so the normality assumption is doubtful; a transformation (e.g. log) or a robust method would be safer."</div>
+<div class="method"><b>Equal variance</b> — compare the <em>spread</em> (box width in boxplots, or histogram width): "The two groups show similar spread, so equal variances is plausible → pooled t-test." OR "Group X is far more spread out than Group Y, so I do <b>not</b> assume equal variances and use the Welch (unequal-variance) t-test."</div>
+<div class="method"><b>Independence</b> — argue from the <em>design</em>, not the plot: "Subjects were randomly and independently sampled/allocated, so observations are independent."</div>
+<p class="tip">On a <b>Q–Q plot</b> the same normality call becomes: "Points lie close to a straight line ⇒ normality reasonable" or "the upward curve in the right tail shows the data are right-skewed (heavier upper tail than normal)."</p>
+</details>
+
+<details>
+<summary>Example 5 — Describe a scatterplot &amp; interpret correlation (2022 Q5(a) style)</summary>
+<div class="card q">
+<p><b>Q.</b> "Based on the scatterplot of serum sodium (x) against ejection fraction (y), describe the relationship." The reported correlation is \(r=0.176\).</p>
+</div>
+<p><b>Template for a scatterplot description — always cover three things:</b></p>
+<ol>
+<li><b>Direction:</b> "There is a weak <em>positive</em> trend — ejection fraction tends to rise slightly as serum sodium increases."</li>
+<li><b>Strength &amp; form:</b> "The relationship is weak and roughly linear; the points form a diffuse cloud (\(r=0.176\), close to 0), so serum sodium is a poor predictor of ejection fraction on its own."</li>
+<li><b>Unusual features:</b> "A few points sit apart at low sodium / extreme ejection fraction; note the data cluster in 130–140 mEq/L and 25–60%."</li>
+</ol>
+<p class="trap">A weak \(r\) means weak <em>linear</em> association only, and — this being observational data — even a strong \(r\) would <b>not</b> justify saying sodium <em>causes</em> a change in ejection fraction.</p>
+</details>
+</section>
+
+<!-- ============ 4. EXAM QUESTION TYPES ============ -->
+<section id="types">
+<h2>4 · Exam question types</h2>
+<p>Mined from the 2021–2025 papers and tutorial/chapter exercises. Ch 4/5 almost never stands alone — each type below is a <b>sub-part inside a Ch 6–11 question</b>.</p>
+
+<div class="card">
+<h3>Type A — "State the assumptions and comment on their validity using Figure X" &nbsp;<span class="badge">2–5 marks · EVERY exam</span></h3>
+<p>The highest-frequency Ch 5 skill. Given histograms / boxplots / residual &amp; Q–Q diagnostic plots, list the test/model assumptions and judge each from the plot.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>State each assumption of the named test/model (independence, normality, equal variance, linearity, constant residual variance).</li>
+<li>For each, point to the specific plot feature: symmetry/skew &amp; outliers (histogram/boxplot); straight line (Q–Q); random band with no funnel (residuals-vs-fitted).</li>
+<li>Give a one-line verdict per assumption: "reasonable" / "doubtful because…".</li>
+</ol></div>
+<p><b>Real appearances:</b> 2025 Q3(d) [4] histograms for a two-sample test; 2025 Q4(d) [4] ANOVA via residual + Q–Q; 2025 Q5(d) [5] regression diagnostics; 2024 Q4(b) [4] ANOVA via boxplots + summary table; 2024 Q5(d) [4] regression diagnostics; 2023 Q5(c) [3] ANOVA via boxplots; 2022 Q4(d) [3] &amp; Q5(b) [4]; 2021 Q4(f) [2].</p>
+</div>
+
+<div class="card">
+<h3>Type B — "Describe the shape of the distribution for each group and compare their locations" &nbsp;<span class="badge">2–3 marks</span></h3>
+<p>Given side-by-side boxplots, describe <b>shape (skew/symmetry), spread, outliers</b> for each group and <b>compare medians</b> (relative locations).</p>
+<div class="method"><b>Recipe:</b> for each group state (i) centre (median), (ii) spread (IQR/box width + whisker length), (iii) skew (which whisker/half is longer), (iv) outliers (points beyond whiskers). Then one sentence comparing the groups' medians and spreads.</div>
+<p><b>Real appearances:</b> 2022 Q4(a) [3] HbA1c by 4 treatment groups; 2021 Q4(a) [2] cuckoo egg length by host species.</p>
+</div>
+
+<div class="card">
+<h3>Type C — Compute a summary statistic / five-number summary by hand &nbsp;<span class="badge">1–8 marks</span></h3>
+<p>Compute IQR, quartiles, five-number summary, variance or SD — sometimes from a raw dataset, sometimes from a distribution.</p>
+<p><b>Real appearances:</b> 2022 Q2(b) [8] uses the boxplot outlier rule (\(1.5\times\text{IQR}\)) to find the sample size giving ~10 expected outliers from a standard normal; 2021 Q1(e) [3] IQR of a given distribution. Chapter/tutorial drills: Ch 5 Ex 2 (five-number summary of LDH decreases), Ex 3 (<span class="mono">var()</span> of a 3-point set).</p>
+</div>
+
+<div class="card">
+<h3>Type D — Scatterplot / relationship description &nbsp;<span class="badge">2–3 marks</span></h3>
+<p>Describe direction, strength, form and unusual features of a scatterplot; interpret a correlation value; note it does not imply causation.</p>
+<p><b>Real appearance:</b> 2022 Q5(a) [3] PE vs particle diameter by face-covering type.</p>
+</div>
+
+<div class="card">
+<h3>Type E — Study design, ethics, bias &amp; data integrity &nbsp;<span class="badge">2–4 marks (rare but pure Ch 4)</span></h3>
+<p>Identify study type, name a bias/ethical concern, or recognise data-manipulation terminology.</p>
+<p><b>Real appearances:</b> 2023 Q3(a) [2, MCQ] data manipulation — throwing out inconvenient wells = <em>trimming</em>; 2023 Q3(b) [2, MCQ] ethical concern / bias in an epidemiological caffeine study. Study-design <em>contexts</em> you can be asked to reason about: randomised trials in 2025 Q3/Q4 &amp; 2022 Q4; observational studies in 2024 Q3 &amp; 2021 Q4.</p>
+</div>
+
+<div class="card">
+<h3>Type F — Variable classification &amp; response/explanatory &nbsp;<span class="badge">setup marks</span></h3>
+<p>Classify a variable (quant/categorical, nominal/ordinal/discrete/continuous) and identify which is the response. Not asked standalone in 2021–25, but constant in chapter exercises (Ch 4 Ex 4–7, Ch 5 Ex 1/4) and it decides which test the later parts need.</p>
+</div>
+</section>
+
+<!-- ============ 5. WORDING TRIGGERS ============ -->
+<section id="triggers">
+<h2>5 · Wording triggers &nbsp;<span class="badge gold">FLAGSHIP</span></h2>
+<p>The exact exam phrase → the exact move. Memorise the right column.</p>
+
+<h4>Study design &amp; causation</h4>
+<table>
+<tr><th>When the exam says…</th><th>…do this</th></tr>
+<tr><td>"Is this an observational study or a designed/randomised experiment?"</td><td>Designed = experimenter <b>actively assigns</b> treatments (usually at random). Observational = data merely <b>observed/recorded</b>, no intervention. State which and <em>why</em> in one line.</td></tr>
+<tr><td>"Can we conclude that X <b>causes</b> Y?" / "randomised controlled trial"</td><td>If <b>randomised experiment</b> → <b>YES, causal language allowed</b>: "X causes Y." If <b>observational</b> → <b>NO</b>: only "X is <b>associated with</b> Y", because of possible <b>confounding</b>.</td></tr>
+<tr><td>"Interpret / state your conclusion <b>in the context of the study</b>"</td><td>Write one plain sentence in the <em>story's own words and units</em> (not "reject H₀"): e.g. "There is strong evidence that the caffeinated group's mean pulse increase is higher than the decaf group's."</td></tr>
+<tr><td>"Give a strength / weakness of this study"</td><td>Strengths: randomisation, blinding/double-blind, placebo/control, equal group sizes, parallel groups, large \(n\). Weaknesses: unclear recruitment/representativeness, small \(n\), no blinding, no placebo, possible confounders, dropouts (missing-not-at-random bias).</td></tr>
+<tr><td>"Why don't they need to record age, sex, etc.?" (RCT)</td><td>Randomisation makes the distribution of <em>all</em> variables — measured or not — approximately equal across groups, so unmeasured variables can't bias the treatment comparison.</td></tr>
+<tr><td>"Threw out / adjusted / selected favourable data"</td><td>Data-manipulation term: discarding inconvenient observations = <b>trimming</b> (2023 Q3a).</td></tr>
+</table>
+
+<h4>Describing distributions &amp; assessing assumptions</h4>
+<table>
+<tr><th>When the exam says…</th><th>…do this</th></tr>
+<tr><td>"State the assumptions … and comment on their validity <b>using Figure X</b>"</td><td>List assumptions (independence, normality, equal variance / for regression: linearity, constant variance, normal residuals). For each, cite a plot feature + verdict. See Worked Ex 4.</td></tr>
+<tr><td>"Comment on the distribution shown in the histogram/boxplot"</td><td>Cover <b>4 things</b>: centre (median/mode), spread (IQR/range), <b>shape</b> (symmetric / right- / left-skewed), and <b>outliers</b>.</td></tr>
+<tr><td>"…assess whether the <b>normality</b> assumption holds"</td><td>Histogram/boxplot: roughly symmetric &amp; bell-shaped, no severe skew/outliers ⇒ OK. Q–Q plot: points on a straight line ⇒ OK; systematic curve ⇒ not normal.</td></tr>
+<tr><td>"Is the data <b>skewed</b>? / which way?"</td><td>Long tail to the <b>right</b> = right/positive skew (mean&gt;median); long tail <b>left</b> = left/negative skew (mean&lt;median). On a boxplot, the longer whisker / wider box half points to the tail.</td></tr>
+<tr><td>"…the right end of the Q–Q plot curves upward"</td><td>Sample upper quantiles are larger than normal ⇒ a <b>long right tail</b> ⇒ right-skewed, not normal.</td></tr>
+<tr><td>"Compare the two groups / relative locations"</td><td>Compare <b>medians</b> (which is higher), then <b>spreads</b> (which box/IQR is wider), then note differing shapes/outliers.</td></tr>
+<tr><td>"Suggest a transformation" / data are right-skewed</td><td>Apply <b>log</b> (or reciprocal / square-root) to pull in the right tail toward symmetry/normality.</td></tr>
+</table>
+
+<h4>Choosing summaries &amp; reading scatterplots</h4>
+<table>
+<tr><th>When the exam says…</th><th>…do this</th></tr>
+<tr><td>"Which measure of <b>centre</b> should be reported?"</td><td>Symmetric → <b>mean</b>. Skewed / has outliers → <b>median</b> (robust; the mean is dragged toward the tail).</td></tr>
+<tr><td>"Which measure of <b>spread</b>?"</td><td>Symmetric → <b>SD</b>. Skewed / outliers → <b>IQR</b> (robust).</td></tr>
+<tr><td>"Why divide by \(n-1\)?"</td><td>To make \(s^2\) an <b>unbiased</b> estimator of \(\sigma^2\): \(\mathbb E(S^2)=\sigma^2\).</td></tr>
+<tr><td>"Is this point an <b>outlier</b>?"</td><td>Boxplot rule: outlier if below \(Q_1-1.5\,\text{IQR}\) or above \(Q_3+1.5\,\text{IQR}\).</td></tr>
+<tr><td>"Give the <b>five-number summary</b>"</td><td>(min, \(Q_1\), median, \(Q_3\), max). Order the data; use positions \((n+1)q/100\) (average the two if fractional).</td></tr>
+<tr><td>"Describe the <b>relationship</b> in the scatterplot"</td><td>State <b>direction</b> (+/−), <b>strength/form</b> (weak/strong, linear/curved, cite \(r\)), and <b>unusual features</b> (clusters, outliers).</td></tr>
+<tr><td>"Interpret the correlation \(r\)"</td><td>Sign = direction; \(|r|\) near 1 = strong <b>linear</b> relationship, near 0 = weak/none. Add: correlation captures linear only, and ≠ causation.</td></tr>
+<tr><td>"Classify this variable"</td><td>Number you'd average → quantitative (continuous if any value in a range, discrete if a count). Category → qualitative (ordinal if ordered, else nominal; binary = nominal).</td></tr>
+</table>
+</section>
+
+<!-- ============ 6. TRAPS ============ -->
+<section id="traps">
+<h2>6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Saying "causes" for an observational study.</b> The single most common lost mark. No randomisation ⇒ only "associated with". If asked "can we conclude causation?", the answer for observational data is <b>no</b> (confounding).</div>
+
+<div class="trap"><b>Only describing the histogram/boxplot, not judging the assumption.</b> "Comment on validity" wants a <b>verdict per assumption</b> ("normality is reasonable / doubtful because…"), not just "it's a bit skewed". State the assumption, cite the feature, give the call.</div>
+
+<div class="trap"><b>Right vs left skew mixed up.</b> The skew direction is named for the <b>tail</b>, not the hump. A peak on the left with a long tail stretching right is <b>right-skewed</b>. Mean is dragged toward the tail (right-skew ⇒ mean&gt;median).</div>
+
+<div class="trap"><b>Using \(\sigma_n\) instead of \(\sigma_{n-1}\) on the Casio.</b> Sample SD/variance divides by \(n-1\). Pressing the population key (÷\(n\)) gives a slightly-too-small value and loses the calculation mark. Sanity-check: sample SD &gt; population SD for the same data.</div>
+
+<div class="trap"><b>Forgetting the answer needs ≥3 significant figures.</b> The rubric ("give at least 3 significant figures") is enforced. Write \(s=2.24\) not \(s=2\).</div>
+
+<div class="trap"><b>Reporting the mean for skewed data.</b> For income/creatinine-type right-skewed variables, the median is the honest centre. Choosing mean vs median is itself often the mark.</div>
+
+<div class="trap"><b>Reading correlation as "no relationship" when \(r=0\).</b> \(r\) only measures <em>linear</em> association. A clear curved pattern can give \(r\approx0\). Say "no <em>linear</em> relationship".</div>
+
+<div class="trap"><b>Treating a 0/1 categorical variable as quantitative.</b> Sex/anaemia/death coded 0/1 are <b>nominal</b>; you summarise them with proportions, not a mean/SD, and in R they must be <span class="mono">factor()</span>s.</div>
+
+<div class="trap"><b>Quartile position slips.</b> With the notes' \((n+1)q/100\) method, if the position is fractional, <b>average the two neighbouring ordered values</b>. R's default interpolation gives slightly different numbers — for by-hand exam answers use the notes method and don't panic if it differs from R output quoted in a question.</div>
+
+<div class="trap"><b>Confusing variance units.</b> Variance is in units² (e.g. years²); SD is in the original units. If asked "in the units of the data", report the SD.</div>
+</section>
+
+<!-- ============ 7. SELF-CHECK ============ -->
+<section id="selfcheck">
+<h2>7 · Self-check</h2>
+
+<details><summary>1. A company compares two ad designs by showing each to a random half of website visitors and recording clicks. Observational or experiment? Can it claim causation?</summary>
+<p><b>Designed/randomised experiment</b> — visitors are randomly assigned to a design. Yes, causal language is allowed: differences in click rate can be attributed to the design.</p></details>
+
+<details><summary>2. A survey finds coffee drinkers have higher blood pressure than non-drinkers. State the strongest valid conclusion, and name a possible confounder.</summary>
+<p>Observational ⇒ <b>association only</b>: "coffee drinking is associated with higher blood pressure." Possible confounders: stress, smoking, age — any of which could drive both.</p></details>
+
+<details><summary>3. Data: 2, 4, 4, 5, 10. Find the mean, median, and sample SD (3 s.f.).</summary>
+<p>Mean \(=25/5=5.00\); median (position 3) \(=4.00\). Deviations \(-3,-1,-1,0,5\); squares \(9,1,1,0,25\) sum \(=36\); \(s^2=36/4=9\), \(s=3.00\).</p></details>
+
+<details><summary>4. For the data in Q3, give the five-number summary and check for outliers.</summary>
+<p>Ordered: 2,4,4,5,10. Min 2; \(Q_1\) pos \(6\times0.25=1.5\) → \((2+4)/2=3\); median 4; \(Q_3\) pos \(4.5\) → \((5+10)/2=7.5\); max 10. IQR \(=4.5\). Upper fence \(=7.5+1.5(4.5)=14.25\); lower \(=3-6.75=-3.75\). The value 10 is inside \([-3.75,14.25]\) ⇒ <b>no outliers</b>.</p></details>
+
+<details><summary>5. A histogram of household income has a single peak near the left and a long tail to the right. Name the shape; is mean or median larger; which should you report?</summary>
+<p><b>Right-skewed (positive skew)</b>. <b>Mean &gt; median</b> (mean pulled toward the high tail). Report the <b>median</b> (robust to the skew).</p></details>
+
+<details><summary>6. On a Normal Q–Q plot the points lie on a straight line except the top-right few curve upward. What does this tell you about the distribution and the normality assumption?</summary>
+<p>The upper sample quantiles are larger than normal ⇒ a <b>heavy/long right tail</b> ⇒ the data are <b>right-skewed, not normal</b>. Normality assumption is doubtful; consider a log transform or a robust/Welch method.</p></details>
+
+<details><summary>7. Two side-by-side boxplots: Group A median 10, IQR 4; Group B median 10, IQR 12 with two high outliers. Compare them.</summary>
+<p>Same centre (both medians ≈ 10) but Group B is <b>far more variable</b> (IQR 12 vs 4) and has high outliers/right skew. If feeding a t-test, equal-variance is violated ⇒ use Welch, and B's outliers/skew threaten normality.</p></details>
+
+<details><summary>8. Classify each: (i) blood type, (ii) number of siblings, (iii) reaction time (s), (iv) satisfaction {low, med, high}, (v) died {yes/no}.</summary>
+<p>(i) qualitative <b>nominal</b>; (ii) quantitative <b>discrete</b>; (iii) quantitative <b>continuous</b>; (iv) qualitative <b>ordinal</b>; (v) qualitative <b>nominal</b> (binary).</p></details>
+</section>
+
+<p style="text-align:center;color:var(--muted);font-size:13px;margin-top:40px">
+Sources: STAT1301 course notes Ch 4 (pp 67–80) &amp; Ch 5 (pp 81–118); Ch 4 &amp; 5 solutions; tutorial sheet 4; past exams 2021–2025. All published numbers verified by computation.
+<br><a href="index.html">← back to Hub</a> · <a href="ch06-estimation-cis.html">next: Ch 6 Estimation &amp; CIs →</a>
+</p>
+
+</main>
+</body>
+</html>

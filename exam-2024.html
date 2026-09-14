@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Worked Exam, Semester 2 2024</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  button{background:var(--accent);color:#032117;border:none;padding:7px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12.5px}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;background:var(--panel2);color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"📝 CONCLUSION IN CONTEXT — ";color:var(--gold);font-weight:700}
+  .ans{background:rgba(52,211,153,.12);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:block;overflow-x:auto}
+  .fig{background:var(--panel2);border:1px dashed #3a4656;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:var(--muted)}
+  .fig:before{content:"🖼 FIGURE — ";color:var(--accent2);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 — Fully Worked Exam</h1>
+  <p><b>Semester 2, 2024</b> · Advanced Analysis of Scientific Data</p>
+  <p>the paper you may re-sit · 120 min + 10 min planning · <b>80 marks · 5 questions</b></p>
+  <span class="badge gold">Every number verified in Python (scipy / sympy)</span>
+  <span class="badge">Exam-legal: FX82 + provided tables only</span>
+</header>
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2023.html">← 2023</a>
+  <a href="exam-2024.html" style="background:var(--accent);color:#032117">2024 (this)</a>
+  <a href="exam-2025.html">2025 →</a>
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+</nav>
+<main>
+
+<p class="tip">Instructions on the day: <i>"Show your working and state conclusions where appropriate. Give at least 3 significant figures."</i> Pages 8–16 give the formula sheet + Normal, \(t\), \(\chi^2\) and \(F\) tables. The skill tested is <b>recognising the method</b> from the wording and executing it cleanly on the FX82.</p>
+
+<!-- ============================ Q1 ============================ -->
+<section id="q1">
+<h2>Question 1 — Joint pmf of two indicators <span style="font-size:14px;color:var(--muted)">[12 marks]</span></h2>
+<div class="card q">
+Two storage tanks. \(A,B\in\{0,1\}\): leak detected (1) or not (0). Joint pmf, with \(0\le p\le1\):
+<table>
+<tr><th>A \\ B</th><th>B = 0</th><th>B = 1</th></tr>
+<tr><th>A = 0</th><td>\(\tfrac14 p^2\)</td><td>\(p\)</td></tr>
+<tr><th>A = 1</th><td>\(p\)</td><td>\(p^2\)</td></tr>
+</table>
+</div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(a)</b> Find the value of \(p\).
+<details><summary>Worked solution</summary>
+<div class="when">A valid pmf must sum to 1. Add all four cells, set \(=1\), solve the quadratic, and keep the root in \([0,1]\).</div>
+$$\tfrac14 p^2 + p + p + p^2 = 1 \;\Rightarrow\; \tfrac54 p^2 + 2p - 1 = 0 \;\Rightarrow\; 5p^2 + 8p - 4 = 0.$$
+Quadratic formula: \(p=\dfrac{-8\pm\sqrt{64+80}}{10}=\dfrac{-8\pm12}{10}\Rightarrow p=0.4\ \text{or}\ p=-2.\)
+Since \(0\le p\le1\), reject \(p=-2\).
+<div class="ans">\(p = 0.4\).</div>
+<div class="tip">Verify: \(\tfrac14(0.16)+0.4+0.4+0.16=0.04+0.4+0.4+0.16=1.00\). ✓ Always plug the root back in.</div>
+<div class="trap">Two roots appear — you <b>must</b> discard the one outside \([0,1]\) and say why (a probability can't be negative). Dropping the invalid-root justification loses a mark.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> What is the marginal pmf of \(A\)?
+<details><summary>Worked solution</summary>
+<div class="when">Marginal of \(A\) = sum each row over \(B\).</div>
+$$\mathbb P(A=0)=\tfrac14 p^2+p=0.04+0.4=0.44,\qquad \mathbb P(A=1)=p+p^2=0.4+0.16=0.56.$$
+<div class="ans">\(f_A(0)=0.44,\quad f_A(1)=0.56.\) (So \(A\sim\text{Ber}(0.56)\).)</div>
+<div class="tip">Recognising \(A\sim\text{Ber}(0.56)\) makes part (c) instant: mean \(=0.56\), variance \(=0.56\times0.44\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(c)</b> Determine the expected value and variance of \(A\).
+<details><summary>Worked solution</summary>
+<div class="when">\(A\) is Bernoulli: \(\mathbb E A = \mathbb P(A=1)\) and \(\operatorname{Var}A = \mathbb P(A=1)\,\mathbb P(A=0)\).</div>
+$$\mathbb E A = 0(0.44)+1(0.56)=0.56.$$
+$$\operatorname{Var}A = \mathbb E[A^2]-(\mathbb E A)^2 = 0.56 - 0.56^2 = 0.56(1-0.56)=0.56\times0.44=0.2464.$$
+<div class="ans">\(\mathbb E A = 0.560,\qquad \operatorname{Var}A = 0.246\) (3 s.f.).</div>
+<div class="trap">For a 0/1 variable \(\mathbb E[A^2]=\mathbb E A\) (since \(0^2=0,1^2=1\)) — don't compute \(0.56^2\) for \(\mathbb E[A^2]\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(d)</b> Determine the covariance and correlation between \(A\) and \(B\).
+<details><summary>Worked solution</summary>
+<div class="when">\(\operatorname{Cov}(A,B)=\mathbb E[AB]-\mathbb E A\,\mathbb E B\); \(\rho=\operatorname{Cov}/(\sigma_A\sigma_B)\). Get the \(B\) marginal first (identical structure here).</div>
+<b>Marginal of \(B\)</b> (sum columns): \(\mathbb P(B=0)=\tfrac14p^2+p=0.44,\ \mathbb P(B=1)=p+p^2=0.56.\) So \(\mathbb E B=0.56,\ \operatorname{Var}B=0.2464\) (same as \(A\)).<br>
+<b>\(\mathbb E[AB]\):</b> only the \((A{=}1,B{=}1)\) cell has \(ab\ne0\): \(\mathbb E[AB]=1\cdot1\cdot p^2=0.16.\)<br>
+<b>Covariance:</b>
+$$\operatorname{Cov}(A,B)=0.16-(0.56)(0.56)=0.16-0.3136=-0.1536.$$
+<b>Correlation</b> (here \(\sigma_A\sigma_B=\operatorname{Var}A=0.2464\)):
+$$\rho=\frac{-0.1536}{\sqrt{0.2464\times0.2464}}=\frac{-0.1536}{0.2464}=-0.6234.$$
+<div class="ans">\(\operatorname{Cov}(A,B)=-0.154,\qquad \rho(A,B)=-0.623\) (3 s.f.).</div>
+<div class="concl">Leakage in the two tanks is moderately <b>negatively</b> correlated (\(\rho\approx-0.62\)): a detected leak in one tank tends to coincide with no detected leak in the other. The negative covariance also confirms \(A\) and \(B\) are <b>not</b> independent.</div>
+<div class="trap">Because \(\operatorname{Var}A=\operatorname{Var}B\), the denominator is just \(0.2464\), not its square root of a product of two different numbers — but write \(\sqrt{\operatorname{Var}A\,\operatorname{Var}B}\) explicitly so the method is visible.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q2 ============================ -->
+<section id="q2">
+<h2>Question 2 — Estimator: unbiasedness &amp; variance <span style="font-size:14px;color:var(--muted)">[12 marks]</span></h2>
+<div class="card q">
+\(X_1,\dots,X_n\) iid with cdf \(F(x;\theta)=x^{1/\theta}\) for \(x\in(0,1)\), \(\theta>0\). Estimator \(\displaystyle\hat\theta=-\frac1n\sum_{i=1}^n\log X_i.\)<br>
+Given identities (for \(a>-1\)): \(\displaystyle\int_0^1(\log x)\,x^a\,dx=-\frac1{(a+1)^2}\), \(\displaystyle\int_0^1(\log x)^2 x^a\,dx=\frac2{(a+1)^3}.\)
+</div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(a)</b> Find the pdf of \(X\).
+<details><summary>Worked solution</summary>
+<div class="when">pdf = derivative of the cdf: \(f(x)=\dfrac{d}{dx}F(x;\theta)\).</div>
+$$f(x)=\frac{d}{dx}\,x^{1/\theta}=\frac1\theta\,x^{\,1/\theta-1},\qquad 0\lt x\lt1.$$
+<div class="ans">\(f(x)=\dfrac1\theta\,x^{1/\theta-1}\) on \((0,1)\), and \(0\) otherwise.</div>
+<div class="tip">This is a Beta\((1/\theta,1)\) / power-function density. Note the exponent is \(a=1/\theta-1\); you'll feed exactly this \(a\) into the given integral identities in (b)–(c).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Show that \(\hat\theta\) is an unbiased estimator of \(\theta\).
+<details><summary>Worked solution</summary>
+<div class="when">Unbiased ⇔ \(\mathbb E[\hat\theta]=\theta\). Use linearity: \(\mathbb E[\hat\theta]=-\mathbb E[\log X]\), then evaluate \(\mathbb E[\log X]\) with the first identity at \(a=1/\theta-1\).</div>
+$$\mathbb E[\log X]=\int_0^1 (\log x)\,\frac1\theta x^{1/\theta-1}\,dx=\frac1\theta\int_0^1(\log x)\,x^{(1/\theta-1)}\,dx.$$
+With \(a=\tfrac1\theta-1\), so \(a+1=\tfrac1\theta\):
+$$=\frac1\theta\left(-\frac1{(1/\theta)^2}\right)=\frac1\theta\left(-\theta^2\right)=-\theta.$$
+Therefore, by iid + linearity,
+$$\mathbb E[\hat\theta]=-\frac1n\sum_{i=1}^n\mathbb E[\log X_i]=-\mathbb E[\log X]=-(-\theta)=\theta.$$
+<div class="ans">\(\mathbb E[\hat\theta]=\theta\) ⇒ \(\hat\theta\) is unbiased. ∎</div>
+<div class="trap">Keep track of the two minus signs: \(\mathbb E[\log X]=-\theta\) is negative (as it must be, since \(\log X\lt0\) on \((0,1)\)), and the leading \(-\tfrac1n\) flips it back to \(+\theta\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(c)</b> Determine \(\operatorname{Var}(\hat\theta)\).
+<details><summary>Worked solution</summary>
+<div class="when">iid ⇒ \(\operatorname{Var}(\hat\theta)=\dfrac1{n^2}\sum\operatorname{Var}(\log X_i)=\dfrac1n\operatorname{Var}(\log X)\). Get \(\operatorname{Var}(\log X)=\mathbb E[(\log X)^2]-(\mathbb E[\log X])^2\) using the second identity.</div>
+$$\mathbb E[(\log X)^2]=\frac1\theta\int_0^1(\log x)^2 x^{1/\theta-1}\,dx=\frac1\theta\cdot\frac2{(1/\theta)^3}=\frac1\theta\cdot2\theta^3=2\theta^2.$$
+$$\operatorname{Var}(\log X)=2\theta^2-(-\theta)^2=2\theta^2-\theta^2=\theta^2.$$
+$$\operatorname{Var}(\hat\theta)=\frac1n\operatorname{Var}(\log X)=\frac{\theta^2}{n}.$$
+<div class="ans">\(\operatorname{Var}(\hat\theta)=\dfrac{\theta^2}{n}.\)</div>
+<div class="trap">Pulling the constant out of the variance gives \(1/n^2\) times a sum of \(n\) equal terms \(=1/n\) times one term — not \(1/n^2\). And \((\mathbb E[\log X])^2=(-\theta)^2=\theta^2\) is positive.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(d)</b> What is the (approximate) distribution of \(\hat\theta\) for large \(n\)?
+<details><summary>Worked solution</summary>
+<div class="when">\(\hat\theta\) is a sample mean of iid terms \((-\log X_i)\) with finite mean and variance → Central Limit Theorem.</div>
+By the CLT, for large \(n\),
+$$\hat\theta \;\overset{\text{approx}}{\sim}\; \mathsf N\!\left(\theta,\ \frac{\theta^2}{n}\right).$$
+<div class="ans">\(\hat\theta\approx\mathsf N\big(\theta,\ \theta^2/n\big)\) for large \(n\).</div>
+<div class="tip">The mean and variance come straight from (b) and (c). The CLT applies because \(\hat\theta=\frac1n\sum(-\log X_i)\) is an average of iid random variables.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q3 ============================ -->
+<section id="q3">
+<h2>Question 3 — Paired difference: blood pressure <span style="font-size:14px;color:var(--muted)">[20 marks]</span></h2>
+<div class="card q">
+Schimanski et al. (2014): \(n=44\) subjects, systolic BP (mmHg) at forearm and upper arm (same person → <b>paired</b>).
+<table>
+<tr><th></th><th>Forearm</th><th>Upper arm</th><th>Forearm − Upper arm</th></tr>
+<tr><th>Mean \(\bar x\)</th><td>134.30</td><td>132.08</td><td>2.22</td></tr>
+<tr><th>SD \(s\)</th><td>22.19</td><td>25.56</td><td>9.64</td></tr>
+</table>
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> State the hypotheses to answer the researchers' question, in mathematical form; explain all notation.
+<details><summary>Worked solution</summary>
+<div class="when">Same subjects measured twice → work with the <b>differences</b> \(D=\)Forearm\(-\)Upper arm. "Can forearm be used as an alternative?" → is there any mean difference → two-sided.</div>
+Let \(\mu_D\) = population mean of the paired difference \(D=\text{Forearm}-\text{Upper arm}\) systolic BP (mmHg).
+$$H_0:\ \mu_D=0\qquad\text{vs}\qquad H_1:\ \mu_D\ne0.$$
+<div class="ans">\(H_0:\mu_D=0\) vs \(H_1:\mu_D\ne0\), \(\mu_D=\) mean difference (forearm − upper arm).</div>
+<div class="trap">This is a <b>paired</b> (one-sample-on-differences) setup — use \(\mu_D\) and the difference SD \(9.64\). Do <b>not</b> treat forearm and upper arm as two independent samples with SDs 22.19 and 25.56 (they're measured on the same 44 people, so they're correlated).</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Perform the test for the mean difference. Report the \(t\)-statistic to 2 s.f., conclude, and interpret in context.
+<details><summary>Worked solution</summary>
+<div class="when">Paired \(t\)-test = one-sample \(t\) on the differences: \(T=\dfrac{\bar d-0}{s_D/\sqrt n}\sim t_{n-1}\) (formula sheet #72).</div>
+$$T=\frac{2.22-0}{9.64/\sqrt{44}}=\frac{2.22}{9.64/6.6332}=\frac{2.22}{1.4532}=1.5276\approx1.5,\quad \text{df}=43.$$
+<b>\(P\)-value:</b> two-sided, df\(=43\) (use df\(=40\) row): \(1.30\ (0.90)\lt1.53\lt1.68\ (0.95)\) ⇒ each tail between 0.05 and 0.10 ⇒ \(0.10\lt P\lt0.20\). (Exact \(P=0.134\).) Since \(P\gt0.05\), <b>do not reject \(H_0\)</b>.
+<div class="ans">\(T=1.5\) (2 s.f.), df \(=43\), \(P\approx0.13\ (\gt0.05)\). Fail to reject \(H_0\).</div>
+<div class="concl">There is no significant difference between forearm and upper-arm systolic BP (\(t=1.5,\ P\approx0.13\)). The observed \(2.22\) mmHg gap is within sampling variation, so the data support the forearm being a reasonable alternative measurement site when the upper arm is unavailable.</div>
+<div class="trap">\(\sqrt{44}=6.63\), not \(44\). Dividing by \(n\) instead of \(\sqrt n\) is the most common paired-test slip and inflates \(T\) sixfold.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(c)</b> A worker claims forearm readings are on average 3 mmHg larger than upper-arm. Test this claim.
+<details><summary>Worked solution</summary>
+<div class="when">Same paired test, but the null value shifts to the claimed 3 mmHg: \(H_0:\mu_D=3\) vs \(H_1:\mu_D\ne3\).</div>
+$$T=\frac{\bar d-3}{s_D/\sqrt n}=\frac{2.22-3}{1.4532}=\frac{-0.78}{1.4532}=-0.5367\approx-0.54,\quad \text{df}=43.$$
+<b>\(P\)-value:</b> \(|T|=0.54\) is tiny (\(\lt1.30\), the 0.90 quantile), so each tail \(\gt0.10\) ⇒ \(P\gt0.20\). (Exact \(P=0.594\).) Fail to reject \(H_0\).
+<div class="ans">\(T=-0.54\), df \(=43\), \(P\approx0.59\ (\gt0.05)\). Fail to reject \(H_0\).</div>
+<div class="concl">The data are entirely consistent with the worker's claim of a 3 mmHg average difference (\(t=-0.54,\ P\approx0.59\)); there is no evidence to contradict it.</div>
+<div class="trap">Only the number you subtract changes (3 instead of 0); the SE \(s_D/\sqrt n=1.4532\) is unchanged. Don't re-derive the SE. "Fail to reject" here means consistent with — not proof that — \(\mu_D=3\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(d)</b> Construct a 95% CI for the standard deviation \(\sigma\) of the difference. State assumptions.
+<details><summary>Worked solution</summary>
+<div class="when">CI for a variance/SD of normal data → the \(\chi^2\) interval (formula sheet #63): \(\left(\dfrac{(n-1)S^2}{q_2},\ \dfrac{(n-1)S^2}{q_1}\right)\), \(q_1=\chi^2_{n-1,0.025},\ q_2=\chi^2_{n-1,0.975}\). Then square-root the endpoints for \(\sigma\).</div>
+<b>Assumption:</b> the differences \(D\) are normally distributed (this CI is <b>not</b> robust to non-normality).<br>
+\(n-1=43\), \(S^2=9.64^2=92.930\), \((n-1)S^2=43\times92.930=3995.97\).<br>
+df\(=43\) is off the \(\chi^2\) table, so interpolate between df\(=40\) and df\(=50\):
+<div class="mono">q1 = χ²(43, .025):  40→24.4, 50→32.4  ⇒  24.4 + 0.3(8.0) = 26.8
+q2 = χ²(43, .975):  40→59.3, 50→71.4  ⇒  59.3 + 0.3(12.1) = 62.9</div>
+(Exact values are \(q_1=26.79,\ q_2=62.99\) — the interpolation is spot on.)
+$$\sigma^2\in\left(\frac{3995.97}{62.9},\ \frac{3995.97}{26.8}\right)=(63.5,\ 149.1).$$
+$$\sigma\in(\sqrt{63.5},\ \sqrt{149.1})=(7.97,\ 12.2).$$
+<div class="ans">95% CI for \(\sigma\): \((7.97,\ 12.2)\) mmHg.</div>
+<div class="concl">We are 95% confident the true SD of the forearm−upper-arm BP difference lies between about \(7.97\) and \(12.2\) mmHg — substantial person-to-person variability in the discrepancy between the two sites.</div>
+<div class="trap">The bigger \(\chi^2\) quantile \(q_2\) goes <b>under</b> the smaller endpoint. Swapping \(q_1,q_2\) flips the interval. And take the square root only at the very end to convert the variance CI to a SD CI.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(e)</b> A future study wants the 95% margin of error for the mean difference \(\le1\) mmHg. Smallest number of subjects (use \(s=9.64\))?
+<details><summary>Worked solution</summary>
+<div class="when">Margin of error \(E=q\,\dfrac{\sigma}{\sqrt n}\). Set \(E\le1\), solve for \(n\), round <b>up</b>. For a sample-size formula use the Normal quantile \(q=1.96\) (\(n\) unknown).</div>
+$$1.96\cdot\frac{9.64}{\sqrt n}\le1 \;\Rightarrow\; \sqrt n\ge1.96\times9.64=18.894 \;\Rightarrow\; n\ge18.894^2=357.0.$$
+<div class="ans">\(n=357\) subjects.</div>
+<div class="concl">The future study would need at least 357 paired subjects to pin the mean forearm−upper-arm difference down to within \(\pm1\) mmHg with 95% confidence.</div>
+<div class="trap">Always round sample sizes <b>up</b> (ceiling), never to nearest — 356.998 becomes 357, because 356 would give a margin slightly above 1. Use the SD of the <b>difference</b> (9.64), the "relevant" SD for a paired mean.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q4 ============================ -->
+<section id="q4">
+<h2>Question 4 — One-way ANOVA (pollution) <span style="font-size:14px;color:var(--muted)">[18 marks]</span></h2>
+<div class="card q">
+Pollutant concentration (ppb) across four land covers, \(n=25\) each (\(N=100\)):
+<table>
+<tr><th>Land cover</th><th>\(n\)</th><th>Mean \(\bar x\)</th><th>SD \(s\)</th></tr>
+<tr><td>Forrest</td><td>25</td><td>5.06</td><td>3.17</td></tr>
+<tr><td>Wetland</td><td>25</td><td>4.00</td><td>2.36</td></tr>
+<tr><td>Developed</td><td>25</td><td>3.15</td><td>1.19</td></tr>
+<tr><td>Grassland</td><td>25</td><td>4.07</td><td>1.52</td></tr>
+</table>
+Given: SS(Land Cover) \(=45.96\), SST \(=510.78\).
+</div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(a)</b> Complete the one-way ANOVA table.
+<details><summary>Worked solution</summary>
+<div class="when">One-way ANOVA (formula sheet #80). df: Factor \(=d-1\), Error \(=n-d\), Total \(=n-1\). SSE \(=\) SST \(-\) SSF; MS \(=\) SS/df; \(F=\) MSF/MSE.</div>
+\(d=4\) groups, \(N=100\): df\(_F=3\), df\(_E=96\), df\(_T=99\).<br>
+\(\text{SSE}=510.78-45.96=464.82.\)
+<div class="mono">MSF = 45.96/3   = 15.32
+MSE = 464.82/96 = 4.8419
+F   = 15.32/4.8419 = 3.16</div>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>F</th></tr>
+<tr><td>Land cover</td><td>3</td><td>45.96</td><td>15.32</td><td>3.16</td></tr>
+<tr><td>Residuals</td><td>96</td><td>464.82</td><td>4.842</td><td></td></tr>
+<tr><td>Total</td><td>99</td><td>510.78</td><td></td><td></td></tr>
+</table>
+<div class="ans">\(F=3.16\) on \((3,96)\) df.</div>
+<div class="trap">Error df is \(N-d=96\), not \(N-1\). The Factor + Error df must add to the Total df: \(3+96=99\). ✓</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> State the ANOVA assumptions and discuss validity from the plots and table.
+<details><summary>Worked solution</summary>
+<div class="fig">Figure 2: side-by-side boxplots of pollutant concentration for the four land covers. Forrest has the widest box/whiskers; Developed is the narrowest with one low outlier. Medians are broadly similar; boxes are roughly symmetric.</div>
+Model \(Y_{ik}=\mu_i+\varepsilon_{ik}\), \(\varepsilon_{ik}\overset{iid}{\sim}\mathsf N(0,\sigma^2)\). Assumptions:
+<ul>
+<li><b>Independence</b> — samples collected randomly within each area ⇒ reasonable.</li>
+<li><b>Normality</b> within groups — boxplots look roughly symmetric (one mild outlier in Developed) ⇒ broadly acceptable, and \(n=25\) per group helps via the CLT.</li>
+<li><b>Equal variances (homoscedasticity)</b> — <b>doubtful</b>: SDs range \(1.19\) to \(3.17\); the largest is \(3.17/1.19\approx2.7\times\) the smallest, and Forrest's box is visibly wider. This assumption is questionable.</li>
+</ul>
+<div class="ans">Independence and approximate normality look fine, but the equal-variance assumption is doubtful (SD ratio \(\approx2.7\), Forrest much more variable).</div>
+<div class="tip">Quantify equal-variance with the SD (or variance) ratio. A largest:smallest SD ratio under ~2 is usually fine; \(2.7\) here is a genuine red flag worth stating.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(c)</b> State the null and alternative hypotheses mathematically. Define notation.
+<details><summary>Worked solution</summary>
+Let \(\mu_F,\mu_W,\mu_D,\mu_G\) be the population mean pollutant concentrations (ppb) for Forrest, Wetland, Developed, Grassland.
+$$H_0:\ \mu_F=\mu_W=\mu_D=\mu_G\qquad\text{vs}\qquad H_1:\ \text{at least one }\mu_i\text{ differs}.$$
+<div class="ans">\(H_0\): all four means equal; \(H_1\): not all equal.</div>
+<div class="trap">\(H_1\) is "at least one mean differs", <b>not</b> "all means are different". ANOVA only detects that some difference exists, not which pairs.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(d)</b> Assuming assumptions hold, test at \(\alpha=0.05\) whether mean pollution differs across land covers. Conclude statistically and in context.
+<details><summary>Worked solution</summary>
+<div class="when">ANOVA \(F\)-test: compare \(F=3.16\) to \(F_{3,96}\) at the 0.95 quantile.</div>
+Under \(H_0\), \(F\sim F_{3,96}\). Observed \(F=3.16\).<br>
+<b>Critical value from the \(F\)-table (\(\gamma=0.95\)):</b> \(F_{3,60}=2.76\) and \(F_{3,120}=2.68\), so \(F_{3,96}\approx2.70\). Since \(3.16\gt2.70\), reject \(H_0\).<br>
+<b>\(P\)-value:</b> \(3.16\) exceeds the 0.95 quantile \((\approx2.70)\), so \(P\lt0.05\) (exact \(P=0.0280\)).
+<div class="ans">\(F=3.16\sim F_{3,96}\); \(F\gt F_{3,96,0.95}\approx2.70\), \(P=0.0280\ (\lt0.05)\). Reject \(H_0\).</div>
+<div class="concl">There is significant evidence (\(F=3.16,\ P=0.028\)) that mean pollutant concentration differs across the four land-cover types. At least one land cover has a different average pollution level from the others — pollution is not uniform across the landscape.</div>
+<div class="trap">Because the equal-variance assumption looked shaky in (b), flag that \(P=0.028\) is only moderately below 0.05, so the conclusion is not rock-solid. ANOVA doesn't say <b>which</b> covers differ — that needs post-hoc tests (see part (e)).</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(e)</b> A friend says: skip ANOVA, just do all pairwise \(t\)-tests. Why is this reasoning flawed and what is correct?
+<details><summary>Worked solution</summary>
+<div class="when">This is the multiple-comparisons problem: each \(t\)-test has its own Type I error, and running many inflates the overall (family-wise) false-positive rate.</div>
+With 4 groups there are \(\binom42=6\) pairwise tests. If each uses \(\alpha=0.05\), the chance of at least one false positive is far above 5% (roughly \(1-0.95^6\approx26\%\)). So the friend would likely "find" a spurious difference.
+<div class="ans">Flaw: many \(t\)-tests inflate the family-wise Type I error rate. Correct approach: run one ANOVA \(F\)-test first (controls overall \(\alpha\)); only if significant, follow with post-hoc pairwise tests using a correction (e.g. Bonferroni/Tukey).</div>
+<div class="trap">Don't answer "because ANOVA is more powerful" — the key issue is <b>error-rate inflation</b> from doing many tests, which the omnibus ANOVA + corrected post-hoc procedure controls.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(f)</b> Calculate \(R^2\) and interpret it for the ANOVA model.
+<details><summary>Worked solution</summary>
+<div class="when">\(R^2=\dfrac{\text{SST}-\text{SSE}}{\text{SST}}=\dfrac{\text{SSF}}{\text{SST}}\) (formula sheet #82) = fraction of total variation explained by the factor.</div>
+$$R^2=\frac{45.96}{510.78}=0.0900.$$
+<div class="ans">\(R^2=0.0900\) (3 s.f.), i.e. about \(9.0\%\).</div>
+<div class="concl">Only about 9% of the total variation in pollutant concentration is explained by land-cover type; the remaining ~91% is within-group (residual) variability. So although land cover has a statistically significant effect, it explains only a small part of the variation in pollution.</div>
+<div class="tip">A result can be statistically significant (part d) yet have a small \(R^2\) — significance and effect size are different things. Mentioning both shows real understanding.</div>
+</details></div>
+</section>
+
+<!-- ============================ Q5 ============================ -->
+<section id="q5">
+<h2>Question 5 — Regression + \(\chi^2\) (tree frogs) <span style="font-size:14px;color:var(--muted)">[18 marks]</span></h2>
+<div class="card q">
+Gray tree frog: model inter-call interval (s) from temperature (°C). R output:
+<div class="mono">Coefficients:
+             Estimate  Std. Error  t value  Pr(>|t|)
+(Intercept)   7.91299    0.58887    13.438   &lt; 2e-16 ***
+Temperature  -0.20108    0.02726    -7.376   1.39e-09 ***
+
+Residual standard error: 1.144 on 51 degrees of freedom
+Multiple R-squared: 0.5161,  Adjusted R-squared: 0.5066
+F-statistic: 54.4 on 1 and 51 DF,  p-value: 1.39e-09</div>
+</div>
+
+<div class="card q"><span class="marks">1 mark</span><b>(a)</b> What is the sample size?
+<details><summary>Worked solution</summary>
+<div class="when">In SLR the residual df \(=n-2\). Read it from the output and add 2.</div>
+$$n-2=51\;\Rightarrow\;n=53.$$
+<div class="ans">\(n=53\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> Expected inter-call interval at temperature 10 °C?
+<details><summary>Worked solution</summary>
+<div class="when">Substitute \(x=10\) into \(\hat y=\hat\beta_0+\hat\beta_1 x\).</div>
+$$\hat y=7.91299+(-0.20108)(10)=7.91299-2.0108=5.9022.$$
+<div class="ans">\(\approx 5.90\) seconds.</div>
+<div class="concl">At 10 °C the model predicts a mean inter-call interval of about 5.90 seconds between mating calls.</div>
+<div class="trap">10 °C is near the low end of the observed temperature range (~10–33 °C), so this is interpolation and safe. Predicting far outside the data (extrapolation) would be unreliable.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(c)</b> 95% CI for the slope; interpret and comment on significance.
+<details><summary>Worked solution</summary>
+<div class="when">Slope CI: \(\hat\beta_1\pm t_{n-2,0.975}\,\text{SE}(\hat\beta_1)\). "Significant linear relationship" ⇔ CI excludes 0.</div>
+df\(=51\); \(t_{51,0.975}\approx2.01\) (df\(=50\) row); SE \(=0.02726\).
+$$-0.20108\pm2.01(0.02726)=-0.20108\pm0.05479=(-0.256,\ -0.146).$$
+<div class="ans">95% CI for slope \(=(-0.256,\ -0.146)\) s/°C.</div>
+<div class="concl">We are 95% confident that each 1 °C rise in temperature is associated with a decrease of between \(0.146\) and \(0.256\) seconds in the mean inter-call interval. The interval lies entirely below 0, so there is strong evidence of a significant <b>negative</b> linear relationship — warmer frogs call more frequently (shorter gaps). Consistent with \(P=1.39\times10^{-9}\).</div>
+<div class="trap">The CI being all-negative (not just "excluding 0" from above) is what signals a negative effect. Interpret the sign in context — "shorter intervals as temperature rises" — for the interpretation mark.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(d)</b> State the model assumptions and, from the diagnostic plots, say whether each is valid.
+<details><summary>Worked solution</summary>
+<div class="fig">Diagnostic plots: (left) Residuals vs Fitted — points scatter fairly evenly around 0 with the smoother roughly flat, no strong curve or funnel; (right) Q-Q Residuals — points track the diagonal closely, only slight departure at the lower tail.</div>
+Model \(Y_i=\beta_0+\beta_1 x_i+\varepsilon_i,\ \varepsilon_i\overset{iid}{\sim}\mathsf N(0,\sigma^2)\):
+<ul>
+<li><b>Linearity</b> — no systematic curve in residuals vs fitted ⇒ valid.</li>
+<li><b>Constant variance</b> — residual spread roughly even across fitted values ⇒ valid.</li>
+<li><b>Normality</b> — Q-Q plot close to the line ⇒ approximately valid (minor lower-tail wobble).</li>
+<li><b>Independence</b> — random sample of frogs ⇒ reasonable.</li>
+</ul>
+<div class="ans">All four assumptions (linearity, constant variance, normality, independence) appear reasonably satisfied.</div>
+<div class="tip">Residuals-vs-fitted checks linearity + equal variance; Q-Q checks normality. Say which plot supports which assumption to earn full marks.</div>
+</details></div>
+
+<div class="card q"><span class="marks">6 marks</span><b>(e)</b> Is there an association between frog type and number of croaks?
+<div style="margin-top:8px">
+<table>
+<tr><th>Number of croaks</th><th>Green Tree Frog</th><th>Gray Tree Frog</th></tr>
+<tr><td>0 times</td><td>7</td><td>8</td></tr>
+<tr><td>1–2 times</td><td>12</td><td>10</td></tr>
+<tr><td>3 or more times</td><td>5</td><td>8</td></tr>
+</table>
+</div>
+<details><summary>Worked solution</summary>
+<div class="when">"Association between two categorical variables" on a contingency table → \(\chi^2\) test of independence (formula sheet #77).</div>
+<b>Hypotheses:</b> \(H_0\): frog type and number of croaks are independent; \(H_1\): they are associated.<br>
+<b>Totals:</b> columns \(24\) (Green), \(26\) (Gray), \(N=50\); rows \(15,\ 22,\ 13\).<br>
+<b>Expected</b> \(=\dfrac{(\text{row})(\text{col})}{50}\):
+<table>
+<tr><th></th><th>Green</th><th>Gray</th></tr>
+<tr><th>0</th><td>7.20</td><td>7.80</td></tr>
+<tr><th>1–2</th><td>10.56</td><td>11.44</td></tr>
+<tr><th>3+</th><td>6.24</td><td>6.76</td></tr>
+</table>
+<b>Test statistic:</b>
+<div class="mono">(7 − 7.20)²/7.20  = 0.006
+(8 − 7.80)²/7.80  = 0.005
+(12−10.56)²/10.56 = 0.196
+(10−11.44)²/11.44 = 0.181
+(5 − 6.24)²/6.24  = 0.246
+(8 − 6.76)²/6.76  = 0.227
+              χ²  = 0.862</div>
+<b>df</b> \(=(3-1)(2-1)=2\).<br>
+<b>\(P\)-value from \(\chi^2_2\) table:</b> the \(0.250\) quantile is \(0.575\) and the \(0.750\) quantile is \(2.77\); since \(0.575\lt0.862\lt2.77\), we get \(0.25\lt P\lt0.75\). (Exact \(P=0.650\).) Since \(P\gt0.05\), <b>do not reject \(H_0\)</b>.
+<div class="ans">\(\chi^2=0.862\) on \(2\) df, \(P\approx0.65\ (\gt0.05)\). Fail to reject \(H_0\).</div>
+<div class="concl">There is no evidence of an association between frog type and number of croaks (\(\chi^2=0.86,\ P\approx0.65\)): green and gray tree frogs show statistically indistinguishable croaking-frequency distributions.</div>
+<div class="trap">Check expected counts: all are \(\ge5\) (smallest \(6.24\)), so the \(\chi^2\) approximation is valid — state this. Watch the df: \((3-1)(2-1)=2\), not \(3\times2=6\).</div>
+</details></div>
+</section>
+
+<p class="tip" style="margin-top:30px">Finished. Cross-check: totals \(12+12+20+18+18=80\) marks. Every displayed number on this page was recomputed in Python (scipy/sympy) before publishing.</p>
+
+</main>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

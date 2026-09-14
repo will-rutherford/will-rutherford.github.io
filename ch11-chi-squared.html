@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 11 Chi-squared Tests</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 11 — Chi-squared Tests</h1>
+  <p>Multinomial distribution · goodness-of-fit · testing independence on contingency tables</p>
+  <p>STAT1301 · Advanced Analysis of Scientific Data · notes pp 227–236</p>
+  <span class="badge gold">HIGH-YIELD: the final part of a joint-table question</span>
+  <span class="badge">Formula sheet + χ² table PROVIDED in exam</span>
+  <span class="badge pre">PRE-LECTURE — check against lectures when released</span>
+</header>
+
+<nav>
+  <a href="index.html">← Hub</a>
+  <a href="ch09-10-regression.html">◀ Ch 9–10 Regression</a>
+  <a href="ch03-multiple-rvs.html">Ch 3 (joint tables)</a>
+  <a href="ch07-hypothesis-testing.html">Ch 7 (testing)</a>
+  <a href="formulas.html">Formula sheet ▶</a>
+  <a href="exam-2025.html">Exams</a>
+</nav>
+
+<main>
+
+<div class="card q">
+<strong>Why this chapter matters for the exam.</strong> Chi-squared is where several earlier
+threads converge on ONE recognisable move. In every recent paper a multi-part question builds a
+<em>joint / contingency table of counts</em>, walks you through marginals, expectations and
+correlation (that's <a href="ch03-multiple-rvs.html">Ch 3</a>), and then the <strong>final part asks
+you to "test whether X is associated with Y" — that final part is a χ² test of independence.</strong>
+It appeared as <strong>2025 Q2(d)</strong> [5 marks], <strong>2023 Q5(e)</strong> [5 marks] and
+<strong>2024 Q5(e)</strong> [6 marks] — three years running. The whole chapter reduces to computing
+expected counts, one sum \(\sum (O-E)^2/E\), reading a df, bracketing a P-value from the provided
+table, and writing a conclusion in context. Learn that pipeline cold.
+</div>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>The one idea behind everything</h3>
+<p>A χ² test compares the counts you <strong>observed</strong> (\(O\)) against the counts a model says
+you should <strong>expect</strong> (\(E\)). If the model is right, \(O\) and \(E\) are close and the
+discrepancies \((O-E)\) are just noise; if the model is wrong, some cells drift far from expectation.
+The single test statistic
+$$T=\sum_{\text{cells}}\frac{(O-E)^2}{E}$$
+measures the total squared, relative discrepancy. <strong>Small \(T\) ⇒ good agreement; large \(T\) ⇒
+evidence against the model.</strong> Everything else in the chapter is just two different ways of
+deciding what "expected" means.</p>
+<ul>
+<li><strong>Goodness-of-fit (GoF):</strong> "expected" comes from <em>claimed proportions</em> — a
+theory, a genetics ratio, a hypothesised model. Question wording: <em>"are the data consistent
+with…"</em>, <em>"does this accord with the theory"</em>, <em>"is each category equally likely"</em>.</li>
+<li><strong>Test of independence:</strong> "expected" comes from assuming the two categorical
+variables are <em>unrelated</em>, so each cell's expected count is <code>row&nbsp;total × column&nbsp;total ÷ n</code>.
+Question wording: <em>"is X associated with Y"</em>, <em>"test for independence"</em>, <em>"is there
+an association between…"</em>.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>The multinomial distribution — the foundation (notes §11.1)</h3>
+<p>Throw \(n\) items into \(k\) boxes, box \(i\) chosen with probability \(p_i\) (with
+\(\sum p_i =1\)). The resulting counts \((X_1,\dots,X_k)\) have a <strong>multinomial</strong>
+distribution, written \((X_1,\dots,X_k)\sim\mathsf{Mnom}(n,p_1,\dots,p_k)\):
+$$\mathbb{P}(X_1=x_1,\dots,X_k=x_k)=\frac{n!}{x_1!\,x_2!\cdots x_k!}\,p_1^{x_1}p_2^{x_2}\cdots p_k^{x_k},
+\qquad \sum_i x_i=n.$$
+This is the binomial generalised from 2 boxes to \(k\) boxes. A contingency table of counts is just a
+multinomial sample whose boxes are the cells. <strong>Every χ² test in this course is a statement
+about a multinomial.</strong></p>
+<div class="tip">The mean count in box \(i\) is \(\mathbb{E}[X_i]=n p_i\). That is exactly the
+"expected count" \(E_i\) you build the test statistic from.</div>
+</div>
+
+<div class="card">
+<h3>Why the statistic is χ² — and where the degrees of freedom come from</h3>
+<p><strong>Theorem 11.1 (known parameters).</strong> If \((X_1,\dots,X_k)\sim\mathsf{Mnom}(n,p_1,\dots,p_k)\), then for large \(n\)
+$$\sum_{i=1}^{k}\frac{(X_i-np_i)^2}{np_i}\ \approx\ \chi^2_{k-1}.$$
+Intuition: each \((X_i-np_i)/\sqrt{np_i}\) is approximately a standard normal (CLT), and a sum of squared
+standard normals is χ². You start with \(k\) boxes but the counts must sum to \(n\) — <strong>one linear
+constraint</strong> — so only \(k-1\) of them are free. Hence \(k-1\) degrees of freedom.</p>
+
+<p><strong>Theorem 11.2 (estimated parameters).</strong> If the model's probabilities depend on
+\(r\) unknown parameters that you must <em>estimate from the same data</em>, you "spend" \(r\) more
+degrees of freedom:
+$$\sum_{i=1}^{k}\frac{(X_i-n\hat p_i)^2}{n\hat p_i}\ \approx\ \chi^2_{k-1-r}.$$
+Every parameter estimated from the data buys the model one extra chance to fit, so the null
+distribution shrinks by one df per estimated parameter.</p>
+</div>
+
+<div class="card">
+<h3>Independence testing IS a goodness-of-fit test (notes §11.3)</h3>
+<p>Take an \(r\times c\) contingency table with total \(n\). Let row variable be \(U\), column
+variable \(V\). "Independent" means the joint probability factorises:
+$$H_0:\quad p_{ij}=p_i\,q_j\quad\text{for all }i,j,$$
+where \(p_i=\mathbb{P}(U=i)\) and \(q_j=\mathbb{P}(V=j)\) are the (unknown) row and column marginals.
+We don't know these marginals, so we estimate them from the data:
+$$\hat p_i=\frac{\text{row }i\text{ total}}{n},\qquad \hat q_j=\frac{\text{col }j\text{ total}}{n}.$$
+The expected count in cell \((i,j)\) is therefore
+$$\boxed{\,E_{ij}=n\,\hat p_i\,\hat q_j=\frac{(\text{row }i\text{ total})\times(\text{col }j\text{ total})}{n}\,}\tag{11.1}$$
+and the test statistic is the usual \(T=\sum_{i,j}(X_{ij}-E_{ij})^2/E_{ij}\).</p>
+<p><strong>Degrees of freedom.</strong> There are \(rc\) cells (so \(rc-1\) free after the total
+constraint), and we estimated \((r-1)\) free row proportions plus \((c-1)\) free column proportions.
+So
+$$\text{df}=(rc-1)-(r-1)-(c-1)=(r-1)(c-1).$$
+Memorise the shortcut: <strong>df \(=(r-1)(c-1)\)</strong> for an \(r\times c\) independence test.</p>
+</div>
+
+<div class="card">
+<h3>Two facts that decide marks</h3>
+<h4>Validity rule (Remark 11.1)</h4>
+<p>The χ² approximation only holds for large \(n\). The course's rule of thumb is
+$$np_i\ge 5\ \text{for all }i,\qquad\text{i.e. every expected count } E\ge 5.$$
+Always compute the \(E\)'s first and confirm the smallest one is \(\ge 5\). If a cell falls below 5
+the approximation is doubtful (in practice you'd pool categories) — state this.</p>
+<h4>The test is always right-tailed</h4>
+<p>Only <em>large</em> \(T\) is evidence against \(H_0\) — a small \(T\) means "\(O\) close to \(E\)",
+which supports the model. So the P-value is always the <strong>upper tail</strong>
+\(\mathbb{P}(\chi^2_{\text{df}}\ge t)\), and you reject when \(t\ge q\), the \((1-\alpha)\)-quantile.
+There is no such thing as a two-sided χ² test here.</p>
+</div>
+</section>
+
+<!-- ================= 2. FORMULAS ================= -->
+<section id="formulas">
+<h2>2 · Key formulas &amp; when to use them</h2>
+
+<div class="method">
+<strong>Multinomial pmf</strong>
+$$\mathbb{P}(X_1=x_1,\dots,X_k=x_k)=\frac{n!}{x_1!\cdots x_k!}\,p_1^{x_1}\cdots p_k^{x_k}$$
+<div class="when">You're asked for the probability of a specific breakdown of \(n\) items across \(k\)
+categories (e.g. "of 7 recruits, 2 in class 1, 4 in class 2, 1 in class 3"). Often the lead-in to a χ²
+question or a Ch 3 joint-distribution part.</div>
+</div>
+
+<div class="method">
+<strong>Chi-squared test statistic (both flavours)</strong>
+$$T=\sum_{\text{cells}}\frac{(O-E)^2}{E}=\sum_{\text{cells}}\frac{(\text{observed}-\text{expected})^2}{\text{expected}}$$
+<div class="when">Always — this is the single statistic for every χ² test. It is on the provided formula
+sheet, so you only need to know how to build the \(E\)'s and read the df.</div>
+</div>
+
+<div class="method">
+<strong>GoF, known/claimed proportions</strong> — expected counts and df
+$$E_i=n\,\pi_i,\qquad \text{df}=k-1$$
+where \(\pi_1,\dots,\pi_k\) are the hypothesised proportions and \(k\) is the number of categories.
+<div class="when">"Are the data consistent with proportions \(1:2:1\) / with the claimed model / with each
+outcome equally likely?" No parameters estimated from the data.</div>
+</div>
+
+<div class="method">
+<strong>GoF, parameters estimated from the data</strong>
+$$E_i=n\,\hat\pi_i,\qquad \text{df}=k-1-r$$
+where \(r\) = number of parameters estimated (e.g. fitting a Poisson mean, or a Binomial \(p\)).
+<div class="when">"Test whether the data follow a Poisson / Binomial / etc. distribution" where the
+distribution's parameter is estimated first. Subtract one df per estimated parameter.</div>
+</div>
+
+<div class="method">
+<strong>Test of independence (contingency table)</strong>
+$$E_{ij}=\frac{(\text{row }i\text{ total})\times(\text{col }j\text{ total})}{n},\qquad
+\text{df}=(r-1)(c-1)$$
+<div class="when">The flagship exam move: "Is X associated with Y?", "Test for independence", "Is
+there an association between the two variables?" on an \(r\times c\) table of counts. This is the
+final part of the joint-table question in 2023/2024/2025.</div>
+</div>
+
+<div class="method">
+<strong>Decision rule &amp; P-value</strong>
+<ul>
+<li><strong>Critical-value form:</strong> reject \(H_0\) at level \(\alpha\) if \(t\ge q\), where \(q\)
+is the \((1-\alpha)\)-quantile of \(\chi^2_{\text{df}}\) (read from the provided χ² table).</li>
+<li><strong>P-value form:</strong> \(P=\mathbb{P}(\chi^2_{\text{df}}\ge t)\) (upper tail). Reject if
+\(P<\alpha\). By hand you <em>bracket</em> \(P\) between two table columns (see §5).</li>
+</ul>
+<div class="when">Every χ² test ends here. If the question says "report the P-value", bracket it from
+the table; if it says "at the 5% level", compare \(t\) with the \(0.95\)-quantile \(q\).</div>
+</div>
+
+<div class="card">
+<h4>The provided χ² table (γ-quantiles, from exam p.13) — the rows you'll actually use</h4>
+<div style="overflow-x:auto">
+<table>
+<tr><th>df</th><th>0.250</th><th>0.750</th><th>0.900</th><th>0.950</th><th>0.975</th><th>0.990</th><th>0.995</th></tr>
+<tr><td>1</td><td>.102</td><td>1.32</td><td>2.71</td><td>3.84</td><td>5.02</td><td>6.63</td><td>7.88</td></tr>
+<tr><td><strong>2</strong></td><td>.575</td><td>2.77</td><td>4.61</td><td><strong>5.99</strong></td><td>7.38</td><td>9.21</td><td>10.6</td></tr>
+<tr><td>3</td><td>1.21</td><td>4.11</td><td>6.25</td><td>7.81</td><td>9.35</td><td>11.3</td><td>12.8</td></tr>
+<tr><td><strong>4</strong></td><td>1.92</td><td>5.39</td><td>7.78</td><td><strong>9.49</strong></td><td>11.1</td><td>13.3</td><td>14.9</td></tr>
+<tr><td>5</td><td>2.67</td><td>6.63</td><td>9.24</td><td>11.1</td><td>12.8</td><td>15.1</td><td>16.7</td></tr>
+<tr><td>6</td><td>3.45</td><td>7.84</td><td>10.6</td><td>12.6</td><td>14.4</td><td>16.8</td><td>18.5</td></tr>
+</table>
+</div>
+<p style="font-size:13px;color:var(--muted)">The entry is the value \(q\) with \(\mathbb{P}(\chi^2_{\text{df}}\le q)=\gamma\). A 2×3 or 3×2
+table has df\(=2\); a 2×3 GoF over \(k=5\) categories has df\(=4\). The bold column (0.950) is the
+5%-level critical value.</p>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="examples">
+<h2>3 · Worked examples</h2>
+<p class="mono" style="color:var(--muted)">Every number below was recomputed in Python — manual
+expected-count arithmetic and <code>scipy.stats.chi2_contingency</code> agree to all shown digits.</p>
+
+<details open>
+<summary>★ FLAGSHIP — 2025 Q2(d) [5 marks]: test of independence, 2×3 table</summary>
+<p><strong>Setup.</strong> A study of \(n=120\) people records screen use before bed (\(X\): 0 = No,
+1 = Yes) and sleep quality (\(Y\): 0 = poor, 1 = fair, 2 = good). Parts (a)–(c) built marginals,
+expectations and correlation (that's <a href="ch03-multiple-rvs.html">Ch 3</a>). Part (d):
+<em>"Perform an appropriate statistical test to determine whether screen use is associated with sleep
+quality. Report the test statistic, the P-value, a statistical conclusion, and a conclusion in
+context."</em> The words <em>"associated with"</em> ⇒ <strong>χ² test of independence.</strong></p>
+
+<div style="overflow-x:auto">
+<table>
+<tr><th></th><th>Y=0 poor</th><th>Y=1 fair</th><th>Y=2 good</th><th>Row total</th></tr>
+<tr><th>X=0 (No)</th><td>25</td><td>8</td><td>7</td><td>40</td></tr>
+<tr><th>X=1 (Yes)</th><td>15</td><td>20</td><td>45</td><td>80</td></tr>
+<tr><th>Col total</th><td>40</td><td>28</td><td>52</td><td>120</td></tr>
+</table>
+</div>
+
+<p><strong>Step 1 — Hypotheses (words AND symbols).</strong><br>
+\(H_0\): screen use and sleep quality are <em>independent</em> (no association), i.e.
+\(p_{ij}=p_i q_j\) for all \(i,j\).<br>
+\(H_1\): screen use and sleep quality are <em>not</em> independent (they are associated), i.e.
+\(p_{ij}\ne p_i q_j\) for some \(i,j\).</p>
+
+<p><strong>Step 2 — Expected counts</strong> \(E_{ij}=\dfrac{\text{row}\times\text{col}}{n}\):</p>
+<div class="mono">E11 = 40·40/120 = 13.33     E12 = 40·28/120 = 9.33     E13 = 40·52/120 = 17.33
+E21 = 80·40/120 = 26.67     E22 = 80·28/120 = 18.67    E23 = 80·52/120 = 34.67</div>
+<div class="tip">Every \(E\ge 5\) (smallest is 9.33), so the χ² approximation is valid — say this for the mark.</div>
+
+<p><strong>Step 3 — Test statistic</strong> \(T=\sum (O-E)^2/E\), cell by cell:</p>
+<div class="mono">(25−13.33)²/13.33 = 10.208     (8−9.33)²/9.33  = 0.190     (7−17.33)²/17.33 = 6.160
+(15−26.67)²/26.67 =  5.104     (20−18.67)²/18.67 = 0.095     (45−34.67)²/34.67 = 3.080
+T = 10.208+0.190+6.160+5.104+0.095+3.080 = 24.84</div>
+
+<p><strong>Step 4 — Distribution &amp; df.</strong> Under \(H_0\), \(T\approx\chi^2_{(r-1)(c-1)}=\chi^2_{(2-1)(3-1)}=\chi^2_2\).</p>
+
+<p><strong>Step 5 — P-value (bracket from the table).</strong> For df \(=2\), the largest tabulated
+quantile is the \(0.995\)-quantile \(=10.6\). Since \(t=24.84>10.6\),
+$$P=\mathbb{P}(\chi^2_2\ge 24.84)<0.005.$$
+(Exact value \(P\approx 4.0\times10^{-6}\); "\(P<0.005\)" is the correct exam answer from the table.)</p>
+
+<p><strong>Step 6 — Statistical conclusion.</strong> \(P<0.005<0.05\), so reject \(H_0\) at the 5% level.</p>
+
+<p><strong>Step 7 — Conclusion in context.</strong> There is very strong evidence that screen use
+before bed is <em>associated</em> with sleep quality. Reading the cells: non-screen users were
+concentrated in "poor" (25 of 40 observed vs 13.3 expected), while screen users were concentrated in
+"good" (45 of 80 vs 34.7 expected) — the two variables are clearly not independent in this sample.</p>
+<div class="trap">Note the direction is the opposite of the "common sense" story — always describe
+the association that the <em>data actually show</em>, not the one you assumed.</div>
+</details>
+
+<details>
+<summary>2023 Q5(e) [5 marks]: independence with a borderline P-value (bracketing matters)</summary>
+<p><strong>Setup.</strong> 500 people surveyed on toothpaste preference (Non-herbal / Herbal) by age
+group (Youth / Working-age adult / Senior). <em>"Is there an association between toothpaste choice and
+age group?"</em></p>
+<div style="overflow-x:auto">
+<table>
+<tr><th></th><th>Youth</th><th>Working-age</th><th>Senior</th><th>Row total</th></tr>
+<tr><th>Non-herbal</th><td>26</td><td>70</td><td>56</td><td>152</td></tr>
+<tr><th>Herbal</th><td>83</td><td>174</td><td>91</td><td>348</td></tr>
+<tr><th>Col total</th><td>109</td><td>244</td><td>147</td><td>500</td></tr>
+</table>
+</div>
+<p><strong>\(H_0\):</strong> toothpaste choice and age are independent; <strong>\(H_1\):</strong> they are associated.</p>
+<p><strong>Expected counts</strong> (all \(\ge 5\) ✓):</p>
+<div class="mono">          Youth    Working   Senior
+Non-herb  33.14    74.18     44.69
+Herbal    75.86   169.82    102.31</div>
+<p><strong>Statistic:</strong></p>
+<div class="mono">(26−33.14)²/33.14 = 1.537   (70−74.18)²/74.18 = 0.235   (56−44.69)²/44.69 = 2.863
+(83−75.86)²/75.86 = 0.671   (174−169.82)²/169.82=0.103  (91−102.31)²/102.31=1.251
+T = 6.66,   df = (2−1)(3−1) = 2</div>
+<p><strong>P-value bracket (df 2):</strong> the \(0.950\)-quantile is \(5.99\) and the \(0.975\)-quantile
+is \(7.38\). Since \(5.99<6.66<7.38\),
+$$0.025<P<0.05.$$
+(Exact \(P\approx 0.036\).) As \(P<0.05\), <strong>reject \(H_0\)</strong> at the 5% level: there is
+(just) significant evidence that toothpaste preference is associated with age group.</p>
+<div class="tip">This is the case that punishes sloppy bracketing. \(T=6.66\) sits between two columns —
+you must name <em>both</em> bounding quantiles to nail "\(0.025<P<0.05\)". Saying only "\(P<0.05\)" still
+earns the reject decision but loses the P-value mark.</div>
+</details>
+
+<details>
+<summary>2024 Q5(e) [6 marks]: independence with a NON-significant result</summary>
+<p><strong>Setup.</strong> Croaking counts for Green vs Gray tree frogs, categorised 0 / 1–2 / 3+ times.
+<em>"Is there an association between frog type and the number of croaks?"</em> (a 3×2 table).</p>
+<div style="overflow-x:auto">
+<table>
+<tr><th>Croaks</th><th>Green</th><th>Gray</th><th>Row total</th></tr>
+<tr><th>0 times</th><td>7</td><td>8</td><td>15</td></tr>
+<tr><th>1–2 times</th><td>12</td><td>10</td><td>22</td></tr>
+<tr><th>3+ times</th><td>5</td><td>8</td><td>13</td></tr>
+<tr><th>Col total</th><td>24</td><td>26</td><td>50</td></tr>
+</table>
+</div>
+<p><strong>Expected counts:</strong></p>
+<div class="mono">        Green   Gray
+0        7.20   7.80
+1–2     10.56  11.44
+3+       6.24   6.76</div>
+<div class="trap">Here two \(E\)'s (6.24, 6.76) are only just above 5 and \(n=50\) is small — flag
+that the χ² approximation is borderline. Full marks acknowledge this rather than ignoring it.</div>
+<p><strong>Statistic &amp; df:</strong></p>
+<div class="mono">T = 0.006+0.005 + 0.196+0.181 + 0.246+0.228 = 0.862
+df = (3−1)(2−1) = 2</div>
+<p><strong>P-value bracket (df 2):</strong> the \(0.250\)-quantile is \(0.575\) and the \(0.750\)-quantile
+is \(2.77\). Since \(0.575<0.862<2.77\),
+$$0.25<P<0.75.$$
+(Exact \(P\approx 0.65\).) \(P\) is large, so <strong>do not reject \(H_0\)</strong>: there is no
+evidence of an association between frog type and croaking frequency — the counts are consistent with
+the two being independent.</p>
+</details>
+
+<details>
+<summary>GoF with known proportions — Frizzled Chickens 1:2:1 (notes Ex 11.3)</summary>
+<p><strong>Setup.</strong> Genetics predicts phenotype ratio FF : Ff : ff \(=1:2:1\), i.e.
+\(\pi=(\tfrac14,\tfrac12,\tfrac14)\). Of \(n=93\) chickens the observed counts are 23, 50, 20.
+<em>"Is this in accordance with the theory?"</em> ⇒ <strong>GoF test, known proportions.</strong></p>
+<p><strong>\(H_0\):</strong> \(p_1=\tfrac14,\ p_2=\tfrac12,\ p_3=\tfrac14\).
+<strong>\(H_1\):</strong> \(H_0\) is not true (at least one \(p_i\) differs).</p>
+<p><strong>Expected</strong> \(E_i=n\pi_i\): \(E=(93/4,\,93/2,\,93/4)=(23.25,\,46.5,\,23.25)\), all \(\ge 5\) ✓.</p>
+<div class="mono">T = (23−23.25)²/23.25 + (50−46.5)²/46.5 + (20−23.25)²/23.25
+  = 0.0027 + 0.2634 + 0.4543 = 0.720
+df = k − 1 = 3 − 1 = 2</div>
+<p><strong>P-value (df 2):</strong> \(0.720\) lies between the \(0.250\)-quantile \(0.575\) and the
+\(0.750\)-quantile \(2.77\), so \(0.25<P<0.75\) (exact \(P\approx 0.70\)). \(P\) is large ⇒
+<strong>accept \(H_0\)</strong>: no evidence against the \(1:2:1\) theory.</p>
+<div class="tip">GoF differs from independence in exactly two places: \(E_i=n\pi_i\) (from the claimed
+ratio, not row×col/n) and df \(=k-1\) (not \((r-1)(c-1)\)). The statistic and conclusion machinery
+are identical.</div>
+</details>
+
+<details>
+<summary>GoF "equally likely" categories — Possums in 5 areas (notes Ex 11.4.1)</summary>
+<p><strong>Setup.</strong> Counts of possums in 5 equal-sized areas: 234, 301, 256, 315, 274. "Does
+this indicate certain areas are preferred?" ⇒ GoF against <em>equal preference</em>
+\(\pi_i=\tfrac15\) for each area.</p>
+<p><strong>\(H_0\):</strong> all \(p_i=\tfrac15\) (no area preference). <strong>\(H_1\):</strong> not all equal.</p>
+<p><strong>Expected:</strong> \(n=234+301+256+315+274=1380\), so each \(E_i=1380/5=276\) (all \(\gg 5\) ✓).</p>
+<div class="mono">T = [(234−276)² + (301−276)² + (256−276)² + (315−276)² + (274−276)²]/276
+  = (1764 + 625 + 400 + 1521 + 4)/276
+  = 4314/276 = 15.63
+df = k − 1 = 5 − 1 = 4</div>
+<p><strong>P-value (df 4):</strong> the \(0.995\)-quantile is \(14.9\); since \(15.63>14.9\),
+\(P<0.005\) (exact \(P\approx 0.0036\)). Reject \(H_0\): strong evidence the possums <em>do</em> prefer
+certain areas.</p>
+<div class="trap">df here is \(k-1=4\), NOT 2. A GoF over \(k\) categories uses \(k-1\); don't reflexively
+write "2" just because the independence examples did.</div>
+</details>
+
+<details>
+<summary>Multinomial probability (the Ch 3 crossover) — notes Ex 11.1</summary>
+<p><strong>Setup.</strong> Army recruits fall in 3 IQ classes with \(p_1=0.266,\ p_2=0.468,\
+p_3=0.266\). For 7 new recruits, find \(\mathbb{P}(X_1=2,X_2=4,X_3=1)\).</p>
+<div class="mono">P = 7!/(2!·4!·1!) · (0.266)² · (0.468)⁴ · (0.266)¹
+  = 105 · 0.070756 · 0.047976 · 0.266
+  = 0.0948</div>
+<p>So about a 9.5% chance of that exact split. This is the multinomial pmf — the same object that
+underlies the whole chapter, and a natural link to joint distributions in
+<a href="ch03-multiple-rvs.html">Ch 3</a>.</p>
+<div class="tip">On the Casio FX82: compute \(7!\div(2!\times4!\times1!)\) first, then multiply by each
+power. Keep full precision until the end and give ≥3 sig figs (\(0.0948\)).</div>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>4 · Exam question types</h2>
+
+<div class="card">
+<h3>Type A — Test of independence (the guaranteed one)</h3>
+<p><strong>Looks like:</strong> the last part of a multi-part question that first built a joint /
+contingency table of counts. Wording: "perform an appropriate test to determine whether X is
+associated with Y", "is there an association between…", "test for independence".</p>
+<p><strong>Marks:</strong> 5–6. <strong>Seen:</strong> 2025 Q2(d) [5], 2023 Q5(e) [5], 2024 Q5(e) [6].</p>
+<div class="method"><strong>Recipe:</strong>
+<ol>
+<li>State \(H_0\) (independent / not associated) and \(H_1\) (associated) — words and symbols.</li>
+<li>Row totals, column totals, grand total \(n\).</li>
+<li>\(E_{ij}=\text{row}\times\text{col}/n\) for every cell; confirm all \(E\ge 5\).</li>
+<li>\(T=\sum(O-E)^2/E\) (show each cell's contribution).</li>
+<li>df \(=(r-1)(c-1)\); state \(T\approx\chi^2_{\text{df}}\) under \(H_0\).</li>
+<li>Bracket \(P=\mathbb{P}(\chi^2_{\text{df}}\ge t)\) from the table (name both bounding quantiles).</li>
+<li>Compare with \(\alpha\); statistical conclusion; then one sentence in the story's language.</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Type B — Goodness-of-fit to claimed proportions / a model</h3>
+<p><strong>Looks like:</strong> "Are the data consistent with the proportions \(a:b:c\)?", "does this
+accord with the theory?", "are the categories equally likely?", "test whether the outcomes match the
+claimed model". Not yet on a 2023–2025 paper, but it is core notes material (Ex 11.3, exercises 1–2)
+and squarely examinable — treat it as live.</p>
+<p><strong>Marks:</strong> ~5.</p>
+<div class="method"><strong>Recipe:</strong>
+<ol>
+<li>\(H_0\): \(p_i=\pi_i\) (the claimed proportions); \(H_1\): \(H_0\) false.</li>
+<li>\(E_i=n\pi_i\) for each category; confirm all \(E\ge 5\).</li>
+<li>\(T=\sum(O-E)^2/E\).</li>
+<li>df \(=k-1\) (subtract an extra \(r\) if you estimated \(r\) parameters).</li>
+<li>Bracket \(P\); conclude statistically and in context.</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Type C — "What are the expected counts?" (stand-alone part)</h3>
+<p><strong>Looks like:</strong> "If there were no association, what would the expected counts be?" or
+"What are the expected counts if all areas are equally attractive?" — often part (a), before the test.</p>
+<p><strong>Marks:</strong> 2–3. <strong>Seen:</strong> notes Ex 11.4.1(a), Ex 11.4.2(a).</p>
+<div class="method"><strong>Recipe:</strong> independence ⇒ \(E_{ij}=\text{row}\times\text{col}/n\);
+equal-preference GoF ⇒ \(E_i=n/k\); claimed-ratio GoF ⇒ \(E_i=n\pi_i\). Present them in a table and
+note whether all \(\ge 5\).</div>
+</div>
+
+<div class="card">
+<h3>Type D — Multinomial probability (lead-in / Ch 3 crossover)</h3>
+<p><strong>Looks like:</strong> "What is the probability that of \(n\) items, \(x_1\) are …, \(x_2\)
+are …?" Plug into the multinomial pmf.</p>
+<p><strong>Marks:</strong> 2–3. <strong>Seen:</strong> notes Ex 11.1; conceptually inside every
+joint-table question (<a href="ch03-multiple-rvs.html">Ch 3</a>).</p>
+</div>
+</section>
+
+<!-- ================= 5. WORDING TRIGGERS ================= -->
+<section id="triggers">
+<h2>5 · Wording triggers — when the exam says… → do this</h2>
+<div style="overflow-x:auto">
+<table>
+<tr><th>When the exam says…</th><th>→ Method / exactly what to do</th></tr>
+<tr>
+<td>"is <strong>X associated with Y</strong>" · "test for <strong>independence</strong>" · "is there an <strong>association</strong> between…" (on a table of counts)</td>
+<td><strong>χ² test of independence.</strong> \(E_{ij}=\dfrac{\text{row}\times\text{col}}{n}\); \(T=\sum(O-E)^2/E\); df \(=(r-1)(c-1)\). Reject for large \(T\).</td>
+</tr>
+<tr>
+<td>"are the data <strong>consistent with</strong> the hypothesised proportions / model" · "does this <strong>accord with the theory</strong>" · "are the outcomes consistent with the claimed ratio \(a:b:c\)"</td>
+<td><strong>Goodness-of-fit.</strong> \(E_i=n\pi_i\) from the claimed proportions; df \(=k-1\).</td>
+</tr>
+<tr>
+<td>"are the categories / areas <strong>equally likely</strong> / equally preferred"</td>
+<td>GoF with \(\pi_i=1/k\), so \(E_i=n/k\); df \(=k-1\).</td>
+</tr>
+<tr>
+<td>"test whether the data follow a <strong>Poisson / Binomial</strong> distribution" (parameter not given)</td>
+<td>GoF with <em>estimated</em> parameter: \(E_i=n\hat\pi_i\), df \(=k-1-r\) (\(r\) = params estimated).</td>
+</tr>
+<tr>
+<td>"what are the <strong>expected counts</strong> (if independent / equally likely)?"</td>
+<td>Just compute \(E\): row×col/n (independence) or \(n/k\) / \(n\pi_i\) (GoF). Present in a table; check all \(\ge 5\).</td>
+</tr>
+<tr>
+<td>"report the <strong>P-value</strong>" (χ² test, table provided)</td>
+<td><strong>Bracket</strong> \(t\) between two adjacent quantiles of \(\chi^2_{\text{df}}\); state e.g. "\(0.025<P<0.05\)". Upper tail only.</td>
+</tr>
+<tr>
+<td>"at the <strong>5% significance level</strong>" / "using \(\alpha=0.05\)"</td>
+<td>Compare \(t\) with the \(0.950\)-quantile \(q\); reject \(H_0\) iff \(t\ge q\).</td>
+</tr>
+<tr>
+<td>"state a <strong>conclusion in context</strong>" / "in the context of the study"</td>
+<td>One plain sentence naming the two variables and whether they're associated, matching the DATA (e.g. "screen users tended to report better sleep — the variables are associated"). Not just "reject \(H_0\)".</td>
+</tr>
+<tr>
+<td>"state the <strong>hypotheses</strong>" for a χ² test</td>
+<td>\(H_0\): independent / \(p_i=\pi_i\); \(H_1\): not independent / \(H_0\) false. Give words <em>and</em> symbols; \(H_1\) is never a specific alternative.</td>
+</tr>
+<tr>
+<td>"is the test <strong>valid</strong> / are assumptions met?"</td>
+<td>Check every expected count \(E\ge 5\) (Remark 11.1) and that observations are independent counts from one multinomial sample. Flag any \(E<5\) or small \(n\).</td>
+</tr>
+<tr>
+<td>"probability that of \(n\), \(x_1\) are…, \(x_2\) are…"</td>
+<td><strong>Multinomial pmf:</strong> \(\dfrac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}\).</td>
+</tr>
+<tr>
+<td>Question ends a <strong>joint-frequency-table</strong> problem after marginals / correlation parts</td>
+<td>The final part is almost certainly this test of independence — link back to the joint pmf built in <a href="ch03-multiple-rvs.html">Ch 3</a>.</td>
+</tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><strong>Wrong degrees of freedom.</strong> Independence: df \(=(r-1)(c-1)\), NOT
+\(rc-1\) and NOT \(k-1\). GoF: df \(=k-1\) (minus estimated params). A 2×3 independence test is df\(=2\);
+a 5-category GoF is df\(=4\). The wrong df sends you to the wrong table row and blows the P-value.</div>
+
+<div class="trap"><strong>Expected counts computed the wrong way.</strong> For independence use
+row×col/n; for claimed-ratio GoF use \(n\pi_i\); for "equally likely" use \(n/k\). Mixing these up is
+the single most common error — read whether the "expected" comes from the <em>margins</em> (independence)
+or a <em>stated model</em> (GoF).</div>
+
+<div class="trap"><strong>Dividing by \(O\) instead of \(E\).</strong> The statistic is
+\(\sum(O-E)^2/\mathbf{E}\) — you divide each squared discrepancy by the <em>expected</em> count, never
+the observed. Easy slip under time pressure.</div>
+
+<div class="trap"><strong>Forgetting the validity check.</strong> "State whether the test is valid"
+is a free mark: confirm every \(E\ge 5\). In 2024 Q5(e) two cells are only ~6.2–6.8 with \(n=50\) —
+you should note the approximation is borderline. Checking \(O\ge 5\) instead of \(E\ge 5\) is wrong.</div>
+
+<div class="trap"><strong>Treating it as two-sided.</strong> The χ² test is always upper-tailed:
+\(P=\mathbb{P}(\chi^2_{\text{df}}\ge t)\). Do not halve or double anything; a small \(t\) means good
+agreement (large P), not a "significant" left tail.</div>
+
+<div class="trap"><strong>P-value bracket too loose.</strong> When \(t\) lands between two quantile
+columns, name <em>both</em> bounds, e.g. "\(5.99<6.66<7.38\Rightarrow 0.025<P<0.05\)". Writing only
+"\(P<0.05\)" when the tighter bracket was available loses the P-value mark.</div>
+
+<div class="trap"><strong>Rounding the \(E\)'s too early.</strong> Keep the expected counts (which are
+often non-integers like 13.33, 34.67) to full precision inside \((O-E)^2/E\); rounding to whole numbers
+first can shift \(T\) enough to change the P-value bracket. Then report \(T\) and \(P\) to ≥3 sig figs.</div>
+
+<div class="trap"><strong>Naming a directional \(H_1\).</strong> For χ² the alternative is only "not
+independent" / "\(H_0\) false" — never "screen use worsens sleep" or a one-directional claim. The test
+detects any departure, not a specific direction.</div>
+
+<div class="trap"><strong>Stopping at "reject \(H_0\)".</strong> The mark scheme wants a conclusion
+<em>in context</em>: name the variables and the association in the study's own language, consistent with
+what the data actually show.</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>7 · Self-check</h2>
+
+<details>
+<summary>1. A 4×3 contingency table. What degrees of freedom does the independence test use?</summary>
+<p>df \(=(r-1)(c-1)=(4-1)(3-1)=6\).</p>
+</details>
+
+<details>
+<summary>2. In a 2×3 table with row totals 40, 80 and column totals 40, 28, 52 (n=120), what is the expected count in the top-right cell?</summary>
+<p>\(E=\dfrac{40\times 52}{120}=17.33\). (Top-right = row-1 total × col-3 total ÷ n.)</p>
+</details>
+
+<details>
+<summary>3. A GoF test compares 6 observed category counts with claimed proportions (none estimated). What is the df?</summary>
+<p>df \(=k-1=6-1=5\). (Only subtract more if you estimated parameters from the data.)</p>
+</details>
+
+<details>
+<summary>4. You compute \(T=8.30\) on df \(=2\). Bracket the P-value using the provided table and give the 5%-level decision.</summary>
+<p>df 2 quantiles: \(0.975\to 7.38\), \(0.990\to 9.21\). Since \(7.38<8.30<9.21\),
+\(0.01<P<0.025\). As \(P<0.05\), reject \(H_0\).</p>
+</details>
+
+<details>
+<summary>5. Why divide by \(E\) and not \(O\), and why is only the upper tail used?</summary>
+<p>Dividing by \(E\) standardises each discrepancy (each \((X_i-np_i)/\sqrt{np_i}\) is approximately
+standard normal, so its square is approximately \(\chi^2_1\)). Only large discrepancies — large \(T\) —
+are evidence against \(H_0\); small \(T\) means \(O\approx E\), which supports \(H_0\). Hence the
+P-value is the upper tail \(\mathbb{P}(\chi^2_{\text{df}}\ge t)\).</p>
+</details>
+
+<details>
+<summary>6. An expected count comes out as 3.1. What should you say?</summary>
+<p>The rule of thumb \(E\ge 5\) (Remark 11.1) is violated, so the χ² approximation is unreliable for
+this table. In practice you would pool that category with a neighbour; in the exam, state that the
+validity condition fails and interpret results with caution.</p>
+</details>
+
+<details>
+<summary>7. Genetics claims phenotypes in ratio 9:3:3:1. Out of n=160, what are the expected counts, and what df?</summary>
+<p>Proportions \(=\tfrac{9}{16},\tfrac{3}{16},\tfrac{3}{16},\tfrac{1}{16}\). Expected \(=160\times\) each
+\(=90,\,30,\,30,\,10\) (all \(\ge 5\) ✓). df \(=k-1=4-1=3\).</p>
+</details>
+
+<details>
+<summary>8. State \(H_0\) and \(H_1\) for testing whether diet type is associated with disease status (2×2 table).</summary>
+<p>\(H_0\): diet type and disease status are independent (\(p_{ij}=p_iq_j\) for all \(i,j\)); \(H_1\):
+they are associated (\(p_{ij}\ne p_iq_j\) for some \(i,j\)). df \(=(2-1)(2-1)=1\).</p>
+</details>
+</section>
+
+<div class="card q">
+<strong>Exam-day pipeline (memorise the order):</strong> recognise flavour (associated → independence;
+consistent with model → GoF) → build \(E\) → check all \(E\ge 5\) → \(T=\sum(O-E)^2/E\) → df →
+bracket upper-tail \(P\) from the table → compare with \(\alpha\) → conclusion in context. The formula
+and the χ² table are handed to you — marks are for <em>recognition, correct \(E\)/df, and a contextual
+conclusion.</em>
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:13px;margin-top:30px">
+All numerics verified with Python (<code>scipy.stats.chi2_contingency</code> + manual expected-count
+arithmetic agree). Sources: notes pp 227–236; exams 2023 Q5(e), 2024 Q5(e), 2025 Q2(d); χ² table exam p.13.
+</p>
+
+</main>
+</body>
+</html>

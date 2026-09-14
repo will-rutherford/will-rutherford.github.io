@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 9–10 Regression &amp; the Linear Model</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* page-specific: annotated R output */
+  .rout{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;overflow-x:auto}
+  .rout .mono{white-space:pre}
+  .tag{display:inline-block;background:var(--accent);color:#032117;font-weight:700;border-radius:5px;padding:0 6px;font-size:11px;font-family:"SF Mono",Menlo,Consolas,monospace}
+  .tag.b2{background:var(--accent2);color:#01131f}
+  .tag.b3{background:var(--gold);color:#3a2a00}
+  .tag.b4{background:var(--bad);color:#2a0505}
+  .legend{font-size:13.5px}
+  .legend li{margin:6px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Chapters 9 &amp; 10 — Regression &amp; the Linear Model</h1>
+  <p>Simple &amp; multiple linear regression · reading R output · CIs &amp; prediction intervals · residual diagnostics · transformations</p>
+  <p>
+    <span class="badge gold">GUARANTEED Q5/Q6 — usually 15–18 marks</span>
+    <span class="badge">Notes pp 185–226</span>
+    <span class="badge pre">PRE-LECTURE — check against lectures when released</span>
+  </p>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch08-anova.html">← Ch 8 ANOVA</a>
+  <a href="ch11-chi-squared.html">Ch 11 Chi-squared →</a>
+  <a href="formulas.html">📄 Formulas</a>
+  <a href="exam-2025.html">📝 Exams</a>
+</nav>
+
+<main>
+
+<div class="card q">
+  <strong>Why this page decides your grade.</strong> Regression is the single most predictable question in STAT1301 — it appeared as
+  <strong>Q6 in 2023</strong> (pioneer trees), <strong>Q5 in 2024</strong> (frog mating calls) and <strong>Q5 in 2025</strong> (Old Faithful geyser).
+  Every time it is built around an R <code>summary(lm(...))</code> printout, and every time it asks the same handful of things:
+  write the fitted equation, interpret the slope, test for a significant relationship, predict a new value, distinguish CI vs PI,
+  and read the residual plots. The formula sheet gives you the model equations (items 82–85) but <em>not</em> the estimation formulas —
+  so the marks are for <strong>recognising which quantity to pull from the output and executing the small calculation</strong>. Master the
+  annotated output map below and you can nearly do the question in your sleep.
+</div>
+
+<!-- ============================================================= -->
+<!-- 1. CONCEPTS IN DEPTH -->
+<!-- ============================================================= -->
+<section id="concepts">
+<h2>1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>The model: what "linear regression" actually assumes</h3>
+<p>Simple linear regression models a <strong>response</strong> \(Y\) (numerical) as a straight-line function of one <strong>explanatory</strong>
+variable \(x\), plus random noise. The <em>data-generating</em> model (notes Def. 9.1, formula sheet item 83) is</p>
+$$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i,\qquad \varepsilon_1,\dots,\varepsilon_n \overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2).$$
+<p>Read this carefully — it contains <strong>four separate assumptions</strong> hiding in one line, and part (d) of every regression question
+makes you check them:</p>
+<ul>
+<li><strong>Linearity</strong> — the mean of \(Y\) really is a straight line in \(x\): \(\mathbb E(Y_i)=\beta_0+\beta_1 x_i\). (The errors have mean 0.)</li>
+<li><strong>Constant variance (homoscedasticity)</strong> — every \(\varepsilon_i\) has the <em>same</em> spread \(\sigma^2\), regardless of \(x\).</li>
+<li><strong>Normality</strong> — the errors are normally distributed. (This is what makes the \(t\)-tests and intervals exact.)</li>
+<li><strong>Independence</strong> — the errors don't influence each other.</li>
+</ul>
+<p>There are <strong>three unknown parameters</strong>: the intercept \(\beta_0\), the slope \(\beta_1\), and the error variance \(\sigma^2\).
+The whole chapter is about estimating these and quantifying our uncertainty about them.</p>
+</div>
+
+<div class="card">
+<h3>Least squares: where \(\widehat\beta_0,\widehat\beta_1\) come from</h3>
+<p>We can't see the true line, so we fit the line \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\) that makes the
+<strong>residuals</strong> \(e_i=y_i-\widehat y_i\) (the vertical misses) as small as possible — specifically we minimise the
+<strong>sum of squared residuals</strong> \(\text{SSE}=\sum e_i^2\). Calculus gives the closed form (Thm 9.1):</p>
+$$\widehat\beta_1=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad \widehat\beta_0=\bar y-\widehat\beta_1\bar x.$$
+<p>You will almost never compute these by hand in the exam — R prints them in the <code>Estimate</code> column. But notice two things worth marks:
+the fitted line <strong>always passes through \((\bar x,\bar y)\)</strong> (from the \(\widehat\beta_0\) formula), and the slope is a scaled
+version of the covariance between \(x\) and \(y\).</p>
+<div class="tip">These are <em>estimates</em> (fixed numbers from your data). Capitalise them into \(\widehat\beta_0,\widehat\beta_1\) as random <em>estimators</em> and you can talk about their sampling distribution — which is exactly what standard errors and \(t\)-tests use.</div>
+</div>
+
+<div class="card">
+<h3>The sampling distribution — the engine behind every \(t\)-value</h3>
+<p>Because each estimator is a linear combination of the normal \(Y_i\)'s, both are themselves normal and <strong>unbiased</strong>
+(Thm 9.2): \(\mathbb E(\widehat\beta_1)=\beta_1\). Their variances are</p>
+$$\operatorname{Var}(\widehat\beta_1)=\frac{\sigma^2}{\sum(x_i-\bar x)^2},\qquad
+\operatorname{Var}(\widehat\beta_0)=\sigma^2\!\left(\frac1n+\frac{\bar x^2}{\sum(x_i-\bar x)^2}\right).$$
+<p>The <strong>standard error</strong> of a coefficient is the square root of its estimated variance (using \(\widehat\sigma^2=\text{MSE}\) in place of \(\sigma^2\)).
+That is the number printed in the <code>Std. Error</code> column, and</p>
+$$\boxed{\;t=\frac{\widehat\beta_1}{\operatorname{se}(\widehat\beta_1)}\;}\quad\text{(formula 9.11)}$$
+<p>is the ratio R prints as <code>t value</code>. Big <code>t</code> = the estimate is many standard errors away from 0 = strong evidence the slope isn't 0.
+Notice \(\operatorname{Var}(\widehat\beta_1)\) shrinks as (i) \(n\) grows and (ii) the \(x\)'s spread out more — wider-spread predictors give a more precisely-estimated slope.</p>
+</div>
+
+<div class="card">
+<h3>Estimating \(\sigma^2\): MSE and residual standard error</h3>
+<p>We can't see the true errors, but the residuals estimate them. The <strong>mean squared error</strong></p>
+$$\widehat\sigma^2=\text{MSE}=\frac{\text{SSE}}{n-2}=\frac1{n-2}\sum e_i^2$$
+<p>is the unbiased estimator of \(\sigma^2\). We divide by \(n-2\) (not \(n-1\)) because we used two degrees of freedom to estimate \(\beta_0\) and \(\beta_1\).
+R prints \(\widehat\sigma=\sqrt{\text{MSE}}\) as the <strong>Residual standard error</strong>, together with its \(n-2\) degrees of freedom — a free way to
+recover the sample size: <strong>\(n = \text{df}+2\)</strong> for simple regression. (For multiple regression with \(p\) predictors, df \(=n-(p+1)\), so \(n=\text{df}+p+1\).)</p>
+</div>
+
+<div class="card">
+<h3>\(R^2\): the "proportion of variability explained"</h3>
+<p>Compare the fitted line against the dumb "null" model that ignores \(x\) and just predicts \(\bar y\). The total spread of \(y\) about \(\bar y\)
+is \(\text{SST}=\sum(y_i-\bar y)^2\); what's left after fitting the line is \(\text{SSE}=\sum(y_i-\widehat y_i)^2\). Then (formula 9.13 / item 82)</p>
+$$R^2=1-\frac{\text{SSE}}{\text{SST}}=\frac{\text{SST}-\text{SSE}}{\text{SST}}.$$
+<p><strong>Interpretation you write in the exam:</strong> "\(R^2=0.81\) means 81% of the variability in [response] is explained by the linear
+relationship with [predictor]." For <em>simple</em> regression only, \(R^2=r^2\) — the square of the sample correlation. <strong>Adjusted \(R^2\)</strong>
+penalises adding useless predictors; use it to compare models of different sizes, but interpret plain \(R^2\) as "variance explained".</p>
+</div>
+
+<div class="card">
+<h3>CI for the mean response vs prediction interval for a new observation — <em>the</em> distinction</h3>
+<p>Both are centred on the same fitted value \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\), but they answer different questions and one is
+<strong>always wider</strong>.</p>
+<div class="grid2">
+<div class="method"><strong>Confidence interval — for the MEAN</strong> \(\mathbb E(Y)\) at \(x\):
+$$\widehat y\pm t_{\alpha/2,\,n-2}\,\widehat\sigma\sqrt{\tfrac1n+\tfrac{(x-\bar x)^2}{\sum(x_i-\bar x)^2}}$$
+"Where does the average response for this \(x\) lie?" Only one source of error: uncertainty in the line.</div>
+<div class="method"><strong>Prediction interval — for a NEW</strong> \(Y\) at \(x\):
+$$\widehat y\pm t_{\alpha/2,\,n-2}\,\widehat\sigma\sqrt{1+\tfrac1n+\tfrac{(x-\bar x)^2}{\sum(x_i-\bar x)^2}}$$
+"Where will one new individual land?" TWO sources: uncertainty in the line <em>plus</em> the individual's own scatter — that's the extra \(+1\).</div>
+</div>
+<div class="tip">The <strong>\(+1\)</strong> under the root is the whole story. It makes the PI wider. As \(n\to\infty\) the CI width shrinks to <strong>0</strong> (we learn the line perfectly), but the PI width shrinks only to \(2\,t\,\widehat\sigma\approx 2(1.96)\sigma\) — the irreducible scatter of individuals never disappears. This exact point was 2025 Q5(e).</div>
+</div>
+
+<div class="card">
+<h3>Multiple linear regression</h3>
+<p>Add more predictors (formula sheet item 84):</p>
+$$Y_i=\beta_0+\beta_1x_{i1}+\dots+\beta_d x_{id}+\varepsilon_i,\qquad \varepsilon_i\overset{\text{iid}}\sim\mathcal N(0,\sigma^2).$$
+<p>Everything transfers, with two upgrades you must say out loud for marks:</p>
+<ul>
+<li><strong>Each slope is now "adjusted for" the others.</strong> "\(\widehat\beta_1=0.53\) means: <em>at fixed weight</em>, a 1&nbsp;cm increase in shoe size is associated with a 0.53&nbsp;cm increase in average height." The "holding the others constant" clause is compulsory.</li>
+<li><strong>Two levels of test.</strong> Each row's \(t\)-test asks "does <em>this</em> predictor add anything, given the rest?" The bottom-line <strong>F-statistic</strong> (Fisher's global test) asks "do <em>all</em> the predictors together explain anything?" — \(H_0:\beta_1=\dots=\beta_d=0\) vs \(H_1:\) at least one \(\beta_j\neq0\).</li>
+</ul>
+<p>For a <strong>categorical predictor with \(k\) levels</strong>, R makes \(k-1\) indicator (dummy) variables and treats the first level (alphabetical) as the
+<strong>reference</strong>. A coefficient like <code>race2 = −510.5</code> means "group 2 is 510.5 units below the reference group, all else equal." This is the
+Ch 10 "linear model" viewpoint: regression and ANOVA are the <em>same</em> machine \(\mathbf Y=\mathcal X\boldsymbol\beta+\boldsymbol\varepsilon\) (item 85) with different design matrices \(\mathcal X\).</p>
+</div>
+
+<div class="card">
+<h3>Ch 10 extras — residual analysis &amp; transformations</h3>
+<p><strong>Residual analysis</strong> is how we <em>check</em> the four assumptions after fitting (there is no other way — we never see the true errors, only the residuals \(e_i\)). Two diagnostic plots do almost all the work:</p>
+<ul>
+<li><strong>Residuals vs Fitted</strong> — a shapeless horizontal band around 0 is good. A <em>curve/U-shape</em> ⇒ linearity is violated. A <em>funnel/megaphone</em> (spread growing) ⇒ non-constant variance.</li>
+<li><strong>Normal Q–Q</strong> — points on the diagonal ⇒ normal errors. Systematic curving off the line at the ends ⇒ skew / heavy tails.</li>
+</ul>
+<p><strong>Transformations</strong> are the fix when the residuals reveal non-linearity or a funnel. A <strong>curved</strong> residuals-vs-fitted plot and data that
+"fan out" as they grow is the classic cue to model \(\log(Y)\) instead of \(Y\). After fitting \(\ln(\text{score})=\beta_0+\beta_1\text{week}\), the model
+<strong>back-transforms</strong> to \(\text{score}=e^{\beta_0}e^{\beta_1\,\text{week}}\) — now the effect is <em>multiplicative</em>: each extra week multiplies the score by \(e^{\beta_1}\), i.e. a \(100(e^{\beta_1}-1)\%\) change (notes §10.5).</p>
+</div>
+</section>
+
+<!-- ============================================================= -->
+<!-- ANNOTATED R OUTPUT (required figure) -->
+<!-- ============================================================= -->
+<section id="rmap">
+<h2>2 · The one figure to memorise: an annotated <code>summary(lm())</code></h2>
+<p>This is the 2025 Old Faithful output. <strong>Every number in a regression question comes from a printout that looks exactly like this.</strong>
+Learn where each value lives and what it means — the numbered tags map to the legend below.</p>
+
+<div class="rout"><span class="mono">Call:
+lm(formula = Waiting ~ Duration, data = data)          <span class="tag">1</span>
+
+Residuals:                                             <span class="tag">2</span>
+     Min       1Q   Median       3Q      Max
+-12.0796  -4.4831   0.2122   3.9246  15.9719
+
+Coefficients:
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)   33.4744      1.1549    28.98   &lt;2e-16 ***    <span class="tag b2">3</span>
+Duration      10.7296      0.3148    34.09   &lt;2e-16 ***    <span class="tag b2">4</span>
+                 &#94;           &#94;         &#94;        &#94;
+                <span class="tag b2">4a</span>          <span class="tag b2">4b</span>        <span class="tag b2">4c</span>       <span class="tag b2">4d</span>
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1   <span class="tag b3">5</span>
+
+Residual standard error: 5.914 on 270 degrees of freedom  <span class="tag b4">6</span>
+Multiple R-squared:  0.8115,  Adjusted R-squared:  0.8108 <span class="tag b4">7</span>
+F-statistic:  1162 on 1 and 270 DF,  p-value: &lt; 2.2e-16  <span class="tag b4">8</span></span></div>
+
+<div class="card">
+<ol class="legend">
+<li><span class="tag">1</span> <strong>Call</strong> — the model. Response is <em>Waiting</em> (left of <code>~</code>), predictor is <em>Duration</em>. So \(\widehat{\text{Waiting}}=\widehat\beta_0+\widehat\beta_1\cdot\text{Duration}\).</li>
+<li><span class="tag">2</span> <strong>Residuals</strong> five-number summary. A roughly symmetric spread (Median near 0, |Min|≈|Max|) is a quick normality/symmetry sanity check.</li>
+<li><span class="tag b2">3</span> <strong>(Intercept) row</strong> — \(\widehat\beta_0=33.4744\): predicted Waiting when Duration \(=0\) (often not meaningful in context — say so).</li>
+<li><span class="tag b2">4</span> <strong>Slope row</strong> — the star of the show. Reading across:</li>
+<li><span class="tag b2">4a</span> <code>Estimate</code> \(=\widehat\beta_1=10.7296\): each extra 1&nbsp;minute of Duration adds 10.73&nbsp;min of Waiting <em>on average</em>. <strong>This is what "write the fitted equation" and "interpret the slope" use.</strong></li>
+<li><span class="tag b2">4b</span> <code>Std. Error</code> \(=\operatorname{se}(\widehat\beta_1)=0.3148\): plug into the CI for the slope, \(\widehat\beta_1\pm t_{0.975,\,n-2}\times\text{se}\).</li>
+<li><span class="tag b2">4c</span> <code>t value</code> \(=34.09=10.7296/0.3148\): the test statistic for \(H_0:\beta_1=0\), on \(n-2\) df.</li>
+<li><span class="tag b2">4d</span> <code>Pr(&gt;|t|)</code> \(=\) the two-sided \(P\)-value. \(\lt2\times10^{-16}\) ⇒ reject \(H_0\) ⇒ significant linear relationship.</li>
+<li><span class="tag b3">5</span> <strong>Signif. codes</strong> — <code>***</code> means \(P\lt0.001\). Handy shorthand but state the actual comparison to \(\alpha\).</li>
+<li><span class="tag b4">6</span> <strong>Residual standard error</strong> \(=\widehat\sigma=\sqrt{\text{MSE}}=5.914\) on \(270\) df ⇒ <strong>\(n=270+2=272\)</strong>. Use \(\widehat\sigma\) in every CI/PI.</li>
+<li><span class="tag b4">7</span> <strong>R-squared</strong> \(=0.8115\): "81.15% of the variability in waiting time is explained by duration." (Adjusted version for model comparison.)</li>
+<li><span class="tag b4">8</span> <strong>F-statistic</strong> — global test that <em>all</em> slopes are 0. In simple regression it just duplicates the slope test: \(F=t^2\) (\(34.09^2\approx1162\)) and the \(p\)-values match.</li>
+</ol>
+</div>
+<div class="tip">Fast facts you can extract with zero calculation: the fitted equation, the sample size (df + 2), \(\widehat\sigma\), \(R^2\), and whether the slope is significant. Everything else is one small arithmetic step from these.</div>
+</section>
+
+<!-- ============================================================= -->
+<!-- 3. KEY FORMULAS -->
+<!-- ============================================================= -->
+<section id="formulas">
+<h2>3 · Key formulas &amp; when to use them</h2>
+
+<div class="method"><strong>Fitted / regression equation</strong>
+$$\widehat y=\widehat\beta_0+\widehat\beta_1 x$$
+<div class="when">the question says "write down the fitted model / regression equation." Read \(\widehat\beta_0\) and \(\widehat\beta_1\) straight from the <code>Estimate</code> column, round to the requested dp, and <strong>define your notation</strong> in words.</div></div>
+
+<div class="method"><strong>Residual for an observation</strong>
+$$e=y-\widehat y = y-(\widehat\beta_0+\widehat\beta_1 x)$$
+<div class="when">given an observed \((x,y)\) pair and asked "what is the residual?" Plug \(x\) into the fitted line, subtract from the observed \(y\). Sign matters: negative ⇒ the model over-predicted.</div></div>
+
+<div class="method"><strong>\(t\)-test for a slope</strong> \(\;H_0:\beta_1=0\) vs \(H_1:\beta_1\neq0\)
+$$t=\frac{\widehat\beta_1}{\operatorname{se}(\widehat\beta_1)}\sim t_{\,n-2}\ \text{under }H_0$$
+<div class="when">"is there a significant linear relationship?" Read <code>t value</code> and <code>Pr(&gt;|t|)</code> off the slope row. If \(P\lt\alpha\), reject \(H_0\): significant. (Multiple regression: df \(=n-(p+1)\).)</div></div>
+
+<div class="method"><strong>Confidence interval for a coefficient</strong>
+$$\widehat\beta_1\pm t_{\alpha/2,\,n-2}\times\operatorname{se}(\widehat\beta_1)$$
+<div class="when">"construct/interpret a 95% CI for the slope." Get \(t_{0.975,\,n-2}\) from the \(t\)-table (γ = 0.975 column). If the interval <strong>excludes 0</strong>, the relationship is significant at that level.</div></div>
+
+<div class="method"><strong>CI for the mean response</strong> at \(x\)
+$$\widehat y\pm t_{\alpha/2,\,n-2}\,\widehat\sigma\sqrt{\tfrac1n+\tfrac{(x-\bar x)^2}{\sum(x_i-\bar x)^2}}$$
+<div class="when">"confidence interval for the <em>mean / expected / average</em> response when \(x=\dots\)". Narrower interval.</div></div>
+
+<div class="method"><strong>Prediction interval for a new</strong> \(Y\) at \(x\)
+$$\widehat y\pm t_{\alpha/2,\,n-2}\,\widehat\sigma\sqrt{1+\tfrac1n+\tfrac{(x-\bar x)^2}{\sum(x_i-\bar x)^2}}$$
+<div class="when">"prediction interval for a <em>new / single / individual</em> observation." Always wider (the extra \(+1\)). In the exam these numbers usually come from R's <code>predict(..., interval="prediction")</code>; know which is which and why the PI is wider.</div></div>
+
+<div class="method"><strong>\(R^2\) — coefficient of determination</strong>
+$$R^2=1-\frac{\text{SSE}}{\text{SST}}=\frac{\text{SST}-\text{SSE}}{\text{SST}}\quad(\text{item }82)$$
+<div class="when">asked to "calculate / interpret \(R^2\)" or given SST and SSE. Interpret as "proportion of variability in \(Y\) explained by the model." Simple regression only: \(R^2=r^2\).</div></div>
+
+<div class="method"><strong>Sample size from the output</strong>
+$$n=\text{df}+2\ \ (\text{simple}),\qquad n=\text{df}+p+1\ \ (p\ \text{predictors})$$
+<div class="when">"what is the sample size / how many pairs were used?" Read the df on the Residual standard error line (or the second F df).</div></div>
+
+<div class="method"><strong>Back-transformed log model</strong>
+$$\ln(Y)=\beta_0+\beta_1 x\ \Longrightarrow\ Y=e^{\beta_0}e^{\beta_1 x},\quad \text{effect}=100(e^{\beta_1}-1)\%\ \text{per unit }x$$
+<div class="when">a transformation was applied and you must write the fitted model on the original scale or interpret the slope multiplicatively.</div></div>
+</section>
+
+<!-- ============================================================= -->
+<!-- 4. WORKED EXAMPLES -->
+<!-- ============================================================= -->
+<section id="worked">
+<h2>4 · Worked examples (real past-paper regression questions)</h2>
+<p>All numbers below were re-computed in Python from the printed R output to guarantee they match.</p>
+
+<details>
+<summary>Example 1 — Old Faithful geyser (2025 Q5, full walk-through)</summary>
+<p>Simple linear model fitting waiting time (min) from eruption duration (min), \(n=272\). Output:</p>
+<div class="rout"><span class="mono">Coefficients:
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)   33.4744      1.1549    28.98   &lt;2e-16 ***
+Duration      10.7296      0.3148    34.09   &lt;2e-16 ***
+Residual standard error: 5.914 on 270 degrees of freedom
+Multiple R-squared:  0.8115</span></div>
+
+<p><strong>(a) Write the fitted equation (2 dp), defining notation.</strong></p>
+$$\widehat{\text{Waiting}}=33.47+10.73\,\times\text{Duration}$$
+<p>where \(\widehat{\text{Waiting}}\) is the predicted waiting time (min) until the next eruption and Duration is the eruption duration (min).</p>
+
+<p><strong>(b) A duration of 4.8&nbsp;min gave an observed waiting of 76&nbsp;min. Find the residual.</strong></p>
+$$\widehat y = 33.4744+10.7296(4.8)=84.9765,\qquad e=y-\widehat y=76-84.9765=\boxed{-8.98\ \text{min}}$$
+<p>Negative ⇒ the model <em>over-predicted</em> the waiting time for this eruption.</p>
+
+<p><strong>(c) 95% CI for the slope; is the relationship significant?</strong></p>
+<p>df \(=270\); take \(t_{0.975}\approx1.97\) (table, df = 200 row):</p>
+$$10.7296\pm1.97(0.3148)=10.7296\pm0.620=\boxed{(10.11,\ 11.35)}$$
+<p>Interpretation: with 95% confidence, each extra minute of eruption duration adds between 10.11 and 11.35 minutes to average waiting time.
+The interval <strong>excludes 0</strong> (equivalently \(P\lt2\times10^{-16}\)), so there <strong>is</strong> statistically significant evidence of a positive linear relationship.</p>
+
+<p><strong>(d) Assumptions from the diagnostic plots.</strong> Linearity — residuals-vs-fitted shows a flat band around 0, no curve: OK.
+Constant variance — spread looks even left-to-right, no funnel: OK. Normality — Q–Q points lie close to the line (slight fatness at the top tail only): approximately OK.
+Independence — assume the eruptions are unrelated over time; no plotted evidence against it.</p>
+
+<p><strong>(e) As \(n\to\infty\): CI vs PI width at a fixed \(x_0\).</strong> The 95% <strong>CI for the mean</strong> width \(\to0\) — with unlimited data the line is pinned down exactly.
+The 95% <strong>prediction interval</strong> width does <em>not</em> go to 0; it tends to \(\approx2(1.96)\widehat\sigma\), because a new observation always has its own irreducible scatter \(\sigma\) (the \(+1\) term). </p>
+</details>
+
+<details>
+<summary>Example 2 — Gray tree frog mating calls (2024 Q5)</summary>
+<p>Model: Inter-Call interval (s) from Temperature (°C).</p>
+<div class="rout"><span class="mono">Coefficients:
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)   7.91299     0.58887   13.438   &lt;2e-16   ***
+Temperature  -0.20108     0.02726   -7.376   1.39e-09 ***
+Residual standard error: 1.144 on 51 degrees of freedom
+Multiple R-squared:  0.5161</span></div>
+
+<p><strong>(a) Sample size.</strong> df \(=51\Rightarrow n=51+2=\boxed{53}\).</p>
+
+<p><strong>(b) Expected inter-call interval at Temperature = 10&nbsp;°C.</strong></p>
+$$\widehat y=7.91299+(-0.20108)(10)=7.91299-2.0108=\boxed{5.90\ \text{s}}$$
+
+<p><strong>(c) 95% CI for the slope; significant?</strong> df \(=51\), \(t_{0.975}\approx2.01\):</p>
+$$-0.20108\pm2.01(0.02726)=-0.20108\pm0.0548=\boxed{(-0.256,\ -0.146)}$$
+<p>The whole interval is <strong>below 0</strong> ⇒ significant <em>negative</em> linear relationship: hotter temperatures shorten the interval between calls (each +1&nbsp;°C cuts the interval by 0.15–0.26&nbsp;s on average). \(R^2=0.516\): about 52% of the variation in inter-call interval is explained by temperature.</p>
+
+<p><strong>(d) Diagnostics.</strong> Residuals vs fitted: flat, patternless band ⇒ linearity and constant variance look fine. Q–Q: near-straight ⇒ normality reasonable. Independence assumed across the sampled frogs.</p>
+</details>
+
+<details>
+<summary>Example 3 — Pioneer-tree ageing (2023 Q6)</summary>
+<p>Model estimating tree Age (years) from Diameter (cm).</p>
+<div class="rout"><span class="mono">Coefficients:
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)  -1.2026      0.8534    -1.409   0.162
+Diameter      0.6372      0.0187    34.067   &lt;2e-16 ***
+Residual standard error: 5.454 on 106 degrees of freedom
+Multiple R-squared:  0.9163</span></div>
+
+<p><strong>(a) Fitted model &amp; sample size.</strong> \(\widehat{\text{Age}}=-1.20+0.64\,\text{Diameter}\); \(n=106+2=108\).</p>
+
+<p><strong>(b) Predict the age of a 50&nbsp;cm tree, and comment on trusting it.</strong></p>
+$$\widehat{\text{Age}}=-1.2026+0.6372(50)=30.66\ \text{years.}$$
+<p>Diameter = 50&nbsp;cm sits inside the observed data range, so this is safe <em>interpolation</em>. Predicting for, say, a 200&nbsp;cm tree would be
+<strong>extrapolation</strong> well beyond the data — do not trust it.</p>
+
+<p><strong>(c) Is the intercept meaningful?</strong> \(\widehat\beta_0=-1.20\) is a negative "age" at Diameter = 0 — biologically impossible, and its \(P\)-value (0.162) says it isn't even distinguishable from 0. That's fine: the intercept is just an anchor for the line, not a real prediction, because Diameter = 0 is far outside the data.</p>
+
+<p><strong>(d) Significant relationship?</strong> Slope \(t=34.07\), \(P\lt2\times10^{-16}\ll0.05\): overwhelming evidence of a positive linear relationship. \(R^2=0.916\) — 91.6% of the variability in age is explained by diameter, an excellent fit.</p>
+</details>
+
+<details>
+<summary>Example 4 — Multiple regression &amp; a prediction (student height ~ shoe + weight, notes §9.3)</summary>
+<div class="rout"><span class="mono">Coefficients:
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)  132.2677     5.2473    25.207   &lt;2e-16   ***
+shoe           0.5304     0.1962     2.703   0.0081   **
+weight         0.3744     0.0572     6.546   2.82e-09 ***
+Residual standard error: 7.785 on 97 degrees of freedom
+Multiple R-squared:  0.4301,  F-statistic: 36.61 on 2 and 97 DF</span></div>
+
+<p><strong>(a) Fitted model.</strong> \(\widehat{\text{height}}=132.27+0.53\,\text{shoe}+0.37\,\text{weight}\).</p>
+
+<p><strong>(b) Interpret the shoe slope.</strong> "<em>At fixed weight</em>, each extra 1&nbsp;cm of shoe size is associated with a 0.53&nbsp;cm increase in average height." The "holding weight constant" phrase is worth the mark.</p>
+
+<p><strong>(c) Predict height for shoe = 30, weight = 75.</strong></p>
+$$\widehat y=132.2677+0.5304(30)+0.3744(75)=176.26\ \text{cm}$$
+<p>(matches R's <code>predict()</code> fit of 176.2617; CI for the mean \((174.17,178.35)\), PI for a new person \((160.67,191.85)\) — note how much wider the PI is.)</p>
+
+<p><strong>(d) Global significance.</strong> Sample size \(n=97+(2+1)=100\). Fisher's global \(F=36.61\) on 2 and 97 df with a tiny \(p\)-value ⇒ at least one predictor is genuinely associated with height. Both individual \(t\)-tests are also significant (\(P=0.008\) and \(P\approx0\)), so both shoe and weight contribute after adjusting for the other.</p>
+</details>
+
+<details>
+<summary>Example 5 — When a straight line fails: log transformation (notes §10.5)</summary>
+<p>Test score vs training week showed a <em>curved</em> scatter and a U-shaped residuals-vs-fitted plot — a textbook non-linearity signal. Refitting with \(\log(\text{score})\):</p>
+<div class="rout"><span class="mono">lm(formula = log(score) ~ week)
+             Estimate  Std. Error  t value  Pr(&gt;|t|)
+(Intercept)   3.01087    0.04404    68.36   &lt;2e-16 ***
+week          0.50370    0.01544    32.61   &lt;2e-16 ***
+Residual standard error: 0.2276 on 98 df
+Multiple R-squared:  0.9156</span></div>
+<p>The residual plot for the log model is now a flat, patternless band ⇒ the transform fixed the linearity/variance problem, and \(R^2\) jumped to 0.916.</p>
+<p><strong>Fitted model (log scale):</strong> \(\widehat{\ln(\text{score})}=3.011+0.504\,\text{week}\).</p>
+<p><strong>Back-transformed (original scale):</strong> \(\widehat{\text{score}}=e^{3.011}e^{0.504\,\text{week}}\).</p>
+<p><strong>Multiplicative interpretation:</strong> each extra week multiplies score by \(e^{0.504}\approx1.66\), i.e. a \(100(e^{0.504}-1)\approx66\%\) increase per week. (On a log model the slope is a <em>percentage</em> change, not an additive one.)</p>
+</details>
+</section>
+
+<!-- ============================================================= -->
+<!-- 5. EXAM QUESTION TYPES -->
+<!-- ============================================================= -->
+<section id="types">
+<h2>5 · Exam question types (mined from 2023–2025 + notes)</h2>
+
+<div class="card">
+<h3>Type A — The full "R-output regression" mega-question (15–18 marks)</h3>
+<p><strong>Looks like:</strong> a context + scatterplot + a boxed <code>summary(lm())</code>, then 4–5 parts. This is the guaranteed one (2023 Q6, 2024 Q5, 2025 Q5).</p>
+<div class="method"><strong>The standard part-sequence &amp; recipe:</strong>
+<ol>
+<li><strong>Write the fitted equation</strong> — read the two Estimates, round as asked, define notation. <em>(2 marks)</em></li>
+<li><strong>Residual / prediction for a given \(x\)</strong> — plug into the line; residual \(=y-\widehat y\). <em>(2 marks)</em></li>
+<li><strong>95% CI for the slope + significance</strong> — \(\widehat\beta_1\pm t_{0.975,n-2}\,\text{se}\); check if it excludes 0; conclude in context. <em>(5 marks)</em></li>
+<li><strong>State &amp; check the four assumptions</strong> from the diagnostic plots — 1–2 sentences each. <em>(4–5 marks)</em></li>
+<li><strong>Conceptual add-on</strong> — CI vs PI behaviour as \(n\to\infty\), or sample size, or extrapolation. <em>(2–4 marks)</em></li>
+</ol></div>
+<div class="tip">Do part 1 and the sample-size extraction first — they're free marks straight off the printout.</div>
+</div>
+
+<div class="card">
+<h3>Type B — Predict a new value + CI/PI (2–5 marks)</h3>
+<p><strong>Looks like:</strong> "estimate the mean response for \(x=\dots\)" or R's <code>predict()</code> giving <code>fit / lwr / upr</code>. </p>
+<div class="method"><ol>
+<li>Point estimate: \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\).</li>
+<li>Choose interval type from the wording: "<em>mean/expected/average</em>" ⇒ confidence; "<em>new/single/individual</em>" ⇒ prediction (wider).</li>
+<li>Check \(x\) is inside the data range — flag extrapolation if not, and refuse to trust the prediction.</li>
+</ol></div>
+<p>Notes §9.4 Q6 (orange yield): predict Yield for Rainfall = 1000, Food = 500 ⇒ \(99.504+0.017676(1000)+0.040197(500)=137.28\) kg.</p>
+</div>
+
+<div class="card">
+<h3>Type C — Multiple regression &amp; categorical predictors (Ch 10, 6–15 marks)</h3>
+<p><strong>Looks like:</strong> output with several rows, some named like <code>factor(race)2</code>, <code>sexMale</code>, <code>classLower</code>; sometimes an <code>anova(mod)</code> table with blanks (2023 Q4 Isotopia wages).</p>
+<div class="method"><ol>
+<li>Write per-group fitted lines by switching indicators on/off (reference group = all indicators 0).</li>
+<li>Interpret each slope "adjusting for the others"; a factor coefficient = difference from the reference group.</li>
+<li>Use the global \(F\)-test for "do the predictors jointly matter?"; individual \(t\)-tests for each one.</li>
+<li>Fill ANOVA-table blanks with DF/SS/MS/F relationships (see Ch 8).</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Type D — Assumption checking / transformation cue (part of the big question)</h3>
+<p><strong>Looks like:</strong> "comment on the residual plots" or "explain why this model is a poor fit / suggest a remedy." A curved residual plot ⇒ recommend a transformation (log for fanning data).</p>
+<div class="method"><ol>
+<li>Residuals-vs-fitted: check for a flat band (good) vs curve (non-linear) vs funnel (non-constant variance).</li>
+<li>Q–Q plot: check points on the diagonal (normal) vs curving tails (skew).</li>
+<li>If violated, name the specific assumption and — if asked — propose \(\log(Y)\), \(\sqrt Y\), or \(1/Y\).</li>
+</ol></div>
+<p>Notes §10.6 Q5 (fish weight ~ length): curved residual plot ⇒ fit \(\log(\text{weight})\); write the back-transformed model.</p>
+</div>
+</section>
+
+<!-- ============================================================= -->
+<!-- 6. WORDING TRIGGERS -->
+<!-- ============================================================= -->
+<section id="triggers">
+<h2>6 · Wording triggers — "when the exam says… → do this"</h2>
+<p>The flagship table. Match the phrase, execute the method.</p>
+<table>
+<thead><tr><th>When the exam says…</th><th>Do exactly this</th></tr></thead>
+<tbody>
+<tr><td>"Using the R output, <strong>write down the fitted model / regression equation</strong>"</td><td>Read the two numbers in the <code>Estimate</code> column. Write \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\) with them substituted, round to the requested dp, and <strong>define \(\widehat y\), \(x\) in words/units</strong>. Don't put a hat on \(x\); don't include \(\varepsilon\) in the <em>fitted</em> line.</td></tr>
+<tr><td>"<strong>Interpret the slope</strong> in context"</td><td>"Each 1-[unit] increase in [predictor] is associated with a [\(\widehat\beta_1\)]-[unit] change in the <em>average / predicted</em> [response]." Use the sign; say "average", never "causes".</td></tr>
+<tr><td>"Interpret the slope" in a <strong>multiple</strong> regression</td><td>Same template PLUS "<em>holding the other predictors constant / after adjusting for [the others]</em>." That clause is a mark.</td></tr>
+<tr><td>"Interpret the <strong>intercept</strong>"</td><td>Predicted response when \(x=0\). Immediately check if \(x=0\) is meaningful / in range; if not, say the intercept is not practically interpretable (e.g. 2023 tree \(\widehat\beta_0=-1.2\) years).</td></tr>
+<tr><td>"Is there a <strong>significant linear relationship</strong>?" / "statistical evidence of association?"</td><td>\(t\)-test on \(\beta_1\): \(H_0:\beta_1=0\) vs \(H_1:\beta_1\neq0\). Read <code>t value</code> &amp; <code>Pr(&gt;|t|)</code> off the slope row; if \(P\lt\alpha\), reject \(H_0\) ⇒ significant. (Or use the global \(F\).)</td></tr>
+<tr><td>"Find the <strong>residual</strong> for this observation"</td><td>\(e=y-\widehat y\) where \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\). Keep the sign; interpret sign as over/under-prediction if asked.</td></tr>
+<tr><td>"<strong>Predict</strong> [response] for \(x=\dots\)"</td><td>Substitute \(x\) into the fitted line. Report to ≥3 sig figs.</td></tr>
+<tr><td>"…and <strong>would you trust this prediction?</strong>"</td><td>Check whether \(x\) lies within the observed data range. Inside ⇒ safe interpolation. Outside ⇒ <strong>extrapolation</strong>, the linear pattern may not hold there — don't trust it.</td></tr>
+<tr><td>"<strong>Confidence interval for the mean / expected / average</strong> response"</td><td>Use the CI formula (no \(+1\)). It's the <em>narrower</em> interval. Usually R's <code>interval="confidence"</code> <code>lwr/upr</code>.</td></tr>
+<tr><td>"<strong>Prediction interval</strong> for a new / single / individual observation"</td><td>Use the PI formula (<strong>with \(+1\)</strong>). It's <em>always wider</em> because it adds the individual's own scatter. R's <code>interval="prediction"</code>.</td></tr>
+<tr><td>"Which interval is <strong>wider</strong> and why?"</td><td>The prediction interval — it carries two sources of variation (uncertainty in the line PLUS the new point's own \(\sigma\)); the CI has only the first.</td></tr>
+<tr><td>"How does the interval width behave <strong>as \(n\) grows large</strong>?"</td><td>CI (mean) width → 0; PI (new obs) width → \(2t\widehat\sigma\approx2(1.96)\sigma\), i.e. it stays positive because individual scatter never vanishes.</td></tr>
+<tr><td>"<strong>95% CI for the slope</strong>"</td><td>\(\widehat\beta_1\pm t_{0.975,\,n-2}\times\text{se}(\widehat\beta_1)\). Get \(t\) from the table (0.975 column, df = residual df). Excludes 0 ⇒ significant.</td></tr>
+<tr><td>"<strong>Comment on the residual plots</strong>"</td><td>Residuals-vs-fitted: flat band ⇒ linearity + constant variance OK; curve ⇒ non-linear; funnel ⇒ non-constant variance. Q–Q: on the line ⇒ normal; curved tails ⇒ non-normal. One clause per assumption.</td></tr>
+<tr><td>"State the <strong>assumptions</strong> of the model"</td><td>Errors are iid \(\mathcal N(0,\sigma^2)\): (1) linearity/zero-mean, (2) constant variance, (3) normality, (4) independence. Then tie each to a plot if asked.</td></tr>
+<tr><td>"Interpret <strong>\(R^2\)</strong>" / "proportion of variability explained"</td><td>"\(R^2\times100\)% of the variability in [response] is explained by the linear relationship with [predictor(s)]." Simple regression: \(R^2=r^2\).</td></tr>
+<tr><td>"How many <strong>observations / pairs</strong>?"</td><td>\(n=\text{df}+2\) (simple) or df\(+p+1\) (multiple). Read df off the Residual standard error line.</td></tr>
+<tr><td>"Read the <strong>standard error / df</strong> from the output"</td><td>SE = <code>Std. Error</code> column of the relevant row; residual df on the RSE line; the \(t\)-test uses that df.</td></tr>
+<tr><td>Data / residuals look <strong>curved</strong> or <strong>fan out</strong> as they grow</td><td>Transformation cue. Suggest modelling \(\log(Y)\) (or \(\sqrt Y\), \(1/Y\)); back-transform to \(Y=e^{\beta_0}e^{\beta_1 x}\) and interpret multiplicatively.</td></tr>
+<tr><td>A coefficient row named <strong><code>factor(x)2</code>, <code>sexMale</code>, <code>classLower</code></strong></td><td>Indicator for a non-reference level. Its estimate = the difference in mean response between that level and the reference level, all else equal.</td></tr>
+<tr><td>"<strong>Global / overall</strong> significance of the model" (multiple regression)</td><td>Fisher's \(F\): \(H_0:\beta_1=\dots=\beta_d=0\). Small \(p\)-value ⇒ at least one predictor matters.</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============================================================= -->
+<!-- 7. TRAPS -->
+<!-- ============================================================= -->
+<section id="traps">
+<h2>7 · Traps &amp; marks lost</h2>
+
+<div class="trap"><strong>Putting \(\varepsilon\) in the fitted line.</strong> The <em>model</em> is \(Y=\beta_0+\beta_1 x+\varepsilon\); the <em>fitted line</em> is \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\) — no error term, no hat on \(x\). Mixing these up loses the "define notation" mark.</div>
+
+<div class="trap"><strong>Forgetting "holding the others constant" in multiple regression.</strong> A slope interpretation without the adjustment clause is marked wrong, because the coefficient's whole meaning is <em>conditional on</em> the other predictors.</div>
+
+<div class="trap"><strong>Confusing CI and PI.</strong> "Mean/expected/average" ⇒ confidence interval (narrow). "New/single/individual" ⇒ prediction interval (wide, has the \(+1\)). Picking the wrong one — or claiming the CI is wider — is a classic lost mark.</div>
+
+<div class="trap"><strong>Extrapolating without comment.</strong> If the requested \(x\) is outside the data range, you must flag it. Predicting a 200&nbsp;cm tree's age from data on 5–125&nbsp;cm trees is extrapolation; the linear fit is not evidence it holds out there.</div>
+
+<div class="trap"><strong>Wrong degrees of freedom.</strong> Simple regression uses \(t_{n-2}\), not \(t_{n-1}\). Multiple regression uses \(t_{n-(p+1)}\). Using \(n-1\) gives a slightly wrong \(t\)-multiplier and a wrong CI.</div>
+
+<div class="trap"><strong>Sig-fig / rounding.</strong> The rubric says "give at least 3 significant figures." Round only at the end; if you round \(\widehat\beta_1\) to 2 dp before predicting, your prediction and residual can drift. Carry full precision through the arithmetic.</div>
+
+<div class="trap"><strong>Reading the intercept \(t\)/\(P\) instead of the slope's.</strong> "Significant relationship" is about \(\beta_1\) (the slope row). The intercept's \(P\)-value (e.g. 0.162 for the 2023 tree) is usually irrelevant to that question.</div>
+
+<div class="trap"><strong>Claiming causation.</strong> Regression shows <em>association</em>. Unless it's a randomised experiment, write "associated with / predicts", never "causes".</div>
+
+<div class="trap"><strong>Saying \(R^2=r\).</strong> \(R^2\) is the <em>square</em> of the correlation, and only in <em>simple</em> regression. Don't report \(R^2=0.81\) as "correlation 0.81" — the correlation is \(\sqrt{0.81}=0.90\).</div>
+
+<div class="trap"><strong>Interpreting a log-model slope additively.</strong> After a log transform, \(\widehat\beta_1\) is a <em>proportional</em> effect: multiply by \(e^{\widehat\beta_1}\) / \(100(e^{\widehat\beta_1}-1)\%\) per unit — not "+\(\widehat\beta_1\) units".</div>
+</section>
+
+<!-- ============================================================= -->
+<!-- 8. SELF-CHECK -->
+<!-- ============================================================= -->
+<section id="selfcheck">
+<h2>8 · Self-check</h2>
+
+<details><summary>1. An lm output shows <code>Residual standard error: 5.454 on 106 degrees of freedom</code> for a simple regression. How many data points were used, and what does 5.454 estimate?</summary>
+<p>\(n=106+2=108\). The value \(5.454=\widehat\sigma=\sqrt{\text{MSE}}\) estimates the standard deviation of the error term \(\sigma\).</p></details>
+
+<details><summary>2. Slope estimate 10.7296, SE 0.3148, df 270. 95% CI for the slope, and does it show a significant relationship?</summary>
+<p>\(t_{0.975,270}\approx1.97\): \(10.7296\pm1.97(0.3148)=(10.11,\ 11.35)\). It excludes 0 ⇒ significant positive linear relationship.</p></details>
+
+<details><summary>3. Fitted line \(\widehat{\text{Age}}=-1.20+0.64\,\text{Diameter}\). Observed tree: Diameter 40&nbsp;cm, Age 22&nbsp;years. Residual?</summary>
+<p>\(\widehat y=-1.20+0.64(40)=24.4\); \(e=22-24.4=-2.4\) years (model over-predicted).</p></details>
+
+<details><summary>4. You want the interval that will contain the waiting time of one specific future eruption. CI or PI — and which is wider?</summary>
+<p>Prediction interval. It's wider than the CI for the mean because it adds the new observation's own scatter (the \(+1\) under the root).</p></details>
+
+<details><summary>5. \(R^2=0.5161\) for the frog model. State the interpretation, and give the sample correlation.</summary>
+<p>"51.6% of the variability in inter-call interval is explained by the linear relationship with temperature." Since it's simple regression, \(|r|=\sqrt{0.5161}=0.718\) (negative here, as the slope is negative, so \(r=-0.718\)).</p></details>
+
+<details><summary>6. A multiple-regression coefficient reads <code>factor(race)2  -510.501</code>. What does −510.5 mean?</summary>
+<p>Relative to the reference race group (race = 1), group 2 has an average response 510.5 units lower, holding all the other predictors constant.</p></details>
+
+<details><summary>7. A residuals-vs-fitted plot shows a clear U-shape. Which assumption is violated and what's the fix?</summary>
+<p>Linearity — a straight-line mean is wrong. Remedy: transform (e.g. model \(\log Y\)) or add a non-linear term, then re-check the residual plot.</p></details>
+
+<details><summary>8. After fitting \(\ln(\text{score})=3.011+0.504\,\text{week}\), interpret the week coefficient on the original scale.</summary>
+<p>Each additional week multiplies score by \(e^{0.504}\approx1.66\) — about a 66% increase per week. Back-transformed model: \(\widehat{\text{score}}=e^{3.011}e^{0.504\,\text{week}}\).</p></details>
+</section>
+
+<div class="card" style="text-align:center">
+<a href="ch08-anova.html">← Ch 8 ANOVA</a> &nbsp;·&nbsp; <a href="index.html">Hub</a> &nbsp;·&nbsp; <a href="ch11-chi-squared.html">Ch 11 Chi-squared →</a>
+</div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Ch 6 Estimation & Confidence Intervals</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 6 — Estimation &amp; Confidence Intervals</h1>
+  <p>Estimates vs estimators · bias &amp; standard error · every CI recipe on the formula sheet</p>
+  <p>STAT1301 Advanced Analysis of Scientific Data</p>
+  <span class="badge gold">CI questions appear EVERY year</span>
+  <span class="badge">Formula sheet items 60–68</span>
+  <span class="badge">High-yield: ~15–20 marks</span>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch04-05-data-descriptives.html">← Ch 4–5 Data</a>
+  <a href="ch07-hypothesis-testing.html">Ch 7 Testing →</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2025.html">📝 Exams</a>
+</nav>
+
+<main>
+
+<!-- ============ SECTION 3: CONCEPTS ============ -->
+<section id="concepts">
+<h2>1 · Concepts in depth</h2>
+
+<div class="card">
+<h3>The whole point of this chapter</h3>
+<p>You have data. Behind the data is a <em>model</em> with unknown parameters — a mean \(\mu\), a variance \(\sigma^2\), a proportion \(p\). You will <strong>never know</strong> the true value. The best you can do is (1) produce a single best guess (a <strong>point estimate</strong>), and (2) attach an honest statement of how accurate that guess is (a <strong>confidence interval</strong>). Chapter 6 is the machinery for both. Everything in Ch 7–11 (testing, ANOVA, regression) is built on these two ideas.</p>
+</div>
+
+<div class="card">
+<h3>Estimate vs estimator — the distinction examiners love</h3>
+<p>This is the first thing the notes (§6.2) drill, and it underpins the whole idea of a standard error.</p>
+<ul>
+<li><strong>Estimate</strong> = a <em>number</em> computed from the data you actually have. Example: \(\bar x = 75.975\). Lower case, fixed, already observed.</li>
+<li><strong>Estimator</strong> = a <em>random variable</em> — the same formula but written in terms of the random data \(X_1,\dots,X_n\) you <em>would</em> get if you ran the experiment again tomorrow. Example: \(\bar X = \tfrac1n\sum X_i\). Upper case, random, has a distribution.</li>
+</ul>
+<p>Notation: the estimate/estimator of a parameter \(\theta\) is written \(\widehat\theta\). So \(\widehat\mu = \bar X\) and \(\widehat{\sigma^2}=S^2\).</p>
+<div class="tip">The <em>estimator</em> has a distribution, so we can talk about its mean and spread. That is exactly what lets us say how good an estimate is. A CI is just "estimate ± (a multiple of the estimator's spread)".</div>
+</div>
+
+<div class="card">
+<h3>Bias — is the estimator right <em>on average</em>?</h3>
+<p>\[\text{Bias}(\widehat\theta)=\mathbb E(\widehat\theta)-\theta.\] An estimator is <strong>unbiased</strong> if \(\mathbb E(\widehat\theta)=\theta\) (bias \(=0\)): on average, across infinitely many repeats of the experiment, it lands on the truth.</p>
+<p><strong>The sample mean is unbiased:</strong> \(\mathbb E(\bar X)=\mu\) (notes §6.2). <strong>The sample variance \(S^2\) is unbiased for \(\sigma^2\)</strong> — and this is <em>why</em> we divide by \(n-1\), not \(n\).</p>
+<div class="method"><strong>Why \(n-1\)?</strong> (Tutorial 6 Q1, and a classic exam-style derivation.) The "natural" estimator \(\widehat{\sigma^2}_{\text{MLE}}=\tfrac1n\sum(X_i-\bar X)^2\) has \(\mathbb E(\widehat{\sigma^2}_{\text{MLE}})=\tfrac{n-1}{n}\sigma^2\), so its bias is \(-\sigma^2/n\) — it is systematically <em>too small</em>. Multiplying by \(\tfrac{n}{n-1}\) fixes it, giving \(S^2=\tfrac{1}{n-1}\sum(X_i-\bar X)^2\). Intuition: \(\bar X\) is fitted <em>to</em> the data, so deviations from \(\bar X\) are a touch smaller than deviations from the true \(\mu\); dividing by \(n-1\) compensates.</div>
+</div>
+
+<div class="card">
+<h3>Standard error — how much does the estimator wobble?</h3>
+<p>The <strong>standard error</strong> is the standard deviation of the estimator. From \(\operatorname{Var}(\bar X)=\sigma^2/n\) we get
+\[\operatorname{s.e.}(\bar X)=\frac{\sigma}{\sqrt n}\;\xrightarrow{\text{estimate }\sigma\text{ by }S}\;\frac{S}{\sqrt n}.\]
+Bigger \(n\) \(\Rightarrow\) smaller standard error \(\Rightarrow\) sharper estimate. The \(\sqrt n\) is why cutting the CI width in half costs <em>four times</em> the sample size — this is the engine of every sample-size question.</p>
+<div class="trap">Standard error (spread of the <em>estimator</em> \(\bar X\), \(=S/\sqrt n\)) is NOT the sample standard deviation (spread of the <em>data</em>, \(=S\)). Confusing the two — forgetting to divide by \(\sqrt n\) — is the single most common CI mistake.</div>
+</div>
+
+<div class="card">
+<h3>What a confidence interval actually <em>means</em></h3>
+<p>A 95% CI is a <strong>random interval</strong> \((T_1,T_2)\) with the property \(\mathbb P(T_1\lt\theta\lt T_2)\ge 0.95\) (Definition 6.1). The <em>endpoints</em> are random (they depend on the data); the <em>parameter</em> \(\theta\) is a fixed unknown constant.</p>
+<p>Once you plug in your data you get a <strong>numerical</strong> interval like \((-6.63,-5.35)\). It is <strong>wrong</strong> to say "there is a 95% probability \(\mu\) lies in \((-6.63,-5.35)\)" — \(\mu\) is either in it or not; there is no randomness left. The correct reading: <em>if we repeated the whole study many times, about 95% of the intervals produced this way would capture the true \(\mu\)</em>. (Notes' urn analogy: 90 white, 10 black balls; you draw one without looking — you are 90% confident it is white.)</p>
+<div class="tip">Exam-safe interpretation template: <strong>"We are 95% confident that the population [parameter, in words] lies between [lo] and [hi] [units]."</strong> Use "confident", never "probability".</div>
+</div>
+
+<div class="card">
+<h3>How every CI is built (the pivot)</h3>
+<p>Standardise the estimator into a quantity whose distribution has <em>no</em> unknown parameters — a <strong>pivot</strong> — then trap it between two quantiles and rearrange for \(\theta\). For the mean:
+\[\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}\quad\Rightarrow\quad \mathbb P\!\left(-q\lt \frac{\bar X-\mu}{S/\sqrt n}\lt q\right)=1-\alpha\quad\Rightarrow\quad \bar X\pm q\,\frac{S}{\sqrt n}.\]
+Every recipe below is the same three moves — only the pivot's distribution (\(t\), \(\chi^2\), or \(N(0,1)\)) changes.</p>
+<p>The half-width \(q\cdot\operatorname{s.e.}\) is the <strong>margin of error</strong>. Larger confidence \(\Rightarrow\) larger \(q\) \(\Rightarrow\) wider interval. Common \(\alpha\): 0.10, 0.05, 0.01.</p>
+</div>
+
+<div class="card">
+<h3>Approximate vs exact — and the CLT</h3>
+<p>Two engines produce CIs for a mean:</p>
+<ul>
+<li><strong>Exact</strong> — when the data are normal, \((\bar X-\mu)/(S/\sqrt n)\) is <em>exactly</em> \(t_{n-1}\), so the CI is exact for any \(n\).</li>
+<li><strong>Approximate</strong> — when the data are not normal but \(n\) is large, the <strong>Central Limit Theorem</strong> makes \(\bar X\) approximately normal anyway, so the same interval works approximately.</li>
+</ul>
+<p>Crucially, the <strong>provided formula sheet (item 62) uses the \(t_{n-1}\) quantile for BOTH cases.</strong> For large \(n\), \(t_{n-1}\approx N(0,1)\) (e.g. \(t_{303}=1.97\approx1.96\)), so it barely matters — but on this exam you can always reach for the \(t\) row. Proportion CIs are the exception (they use the normal quantile — see below).</p>
+</div>
+</section>
+
+<!-- ============ SECTION 4: FORMULAS ============ -->
+<section id="formulas">
+<h2>2 · Key formulas &amp; when to use them</h2>
+<p>All of these are printed on your formula sheet (items 60–68). You do not memorise them — you <strong>recognise which one</strong> and execute cleanly. Notation matches the sheet exactly: two-sample sizes are \(m\) (first/\(X\) group) and \(n\) (second/\(Y\) group); \(q\) is always "the \(1-\alpha/2\) quantile" of the stated distribution.</p>
+
+<h3>The master decision table</h3>
+<table>
+<tr><th>What you're estimating</th><th># samples</th><th>Distribution for \(q\)</th><th>Formula sheet</th></tr>
+<tr><td>Mean \(\mu\)</td><td>one</td><td>\(t_{n-1}\)</td><td>item 62</td></tr>
+<tr><td>Variance \(\sigma^2\) or SD \(\sigma\) (normal data)</td><td>one</td><td>\(\chi^2_{n-1}\)</td><td>item 63</td></tr>
+<tr><td>Difference of means \(\mu_X-\mu_Y\), equal variances</td><td>two</td><td>\(t_{m+n-2}\) (pooled)</td><td>items 64–65</td></tr>
+<tr><td>Difference of means \(\mu_X-\mu_Y\), unequal variances</td><td>two</td><td>\(t_{\text{df}}\) (Welch)</td><td>item 66</td></tr>
+<tr><td>Proportion \(p\)</td><td>one</td><td>\(N(0,1)\)</td><td>item 67</td></tr>
+<tr><td>Difference of proportions \(p_X-p_Y\)</td><td>two</td><td>\(N(0,1)\)</td><td>item 68</td></tr>
+</table>
+<div class="tip">Read the wording for three signals: <strong>(a) mean or proportion?</strong> (measurements → mean; counts/yes-no → proportion), <strong>(b) one group or two?</strong> ("compare A and B" → two), <strong>(c) variance/SD asked?</strong> → chi-squared.</div>
+
+<div class="card">
+<h3>① One-sample CI for a mean \(\mu\) &nbsp;<span style="color:var(--muted);font-size:13px">(item 62)</span></h3>
+<p>\[\bar X \pm q\,\frac{S}{\sqrt n},\qquad q = \text{the }1-\tfrac\alpha2\text{ quantile of } t_{n-1}.\]</p>
+<div class="when">One sample of measurements; you want a CI for its population mean. This is the workhorse — it is <em>exact</em> if the data are normal and a good <em>approximation</em> for large \(n\) by the CLT. \(\sigma\) is unknown (estimated by \(S\)), so use the \(t\) quantile.</div>
+</div>
+
+<div class="card">
+<h3>② One-sample CI for a variance \(\sigma^2\) &nbsp;<span style="color:var(--muted);font-size:13px">(item 63)</span></h3>
+<p>\[\left(\frac{(n-1)S^2}{q_2},\;\frac{(n-1)S^2}{q_1}\right),\quad q_1=\tfrac\alpha2\text{ quantile},\;q_2=1-\tfrac\alpha2\text{ quantile of }\chi^2_{n-1}.\]</p>
+<div class="when">Normal data, one sample, and the question asks about <strong>variability</strong> — a CI for \(\sigma^2\) (variance) or \(\sigma\) (standard deviation). For a CI on \(\sigma\), take the square root of both endpoints. Uses \(\chi^2\) because \((n-1)S^2/\sigma^2\sim\chi^2_{n-1}\).</div>
+<div class="trap">The <em>small</em> quantile \(q_1\) sits under the <em>upper</em> bound, and the <em>large</em> quantile \(q_2\) under the <em>lower</em> bound. Cross them and your interval comes out backwards.</div>
+</div>
+
+<div class="card">
+<h3>③ Two-sample CI for \(\mu_X-\mu_Y\) — equal variances (pooled) &nbsp;<span style="color:var(--muted);font-size:13px">(items 64–65)</span></h3>
+<p>\[\bar X-\bar Y \pm q\,S_p\sqrt{\tfrac1m+\tfrac1n},\qquad S_p^2=\frac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2},\qquad q = t_{m+n-2}.\]</p>
+<div class="when">Two independent groups, comparing their means, and it is reasonable to assume the two populations have the <strong>same variance</strong> (similar sample SDs, similar boxplot spreads). Pool the two variances into \(S_p^2\); df \(=m+n-2\).</div>
+</div>
+
+<div class="card">
+<h3>④ Two-sample CI for \(\mu_X-\mu_Y\) — unequal variances (Welch) &nbsp;<span style="color:var(--muted);font-size:13px">(item 66)</span></h3>
+<p>\[\bar X-\bar Y \pm q\,\sqrt{\tfrac{S_X^2}{m}+\tfrac{S_Y^2}{n}},\qquad q = t_{\text{df}}.\]</p>
+<p>Welch df (item 66/75): \(\displaystyle \text{df}=\frac{\left(\tfrac{s_X^2}{m}+\tfrac{s_Y^2}{n}\right)^2}{\tfrac{1}{m-1}\left(\tfrac{s_X^2}{m}\right)^2+\tfrac{1}{n-1}\left(\tfrac{s_Y^2}{n}\right)^2}\). &nbsp; Conservative shortcut: \(\text{df}=\min(m-1,\,n-1)\).</p>
+<div class="when">Two independent groups whose spreads look clearly different (unequal sample SDs). No pooling. If df isn't given, use the conservative \(\min(m-1,n-1)\) and say so.</div>
+</div>
+
+<div class="card">
+<h3>⑤ One-sample CI for a proportion \(p\) &nbsp;<span style="color:var(--muted);font-size:13px">(item 67)</span></h3>
+<p>\[\widehat p \pm q\,\sqrt{\frac{\widehat p\,(1-\widehat p)}{n}},\qquad \widehat p=\frac{X}{n},\quad q = \text{the }1-\tfrac\alpha2\text{ quantile of }N(0,1).\]</p>
+<div class="when">Binary / yes-no data — a count \(X\) of "successes" out of \(n\). Uses the <strong>normal</strong> quantile (from the CLT for a binomial), not \(t\). Validity check: \(n\widehat p\ge5\) AND \(n(1-\widehat p)\ge5\) (at least 5 successes and 5 failures).</div>
+</div>
+
+<div class="card">
+<h3>⑥ Two-sample CI for \(p_X-p_Y\) &nbsp;<span style="color:var(--muted);font-size:13px">(item 68)</span></h3>
+<p>\[\widehat p_X-\widehat p_Y \pm q\,\sqrt{\frac{\widehat p_X(1-\widehat p_X)}{m}+\frac{\widehat p_Y(1-\widehat p_Y)}{n}},\qquad q = 1-\tfrac\alpha2\text{ quantile of }N(0,1).\]</p>
+<div class="when">Comparing two proportions (two groups, each yes/no). If the CI contains 0, there is no evidence the two proportions differ.</div>
+</div>
+
+<div class="card">
+<h3>⑦ Margin of error &amp; sample size</h3>
+<p>The <strong>margin of error</strong> is the \(\pm\) half-width: \(\text{ME}=q\cdot\operatorname{s.e.}\) To guarantee \(\text{ME}\le E\), solve for \(n\):</p>
+<ul>
+<li><strong>Mean:</strong> \(q\dfrac{\sigma}{\sqrt n}\le E \;\Rightarrow\; n\ge\left(\dfrac{q\,\sigma}{E}\right)^2\) &nbsp;(use \(q=z=1.96\) for 95%, and a supplied/estimated \(\sigma\)).</li>
+<li><strong>Proportion:</strong> \(n\ge\left(\dfrac{q}{2E}\right)^2\) using the worst case \(p(1-p)\le\tfrac14\) (max at \(p=0.5\)).</li>
+</ul>
+<div class="tip">Always <strong>round UP</strong> to the next whole number — rounding down would fail the accuracy requirement.</div>
+</div>
+
+<div class="card">
+<h3>⑧ (Rare) known-\(\sigma\) mean CI — uses \(z\)</h3>
+<p>\[\bar X \pm z_{\alpha/2}\,\frac{\sigma}{\sqrt n}.\]</p>
+<div class="when">Only when the problem explicitly hands you the true population \(\sigma\) (a theory/tutorial setup — Tutorial 6 Q3). Because \(\sigma\) is known you use the <em>normal</em> quantile instead of \(t\). If \(\sigma\) is estimated from the sample (the normal case), fall back to recipe ①.</div>
+</div>
+</section>
+
+<!-- ============ SECTION 5: WORKED EXAMPLES ============ -->
+<section id="worked">
+<h2>3 · Worked examples</h2>
+<p>Every number below is computed with <code>scipy.stats</code>. Click to reveal full working.</p>
+
+<details>
+<summary>WE1 — One-sample mean CI + interpret (2025 exam Q3(a), 4 marks) ★ the flagship</summary>
+<div class="q card">Gardner et al. (2018): 304 participants on a low-carb diet had a mean 12-month weight change of \(\bar x=-5.99\) kg with \(s=5.69\) kg. <em>Calculate a 95% confidence interval for the low-carb population mean weight change (kg). Report to two decimal places and interpret in the context of the study.</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, mean of measurements → recipe ① (\(t_{n-1}\), item 62).
+<ol>
+<li>\(n=304\), df \(=303\). Quantile \(q=t_{0.975,303}\). Table: \(t_{200}=1.97\), \(t_\infty=1.96\) → use \(1.97\) (exact \(1.9679\)).</li>
+<li>Standard error: \(S/\sqrt n = 5.69/\sqrt{304}=0.3263\).</li>
+<li>Margin of error: \(q\cdot\operatorname{s.e.}=1.97\times0.3263=0.64\).</li>
+<li>CI: \(-5.99\pm0.64=(-6.63,\,-5.35)\) kg.</li>
+</ol></div>
+<p><strong>Answer (2 dp): \((-6.63,\;-5.35)\) kg.</strong></p>
+<div class="tip"><strong>Interpretation that scores full marks:</strong> "We are 95% confident that the true mean 12-month weight change for people on the low-carb diet lies between \(-6.63\) kg and \(-5.35\) kg. Because the entire interval is below 0, there is strong evidence the diet is associated with genuine average weight <em>loss</em>."</div>
+<div class="trap">Do NOT write "there is a 95% probability the mean is in \((-6.63,-5.35)\)". No marks — the mean is fixed, the interval is what's random.</div>
+</details>
+
+<details>
+<summary>WE2 — Two-sample mean CI, pooled/equal variances (2023 exam Q4(b), 7 marks)</summary>
+<div class="q card">6 samples of 100g sheep paté: mean \(20.7\) g protein, \(s=0.17\). 6 samples of goat paté: mean \(19.2\) g, \(s=0.17\). Both normal. <em>Construct a 95% CI for the mean difference in protein content. Report to 3 s.f., then give a statistical conclusion and a conclusion in context.</em></div>
+<div class="method"><strong>Recognise:</strong> two independent groups, comparing means, sample SDs identical → assume equal variances → pooled recipe ③ (\(t_{m+n-2}\)).
+<ol>
+<li>Pooled variance: \(S_p^2=\dfrac{(6-1)0.17^2+(6-1)0.17^2}{6+6-2}=0.0289\), so \(S_p=0.17\).</li>
+<li>Standard error: \(S_p\sqrt{\tfrac16+\tfrac16}=0.17\times\sqrt{1/3}=0.0981\).</li>
+<li>df \(=m+n-2=10\); \(q=t_{0.975,10}=2.23\).</li>
+<li>Difference \(\bar x-\bar y=20.7-19.2=1.5\). ME \(=2.23\times0.0981=0.219\).</li>
+<li>CI: \(1.5\pm0.219=(1.28,\;1.72)\) g.</li>
+</ol></div>
+<p><strong>Answer (3 s.f.): \((1.28,\;1.72)\) g.</strong></p>
+<div class="tip"><strong>Conclusion:</strong> The interval does not contain 0 (it is entirely positive), so at the 5% level there is evidence of a real difference. In context: 100g sheep paté contains, on average, between 1.28 g and 1.72 g <em>more</em> protein than 100g goat paté.</div>
+</details>
+
+<details>
+<summary>WE3 — CI for a standard deviation \(\sigma\), chi-squared (2024 exam Q3(d), 4 marks)</summary>
+<div class="q card">The differences (forearm − upper-arm systolic BP) for 44 subjects have SD \(s=9.64\) mmHg. <em>Construct a 95% CI for the standard deviation \(\sigma\) of the difference. State any assumptions.</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, CI for the SD → recipe ② (\(\chi^2_{n-1}\), item 63). Build the CI for \(\sigma^2\) first, then square-root.
+<ol>
+<li>\(n=44\), df \(=43\). Quantiles of \(\chi^2_{43}\): \(q_1=\chi^2_{0.025,43}=26.79\), \(q_2=\chi^2_{0.975,43}=62.99\). (df 43 isn't on the table — use the nearest row, df 40, or interpolate; nearest-row is accepted.)</li>
+<li>\((n-1)S^2 = 43\times9.64^2 = 3995.5\).</li>
+<li>CI for \(\sigma^2\): \(\left(\dfrac{3995.5}{62.99},\;\dfrac{3995.5}{26.79}\right)=(63.4,\;149.2)\).</li>
+<li>CI for \(\sigma\): square-root → \((\sqrt{63.4},\sqrt{149.2})=(7.97,\;12.21)\) mmHg.</li>
+</ol></div>
+<p><strong>Answer: \(\sigma\in(7.97,\;12.21)\) mmHg</strong> (using nearest table row df 40: \((8.21,\,12.80)\) — either is fine if you state which df you used).</p>
+<div class="tip"><strong>Assumption:</strong> the differences are an iid sample from a <em>normal</em> distribution. The \(\chi^2\) result is exact only under normality (and, unlike the mean CI, it is NOT rescued by the CLT — so this assumption genuinely matters here).</div>
+<div class="trap">Don't forget the final square root. The formula gives a CI for the <em>variance</em>; the question asked for the <em>standard deviation</em>.</div>
+</details>
+
+<details>
+<summary>WE4 — Two-sample proportion CI (notes §6.4 exercise 6: election poll)</summary>
+<div class="q card">In an election poll, 350 of 980 women and 420 of 1108 men said they would vote "Shady Shane". <em>Give a 90% CI for the difference in the proportion of Shady voters among women and men.</em></div>
+<div class="method"><strong>Recognise:</strong> two groups, yes/no responses → two-sample proportion, recipe ⑥ (\(N(0,1)\)).
+<ol>
+<li>\(\widehat p_X=350/980=0.3571\) (women), \(\widehat p_Y=420/1108=0.3791\) (men). Plenty of successes and failures in each → normal approx OK.</li>
+<li>90% → \(\alpha=0.10\); \(q=z_{0.95}=1.645\) (0.95 quantile of \(N(0,1)\)).</li>
+<li>SE \(=\sqrt{\dfrac{0.3571(0.6429)}{980}+\dfrac{0.3791(0.6209)}{1108}}=0.0211\).</li>
+<li>Difference \(=0.3571-0.3791=-0.0219\). ME \(=1.645\times0.0211=0.0348\).</li>
+<li>CI: \(-0.0219\pm0.0348=(-0.057,\;0.013)\).</li>
+</ol></div>
+<p><strong>Answer: \((-0.057,\;0.013)\).</strong> The interval contains 0, so there is no evidence at the 10% level that women and men differ in their support for "Shady Shane".</p>
+</details>
+
+<details>
+<summary>WE5 — Sample-size / margin-of-error (2024 exam Q3(e), 3 marks + proportion version)</summary>
+<div class="q card"><strong>(a)</strong> A future study wants to estimate the mean forearm−upper-arm BP difference within a 95% margin of error of no more than 1 mmHg, taking \(\sigma\approx s=9.64\). What is the smallest number of subjects needed?</div>
+<div class="method"><strong>Recognise:</strong> "margin of error no more than …" → sample-size, recipe ⑦.
+<ol>
+<li>Require \(z\dfrac{\sigma}{\sqrt n}\le 1\) with \(z=1.96\), \(\sigma=9.64\).</li>
+<li>Rearrange: \(n\ge\left(\dfrac{1.96\times9.64}{1}\right)^2=(18.894)^2=356.998\).</li>
+<li>Round UP: \(n=357\) subjects.</li>
+</ol></div>
+<p><strong>Answer: 357 subjects.</strong></p>
+<div class="q card" style="margin-top:12px"><strong>(b) Proportion version</strong> (Tutorial 6 Q4): a 95% CI for a proportion with margin of error \(\le 3\%\), no pilot data. How large must \(n\) be?</div>
+<div class="method"><ol>
+<li>Worst case: \(p(1-p)\le\tfrac14\) (maximum at \(p=0.5\)), so ME \(\le q\cdot\tfrac12/\sqrt n\).</li>
+<li>Set \(1.96\times\dfrac{0.5}{\sqrt n}=0.03 \Rightarrow n=\left(\dfrac{1.96\times0.5}{0.03}\right)^2=1067.1 \Rightarrow n=1068\).</li>
+<li>(The rougher \(q\approx2\) gives the neat \(1/\sqrt n=0.03\Rightarrow n=1111\).)</li>
+</ol></div>
+<p><strong>Answer: \(n=1068\)</strong> (or \(1111\) with the \(q\approx2\) approximation). <span style="color:var(--muted)">You can answer <em>before</em> collecting data because the worst-case \(p(1-p)=\tfrac14\) removes the need for a pilot estimate.</span></p>
+</details>
+
+<details>
+<summary>WE6 — One-sample proportion CI + validity check (notes Ex 6.9, opinion poll)</summary>
+<div class="q card">In a poll of 1000 voters, 227 say they will vote Green. <em>Construct a 95% CI for the population proportion \(p\).</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, yes/no → recipe ⑤.
+<ol>
+<li>\(\widehat p=227/1000=0.227\). Check: \(n\widehat p=227\ge5\) and \(n(1-\widehat p)=773\ge5\) ✓.</li>
+<li>\(q=z_{0.975}=1.96\). SE \(=\sqrt{0.227(0.773)/1000}=0.0132\).</li>
+<li>ME \(=1.96\times0.0132=0.026\). CI: \(0.227\pm0.026=(0.201,\;0.253)\).</li>
+</ol></div>
+<p><strong>Answer: \((0.20,\;0.25)\).</strong> We are 95% confident the true Green vote share lies between 20% and 25%.</p>
+</details>
+</section>
+
+<!-- ============ SECTION 6: EXAM QUESTION TYPES ============ -->
+<section id="types">
+<h2>4 · Exam question types</h2>
+<p>Every CI-flavoured question STAT1301 has generated, with the mark range, the step recipe, and a real past-paper reference.</p>
+
+<div class="card">
+<h3>Type A — One-sample mean CI + interpret in context</h3>
+<p><strong>Looks like:</strong> summary stats (\(n,\bar x,s\)) given; "calculate a 95% CI for the mean … and interpret in the context of the study". <strong>Marks:</strong> 3–5.</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Recognise one-sample mean → \(t_{n-1}\) (item 62).</li><li>\(q=t_{1-\alpha/2,\,n-1}\) from the table.</li><li>\(\bar x\pm q\,s/\sqrt n\); compute to the requested precision.</li><li>One context sentence using "we are 95% confident…"; state whether it excludes a benchmark value.</li></ol></div>
+<p><strong>Seen in:</strong> 2025 Q3(a) [4 marks] — low-carb weight change, "report to two decimal places and interpret".</p>
+</div>
+
+<div class="card">
+<h3>Type B — Two-sample mean CI (difference of means)</h3>
+<p><strong>Looks like:</strong> two groups' summary stats; "CI for the mean difference"; often followed by "state a conclusion". <strong>Marks:</strong> 5–7.</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Two samples of measurements → recipe ③ (equal var, pooled) or ④ (unequal var, Welch). Decide from the sample SDs / plots.</li><li>If pooled: compute \(S_p^2\), df \(=m+n-2\). If Welch: use \(\sqrt{S_X^2/m+S_Y^2/n}\), df \(=\) Welch or \(\min(m-1,n-1)\).</li><li>\((\bar x-\bar y)\pm q\cdot\operatorname{s.e.}\)</li><li>Conclusion: does the interval contain 0?</li></ol></div>
+<p><strong>Seen in:</strong> 2023 Q4(b) [7 marks] — sheep vs goat paté protein (equal SDs → pooled).</p>
+</div>
+
+<div class="card">
+<h3>Type C — CI for a variance \(\sigma^2\) or SD \(\sigma\)</h3>
+<p><strong>Looks like:</strong> "CI for the variance / standard deviation"; the word <em>variation</em> or <em>variability</em> is the tell. <strong>Marks:</strong> 4.</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Normal data, one sample, variability asked → recipe ② (\(\chi^2_{n-1}\)).</li><li>Read \(q_1=\chi^2_{\alpha/2}\), \(q_2=\chi^2_{1-\alpha/2}\); mind the ordering.</li><li>\(\left((n-1)s^2/q_2,\;(n-1)s^2/q_1\right)\).</li><li>If the SD is asked, square-root both ends. State the normality assumption.</li></ol></div>
+<p><strong>Seen in:</strong> 2024 Q3(d) [4 marks] — SD of paired BP differences. Notes exercise 7 — juice-bottle variance (\(n=27,s=5.86\)).</p>
+</div>
+
+<div class="card">
+<h3>Type D — Sample size / margin of error</h3>
+<p><strong>Looks like:</strong> "smallest number of subjects to achieve a margin of error of …"; "what sample size gives a CI no wider than …". <strong>Marks:</strong> 3.</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Write ME \(=q\cdot\operatorname{s.e.}\le E\).</li><li>Mean: \(n\ge(q\sigma/E)^2\). Proportion: \(n\ge(q/2E)^2\) via \(p(1-p)\le\tfrac14\).</li><li>Round UP.</li></ol></div>
+<p><strong>Seen in:</strong> 2024 Q3(e) [3 marks] — \(n=357\) for ME \(\le1\) mmHg. Tutorial 6 Q4 — proportion, ME \(\le3\%\). Notes exercises 3 &amp; 5.</p>
+</div>
+
+<div class="card">
+<h3>Type E — Proportion CI (one or two samples)</h3>
+<p><strong>Looks like:</strong> counts out of totals ("227 of 1000", "350 of 980"). <strong>Marks:</strong> 3–5.</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Count data → proportion; use the <strong>normal</strong> quantile.</li><li>Check \(\ge5\) successes and \(\ge5\) failures.</li><li>\(\widehat p\pm z\sqrt{\widehat p(1-\widehat p)/n}\) (one sample) or the two-\(\widehat p\) version.</li><li>Two-sample: contains 0? → no evidence of difference.</li></ol></div>
+<p><strong>Seen in:</strong> Notes Ex 6.9 &amp; 6.11; notes exercise 6 (election). Tutorial 6 Q4.</p>
+</div>
+
+<div class="card">
+<h3>Type F — Estimator properties (bias, variance, distribution)</h3>
+<p><strong>Looks like:</strong> "A suggested estimator of \(\theta\) is \(\widehat\theta=\dots\). Show it is unbiased / find \(\operatorname{Var}(\widehat\theta)\) / what is its approximate distribution for large \(n\)?" <strong>Marks:</strong> 8–12 (often a whole question).</p>
+<div class="method"><strong>Recipe:</strong> <ol><li>Unbiased? Compute \(\mathbb E(\widehat\theta)\) using linearity of expectation; compare to \(\theta\).</li><li>\(\operatorname{Var}(\widehat\theta)\): use \(\operatorname{Var}(a+\sum b_iX_i)=\sum b_i^2\operatorname{Var}(X_i)\) for independent data.</li><li>Large-\(n\) distribution: by the CLT it is approximately normal, centred at \(\theta\) with variance \(\operatorname{Var}(\widehat\theta)\).</li></ol></div>
+<p><strong>Seen in:</strong> 2024 Q2 [12 marks] — unbiasedness &amp; variance of \(\widehat\theta=-\tfrac1n\sum\log X_i\). 2023 Q2 [10 marks] — \(\widehat\theta=\tfrac1n\sum X_i/y_i\). Tutorial 6 Q1 — bias of the MLE variance.</p>
+</div>
+
+<div class="card">
+<h3>Type G — CI theory / interpretation (words, not numbers)</h3>
+<p><strong>Looks like:</strong> "Formally define the confidence level via probability statements; state what is fixed and what is random." <strong>Marks:</strong> 2–4.</p>
+<div class="method"><strong>Recipe:</strong> write \(\mathbb P(\bar X - q\,S/\sqrt n \lt \mu \lt \bar X + q\,S/\sqrt n)=1-\alpha\); say the <em>endpoints</em> are random and \(\mu\) is a fixed constant; distinguish \(\sigma\) known (\(z\)) vs unknown (\(t_{n-1}\)).</div>
+<p><strong>Seen in:</strong> Tutorial 6 Q2 &amp; Q3. Frequently a 2-mark sub-part after a numeric CI (e.g. 2025 Q5(e) asks how CI width behaves as \(n\to\infty\)).</p>
+</div>
+</section>
+
+<!-- ============ SECTION 7: WORDING TRIGGERS ============ -->
+<section id="triggers">
+<h2>5 · Wording triggers &nbsp;<span style="font-size:13px;color:var(--muted)">(the flagship — read this twice)</span></h2>
+<p>Exam phrasing maps to a method almost mechanically. Learn the left column and the right column follows.</p>
+
+<table>
+<tr><th>When the exam says…</th><th>→ do this</th></tr>
+<tr><td>"Calculate a 95% CI for the <strong>mean</strong> … and <strong>interpret in the context</strong> of the study"</td><td>Recipe ① (\(t_{n-1}\)). Then the exact sentence: <strong>"We are 95% confident the population mean [thing in words] lies between [lo] and [hi] [units]."</strong></td></tr>
+<tr><td>"<strong>interpret</strong> the interval" / "in context"</td><td>Name the parameter in plain words + units + a study conclusion (does it exclude 0 / the claimed value?). Generic "the mean is in the interval" loses the context mark.</td></tr>
+<tr><td>"there is a 95% <strong>probability</strong> the mean lies in…"</td><td>NEVER write this. Say "95% <strong>confident</strong>". Probability wording = 0 marks for interpretation.</td></tr>
+<tr><td>"CI for the <strong>difference</strong> in means" / "compare group A and B"</td><td>Two-sample mean, recipe ③/④. Order matters: state which is \(X\) and which is \(Y\).</td></tr>
+<tr><td>Two SDs are <strong>similar</strong> / boxplots equally spread / "treat variances as equal (pooled)"</td><td>Pooled recipe ③, df \(=m+n-2\).</td></tr>
+<tr><td>SDs clearly <strong>different</strong> / "unequal (Welch)"</td><td>Welch recipe ④, df \(=\) Welch formula or \(\min(m-1,n-1)\).</td></tr>
+<tr><td>"CI for the <strong>variance</strong> / <strong>standard deviation</strong>", "variation", "variability"</td><td>Chi-squared recipe ②. For SD, square-root the endpoints. State normality assumption.</td></tr>
+<tr><td>Data are <strong>counts / proportions / yes-no / percentages</strong> ("227 of 1000")</td><td>Proportion recipe ⑤/⑥. Use \(z\) (normal), not \(t\). Check \(\ge5\) successes &amp; failures.</td></tr>
+<tr><td>"<strong>margin of error</strong> of no more than …", "smallest sample size", "CI no wider than …"</td><td>Sample-size, recipe ⑦: \(n\ge(q\sigma/E)^2\) (mean) or \((q/2E)^2\) (proportion). <strong>Round up.</strong></td></tr>
+<tr><td>"the population standard deviation \(\sigma\) <strong>is known</strong>"</td><td>Known-\(\sigma\) CI ⑧: use \(z\), not \(t\).</td></tr>
+<tr><td>"report to <strong>two decimal places</strong>" / "to <strong>3 significant figures</strong>"</td><td>Match exactly. Default exam rule: at least 3 s.f. Keep full precision until the final line.</td></tr>
+<tr><td>"does the interval provide evidence that…" / "is there a difference?"</td><td>Check whether the CI contains the null value (0 for a difference, the claimed \(\mu_0\)/\(p_0\) otherwise). Contains it → no evidence; excludes it → evidence.</td></tr>
+<tr><td>"Show that \(\widehat\theta\) is <strong>unbiased</strong>" / "find \(\operatorname{Var}(\widehat\theta)\)"</td><td>Estimator algebra, Type F: \(\mathbb E(\widehat\theta)\) via linearity; variance via \(\sum b_i^2\operatorname{Var}(X_i)\).</td></tr>
+<tr><td>"approximate distribution of \(\widehat\theta\) for <strong>large \(n\)</strong>"</td><td>CLT → approximately \(N(\theta,\operatorname{Var}(\widehat\theta))\).</td></tr>
+<tr><td>"how does the CI <strong>width</strong> change as \(n\) grows"</td><td>ME \(\propto 1/\sqrt n\) → width shrinks toward 0 (mean CI). (A prediction interval does NOT shrink to 0 — it keeps the irreducible \(\sigma\).)</td></tr>
+<tr><td>"<strong>state the assumptions</strong>"</td><td>iid sample; normality (needed for chi-squared \(\sigma^2\) CI &amp; small-\(n\) mean CI; relaxed for large \(n\) by CLT); independence of the two groups; \(\ge5\) successes/failures for proportions.</td></tr>
+</table>
+</section>
+
+<!-- ============ SECTION 8: TRAPS ============ -->
+<section id="traps">
+<h2>6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><strong>"Probability" instead of "confidence".</strong> "There's a 95% probability \(\mu\) is in the interval" is the classic zero-mark interpretation. Once the numbers are in, \(\mu\) is fixed — nothing is random. Say "we are 95% confident".</div>
+
+<div class="trap"><strong>Using \(z\) when you need \(t\) (or vice-versa).</strong> Mean CI on this course → \(t_{n-1}\) (formula sheet item 62), even for large \(n\). Proportion CI → \(z\) (normal). Known-\(\sigma\) mean → \(z\). Getting this wrong is small numerically but flagged as a method error.</div>
+
+<div class="trap"><strong>Forgetting the \(\sqrt n\).</strong> The margin of error uses the <em>standard error</em> \(s/\sqrt n\), not the sample SD \(s\). Dividing by \(n\) instead of \(\sqrt n\), or not dividing at all, is the most common arithmetic slip.</div>
+
+<div class="trap"><strong>Chi-squared quantiles swapped.</strong> Lower bound uses the <em>upper</em> quantile \(q_2\); upper bound uses the <em>lower</em> quantile \(q_1\). If your "lower" bound is bigger than your "upper", you crossed them.</div>
+
+<div class="trap"><strong>CI for \(\sigma^2\) vs \(\sigma\).</strong> The formula produces a variance interval. If the SD was asked, take square roots of both endpoints — and only at the end.</div>
+
+<div class="trap"><strong>Two-sample SE errors.</strong> It is \(S_p\sqrt{\tfrac1m+\tfrac1n}\) (pooled) or \(\sqrt{\tfrac{S_X^2}{m}+\tfrac{S_Y^2}{n}}\) (Welch) — NOT \(\tfrac{1}{\sqrt{m+n}}\). And the pooled df is \(m+n-2\), not \(m+n\).</div>
+
+<div class="trap"><strong>Proportion validity not checked.</strong> If asked to justify the method, state \(n\widehat p\ge5\) and \(n(1-\widehat p)\ge5\). Skipping the check when it's requested loses a mark.</div>
+
+<div class="trap"><strong>Sample size rounded down.</strong> \(n=356.99\) means you need \(357\), not \(356\). Always round <em>up</em> — the requirement is an upper bound on the error.</div>
+
+<div class="trap"><strong>Significant figures.</strong> "Give at least 3 significant figures" is on the front of every paper. If a part says "two decimal places", obey that exactly. Carry full precision through the working; round only the final answer.</div>
+
+<div class="trap"><strong>Generic interpretation.</strong> "The mean lies between a and b" earns the number mark but not the context mark. Name the actual quantity (e.g. "mean 12-month weight change on the low-carb diet") with units, and state the study implication.</div>
+
+<div class="trap"><strong>Pooled vs Welch not justified.</strong> When a question (like 2025 Q3(d)) asks you to state whether you pooled, give a one-line reason from the sample SDs or the plots — don't just pick one silently.</div>
+</section>
+
+<!-- ============ SECTION 9: SELF-CHECK ============ -->
+<section id="selfcheck">
+<h2>7 · Self-check</h2>
+<p>Attempt before revealing. Numbers verified with scipy.</p>
+
+<details>
+<summary>Q1. Distinguish "estimate" and "estimator", and say which one has a standard error.</summary>
+<p>An <strong>estimate</strong> is a fixed number from your data (e.g. \(\bar x=75.98\)); an <strong>estimator</strong> is the random variable \(\bar X=\tfrac1n\sum X_i\) built from the random data. The <em>estimator</em> has a distribution, so it has a standard error \(=S/\sqrt n\). You can't attach a spread to a single observed number.</p>
+</details>
+
+<details>
+<summary>Q2. \(n=51\), \(\bar x=1136\), \(s=178\). Give a 95% CI for the mean, and say whether \(z\) or \(t\) is "correct" on the formula sheet.</summary>
+<p>Formula-sheet item 62 uses \(t_{n-1}=t_{50}\). \(t_{0.975,50}=2.01\), SE \(=178/\sqrt{51}=24.9\), ME \(=2.01\times24.9=50.1\) → CI \((1085.9,\,1186.1)\). (Using \(z=1.96\) instead — the notes' original version — gives \((1087,\,1185)\); the difference is tiny because \(t_{50}\approx z\).) On this exam, reach for the \(t\) row.</p>
+</details>
+
+<details>
+<summary>Q3. A juice company samples 27 bottles; \(s=5.86\) ml. Give a 95% CI for the variance \(\sigma^2\).</summary>
+<p>Recipe ② with df \(=26\): \(q_1=\chi^2_{0.025,26}=13.8\), \(q_2=\chi^2_{0.975,26}=41.9\). \((n-1)s^2=26\times5.86^2=892.6\). CI \(=(892.6/41.9,\;892.6/13.8)=(21.3,\;64.7)\) ml². (For the SD: \((4.62,\,8.04)\) ml.)</p>
+</details>
+
+<details>
+<summary>Q4. Nightmares: 55 of 160 men and 60 of 192 women report frequent nightmares. 95% CI for \(p_{\text{men}}-p_{\text{women}}\)?</summary>
+<p>Recipe ⑥. \(\widehat p_X=0.344\), \(\widehat p_Y=0.313\), diff \(=0.031\). SE \(=\sqrt{0.344(0.656)/160+0.313(0.687)/192}=0.0503\). ME \(=1.96\times0.0503=0.099\). CI \(=(-0.067,\;0.130)\). Contains 0 → no evidence men and women differ.</p>
+</details>
+
+<details>
+<summary>Q5. Why do we divide the sample variance by \(n-1\) and not \(n\)?</summary>
+<p>Because dividing by \(n\) gives a <em>biased</em> estimator: \(\mathbb E\big(\tfrac1n\sum(X_i-\bar X)^2\big)=\tfrac{n-1}{n}\sigma^2\), systematically too small (deviations are taken from the fitted \(\bar X\), which hugs the data more tightly than the true \(\mu\)). Multiplying by \(\tfrac{n}{n-1}\) makes \(S^2\) unbiased: \(\mathbb E(S^2)=\sigma^2\).</p>
+</details>
+
+<details>
+<summary>Q6. A pilot 95% CI for a mean is \(16.75\pm7.39\) from \(n=4\). What \(n\) is needed for a margin of error \(\le 2\)?</summary>
+<p>Recover \(s\): half-width \(7.39=t_{0.975,3}\,s/\sqrt4=3.18\,s/2\Rightarrow s=4.64\). Then \(n\ge(1.96\times4.64/2)^2=20.7\Rightarrow n=21\). (Round up.)</p>
+</details>
+
+<details>
+<summary>Q7. A 95% CI for a difference in means comes out \((-2.1,\,4.8)\). What do you conclude?</summary>
+<p>The interval contains 0, so at the 5% level there is <strong>no evidence</strong> of a real difference between the two group means — the observed gap is consistent with sampling variability.</p>
+</details>
+
+<details>
+<summary>Q8. Which CIs require a normality assumption, and which are rescued by large \(n\)?</summary>
+<p>The <strong>mean CI</strong> (item 62) is exact under normality but the CLT rescues it for large \(n\), so normality is not essential when \(n\) is big. The <strong>proportion CIs</strong> rely on the CLT (need \(\ge5\) successes/failures). The <strong>chi-squared CI for \(\sigma^2\)</strong> genuinely needs normal data — the CLT does <em>not</em> save it — so always state that assumption there.</p>
+</details>
+</section>
+
+<p style="color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px">
+Sources: notes_STAT1301 §6.1–6.3 (pp 119–136), STAT1301_formula.pdf items 60–68 &amp; tables (pp 4–6), past exams 2023 Q2/Q4, 2024 Q2/Q3, 2025 Q3, Tutorial Sheet 6. Every published number verified with <code>python3 / scipy.stats</code>.
+</p>
+
+</main>
+</body>
+</html>
