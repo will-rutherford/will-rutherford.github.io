@@ -71,6 +71,7 @@
 
 <nav>
   <a href="index.html">🏠 Hub</a>
+  <a href="foundations.html">📐 Foundations</a>
   <a href="ch08-anova.html">← Ch 8 ANOVA</a>
   <a href="ch11-chi-squared.html">Ch 11 Chi-squared →</a>
   <a href="formulas.html">📄 Formulas</a>
@@ -96,11 +97,20 @@
 <h2>1 · Concepts in depth</h2>
 
 <div class="card">
+<h3>🧭 Intuition first — what regression is doing</h3>
+<p>Picture a scatterplot: a cloud of points, one dot per subject, with a predictor \(x\) across the bottom and a response \(y\) up the side (e.g. eruption <em>duration</em> vs <em>waiting</em> time). If the cloud <em>trends</em>, we can summarise it with a single straight line drawn through the middle. <strong>Regression is the recipe for choosing that line and then reasoning about it carefully</strong> — how steep is it, could the trend just be luck, and how good are its predictions?</p>
+<p>That's the whole chapter in one sentence. Everything below is machinery for four jobs: <strong>(1)</strong> pick the line (least squares), <strong>(2)</strong> put an honest uncertainty on its slope (standard errors and \(t\)-tests), <strong>(3)</strong> measure how much of the scatter it explains (\(R^2\)), and <strong>(4)</strong> check the line was even a fair thing to draw (residual diagnostics).</p>
+<div class="tip">New to <b>sampling distributions, standard error, and where the \(t\), \(\chi^2\) and \(F\) shapes and quantile notation \(t_{\alpha/2,\,n-2}\) come from</b>? That underlying machinery is taught in one place — see <a href="foundations.html">📐 Foundations</a>. This page leans on it whenever a slope gets a standard error or a \(t\)-value.</div>
+</div>
+
+<div class="card">
 <h3>The model: what "linear regression" actually assumes</h3>
 <p>Simple linear regression models a <strong>response</strong> \(Y\) (numerical) as a straight-line function of one <strong>explanatory</strong>
 variable \(x\), plus random noise. The <em>data-generating</em> model (notes Def. 9.1, formula sheet item 83) is</p>
-$$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i,\qquad \varepsilon_1,\dots,\varepsilon_n \overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2).$$
-<p>Read this carefully — it contains <strong>four separate assumptions</strong> hiding in one line, and part (d) of every regression question
+$$Y_i = \underbrace{\beta_0 + \beta_1 x_i}_{\text{signal (the true line)}} + \underbrace{\varepsilon_i}_{\text{noise}},\qquad \varepsilon_1,\dots,\varepsilon_n \overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2).$$
+<p><strong>In words: every observation = signal + noise.</strong> The signal \(\beta_0+\beta_1x_i\) is the straight-line trend that <em>every</em> subject shares. The noise \(\varepsilon_i\) is that subject's personal vertical wobble off the line — everything about \(y\) that \(x\) doesn't explain (measurement error, other omitted causes, individuality). \(\varepsilon_i\) is literally the vertical gap between the point and the true line; \(\sigma\) is the typical size of that gap.</p>
+<div class="tip"><strong>Two lines, never confuse them.</strong> \(\beta_0,\beta_1\) describe the <em>true population line</em> — a fixed fact about the world we can <em>never</em> see, because we never have everyone. Once we collect a sample and fit, we get \(\widehat\beta_0,\widehat\beta_1\) (also written \(b_0,b_1\)): our best <em>estimate</em> of that line from this particular data. Greek \(\beta\) = the unknown truth; hat \(\widehat\beta\) = our sample guess at it. All the standard errors and \(t\)-tests exist to bridge that gap.</div>
+<p>Read the model carefully — it contains <strong>four separate assumptions</strong> hiding in one line, and part (d) of every regression question
 makes you check them:</p>
 <ul>
 <li><strong>Linearity</strong> — the mean of \(Y\) really is a straight line in \(x\): \(\mathbb E(Y_i)=\beta_0+\beta_1 x_i\). (The errors have mean 0.)</li>
@@ -117,6 +127,7 @@ The whole chapter is about estimating these and quantifying our uncertainty abou
 <p>We can't see the true line, so we fit the line \(\widehat y=\widehat\beta_0+\widehat\beta_1 x\) that makes the
 <strong>residuals</strong> \(e_i=y_i-\widehat y_i\) (the vertical misses) as small as possible — specifically we minimise the
 <strong>sum of squared residuals</strong> \(\text{SSE}=\sum e_i^2\). Calculus gives the closed form (Thm 9.1):</p>
+<div class="tip"><strong>Why this rule?</strong> A <em>residual</em> is one point's <em>vertical</em> gap from the fitted line, \(e_i=y_i-\widehat y_i\) (observed minus predicted). Vertical, because we're predicting \(y\) from \(x\), so the error we care about is in \(y\). We <em>square</em> the misses before adding for two reasons: squaring stops positive misses (points above the line) cancelling negative ones (points below), and it punishes one big miss far more than several small ones — so least squares hunts for the line that leaves no point wildly stranded. "Fitting the line" literally means: slide and tilt a line until that total squared miss is as small as it can possibly be.</div>
 $$\widehat\beta_1=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2},\qquad \widehat\beta_0=\bar y-\widehat\beta_1\bar x.$$
 <p>You will almost never compute these by hand in the exam — R prints them in the <code>Estimate</code> column. But notice two things worth marks:
 the fitted line <strong>always passes through \((\bar x,\bar y)\)</strong> (from the \(\widehat\beta_0\) formula), and the slope is a scaled
@@ -126,6 +137,7 @@ version of the covariance between \(x\) and \(y\).</p>
 
 <div class="card">
 <h3>The sampling distribution — the engine behind every \(t\)-value</h3>
+<div class="tip"><strong>Why does a slope even <em>have</em> a standard error?</strong> Imagine drawing a fresh sample of the same size from the same population. The points would land in slightly different spots, so the least-squares line would tilt slightly differently, so you'd get a slightly different \(\widehat\beta_1\). Repeat forever and \(\widehat\beta_1\) traces out a whole distribution of values centred on the true \(\beta_1\) — its <strong>sampling distribution</strong>. The <strong>standard error</strong> is just the standard deviation of that distribution: how much your one slope estimate would jump around from sample to sample. This is the exact same idea as the standard error of a sample mean — see <a href="foundations.html">📐 Foundations</a> for the floor. A slope is "significant" precisely when it sits too many standard errors away from 0 to be luck.</div>
 <p>Because each estimator is a linear combination of the normal \(Y_i\)'s, both are themselves normal and <strong>unbiased</strong>
 (Thm 9.2): \(\mathbb E(\widehat\beta_1)=\beta_1\). Their variances are</p>
 $$\operatorname{Var}(\widehat\beta_1)=\frac{\sigma^2}{\sum(x_i-\bar x)^2},\qquad
@@ -135,6 +147,7 @@ That is the number printed in the <code>Std. Error</code> column, and</p>
 $$\boxed{\;t=\frac{\widehat\beta_1}{\operatorname{se}(\widehat\beta_1)}\;}\quad\text{(formula 9.11)}$$
 <p>is the ratio R prints as <code>t value</code>. Big <code>t</code> = the estimate is many standard errors away from 0 = strong evidence the slope isn't 0.
 Notice \(\operatorname{Var}(\widehat\beta_1)\) shrinks as (i) \(n\) grows and (ii) the \(x\)'s spread out more — wider-spread predictors give a more precisely-estimated slope.</p>
+<div class="tip"><strong>What is \(H_0:\beta_1=0\) really saying?</strong> A slope of zero is a <em>flat</em> line: whatever \(x\) you plug in, the prediction for \(y\) never changes. So \(H_0:\beta_1=0\) is the claim "<strong>\(x\) tells you nothing about \(y\)</strong> — knowing the eruption duration doesn't help you predict the waiting time at all." Rejecting \(H_0\) (small \(p\)-value) is how you earn the right to say there <em>is</em> a real linear relationship. That is exactly what "is there a significant linear relationship?" is asking.</div>
 </div>
 
 <div class="card">
@@ -193,7 +206,9 @@ Ch 10 "linear model" viewpoint: regression and ANOVA are the <em>same</em> machi
 <li><strong>Normal Q–Q</strong> — points on the diagonal ⇒ normal errors. Systematic curving off the line at the ends ⇒ skew / heavy tails.</li>
 </ul>
 <p><strong>Transformations</strong> are the fix when the residuals reveal non-linearity or a funnel. A <strong>curved</strong> residuals-vs-fitted plot and data that
-"fan out" as they grow is the classic cue to model \(\log(Y)\) instead of \(Y\). After fitting \(\ln(\text{score})=\beta_0+\beta_1\text{week}\), the model
+"fan out" as they grow is the classic cue to model \(\log(Y)\) instead of \(Y\).</p>
+<div class="tip"><strong>A transformation is not fudging the data — it's choosing a better ruler.</strong> Re-expressing \(y\) as \(\log y\) (or \(\sqrt y\), \(1/y\)) just measures the same response on a stretched scale. On the right scale a relationship that <em>curved</em> becomes <em>straight</em>, and a spread that <em>fanned out</em> becomes <em>even</em> — so the four straight-line assumptions can finally hold. The data are untouched; you've picked coordinates in which a line is honest. You then fit the ordinary linear model there, and back-transform to talk about the original units.</div>
+<p>After fitting \(\ln(\text{score})=\beta_0+\beta_1\text{week}\), the model
 <strong>back-transforms</strong> to \(\text{score}=e^{\beta_0}e^{\beta_1\,\text{week}}\) — now the effect is <em>multiplicative</em>: each extra week multiplies the score by \(e^{\beta_1}\), i.e. a \(100(e^{\beta_1}-1)\%\) change (notes §10.5).</p>
 </div>
 </section>
@@ -519,6 +534,8 @@ Multiple R-squared:  0.9156</span></div>
 <div class="trap"><strong>Claiming causation.</strong> Regression shows <em>association</em>. Unless it's a randomised experiment, write "associated with / predicts", never "causes".</div>
 
 <div class="trap"><strong>Saying \(R^2=r\).</strong> \(R^2\) is the <em>square</em> of the correlation, and only in <em>simple</em> regression. Don't report \(R^2=0.81\) as "correlation 0.81" — the correlation is \(\sqrt{0.81}=0.90\).</div>
+
+<div class="trap"><strong>Treating a high \(R^2\) as proof the model is right.</strong> \(R^2\) only measures how much \(y\)-scatter the line mops up — it says <em>nothing</em> about whether a straight line was the correct shape. Badly curved data can still post a high \(R^2\) while the residuals-vs-fitted plot screams "non-linear". The verdict on whether the model is <em>appropriate</em> comes from the <strong>residual plots</strong>, not from \(R^2\). Conversely a "low" \(R^2\) can be a perfectly valid model of a genuinely noisy relationship. Report \(R^2\) as variance-explained, then judge fit from the diagnostics.</div>
 
 <div class="trap"><strong>Interpreting a log-model slope additively.</strong> After a log transform, \(\widehat\beta_1\) is a <em>proportional</em> effect: multiply by \(e^{\widehat\beta_1}\) / \(100(e^{\widehat\beta_1}-1)\%\) per unit — not "+\(\widehat\beta_1\) units".</div>
 </section>

@@ -63,6 +63,7 @@
 
 <nav>
   <a href="index.html">🏠 Hub</a>
+  <a href="foundations.html">📐 Foundations</a>
   <a href="ch07-hypothesis-testing.html">← Ch 7 Hypothesis Testing</a>
   <a href="ch09-10-regression.html">Ch 9–10 Regression →</a>
   <a href="formulas.html">📄 Formula sheet</a>
@@ -79,6 +80,28 @@
 <h3>The one-sentence idea</h3>
 <p>ANOVA answers <em>"do these groups have the same mean, or not?"</em> for <strong>more than two groups at once</strong>. The response is a <strong>quantitative</strong> variable; the group labels come from one or more <strong>categorical explanatory variables called factors</strong> (each factor tested at several <strong>levels</strong>). A two-sample \(t\)-test handles exactly two groups (notes §7.5); ANOVA generalises it to \(d\) groups — and to two crossed factors — while keeping the machinery of a single hypothesis test. (Notes §8.1.)</p>
 <div class="tip">Response = numeric (yield, plaque index, healing time). Factor = category (fertilizer, mouth-rinse, land cover). If the "predictor" is itself numeric and you fit a line, that's <em>regression</em> (Ch 9), not ANOVA.</div>
+<div class="tip">New to the underlying machinery — <strong>sampling distributions, standard error, and where the \(Z\), \(t\), \(\chi^2\) and \(F\) shapes come from</strong>? That background is taught in one place: see <a href="foundations.html">📐 Foundations</a>. ANOVA leans on the \(F\) distribution, so it is worth skimming that section first.</div>
+</div>
+
+<div class="card">
+<h3>🧭 The core idea — signal vs noise (read this first)</h3>
+<p>Forget formulas for a moment. Picture the numbers from three groups plotted on a line. There are <strong>two kinds of spread</strong> in that picture:</p>
+<ul>
+<li><strong>BETWEEN groups</strong> — how far apart the three <em>group averages</em> sit from each other. This is the "signal": if the groups really are different, their averages drift apart.</li>
+<li><strong>WITHIN groups</strong> — how much the individual points <em>scatter around their own group's average</em>. This is the "noise": ordinary person-to-person, plot-to-plot randomness that has nothing to do with which group you are in.</li>
+</ul>
+<p>ANOVA is one question in disguise: <strong>is the between-group spread big <em>compared to</em> the within-group noise?</strong> If the group averages are further apart than random scatter alone could plausibly produce, the groups genuinely differ. If the gap between averages is no bigger than the wobble you already see <em>inside</em> each group, it could easily be a fluke. That comparison — signal divided by noise — is exactly what the \(F\)-statistic computes.</p>
+<div class="tip"><strong>The name paradox, resolved.</strong> "Why is it called <em>Analysis of Variance</em> when I want to compare <em>means</em>?" Because the tool for judging whether means are far apart is to <em>measure two variances and compare them</em>: the variance <em>of</em> the group means (between) against the variance <em>within</em> groups. Big between-variance relative to within-variance ⇒ the means are not all equal. You analyse variances to draw a conclusion about means.</div>
+</div>
+
+<div class="card">
+<h3>Vocabulary (the words the exam uses without defining)</h3>
+<ul>
+<li><strong>Factor</strong> — a categorical explanatory variable (e.g. <em>fertilizer type</em>). <strong>Level</strong> — one specific category of that factor (e.g. <em>brand A</em>). A one-way study has one factor; a two-way study crosses two.</li>
+<li><strong>Replicate</strong> — one observation within a level/cell. \(n_i\) = number of replicates in level \(i\).</li>
+<li><strong>Balanced design</strong> — every group/cell has the <em>same</em> number of replicates. Balance is what makes the sums of squares add up exactly (§1.6), which is why table-completion questions always say "balanced".</li>
+<li><strong>Residual</strong> — one point minus its own group mean, \(e_{ik}=Y_{ik}-\overline Y_i\). Residuals <em>are</em> the within-group scatter, measured point by point.</li>
+</ul>
 </div>
 
 <div class="card">
@@ -91,6 +114,7 @@
 <p>One factor with \(d\) levels \(i=1,\dots,d\); within level \(i\) there are \(n_i\) replicates \(k=1,\dots,n_i\); total \(n=n_1+\cdots+n_d\).</p>
 $$Y_{ik}=\mu_i+\varepsilon_{ik},\qquad \varepsilon_{ik}\overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2)$$
 <p>Each level has its own mean \(\mu_i\) but <strong>a common variance</strong> \(\sigma^2\) — equal variance is baked into the model. R uses the equivalent <strong>"factor-effects"</strong> form \(Y_{ik}=\mu_1+\alpha_i+\varepsilon_{ik}\), where \(\mu_1\) is the reference (level-1) mean and \(\alpha_i=\mu_i-\mu_1\) is the incremental effect of level \(i\). (Notes §8.2.1, eq 8.1–8.3.)</p>
+<div class="tip"><strong>🧭 The equation in plain words.</strong> \(Y_{ik}=\mu_i+\varepsilon_{ik}\) reads: <em>"any single measurement = the true average of the group it belongs to, plus a random personal wobble."</em> The wobble \(\varepsilon\) has mean 0 (it pushes up as often as down) and the <em>same</em> size \(\sigma\) in every group. The factor-effects version \(Y=\mu_1+\alpha_i+\varepsilon\) just re-writes each group mean as "the baseline group's mean, plus/minus a shift \(\alpha_i\)". So \(\alpha_i=0\) for every level is the same statement as "all the group means are equal" — which is why the hypotheses can be written either as \(\mu_1=\dots=\mu_d\) or as "all \(\alpha_i=0\)".</div>
 </div>
 
 <div class="card">
@@ -108,6 +132,10 @@ $$\underbrace{\text{SST}}_{\sum\sum(Y_{ik}-\overline Y)^2}=\underbrace{\text{SSF
 <p>where \(\text{SSF}=\sum_i n_i(\overline Y_i-\overline Y)^2\) measures how far the group means spread from the grand mean. Convert each SS to a mean square by dividing by its DF, then form the ratio:</p>
 $$F=\frac{\text{MSF}}{\text{MSE}}=\frac{\text{SSF}/(d-1)}{\text{SSE}/(n-d)}\ \overset{H_0}{\sim}\ F(d-1,\ n-d).$$
 <p><strong>Intuition:</strong> \(F\) compares between-group spread to within-group noise. If \(H_0:\mu_1=\cdots=\mu_d\) is true, both estimate the same \(\sigma^2\) and \(F\approx1\). Big between-group differences push \(F\) up — so it is a <strong>right-one-sided test</strong>: reject for large \(F\), P-value \(=\mathbb P(F>f)\). (Notes §8.2.3, Theorem 8.1.)</p>
+<div class="tip"><strong>🧭 What each quantity means in words.</strong> <strong>SS</strong> (sum of squares) = raw total amount of a kind of spread, in squared units — it grows just by adding more data, so it is not yet comparable. <strong>MS</strong> (mean square) = SS ÷ its df = spread <em>per degree of freedom</em>, i.e. an <em>average</em> variance that no longer depends on sample size. <strong>MSF</strong> is the between-group variance (signal); <strong>MSE</strong> is the within-group variance (noise). <strong>\(F\) = MSF / MSE</strong> is literally "signal-to-noise as a single number": about 1 when nothing is going on, much bigger than 1 when the group means genuinely differ.</div>
+<div class="tip"><strong>🧭 Why the \(F\) needs <em>two</em> degrees of freedom.</strong> \(F\) is a ratio of two independent variance estimates, and the shape of that ratio's distribution depends on how much data went into <em>each</em> estimate separately — so it carries one df for the numerator (between: \(d-1\)) and one for the denominator (within: \(n-d\)). A ratio of two things needs to know the reliability of the top and of the bottom. Full derivation of the \(F\) family as a ratio of variances is in <a href="foundations.html">📐 Foundations</a>.</div>
+<div class="tip"><strong>🧭 Why the df partition the way they do.</strong> Degrees of freedom = independent pieces of information left over. You start with \(n-1\) total (one lost to estimating the grand mean). Pinning down \(d\) group means costs \(d-1\) of them to "between" (the last group mean is fixed once you know the grand mean and the others), leaving \(n-d\) for "within". So \((d-1)+(n-d)=n-1\) is not a coincidence — the information splits the same way the spread does.</div>
+<div class="trap"><strong>A significant \(F\) does NOT mean all groups differ.</strong> Rejecting \(H_0\) says only "the means are <em>not all</em> equal" — i.e. <em>at least one</em> group differs from at least one other. It could be that just one group stands apart while the rest are indistinguishable. To find out <em>which</em> pairs differ you must run the multiple-comparison follow-up (§1.7) — never claim "every group is different" from the \(F\)-test alone.</div>
 </div>
 
 <div class="card">
@@ -147,6 +175,7 @@ $$Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk},\qquad \varepsilon_
 
 <div class="card">
 <h3>Interaction — the concept the exam loves</h3>
+<div class="tip"><strong>🧭 What "interaction" means, physically.</strong> Two factors <em>interact</em> when the effect of one <em>depends on the level of the other</em>. Everyday example: caffeine and sleep. Coffee wakes you up (main effect of caffeine); a good night's sleep also helps (main effect of sleep). But coffee's <em>boost</em> is huge when you're exhausted and tiny when you're already well-rested — so the effect of coffee <em>changes</em> depending on how much you slept. That "the benefit of one thing depends on the other" is an interaction. <strong>No interaction</strong> would mean coffee adds the same fixed lift no matter how you slept — the two effects simply stack. (Recipe example: salt improves any dish a bit, sugar improves dessert — but salt <em>in dessert</em> ruins it: the effect of salt flips sign depending on the dish. That sign-flip is a strong interaction.)</div>
 <p><strong>Interaction present</strong> = the effect of one factor <em>depends on the level</em> of the other factor. On an <strong>interaction plot</strong> (mean response vs one factor, a separate line per level of the other):</p>
 <ul>
 <li><strong>Parallel lines ⇒ NO interaction</strong> — the gap between lines is constant, so each factor acts independently.</li>
@@ -169,6 +198,7 @@ $$Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk},\qquad \varepsilon_
 <div class="card">
 <h3>Multiple comparisons — which groups differ? (notes §8.5)</h3>
 <p>A significant ANOVA says "not all means are equal" but not <em>which</em> pairs differ. Follow up with pairwise tests, but control the inflated Type-I error. The course uses the <strong>Bonferroni</strong> procedure: for \(m\) comparisons, test each at \(\alpha/m\) — equivalently, R multiplies each pairwise P-value by \(m\) (capped at 1) and you compare to the ordinary \(\alpha\).</p>
+<div class="tip"><strong>🧭 Why divide \(\alpha\) by \(m\)?</strong> Each test you run has its own \(\alpha\) chance of a false alarm. Run \(m\) tests and the false alarms accumulate — roughly \(m\times\alpha\) chance that <em>at least one</em> of them fires by luck (the same error-inflation that rules out doing many \(t\)-tests). Bonferroni's fix is deliberately blunt: make each individual test \(m\) times <em>stricter</em> (threshold \(\alpha/m\)) so that the \(m\) risks, added back up, land at your intended overall \(\alpha\). It is the price of asking several questions at once and still wanting the whole family to be trustworthy at 5%.</div>
 <p>R's <span class="mono">pairwise.t.test(..., p.adj="bonferroni")</span> prints a matrix of adjusted P-values. <strong>Reading rule:</strong> an entry \(&lt;\alpha\) ⇒ those two groups <em>differ significantly</em>; \(\ge\alpha\) (often shown as 1.000) ⇒ no significant difference. Interpreting this output was examined in <strong>2025 Q4(e)</strong> and <strong>2023 Q5(d)</strong>.</p>
 </div>
 

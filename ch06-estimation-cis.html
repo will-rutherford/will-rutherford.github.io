@@ -72,6 +72,8 @@
 <section id="concepts">
 <h2>1 · Concepts in depth</h2>
 
+<div class="tip">New to \(t_{n-1}\), \(\chi^2\), or quantile notation? Read <a href="foundations.html">the Ground Floor</a> first — it explains sampling distributions, standard error vs SD, and where every reference distribution below comes from.</div>
+
 <div class="card">
 <h3>The whole point of this chapter</h3>
 <p>You have data. Behind the data is a <em>model</em> with unknown parameters — a mean \(\mu\), a variance \(\sigma^2\), a proportion \(p\). You will <strong>never know</strong> the true value. The best you can do is (1) produce a single best guess (a <strong>point estimate</strong>), and (2) attach an honest statement of how accurate that guess is (a <strong>confidence interval</strong>). Chapter 6 is the machinery for both. Everything in Ch 7–11 (testing, ANOVA, regression) is built on these two ideas.</p>
@@ -100,6 +102,7 @@
 <p>The <strong>standard error</strong> is the standard deviation of the estimator. From \(\operatorname{Var}(\bar X)=\sigma^2/n\) we get
 \[\operatorname{s.e.}(\bar X)=\frac{\sigma}{\sqrt n}\;\xrightarrow{\text{estimate }\sigma\text{ by }S}\;\frac{S}{\sqrt n}.\]
 Bigger \(n\) \(\Rightarrow\) smaller standard error \(\Rightarrow\) sharper estimate. The \(\sqrt n\) is why cutting the CI width in half costs <em>four times</em> the sample size — this is the engine of every sample-size question.</p>
+<p><em>Where does \(\operatorname{Var}(\bar X)=\sigma^2/n\) come from?</em> It is the variance of the <strong>sampling distribution</strong> of \(\bar X\) — see the <a href="foundations.html#stats-rv">Ground Floor derivation</a> (averaging \(n\) independent numbers divides the variance by \(n\)). That shrinkage is the whole reason more data buys precision.</p>
 <div class="trap">Standard error (spread of the <em>estimator</em> \(\bar X\), \(=S/\sqrt n\)) is NOT the sample standard deviation (spread of the <em>data</em>, \(=S\)). Confusing the two — forgetting to divide by \(\sqrt n\) — is the single most common CI mistake.</div>
 </div>
 
@@ -108,14 +111,31 @@ Bigger \(n\) \(\Rightarrow\) smaller standard error \(\Rightarrow\) sharper esti
 <p>A 95% CI is a <strong>random interval</strong> \((T_1,T_2)\) with the property \(\mathbb P(T_1\lt\theta\lt T_2)\ge 0.95\) (Definition 6.1). The <em>endpoints</em> are random (they depend on the data); the <em>parameter</em> \(\theta\) is a fixed unknown constant.</p>
 <p>Once you plug in your data you get a <strong>numerical</strong> interval like \((-6.63,-5.35)\). It is <strong>wrong</strong> to say "there is a 95% probability \(\mu\) lies in \((-6.63,-5.35)\)" — \(\mu\) is either in it or not; there is no randomness left. The correct reading: <em>if we repeated the whole study many times, about 95% of the intervals produced this way would capture the true \(\mu\)</em>. (Notes' urn analogy: 90 white, 10 black balls; you draw one without looking — you are 90% confident it is white.)</p>
 <div class="tip">Exam-safe interpretation template: <strong>"We are 95% confident that the population [parameter, in words] lies between [lo] and [hi] [units]."</strong> Use "confident", never "probability".</div>
+<div class="trap">A CI is a statement about the <strong>population mean</strong> \(\mu\), NOT about individual observations. "95% of low-carb dieters lost between 6.63 and 5.35 kg" is <em>wrong</em> — the interval is narrow only because \(\bar X\) wobbles little (\(S/\sqrt n\)); individual people vary far more (\(S\)). The interval that catches 95% of <em>individuals</em> is a <em>prediction interval</em>, which is much wider and does <strong>not</strong> shrink to 0 as \(n\to\infty\).</div>
 </div>
 
 <div class="card">
 <h3>How every CI is built (the pivot)</h3>
 <p>Standardise the estimator into a quantity whose distribution has <em>no</em> unknown parameters — a <strong>pivot</strong> — then trap it between two quantiles and rearrange for \(\theta\). For the mean:
 \[\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}\quad\Rightarrow\quad \mathbb P\!\left(-q\lt \frac{\bar X-\mu}{S/\sqrt n}\lt q\right)=1-\alpha\quad\Rightarrow\quad \bar X\pm q\,\frac{S}{\sqrt n}.\]
-Every recipe below is the same three moves — only the pivot's distribution (\(t\), \(\chi^2\), or \(N(0,1)\)) changes.</p>
+Every recipe below is the same three moves — only the pivot's distribution (\(t\), \(\chi^2\), or \(N(0,1)\)) changes. This is the <a href="foundations.html#machine">universal CI machine</a>.</p>
 <p>The half-width \(q\cdot\operatorname{s.e.}\) is the <strong>margin of error</strong>. Larger confidence \(\Rightarrow\) larger \(q\) \(\Rightarrow\) wider interval. Common \(\alpha\): 0.10, 0.05, 0.01.</p>
+<div class="tip"><strong>Two dials, and you can't cheat.</strong> Raise the confidence level (95%→99%) → bigger \(q\) → <em>wider</em> interval: being more sure costs precision. Raise \(n\) → smaller s.e. \(=S/\sqrt n\) → <em>narrower</em> interval. Only more data tightens the interval without sacrificing confidence — that is what every sample-size question is buying.</div>
+<details>
+<summary>The mean CI derivation, one algebra step at a time (mirrors the variance derivation in the Ground Floor)</summary>
+<div class="method">Start from the pivot — a quantity with a <em>completely known</em> distribution (no \(\mu\), no \(\sigma\) left inside it):
+\[\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}.\]
+<strong>Step 1 — trap it.</strong> Because \(t_{n-1}\) is symmetric about 0, the middle \(1-\alpha\) sits between \(\pm q\) with \(q=t_{1-\alpha/2,\,n-1}\):
+\[\mathbb P\!\left(-q\lt\frac{\bar X-\mu}{S/\sqrt n}\lt q\right)=1-\alpha.\]
+<strong>Step 2 — multiply all three parts by \(S/\sqrt n\)</strong> (positive, so inequality directions stay):
+\[\mathbb P\!\left(-q\,\tfrac{S}{\sqrt n}\lt \bar X-\mu\lt q\,\tfrac{S}{\sqrt n}\right)=1-\alpha.\]
+<strong>Step 3 — subtract \(\bar X\)</strong> from all three parts:
+\[\mathbb P\!\left(-\bar X-q\,\tfrac{S}{\sqrt n}\lt -\mu\lt -\bar X+q\,\tfrac{S}{\sqrt n}\right)=1-\alpha.\]
+<strong>Step 4 — multiply by \(-1\)</strong>, which <em>flips</em> both inequalities; reorder left-to-right:
+\[\mathbb P\!\left(\bar X-q\,\tfrac{S}{\sqrt n}\lt \mu\lt \bar X+q\,\tfrac{S}{\sqrt n}\right)=1-\alpha.\]
+That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
+<div class="tip">Notice \(\mu\) never moved — we only rearranged to isolate it. The randomness lives entirely in \(\bar X\) and \(S\), so it is the <strong>endpoints</strong> that are random and \(\mu\) that is fixed. That is the algebra behind the "confidence, not probability" rule. Contrast the variance CI, where <a href="foundations.html#chisq">reciprocating the pivot flips the quantiles</a> instead.</div>
+</details>
 </div>
 
 <div class="card">
@@ -125,7 +145,7 @@ Every recipe below is the same three moves — only the pivot's distribution (\(
 <li><strong>Exact</strong> — when the data are normal, \((\bar X-\mu)/(S/\sqrt n)\) is <em>exactly</em> \(t_{n-1}\), so the CI is exact for any \(n\).</li>
 <li><strong>Approximate</strong> — when the data are not normal but \(n\) is large, the <strong>Central Limit Theorem</strong> makes \(\bar X\) approximately normal anyway, so the same interval works approximately.</li>
 </ul>
-<p>Crucially, the <strong>provided formula sheet (item 62) uses the \(t_{n-1}\) quantile for BOTH cases.</strong> For large \(n\), \(t_{n-1}\approx N(0,1)\) (e.g. \(t_{303}=1.97\approx1.96\)), so it barely matters — but on this exam you can always reach for the \(t\) row. Proportion CIs are the exception (they use the normal quantile — see below).</p>
+<p>Crucially, the <strong>provided formula sheet (item 62) uses the \(t_{n-1}\) quantile for BOTH cases.</strong> For large \(n\), \(t_{n-1}\approx N(0,1)\) (e.g. \(t_{303}=1.97\approx1.96\); <a href="foundations.html#t">why the \(t\) fattens then converges</a>), so it barely matters — but on this exam you can always reach for the \(t\) row. Proportion CIs are the exception (they use the normal quantile — see below).</p>
 </div>
 </section>
 
@@ -157,6 +177,7 @@ Every recipe below is the same three moves — only the pivot's distribution (\(
 <p>\[\left(\frac{(n-1)S^2}{q_2},\;\frac{(n-1)S^2}{q_1}\right),\quad q_1=\tfrac\alpha2\text{ quantile},\;q_2=1-\tfrac\alpha2\text{ quantile of }\chi^2_{n-1}.\]</p>
 <div class="when">Normal data, one sample, and the question asks about <strong>variability</strong> — a CI for \(\sigma^2\) (variance) or \(\sigma\) (standard deviation). For a CI on \(\sigma\), take the square root of both endpoints. Uses \(\chi^2\) because \((n-1)S^2/\sigma^2\sim\chi^2_{n-1}\).</div>
 <div class="trap">The <em>small</em> quantile \(q_1\) sits under the <em>upper</em> bound, and the <em>large</em> quantile \(q_2\) under the <em>lower</em> bound. Cross them and your interval comes out backwards.</div>
+<div class="tip"><strong>Why this interval is <em>not</em> symmetric</strong> (unlike the mean CI, which is \(\bar X\pm\text{something}\)). The mean's pivot is symmetric \(t\), so its two quantiles are mirror images \(\pm q\). The variance pivot \((n-1)S^2/\sigma^2\sim\chi^2_{n-1}\) is <strong>right-skewed</strong> — a sum of squares can't dip below 0 but has a long upper tail — so \(q_1\) and \(q_2\) are <em>not</em> mirror images, and \(s^2\) is not at the centre of the interval. The <a href="foundations.html#chisq">slow \(\chi^2\) derivation</a> shows exactly why the reciprocal step lands the big quantile under the small bound.</div>
 </div>
 
 <div class="card">

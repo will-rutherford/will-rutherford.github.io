@@ -35,6 +35,8 @@
   .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
   .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
   .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .intuition{background:rgba(14,165,233,.09);border:1px solid #1d3a4a;border-left:4px solid var(--accent2);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px}
+  .intuition:before{content:"🧭 INTUITION — ";color:var(--accent2);font-weight:700}
   details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
   details[open]{padding-bottom:12px}
   summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
@@ -81,6 +83,22 @@
 <p>These are pure Ch 5 skills wrapped around a t-test / ANOVA / regression. This page gives you <b>ready-made sentence templates</b> so you never freeze on them. Ch 4 supplies the study-design vocabulary (causal vs association, bias, confounding) that unlocks the "interpret in context" marks.</p>
 </div>
 
+<h3>1.0 &nbsp;The core dichotomy: population vs sample (read this first)</h3>
+<div class="card">
+<p>Every idea on this page hangs off one split. The <b>population</b> is the entire group you actually want a conclusion about (all UQ students, all heart-failure patients) — usually far too big to measure. The <b>sample</b> is the handful you actually collect data on. You compute numbers from the sample to <em>guess</em> the corresponding numbers of the population.</p>
+<div class="intuition">A population number is a fixed (but unknown) truth — call it a <b>parameter</b>. A sample number is something you can actually calculate, but it <b>changes every time you draw a new sample</b> — call it a <b>statistic</b>. The entire subject from Ch 6 on is: "my statistic is a noisy guess of the parameter — how far off could it be?" That "how far off" is the <b>standard error</b>, built on the <b>sampling distribution</b> of the statistic (see <a href="foundations.html">Foundations</a>).</div>
+<table>
+<tr><th>Quantity</th><th>Population <b>parameter</b> (fixed, unknown)</th><th>Sample <b>statistic</b> (computed, varies)</th></tr>
+<tr><td>Mean</td><td>\(\mu\)</td><td>\(\bar x\)</td></tr>
+<tr><td>Standard deviation</td><td>\(\sigma\)</td><td>\(s\)</td></tr>
+<tr><td>Variance</td><td>\(\sigma^2\)</td><td>\(s^2\)</td></tr>
+<tr><td>Proportion</td><td>\(p\)</td><td>\(\hat p\)</td></tr>
+<tr><td>Correlation</td><td>\(\rho\)</td><td>\(r\)</td></tr>
+<tr><td>Size</td><td>\(N\) (population)</td><td>\(n\) (sample)</td></tr>
+</table>
+<p class="tip"><b>Reading the notation on sight:</b> Greek letters (\(\mu,\sigma,\rho,p\)) = the population truth you're chasing; Roman/hatted letters (\(\bar x,s,r,\hat p\)) = what your sample gives you. When a question writes \(\mu\), it is asking about the whole population; when it writes \(\bar x\), it means "the number from this particular dataset". Everything in §1.5 (mean, SD, …) is the <em>right</em>-hand column; the model parameters in §1.1 are the <em>left</em>-hand column.</p>
+</div>
+
 <h3>1.1 &nbsp;Statistical modelling (Ch 4.1)</h3>
 <div class="card">
 <p>A <b>statistical model</b> is a plausible probabilistic story for how the data were generated. The whole workflow (notes Fig 4.1) is a pipeline:</p>
@@ -110,6 +128,8 @@
 <tr><td><b>Main threat</b></td><td>Sampling bias (are subjects representative?), too-small \(n\).</td><td><b>Confounding variables</b> — an unmeasured variable driving both X and Y.</td></tr>
 </table>
 <p class="tip">The confounding classic (notes p.71): taller people appear to have shorter hair → but <b>gender</b> confounds it (females: longer hair &amp; shorter on average). Within each gender the relationship vanishes. Randomisation defeats confounding; observation cannot.</p>
+<div class="intuition"><b>What a confounder actually is:</b> a third variable that is tied to <em>both</em> your explanatory variable and your response, so it manufactures (or hides) an apparent link between them. Gender drives both height and hair length above, so height and hair look related when neither causes the other.
+<br><br><b>Why randomisation defeats it — the real mechanism:</b> you don't need to <em>know</em> the confounders. When you flip a coin to assign each person to a group, every background variable — age, gender, diet, genetics, the ones you never measured or even thought of — gets scattered into both groups <b>at roughly equal rates, purely by chance</b>. So the groups start out as near-identical twins on <em>everything</em>. After treatment, the only systematic difference left is the treatment itself, so a difference in outcome must be caused by it. Observation can only balance the confounders you happened to measure and adjust for; randomisation balances them <em>all</em>, on average — that is why the RCT is the gold standard.</div>
 </div>
 
 <div class="card">
@@ -123,6 +143,7 @@
 <li><b>Randomisation</b> — assign treatments by a random mechanism (R's <span class="mono">sample()</span>). The ingredient that licences causal claims.</li>
 <li><b>Residual variability</b> — variation the model cannot explain.</li>
 </ul>
+<div class="intuition"><b>Why placebo &amp; blinding exist</b> — they close two leaks that would otherwise masquerade as a treatment effect. The <b>placebo</b> controls the <em>placebo effect</em>: people often improve just from believing they are being treated, so without a dummy pill you couldn't tell the drug's effect from the belief's effect. <b>Blinding</b> the subjects stops that belief differing between groups; <b>double-blinding</b> (the experimenter is also blind) stops <em>experimenter bias</em> — an assessor who knows who got the drug may unconsciously score them more favourably. Each device removes a specific alternative explanation, so what's left is cleaner evidence for the treatment itself.</div>
 </div>
 
 <h3>1.3 &nbsp;Sampling from a population (Ch 4.4)</h3>
@@ -136,6 +157,8 @@
 <tr><td><b>Self-selected</b></td><td>People opt in (TV polls).</td><td style="color:var(--bad)">Strongly biased; not sampled independently with equal probability.</td></tr>
 </table>
 <p><b>Villagers example</b> (notes 4.4): 10 villages, \(N=5\times50+5\times100=750\); to sample \(n=100\), stratify East (250) / West (500) → take \(100\times250/750\approx33\) and \(100\times500/750\approx67\).</p>
+<div class="intuition"><b>Bias vs variability are two different problems.</b> A bigger sample shrinks <em>variability</em> — your estimate wobbles less around whatever it's converging to (this is the standard-error story, <a href="foundations.html">Foundations</a>). But <b>bias</b> is a systematic aim in the <em>wrong</em> direction, baked into <em>how</em> you selected people. Collecting more of the same wrongly-selected people just makes you more precisely wrong.</div>
+<p class="trap"><b>"A huge sample fixes bias." — No.</b> The 1936 <em>Literary Digest</em> poll surveyed 2.4 million people and still called the US election wrong, because its list (car &amp; phone owners) over-represented the wealthy — a biased <em>frame</em>, not a small one. A self-selected online poll with a million responses is still worthless for a population claim. Only a good <b>sampling method</b> (random, representative) removes bias; \(n\) cannot.</p>
 </div>
 
 <h3>1.4 &nbsp;Variable types (Ch 5.3)</h3>
@@ -166,12 +189,14 @@
 <li><b>IQR</b> \(= Q_3-Q_1\). <b>Robust</b> measure of spread (middle 50%).</li>
 <li><b>Sample variance</b> \(s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2\); <b>SD</b> \(s=\sqrt{s^2}\), in the original units. <b>Not robust.</b></li>
 </ul>
+<div class="intuition"><b>Why <em>squared</em> deviations?</b> We want one number for "how far, typically, are points from the centre". The raw deviations \(x_i-\bar x\) are useless summed — they always cancel to exactly 0 (that's what makes \(\bar x\) the balance point). We need to kill the signs first. Squaring does that, and does two extra useful things: it <b>penalises big misses much harder</b> than small ones (a deviation of 4 counts 16, not 4), and it makes the algebra clean — squared distances are what the Pythagorean/least-squares machinery of the whole course (variance decomposition, ANOVA, regression \(R^2\)) is built on. Taking the square root at the end (the SD) just brings the answer back into the original units so it's interpretable. (Absolute deviations avoid signs too, but aren't smoothly differentiable and don't decompose nicely — hence squares win.)</div>
 <p class="tip"><b>The two decisions the exam loves:</b></p>
 <ul>
 <li><b>Mean vs median under skew:</b> for right-skewed data (long right tail), <b>mean &gt; median</b>; the mean is pulled toward the tail. Report the <b>median</b> for a skewed variable (e.g. income, serum creatinine).</li>
 <li><b>SD vs IQR:</b> use <b>IQR / median</b> when data are skewed or have outliers (robust); use <b>SD / mean</b> when data are roughly symmetric.</li>
 </ul>
 <p class="trap"><b>Why \(n-1\), not \(n\)?</b> Dividing by \(n-1\) makes \(s^2\) an <em>unbiased</em> estimator of the population variance \(\sigma^2\): \(\mathbb E(S^2)=\sigma^2\). Your Casio's "\(\sigma_{n-1}\)"/"sx" key gives the \(n-1\) version — use that, not \(\sigma_n\).</p>
+<div class="intuition"><b>The intuition behind \(n-1\) (degrees of freedom):</b> the deviations are measured from \(\bar x\), which was itself computed from the same data. Once you know \(\bar x\) and any \(n-1\) of the deviations, the last one is forced (they must sum to 0) — so only \(n-1\) of them are "free" to vary. You already spent one piece of information estimating the centre, so you average the squared deviations over \(n-1\), not \(n\); dividing by \(n\) would under-estimate the true spread. This "\(n-1\)" is your first <b>degrees-of-freedom</b> count — the same idea returns for the \(t\), \(\chi^2\) and \(F\) distributions later (<a href="foundations.html">Foundations</a> tells that df story in full).</div>
 </div>
 
 <h3>1.6 &nbsp;Describing distributions &amp; the plots (Ch 5.5–5.6)</h3>
@@ -185,12 +210,14 @@
 <li>An observation is a <b>boxplot outlier</b> if it lies more than \(1.5\times\text{IQR}\) beyond a box edge — i.e. below \(Q_1-1.5\,\text{IQR}\) or above \(Q_3+1.5\,\text{IQR}\). Shown as a point/*.</li>
 <li>Whiskers reach the most extreme <em>non-outlier</em> observations.</li>
 </ul>
+<div class="intuition"><b>Why \(1.5\times\)IQR, and why the whiskers are built this way?</b> The box (\(Q_1\) to \(Q_3\)) is the robust "typical" middle 50% — it deliberately ignores the extremes, so the whole plot can't be dragged around by one wild value the way the mean/SD can. The whiskers then show the realistic reach of ordinary data, and anything past a fence gets flagged for individual attention. The <b>1.5 is a deliberate calibration</b>: for a <em>normal</em> distribution the IQR is about \(1.35\sigma\), so \(Q_3+1.5\,\text{IQR}\) sits roughly \(2.7\sigma\) above the median — far enough out that only about <b>0.7% of normal data</b> lands beyond a fence. So on clean normal data you expect almost no flagged points; when a boxplot shows several, that itself is evidence of heavy tails or skew. This is exactly the engine of <b>2022 Q2(b)</b>: it inverts the logic — given the ~0.7% rate, find the \(n\) that yields about 10 expected outliers.</div>
 <h4>Shape &amp; skewness</h4>
 <div class="grid2">
 <div class="method"><b>Right-skewed</b> (positive)<br>long tail to the <em>right</em>; mean&gt;median; box's right whisker/outliers longer. e.g. serum creatinine, salaries.</div>
 <div class="method"><b>Left-skewed</b> (negative)<br>long tail to the <em>left</em>; mean&lt;median.</div>
 </div>
 <p><b>Symmetric</b>: left and right tails mirror each other; mean≈median (normal is the bell-shaped symmetric case).</p>
+<div class="intuition"><b>Why "shape" is worth a whole mark — it decides what you're allowed to do next.</b> Shape isn't decoration; it gates the entire toolkit in Ch 6–11. (1) It picks the <b>right summary</b>: symmetric → mean &amp; SD are honest; skewed → they lie, so report median &amp; IQR. (2) It checks the <b>normality assumption</b> that the t-test, ANOVA and regression all lean on — a badly skewed group means the test's stated error rate is wrong, so you'd switch to a transform or a robust method. (3) It warns of <b>outliers</b> that could be driving a result single-handedly. That's why "comment on the shape" is never idle: the examiner is really asking "have you checked whether the machinery you're about to use is valid here?"</div>
 <h4>Histograms, density &amp; QQ plots</h4>
 <ul>
 <li><b>Histogram</b> — counts of observations in bins; reveals shape, peaks (modes), skew, gaps.</li>
@@ -208,6 +235,7 @@
 <li><b>Correlation</b> \(r\in[-1,1]\) measures the strength of a <em>linear</em> relationship: \(+1\) lock-step increase, \(-1\) one up one down, \(0\) no linear relationship. Larger \(|r|\) = stronger. In the heart data the strongest was only \(r=-0.257\) (log serum creatinine vs serum sodium).</li>
 </ul>
 <p class="trap"><b>Correlation is linear-only.</b> \(r=0\) does <em>not</em> mean "no relationship" — a strong curved (non-linear) pattern can have \(r\approx0\). And correlation ≠ causation (Ch 4!).</p>
+<div class="intuition"><b>Reading \(r\) into words</b> — the two halves carry different information. The <b>sign is direction</b> (does \(y\) tend to rise or fall as \(x\) rises?); the <b>magnitude \(|r|\) is strength</b> (how tightly the cloud hugs a straight line). A rough vocabulary the exam accepts: \(|r|\lesssim0.3\) weak, \(0.3\)–\(0.7\) moderate, \(\gtrsim0.7\) strong; \(|r|=1\) means the points lie <em>exactly</em> on a line. So the heart-data \(r=-0.257\) reads as a "weak negative" trend. Two more facts worth knowing: \(r\) is <b>unitless and scale-free</b> — rescaling cm→m or °C→°F doesn't change it, so it's purely about pattern, not size of the numbers; and it's <b>symmetric</b> in \(x\) and \(y\) (unlike a regression slope). Because \(|r|\) rewards <em>linear</em> tightness only, always eyeball the scatterplot before trusting the number.</div>
 </div>
 </section>
 
@@ -220,7 +248,8 @@
 <div class="when">reporting the centre of a roughly symmetric quantitative variable. On the Casio: SD/STAT mode → <span class="mono">x̄</span>.</div></div>
 
 <div class="method"><b>Median &amp; percentiles (by hand, notes p.97 method).</b> Order the data \(x_{(1)}\le\dots\le x_{(n)}\). The \(q\)th percentile is the average of the values at positions \(\lfloor (n+1)q/100\rfloor\) and \(\lceil (n+1)q/100\rceil\). Median is the 50th percentile: position \((n+1)/2\).
-<div class="when">computing a five-number summary or IQR by hand from a small dataset. <b>R interpolates differently</b> — for exam by-hand work use this averaging method.</div></div>
+<div class="when">computing a five-number summary or IQR by hand from a small dataset. <b>R interpolates differently</b> — for exam by-hand work use this averaging method.</div>
+<div class="intuition"><b>Why \((n+1)p\), not \(np\)?</b> A percentile is a <em>cut point</em>, and cut points fall in the <em>gaps between</em> ordered values, not on them. Line up your \(n\) sorted points and you create \(n+1\) gaps (one before the first, \(n-1\) between, one after the last). The \(p\)-fraction quantile should sit \(p\) of the way through those gaps, which lands it at rank \((n+1)p\). Sanity check with the median (\(p=0.5\)): position \((n+1)/2\) is dead centre — for \(n=7\) that's rank 4 (the middle value), and for \(n=8\) it's rank 4.5 (average the 4th and 5th). Using \(np\) instead would bias every quantile slightly toward the low end, especially for small \(n\).</div></div>
 
 <div class="method"><b>Range &amp; IQR</b> \[\text{range}=\max_i x_i-\min_i x_i,\qquad \text{IQR}=Q_3-Q_1\]
 <div class="when">IQR = robust spread for skewed data; range only for a quick min/max.</div></div>
@@ -291,7 +320,7 @@
 <p>This is worth ~4 marks and it is <b>free if you have the template</b>. The two-sample t-test assumes: (i) each sample is <b>iid</b> / independent observations; (ii) the two samples are <b>independent of each other</b>; (iii) the data in each group are (approximately) <b>normally distributed</b>; and (for the pooled version) (iv) <b>equal variances</b>.</p>
 <p><b>How to read each off the plot and write it up:</b></p>
 <div class="method"><b>Normality</b> — from a histogram/density: is each group roughly <b>symmetric and bell-shaped</b>? <br>
-<em>Template:</em> "The histograms for both groups are roughly symmetric and single-peaked with no severe skew or gross outliers, so the normality assumption appears reasonable. (If the samples are large, the CLT further protects the test.)" <br>
+<em>Template:</em> "The histograms for both groups are roughly symmetric and single-peaked with no severe skew or gross outliers, so the normality assumption appears reasonable. (If the samples are large, the <a href="foundations.html">central limit theorem</a> further protects the test — the sampling distribution of the mean is near-normal even when the raw data aren't.)" <br>
 If instead you see a long right tail: "Group X is clearly right-skewed with a long upper tail, so the normality assumption is doubtful; a transformation (e.g. log) or a robust method would be safer."</div>
 <div class="method"><b>Equal variance</b> — compare the <em>spread</em> (box width in boxplots, or histogram width): "The two groups show similar spread, so equal variances is plausible → pooled t-test." OR "Group X is far more spread out than Group Y, so I do <b>not</b> assume equal variances and use the Welch (unequal-variance) t-test."</div>
 <div class="method"><b>Independence</b> — argue from the <em>design</em>, not the plot: "Subjects were randomly and independently sampled/allocated, so observations are independent."</div>

@@ -60,6 +60,7 @@
 
 <nav>
   <a href="index.html">← Hub</a>
+  <a href="foundations.html">📐 Foundations</a>
   <a href="ch03-multiple-rvs.html">Ch 3 Multiple RVs →</a>
   <a href="formulas.html">Formula sheet</a>
   <a href="exam-2025.html">Exams</a>
@@ -78,13 +79,15 @@
 <section id="concepts">
 <h2>§1 Concepts in depth</h2>
 
+<div class="tip">New to the underlying machinery — <b>sampling distributions, standard error, where the \(Z\), \(t\), \(\chi^2\) and \(F\) shapes come from, and the quantile conventions</b> (\(z_\alpha\), \(1-\alpha/2\))? Those foundations are taught in one place: see <a href="foundations.html">📐 Foundations</a>. This page assumes only Chapters 1–2.</div>
+
 <div class="card">
 <h3>The whole point: a model for randomness</h3>
 <p>A <b>random experiment</b> is any process whose outcome cannot be predicted with certainty (a die roll, a person's height, whether a chip is faulty). We tame it with three ingredients (notes §1.4):</p>
 <ul>
 <li><b>Sample space</b> \(\Omega\) — the set of <i>all</i> possible outcomes.</li>
 <li><b>Events</b> — subsets of \(\Omega\) (e.g. "sum of two dice \(\ge 10\)"). Events are sets, so union \(\cup\), intersection \(\cap\), complement \(A^c\) all apply.</li>
-<li><b>Probability measure</b> \(\mathbb{P}\) — assigns each event a number in \([0,1]\), obeying Kolmogorov's axioms: \(\mathbb{P}(A)\ge 0\), \(\mathbb{P}(\Omega)=1\), and countable additivity for disjoint events.</li>
+<li><b>Probability measure</b> \(\mathbb{P}\) — assigns each event a number in \([0,1]\), obeying Kolmogorov's axioms: \(\mathbb{P}(A)\ge 0\) (no negative probabilities), \(\mathbb{P}(\Omega)=1\) (something must happen), and <b>countable additivity</b> for disjoint events — if events cannot overlap, the probability of "one of them happens" is just the sum of their probabilities (the same rule as areas: the total area of non-overlapping patches is the sum of the patch areas, notes Thm 1.2).</li>
 </ul>
 <p>Everything else in the course is built on these three objects. If you can name \(\Omega\), the event of interest, and how \(\mathbb{P}\) is assigned, you can answer any Chapter-1 question.</p>
 </div>
@@ -107,14 +110,21 @@
 <tr><td><b>Yes</b> (ordered)</td><td>\(n^k\)</td><td>\({}^nP_k=\dfrac{n!}{(n-k)!}\)</td></tr>
 <tr><td><b>No</b> (unordered)</td><td>— (not examinable)</td><td>\({}^nC_k=\dbinom{n}{k}=\dfrac{n!}{(n-k)!\,k!}\)</td></tr>
 </table>
+<p><b>Where the formulas come from</b> (don't memorise — <i>derive</i> them):</p>
+<ul>
+<li><b>\(n^k\) (ordered, with replacement):</b> \(k\) positions to fill, each position has all \(n\) choices available (nothing is used up), so \(n\times n\times\cdots\times n=n^k\).</li>
+<li><b>\({}^nP_k\) (ordered, no replacement):</b> the first position has \(n\) choices, but now each pick is used up — the second has \(n-1\), the third \(n-2\), …, down to \(n-k+1\). Multiply: \(n(n-1)\cdots(n-k+1)=\dfrac{n!}{(n-k)!}\).</li>
+<li><b>\({}^nC_k=\binom{n}{k}\) (unordered, no replacement):</b> start from \({}^nP_k\), but if order doesn't matter we've counted each group \(k!\) times (a group of \(k\) items can be arranged in \(k!\) orders). <b>Divide out that overcount:</b> \(\binom{n}{k}=\dfrac{{}^nP_k}{k!}\). This is why a combination is always a permutation divided by \(k!\).</li>
+</ul>
 <p>Choosing a lottery set, a poker hand, or which positions the "successes" occupy — all are \(\binom{n}{k}\). This combination is exactly what appears inside the binomial pmf, which is why counting is the bridge into Chapter 2.</p>
 </div>
 
 <div class="card">
 <h3>Conditional probability, independence, and the two big rules</h3>
 <p><b>Conditional probability</b> updates a probability once you know event \(B\) happened (notes Def 1.4):
-$$\mathbb{P}(A\mid B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}.$$
-Rearranged, this is the <b>product rule</b> \(\mathbb{P}(A\cap B)=\mathbb{P}(B)\,\mathbb{P}(A\mid B)\) — the engine for sequential "draw without replacement" problems.</p>
+$$\mathbb{P}(A\mid B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}.$$</p>
+<div class="tip"><b>Intuition — shrinking the universe.</b> Learning that \(B\) happened throws away every outcome outside \(B\): your whole sample space <i>shrinks</i> from \(\Omega\) down to just \(B\). Inside this smaller universe, the only part of \(A\) that survives is \(A\cap B\), and you re-scale by dividing by \(\mathbb{P}(B)\) so the shrunken universe still adds up to 1. That division is the entire formula.</div>
+<p>Rearranged, this is the <b>product rule</b> \(\mathbb{P}(A\cap B)=\mathbb{P}(B)\,\mathbb{P}(A\mid B)\) — the engine for sequential "draw without replacement" problems (e.g. \(\mathbb{P}(\text{2nd ball black}\mid\text{1st black})\), notes Ex 1.6).</p>
 <p><b>Independence</b> means knowing \(B\) tells you nothing about \(A\): \(\mathbb{P}(A\cap B)=\mathbb{P}(A)\,\mathbb{P}(B)\). Do not confuse independent with disjoint — disjoint events with positive probability are the <i>opposite</i> of independent.</p>
 <p><b>Law of Total Probability:</b> if \(B_1,\dots,B_n\) partition \(\Omega\),
 $$\mathbb{P}(A)=\sum_{i=1}^n \mathbb{P}(A\mid B_i)\,\mathbb{P}(B_i).$$
@@ -126,13 +136,17 @@ The classic wording is "given the test is <i>positive</i>, what is the probabili
 
 <div class="card">
 <h3>Random variables: cdf, pmf, pdf</h3>
-<p>A <b>random variable</b> \(X\) is a numerical measurement of the experiment — a function from \(\Omega\) to \(\mathbb{R}\). We describe its behaviour with:</p>
+<p>A <b>random variable</b> \(X\) is a numerical measurement of the experiment — formally a function from \(\Omega\) to \(\mathbb{R}\) (notes §1.8). Think of it as "a number you'll observe <i>tomorrow</i>, whose value is still uncertain <i>today</i>" (die face, a person's height, count of faulty chips).</p>
+<div class="tip"><b>What "distribution" even means.</b> The <b>distribution</b> of \(X\) is just the complete rulebook saying how its total probability of 1 is spread across the possible values — which values are likely, which are rare. The cdf, pmf and pdf below are three ways of writing down that same rulebook. "Find the distribution" = "pin down that spread."</div>
+<p>The value set where \(X\) actually lives — where \(f\gt0\) — is called the <b>support</b> (e.g. \([0,5]\) for a pdf defined on that interval). Outside the support, probability is zero. We describe the distribution with:</p>
 <ul>
-<li><b>cdf</b> \(F(x)=\mathbb{P}(X\le x)\) — defined for every RV, always non-decreasing from 0 to 1. Then \(\mathbb{P}(a\lt X\le b)=F(b)-F(a)\).</li>
-<li><b>Discrete</b> RV → <b>pmf</b> \(f(x)=\mathbb{P}(X=x)\), with \(\sum_x f(x)=1\). Probabilities are <i>sums</i>.</li>
-<li><b>Continuous</b> RV → <b>pdf</b> \(f(x)\), with \(\int_{-\infty}^{\infty}f(x)\,dx=1\). Probabilities are <i>areas</i>: \(\mathbb{P}(a\lt X\lt b)=\int_a^b f(x)\,dx\). Crucially \(\mathbb{P}(X=c)=0\) for any single point.</li>
+<li><b>cdf</b> \(F(x)=\mathbb{P}(X\le x)\) — "probability accumulated up to \(x\)". Defined for <i>every</i> RV, always non-decreasing, running from 0 (far left) up to 1 (far right). Then \(\mathbb{P}(a\lt X\le b)=F(b)-F(a)\).</li>
+<li><b>Discrete</b> RV → <b>pmf</b> \(f(x)=\mathbb{P}(X=x)\), with \(\sum_x f(x)=1\). Probabilities are <i>sums</i>. Here \(f(x)\) really is a probability.</li>
+<li><b>Continuous</b> RV → <b>pdf</b> \(f(x)\), with \(\int_{-\infty}^{\infty}f(x)\,dx=1\). Probabilities are <i>areas</i>: \(\mathbb{P}(a\lt X\lt b)=\int_a^b f(x)\,dx\). Crucially \(\mathbb{P}(X=c)=0\) for any single point — an area of zero width.</li>
 </ul>
+<div class="tip"><b>Why must \(\sum f=1\) / \(\int f=1\)?</b> Because \(X\) is <i>certain</i> to land <i>somewhere</i> on its support, and "somewhere" is the whole sample space, which has probability 1 by the axioms. So adding up (discrete) or sweeping the area under (continuous) all the probability must give exactly 1. This is not a convention — it's what forces the unknown constant in \(f(x)=c\,x^a\) to a specific value, which is the whole point of the flagship question.</div>
 <p>The pdf and cdf are linked by calculus: \(F(x)=\int_{-\infty}^x f(u)\,du\) and \(f(x)=F'(x)\). <b>Integrate the density to get the cdf; differentiate the cdf to get the density.</b> This single fact powers the flagship exam question.</p>
+<div class="trap"><b>A pdf value is not a probability.</b> For a continuous \(X\), \(f(x)\) is a probability <i>density</i> — probability per unit length — so it can be bigger than 1 (e.g. \(\mathcal U[0,0.5]\) has \(f=2\)). Only its <i>area</i> is a probability. Reading \(f(3)=0.4\) as "\(\mathbb{P}(X=3)=0.4\)" is wrong; that point probability is 0. Formally \(\mathbb{P}(x\le X\le x+h)\approx h\,f(x)\) for small \(h\) (notes eq 1.21).</div>
 </div>
 
 <div class="card">
@@ -148,12 +162,14 @@ The classic wording is "given the test is <i>positive</i>, what is the probabili
 
 <div class="card">
 <h3>Expectation and variance</h3>
-<p><b>Expectation</b> (the long-run average) is a weighted average of the values \(X\) can take:
+<p><b>Expectation</b> \(\mathbb{E}(X)\) is a weighted average of the values \(X\) can take, each weighted by how likely it is:
 $$\mathbb{E}(X)=\sum_x x\,f(x)\ \text{(discrete)},\qquad \mathbb{E}(X)=\int_{-\infty}^{\infty} x\,f(x)\,dx\ \text{(continuous)}.$$
 For any function \(g\), \(\mathbb{E}(g(X))=\sum_x g(x)f(x)\) or \(\int g(x)f(x)\,dx\) (Law of the Unconscious Statistician).</p>
-<p><b>Variance</b> measures spread: \(\operatorname{Var}(X)=\mathbb{E}(X-\mu)^2\), computed in practice via the shortcut
-$$\operatorname{Var}(X)=\mathbb{E}(X^2)-\big(\mathbb{E}(X)\big)^2.$$
-The standard deviation is \(\sigma=\sqrt{\operatorname{Var}(X)}\).</p>
+<div class="tip"><b>Two ways to picture \(\mathbb{E}(X)\).</b> (1) <b>Long-run average:</b> repeat the experiment forever and average the results — that average settles on \(\mathbb{E}(X)\) (notes Ex 1.10, the fair-payout game). (2) <b>Centre of mass / balance point:</b> if you laid the pmf/pdf out as a physical mass along the number line, \(\mathbb{E}(X)\) is where it would balance on a fingertip. This is why, for a <b>symmetric</b> density, \(\mathbb{E}(X)\) is simply the point of symmetry — no integration needed.</div>
+<p><b>Variance</b> measures <i>spread</i> — how far \(X\) typically strays from its centre \(\mu=\mathbb{E}(X)\):
+$$\operatorname{Var}(X)=\mathbb{E}\big[(X-\mu)^2\big]=\text{the average squared distance from the mean.}$$
+We square the distance for two reasons: it stops positive and negative deviations cancelling to zero, and it penalises big misses more than small ones. Because squaring changes the units (cm becomes cm²), we take a square root at the end to get back to the original scale — the <b>standard deviation</b> \(\sigma=\sqrt{\operatorname{Var}(X)}\), the "typical distance from the mean". In practice compute via the shortcut
+$$\operatorname{Var}(X)=\mathbb{E}(X^2)-\big(\mathbb{E}(X)\big)^2.$$</p>
 <p><b>Linearity / scaling</b> (notes Thm 1.10–1.11) — these are examined constantly:
 $$\mathbb{E}(aX+b)=a\,\mathbb{E}(X)+b,\qquad \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X).$$
 Note the shift \(b\) drops out of the variance, and the scale \(a\) is squared.</p>
@@ -170,14 +186,17 @@ Note the shift \(b\) drops out of the variance, and the scale \(a\) is squared.<
 <tr><td><b>Uniform</b> \(\mathcal U[a,b]\)</td><td>\(\dfrac{1}{b-a}\) on \([a,b]\)</td><td>\(\dfrac{a+b}{2}\)</td><td>\(\dfrac{(b-a)^2}{12}\)</td><td>"equally likely" over an interval</td></tr>
 <tr><td><b>Normal</b> \(\mathcal N(\mu,\sigma^2)\)</td><td>\(\dfrac{1}{\sigma\sqrt{2\pi}}e^{-\frac12\left(\frac{x-\mu}{\sigma}\right)^2}\)</td><td>\(\mu\)</td><td>\(\sigma^2\)</td><td>heights, measurement error, sample means (CLT)</td></tr>
 </table>
+<div class="tip"><b>Bernoulli → Binomial (the build worth knowing).</b> A <b>Bernoulli(\(p\))</b> is one yes/no trial: \(X=1\) with prob \(p\), else 0. A <b>Binomial(\(n,p\))</b> is nothing more than the <i>sum of \(n\) independent Bernoulli(\(p\)) trials</i> — you run the same coin-flip \(n\) times and count the 1s (notes §2.3). This instantly explains the moment formulas: each trial contributes mean \(p\) and variance \(p(1-p)\), and for independent pieces means and variances just <b>add</b>, so over \(n\) trials \(\mathbb{E}=np\) and \(\operatorname{Var}=np(1-p)\). The \(\binom{n}{x}\) in the pmf is exactly the counting from §1: the number of ways to choose <i>which</i> \(x\) of the \(n\) trials were the successes.</div>
 <p class="trap">R (and the formula sheet) parameterise the Normal by the <b>standard deviation</b> \(\sigma\), but the notation \(\mathcal N(\mu,\sigma^2)\) uses the <b>variance</b>. If a question says "variance 36", then \(\sigma=6\). Mixing these up is the single most common Normal error.</p>
 </div>
 
 <div class="card">
 <h3>Standardising the Normal</h3>
-<p>There is no closed form for Normal areas, so we convert every Normal question to the <b>standard normal</b> \(Z\sim\mathcal N(0,1)\) and read the table (provided):
+<p>There is no closed form for Normal areas (you can't integrate \(e^{-x^2/2}\) by hand), so we convert every Normal question to the <b>standard normal</b> \(Z\sim\mathcal N(0,1)\) and read the table (provided). Here \(\Phi(z)=\mathbb{P}(Z\le z)\) is the standard-normal <b>cdf</b> — the area to the left of \(z\) — and \(\varphi\) (little phi) is its pdf.
 $$Z=\frac{X-\mu}{\sigma},\qquad \mathbb{P}(X\le x)=\Phi\!\left(\frac{x-\mu}{\sigma}\right).$$
 Use \(\mathbb{P}(Z\ge z)=1-\Phi(z)\) and symmetry \(\Phi(-z)=1-\Phi(z)\). Going backwards ("find the value with 10% above it") uses the <b>quantile</b>: \(x=\mu+z\,\sigma\) where \(\Phi(z)=1-\alpha\).</p>
+<div class="tip"><b>What standardising actually does.</b> It's not a trick — it's a change of ruler. Every normal curve is the <i>same bell shape</i>; they differ only by where the centre sits (\(\mu\)) and how wide it is (\(\sigma\)). The step \(Z=(X-\mu)/\sigma\) does two things: <b>subtract \(\mu\)</b> slides the centre to 0, and <b>divide by \(\sigma\)</b> rescales so one standard deviation becomes one unit. Because sliding and stretching don't change <i>areas</i> (probabilities), the answer is identical — but now it lives on the single universal \(Z\) curve we have a table for. Equivalently (notes Thm 2.5): any normal is just \(X=\mu+\sigma Z\), a shifted-and-stretched standard normal. That is why <b>one</b> table serves <b>every</b> normal problem.</div>
+<div class="tip">The reverse-lookup convention (\(z_\alpha\) with area \(\alpha\) to the <i>right</i>, i.e. \(\Phi(z_\alpha)=1-\alpha\), and the two-sided \(1-\alpha/2\) used for symmetric intervals) is exactly the quantile notation that trips people up later in Chapters 6–7. It is taught in full at <a href="foundations.html">📐 Foundations</a>.</div>
 </div>
 </section>
 
@@ -407,6 +426,7 @@ $$F(x)=\begin{cases}0 & x\lt0\\[2pt]\tfrac23 x & 0\le x\lt1\\[2pt]\tfrac23+\tfra
 <div class="card">
 <h3>Type E — Normal approximation / CLT</h3>
 <p><b>Looks like:</b> "use the central limit theorem to approximate the probability that fewer than … " a large count or sum; "expected number of outliers from a standard normal."<br><b>Marks:</b> 6–8.</p>
+<div class="tip"><b>Why this works (one line):</b> the Central Limit Theorem says a <i>sum or average of many independent pieces</i> is approximately Normal, <i>whatever</i> the pieces' own distribution — which is why a Binomial count (a sum of \(n\) Bernoullis) can be approximated by \(\mathcal N(np,\,np(1-p))\). The full statement, plus where standard error comes from, is at <a href="foundations.html">📐 Foundations</a>.</div>
 <div class="method"><b>Recipe:</b>
 <ol>
 <li>Identify the sum/count and its mean and variance (for a binomial count, \(\mu=np,\ \sigma^2=np(1-p)\)).</li>

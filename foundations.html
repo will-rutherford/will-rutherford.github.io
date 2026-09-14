@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — The Ground Floor: sampling distributions, t, χ² and F</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* tail-diagram (self-contained, no images) */
+  .taildiag{margin:14px 0}
+  .taildiag .bar{display:flex;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--line);font-size:12px;font-weight:700}
+  .taildiag .seg{display:flex;align-items:center;justify-content:center;text-align:center;padding:2px}
+  .taildiag .tail{background:rgba(248,113,113,.28);color:#ffd9d9;flex:0 0 14%}
+  .taildiag .mid{background:rgba(52,211,153,.22);color:#c9ffe9;flex:1 1 auto}
+  .taildiag .ticks{display:flex;justify-content:space-between;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11.5px;color:var(--muted);margin-top:4px}
+  .taildiag .ticks span{flex:0 0 33%;}
+  .taildiag .ticks span:nth-child(2){text-align:center}
+  .taildiag .ticks span:nth-child(3){text-align:right}
+  /* chi-square skew sketch */
+  .skew{display:block;width:100%;max-width:460px;height:auto;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Ground Floor</h1>
+  <p>Sampling distributions, and the \(t\), \(\chi^2\) and \(F\) distributions — built from scratch</p>
+  <p>STAT1301 Advanced Analysis of Scientific Data</p>
+  <span class="badge gold">Start here if t, χ², df are fuzzy</span>
+  <span class="badge">Prerequisite for Ch 6–8 &amp; 11</span>
+  <span class="badge">Zero new formulas to memorise</span>
+</header>
+
+<nav>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch06-estimation-cis.html">Ch 6 Estimation &amp; CIs</a>
+  <a href="ch07-hypothesis-testing.html">Ch 7 Testing</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="notebook.html">📓 Notebook</a>
+  <a href="#stats-rv">1 · Statistics are RVs</a>
+  <a href="#z">2 · Z</a>
+  <a href="#t">3 · t</a>
+  <a href="#quantile">4 · Quantiles</a>
+  <a href="#chisq">5 · χ²</a>
+  <a href="#f">6 · F</a>
+  <a href="#machine">7 · CI machine</a>
+  <a href="#drills">8 · Drills</a>
+</nav>
+
+<main>
+
+<div class="card q">
+<p style="margin:0"><strong>Why this page exists.</strong> Every CI and every test in this course ends the same way: "…where \(q\) is the \(1-\alpha/2\) quantile of \(t_{n-1}\)" (or \(\chi^2_{n-1}\), or \(F\)). If you don't know what those distributions <em>are</em> — where they come from, why the subscript is \(n-1\), what the quantile notation means — the recipes are just spells. This page is the ground floor underneath Chapters 6, 7, 8 and 11. Read it once, slowly, and the rest of the site stops being magic.</p>
+</div>
+
+<!-- ============ 1. STATISTICS ARE RANDOM VARIABLES ============ -->
+<section id="stats-rv">
+<h2>1 · Statistics are random variables too</h2>
+
+<div class="card">
+<h3>The one idea everything rests on</h3>
+<p>A <strong>statistic</strong> is any number you compute from data — the sample mean \(\bar x\), the sample variance \(s^2\), a sample proportion \(\widehat p\). Here is the shift in thinking the whole course demands:</p>
+<p>Your data \(X_1,\dots,X_n\) are a <em>random sample</em>. If you re-ran the study tomorrow you would get <em>different</em> numbers, so any statistic you compute would come out <em>different too</em>. That means a statistic like \(\bar X\) is itself a <strong>random variable</strong> — it has a distribution, a mean, and a spread — exactly like a single data point does.</p>
+<div class="tip">Lower-case \(\bar x = 75.98\) is the <em>one number you actually got</em> (an estimate). Upper-case \(\bar X = \tfrac1n\sum X_i\) is the <em>random recipe</em> that would give a different number each repeat (an estimator). The whole game is: study the distribution of \(\bar X\) so you can say how far your single \(\bar x\) might be from the truth.</div>
+</div>
+
+<div class="card">
+<h3>The sampling distribution</h3>
+<p>Imagine drawing sample after sample after sample, computing \(\bar x\) each time, and making a histogram of all those \(\bar x\) values. That histogram is the <strong>sampling distribution of the mean</strong>. It is <em>not</em> the distribution of the raw data — it is the distribution of the <em>statistic</em>.</p>
+<p>Two things are true of it (both proved in Ch 3), for data with population mean \(\mu\) and variance \(\sigma^2\):</p>
+<p>\[\mathbb E(\bar X)=\mu \qquad\text{and}\qquad \operatorname{Var}(\bar X)=\frac{\sigma^2}{n}.\]</p>
+<p>The mean of the sampling distribution sits right on the truth \(\mu\) (that's why \(\bar X\) is <em>unbiased</em>). The variance is the population variance <strong>shrunk by a factor of \(n\)</strong> — average more numbers and the average wobbles less. That shrinkage is the single most important fact in inferential statistics.</p>
+</div>
+
+<div class="card">
+<h3>Standard error vs standard deviation — the classic confusion</h3>
+<p>Take the square root of \(\operatorname{Var}(\bar X)=\sigma^2/n\):</p>
+<p>\[\underbrace{\sigma}_{\text{SD of the DATA}}\qquad\text{vs}\qquad \underbrace{\operatorname{s.e.}(\bar X)=\frac{\sigma}{\sqrt n}}_{\text{SD of the STATISTic }\bar X}.\]</p>
+<ul>
+<li><strong>Standard deviation \(\sigma\)</strong> (estimated by \(s\)) measures how spread out the <em>individual observations</em> are. It does <em>not</em> shrink as you collect more data — a taller pile of people still has the same spread of heights.</li>
+<li><strong>Standard error \(\sigma/\sqrt n\)</strong> (estimated by \(s/\sqrt n\)) measures how spread out the <em>sample mean</em> is across hypothetical repeats. It <em>does</em> shrink — like \(1/\sqrt n\).</li>
+</ul>
+<div class="trap">Forgetting to divide by \(\sqrt n\) — using \(s\) where you needed \(s/\sqrt n\) — is the single most common mistake in the whole course. Every CI and test statistic for a mean uses the <em>standard error</em>, never the raw SD.</div>
+<div class="tip">The \(\sqrt n\) also explains why halving a CI's width costs <em>four times</em> the sample size: width \(\propto 1/\sqrt n\), so to divide width by 2 you multiply \(n\) by \(4\).</div>
+</div>
+</section>
+
+<!-- ============ 2. Z ============ -->
+<section id="z">
+<h2>2 · \(Z\): the \(\sigma\)-known ideal world</h2>
+
+<div class="card">
+<h3>Standardising the mean</h3>
+<p>Suppose the data are Normal: \(X_i\sim N(\mu,\sigma^2)\). Then a linear combination of Normals is Normal, so the sample mean is <em>exactly</em> Normal:</p>
+<p>\[\bar X \sim N\!\left(\mu,\;\frac{\sigma^2}{n}\right).\]</p>
+<p>Now do the move you already know from Ch 1–2 — subtract the mean, divide by the standard deviation — except the "standard deviation" here is the standard error \(\sigma/\sqrt n\):</p>
+<p>\[Z=\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N(0,1).\]</p>
+<p>This is a <strong>pivot</strong>: a quantity built from the data and the unknown \(\mu\) whose distribution — standard Normal — contains <em>no unknown parameters at all</em>. That is what makes it useful: we know its quantiles exactly (\(1.96\), etc.) no matter what \(\mu\) and \(\sigma\) happen to be.</p>
+<div class="when">You may use \(Z\) for a mean only when \(\sigma\) is <strong>genuinely known</strong> (handed to you in the problem). That is rare in practice — you almost never know the population SD but not its mean.</div>
+</div>
+
+<div class="card">
+<h3>Why \(Z\) is not enough</h3>
+<p>In real problems you don't know \(\sigma\). The only honest thing to do is estimate it from the same sample, using \(s\). So you'd like to write</p>
+<p>\[\frac{\bar X-\mu}{s/\sqrt n}.\]</p>
+<p>But now there is a problem: \(s\) is itself a random quantity that changes sample to sample. You've replaced a fixed denominator with a jittery one. This <em>extra</em> randomness means the ratio is <strong>no longer</strong> \(N(0,1)\) — and pretending it is would make your intervals too narrow. Fixing this is exactly what Student's \(t\) does.</p>
+</div>
+</section>
+
+<!-- ============ 3. t ============ -->
+<section id="t">
+<h2>3 · \(t\): what happens when you estimate \(\sigma\)</h2>
+
+<div class="card">
+<h3>The definition that actually matters</h3>
+<p>Replace the known \(\sigma\) with the sample \(s\), and the standardised mean follows a new distribution — <strong>Student's \(t\) with \(n-1\) degrees of freedom</strong>:</p>
+<p>\[t=\frac{\bar X-\mu}{s/\sqrt n}\sim t_{n-1}.\]</p>
+<p>Read this carefully, because it is the single most misunderstood object on the course:</p>
+<div class="trap">\(t_{n-1}\) is <strong>NOT</strong> the distribution of your data. It is the distribution <em>of the statistic</em> \((\bar X-\mu)/(s/\sqrt n)\). Your data can be heights, weights, blood pressures — anything Normal. The <em>standardised sample mean</em> computed from them is what follows \(t\).</div>
+</div>
+
+<div class="card">
+<h3>Why heavier tails than \(Z\)?</h3>
+<p>Compared with \(Z\), the \(t\)-distribution is <strong>bell-shaped and symmetric about 0, but with heavier tails</strong> — more probability far from the centre. The reason is exactly the extra randomness we introduced: sometimes \(s\) comes out too small purely by chance, which inflates the ratio \((\bar X-\mu)/(s/\sqrt n)\) and produces occasional large values. To stay honest about that risk, \(t\) spreads more mass into the tails, which makes its critical values <strong>larger</strong> than \(1.96\). Larger critical value → wider interval → the price you pay for not knowing \(\sigma\).</p>
+</div>
+
+<div class="card">
+<h3>Degrees of freedom: why \(n-1\)?</h3>
+<p>The \(s\) in the denominator is computed from the deviations \(X_i-\bar X\). Here is the one-line reason there are only \(n-1\) "free" pieces of information in them:</p>
+<p>\[\sum_{i=1}^{n}(X_i-\bar X)=0\quad\text{always.}\]</p>
+<p>The deviations are forced to sum to zero, so once you know any \(n-1\) of them, the last one is determined — it carries no new information. You spent one degree of freedom estimating the centre \(\bar X\); \(n-1\) remain to estimate spread. That "\(n-1\)" is the same one you divide by in \(s^2=\tfrac{1}{n-1}\sum(X_i-\bar X)^2\), and it is the subscript on \(t_{n-1}\).</p>
+</div>
+
+<div class="card">
+<h3>Critical values: \(t\) vs \(Z\), side by side</h3>
+<p>The \(0.975\) quantile (the number you use for a 95% two-sided interval) shrinks toward \(1.96\) as \(df\) grows:</p>
+<table>
+<tr><th>\(df=n-1\)</th><th>\(t_{0.975,\,df}\) (95% critical value)</th><th>comment</th></tr>
+<tr><td>4</td><td>2.78</td><td>tiny sample — much wider than \(Z\)</td></tr>
+<tr><td>14</td><td>2.14</td><td>still noticeably above 1.96</td></tr>
+<tr><td>30</td><td>2.04</td><td>getting close</td></tr>
+<tr><td>\(\infty\)</td><td>1.96</td><td>identical to the Normal \(z_{0.975}\)</td></tr>
+</table>
+<p>As \(df\to\infty\), \(s\) becomes an essentially perfect estimate of \(\sigma\), the extra randomness vanishes, and \(t_{df}\to N(0,1)\). That is why the very last row of the \(t\)-table (labelled \(\infty\)) <em>is</em> the standard-Normal row.</p>
+<div class="tip"><strong>Why this course never needs a separate \(z\)-table for means.</strong> The formula sheet's mean CI (item 62) always uses the \(t_{n-1}\) quantile. For large \(n\) that quantile is already \(\approx 1.96\) — e.g. \(t_{0.975,303}=1.97\) — so reading the \(t\)-table's \(\infty\) row gives you the Normal value anyway. One table covers both worlds.</div>
+</div>
+</section>
+
+<!-- ============ 4. QUANTILE NOTATION ============ -->
+<section id="quantile">
+<h2>4 · Quantile-notation clinic</h2>
+
+<div class="card">
+<h3>What "\(1-\alpha/2\) quantile" actually means</h3>
+<p>For a 95% interval, \(\alpha=0.05\) (the total probability left <em>outside</em> the interval). It is split evenly into two tails of \(\alpha/2 = 0.025\) each. The quantile you want cuts off the <em>upper</em> tail, so it is the value with area \(1-\alpha/2\) <em>below</em> it:</p>
+<p>\[1-\frac{\alpha}{2}=1-\frac{0.05}{2}=1-0.025=0.975.\]</p>
+<div class="trap"><strong>The misreading that wrecks marks.</strong> \(1-\alpha/2\) means \(1-(\alpha/2)=0.975\). It does <strong>NOT</strong> mean \((1-\alpha)/2=0.95/2=0.475\). The division is only under the \(\alpha\); the "1 minus" wraps the whole thing. Say it as "one, minus alpha-over-two".</p></div>
+</div>
+
+<div class="card">
+<h3>Two labelling conventions for the same number</h3>
+<p>Tables and textbooks disagree on whether the subscript names the <em>area below</em> or the <em>tail area above</em>. They point to the identical value:</p>
+<ul>
+<li><strong>Area-below (quantile) convention:</strong> \(t_{0.975,\,14}=2.14\). "The value with 0.975 of the area to its left."</li>
+<li><strong>Tail-area convention:</strong> \(t_{0.025,\,14}=2.14\). "The value cutting off an upper tail of 0.025." (Some books write \(t_{\alpha/2}\) for this.)</li>
+</ul>
+<p>Both describe the point at \(+2.14\) on the \(t_{14}\) axis. The formula sheet uses the <strong>quantile (area-below)</strong> convention — "the \(1-\alpha/2\) quantile" — so \(0.975\) is what you look up. If a source writes \(t_{0.025,14}\) it means the same positive number by the tail-area convention.</p>
+<div class="tip">Sanity check: a 95% critical value must be a bit bigger than 1.96 (for finite \(df\)) and positive. If your table lookup gives you 0.475 or a negative number, you've read the wrong column.</div>
+</div>
+
+<div class="card">
+<h3>The picture (95% interval, symmetric \(t\) or \(Z\))</h3>
+<p>Total area \(=1\). Middle \(95\%\) is the interval; each tail is \(2.5\%\). The cut-points are \(\pm q\) where \(q\) is the \(0.975\) quantile.</p>
+<div class="taildiag">
+  <div class="bar">
+    <div class="seg tail">2.5%<br>tail</div>
+    <div class="seg mid">95% &nbsp;— the confidence interval —&nbsp; central area \(=1-\alpha\)</div>
+    <div class="seg tail">2.5%<br>tail</div>
+  </div>
+  <div class="ticks">
+    <span>\(-q\) &nbsp;(0.025 quantile)</span>
+    <span>0</span>
+    <span>(0.975 quantile) &nbsp;\(+q\)</span>
+  </div>
+</div>
+<p style="font-size:14px;color:var(--muted)">So "the \(0.975\) quantile" and "\(t_{0.025}\) (upper tail)" both name the right-hand cut-point \(+q\); by symmetry the left cut-point is \(-q\). For a 95% CI, \(q=t_{0.975,\,n-1}\).</p>
+</div>
+</section>
+
+<!-- ============ 5. CHI-SQUARE ============ -->
+<section id="chisq">
+<h2>5 · \(\chi^2\): the distribution of a variance</h2>
+
+<div class="card">
+<h3>Definition — a sum of squared Normals</h3>
+<p>Take \(k\) independent standard Normals \(Z_1,\dots,Z_k\), square each, and add them up. The result follows a <strong>chi-square distribution with \(k\) degrees of freedom</strong>:</p>
+<p>\[\chi^2_k = Z_1^2+Z_2^2+\dots+Z_k^2.\]</p>
+<p>That's the whole definition. You never need its pdf on this course — only its <em>shape</em> and the <em>one key fact</em> below.</p>
+</div>
+
+<div class="card">
+<h3>Its shape — and why it's lopsided</h3>
+<div class="grid2">
+<div>
+<ul>
+<li><strong>Strictly positive.</strong> It is a sum of squares, so it can never be negative — the distribution lives entirely on \([0,\infty)\).</li>
+<li><strong>Right-skewed</strong> (a long tail to the right), especially for small \(k\). It is <strong>not symmetric</strong>, unlike \(Z\) and \(t\).</li>
+<li><strong>Mean \(=k\).</strong> Each \(Z_i^2\) has mean 1, and there are \(k\) of them.</li>
+<li>As \(k\) grows it becomes more symmetric and bell-like, but for the \(df\) you'll meet it stays visibly skewed.</li>
+</ul>
+</div>
+<div>
+<svg class="skew" viewBox="0 0 300 160" role="img" aria-label="Right-skewed chi-square density sketch">
+  <line x1="20" y1="140" x2="290" y2="140" stroke="#2a3340" stroke-width="1.5"/>
+  <line x1="20" y1="140" x2="20" y2="15" stroke="#2a3340" stroke-width="1.5"/>
+  <path d="M20,140 C55,30 80,25 105,60 C140,110 200,133 290,138"
+        fill="rgba(52,211,153,.18)" stroke="#34d399" stroke-width="2"/>
+  <text x="150" y="156" fill="#9aa7b8" font-size="11" text-anchor="middle" font-family="monospace">value  (0 → ∞, never negative)</text>
+  <text x="150" y="20" fill="#9aa7b8" font-size="10.5" text-anchor="middle" font-family="monospace">skewed right, mean = k</text>
+</svg>
+<p style="font-size:12.5px;color:var(--muted);margin:0">Because it's asymmetric, its lower and upper quantiles are <em>not</em> mirror images — you must look up <em>two different</em> numbers, unlike the single \(\pm q\) of \(t\).</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>The one key fact you must know cold</h3>
+<p>For an iid <em>Normal</em> sample, the (scaled) sample variance follows a chi-square:</p>
+<p>\[\frac{(n-1)s^2}{\sigma^2}\sim\chi^2_{n-1}.\]</p>
+<p>This is the pivot for variance: it links the thing you can compute (\(s^2\)) to the thing you want (\(\sigma^2\)) through a distribution with no other unknowns. The \(df\) is \(n-1\) for the very same reason as in \(t\) — \(s^2\) uses the deviations \(X_i-\bar X\), which sum to zero.</p>
+<div class="trap">This result <em>requires</em> Normal data and — unlike the mean CI — is <strong>not</strong> rescued by the CLT for large \(n\). Whenever you build a variance/SD interval you must state the normality assumption.</div>
+</div>
+
+<div class="card">
+<h3>Deriving the variance CI — slowly, and why the big quantile gives the small bound</h3>
+<p>Start from the pivot and trap it between its lower and upper quantiles. For a \(95\%\) interval with \(df=n-1\), let \(q_1=\chi^2_{0.025,\,n-1}\) (small) and \(q_2=\chi^2_{0.975,\,n-1}\) (big):</p>
+<p>\[\mathbb P\!\left(q_1 \lt \frac{(n-1)s^2}{\sigma^2} \lt q_2\right)=0.95.\]</p>
+<p>Now solve the inequality for \(\sigma^2\). This is where people go wrong, so take it one step at a time. Take reciprocals of all three parts — <strong>and remember taking reciprocals flips the direction of each inequality</strong>:</p>
+<p>\[\frac{1}{q_1} \gt \frac{\sigma^2}{(n-1)s^2} \gt \frac{1}{q_2}.\]</p>
+<p>Multiply through by \((n-1)s^2\) (positive, so directions stay) and rewrite left-to-right:</p>
+<p>\[\frac{(n-1)s^2}{q_2} \lt \sigma^2 \lt \frac{(n-1)s^2}{q_1}.\]</p>
+<div class="tip"><strong>There it is:</strong> the <em>big</em> quantile \(q_2\) landed in the denominator of the <em>lower</em> bound, and the <em>small</em> quantile \(q_1\) in the denominator of the <em>upper</em> bound. Dividing by a bigger number gives a smaller result — that reciprocal flip is <em>why</em> the quantiles appear to be "crossed". They are not crossed; the algebra put them there.</div>
+<p>So the 95% CI for the variance is</p>
+<p>\[\left(\frac{(n-1)s^2}{q_2},\;\frac{(n-1)s^2}{q_1}\right),\qquad q_1=\chi^2_{0.025,\,n-1},\;\; q_2=\chi^2_{0.975,\,n-1}.\]</p>
+<p>For a CI on the standard deviation \(\sigma\), take the square root of both endpoints — and only at the very end.</p>
+<div class="trap"><strong>The 2024 Q3(d) ambush.</strong> That question asked for a CI for the <em>standard deviation</em> of paired BP differences. Two ways to lose marks: (1) putting \(q_1\) under the lower bound (interval comes out backwards), and (2) forgetting the final square root (you'd report a variance interval when a SD was asked). See <a href="ch06-estimation-cis.html#worked">Ch 6 WE3</a> for the full worked numbers.</div>
+</div>
+</section>
+
+<!-- ============ 6. F ============ -->
+<section id="f">
+<h2>6 · \(F\): comparing two variances</h2>
+
+<div class="card">
+<h3>Definition — a ratio of two chi-squares</h3>
+<p>Take two <em>independent</em> chi-square variables, divide each by its own degrees of freedom, and take the ratio:</p>
+<p>\[F=\frac{\chi^2_{d_1}/d_1}{\chi^2_{d_2}/d_2}\sim F(d_1,d_2).\]</p>
+<p>It has <strong>two</strong> degrees-of-freedom parameters — numerator \(d_1\) and denominator \(d_2\), in that order (they are not interchangeable). Like \(\chi^2\) it is positive and right-skewed.</p>
+</div>
+
+<div class="card">
+<h3>Why it exists</h3>
+<p>Each \(\chi^2/df\) is essentially an estimate of a variance. Their ratio therefore <strong>compares two variances</strong>. If two groups really have the same variance, the ratio sits near 1; a ratio far above 1 is evidence they differ.</p>
+<p>This is the engine of <strong>ANOVA</strong>: the \(F\)-statistic is</p>
+<p>\[F=\frac{\text{between-group variance}}{\text{within-group variance}}.\]</p>
+<p>If the group means are truly equal, between-group variation is just noise of the same size as within-group variation, so \(F\approx 1\). If the means differ, the numerator inflates and \(F\) grows large — that's what a significant ANOVA detects. The full machinery (the ANOVA table, reading the \(F\)-row, \(p\)-values) lives in <a href="ch08-anova.html">Ch 8 — ANOVA</a>. For foundations, the ratio-of-chi-squares idea is all you need.</p>
+</div>
+</section>
+
+<!-- ============ 7. THE UNIVERSAL CI MACHINE ============ -->
+<section id="machine">
+<h2>7 · The universal CI machine</h2>
+<p>Every confidence interval on this course is the <em>same three moves</em>: (1) form a <strong>pivot</strong> — a statistic whose distribution has no unknowns; (2) trap it between quantiles of that reference distribution; (3) rearrange for the parameter. Only the pivot and its reference distribution change:</p>
+
+<table>
+<tr><th>Parameter</th><th>Pivot</th><th>Reference distribution</th><th>Quantiles needed</th></tr>
+<tr><td>Mean \(\mu\) (\(\sigma\) unknown)</td><td>\(\dfrac{\bar X-\mu}{s/\sqrt n}\)</td><td>\(t_{n-1}\)</td><td>one \(\pm q\) &nbsp;(\(q=t_{0.975}\))</td></tr>
+<tr><td>Mean \(\mu\) (\(\sigma\) known, rare)</td><td>\(\dfrac{\bar X-\mu}{\sigma/\sqrt n}\)</td><td>\(N(0,1)\)</td><td>one \(\pm q\) &nbsp;(\(q=1.96\))</td></tr>
+<tr><td>Variance \(\sigma^2\) / SD \(\sigma\)</td><td>\(\dfrac{(n-1)s^2}{\sigma^2}\)</td><td>\(\chi^2_{n-1}\)</td><td><strong>two:</strong> \(q_1=\chi^2_{0.025}\), \(q_2=\chi^2_{0.975}\)</td></tr>
+<tr><td>Proportion \(p\)</td><td>\(\dfrac{\widehat p-p}{\sqrt{\widehat p(1-\widehat p)/n}}\)</td><td>\(N(0,1)\) (via CLT)</td><td>one \(\pm q\) &nbsp;(\(q=1.96\))</td></tr>
+<tr><td>Ratio of variances / ANOVA</td><td>\(\dfrac{s_1^2/\sigma_1^2}{s_2^2/\sigma_2^2}\)</td><td>\(F(d_1,d_2)\)</td><td>\(F\)-quantile(s) (see Ch 8)</td></tr>
+</table>
+<div class="tip"><strong>The symmetry payoff.</strong> \(t\) and \(Z\) are symmetric, so one number \(q\) does both ends via \(\pm q\). \(\chi^2\) and \(F\) are skewed, so you need <em>two separate</em> quantiles. That single fact — symmetric ⟹ one quantile, skewed ⟹ two — tells you at a glance how many table lookups a problem needs.</div>
+</section>
+
+<!-- ============ 8. TABLE-READING DRILLS ============ -->
+<section id="drills">
+<h2>8 · Table-reading drills</h2>
+<p>Attempt each before revealing. Every number is verified with <code>scipy.stats</code>. Practise reading <em>both</em> conventions.</p>
+
+<details>
+<summary>D1. For a 95% CI with \(n=15\), what quantile of \(t\) do you look up, and what is it?</summary>
+<p>\(df=n-1=14\); \(\alpha=0.05\); you want the \(1-\alpha/2 = 0.975\) quantile. \(t_{0.975,\,14}=2.14\). (In tail-area notation the same number is \(t_{0.025,14}\).)</p>
+</details>
+
+<details>
+<summary>D2. A source writes \(t_{0.025,\,14}\). Is this the same as your answer to D1, and is it positive or negative?</summary>
+<p>Same magnitude: it is the upper-tail-area label for the point at \(+2.14\), so it is <strong>positive</strong>, \(=2.14\). The lower cut-point \(-2.14\) would be written \(t_{0.975}\) in tail-area terms (or the \(0.025\) quantile). Symmetric distribution ⟹ mirror images.</p>
+</details>
+
+<details>
+<summary>D3. \(n=5\), 95% CI for a mean. What is \(t_{0.975,\,4}\), and why is it so much bigger than 1.96?</summary>
+<p>\(df=4\), so \(t_{0.975,4}=2.78\). It's large because with only 4 degrees of freedom \(s\) is a poor, jittery estimate of \(\sigma\); the heavy \(t\)-tails widen the interval to stay honest. Contrast \(t_{0.975,30}=2.04\) and \(t_{0.975,\infty}=1.96\).</p>
+</details>
+
+<details>
+<summary>D4. \(n=44\), 95% variance CI. Which two \(\chi^2\) quantiles do you need, and what are they?</summary>
+<p>\(df=43\). You need <strong>both</strong> tails: \(q_1=\chi^2_{0.025,\,43}=26.79\) and \(q_2=\chi^2_{0.975,\,43}=62.99\). The <em>big</em> one \(q_2=62.99\) goes under the <em>lower</em> bound; the <em>small</em> one \(q_1=26.79\) under the <em>upper</em> bound. (If your table stops at \(df=40\): \(24.43\) and \(59.34\).)</p>
+</details>
+
+<details>
+<summary>D5. \(n=27\) juice bottles, 95% CI for the variance. State the two quantiles and the reason there are two, not one.</summary>
+<p>\(df=26\): \(q_1=\chi^2_{0.025,\,26}=13.84\), \(q_2=\chi^2_{0.975,\,26}=41.92\). Two are needed because \(\chi^2\) is <strong>skewed</strong> — its lower and upper quantiles are not mirror images, so no single \(\pm q\) works (that shortcut only exists for the symmetric \(t\) and \(Z\)).</p>
+</details>
+
+<details>
+<summary>D6. What is the \(0.95\) quantile of \(\chi^2_{10}\), and roughly where is the distribution's centre?</summary>
+<p>\(\chi^2_{0.95,\,10}=18.31\). The centre (mean) is at \(k=10\), and because the distribution is right-skewed the \(0.95\) quantile sits well to the right of the mean. (For a two-sided 95% variance CI at \(df=10\) you'd instead use \(q_1=\chi^2_{0.025,10}=3.25\) and \(q_2=\chi^2_{0.975,10}=20.48\).)</p>
+</details>
+
+<details>
+<summary>D7. Confidence 90% instead of 95%. What is \(\alpha\), what is \(1-\alpha/2\), and what \(Z\) quantile results?</summary>
+<p>\(\alpha=0.10\); \(1-\alpha/2 = 1-0.05 = 0.95\); \(z_{0.95}=1.645\). Note it is <em>smaller</em> than the 95%-CI value \(1.96\) — less confidence ⟹ narrower interval ⟹ smaller quantile. And it is emphatically <em>not</em> \((1-\alpha)/2 = 0.45\).</p>
+</details>
+</section>
+
+<!-- ============ WHAT YOU DO NOT NEED ============ -->
+<section id="notneeded">
+<h2>9 · What you do <em>not</em> need</h2>
+<div class="card">
+<p>This page deliberately stops short of things STAT1301 never asks. To keep your revision ruthless, here is what you can safely <strong>ignore</strong>:</p>
+<ul>
+<li><strong>The pdf formulas</strong> of \(t\), \(\chi^2\) or \(F\). You never write them down, integrate them, or evaluate them by hand — you read quantiles off the provided tables (or a computer).</li>
+<li><strong>Derivations</strong> of these distributions — e.g. proving that \((n-1)s^2/\sigma^2\sim\chi^2_{n-1}\), or that \(t\) is a Normal over a scaled root-chi-square. Interesting, not examinable here.</li>
+<li><strong>Moment-generating functions (MGFs)</strong> of \(t\), \(\chi^2\), \(F\). Not required (and \(t\)'s doesn't even exist in the usual sense).</li>
+<li><strong>Gamma / beta function machinery</strong> behind the densities.</li>
+</ul>
+<div class="tip">What you <em>do</em> need: the <em>definition in words</em> (t = standardised mean with \(\sigma\) estimated; \(\chi^2\) = sum of squared \(Z\)s; \(F\) = ratio of scaled \(\chi^2\)s), the <em>shape</em> (symmetric vs skewed), the <em>key pivots</em>, and the ability to <em>read a quantile</em> in either convention. That's the whole ground floor.</div>
+</div>
+</section>
+
+<p style="color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px">
+Scope: sampling distributions and the \(t\), \(\chi^2\), \(F\) reference distributions as used in STAT1301 Ch 6–8 &amp; 11. Every quantile and critical value on this page verified with <code>python3 / scipy.stats</code> (<code>t.ppf</code>, <code>chi2.ppf</code>, <code>norm.ppf</code>). Next: <a href="ch06-estimation-cis.html">Ch 6 — Estimation &amp; CIs</a>.
+</p>
+
+</main>
+</body>
+</html>

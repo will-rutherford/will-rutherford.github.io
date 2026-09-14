@@ -107,6 +107,26 @@ an association between…"</em>.</li>
 </div>
 
 <div class="card">
+<h3>🧭 Intuition — why the statistic is \((O-E)^2/E\) and not just \(O-E\)</h3>
+<p>Take the formula apart piece by piece — each part fixes a real problem:</p>
+<ul>
+<li><strong>\(O-E\) — the miss.</strong> How far this cell landed from where the model said it should.</li>
+<li><strong>Square it — kill the cancellation.</strong> Raw misses always sum to zero across the table
+(overshoots exactly balance undershoots, because both O and E sum to \(n\)), so \(\sum(O-E)=0\) tells
+you nothing. Squaring makes every miss count, and makes big misses count disproportionately.</li>
+<li><strong>Divide by \(E\) — make it relative.</strong> Missing by 10 is shocking if you expected 15,
+and trivial if you expected 1500. Dividing by \(E\) converts each miss into "surprise per unit of
+expectation", so cells of different sizes compete fairly.</li>
+</ul>
+<p>Summing over all cells gives one number: <em>the total surprise in the table</em>. That's all
+\(T\) is.</p>
+<div class="trap">χ² tells you <em>whether</em> an association exists — it says nothing about how
+<em>strong</em> it is (a huge \(n\) can make a tiny association significant). For direction and
+substance, compare O vs E cell by cell and say <em>which way</em> reality deviates — that comparison
+is what upgrades a conclusion to full marks.</div>
+</div>
+
+<div class="card">
 <h3>The multinomial distribution — the foundation (notes §11.1)</h3>
 <p>Throw \(n\) items into \(k\) boxes, box \(i\) chosen with probability \(p_i\) (with
 \(\sum p_i =1\)). The resulting counts \((X_1,\dots,X_k)\) have a <strong>multinomial</strong>
@@ -125,7 +145,9 @@ about a multinomial.</strong></p>
 <p><strong>Theorem 11.1 (known parameters).</strong> If \((X_1,\dots,X_k)\sim\mathsf{Mnom}(n,p_1,\dots,p_k)\), then for large \(n\)
 $$\sum_{i=1}^{k}\frac{(X_i-np_i)^2}{np_i}\ \approx\ \chi^2_{k-1}.$$
 Intuition: each \((X_i-np_i)/\sqrt{np_i}\) is approximately a standard normal (CLT), and a sum of squared
-standard normals is χ². You start with \(k\) boxes but the counts must sum to \(n\) — <strong>one linear
+standard normals is χ² — <em>that is the definition of the χ² distribution</em> (new to you? see
+<a href="foundations.html">the Ground Floor</a> for the full build-up from Z). You start with \(k\) boxes
+but the counts must sum to \(n\) — <strong>one linear
 constraint</strong> — so only \(k-1\) of them are free. Hence \(k-1\) degrees of freedom.</p>
 
 <p><strong>Theorem 11.2 (estimated parameters).</strong> If the model's probabilities depend on
@@ -152,6 +174,10 @@ constraint), and we estimated \((r-1)\) free row proportions plus \((c-1)\) free
 So
 $$\text{df}=(rc-1)-(r-1)-(c-1)=(r-1)(c-1).$$
 Memorise the shortcut: <strong>df \(=(r-1)(c-1)\)</strong> for an \(r\times c\) independence test.</p>
+<div class="tip">Quick way to <em>see</em> \((r-1)(c-1)\): once the row and column totals of the table
+are fixed, you can only freely choose the counts in an \((r-1)\times(c-1)\) corner — every remaining
+cell is then forced by the margins. df literally counts the free cells. (Try it on a 2×2: fix the
+margins, choose ONE cell, and watch the other three fill themselves in — df = 1.)</div>
 </div>
 
 <div class="card">

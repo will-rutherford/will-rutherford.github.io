@@ -85,6 +85,12 @@ is the whole point of the chapter — and it is exactly what the flagship exam q
 frequency table with total \(n\), \(f(x,y)=n_{xy}/n\) (notes Def 3.2; 2025 Q2 states this explicitly).</li>
 <li><b>Joint cdf</b> \(F(x,y)=\mathbb P(X\le x,\,Y\le y)\) — cumulative version, rarely needed in the exam for tables (Def 3.1).</li>
 </ul>
+<div class="tip"><b>🧭 What a joint distribution really is:</b> a table of <b>"AND" probabilities</b>. Each cell answers
+one question — "what fraction of the population has \(X=x\) <i>and</i> \(Y=y\) at the same time?" Read the
+comma in \(\mathbb P(X=x,\,Y=y)\) as the word <b>and</b>. Because every individual lands in exactly one cell,
+the whole table must <b>sum to 1</b> (\(\sum_{x,y}f(x,y)=1\)) — that single fact is what lets you solve for an
+unknown parameter (Example 2). The cells hold everything: how each variable behaves alone <i>and</i> how they
+lean on each other. The margins (next card) are just shadows cast by summing the cells.</div>
 </div>
 
 <div class="card">
@@ -105,6 +111,12 @@ dependence information; that information lives only in the cells.</div>
 <p>\(X\) and \(Y\) are <b>independent</b> iff the joint pmf factorises into the product of the marginals
 <b>for every cell</b> (notes Def 3.4):</p>
 <p>$$f(x,y)=f_X(x)\,f_Y(y)\quad\text{for all }x,y.$$</p>
+<div class="tip"><b>🧭 What factorisation MEANS:</b> knowing the value of one variable tells you <b>nothing</b> about the
+other. Formally the conditional distribution equals the marginal, \(f_{Y\mid X}(y\mid x)=f_Y(y)\) — the row you
+land in doesn't reshape the odds across \(Y\). That is exactly why the joint is just the product: if a factor
+"height=tall" doubles your row, an <i>independent</i> \(Y\) keeps its same relative spread, so every cell is
+(row prob) × (col prob). Dependence is the opposite — some rows over-load particular columns, and the product
+rule breaks in at least one cell.</div>
 <p>Practically: to <b>prove</b> independence you must check <i>every</i> cell equals row-prob × col-prob. To
 <b>disprove</b> it, <b>one</b> cell where \(f(x,y)\ne f_X(x)f_Y(y)\) is enough — state that single counterexample
 and stop.</p>
@@ -130,6 +142,20 @@ the covariance/correlation calculation, and it is where dependence shows up.</p>
 <h3>Covariance &amp; correlation — measuring how they move together</h3>
 <p><b>Covariance</b> (Def 3.5) measures linear co-movement:</p>
 <p>$$\text{Cov}(X,Y)=\mathbb E[(X-\mu_X)(Y-\mu_Y)]=\mathbb E[XY]-\mathbb E[X]\,\mathbb E[Y].$$</p>
+<div class="tip"><b>🧭 Why this formula captures "moving together":</b> look at the product of the two <b>deviations</b>
+\((X-\mu_X)(Y-\mu_Y)\) for one individual. If both are <b>above</b> their means the product is (+)(+) = positive;
+if both are <b>below</b>, (−)(−) = positive again. But if one is above while the other is below, you get
+(+)(−) = negative. Covariance is the <b>average</b> of these products. So a positive covariance means "when \(X\)
+is high, \(Y\) tends to be high too" (they move the same direction); negative means they move opposite ways; and
+if highs of \(X\) pair with highs and lows of \(Y\) equally, the positives and negatives cancel to ≈ 0. The
+shortcut form \(\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\) is the same idea: \(\mathbb E[XY]\) is what actually
+happens, \(\mathbb E[X]\mathbb E[Y]\) is what you'd expect if they were unrelated — the <b>gap between them</b> is
+the co-movement.</div>
+<div class="trap"><b>Covariance has ugly units.</b> If \(X\) is in kg and \(Y\) in cm, \(\text{Cov}\) comes out in
+"kg·cm", and its size also blows up if you merely rescale (measure height in mm and covariance ×10). So the raw
+number "0.18" is <i>meaningless on its own</i> — you can't tell strong from weak. That units problem is the whole
+reason we divide by \(\sigma_X\sigma_Y\) to get correlation \(\varrho\): the units cancel, leaving a clean,
+comparable number pinned to \([-1,1]\).</div>
 <p>The second form (Theorem 3.2 property 3) is the exam-friendly one: get \(\mathbb E[XY]\), \(\mathbb E[X]\),
 \(\mathbb E[Y]\) from the table, subtract. Covariance has awkward units, so we scale it to the
 <b>correlation coefficient</b> \(\varrho\) (eq 3.8), which is unit-free and always in \([-1,1]\):</p>
@@ -151,6 +177,19 @@ the covariance/correlation calculation, and it is where dependence shows up.</p>
 
 <div class="card">
 <h3>Linear combinations — the workhorse for "sums of normals"</h3>
+<div class="tip"><b>🧭 What a "linear combination" is:</b> you take your random variables, <b>scale each</b> by a constant
+and <b>add</b> them, maybe plus a fixed offset: \(a+b_1X_1+\cdots+b_nX_n\). That one shape covers almost every
+real question — a <b>total</b> (all \(b_i=1\)), an <b>average</b> (all \(b_i=1/n\)), a <b>difference</b>
+(\(b_1=1,b_2=-1\)), a unit conversion (°F \(=\tfrac95\)°C\(+32\)), or a cost (\(b_i=\) price per unit). Learn to
+handle this one object and you've handled them all.</div>
+<div class="tip"><b>🧭 Why variance carries a \(2ab\,\text{Cov}\) term.</b> Start from the general two-variable rule
+\(\text{Var}(aX+bY)=a^2\sigma_X^2+b^2\sigma_Y^2+2ab\,\text{Cov}(X,Y)\). It falls straight out of "squaring a
+sum": \((aX+bY)^2\) expands to \(a^2X^2+b^2Y^2+\mathbf{2ab\,XY}\), and that cross-term is what becomes the
+covariance. Intuition: if the two variables tend to rise together (\(\text{Cov}>0\)), their wobbles
+<b>reinforce</b> and the combined spread is bigger than you'd guess; if they offset each other
+(\(\text{Cov}\lt 0\)), the wobbles partly cancel and the spread shrinks. <b>Independence sets \(\text{Cov}=0\)</b>,
+the cross-term vanishes, and you're left with the clean "variances just add" rule below. That is the <i>only</i>
+reason the formula looks so simple here — it silently assumes independence.</div>
 <p>For <b>independent</b> \(X_1,\dots,X_n\) (Theorem 3.3):</p>
 <p>$$\text{Var}(a+b_1X_1+\cdots+b_nX_n)=b_1^2\sigma_1^2+\cdots+b_n^2\sigma_n^2.$$</p>
 <p>Combine with linearity for the mean and you can find the distribution of any weighted sum. If, in
@@ -164,11 +203,24 @@ addition, the \(X_i\) are <b>normal</b> (Theorem 3.6), the result is <b>exactly 
 <h3>Limit theorems — why the normal is everywhere</h3>
 <p>Take iid \(X_1,X_2,\dots\) with mean \(\mu\) and variance \(\sigma^2\). Let \(S_n=X_1+\cdots+X_n\) and
 \(\bar X=S_n/n\). Then \(\mathbb E[\bar X]=\mu\) and \(\text{Var}(\bar X)=\sigma^2/n\).</p>
+<div class="tip"><b>🧭 Meet the standard error.</b> The SD of the sample mean, \(\text{sd}(\bar X)=\sigma/\sqrt n\), gets its
+own name: the <b>standard error</b> of \(\bar X\). It is <i>not</i> the spread of the data (\(\sigma\)) — it's the
+spread of the <b>average</b>, i.e. how much \(\bar X\) would jump around if you re-ran the whole sample. Bigger
+\(n\) → smaller standard error → a more reliable average (that's the \(\sqrt n\) in every confidence interval
+later). This idea — the distribution of a statistic across hypothetical repeats — is a <b>sampling
+distribution</b>; the deep floor for it (and for the Z→t, χ², F machinery it feeds) lives in
+<a href="foundations.html#stats-rv">foundations.html</a>.</div>
 <h4>Law of Large Numbers (Theorem 3.4)</h4>
 <p>As \(n\to\infty\) the sample average \(\bar X\) converges to the true mean \(\mu\): the variance
 \(\sigma^2/n\to 0\), so averaging kills randomness. (This is why simulation works: average many draws to
 estimate an expectation.)</p>
 <h4>Central Limit Theorem (Theorem 3.5)</h4>
+<div class="tip"><b>🧭 What the CLT actually claims.</b> Add up (or average) enough independent copies of <i>any</i>
+distribution — skewed, lumpy, discrete, whatever — and the distribution of that <b>sum/average</b> settles into a
+bell curve. The parent's weird shape gets ironed out. "<b>Approximate</b>" means it's never exactly normal for
+finite \(n\), but the fit gets steadily better as \(n\) grows (rule of thumb: \(n\gtrsim30\), fewer if the parent
+is already symmetric). This is the plank the whole inference course stands on — it's why a \(Z\) or \(t\) statistic
+is legitimate even when you never assumed the data were normal.</div>
 <p>For <b>large \(n\)</b>, regardless of the parent distribution's shape:</p>
 <p>$$S_n=X_1+\cdots+X_n\ \overset{\text{approx}}{\sim}\ \mathcal N(n\mu,\ n\sigma^2),\qquad
 \bar X\ \overset{\text{approx}}{\sim}\ \mathcal N\!\Big(\mu,\ \tfrac{\sigma^2}{n}\Big).$$</p>
@@ -179,6 +231,27 @@ estimate an expectation.)</p>
 <div class="tip">LLN says the average <i>lands on</i> \(\mu\); CLT says <i>how it's scattered</i> around \(\mu\) (normally, spread
 \(\sigma/\sqrt n\)). Different questions: "what does the average tend to?" → LLN; "probability the average
 exceeds…?" → CLT.</div>
+</div>
+
+<div class="card">
+<h3>Estimator vs estimate — reading θ̂ correctly</h3>
+<p>Some exam parts (Type D) ask for "the approximate distribution of the estimator \(\hat\theta\) when \(n\) is
+large". Two words that look the same but aren't:</p>
+<ul>
+<li>An <b>estimator</b> is the <i>recipe</i> — a formula in the not-yet-seen data, e.g. \(\hat\theta=\bar X\). Because
+its input (the sample) is random, the estimator is itself a <b>random variable</b>, so it <i>has</i> a mean,
+variance and distribution.</li>
+<li>An <b>estimate</b> is the single <i>number</i> you get after plugging in one actual sample, e.g.
+\(\hat\theta=30.4\). Just a number — no distribution.</li>
+</ul>
+<div class="tip"><b>🧭 Why the distinction earns marks:</b> the question "what is the approximate distribution of
+\(\hat\theta\)?" only makes sense for the <b>estimator</b> (the random recipe). Its spread across hypothetical
+re-samples is its <b>sampling distribution</b>, and when \(\hat\theta\) is an average of iid pieces the CLT hands
+you \(\hat\theta\overset{\text{approx}}{\sim}\mathcal N\big(\theta,\,\text{Var}(\hat\theta)\big)\) — that's what
+those parts are testing. A good estimator is <b>unbiased</b>: \(\mathbb E[\hat\theta]=\theta\), i.e. it is centred
+on the truth and doesn't systematically over- or under-shoot, so on average it's right. Full treatment
+(bias, standard error of \(\hat\theta\), efficiency) is on
+<a href="foundations.html#stats-rv">foundations.html</a> and Ch 6.</div>
 </div>
 </section>
 
@@ -557,6 +630,18 @@ Missing one (e.g. the \(Y=2\) column) silently corrupts the covariance.</div>
 
 <div class="trap"><b>CLT standardisation mix-up.</b> For a <b>mean</b> divide by \(\sigma/\sqrt n\); for a <b>total/sum</b>
 divide by \(\sigma\sqrt n\). Using \(\sigma\) alone (forgetting \(n\)) is the most common CLT error.</div>
+
+<div class="trap"><b>CLT is about \(\bar X\), NOT the data.</b> The CLT does <b>not</b> say your data become normal as you
+collect more of them — a skewed population stays skewed no matter how big \(n\) is. What turns normal is the
+distribution of the <b>sample mean/total</b>. So "the data are approximately normal for large \(n\)" is wrong;
+"the <i>sample mean</i> is approximately normal for large \(n\)" is right. Standardise \(\bar X\), never the raw
+observations.</div>
+
+<div class="trap"><b>Correlation ≠ causation.</b> A strong \(\varrho\) (or a significant χ²) says the two variables
+<i>move together</i>, not that one <b>causes</b> the other — a hidden third variable (confounder) or pure
+coincidence can drive both. In the flagship, "screen use correlates with worse-coded sleep" is <b>not</b> "screens
+cause bad sleep". If a part asks you to interpret, say "association/evidence of a relationship", never "causes",
+unless the design was a randomised experiment.</div>
 
 <div class="trap"><b>Wrong df in the χ² test.</b> df \(=(r-1)(c-1)\), not \(rc-1\) and not \(n-1\). A 2×3 table has df \(=2\),
 so the 5% critical value is 5.99 — memorise the shape of that lookup.</div>
