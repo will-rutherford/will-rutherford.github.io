@@ -282,7 +282,14 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 1 — One-sample \(t\)-test (notes Example, Decaf pulse data)</summary>
-<p><b>Q.</b> Change in pulse rate for the Decaf (control) group: 4, 10, 7, −9, 5, 4, 5, 7, 6, 12 (\(n=10\)). Is there evidence the expected change is greater than 0?</p>
+<p><b>Context.</b> In an experiment on the effect of caffeine on pulse rate, each of 10 volunteers in the <b>Decaf (control)</b> group had their pulse rate (beats per minute) recorded immediately before and again a short time after drinking a cup of <i>decaffeinated</i> coffee. The <b>change</b> in pulse rate (after − before) for the 10 subjects was recorded as:</p>
+<div class="mono">4,  10,  7,  −9,  5,  4,  5,  7,  6,  12       (n = 10)</div>
+<p>For these data \(\bar x = 5.1\) and \(s = 5.587\) beats/min. The researcher wants to know whether decaf alone is associated with a rise in pulse rate — i.e. whether the population mean change is <b>greater than 0</b>.</p>
+<ul>
+<li>(a) State the model and the relevant hypotheses in mathematical form, explaining all notation. <b>[3 marks]</b></li>
+<li>(b) Carry out an appropriate one-sample test. Report the \(t\)-statistic and bracket the P-value from the \(t\)-table. <b>[4 marks]</b></li>
+<li>(c) Make a statistical conclusion and interpret it in the context of the study. <b>[2 marks]</b></li>
+</ul>
 <div class="mono">1. Model:  X₁,…,X₁₀ ~iid N(μ, σ²), σ unknown.
 2. Hypotheses:  H₀: μ = 0   vs   H₁: μ > 0   (right one-sided — "greater than 0").
 3. Statistic:  T = (X̄ − 0)/(S/√n),  where X̄ = sample mean, S = sample SD.
@@ -299,7 +306,19 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 2 — Two-sample Welch AND pooled \(t\)-test (notes, Alice's caffeine data)</summary>
-<p><b>Q.</b> Caffeinated group (\(m=10\)): mean 15.8, sd 8.32. Decaf (\(n=10\)): mean 5.1, sd 5.59. Does caffeine increase pulse rate?</p>
+<p><b>Context.</b> To test whether caffeine raises pulse rate, 20 volunteers were <b>randomly allocated</b> to two independent groups of 10. One group drank <i>caffeinated</i> coffee and the other drank <i>decaffeinated</i> coffee (control). For each subject the change in pulse rate (after − before, beats/min) was recorded. The summary statistics were:</p>
+<table>
+<tr><th>Group</th><th>\(n\)</th><th>Mean change</th><th>SD</th></tr>
+<tr><td>Caffeinated (\(X\))</td><td>10</td><td>15.8</td><td>8.32</td></tr>
+<tr><td>Decaf / control (\(Y\))</td><td>10</td><td>5.1</td><td>5.59</td></tr>
+</table>
+<p>The researcher wants to know whether caffeine <b>increases</b> the mean change in pulse rate (i.e. \(\mu_X\gt\mu_Y\)).</p>
+<ul>
+<li>(a) State the model and hypotheses in mathematical form, explaining all notation. <b>[3 marks]</b></li>
+<li>(b) Perform the two-sample test <i>both</i> ways — Welch (unequal variances) and pooled (equal variances). Report each \(t\)-statistic and degrees of freedom, and bracket the P-value. <b>[8 marks]</b></li>
+<li>(c) Comment on whether pooling is defensible here, and state whether the conclusion depends on the choice. <b>[2 marks]</b></li>
+<li>(d) Give a statistical conclusion and a conclusion in the context of the study. <b>[2 marks]</b></li>
+</ul>
 <div class="mono">1. Model:  X₁,…,X₁₀ ~iid N(μ_X,σ_X²)  [caff],  Y₁,…,Y₁₀ ~iid N(μ_Y,σ_Y²)  [decaf],  independent.
 2. Hypotheses:  H₀: μ_X = μ_Y   vs   H₁: μ_X > μ_Y   (i.e. μ_X − μ_Y > 0).
 
@@ -321,7 +340,17 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 3 — Paired \(t\)-test (notes Example 7.7/7.8, two labs, same 15 patients)</summary>
-<p><b>Q.</b> Two labs measured the same 15 patients. Is there a difference between labs? lab1 and lab2 vectors given in notes.</p>
+<p><b>Context.</b> A blood sample from each of <b>15 patients</b> was split and sent to <b>two different laboratories</b>, which each returned a measurement of the same analyte for that patient. Because both labs measured the <i>same</i> 15 patients, the data are <b>paired</b>: for each patient we form the difference \(D=(\text{Lab 1}-\text{Lab 2})\). The 15 paired differences are summarised by:</p>
+<table>
+<tr><th>Paired difference \(D=\text{Lab 1}-\text{Lab 2}\)</th><th>\(n\) (pairs)</th><th>Mean \(\bar d\)</th><th>SD \(s_D\)</th></tr>
+<tr><td>per-patient difference</td><td>15</td><td>\(-0.933\)</td><td>2.052</td></tr>
+</table>
+<p>Is there evidence that the two laboratories give <b>different</b> results on average?</p>
+<ul>
+<li>(a) Explain why a paired test is appropriate, and state the model and hypotheses (define notation). <b>[3 marks]</b></li>
+<li>(b) Perform the paired \(t\)-test. Report the \(t\)-statistic and df, and bracket the P-value. <b>[4 marks]</b></li>
+<li>(c) State a statistical conclusion at \(\alpha=0.05\) and interpret it in context. <b>[2 marks]</b></li>
+</ul>
 <div class="mono">Recognise PAIRED: same 15 patients measured by both labs ⇒ collapse to differences D = lab1 − lab2.
 1. Model:  D₁,…,D₁₅ ~iid N(μ_D, σ²).
 2. Hypotheses:  H₀: μ_D = 0  vs  H₁: μ_D ≠ 0   (two-sided — "a difference").
@@ -335,7 +364,12 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 4 — One-sample proportion test (notes Example 7.4–7.6, yoghurt)</summary>
-<p><b>Q.</b> 8 of 10 people preferred the new sweetener. Evidence that the new style is preferred (\(p\gt0.5\))?</p>
+<p><b>Context.</b> A dairy company has reformulated its yoghurt using a new sweetener. In a blind taste test, <b>10 randomly chosen consumers</b> each tasted the old and the new recipe (in random order) and named the one they preferred. <b>8 of the 10</b> preferred the new sweetener. The company wants evidence that the new recipe is preferred by <b>more than half</b> of the population of consumers (\(p\gt0.5\)), where \(p\) is the population proportion preferring the new recipe.</p>
+<ul>
+<li>(a) State the model and hypotheses in mathematical form. <b>[2 marks]</b></li>
+<li>(b) Using the <i>exact</i> binomial test, compute the P-value and state a conclusion. <b>[4 marks]</b></li>
+<li>(c) Repeat using the Normal approximation. Explain why the two P-values differ and which you should trust at \(n=10\). <b>[3 marks]</b></li>
+</ul>
 <div class="mono">1. Model:  X = # preferring new ~ Bin(10, p).
 2. Hypotheses:  H₀: p = 0.5   vs   H₁: p > 0.5.
 3. Statistic:  X  (exact test).   4. Under H₀:  X ~ Bin(10, 0.5).
@@ -350,7 +384,17 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 5 — Two-sample proportion test (notes Example 7.9/7.10, ABC viewers)</summary>
-<p><b>Q.</b> 40/70 ABC viewers vs 50/100 commercial viewers claim left-wing allegiance. Are ABC viewers more left-wing?</p>
+<p><b>Context.</b> A political survey asked television viewers about their political allegiance. Among a sample of viewers of the (public) ABC network, <b>40 of 70</b> declared a left-wing allegiance. Among an independent sample of commercial-network viewers, <b>50 of 100</b> declared a left-wing allegiance. Is there evidence that ABC viewers are <b>more likely</b> to be left-wing than commercial-network viewers?</p>
+<table>
+<tr><th>Group</th><th>\(n\)</th><th>Left-wing</th><th>Sample proportion</th></tr>
+<tr><td>ABC viewers (\(X\))</td><td>70</td><td>40</td><td>0.571</td></tr>
+<tr><td>Commercial viewers (\(Y\))</td><td>100</td><td>50</td><td>0.500</td></tr>
+</table>
+<ul>
+<li>(a) State the model and hypotheses in mathematical form, explaining all notation. <b>[3 marks]</b></li>
+<li>(b) Perform the two-sample proportion (\(Z\)) test. Report the pooled proportion, the \(z\)-statistic and the P-value. <b>[4 marks]</b></li>
+<li>(c) Make a statistical conclusion and interpret it in context. <b>[2 marks]</b></li>
+</ul>
 <div class="mono">1. Model:  X ~ Bin(70, p_X) [ABC],  Y ~ Bin(100, p_Y) [commercial],  independent.
 2. Hypotheses:  H₀: p_X = p_Y   vs   H₁: p_X > p_Y.
 3&4. Z = (p̂_X − p̂_Y)/√(p̂(1−p̂)(1/m+1/n)) ~ N(0,1),  with pooled p̂ = (X+Y)/(m+n).
@@ -363,7 +407,12 @@ Z=\frac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)\left(\dfrac1m+\dfrac1n\right)}
 
 <details>
 <summary>Example 6 — Power of a test (notes Example 7.3)</summary>
-<p><b>Q.</b> One-sample \(t\)-test, \(H_0:\mu=0\) vs \(H_1:\mu\gt0\), \(\alpha=0.05\), \(n=5\). What is the power when the truth is \(\mu=1,\sigma=2\)?</p>
+<p><b>Context.</b> A researcher plans a one-sample \(t\)-test of \(H_0:\mu=0\) against \(H_1:\mu\gt0\) at significance level \(\alpha=0.05\), using \(n=5\) observations assumed \(\overset{iid}{\sim}\mathcal N(\mu,\sigma^2)\). Before collecting data she wants to know how likely the test is to detect a real effect. Suppose that in truth \(\mu=1\) and \(\sigma=2\).</p>
+<ul>
+<li>(a) Write down the rejection region of the test in terms of the \(t\)-statistic. <b>[2 marks]</b></li>
+<li>(b) Compute the power of the test against the alternative \(\mu=1,\ \sigma=2\). <b>[3 marks]</b></li>
+<li>(c) Re-compute the power if the sample size is increased to \(n=50\), and comment on what this shows. <b>[2 marks]</b></li>
+</ul>
 <div class="mono">Signal-to-noise: μ/σ = 0.5. Reject if t = X̄/(S/√5) exceeds t₄,0.95 = 2.13.
 Under the alternative T has a NON-CENTRAL t₄ with ncp = μ/(σ/√n) = 1/(2/√5) = 1.118.
 Power = P(reject | H₁) = 0.239   (verified; notes report 0.24).
@@ -390,7 +439,22 @@ Same calc with n = 50 ⇒ power = 0.967.</div>
 <li>Statistical conclusion + one sentence in context.</li>
 <li>State &amp; check assumptions (independence, normality) from the plots.</li>
 </ol></div>
-<p><b>Real example — 2025 Q3 (Gardner diet trial), the flagship.</b> Low-Carb: \(n=304\), mean weight change \(-5.99\) (SD 5.69). Low-Fat: \(n=305\), \(-5.29\) (SD 5.70). "Did one diet produce a <i>different</i> change than the other?"</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 Q3 <span class="marks">[19 marks]</span></b></p>
+<p>Gardner et al. (2018) conducted a randomised trial to compare the effectiveness of low-carbohydrate (LC) and low-fat (LF) diets for adult weight loss. A total of 609 participants were enrolled, with 304 assigned to the LC diet and 305 to the LF diet. Body weight (kg) was measured at baseline and again after 12 months of dietary intervention. Table 2 summarises the sample sizes, baseline weights, 12-month weights, and weight changes for each diet.</p>
+<table>
+<tr><th>Diet</th><th>\(n\)</th><th>mean Baseline (SD)</th><th>mean 12-month (SD)</th><th>mean weight change (SD)</th></tr>
+<tr><td>Low-Carb</td><td>304</td><td>96.30 (15.70)</td><td>90.31 (16.72)</td><td>\(-5.99\) (5.69)</td></tr>
+<tr><td>Low-Fat</td><td>305</td><td>97.50 (14.70)</td><td>92.21 (15.59)</td><td>\(-5.29\) (5.70)</td></tr>
+</table>
+<p style="text-align:center;color:var(--muted);font-size:13px">Table 2: Summary statistics for diet groups in randomised trial</p>
+<ul>
+<li>(a) Calculate a 95% confidence interval for the low-carb population mean weight change (kg). Report to two decimal places and interpret the interval in the context of the study. <b>[4 marks]</b></li>
+<li>(b) The primary aim of the study was to evaluate whether one diet produced a different change in weight than the other. State the relevant statistical hypotheses required to answer the researcher's question in mathematical form. Explain all notation used. <b>[4 marks]</b></li>
+<li>(c) Perform an appropriate hypothesis test for the mean difference in weight change across the two diets. Show all working and report the \(t\)-statistic to two significant figures. Make a statistical conclusion and interpret it in the context of the study. <b>[7 marks]</b></li>
+<li>(d) Figure 1 shows histograms of the samples for the different groups. State the assumptions required for the test in (c) and, where possible, comment on their validity using Figure 1 or Table 2. If your analysis uses a two-sample procedure, state whether you treated the variances as equal (pooled) or unequal (Welch) and justify your choice briefly. <b>[4 marks]</b></li>
+</ul>
+</div>
 <details>
 <summary>Full worked solution — 2025 Q3(a)–(d)</summary>
 <div class="mono">(a) 95% CI for LC mean weight change (one-sample t, df=303):
@@ -429,7 +493,23 @@ Same calc with n = 50 ⇒ power = 0.967.</div>
 <h3>Type B — Paired \(t\)-test (same subjects, two measurements) <span class="marks">~9–13 marks</span></h3>
 <p><b>Looks like:</b> a table with a <b>"difference" column</b> (its own mean and SD), or wording "measured at baseline and again after…" on the SAME subjects. Signals paired.</p>
 <div class="method"><b>Recipe:</b> work on the differences \(D=X-Y\). \(H_0:\mu_D=\delta_0\) (usually 0). \(t=(\bar d-\delta_0)/(s_D/\sqrt n)\sim t_{n-1}\). Bracket P, conclude in context.</div>
-<p><b>Real example — 2024 Q3 (forearm vs upper-arm blood pressure, 44 subjects).</b> Difference column: mean 2.22, SD 9.64, \(n=44\).</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 Q3 <span class="marks">[20 marks]</span></b></p>
+<p>Schimanski et al. (2014) were interested in whether the forearm could be used as an alternative site to measure blood pressure when the upper arm is unavailable. Forty-four subjects were recruited for the study. For each person, a measurement of their systolic blood pressure (mmHg) was taken at their forearms and at their upper arms. Summary statistics for the data are shown in Table 1.</p>
+<table>
+<tr><th></th><th>Forearm</th><th>Upper arm</th><th>Forearm − Upper arm</th></tr>
+<tr><td>Mean \(\bar x\)</td><td>134.30</td><td>132.08</td><td>2.22</td></tr>
+<tr><td>Standard deviation \(s\)</td><td>22.19</td><td>25.56</td><td>9.64</td></tr>
+</table>
+<p style="text-align:center;color:var(--muted);font-size:13px">Table 1: Summary statistics for forearm and upper arm systolic blood pressure (mmHg), \(n=44\) subjects</p>
+<ul>
+<li>(a) State the relevant statistical hypotheses required to answer the researchers' question in mathematical form. Explain all notation used. <b>[4 marks]</b></li>
+<li>(b) Perform an appropriate hypothesis test for the mean difference in blood pressure for forearm and upper arm. Show all working and report the \(t\)-statistic to two significant figures. Make a statistical conclusion and infer what this means in the context of the study. <b>[5 marks]</b></li>
+<li>(c) A hospital worker claims that the forearm measurements are on average 3 mmHg larger than the upper arm measurements. Perform a suitable hypothesis test to check their claim. <b>[4 marks]</b></li>
+<li>(d) Construct a 95% confidence interval for the standard deviation \(\sigma\) of the difference in systolic blood pressure when measured at the forearm and upper arm. State any assumptions you make. <b>[4 marks]</b></li>
+<li>(e) Suppose a future study wanted to estimate blood pressure by correcting measurements taken at the forearm. To do so, they want to estimate the difference in means (Forearm − Upper arm) within a 95% margin of error of no more than 1 mmHg. What is the smallest number of subjects they would need to recruit to obtain a confidence interval with the desired accuracy? You may assume the estimate of the standard deviation is equal to the relevant sample standard deviation given in Table 1. <b>[3 marks]</b></li>
+</ul>
+</div>
 <details>
 <summary>Full worked solution — 2024 Q3(a)–(e)</summary>
 <div class="mono">(a) Let μ_D = mean of (Forearm − Upper-arm) systolic BP differences, per person.
@@ -459,7 +539,20 @@ Same calc with n = 50 ⇒ power = 0.967.</div>
 <div class="card q">
 <h3>Type C — Two-sample test + CI from small samples (pooled) <span class="marks">~18 marks</span></h3>
 <p><b>Looks like:</b> two small independent groups with near-equal SDs; asks for a CI on the mean difference and a one-sided test of a claim.</p>
-<p><b>Real example — 2023 Q4 (sheep vs goat pâté protein).</b> Sheep: \(n=6\), mean 20.7, SD 0.17. Goat: \(n=6\), mean 19.2, SD 0.17. Normally distributed.</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2023 Q4 <span class="marks">[18 marks]</span></b></p>
+<p>Researchers wanted to investigate the differences in protein content of sheep and goat pâtés. As part of the study, 6 samples of 100 g sheep pâté and 6 samples of 100 g goat pâté were collected from different producers, and their protein content was measured. The sheep pâtés have an average of 20.7 g of protein, with a standard deviation of 0.17 g. For the goat pâtés, the average was 19.2 g of protein with a standard deviation of 0.17 g. The distributions of protein content of sheep and goat pâtés were each approximately normally distributed.</p>
+<table>
+<tr><th>Pâté type</th><th>\(n\)</th><th>Mean protein (g / 100 g)</th><th>SD (g)</th></tr>
+<tr><td>Sheep</td><td>6</td><td>20.7</td><td>0.17</td></tr>
+<tr><td>Goat</td><td>6</td><td>19.2</td><td>0.17</td></tr>
+</table>
+<ul>
+<li>(a) State the null and alternative hypotheses required to statistically answer the researchers' question. Explain any notation used. <b>[4 marks]</b></li>
+<li>(b) Construct a 95% confidence interval for the mean difference in protein content between 100 g sheep pâtés and goat pâtés. Show working and report your answer to three significant figures. Based on this confidence interval, write a statistical conclusion and a conclusion in the context of the study. <b>[7 marks]</b></li>
+<li>(c) One of the producers is advertising for its sheep pâtés and claims that (on average) the 100 g sheep pâtés have at least 2 g more protein than 100 g goat pâtés. Perform a relevant hypothesis test to test this claim at a 0.05 significance level, showing all working. <b>[7 marks]</b></li>
+</ul>
+</div>
 <details>
 <summary>Full worked solution — 2023 Q4(a)–(c)</summary>
 <div class="mono">(a) Let μ_s, μ_g = population mean protein (g / 100g) of sheep & goat pâté.
@@ -483,12 +576,18 @@ Same calc with n = 50 ⇒ power = 0.967.</div>
 <div class="card q">
 <h3>Type D — Proportion tests &amp; Type-I/II/power exercises <span class="marks">notes / tutorial level</span></h3>
 <p><b>Looks like:</b> count data vs a target (one-sample), two count groups (two-sample), or a "find \(\alpha\), \(\beta\), power" exercise with an explicit rejection region. See notes §7.7 Exercises 5, 6, 9 and Examples 7.4–7.10 (all worked in §3 above).</p>
-<div class="method"><b>Type-I/II drill (notes Ex 6):</b> reject \(H_0:p=0.8\) if \(X\le12\), \(X\sim\mathrm{Bin}(20,p)\).
+<p><b>Real example — notes §7.7 Exercise 6 (Type-I/II drill).</b> A supplier's items meet spec with probability \(p\). To test \(H_0:p=0.8\) against \(H_1:p\lt0.8\), an inspector examines \(n=20\) items and lets \(X\sim\mathrm{Bin}(20,p)\) be the number that meet spec. The batch is <b>rejected</b> (i.e. \(H_0\) is rejected) if \(X\le 12\).</p>
+<ul>
+<li>(a) Find the significance level \(\alpha=\mathbb{P}(\text{Type I error})\) of this rule. <b>[2 marks]</b></li>
+<li>(b) If in truth \(p=0.6\), find the Type II error probability \(\beta(0.6)\) and the power. <b>[3 marks]</b></li>
+</ul>
+<div class="method"><b>Solution outline</b> (evaluate the binomial tails from tables/FX82):
 <ul>
 <li>\(\alpha=\mathbb{P}(X\le12\mid p=0.8)\) — Type I under the null.</li>
 <li>\(\beta(0.6)=\mathbb{P}(X\gt12\mid p=0.6)=\mathbb{P}(X\ge13\mid p=0.6)\) — Type II under that alternative.</li>
 <li>Power at \(p=0.6\) \(=1-\beta(0.6)\).</li>
-</ul></div>
+</ul>
+A fully-worked numeric version of this exact style (with verified binomial values) is <a href="#practice">§8.6 Worked A</a>.</div>
 </div>
 </section>
 

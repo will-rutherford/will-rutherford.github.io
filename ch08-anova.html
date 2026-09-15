@@ -47,6 +47,13 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
   .fill{color:var(--gold);font-weight:700}
+  .fig{background:var(--panel2);border:1px dashed var(--accent2);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .fig:before{content:"🖼️ FIGURE DESCRIPTION — ";color:var(--accent2);font-weight:700;letter-spacing:.3px}
+  .qscn{background:rgba(14,165,233,.06);border-left:4px solid var(--accent2);border-radius:6px;padding:10px 14px;margin:10px 0}
+  .marks{color:var(--gold);font-weight:700;font-size:12.5px;white-space:nowrap}
+  .parts{margin:10px 0 0}.parts li{margin:7px 0}
+  .soln{border-top:2px solid var(--line);margin-top:14px;padding-top:6px}
+  .soln:before{content:"✍️ FULL SOLUTION";display:block;color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.5px;margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -273,36 +280,48 @@ For \(m\) pairwise comparisons: test each at \(\alpha_{\text{adj}}=\alpha/m\); e
 <p>Every number below was checked in Python. Click to reveal.</p>
 
 <details>
-<summary>WE1 — 2025 Q4 (17 marks): the flagship two-way table completion + full write-up</summary>
-<p><strong>Setup.</strong> Dental plaque study. Factor A = <em>Mouth rinse</em> (Lemongrass, Chlorhexidine, Prophylaxis) so \(d_1=3\); Factor B = <em>Flossing</em> (once / twice daily) so \(d_2=2\); balanced with 10 per cell ⇒ \(n=3\times2\times10=60\). Given partial table:</p>
-<div class="mono">Source        DF    SS      MS      F
-Mouth rinse    X   0.836    X       X
-Flossing       X    X      0.231    X
-Interaction    X    X       X      1.233
-Residuals      X   4.256    X
-Total          X   5.517</div>
+<summary>WE1 — 2025 Exam Q4 (17 marks): the flagship two-way table completion + full write-up</summary>
 
-<p><strong>Step 1 — DF from the design.</strong></p>
+<div class="qscn"><strong>Question 4 (2025 exam) — Two-way ANOVA [17 marks].</strong> A dental study investigates how <strong>mouth-rinse</strong> and <strong>flossing frequency</strong> affect the <em>Plaque Index</em> (PI; a higher PI means more dental plaque). The two factors are crossed: mouth-rinse has three levels — <em>Lemongrass</em>, <em>Chlorhexidine</em> and <em>Prophylaxis</em> (a control) — and flossing frequency has two levels — <em>once daily</em> and <em>twice daily</em>. The design is <strong>balanced with 10 participants in each of the six treatment combinations</strong>, so the total sample size is \(N=3\times2\times10=60\). Each participant's plaque index was measured once. A partially completed two-way ANOVA table is shown below, together with the interaction plots (Figure 2), the residual diagnostic plots (Figure 3) and Bonferroni-adjusted pairwise output.</div>
+
+<p><strong>Partial ANOVA table</strong> (each <span class="fill">X</span> is an unknown to be found; blank cells are not required):</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Mouth rinse</td><td class="fill">X</td><td>0.836</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Flossing</td><td class="fill">X</td><td class="fill">X</td><td>0.231</td><td></td></tr>
+<tr><td>Interaction</td><td class="fill">X</td><td></td><td></td><td>1.233</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td>4.256</td><td class="fill">X</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>5.517</td><td></td><td></td></tr>
+</table>
+
+<div class="fig"><strong>Figure 2 (two interaction plots of mean PI).</strong> <em>Left panel</em> — x-axis = flossing frequency (once / twice daily), one line per mouth-rinse: the Prophylaxis line drops steeply from once→twice daily, while the Lemongrass and Chlorhexidine lines are nearly flat. <em>Right panel</em> — x-axis = mouth-rinse, one line per flossing frequency: the once-daily and twice-daily lines are not parallel and cross near Chlorhexidine.</div>
+
+<div class="fig"><strong>Figure 3 (residual diagnostics).</strong> <em>Left</em> — residuals-vs-fitted: points scatter in a roughly constant-width horizontal band around 0 with no funnel shape. <em>Right</em> — Normal Q–Q plot of the standardised residuals: points lie close to the straight reference line, with only mild wobble at the extremes.</div>
+
+<p><strong>Bonferroni-adjusted pairwise \(P\)-values for mouth-rinse</strong> (pooled-SD pairwise \(t\)-tests):</p>
+<div class="mono">                Lemongrass   Chlorhexidine
+Chlorhexidine   1.000        —
+Prophylaxis     0.036        0.016</div>
+
+<ol class="parts">
+<li><strong>(a)</strong> Using Figure 2, comment on whether there could be an interaction, and why. <span class="marks">[2 marks]</span></li>
+<li><strong>(b)</strong> Find the missing (<span class="fill">X</span>) cells of the ANOVA table. <span class="marks">[4 marks]</span></li>
+<li><strong>(c)</strong> Is there evidence of a significant interaction? State the hypotheses (with notation), the null distribution of the \(F\)-statistic, its observed value and the \(P\)-value; conclude at the 5% level. <span class="marks">[4 marks]</span></li>
+<li><strong>(d)</strong> State the ANOVA assumptions and discuss their validity using Figure 3. <span class="marks">[4 marks]</span></li>
+<li><strong>(e)</strong> From the Bonferroni output, which mouth-rinses differ at the 5% level? Interpret in context. <span class="marks">[3 marks]</span></li>
+</ol>
+
+<div class="soln">
+<p><strong>(a) Interaction from the plot [2 marks].</strong> In an interaction plot, parallel lines ⇒ no interaction; non-parallel/crossing lines ⇒ possible interaction. In Figure 2 the lines are clearly <em>not</em> parallel (and cross), so the plot <em>suggests a possible</em> mouth-rinse × flossing interaction — the effect of flossing frequency on plaque appears to depend on which rinse is used. (This is only a visual hint; the \(F\)-test in (c) decides.)</p>
+
+<p><strong>(b) Complete the table [4 marks].</strong> Fill DF from the design first, then MS = SS/DF, then \(F\) = MS/MSE, using additivity for the one missing SS.</p>
 <ul>
-<li>Mouth rinse: \(d_1-1=2\)</li>
-<li>Flossing: \(d_2-1=1\)</li>
-<li>Interaction: \((d_1-1)(d_2-1)=2\times1=2\)</li>
-<li>Residuals: \(n-d_1d_2=60-6=54\)</li>
-<li>Total: \(n-1=59\) &nbsp;(check: \(2+1+2+54=59\) ✓)</li>
+<li>Mouth rinse: \(d_1-1=2\); Flossing: \(d_2-1=1\); Interaction: \((d_1-1)(d_2-1)=2\times1=2\); Residuals: \(n-d_1d_2=60-6=54\); Total: \(n-1=59\) &nbsp;(check: \(2+1+2+54=59\) ✓).</li>
+<li>MSE (shared denominator): \(\text{MSE}=\dfrac{\text{SSE}}{54}=\dfrac{4.256}{54}=0.078815\).</li>
+<li>Flossing SS from its MS: \(\text{SSF2}=\text{MS}\times\text{DF}=0.231\times1=0.231\).</li>
+<li>Interaction SS via additivity: \(\text{SSF12}=\text{SST}-\text{SSF1}-\text{SSF2}-\text{SSE}=5.517-0.836-0.231-4.256=0.194\); then \(\text{MSF12}=0.194/2=0.097\). Check: \(F_{\text{int}}=0.097/0.078815=1.231\approx1.233\) (given) ✓ — the tiny gap is rounding in the printed SSs.</li>
+<li>Remaining MS and \(F\): \(\text{MSF1}=0.836/2=0.418\Rightarrow F_{\text{MR}}=0.418/0.078815=5.30\); \(F_{\text{Fl}}=0.231/0.078815=2.93\).</li>
 </ul>
-
-<p><strong>Step 2 — MSE (the shared denominator).</strong> \(\text{MSE}=\dfrac{\text{SSE}}{54}=\dfrac{4.256}{54}=0.078815\).</p>
-
-<p><strong>Step 3 — Flossing SS from its MS.</strong> \(\text{SSF2}=\text{MS}\times\text{DF}=0.231\times1=0.231\).</p>
-
-<p><strong>Step 4 — Interaction SS via additivity.</strong>
-\(\text{SSF12}=\text{SST}-\text{SSF1}-\text{SSF2}-\text{SSE}=5.517-0.836-0.231-4.256=0.194\).
-Then \(\text{MSF12}=0.194/2=0.097\). Check: \(F_{\text{int}}=0.097/0.078815=1.231\approx1.233\) (given) ✓ — the tiny gap is rounding in the printed SSs.</p>
-
-<p><strong>Step 5 — remaining MS and \(F\).</strong>
-\(\text{MSF1}=0.836/2=0.418\Rightarrow F_{\text{MR}}=0.418/0.078815=5.30\).
-\(F_{\text{Fl}}=0.231/0.078815=2.93\).</p>
-
 <p><strong>Completed table:</strong></p>
 <table>
 <tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
@@ -313,57 +332,131 @@ Then \(\text{MSF12}=0.194/2=0.097\). Check: \(F_{\text{int}}=0.097/0.078815=1.23
 <tr><td>Total</td><td class="fill">59</td><td>5.517</td><td></td><td></td></tr>
 </table>
 
-<p><strong>(a) Interaction plot [2 marks].</strong> The lines in Figure 2 are close to parallel (they do not clearly cross), so there is <em>little visual evidence of an interaction</em> — the effect of flossing on plaque index looks roughly the same across mouth-rinse types. (The interaction \(F\)-test confirms this below.)</p>
-
 <p><strong>(c) Interaction test [4 marks].</strong>
 Hypotheses: \(H_0:\gamma_{ij}=0\) for all \(i,j\) (no interaction) vs \(H_1:\) at least one \(\gamma_{ij}\neq0\).
-Under \(H_0\), \(F=\text{MSF12}/\text{MSE}\sim F(2,\ 54)\). Observed \(f=1.233\); P-value \(=\mathbb P(F_{2,54}>1.233)\approx0.30\). Since \(0.30&gt;0.05\), <strong>do not reject \(H_0\)</strong> — no significant interaction between mouth-rinse and flossing on mean plaque index.</p>
+Under \(H_0\), \(F=\text{MSF12}/\text{MSE}\sim F(2,\ 54)\). Observed \(f=1.233\); P-value \(=\mathbb P(F_{2,54}>1.233)\approx0.30\). Since \(0.30&gt;0.05\), <strong>do not reject \(H_0\)</strong> — no significant interaction between mouth-rinse and flossing on mean plaque index. (So despite the non-parallel look of Figure 2, the factors can be read through their main effects.)</p>
 
-<p><strong>(d) Assumptions [4 marks].</strong> Errors independent, normal, equal variance. Residuals-vs-fitted (Fig 3, left) shows an even band with no funnel ⇒ constant variance looks OK; the Normal Q–Q plot points lie close to the line ⇒ normality reasonable; independence is plausible because participants were randomly allocated. Assumptions appear valid.</p>
+<p><strong>(d) Assumptions [4 marks].</strong> The model is \(Y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\varepsilon_{ijk}\) with \(\varepsilon_{ijk}\overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2)\): errors <strong>independent</strong>, <strong>normal</strong> and of <strong>equal variance</strong>. Residuals-vs-fitted (Fig 3, left) shows an even band with no funnel ⇒ constant variance looks OK; the Normal Q–Q plot (Fig 3, right) points lie close to the line ⇒ normality reasonable; independence is plausible because each participant was measured once under randomised allocation. All three assumptions appear valid.</p>
 
-<p><strong>(e) Multiple comparisons [3 marks].</strong> From the Bonferroni pairwise matrix — Prophylaxis vs Lemongrass \(=0.036\), Prophylaxis vs Chlorhexidine \(=0.016\) (both \(&lt;0.05\)); Lemongrass vs Chlorhexidine \(=1.000\) (not significant). <strong>Conclusion:</strong> Prophylaxis differs significantly from both Lemongrass and Chlorhexidine, but Lemongrass and Chlorhexidine do not differ from each other — i.e. the Prophylaxis (control) group has a different mean plaque index from the two active rinses, which are statistically indistinguishable.</p>
-<div class="tip">Marks scheme reality: (b) is 4 marks for the 8–10 filled cells; getting DF right and the additivity step secures most of them even if a final \(F\) rounds slightly.</div>
+<p><strong>(e) Multiple comparisons [3 marks].</strong> The printed \(P\)-values are already Bonferroni-adjusted, so compare each directly to \(\alpha=0.05\): Prophylaxis vs Lemongrass \(=0.036\), Prophylaxis vs Chlorhexidine \(=0.016\) (both \(&lt;0.05\)); Lemongrass vs Chlorhexidine \(=1.000\) (not significant). <strong>Conclusion:</strong> Prophylaxis differs significantly from both Lemongrass and Chlorhexidine, but Lemongrass and Chlorhexidine do not differ from each other — i.e. the Prophylaxis (control) group has a different mean plaque index from the two active rinses, which are statistically indistinguishable.</p>
+<div class="tip">Marks-scheme reality: (b) is 4 marks for the 8–10 filled cells; getting DF right and the additivity step secures most of them even if a final \(F\) rounds slightly.</div>
+</div>
 </details>
 
 <details>
-<summary>WE2 — 2024 Q4 (one-way, 4 groups): complete the table, test, \(R^2\)</summary>
-<p><strong>Setup.</strong> Pollutant concentration across 4 land covers (Forest, Wetland, Developed, Grassland), \(n_i=25\) each ⇒ \(d=4,\ n=100\). Given SSF (Land Cover) \(=45.96\), SST \(=510.78\).</p>
-<p><strong>DF:</strong> Factor \(=d-1=3\); Error \(=n-d=96\); Total \(=99\).</p>
-<p><strong>SS:</strong> \(\text{SSE}=\text{SST}-\text{SSF}=510.78-45.96=464.82\).</p>
-<p><strong>MS:</strong> \(\text{MSF}=45.96/3=15.32\); \(\text{MSE}=464.82/96=4.8419\).</p>
-<p><strong>\(F\):</strong> \(15.32/4.8419=3.164\).</p>
+<summary>WE2 — 2024 Exam Q4 (one-way, 4 land covers, 18 marks): complete the table, assumptions, test, \(R^2\)</summary>
+
+<div class="qscn"><strong>Question 4 (2024 exam) — One-way ANOVA [18 marks].</strong> An environmental scientist measures the <em>pollutant concentration</em> (in parts per billion, ppb) of soil samples taken from areas of four different <strong>land-cover types</strong>: <em>Forest</em>, <em>Wetland</em>, <em>Developed</em> and <em>Grassland</em>. The single factor is land cover with \(d=4\) levels; \(n_i=25\) samples were collected for each land cover, giving a total of \(N=100\) samples. The sample summaries are:</div>
+<table>
+<tr><th>Land cover</th><th>\(n\)</th><th>Mean \(\bar x\) (ppb)</th><th>SD \(s\)</th></tr>
+<tr><td>Forest</td><td>25</td><td>5.06</td><td>3.17</td></tr>
+<tr><td>Wetland</td><td>25</td><td>4.00</td><td>2.36</td></tr>
+<tr><td>Developed</td><td>25</td><td>3.15</td><td>1.19</td></tr>
+<tr><td>Grassland</td><td>25</td><td>4.07</td><td>1.52</td></tr>
+</table>
+<p>You are given that the factor (land-cover) sum of squares is SSF \(=45.96\) and the total sum of squares is SST \(=510.78\). Side-by-side boxplots of the four groups are provided in Figure 2, and the partial ANOVA table below is to be completed.</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Land cover</td><td class="fill">X</td><td>45.96</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td class="fill">X</td><td class="fill">X</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>510.78</td><td></td><td></td></tr>
+</table>
+<div class="fig"><strong>Figure 2 (boxplots).</strong> Side-by-side boxplots of pollutant concentration for the four land covers. Forest has the widest box and whiskers; Developed is the narrowest with one low outlier. The medians are broadly similar across covers and the boxes are roughly symmetric.</div>
+
+<ol class="parts">
+<li><strong>(a)</strong> Complete the one-way ANOVA table. <span class="marks">[3 marks]</span></li>
+<li><strong>(b)</strong> State the ANOVA assumptions and discuss their validity from the plots and the SD table. <span class="marks">[4 marks]</span></li>
+<li><strong>(c)</strong> State the null and alternative hypotheses mathematically, defining your notation. <span class="marks">[2 marks]</span></li>
+<li><strong>(d)</strong> Assuming the assumptions hold, test at \(\alpha=0.05\) whether mean pollution differs across land covers. Conclude statistically and in context. <span class="marks">[5 marks]</span></li>
+<li><strong>(e)</strong> A friend says: skip the ANOVA and just run all pairwise \(t\)-tests. Why is this flawed, and what is the correct approach? <span class="marks">[2 marks]</span></li>
+<li><strong>(f)</strong> Calculate \(R^2\) and interpret it. <span class="marks">[2 marks]</span></li>
+</ol>
+
+<div class="soln">
+<p><strong>(a) Complete the table.</strong> DF: Factor \(=d-1=3\); Error \(=n-d=96\); Total \(=99\). SS: \(\text{SSE}=\text{SST}-\text{SSF}=510.78-45.96=464.82\). MS: \(\text{MSF}=45.96/3=15.32\); \(\text{MSE}=464.82/96=4.8419\). \(F=15.32/4.8419=3.16\).</p>
 <table>
 <tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
 <tr><td>Land cover</td><td class="fill">3</td><td>45.96</td><td class="fill">15.32</td><td class="fill">3.16</td></tr>
 <tr><td>Residuals</td><td class="fill">96</td><td class="fill">464.82</td><td class="fill">4.842</td><td></td></tr>
 <tr><td>Total</td><td class="fill">99</td><td>510.78</td><td></td><td></td></tr>
 </table>
-<p><strong>Hypotheses [Q(c)]:</strong> \(H_0:\mu_{\text{For}}=\mu_{\text{Wet}}=\mu_{\text{Dev}}=\mu_{\text{Grass}}\) vs \(H_1:\) at least two means differ, where \(\mu_i\) is the mean pollutant concentration (ppb) for land cover \(i\).</p>
-<p><strong>Test [Q(d)]:</strong> \(F\sim F(3,96)\); \(f=3.16\). \(F_{0.05}(3,96)\approx2.70\); since \(3.16&gt;2.70\) (equivalently P \(\approx0.028&lt;0.05\)) <strong>reject \(H_0\)</strong>: there is significant evidence that mean pollutant concentration differs across land covers.</p>
-<p><strong>Pooled SD:</strong> \(\sqrt{4.8419}=2.20\) ppb. &nbsp; <strong>\(R^2\) [Q(f)]:</strong> \(45.96/510.78=0.090\) — land cover explains only \(9\%\) of the variation in pollutant concentration (statistically significant but a small effect).</p>
+<p><strong>(b) Assumptions.</strong> The model is \(Y_{ik}=\mu_i+\varepsilon_{ik}\) with \(\varepsilon_{ik}\overset{\text{iid}}{\sim}\mathcal N(0,\sigma^2)\): <strong>independence</strong> — samples collected randomly within each area ⇒ reasonable; <strong>normality</strong> within groups — boxplots look roughly symmetric (one mild outlier in Developed) and \(n=25\) per group helps via the CLT ⇒ broadly acceptable; <strong>equal variance</strong> — <em>doubtful</em>: the SDs run from \(1.19\) to \(3.17\), a largest:smallest ratio of \(3.17/1.19\approx2.7\) (Forest much more variable), so homoscedasticity is questionable.</p>
+<p><strong>(c) Hypotheses.</strong> Let \(\mu_{\text{For}},\mu_{\text{Wet}},\mu_{\text{Dev}},\mu_{\text{Grass}}\) be the population mean pollutant concentrations (ppb) for the four land covers. \(H_0:\mu_{\text{For}}=\mu_{\text{Wet}}=\mu_{\text{Dev}}=\mu_{\text{Grass}}\) vs \(H_1:\) at least one \(\mu_i\) differs (not all equal).</p>
+<p><strong>(d) Test.</strong> Under \(H_0\), \(F\sim F(3,96)\); observed \(f=3.16\). Critical value \(F_{0.05}(3,96)\approx2.70\); since \(3.16&gt;2.70\) (equivalently P \(\approx0.028&lt;0.05\)) <strong>reject \(H_0\)</strong>: there is significant evidence that mean pollutant concentration differs across land covers — pollution is not uniform across the landscape. (Because equal variance looked shaky in (b) and \(P\) is only moderately below 0.05, the conclusion is not rock-solid.)</p>
+<p><strong>(e) Why not pairwise \(t\)-tests.</strong> With 4 groups there are \(\binom42=6\) pairwise tests; each at \(\alpha=0.05\) pushes the family-wise false-positive rate to roughly \(1-0.95^6\approx26\%\), so a spurious "difference" is likely. The correct approach is one ANOVA \(F\)-test (controls overall \(\alpha\)); only if it rejects do you follow up with corrected pairwise comparisons (e.g. Bonferroni).</p>
+<p><strong>(f) \(R^2\) and pooled SD.</strong> \(R^2=\dfrac{\text{SSF}}{\text{SST}}=\dfrac{45.96}{510.78}=0.090\) — land cover explains only about \(9\%\) of the variation in pollutant concentration (statistically significant, but a small effect; the other \(\approx91\%\) is within-group noise). Pooled SD \(=\sqrt{\text{MSE}}=\sqrt{4.8419}=2.20\) ppb.</p>
+</div>
 </details>
 
 <details>
-<summary>WE3 — 2023 Q5 (one-way + Bonferroni interpretation)</summary>
-<p><strong>Setup.</strong> Plaque Score Difference for 3 toothpastes (Brand A, Brand B, Herbal), \(n_i=30\) ⇒ \(d=3,\ n=90\). SSF (Toothpaste) \(=1.170\), SST \(=13.797\).</p>
-<p><strong>DF:</strong> \(2,\ 87,\ 89\). &nbsp; <strong>SSE</strong> \(=13.797-1.170=12.627\). &nbsp; <strong>MSF</strong> \(=1.170/2=0.585\); <strong>MSE</strong> \(=12.627/87=0.14514\); <strong>\(F\)</strong> \(=0.585/0.14514=4.03\).</p>
+<summary>WE3 — 2023 Exam Q5 (one-way ANOVA + Bonferroni, toothpaste): parts (a)–(d)</summary>
+
+<div class="qscn"><strong>Question 5 (2023 exam) — One-way ANOVA [ANOVA parts, 13 marks].</strong> To compare how well three toothpastes remove dental plaque, <strong>90 volunteers were randomly allocated</strong>, 30 to each of three brands — <em>Brand A</em>, <em>Brand B</em> and a <em>Herbal</em> toothpaste. For each person the <em>Plaque Score Difference</em> (PSD; higher = more plaque removed) was recorded. The single factor is toothpaste with \(d=3\) levels and \(N=90\). Group summaries:</div>
+<table>
+<tr><th>Toothpaste</th><th>\(n\)</th><th>Mean \(\bar x\)</th><th>SD \(s\)</th></tr>
+<tr><td>Brand A</td><td>30</td><td>1.57</td><td>0.35</td></tr>
+<tr><td>Brand B</td><td>30</td><td>1.60</td><td>0.29</td></tr>
+<tr><td>Herbal</td><td>30</td><td>1.35</td><td>0.46</td></tr>
+</table>
+<p>You are given the between-group (factor) sum of squares SSF \(=1.170\) and the total sum of squares SST \(=13.797\). The partial ANOVA table below is to be completed; boxplots are described in Figure 2 and Bonferroni-adjusted output is provided.</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Toothpaste</td><td class="fill">X</td><td>1.170</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td class="fill">X</td><td class="fill">X</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>13.797</td><td></td><td></td></tr>
+</table>
+<div class="fig"><strong>Figure 2 (boxplots).</strong> Brand A and Brand B sit higher and close together (medians ≈ 1.6); the Herbal group is lower and more spread out (median ≈ 1.4) with one low outlier.</div>
+<p><strong>Bonferroni-adjusted pairwise \(P\)-values:</strong></p>
+<div class="mono">                Brand A   Brand B
+Brand B         1.000     —
+Herbal          0.066     0.028</div>
+
+<ol class="parts">
+<li><strong>(a)</strong> Complete the one-way ANOVA table. <span class="marks">[3 marks]</span></li>
+<li><strong>(b)</strong> Test for a difference in mean PSD across the three groups: state the hypotheses, the statistic and its distribution, the \(P\)-value and your conclusion at the 5% level. <span class="marks">[5 marks]</span></li>
+<li><strong>(c)</strong> What are the test's assumptions, and are they met here? <span class="marks">[3 marks]</span></li>
+<li><strong>(d)</strong> The manufacturer claims the Herbal toothpaste is "as effective as the other two brands." Does the Bonferroni output support that claim? <span class="marks">[2 marks]</span></li>
+</ol>
+<p style="font-size:13px;color:var(--muted)">(The original exam Q5 also had a part (e) — a \(\chi^2\) test of association between toothpaste choice and age group [5 marks]. That is a chi-squared question, covered in <a href="ch11-chi-squared.html">Ch 11</a>, so it is out of scope for this ANOVA chapter.)</p>
+
+<div class="soln">
+<p><strong>(a) Complete the table.</strong> DF: \(d-1=2\), \(n-d=87\), Total \(89\). \(\text{SSE}=13.797-1.170=12.627\). \(\text{MSF}=1.170/2=0.585\); \(\text{MSE}=12.627/87=0.14514\); \(F=0.585/0.14514=4.03\).</p>
 <table>
 <tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
 <tr><td>Toothpaste</td><td class="fill">2</td><td>1.170</td><td class="fill">0.585</td><td class="fill">4.03</td></tr>
 <tr><td>Residuals</td><td class="fill">87</td><td class="fill">12.627</td><td class="fill">0.1451</td><td></td></tr>
 <tr><td>Total</td><td class="fill">89</td><td>13.797</td><td></td><td></td></tr>
 </table>
-<p><strong>Test [Q(b)]:</strong> \(H_0:\mu_A=\mu_B=\mu_H\). \(F\sim F(2,87)\), \(f=4.03\); \(F_{0.05}(2,87)\approx3.10\), P \(\approx0.021&lt;0.05\) ⇒ <strong>reject</strong>: mean PSD differs between toothpastes.</p>
-<p><strong>Bonferroni [Q(d)]:</strong> matrix gives Herbal vs Brand B \(=0.028\) (\(&lt;0.05\), significant) while Brand A vs Brand B \(=1.000\) and Herbal vs Brand A \(=0.066\) (not significant). The company claims herbal is "as effective as the other two brands" — but Herbal differs <em>significantly</em> from Brand B, so the data <strong>do not support</strong> that claim; herbal appears less effective than Brand B.</p>
+<p><strong>(b) Test.</strong> \(H_0:\mu_A=\mu_B=\mu_H\) (mean PSD equal for all three) vs \(H_1:\) at least one differs. Under \(H_0\), \(F\sim F(2,87)\), observed \(f=4.03\); \(F_{0.05}(2,87)\approx3.10\), so \(4.03&gt;3.10\) and P \(\approx0.021&lt;0.05\) ⇒ <strong>reject \(H_0\)</strong>: mean plaque-score difference is not the same across the three toothpastes (the boxplots suggest Herbal is the weaker performer).</p>
+<p><strong>(c) Assumptions.</strong> (1) independent observations — holds, participants were randomised to groups; (2) normal errors within each group — boxplots roughly symmetric (one Herbal low outlier), broadly reasonable at \(n=30\) each; (3) equal variances — SD ratio \(=0.46^2/0.29^2\approx2.5&lt;4\), so acceptable, though Herbal is the most variable.</p>
+<p><strong>(d) Bonferroni / the claim.</strong> The values are already adjusted, so compare directly to \(\alpha=0.05\): Herbal vs Brand B \(=0.028&lt;0.05\) (significant), while Brand A vs Brand B \(=1.000\) and Herbal vs Brand A \(=0.066\) (not significant). "As effective as the other two" requires <em>no</em> significant difference with <em>either</em> brand — but Herbal differs significantly from Brand B, so the data <strong>do not support</strong> the claim; Herbal appears to remove less plaque than Brand B.</p>
+</div>
 </details>
 
 <details>
-<summary>WE4 — Two-way with back-solving from \(F\) (notes Exercise 5: rats / stress)</summary>
-<p><strong>Setup.</strong> \(2\times2\): Levorphanol (yes/no) × Adrenaline (yes/no), \(n=20\), 5 per cell. Partial output gives Levorphanol \(F=12.630\), and SS: Lev \(=128801\), Adr \(=185281\), Interaction \(=61051\), Residuals \(=163164\).</p>
-<p><strong>DF:</strong> each main effect \(=1\); interaction \(=1\times1=1\); Error \(=20-4=16\); Total \(=19\).</p>
-<p><strong>MSE</strong> \(=163164/16=10197.75\). Then \(F_{\text{Adr}}=185281/10197.75=18.17\); \(F_{\text{int}}=61051/10197.75=5.99\).</p>
-<p>P-values: \(\mathbb P(F_{1,16}>12.63)=0.0026\), \(\mathbb P(F_{1,16}>18.17)=0.0006\), \(\mathbb P(F_{1,16}>5.99)=0.026\). All \(&lt;0.05\): both main effects <strong>and</strong> the interaction are significant.</p>
-<div class="trap">Because the interaction is significant here, the interaction plot lines cross / are non-parallel and you must <strong>not</strong> read the Levorphanol effect as a single number — its effect on corticosterone depends on whether adrenaline was given.</div>
+<summary>WE4 — Two-way with back-solving from \(F\) (notes Exercise 5: rats / stress hormones)</summary>
+
+<div class="qscn"><strong>Question (notes Exercise 5) — Two-way ANOVA [8 marks].</strong> A pharmacology experiment studies the effect of two drugs on the <em>plasma corticosterone</em> level (a stress-hormone response, in arbitrary units) of laboratory rats. Two factors are crossed: <strong>Levorphanol</strong> administered (Yes / No; \(d_1=2\)) and <strong>Adrenaline</strong> administered (Yes / No; \(d_2=2\)). The design is <strong>balanced with 5 rats in each of the four treatment combinations</strong>, so \(N=2\times2\times5=20\). Partial computer output gives the sums of squares for all four sources and the \(F\)-statistic for Levorphanol only:</div>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Levorphanol</td><td class="fill">X</td><td>128801</td><td class="fill">X</td><td>12.630</td></tr>
+<tr><td>Adrenaline</td><td class="fill">X</td><td>185281</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Interaction</td><td class="fill">X</td><td>61051</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td>163164</td><td class="fill">X</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td class="fill">X</td><td></td><td></td></tr>
+</table>
+
+<ol class="parts">
+<li><strong>(a)</strong> Give the degrees of freedom for every source and complete the MS and \(F\) columns. <span class="marks">[4 marks]</span></li>
+<li><strong>(b)</strong> Carry out the three \(F\)-tests at the 5% level, giving each null distribution and \(P\)-value. <span class="marks">[3 marks]</span></li>
+<li><strong>(c)</strong> Given your result, explain how the Levorphanol main effect should be interpreted. <span class="marks">[1 mark]</span></li>
+</ol>
+
+<div class="soln">
+<p><strong>(a) DF, MS and \(F\).</strong> Each main effect \(=d-1=1\); interaction \(=1\times1=1\); Error \(=N-d_1d_2=20-4=16\); Total \(=19\). \(\text{SST}=128801+185281+61051+163164=538297\). \(\text{MSE}=163164/16=10197.75\) (shared denominator). Since each effect has DF 1, its MS = SS, so: \(F_{\text{Lev}}=128801/10197.75=12.63\) ✓ (matches given); \(F_{\text{Adr}}=185281/10197.75=18.17\); \(F_{\text{int}}=61051/10197.75=5.99\).</p>
+<p><strong>(b) Three \(F\)-tests</strong> (all against MSE, \(F\sim F(1,16)\)): Levorphanol \(f=12.63\), \(\mathbb P(F_{1,16}>12.63)=0.0026\); Adrenaline \(f=18.17\), \(\mathbb P(F_{1,16}>18.17)=0.0006\); Interaction \(f=5.99\), \(\mathbb P(F_{1,16}>5.99)=0.026\). All three \(P\)-values are \(&lt;0.05\), so both main effects <strong>and</strong> the interaction are statistically significant.</p>
+<p><strong>(c) Interpretation.</strong> Because the interaction is significant, you must <strong>not</strong> report the Levorphanol effect as a single number — its effect on corticosterone depends on whether adrenaline was also given. Interpret each drug's effect within a fixed level of the other (the interaction-plot lines are non-parallel / cross).</p>
+</div>
 </details>
 </section>
 
@@ -532,7 +625,7 @@ STAT1301 Ch 8 · sources: notes pp 159–184, <span class="mono">STAT1301_formul
 
 <details>
 <summary>WE1.1 — Espresso extraction yield (one-way, 3 roasts) — full table + test</summary>
-<p><strong>Setup.</strong> A café measures <em>extraction yield</em> (%) for three roast levels — Light, Medium, Dark — with \(n_i=12\) shots each, so \(d=3\), \(n=36\). A one-way ANOVA gives factor (Roast) SS \(=18.62\) and total SS \(=96.50\).</p>
+<p><strong>Setup.</strong> A café measures <em>extraction yield</em> (%) for three roast levels — Light, Medium, Dark — with \(n_i=12\) shots each, so \(d=3\), \(n=36\). A one-way ANOVA gives factor (Roast) SS \(=18.62\) and total SS \(=96.50\). <strong>Task:</strong> complete the ANOVA table, test at the 5% level, and report the pooled SD and \(R^2\).</p>
 <p><strong>Step 1 — DF from the design.</strong> Factor \(=d-1=2\); Error \(=n-d=33\); Total \(=n-1=35\) (check \(2+33=35\) ✓).</p>
 <p><strong>Step 2 — the missing SS by additivity.</strong> \(\text{SSE}=\text{SST}-\text{SSF}=96.50-18.62=77.88\).</p>
 <p><strong>Step 3 — mean squares.</strong> \(\text{MSF}=18.62/2=9.31\); \(\text{MSE}=77.88/33=2.3600\).</p>
@@ -549,7 +642,7 @@ STAT1301 Ch 8 · sources: notes pp 159–184, <span class="mono">STAT1301_formul
 
 <details>
 <summary>WE1.2 — E-scooter range (one-way, 4 brands) — SSE given directly</summary>
-<p><strong>Setup.</strong> A reviewer records the real-world <em>range</em> (km) of four e-scooter brands (Volt, Zippi, Nimbus, Cruz), \(n_i=15\) each ⇒ \(d=4\), \(n=60\). The ANOVA gives factor (Brand) SS \(=53.80\) and residual SS \(=245.00\).</p>
+<p><strong>Setup.</strong> A reviewer records the real-world <em>range</em> (km) of four e-scooter brands (Volt, Zippi, Nimbus, Cruz), \(n_i=15\) each ⇒ \(d=4\), \(n=60\). The ANOVA gives factor (Brand) SS \(=53.80\) and residual SS \(=245.00\). <strong>Task:</strong> complete the table, test at the 5% level, and report \(R^2\).</p>
 <p><strong>DF:</strong> Factor \(=3\); Error \(=56\); Total \(=59\). &nbsp; <strong>SST</strong> \(=53.80+245.00=298.80\).</p>
 <p><strong>MS:</strong> \(\text{MSF}=53.80/3=17.933\); \(\text{MSE}=245.00/56=4.3750\). &nbsp; <strong>F</strong> \(=17.933/4.3750=4.099\).</p>
 <table>
@@ -586,11 +679,13 @@ STAT1301 Ch 8 · sources: notes pp 159–184, <span class="mono">STAT1301_formul
 
 <details>
 <summary>⭐ <strong>EXAM-LEVEL</strong> · YT1.3 — GAPPED one-way table: energy-drink reaction time [6 marks]</summary>
-<p><strong>The flagship one-way drill — a fresh gapped X-cell table.</strong> Reaction time (ms) is measured for 4 energy drinks (Placebo, Cola-X, Guarana, Taurine+), \(n_i=10\) each ⇒ \(d=4,\ n=40\). Using the design and the partial information, find every \(X\) cell, then test at 5% and give \(R^2\).</p>
-<div class="mono">Source        DF    SS       MS      F
-Drink          X    3120     X       X
-Residuals      X    X        240
-Total          X    11760</div>
+<p><strong>The flagship one-way drill — a fresh gapped X-cell table.</strong> A sports-science lab measures simple <em>reaction time</em> (ms) after volunteers consume one of 4 energy drinks (Placebo, Cola-X, Guarana, Taurine+). The single factor is drink with \(d=4\) levels, balanced with \(n_i=10\) volunteers per drink ⇒ \(N=40\). Using the design and the partial ANOVA table below, find every \(X\) cell, then test at the 5% level and give \(R^2\). <span class="marks">[6 marks]</span></p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Drink</td><td class="fill">X</td><td>3120</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td class="fill">X</td><td>240</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>11760</td><td></td><td></td></tr>
+</table>
 <hr>
 <p><strong>Step 1 — DF from design.</strong> Drink \(=d-1=3\); Residuals \(=n-d=36\); Total \(=39\) (check \(3+36=39\) ✓).</p>
 <p><strong>Step 2 — Residual SS by additivity.</strong> \(\text{SSE}=\text{SST}-\text{SSF}=11760-3120=8640\). Self-check with the given MSE: \(8640/36=240=\text{MSE}\) ✓.</p>
@@ -626,13 +721,15 @@ Total          X    11760</div>
 
 <details>
 <summary>WE2.1 — Sourdough rise: Flour(3) × Hydration(2) — complete + interaction test</summary>
-<p><strong>Setup.</strong> Loaf <em>rise height</em> (cm) by Factor A = flour type (Wholemeal, Rye, Spelt; \(d_1=3\)) and Factor B = hydration (65% / 80%; \(d_2=2\)), balanced with 8 loaves per cell ⇒ \(n=3\times2\times8=48\). Partial table:</p>
-<div class="mono">Source        DF    SS      MS      F
-Flour          X   12.40    X       X
-Hydration      X    5.76    X       X
-Interaction    X    X       X       X
-Residuals      X   30.24    X
-Total          X   49.84</div>
+<p><strong>Setup.</strong> A bakery measures loaf <em>rise height</em> (cm) under Factor A = flour type (Wholemeal, Rye, Spelt; \(d_1=3\)) and Factor B = hydration (65% / 80%; \(d_2=2\)), balanced with 8 loaves per cell ⇒ \(n=3\times2\times8=48\). <strong>Task:</strong> complete the partial two-way ANOVA table below, then test the interaction at the 5% level.</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Flour</td><td class="fill">X</td><td>12.40</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Hydration</td><td class="fill">X</td><td>5.76</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Interaction</td><td class="fill">X</td><td class="fill">X</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td>30.24</td><td class="fill">X</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>49.84</td><td></td><td></td></tr>
+</table>
 <p><strong>DF (design first):</strong> Flour \(=2\); Hydration \(=1\); Interaction \(=(3-1)(2-1)=2\); Residuals \(=n-d_1d_2=48-6=42\); Total \(=47\) (check \(2+1+2+42=47\) ✓).</p>
 <p><strong>MSE:</strong> \(30.24/42=0.7200\) — the shared denominator.</p>
 <p><strong>Interaction SS by additivity:</strong> \(\text{SSF12}=\text{SST}-\text{SSF1}-\text{SSF2}-\text{SSE}=49.84-12.40-5.76-30.24=1.44\).</p>
@@ -650,7 +747,7 @@ Total          X   49.84</div>
 
 <details>
 <summary>WE2.2 — Drone flight time: Temperature(2) × Propeller(3) — all three F-tests</summary>
-<p><strong>Setup.</strong> <em>Flight time</em> (min) by Factor A = ambient temperature (Cold / Warm; \(d_1=2\)) and Factor B = propeller design (2-blade, 3-blade, Toroidal; \(d_2=3\)), 6 flights per cell ⇒ \(n=36\). Given SS: Temp \(=40.5\), Propeller \(=88.2\), Interaction \(=9.6\), Residuals \(=133.2\).</p>
+<p><strong>Setup.</strong> <em>Flight time</em> (min) by Factor A = ambient temperature (Cold / Warm; \(d_1=2\)) and Factor B = propeller design (2-blade, 3-blade, Toroidal; \(d_2=3\)), 6 flights per cell ⇒ \(n=36\). Given SS: Temp \(=40.5\), Propeller \(=88.2\), Interaction \(=9.6\), Residuals \(=133.2\). <strong>Task:</strong> complete the table and carry out all three \(F\)-tests at the 5% level.</p>
 <p><strong>DF:</strong> Temp \(=1\); Propeller \(=2\); Interaction \(=1\times2=2\); Residuals \(=36-6=30\); Total \(=35\). &nbsp; <strong>SST</strong> \(=40.5+88.2+9.6+133.2=271.5\).</p>
 <p><strong>MSE</strong> \(=133.2/30=4.440\). Then \(F_{\text{Temp}}=(40.5/1)/4.440=9.122\); \(F_{\text{Prop}}=(88.2/2)/4.440=9.932\); \(F_{\text{Int}}=(9.6/2)/4.440=1.081\).</p>
 <table>
@@ -691,13 +788,15 @@ Total          X   49.84</div>
 
 <details>
 <summary>⭐ <strong>EXAM-LEVEL</strong> · YT2.3 — GAPPED two-way table: cake height [6 marks]</summary>
-<p><strong>This is the flagship two-way drill — a fresh gapped table with a different X-pattern from 2025 Q4.</strong> A bakery studies sponge-cake <em>height</em> (mm) under Factor A = oven setting (Fan / Conventional / Convection; \(d_1=3\)) and Factor B = recipe (Butter / Oil; \(d_2=2\)), balanced with 5 cakes per cell ⇒ \(n=3\times2\times5=30\). Using the design and the partial information, find every \(X\) cell, then test the interaction at 5%.</p>
-<div class="mono">Source        DF    SS      MS      F
-Oven           X    X       X      2.980
-Recipe         X   4.05     X       X
-Interaction    X    X      3.150    X
-Residuals      X    X      2.550
-Total          X   86.75</div>
+<p><strong>This is the flagship two-way drill — a fresh gapped table with a different X-pattern from 2025 Q4.</strong> A bakery studies sponge-cake <em>height</em> (mm) under Factor A = oven setting (Fan / Conventional / Convection; \(d_1=3\)) and Factor B = recipe (Butter / Oil; \(d_2=2\)), balanced with 5 cakes per cell ⇒ \(n=3\times2\times5=30\). Using the design and the partial ANOVA table below, find every \(X\) cell, then test the interaction at the 5% level. <span class="marks">[6 marks]</span></p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Oven</td><td class="fill">X</td><td class="fill">X</td><td class="fill">X</td><td>2.980</td></tr>
+<tr><td>Recipe</td><td class="fill">X</td><td>4.05</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Interaction</td><td class="fill">X</td><td class="fill">X</td><td>3.150</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td class="fill">X</td><td>2.550</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>86.75</td><td></td><td></td></tr>
+</table>
 <hr>
 <p><strong>Step 1 — DF from design.</strong> Oven \(=2\); Recipe \(=1\); Interaction \(=(3-1)(2-1)=2\); Residuals \(=30-6=24\); Total \(=29\) (check \(2+1+2+24=29\) ✓).</p>
 <p><strong>Step 2 — MSE is given:</strong> \(\text{MSE}=2.550\) (shared denominator).</p>
@@ -719,13 +818,15 @@ Total          X   86.75</div>
 
 <details>
 <summary><strong>STRETCH</strong> · YT2.4 — GAPPED \(4\times2\) germination: which effects are significant? [7 marks]</summary>
-<p>Seed <em>germination count</em> (per tray) under Factor A = light colour (Red, Blue, White, Far-red; \(d_1=4\)) and Factor B = soil mix (Peat / Coir; \(d_2=2\)), balanced with 5 trays per cell ⇒ \(n=40\). Partial table:</p>
-<div class="mono">Source        DF    SS      MS      F
-Light          X    X      32.00    X
-Soil           X   18.00    X       X
-Interaction    X   30.00    X       X
-Residuals      X    X       4.00
-Total          X   272.00</div>
+<p>A horticulture lab records seed <em>germination count</em> (per tray) under Factor A = light colour (Red, Blue, White, Far-red; \(d_1=4\)) and Factor B = soil mix (Peat / Coir; \(d_2=2\)), balanced with 5 trays per cell ⇒ \(N=40\). Complete the partial two-way ANOVA table below, then state which effects are significant at the 5% level. <span class="marks">[7 marks]</span></p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Light</td><td class="fill">X</td><td class="fill">X</td><td>32.00</td><td class="fill">X</td></tr>
+<tr><td>Soil</td><td class="fill">X</td><td>18.00</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Interaction</td><td class="fill">X</td><td>30.00</td><td class="fill">X</td><td class="fill">X</td></tr>
+<tr><td>Residuals</td><td class="fill">X</td><td class="fill">X</td><td>4.00</td><td></td></tr>
+<tr><td>Total</td><td class="fill">X</td><td>272.00</td><td></td><td></td></tr>
+</table>
 <hr>
 <p><strong>DF:</strong> Light \(=3\); Soil \(=1\); Interaction \(=(4-1)(2-1)=3\); Residuals \(=40-8=32\); Total \(=39\) (check \(3+1+3+32=39\) ✓).</p>
 <p><strong>Light from its MS:</strong> \(\text{SSF1}=32.00\times3=96.00\); \(F_1=32.00/4.00=8.000\).</p>
@@ -751,13 +852,15 @@ Total          X   272.00</div>
 
 <details>
 <summary>WE3.1 — Parallel lines (car fuel economy) → no interaction</summary>
-<p><strong>Plot described.</strong> Mean fuel economy (km/L) on the y-axis against <em>tyre pressure</em> (Low / High) on the x-axis; two lines, one for <em>Eco</em> driving mode and one for <em>Sport</em>. Both lines slope gently upward from Low to High pressure, and the Eco line sits about 4 km/L above the Sport line at <em>both</em> pressures — the vertical gap between the lines is essentially constant.</p>
+<p><strong>Setup.</strong> A two-way study crosses <em>tyre pressure</em> (Low / High) with <em>driving mode</em> (Eco / Sport); the interaction plot below shows mean fuel economy. <strong>Task:</strong> comment on whether there could be an interaction, and what it means in context.</p>
+<div class="fig">Mean fuel economy (km/L) on the y-axis against <em>tyre pressure</em> (Low / High) on the x-axis; two lines, one for <em>Eco</em> driving mode and one for <em>Sport</em>. Both lines slope gently upward from Low to High pressure, and the Eco line sits about 4 km/L above the Sport line at <em>both</em> pressures — the vertical gap between the lines is essentially constant.</div>
 <p><strong>Interpretation.</strong> The lines are (near) <strong>parallel</strong> ⇒ <em>little/no evidence of an interaction</em>. The benefit of higher tyre pressure is about the same whether you drive in Eco or Sport, and the Eco-vs-Sport gap is about the same at either pressure. The two factors appear to act <strong>independently</strong> (their effects add). A formal interaction \(F\)-test would confirm this.</p>
 </details>
 
 <details>
 <summary>WE3.2 — Crossing lines (crop yield) → interaction present</summary>
-<p><strong>Plot described.</strong> Mean crop yield (t/ha) against <em>irrigation</em> (Drip / Flood); one line for variety <em>Alpha</em>, one for variety <em>Omega</em>. Under Drip, Alpha is well above Omega; under Flood, the lines <strong>cross over</strong> so Omega ends up above Alpha.</p>
+<p><strong>Setup.</strong> A two-way trial crosses <em>irrigation</em> (Drip / Flood) with crop <em>variety</em> (Alpha / Omega); the interaction plot below shows mean crop yield. <strong>Task:</strong> comment on whether there could be an interaction, and what it means in context.</p>
+<div class="fig">Mean crop yield (t/ha) against <em>irrigation</em> (Drip / Flood); one line for variety <em>Alpha</em>, one for variety <em>Omega</em>. Under Drip, Alpha is well above Omega; under Flood, the lines <strong>cross over</strong> so Omega ends up above Alpha.</div>
 <p><strong>Interpretation.</strong> The lines <strong>cross</strong> (strongly non-parallel) ⇒ <em>clear visual evidence of an interaction</em>: which variety yields more <em>depends on</em> the irrigation method — Alpha wins under Drip, Omega wins under Flood. You must <strong>not</strong> summarise "the best variety" as a single answer; the variety effect reverses across irrigation. Confirm with the interaction \(F\)-test, and if significant, analyse each variety within a fixed irrigation type.</p>
 </details>
 
@@ -772,7 +875,8 @@ Total          X   272.00</div>
 
 <details>
 <summary><strong>STANDARD</strong> · YT3.2 — One flat, one steep line [2 marks]</summary>
-<p>Mean recovery time (days) against <em>physiotherapy</em> (None / Daily) for two age groups: the <em>Under-40</em> line is almost flat, while the <em>Over-60</em> line drops steeply from None to Daily. The lines do not cross but clearly fan apart. Comment on interaction.</p>
+<p>A rehabilitation study crosses <em>physiotherapy</em> (None / Daily) with <em>age group</em> (Under-40 / Over-60); the interaction plot of mean recovery time is described below. Comment on whether there could be an interaction. <span class="marks">[2 marks]</span></p>
+<div class="fig">Mean recovery time (days) against <em>physiotherapy</em> (None / Daily) for two age groups: the <em>Under-40</em> line is almost flat, while the <em>Over-60</em> line drops steeply from None to Daily. The lines do not cross but clearly fan apart.</div>
 <hr>
 <p><strong>Solution.</strong> The lines are <strong>not parallel</strong> (one flat, one steep) ⇒ <em>possible interaction</em>: physiotherapy barely changes recovery time for the under-40s but shortens it substantially for the over-60s, so the effect of physiotherapy <em>depends on</em> age group. (Non-parallel without crossing still signals interaction.) A formal interaction \(F\)-test is needed to confirm.</p>
 </details>
@@ -799,13 +903,15 @@ Total          X   272.00</div>
 
 <details>
 <summary>WE4.1 — All three look fine (bakery study)</summary>
-<p><strong>Plots described.</strong> Residuals-vs-fitted shows a roughly even horizontal band of points with no funnel or curve; the Normal Q–Q plot has points lying close to the reference line with only mild wiggle at the extremes; the four group SDs are \(1.9, 2.1, 2.3, 2.0\) (largest/smallest \(=1.2\), well under 2). Participants/cakes were randomly assigned to ovens.</p>
+<p><strong>Setup.</strong> A one-way ANOVA (a bakery study, 4 oven types) has been fitted; the diagnostic plots and group SDs are given below. <strong>Task:</strong> state the assumptions and assess each from the evidence.</p>
+<div class="fig">Residuals-vs-fitted shows a roughly even horizontal band of points with no funnel or curve; the Normal Q–Q plot has points lying close to the reference line with only mild wiggle at the extremes; the four group SDs are \(1.9, 2.1, 2.3, 2.0\) (largest/smallest \(=1.2\), well under 2). Participants/cakes were randomly assigned to ovens.</div>
 <p><strong>Verdict.</strong> <em>Constant variance</em> — even band, similar SDs (ratio \(1.2\lt2\)) ⇒ OK. <em>Normality</em> — Q–Q points near the line ⇒ reasonable. <em>Independence</em> — random assignment, no repeated measures on the same unit ⇒ plausible. All three assumptions appear satisfied, so the ANOVA \(F\)-test is trustworthy.</p>
 </details>
 
 <details>
 <summary>WE4.2 — A funnel + unequal SDs → equal-variance fails</summary>
-<p><strong>Plots described.</strong> Residuals-vs-fitted <em>fans out</em> — small scatter at low fitted values widening to large scatter at high fitted values (a clear funnel); group SDs are \(0.8, 1.5, 3.4\) (largest/smallest \(=4.3\)). Q–Q plot is close to the line.</p>
+<p><strong>Setup.</strong> A one-way ANOVA (3 groups) has been fitted; the diagnostic plots and group SDs are given below. <strong>Task:</strong> state the assumptions and assess each, noting any that fail.</p>
+<div class="fig">Residuals-vs-fitted <em>fans out</em> — small scatter at low fitted values widening to large scatter at high fitted values (a clear funnel); group SDs are \(0.8, 1.5, 3.4\) (largest/smallest \(=4.3\)). Q–Q plot is close to the line.</div>
 <p><strong>Verdict.</strong> <em>Constant variance is violated</em>: the funnel and the SD ratio \(4.3\) (far above the ≈2 rule of thumb) show spread grows with the mean. Normality looks fine (Q–Q on the line), and independence is argued from the design. Because equal variance fails, the standard \(F\)-test is unreliable — a variance-stabilising transformation (e.g. \(\log\) or \(\sqrt{\cdot}\) of the response) should be considered before trusting the ANOVA.</p>
 </details>
 
@@ -820,14 +926,16 @@ Total          X   272.00</div>
 
 <details>
 <summary><strong>STANDARD</strong> · YT4.2 — Curved Q–Q tails [2 marks]</summary>
-<p>The residuals-vs-fitted plot is a clean even band, but the Normal Q–Q plot curves up sharply at both ends (heavy S-shape). What do you conclude?</p>
+<p>A one-way ANOVA has been fitted and the two diagnostic plots below are provided. What do you conclude about the assumptions? <span class="marks">[2 marks]</span></p>
+<div class="fig">The residuals-vs-fitted plot is a clean even band, but the Normal Q–Q plot curves up sharply at both ends (a heavy S-shape).</div>
 <hr>
 <p><strong>Solution.</strong> Equal variance looks fine (even band), but the strong S-curve in the Q–Q plot signals a departure from <strong>normality</strong> (heavy tails). With large groups the \(F\)-test is fairly robust, but the normality assumption is questionable — note it, and consider a transformation or a non-parametric alternative if groups are small.</p>
 </details>
 
 <details>
 <summary><strong>EXAM-LEVEL</strong> · YT4.3 — Full assessment from plots + SD table [4 marks]</summary>
-<p>A one-way study (3 groups) reports group SDs \(2.4, 2.6, 2.5\); residuals-vs-fitted is an even band; Q–Q points sit on the line; treatments were randomly allocated. Give a one-line verdict on each assumption and an overall statement.</p>
+<p>A one-way study (3 groups) has been fitted; the group SDs and diagnostic plots are given below, and treatments were randomly allocated. Give a one-line verdict on each assumption and an overall statement. <span class="marks">[4 marks]</span></p>
+<div class="fig">Group SDs are \(2.4, 2.6, 2.5\); the residuals-vs-fitted plot is an even band; the Normal Q–Q points sit on the line.</div>
 <hr>
 <p><strong>Solution.</strong></p>
 <ul>

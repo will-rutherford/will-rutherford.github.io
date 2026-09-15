@@ -278,7 +278,13 @@ Use \(\mathbb{P}(Z\ge z)=1-\Phi(z)\) and symmetry \(\Phi(-z)=1-\Phi(z)\). Going 
 
 <details>
 <summary>Example 1 — THE FLAGSHIP: continuous pdf \(f(x)=c\,x^a\) (2025 exam Q1, 10 marks)</summary>
-<div class="q card">Let \(X\) have pdf \(f(x)=c\,x^{a}\) for \(0\le x\le 5\), where \(c\gt 0,\ a\gt 0\). Moreover \(\mathbb{P}\!\left(X\lt \tfrac54\right)=\tfrac{1}{32}\).<br>(a) Determine \(a\) and \(c\). (b) Determine \(\mathbb{P}(X\gt 4)\). (c) Determine the median and the mode.</div>
+<div class="q card"><b>Semester 2, 2025 — Question 1</b> <span style="color:var(--muted)">[10 marks]</span><br>
+Let \(X\) be a random variable with probability density function (pdf) given by
+$$f(x)=c\,x^{a},\qquad \text{for } 0\le x\le 5,$$
+where \(c\gt 0\) and \(a\gt 0\) are constants. Moreover, \(\mathbb{P}\!\left(X\lt \tfrac54\right)=\tfrac{1}{32}\).
+<br>(a) Determine the value of \(a\) and \(c\). <i>[5 marks]</i>
+<br>(b) Determine \(\mathbb{P}(X\gt 4)\). <i>[2 marks]</i>
+<br>(c) Determine the median and the mode of \(X\). <i>[3 marks]</i></div>
 
 <h4>(a) Find a and c — two equations</h4>
 <p><b>Equation 1 (normalisation):</b> \(\displaystyle\int_0^5 c\,x^a\,dx = \frac{c\,5^{a+1}}{a+1}=1.\)</p>
@@ -299,7 +305,15 @@ So \(4^{a+1}=32\Rightarrow 2^{2(a+1)}=2^{5}\Rightarrow 2(a+1)=5\Rightarrow \boxe
 
 <details>
 <summary>Example 2 — pdf \(f(x)=k\,x^3\): find k, E, Var, cdf, median (2023 exam Q1, 15 marks)</summary>
-<div class="q card">\(X\) has pdf \(f(x)=k\,x^{3}\) for \(1\le x\le 2\), \(k\gt0\). Find (a) \(k\); (b) \(\mathbb{E}(X)\); (c) \(\operatorname{Var}(X)\); (d) the cdf; (e) the median.</div>
+<div class="q card"><b>Semester 2, 2023 — Question 1</b> <span style="color:var(--muted)">[Total 15 marks]</span><br>
+A random variable \(X\) has the following probability density function,
+$$f(x)=k\,x^{3},\qquad \text{for } 1\le x\le 2,$$
+where \(k\) is a positive constant.
+<br>(a) Determine the value of \(k\). <i>[2 marks]</i>
+<br>(b) Determine \(\mathbb{E}(X)\). <i>[3 marks]</i>
+<br>(c) Determine \(\operatorname{Var}(X)\). <i>[4 marks]</i>
+<br>(d) Determine the cumulative distribution function of \(X\). <i>[3 marks]</i>
+<br>(e) Determine the median of \(X\). <i>[3 marks]</i></div>
 <h4>(a) k</h4>
 <p>\(\displaystyle\int_1^2 k x^3\,dx = k\cdot\frac{2^4-1^4}{4}=\frac{15k}{4}=1\Rightarrow k=\frac{4}{15}\approx 0.2667.\)</p>
 <h4>(b) E(X)</h4>
@@ -315,8 +329,12 @@ $$F(x)=\begin{cases}0 & x\lt 1\\[2pt] \dfrac{x^4-1}{15} & 1\le x\le 2\\[4pt] 1 &
 </details>
 
 <details>
-<summary>Example 3 — Binomial "at least" with the complement trick + a Normal question</summary>
-<div class="q card">A fair-ish process: 10% of a large population are left-handed. We select \(n=100\) people. (a) What is \(\mathbb{P}(X=3)\) if instead \(X\sim\text{Bin}(10,\tfrac14)\)? (b) For the left-handers, find \(\mathbb{P}(\text{at least }15)\). (c) Female heights \(\sim\mathcal N(168,36)\) cm². What fraction of women are taller than 180 cm? (Notes Ch 2 exercises &amp; Example 2.1.)</div>
+<summary>Example 3 — Binomial "at least" with the complement trick + a Normal question (notes Ch 2 exercises &amp; Example 2.1)</summary>
+<div class="q card"><b>Three short distribution questions</b> (notes Ch 2 exercises &amp; Example 2.1) <span style="color:var(--muted)">[11 marks]</span><br>
+Answer each part independently — each describes its own scenario.
+<br>(a) A multiple-choice quiz has 10 questions, each with four equally likely options. A student who has not studied guesses every answer at random. Let \(X\) be the number of questions answered correctly, so \(X\sim\text{Bin}(10,\tfrac14)\). Determine \(\mathbb{P}(X=3)\), and state \(\mathbb{E}(X)\) and the standard deviation of \(X\). <i>[4 marks]</i>
+<br>(b) In a large population, 10% of people are left-handed. A random sample of \(n=100\) people is selected; let \(X\) be the number who are left-handed, so \(X\sim\text{Bin}(100,0.10)\). Determine \(\mathbb{P}(X\ge 15)\) (a Normal approximation is acceptable). <i>[4 marks]</i>
+<br>(c) The heights of adult women are normally distributed with mean 168 cm and variance 36 cm\(^2\); that is, \(X\sim\mathcal N(168,36)\). Determine the proportion of women who are taller than 180 cm. <i>[3 marks]</i></div>
 <h4>(a) Exact binomial term</h4>
 <p>\(X\sim\text{Bin}(10,0.25)\): \(\mathbb{P}(X=3)=\binom{10}{3}(0.25)^3(0.75)^7=120\cdot0.015625\cdot0.13348\approx 0.250.\) Also \(\mathbb{E}(X)=np=2.5\), \(\text{sd}=\sqrt{np(1-p)}=\sqrt{1.875}\approx1.369.\)</p>
 <h4>(b) At least 15 — complement</h4>
@@ -328,8 +346,15 @@ $$F(x)=\begin{cases}0 & x\lt 1\\[2pt] \dfrac{x^4-1}{15} & 1\le x\le 2\\[4pt] 1 &
 
 <details>
 <summary>Example 4 — Bayes / conditional probability (car faults, 2022 exam Q1, 11 marks)</summary>
-<div class="q card">For a car model in its first 5 years: \(\mathbb{P}(\text{engine fault } E)=0.05\), \(\mathbb{P}(\text{transmission fault } T)=0.02\), \(\mathbb{P}(E\cup T)=0.06\). (b) \(\mathbb{P}(E\mid T)\); (c) \(\mathbb{P}(E\mid T^c)\); (d) \(\mathbb{P}(T\mid E)\).</div>
-<h4>First get the overlap (addition rule)</h4>
+<div class="q card"><b>Semester 2, 2022 — Question 1</b> <span style="color:var(--muted)">[11 marks]</span><br>
+A model of car has a substantial rate of faults with its transmission and its engine. For a randomly selected car of this model, in the first 5 years of use, the probability of a fault with the engine is 0.05, and the probability of a fault with the transmission is 0.02. There is a 0.06 probability of a fault in either the engine, the transmission or both in the first 5 years of use for a car of this model.
+<br>(a) Define the events of interest (with notation), the sample space and the known probabilities. <i>[3 marks]</i>
+<br>(b) If one of these cars has a faulty transmission, what is the probability that it also has a faulty engine? <i>[3 marks]</i>
+<br>(c) If one of these cars has a transmission which passes all tests, what is the probability that it has a faulty engine? <i>[3 marks]</i>
+<br>(d) If one of these cars has a faulty engine, what is the probability that it also has a faulty transmission? <i>[2 marks]</i></div>
+<h4>(a) Events, sample space, known probabilities</h4>
+<p>Let \(E=\{\text{the car develops an engine fault in the first 5 years}\}\) and \(T=\{\text{the car develops a transmission fault in the first 5 years}\}\). The sample space is the set of possible fault outcomes for a randomly selected car, \(\Omega=\{E\cap T,\ E\cap T^c,\ E^c\cap T,\ E^c\cap T^c\}\). Known probabilities: \(\mathbb{P}(E)=0.05,\ \mathbb{P}(T)=0.02,\ \mathbb{P}(E\cup T)=0.06.\)</p>
+<h4>Preliminary — the overlap (addition rule)</h4>
 <p>\(\mathbb{P}(E\cap T)=\mathbb{P}(E)+\mathbb{P}(T)-\mathbb{P}(E\cup T)=0.05+0.02-0.06=0.01.\)</p>
 <h4>(b) faulty engine given faulty transmission</h4>
 <p>\(\mathbb{P}(E\mid T)=\dfrac{\mathbb{P}(E\cap T)}{\mathbb{P}(T)}=\dfrac{0.01}{0.02}=0.5.\)</p>
@@ -343,7 +368,16 @@ $$F(x)=\begin{cases}0 & x\lt 1\\[2pt] \dfrac{x^4-1}{15} & 1\le x\le 2\\[4pt] 1 &
 
 <details>
 <summary>Example 5 — piecewise pdf: h, cdf, E, sd, IQR (2021 exam Q1)</summary>
-<div class="q card">\(f(x)=h\) for \(0\le x\lt1\), \(f(x)=h/2\) for \(1\le x\le2\), else 0. Find (a) \(h\); (b) cdf; (c) \(\mathbb{E}(X)\); (d) sd; (e) IQR.</div>
+<div class="q card"><b>Semester 2, 2021 — Question 1</b> <span style="color:var(--muted)">[parts (a)–(e), 18 marks]</span><br>
+A continuous random variable \(X\) has probability density function
+$$f(x)=\begin{cases}h & 0\le x\lt 1,\\[2pt] h/2 & 1\le x\le 2,\\[2pt] 0 & \text{otherwise,}\end{cases}$$
+where \(h\) is a positive real number.
+<br>(a) Determine the value of \(h\). <i>[2 marks]</i>
+<br>(b) Determine the cumulative distribution function \(F(x)\). <i>[5 marks]</i>
+<br>(c) Determine the expectation of \(X\). <i>[4 marks]</i>
+<br>(d) Determine the standard deviation of \(X\). <i>[4 marks]</i>
+<br>(e) Determine the inter-quartile range for \(X\). <i>[3 marks]</i>
+<div class="tip">The original 2021 Q1 also had a part (f) asking you to derive \(\operatorname{Var}(\bar X-\bar Y)\) for two independent samples with a common variance \(\sigma^2\) — that is a Chapter 6 sampling topic and is covered at <a href="foundations.html">📐 Foundations</a>.</div></div>
 <h4>(a) h</h4>
 <p>Area = \(h\cdot1 + \tfrac{h}{2}\cdot1=\tfrac{3h}{2}=1\Rightarrow h=\tfrac23.\)</p>
 <h4>(b) cdf (integrate piece by piece)</h4>
@@ -358,7 +392,11 @@ $$F(x)=\begin{cases}0 & x\lt0\\[2pt]\tfrac23 x & 0\le x\lt1\\[2pt]\tfrac23+\tfra
 
 <details>
 <summary>Example 6 — pure counting → probability (notes §1.5)</summary>
-<div class="q card">(i) A 20-question, 3-choice exam: how many ways to complete it? (ii) In how many ways can 8 horses place 1st/2nd/3rd? (iii) Probability that 40 people all have different birthdays.</div>
+<div class="q card"><b>Counting and probability</b> (notes §1.5) <span style="color:var(--muted)">[6 marks]</span><br>
+Answer each part independently.
+<br>(i) A multiple-choice exam has 20 questions, each with 3 possible answers. In how many different ways can the whole exam be completed, giving exactly one answer to every question? <i>[2 marks]</i>
+<br>(ii) Eight horses run a race with no ties. In how many different ways can the first, second and third places be filled? <i>[2 marks]</i>
+<br>(iii) A room contains 40 people. Assuming each person's birthday is equally likely to be any of 365 days (ignoring leap years) and that birthdays are independent, determine the probability that all 40 people have different birthdays. <i>[2 marks]</i></div>
 <p>(i) Ordered, with replacement: \(3^{20}=3\,486\,784\,401.\)</p>
 <p>(ii) Ordered, without replacement: \({}^8P_3=8\cdot7\cdot6=336.\)</p>
 <p>(iii) \(\Omega=365^{40}\) equally-likely birthday vectors; favourable \(={}^{365}P_{40}\). So \(\mathbb{P}=\dfrac{{}^{365}P_{40}}{365^{40}}\approx 0.109\) — surprisingly small.</p>

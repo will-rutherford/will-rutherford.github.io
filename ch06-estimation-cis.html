@@ -230,7 +230,16 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE1 — One-sample mean CI + interpret (2025 exam Q3(a), 4 marks) ★ the flagship</summary>
-<div class="q card">Gardner et al. (2018): 304 participants on a low-carb diet had a mean 12-month weight change of \(\bar x=-5.99\) kg with \(s=5.69\) kg. <em>Calculate a 95% confidence interval for the low-carb population mean weight change (kg). Report to two decimal places and interpret in the context of the study.</em></div>
+<div class="q card"><strong>STAT1301 Semester 2 Examinations 2025 — Question 3</strong> <span style="color:var(--muted)">[Total 19 marks]</span>
+<p>Gardner et al. (2018) conducted a randomised trial to compare the effectiveness of low-carbohydrate (LC) and low-fat (LF) diets for adult weight loss. A total of 609 participants were enrolled, with 304 assigned to the LC diet and 305 to the LF diet. Body weight (kg) was measured at baseline and again after 12 months of dietary intervention. Table 2 summarises the sample sizes, baseline weights, 12-month weights, and weight changes for each diet.</p>
+<table>
+<tr><th>Diet</th><th>\(n\)</th><th>mean Baseline (SD)</th><th>mean 12-month (SD)</th><th>mean weight change (SD)</th></tr>
+<tr><td>Low-Carb</td><td>304</td><td>96.30 (15.70)</td><td>90.31 (16.72)</td><td>\(-5.99\) (5.69)</td></tr>
+<tr><td>Low-Fat</td><td>305</td><td>97.50 (14.70)</td><td>92.21 (15.59)</td><td>\(-5.29\) (5.70)</td></tr>
+</table>
+<p style="color:var(--muted);font-size:12px;margin:-4px 0 10px">Table 2: Summary statistics for diet groups in the randomised trial.</p>
+<p><strong>(a)</strong> Calculate a 95% confidence interval for the low-carb population mean weight change (kg). Report to two decimal places and interpret the interval in the context of the study. <span style="color:var(--muted)">[4 marks]</span></p>
+<p style="color:var(--muted);font-size:13px;margin-bottom:0">(Parts (b)–(d) — stating the hypotheses, testing whether the two diets differ, and checking assumptions — are two-sample hypothesis-testing tasks; see Ch 7.)</p></div>
 <div class="method"><strong>Recognise:</strong> one sample, mean of measurements → recipe ① (\(t_{n-1}\), item 62).
 <ol>
 <li>\(n=304\), df \(=303\). Quantile \(q=t_{0.975,303}\). Table: \(t_{200}=1.97\), \(t_\infty=1.96\) → use \(1.97\) (exact \(1.9679\)).</li>
@@ -245,7 +254,10 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE2 — Two-sample mean CI, pooled/equal variances (2023 exam Q4(b), 7 marks)</summary>
-<div class="q card">6 samples of 100g sheep paté: mean \(20.7\) g protein, \(s=0.17\). 6 samples of goat paté: mean \(19.2\) g, \(s=0.17\). Both normal. <em>Construct a 95% CI for the mean difference in protein content. Report to 3 s.f., then give a statistical conclusion and a conclusion in context.</em></div>
+<div class="q card"><strong>STAT1301 Semester 2 Examinations 2023 — Question 4</strong> <span style="color:var(--muted)">[Total 18 marks]</span>
+<p>Researchers wanted to investigate the differences in protein content of sheep and goat pâtés. As part of the study, 6 samples of 100g sheep pâté and 6 samples of 100g goat pâté were collected from different producers, and their protein content was measured. The sheep pâtés have an average of 20.7g of protein, with a standard deviation of 0.17g. For the goat pâtés, the average was 19.2g of protein with a standard deviation of 0.17g. The distributions of protein content of sheep and goat pâtés were each approximately normally distributed.</p>
+<p><strong>(b)</strong> Construct a 95% confidence interval for the mean difference in protein content between 100g sheep pâtés and goat pâtés. Show working and report your answer to three significant figures. Based on this confidence interval, write a statistical conclusion and a conclusion in the context of the study. <span style="color:var(--muted)">[7 marks]</span></p>
+<p style="color:var(--muted);font-size:13px;margin-bottom:0">(Part (a) asks for the null/alternative hypotheses [4 marks]; part (c) tests a producer's "at least 2g more protein" claim [7 marks] — both hypothesis tests, see Ch 7.)</p></div>
 <div class="method"><strong>Recognise:</strong> two independent groups, comparing means, sample SDs identical → assume equal variances → pooled recipe ③ (\(t_{m+n-2}\)).
 <ol>
 <li>Pooled variance: \(S_p^2=\dfrac{(6-1)0.17^2+(6-1)0.17^2}{6+6-2}=0.0289\), so \(S_p=0.17\).</li>
@@ -260,7 +272,16 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE3 — CI for a standard deviation \(\sigma\), chi-squared (2024 exam Q3(d), 4 marks)</summary>
-<div class="q card">The differences (forearm − upper-arm systolic BP) for 44 subjects have SD \(s=9.64\) mmHg. <em>Construct a 95% CI for the standard deviation \(\sigma\) of the difference. State any assumptions.</em></div>
+<div class="q card"><strong>STAT1301 Semester 2 Examinations 2024 — Question 3</strong> <span style="color:var(--muted)">[Total 20 marks]</span>
+<p>Schimanski et al. (2014) were interested in whether the forearm could be used as an alternative site to measure blood pressure when the upper arm is unavailable. Forty-four subjects were recruited for the study. For each person, a measurement of their systolic blood pressure (mmHg) was taken at their forearms and at their upper arms. Summary statistics for the data are shown in Table 1.</p>
+<table>
+<tr><th></th><th>Forearm</th><th>Upper arm</th><th>Forearm − Upper arm</th></tr>
+<tr><td>Mean \(\bar x\)</td><td>134.30</td><td>132.08</td><td>2.22</td></tr>
+<tr><td>Standard deviation \(s\)</td><td>22.19</td><td>25.56</td><td>9.64</td></tr>
+</table>
+<p style="color:var(--muted);font-size:12px;margin:-4px 0 10px">Table 1: Summary statistics for forearm and upper arm systolic blood pressure (mmHg) measurements.</p>
+<p><strong>(d)</strong> Construct a 95% confidence interval for the standard deviation \(\sigma\) of the difference in systolic blood pressure when measured at the forearm and upper arm. State any assumptions you make. <span style="color:var(--muted)">[4 marks]</span></p>
+<p style="color:var(--muted);font-size:13px;margin-bottom:0">(Parts (a)–(c) are paired-difference hypothesis tests, see Ch 7; part (e) — sample size for a future study — is worked as WE5 below.)</p></div>
 <div class="method"><strong>Recognise:</strong> one sample, CI for the SD → recipe ② (\(\chi^2_{n-1}\), item 63). Build the CI for \(\sigma^2\) first, then square-root.
 <ol>
 <li>\(n=44\), df \(=43\). Quantiles of \(\chi^2_{43}\): \(q_1=\chi^2_{0.025,43}=26.79\), \(q_2=\chi^2_{0.975,43}=62.99\). (df 43 isn't on the table — use the nearest row, df 40, or interpolate; nearest-row is accepted.)</li>
@@ -275,7 +296,9 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE4 — Two-sample proportion CI (notes §6.4 exercise 6: election poll)</summary>
-<div class="q card">In an election poll, 350 of 980 women and 420 of 1108 men said they would vote "Shady Shane". <em>Give a 90% CI for the difference in the proportion of Shady voters among women and men.</em></div>
+<div class="q card"><strong>Exam-style question</strong> <span style="color:var(--muted)">[5 marks]</span>
+<p>In the lead-up to an election, a polling organisation surveys a random sample of registered voters to gauge support for the candidate "Shady Shane", and records each respondent's sex. Among the women surveyed, 350 of 980 said they would vote for Shady Shane; among the men surveyed, 420 of 1108 said they would. Let \(p_X\) be the true proportion of women who support Shady Shane and \(p_Y\) the true proportion of men.</p>
+<p><strong>(a)</strong> Give a 90% confidence interval for the difference \(p_X-p_Y\) in the proportion of Shady Shane voters between women and men. <strong>(b)</strong> Based on the interval, is there evidence at the 10% level that support differs between women and men? <span style="color:var(--muted)">[5 marks]</span></p></div>
 <div class="method"><strong>Recognise:</strong> two groups, yes/no responses → two-sample proportion, recipe ⑥ (\(N(0,1)\)).
 <ol>
 <li>\(\widehat p_X=350/980=0.3571\) (women), \(\widehat p_Y=420/1108=0.3791\) (men). Plenty of successes and failures in each → normal approx OK.</li>
@@ -289,7 +312,9 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE5 — Sample-size / margin-of-error (2024 exam Q3(e), 3 marks + proportion version)</summary>
-<div class="q card"><strong>(a)</strong> A future study wants to estimate the mean forearm−upper-arm BP difference within a 95% margin of error of no more than 1 mmHg, taking \(\sigma\approx s=9.64\). What is the smallest number of subjects needed?</div>
+<div class="q card"><strong>STAT1301 Semester 2 Examinations 2024 — Question 3(e)</strong> <span style="color:var(--muted)">[3 marks]</span>
+<p>Recall the Schimanski et al. (2014) study from WE3: for each of 44 subjects, systolic blood pressure (mmHg) was measured at the forearm and at the upper arm. The forearm − upper arm differences had mean \(\bar x=2.22\) mmHg and standard deviation \(s=9.64\) mmHg.</p>
+<p><strong>(a)</strong> Suppose a future study wanted to estimate blood pressure by correcting measurements taken at the forearm. To do so, they want to estimate the difference in means (forearm − upper arm) within a 95% margin of error of no more than 1 mmHg. What is the smallest number of subjects they would need to recruit to obtain a confidence interval with the desired accuracy? You may assume the estimate of the standard deviation is equal to the relevant sample standard deviation above (\(\sigma\approx s=9.64\)). <span style="color:var(--muted)">[3 marks]</span></p></div>
 <div class="method"><strong>Recognise:</strong> "margin of error no more than …" → sample-size, recipe ⑦.
 <ol>
 <li>Require \(z\dfrac{\sigma}{\sqrt n}\le 1\) with \(z=1.96\), \(\sigma=9.64\).</li>
@@ -297,7 +322,9 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <li>Round UP: \(n=357\) subjects.</li>
 </ol></div>
 <p><strong>Answer: 357 subjects.</strong></p>
-<div class="q card" style="margin-top:12px"><strong>(b) Proportion version</strong> (Tutorial 6 Q4): a 95% CI for a proportion with margin of error \(\le 3\%\), no pilot data. How large must \(n\) be?</div>
+<div class="q card" style="margin-top:12px"><strong>(b) Proportion version</strong> <span style="color:var(--muted)">(Tutorial 6 Q4 style) [3 marks]</span>
+<p>A market-research team is planning a survey to estimate the proportion \(p\) of a city's adults who have used public transport in the past week. They want a 95% confidence interval for \(p\) whose margin of error is no more than 3% (i.e. \(\le 0.03\)). No pilot survey has been run, so no prior estimate of \(p\) is available.</p>
+<p><strong>(b)</strong> How large must the sample size \(n\) be to guarantee the desired margin of error? <span style="color:var(--muted)">[3 marks]</span></p></div>
 <div class="method"><ol>
 <li>Worst case: \(p(1-p)\le\tfrac14\) (maximum at \(p=0.5\)), so ME \(\le q\cdot\tfrac12/\sqrt n\).</li>
 <li>Set \(1.96\times\dfrac{0.5}{\sqrt n}=0.03 \Rightarrow n=\left(\dfrac{1.96\times0.5}{0.03}\right)^2=1067.1 \Rightarrow n=1068\).</li>
@@ -308,7 +335,9 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 
 <details>
 <summary>WE6 — One-sample proportion CI + validity check (notes Ex 6.9, opinion poll)</summary>
-<div class="q card">In a poll of 1000 voters, 227 say they will vote Green. <em>Construct a 95% CI for the population proportion \(p\).</em></div>
+<div class="q card"><strong>Exam-style question</strong> <span style="color:var(--muted)">[4 marks]</span>
+<p>A polling company conducts a random opinion poll of 1000 eligible voters ahead of a state election, asking each which party they intend to vote for. Of the 1000 respondents, 227 say they will vote for the Green party. Let \(p\) denote the true proportion of all eligible voters who intend to vote Green.</p>
+<p><strong>(a)</strong> Check that the conditions for the large-sample (normal-approximation) proportion interval are satisfied. <strong>(b)</strong> Construct a 95% confidence interval for the population proportion \(p\) and interpret it in context. <span style="color:var(--muted)">[4 marks]</span></p></div>
 <div class="method"><strong>Recognise:</strong> one sample, yes/no → recipe ⑤.
 <ol>
 <li>\(\widehat p=227/1000=0.227\). Check: \(n\widehat p=227\ge5\) and \(n(1-\widehat p)=773\ge5\) ✓.</li>
@@ -438,17 +467,20 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>Q2. \(n=51\), \(\bar x=1136\), \(s=178\). Give a 95% CI for the mean, and say whether \(z\) or \(t\) is "correct" on the formula sheet.</summary>
+<summary>Q2. One-sample mean CI + which quantile — quarterly electricity use (3 marks)</summary>
+<div class="q card">An electricity retailer audits a random sample of \(n=51\) households in a suburb and records each household's electricity use over the past quarter (kWh). The sample mean is \(\bar x=1136\) kWh with sample standard deviation \(s=178\) kWh. <strong>(a)</strong> Construct a 95% confidence interval for the mean quarterly electricity use of households in the suburb. <strong>(b)</strong> State whether the formula sheet uses the \(z\) or the \(t\) quantile here, and why. <span style="color:var(--muted)">[3 marks]</span></div>
 <p>Formula-sheet item 62 uses \(t_{n-1}=t_{50}\). \(t_{0.975,50}=2.01\), SE \(=178/\sqrt{51}=24.9\), ME \(=2.01\times24.9=50.1\) → CI \((1085.9,\,1186.1)\). (Using \(z=1.96\) instead — the notes' original version — gives \((1087,\,1185)\); the difference is tiny because \(t_{50}\approx z\).) On this exam, reach for the \(t\) row.</p>
 </details>
 
 <details>
-<summary>Q3. A juice company samples 27 bottles; \(s=5.86\) ml. Give a 95% CI for the variance \(\sigma^2\).</summary>
+<summary>Q3. CI for a variance — juice-bottle fill volume (4 marks)</summary>
+<div class="q card">A juice company is concerned about the consistency of its bottle-filling machine. A random sample of 27 filled bottles is taken and the fill volume (ml) of each is measured; fill volumes are assumed approximately normal. The sample standard deviation is \(s=5.86\) ml. Construct a 95% confidence interval for the population variance \(\sigma^2\) of the fill volume. <span style="color:var(--muted)">[4 marks]</span></div>
 <p>Recipe ② with df \(=26\): \(q_1=\chi^2_{0.025,26}=13.8\), \(q_2=\chi^2_{0.975,26}=41.9\). \((n-1)s^2=26\times5.86^2=892.6\). CI \(=(892.6/41.9,\;892.6/13.8)=(21.3,\;64.7)\) ml². (For the SD: \((4.62,\,8.04)\) ml.)</p>
 </details>
 
 <details>
-<summary>Q4. Nightmares: 55 of 160 men and 60 of 192 women report frequent nightmares. 95% CI for \(p_{\text{men}}-p_{\text{women}}\)?</summary>
+<summary>Q4. Two-sample proportion CI — frequent nightmares by sex (5 marks)</summary>
+<div class="q card">A sleep researcher surveys a random sample of adults about how often they experience nightmares. Among the men surveyed, 55 of 160 report frequent nightmares; among the women, 60 of 192 do. Let \(p_{\text{men}}\) and \(p_{\text{women}}\) be the corresponding population proportions. Construct a 95% confidence interval for \(p_{\text{men}}-p_{\text{women}}\) and state what it implies about a difference between the sexes. <span style="color:var(--muted)">[5 marks]</span></div>
 <p>Recipe ⑥. \(\widehat p_X=0.344\), \(\widehat p_Y=0.313\), diff \(=0.031\). SE \(=\sqrt{0.344(0.656)/160+0.313(0.687)/192}=0.0503\). ME \(=1.96\times0.0503=0.099\). CI \(=(-0.067,\;0.130)\). Contains 0 → no evidence men and women differ.</p>
 </details>
 
@@ -458,7 +490,8 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>Q6. A pilot 95% CI for a mean is \(16.75\pm7.39\) from \(n=4\). What \(n\) is needed for a margin of error \(\le 2\)?</summary>
+<summary>Q6. Recover \(s\) from a pilot CI, then size the study (4 marks)</summary>
+<div class="q card">A researcher runs a small pilot study of \(n=4\) normally-distributed observations and reports a 95% confidence interval for the population mean of \(16.75\pm7.39\). They now want to design a full study that estimates the mean with a 95% margin of error of no more than 2. How many observations are needed? <span style="color:var(--muted)">[4 marks]</span></div>
 <p>Recover \(s\): half-width \(7.39=t_{0.975,3}\,s/\sqrt4=3.18\,s/2\Rightarrow s=4.64\). Then \(n\ge(1.96\times4.64/2)^2=20.7\Rightarrow n=21\). (Round up.)</p>
 </details>
 
@@ -483,7 +516,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-A1 — Espresso extraction time (95% CI)</summary>
+<summary>WE-A1 — Espresso extraction time (95% CI) — 4 marks</summary>
 <div class="q card">A café dials in a new grinder. Over \(n=25\) consecutive shots the extraction time has mean \(\bar x=27.4\) s and \(s=2.1\) s. Assume shot times are approximately normal. <em>Construct a 95% CI for the true mean extraction time and interpret it.</em></div>
 <div class="method"><strong>Recognise:</strong> one sample, mean of measurements → recipe ① (\(t_{n-1}\), item 62).
 <ol>
@@ -497,7 +530,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-A2 — Climbing-gym hang time (90% CI)</summary>
+<summary>WE-A2 — Climbing-gym hang time (90% CI) — 3 marks</summary>
 <div class="q card">At a bouldering gym, \(n=16\) members hold a dead-hang; the times (assume normal) have \(\bar x=41.8\) s and \(s=7.5\) s. <em>Give a 90% CI for the mean dead-hang time.</em></div>
 <div class="method"><strong>Recognise:</strong> one sample, mean → recipe ①. Note 90% → \(\alpha=0.10\), so \(q=t_{0.95,\,15}\).
 <ol>
@@ -556,7 +589,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-B1 — Two keyboards, typing speed (pooled, 95%)</summary>
+<summary>WE-B1 — Two keyboards, typing speed (pooled, 95%) — 5 marks</summary>
 <div class="q card">Ten typists test a mechanical keyboard \(X\) (\(\bar x=78\) wpm, \(s_X=6.0\)); ten <em>different</em> typists test a membrane keyboard \(Y\) (\(\bar y=71\) wpm, \(s_Y=6.4\)). The two sample SDs are almost identical, so treat the variances as equal. <em>Give a 95% CI for \(\mu_X-\mu_Y\).</em></div>
 <div class="method"><strong>Recognise:</strong> two independent groups, means, similar SDs → pooled recipe ③ (\(t_{m+n-2}\)).
 <ol>
@@ -570,7 +603,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-B2 — Two fertilisers, tomato yield (Welch, unequal variances, 95%)</summary>
+<summary>WE-B2 — Two fertilisers, tomato yield (Welch, unequal variances, 95%) — 5 marks</summary>
 <div class="q card">Liquid fertiliser \(X\) on \(m=12\) plots gives yield \(\bar x=54\) kg (\(s_X=9.0\)); fertiliser \(Y\) on \(n=10\) plots gives \(\bar y=46\) kg (\(s_Y=3.5\)). The spreads look clearly different, so do <strong>not</strong> pool. <em>Give a 95% CI for \(\mu_X-\mu_Y\).</em></div>
 <div class="method"><strong>Recognise:</strong> two groups, means, unequal SDs → Welch recipe ④ (\(t_{\text{df}}\), item 66).
 <ol>
@@ -647,7 +680,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-C1 — Seed germination (one-sample proportion, 95%)</summary>
+<summary>WE-C1 — Seed germination (one-sample proportion, 95%) — 4 marks</summary>
 <div class="q card">A seed supplier plants \(n=200\) seeds under standard conditions; \(138\) germinate. <em>Construct a 95% CI for the true germination proportion \(p\).</em></div>
 <div class="method"><strong>Recognise:</strong> one sample, yes/no counts → proportion recipe ⑤ (normal \(z\), item 67).
 <ol>
@@ -659,7 +692,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-C2 — Checkout A/B test (two-sample proportion, 90%)</summary>
+<summary>WE-C2 — Checkout A/B test (two-sample proportion, 90%) — 5 marks</summary>
 <div class="q card">An online store A/B-tests two checkout designs. Of \(400\) shoppers on design \(X\), \(84\) abandon their cart; of \(400\) on design \(Y\), \(66\) abandon. <em>Give a 90% CI for \(p_X-p_Y\), the difference in abandonment rates.</em></div>
 <div class="method"><strong>Recognise:</strong> two groups, yes/no → two-sample proportion recipe ⑥ (\(z\), item 68).
 <ol>
@@ -718,7 +751,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-D1 — 3D-printer layer thickness (CI for variance, 95%)</summary>
+<summary>WE-D1 — 3D-printer layer thickness (CI for variance, 95%) — 4 marks</summary>
 <div class="q card">A 3D printer's layer thickness (mm) is measured on \(n=20\) layers, giving \(s=0.08\) mm. Assume normality. <em>Construct a 95% CI for the variance \(\sigma^2\).</em></div>
 <div class="method"><strong>Recognise:</strong> one sample, variability, normal → recipe ② (\(\chi^2_{n-1}\), item 63).
 <ol>
@@ -731,7 +764,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-D2 — Archery arrow spread (CI for SD, 95%)</summary>
+<summary>WE-D2 — Archery arrow spread (CI for SD, 95%) — 4 marks</summary>
 <div class="q card">An archer's arrow-to-centre distances (cm) for \(n=15\) shots have \(s=3.2\) cm. Assume normality. <em>Give a 95% CI for the standard deviation \(\sigma\).</em></div>
 <div class="method"><strong>Recognise:</strong> SD asked → build the variance CI (recipe ②) then square-root.
 <ol>
@@ -789,7 +822,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-E1 — E-scooter range (mean sample size)</summary>
+<summary>WE-E1 — E-scooter range (mean sample size) — 3 marks</summary>
 <div class="q card">An e-scooter maker wants to estimate the mean range (km) on a full charge to within a 95% margin of error of \(1\) km. A pilot suggests \(\sigma\approx4.5\) km. <em>What is the smallest number of scooters to test?</em></div>
 <div class="method"><strong>Recognise:</strong> "margin of error no more than …" → sample-size recipe ⑦ (mean).
 <ol>
@@ -801,7 +834,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-E2 — Campus survey (proportion sample size, no pilot)</summary>
+<summary>WE-E2 — Campus survey (proportion sample size, no pilot) — 3 marks</summary>
 <div class="q card">A student union wants a 95% CI for the proportion who commute by bike, with margin of error \(\le 2.5\%\). No prior estimate of \(p\) is available. <em>How large must the sample be?</em></div>
 <div class="method"><strong>Recognise:</strong> proportion, worst-case → recipe ⑦ with \(p(1-p)\le\tfrac14\).
 <ol>
@@ -847,7 +880,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <h4>📖 Learn from these</h4>
 
 <details>
-<summary>WE-F1 — Which interpretation is correct? (MCQ)</summary>
+<summary>WE-F1 — Which interpretation is correct? (MCQ) — 2 marks</summary>
 <div class="q card">A 95% CI for a population mean download speed is computed as \((48.2,\;53.6)\) Mbps. Which statement is correct?
 <br>&nbsp;&nbsp;<strong>A.</strong> There is a 95% probability that \(\mu\) lies in \((48.2,\;53.6)\).
 <br>&nbsp;&nbsp;<strong>B.</strong> 95% of individual users have a download speed between 48.2 and 53.6 Mbps.
@@ -862,7 +895,7 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 </details>
 
 <details>
-<summary>WE-F2 — Comparing two unbiased estimators (efficiency)</summary>
+<summary>WE-F2 — Comparing two unbiased estimators (efficiency) — 6 marks</summary>
 <div class="q card">\(X_1,\dots,X_n\) are iid with mean \(\mu\) and variance \(\sigma^2\). Consider two estimators of \(\mu\): the full mean \(\widehat\mu_A=\bar X=\tfrac1n\sum X_i\), and the "endpoints-only" average \(\widehat\mu_B=\tfrac12(X_1+X_n)\). <em>Show both are unbiased and say which you'd prefer for \(n\gt2\).</em></div>
 <div class="method"><strong>Unbiasedness</strong> (linearity of expectation):
 \[\mathbb E(\widehat\mu_A)=\tfrac1n\sum\mathbb E(X_i)=\tfrac1n(n\mu)=\mu,\qquad \mathbb E(\widehat\mu_B)=\tfrac12(\mu+\mu)=\mu.\]

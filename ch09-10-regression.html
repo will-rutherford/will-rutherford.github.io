@@ -55,6 +55,10 @@
   .tag.b4{background:var(--bad);color:#2a0505}
   .legend{font-size:13.5px}
   .legend li{margin:6px 0}
+  .figdesc{background:rgba(14,165,233,.07);border:1px solid #23415a;border-left:4px solid var(--accent2);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:13.5px}
+  .figdesc:before{content:"\1F5BC FIGURE — ";color:var(--accent2);font-weight:700}
+  .marks{color:var(--muted);font-weight:400;font-size:13px}
+  .qhead{color:var(--gold);font-size:16px;margin:0 0 4px}
 </style>
 </head>
 <body>
@@ -309,119 +313,214 @@ $$\ln(Y)=\beta_0+\beta_1 x\ \Longrightarrow\ Y=e^{\beta_0}e^{\beta_1 x},\quad \t
 <!-- ============================================================= -->
 <section id="worked">
 <h2>4 · Worked examples (real past-paper regression questions)</h2>
-<p>All numbers below were re-computed in Python from the printed R output to guarantee they match.</p>
+<p>Each example is set out as a <strong>full exam question</strong> — scenario, the complete R output, a written description of every figure (so you can answer the diagnostics parts without seeing the plots), and the lettered parts with their marks exactly as printed — followed by a reveal-able worked solution. Examples 1–3 are transcribed verbatim from the 2025, 2024 and 2023 papers; Examples 4–5 are notes-based in the same style. Attempt each on paper before opening the solution. All numbers were re-checked against the printed output.</p>
 
-<details>
-<summary>Example 1 — Old Faithful geyser (2025 Q5, full walk-through)</summary>
-<p>Simple linear model fitting waiting time (min) from eruption duration (min), \(n=272\). Output:</p>
-<div class="rout"><span class="mono">Coefficients:
+<!-- ===== Example 1 — Old Faithful 2025 Q5 ===== -->
+<div class="card q">
+<p class="qhead"><strong>Example 1 · Old Faithful geyser</strong> — 2025 Q5 <span class="marks">[Total 18 marks]</span></p>
+<p>Old Faithful is a geyser located in Yellowstone National Park, Wyoming USA and erupts regularly every 44 to 125 minutes. A field study collected measurements of the eruption <strong>duration</strong> (minutes) and the <strong>waiting time</strong> until the next eruption (minutes). To understand this relationship and make predictions, they consider a linear regression model to estimate the waiting time from duration. Measurements were taken continuously from August 1st to August 15th, 1985.</p>
+<div class="figdesc"><strong>Figure 4 — Scatterplot</strong> of eruption duration (\(x\), minutes) against waiting time until the next eruption (\(y\), minutes). The points show a strong, positive, roughly linear trend: short (~2&nbsp;min) eruptions sit at waiting times near 50–60&nbsp;min while long (~4.5–5&nbsp;min) eruptions sit near 80–90&nbsp;min, forming two loose clusters that rise together along a clear straight-line pattern.</div>
+<p>A simple linear model is fitted to the data using R. The output is shown below.</p>
+<div class="rout"><span class="mono">Call:
+lm(formula = Waiting ~ Duration, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-12.0796  -4.4831   0.2122   3.9246  15.9719
+
+Coefficients:
              Estimate  Std. Error  t value  Pr(&gt;|t|)
 (Intercept)   33.4744      1.1549    28.98   &lt;2e-16 ***
 Duration      10.7296      0.3148    34.09   &lt;2e-16 ***
-Residual standard error: 5.914 on 270 degrees of freedom
-Multiple R-squared:  0.8115</span></div>
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-<p><strong>(a) Write the fitted equation (2 dp), defining notation.</strong></p>
+Residual standard error: 5.914 on 270 degrees of freedom
+Multiple R-squared:  0.8115,  Adjusted R-squared:  0.8108
+F-statistic: 1162 on 1 and 270 DF,  p-value: &lt; 2.2e-16</span></div>
+<div class="figdesc"><strong>Figure 5 — Diagnostic plots.</strong> <em>Residuals vs Fitted:</em> the residuals scatter in a roughly horizontal band centred on 0 across the whole fitted range, with no obvious curvature and no funnelling. <em>Normal Q–Q:</em> the standardised residuals lie close to the 45° reference line through the middle, lifting only slightly away at the upper tail. <em>Scale–Location:</em> the smoothed red line is roughly flat. <em>Residuals vs Leverage:</em> no point lies beyond the Cook's-distance contours.</div>
+<p><strong>(a)</strong> Write the fitted regression equation (with estimated coefficients), rounding coefficients to two decimal places. Clearly define all notation. <span class="marks">[2 marks]</span></p>
+<p><strong>(b)</strong> A waiting time of 76 minutes was observed with a corresponding duration of 4.8 minutes. Using the linear model, what is the residual for this observation? <span class="marks">[2 marks]</span></p>
+<p><strong>(c)</strong> Construct a 95% confidence interval for the slope of the regression. Interpret the interval in the context of the question and comment on whether there is statistical evidence to conclude that the linear relationship is significant. <span class="marks">[5 marks]</span></p>
+<p><strong>(d)</strong> Diagnostic plots for the fitted simple linear regression are shown in Figure 5. State the assumptions of the model and briefly discuss whether each appears valid based on the plots (1–2 sentences per assumption). <span class="marks">[5 marks]</span></p>
+<p><strong>(e)</strong> As sampling continues for the simple linear regression of waiting time on duration, consider a fixed predictor value \(x_0\). Without using formulas, briefly answer: (i) how the width of the 95% confidence interval for the mean at \(x_0\) changes as \(n\) grows large; (ii) how the width of the 95% prediction interval for a new \(Y\) at \(x_0\) changes as \(n\) grows large. <span class="marks">[4 marks]</span></p>
+<details><summary>Show worked solution</summary>
+<p><strong>(a)</strong> Read \(\widehat\beta_0,\widehat\beta_1\) straight from the <code>Estimate</code> column:</p>
 $$\widehat{\text{Waiting}}=33.47+10.73\,\times\text{Duration}$$
 <p>where \(\widehat{\text{Waiting}}\) is the predicted waiting time (min) until the next eruption and Duration is the eruption duration (min).</p>
-
-<p><strong>(b) A duration of 4.8&nbsp;min gave an observed waiting of 76&nbsp;min. Find the residual.</strong></p>
+<p><strong>(b)</strong> Fitted value then residual (carry full precision):</p>
 $$\widehat y = 33.4744+10.7296(4.8)=84.9765,\qquad e=y-\widehat y=76-84.9765=\boxed{-8.98\ \text{min}}$$
 <p>Negative ⇒ the model <em>over-predicted</em> the waiting time for this eruption.</p>
-
-<p><strong>(c) 95% CI for the slope; is the relationship significant?</strong></p>
-<p>df \(=270\); take \(t_{0.975}\approx1.97\) (table, df = 200 row):</p>
+<p><strong>(c)</strong> df \(=270\); take \(t_{0.975,\,270}\approx1.97\) (table, df = 200 row):</p>
 $$10.7296\pm1.97(0.3148)=10.7296\pm0.620=\boxed{(10.11,\ 11.35)}$$
-<p>Interpretation: with 95% confidence, each extra minute of eruption duration adds between 10.11 and 11.35 minutes to average waiting time.
-The interval <strong>excludes 0</strong> (equivalently \(P\lt2\times10^{-16}\)), so there <strong>is</strong> statistically significant evidence of a positive linear relationship.</p>
-
-<p><strong>(d) Assumptions from the diagnostic plots.</strong> Linearity — residuals-vs-fitted shows a flat band around 0, no curve: OK.
-Constant variance — spread looks even left-to-right, no funnel: OK. Normality — Q–Q points lie close to the line (slight fatness at the top tail only): approximately OK.
-Independence — assume the eruptions are unrelated over time; no plotted evidence against it.</p>
-
-<p><strong>(e) As \(n\to\infty\): CI vs PI width at a fixed \(x_0\).</strong> The 95% <strong>CI for the mean</strong> width \(\to0\) — with unlimited data the line is pinned down exactly.
-The 95% <strong>prediction interval</strong> width does <em>not</em> go to 0; it tends to \(\approx2(1.96)\widehat\sigma\), because a new observation always has its own irreducible scatter \(\sigma\) (the \(+1\) term). </p>
+<p>With 95% confidence, each extra minute of eruption duration adds between 10.11 and 11.35 minutes to average waiting time. The interval <strong>excludes 0</strong> (equivalently \(P\lt2\times10^{-16}\)), so there <strong>is</strong> statistically significant evidence of a positive linear relationship.</p>
+<p><strong>(d)</strong> <em>Linearity</em> — Residuals vs Fitted shows a flat band around 0 with no curve: OK. <em>Constant variance</em> — the spread is even left-to-right, no funnel: OK. <em>Normality</em> — the Q–Q points lie close to the line (slight heaviness at the top tail only): approximately OK. <em>Independence</em> — assume eruptions are unrelated over time; there is no plotted evidence against it.</p>
+<p><strong>(e)</strong> The 95% <strong>CI for the mean</strong> width \(\to0\) — with unlimited data the line is pinned down exactly. The 95% <strong>prediction interval</strong> width does <em>not</em> go to 0; it tends to \(\approx2(1.96)\widehat\sigma\), because a new observation always carries its own irreducible scatter \(\sigma\) (the \(+1\) term under the root).</p>
 </details>
+</div>
 
-<details>
-<summary>Example 2 — Gray tree frog mating calls (2024 Q5)</summary>
-<p>Model: Inter-Call interval (s) from Temperature (°C).</p>
-<div class="rout"><span class="mono">Coefficients:
+<!-- ===== Example 2 — Gray tree frog 2024 Q5 ===== -->
+<div class="card q">
+<p class="qhead"><strong>Example 2 · Gray tree frog mating calls</strong> — 2024 Q5 <span class="marks">[regression parts (a)–(d) of an 18-mark question]</span></p>
+<p>In a study on the gray tree frog (<em>Hyla versicolor</em>), researchers aimed to determine whether temperature influences the frogs' mating calls. Specifically, they measured the interval between successive male mating calls (<strong>Inter-Call interval</strong>, seconds) and the corresponding air <strong>temperature</strong> (°C) at which the calls occurred. To gain insight into the frogs' communication patterns, they construct a model to estimate the inter-call interval based on temperature, using measurements from a random sample of frogs.</p>
+<div class="figdesc"><strong>Scatterplot</strong> of temperature (\(x\), °C) against inter-call interval (\(y\), s). The points trend clearly <em>downward</em> — colder temperatures give longer gaps between calls, warmer temperatures shorter gaps — with moderate scatter about a straight-line decline.</div>
+<p>A simple linear model is fitted to the data using R. The output is shown below.</p>
+<div class="rout"><span class="mono">Call:
+lm(formula = InterCall ~ Temperature, data = frog)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.9823 -0.9216 -0.1194  0.6325  2.7593
+
+Coefficients:
              Estimate  Std. Error  t value  Pr(&gt;|t|)
 (Intercept)   7.91299     0.58887   13.438   &lt;2e-16   ***
-Temperature  -0.20108     0.02726   -7.376   1.39e-09 ***
+Temperature  -0.20108     0.02726   -7.376  1.39e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
 Residual standard error: 1.144 on 51 degrees of freedom
-Multiple R-squared:  0.5161</span></div>
-
-<p><strong>(a) Sample size.</strong> df \(=51\Rightarrow n=51+2=\boxed{53}\).</p>
-
-<p><strong>(b) Expected inter-call interval at Temperature = 10&nbsp;°C.</strong></p>
+Multiple R-squared:  0.5161,  Adjusted R-squared:  0.5066
+F-statistic: 54.4 on 1 and 51 DF,  p-value: 1.39e-09</span></div>
+<div class="figdesc"><strong>Diagnostic plots.</strong> <em>Residuals vs Fitted:</em> a flat, patternless band around 0 — no curve, no funnel. <em>Normal Q–Q:</em> points sit close to the straight reference line along its whole length. <em>Scale–Location:</em> roughly flat. No high-leverage outliers flagged.</div>
+<p><strong>(a)</strong> What is the sample size of the data? <span class="marks">[1 mark]</span></p>
+<p><strong>(b)</strong> Based on the model, what is the expected inter-call interval when the temperature is 10 degrees? <span class="marks">[2 marks]</span></p>
+<p><strong>(c)</strong> Construct a 95% confidence interval for the slope of the regression. Interpret the interval in the context of the question and comment on whether there is statistical evidence to conclude that the linear relationship is significant. <span class="marks">[5 marks]</span></p>
+<p><strong>(d)</strong> Diagnostic plots for the fitted linear model are given above. State the assumptions of the model and explain whether each of these assumptions is valid. <span class="marks">[4 marks]</span></p>
+<p class="marks">(The paper's part (e) is a separate chi-squared "association between frog type and number of croaks" question — see the <a href="ch11-chi-squared.html">Ch 11</a> page.)</p>
+<details><summary>Show worked solution</summary>
+<p><strong>(a)</strong> Simple regression: df \(=51\Rightarrow n=51+2=\boxed{53}\).</p>
+<p><strong>(b)</strong> Substitute Temperature \(=10\) into the fitted line:</p>
 $$\widehat y=7.91299+(-0.20108)(10)=7.91299-2.0108=\boxed{5.90\ \text{s}}$$
-
-<p><strong>(c) 95% CI for the slope; significant?</strong> df \(=51\), \(t_{0.975}\approx2.01\):</p>
+<p><strong>(c)</strong> df \(=51\), \(t_{0.975,\,51}\approx2.01\):</p>
 $$-0.20108\pm2.01(0.02726)=-0.20108\pm0.0548=\boxed{(-0.256,\ -0.146)}$$
 <p>The whole interval is <strong>below 0</strong> ⇒ significant <em>negative</em> linear relationship: hotter temperatures shorten the interval between calls (each +1&nbsp;°C cuts the interval by 0.15–0.26&nbsp;s on average). \(R^2=0.516\): about 52% of the variation in inter-call interval is explained by temperature.</p>
-
-<p><strong>(d) Diagnostics.</strong> Residuals vs fitted: flat, patternless band ⇒ linearity and constant variance look fine. Q–Q: near-straight ⇒ normality reasonable. Independence assumed across the sampled frogs.</p>
+<p><strong>(d)</strong> <em>Linearity &amp; constant variance</em> — Residuals vs Fitted is a flat, patternless band ⇒ both look fine. <em>Normality</em> — Q–Q near-straight ⇒ reasonable. <em>Independence</em> — assumed across the randomly sampled frogs; nothing in the plots contradicts it.</p>
 </details>
+</div>
 
-<details>
-<summary>Example 3 — Pioneer-tree ageing (2023 Q6)</summary>
-<p>Model estimating tree Age (years) from Diameter (cm).</p>
-<div class="rout"><span class="mono">Coefficients:
+<!-- ===== Example 3 — Pioneer trees 2023 Q6 ===== -->
+<div class="card q">
+<p class="qhead"><strong>Example 3 · Pioneer-tree ageing</strong> — 2023 Q6 <span class="marks">[Total 15 marks]</span></p>
+<p>"Pioneer" trees are fast-growing tree species that can withstand a hostile environment; they play an important role in preparing damaged or degraded sites for the reconstruction of their ecosystems. Researchers at a national park studying one pioneer species want to estimate a tree's <strong>age</strong> (years) from its <strong>diameter</strong> (cm), because measuring age directly by dendrochronology is often not feasible or cost-effective for a large number of trees. They took measurements from a random sample of trees.</p>
+<div class="figdesc"><strong>Scatterplot</strong> of diameter (\(x\), cm) against age (\(y\), years). A strong, tight, positive straight-line relationship: age rises steadily and almost proportionally with diameter, with only modest scatter about the line.</div>
+<p>A simple linear model is fitted to the data using R. The output is shown below.</p>
+<div class="rout"><span class="mono">Call:
+lm(formula = Age ~ Diameter, data = tree)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-16.1349  -2.0623   0.0482   1.9518  23.2065
+
+Coefficients:
              Estimate  Std. Error  t value  Pr(&gt;|t|)
-(Intercept)  -1.2026      0.8534    -1.409   0.162
-Diameter      0.6372      0.0187    34.067   &lt;2e-16 ***
+(Intercept)  -1.2026      0.8534    -1.409     0.162
+Diameter      0.6372      0.0187    34.067    &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
 Residual standard error: 5.454 on 106 degrees of freedom
-Multiple R-squared:  0.9163</span></div>
+Multiple R-squared:  0.9163,  Adjusted R-squared:  0.9155
+F-statistic: 1161 on 1 and 106 DF,  p-value: &lt; 2.2e-16</span></div>
+<p>For part (c), R also reports predictions at Diameter = 20&nbsp;cm:</p>
+<div class="rout"><span class="mono">&gt; predict(mod, newdata=data.frame(Diameter=20), interval="conf")
+       fit      lwr      upr
+1 11.54197 10.34459 12.73936
 
-<p><strong>(a) Fitted model &amp; sample size.</strong> \(\widehat{\text{Age}}=-1.20+0.64\,\text{Diameter}\); \(n=106+2=108\).</p>
-
-<p><strong>(b) Predict the age of a 50&nbsp;cm tree, and comment on trusting it.</strong></p>
-$$\widehat{\text{Age}}=-1.2026+0.6372(50)=30.66\ \text{years.}$$
-<p>Diameter = 50&nbsp;cm sits inside the observed data range, so this is safe <em>interpolation</em>. Predicting for, say, a 200&nbsp;cm tree would be
-<strong>extrapolation</strong> well beyond the data — do not trust it.</p>
-
-<p><strong>(c) Is the intercept meaningful?</strong> \(\widehat\beta_0=-1.20\) is a negative "age" at Diameter = 0 — biologically impossible, and its \(P\)-value (0.162) says it isn't even distinguishable from 0. That's fine: the intercept is just an anchor for the line, not a real prediction, because Diameter = 0 is far outside the data.</p>
-
-<p><strong>(d) Significant relationship?</strong> Slope \(t=34.07\), \(P\lt2\times10^{-16}\ll0.05\): overwhelming evidence of a positive linear relationship. \(R^2=0.916\) — 91.6% of the variability in age is explained by diameter, an excellent fit.</p>
+&gt; predict(mod, newdata=data.frame(Diameter=20), interval="pred")
+       fit       lwr      upr
+1 11.54197 0.6622128 22.42173</span></div>
+<div class="figdesc"><strong>Diagnostic plots (part f).</strong> <em>Residuals vs Fitted:</em> a broadly horizontal band around 0 with no systematic curve, though the vertical spread is a little larger at the top. <em>Normal Q–Q:</em> points follow the reference line through the centre with a mild upward departure at the top tail (consistent with the largest residual, +23.2, exceeding the most negative, −16.1). <em>Scale–Location:</em> roughly flat. No single point dominates leverage.</div>
+<p><strong>(a)</strong> What is the sample size of the data? <span class="marks">[1 mark]</span></p>
+<p><strong>(b)</strong> Based on the model, what is the expected age of a tree that has a diameter of 50&nbsp;cm? <span class="marks">[2 marks]</span></p>
+<p><strong>(c)</strong> When surveying a new patch of the park, the researchers are surprised to find a 20&nbsp;cm-diameter pioneer tree that was only eight months old. Is this an unusual age for a tree of this size? Explain your answer based on the R output above. <span class="marks">[2 marks]</span></p>
+<p><strong>(d)</strong> A farmer claims that, based on his experience, it takes more than five years for this species of pioneer tree to grow 3&nbsp;cm in diameter. Based on the linear model, is there evidence against this claim? Perform a relevant hypothesis test, stating the null and alternative hypotheses, the test statistic, the \(P\)-value, a statistical conclusion and a conclusion in context. <span class="marks">[4 marks]</span></p>
+<p><strong>(e)</strong> For the model to be useful in practice, its accuracy in estimating tree age needs to be within ±5 years of the true age. Based on the information in the R output, explain whether this model is feasible for practical use. <span class="marks">[2 marks]</span></p>
+<p><strong>(f)</strong> Diagnostic plots for the fitted linear model are given above. State the assumptions of the model and explain whether each of these assumptions is valid. <span class="marks">[4 marks]</span></p>
+<details><summary>Show worked solution</summary>
+<p><strong>(a)</strong> Simple regression: \(n=106+2=\boxed{108}\).</p>
+<p><strong>(b)</strong> Substitute Diameter \(=50\):</p>
+$$\widehat{\text{Age}}=-1.2026+0.6372(50)=\boxed{30.66\ \text{years}}$$
+<p><strong>(c)</strong> To judge one <em>individual</em> tree, use the <strong>prediction interval</strong> for a new tree at Diameter = 20: \((0.66,\ 22.42)\) years. Eight months \(=8/12=0.67\) years lies <em>just inside</em> the lower end of this interval (the lower bound is 0.66), so although it is at the very bottom of the plausible range it is <strong>not outside</strong> the prediction interval — so it is not (quite) unusual, only borderline. (The narrow confidence interval \((10.34,12.74)\) is for the <em>mean</em> age of all 20&nbsp;cm trees and would be the wrong interval to judge a single tree.)</p>
+<p><strong>(d)</strong> The slope is 0.6372 years per cm, so 3&nbsp;cm of growth corresponds to \(3\beta_1\) years. The farmer claims \(3\beta_1\gt5\), i.e. \(\beta_1\gt5/3\). Test</p>
+$$H_0:\beta_1=\tfrac{5}{3}\quad\text{vs}\quad H_1:\beta_1\lt\tfrac{5}{3}\qquad(\text{5 yr per 3 cm}).$$
+$$t=\frac{\widehat\beta_1-5/3}{\operatorname{se}(\widehat\beta_1)}=\frac{0.6372-1.6667}{0.0187}=\boxed{-55.05}\ \text{on }106\text{ df}.$$
+<p>This is enormously far into the lower tail, so \(P=P(T_{106}\lt-55.05)\approx0\ll0.05\): reject \(H_0\). There is overwhelming evidence <strong>against</strong> the farmer's claim — the model estimates that 3&nbsp;cm of growth takes only \(3(0.6372)\approx1.91\) years, far less than five.</p>
+<p><strong>(e)</strong> The residual standard error is \(\widehat\sigma=5.454\) years, so a single tree's age can be predicted only to about \(\pm2\widehat\sigma\approx\pm10.9\) years (confirmed by the part-(c) prediction interval, which spans roughly \(0.7\) to \(22.4\) years — about \(\pm11\) years around the fit). That is more than double the required \(\pm5\)-year accuracy, so the model is <strong>not</strong> feasible for this practical purpose.</p>
+<p><strong>(f)</strong> <em>Linearity &amp; constant variance</em> — Residuals vs Fitted is a broadly flat band with no curve, so both are reasonable, though the spread is slightly larger at the top. <em>Normality</em> — Q–Q is close to the line with a mild upper-tail departure (the max residual +23.2 exceeds |min| = 16.1, a hint of slight right-skew), so normality is approximately but not perfectly satisfied. <em>Independence</em> — assumed across the randomly sampled trees.</p>
 </details>
+</div>
 
-<details>
-<summary>Example 4 — Multiple regression &amp; a prediction (student height ~ shoe + weight, notes §9.3)</summary>
-<div class="rout"><span class="mono">Coefficients:
+<!-- ===== Example 4 — Multiple regression (notes §9.3) ===== -->
+<div class="card q">
+<p class="qhead"><strong>Example 4 · Student height from shoe length and weight</strong> <span class="marks">[notes §9.3 style · 11 marks]</span></p>
+<p>As part of a first-year statistics practical, 100 students each had their <strong>height</strong> (cm), <strong>shoe length</strong> (cm) and body <strong>weight</strong> (kg) recorded. To see how well height is explained jointly by shoe length and weight, a multiple linear regression of height on both predictors is fitted in R.</p>
+<div class="rout"><span class="mono">Call:
+lm(formula = height ~ shoe + weight, data = students)
+
+Coefficients:
              Estimate  Std. Error  t value  Pr(&gt;|t|)
 (Intercept)  132.2677     5.2473    25.207   &lt;2e-16   ***
 shoe           0.5304     0.1962     2.703   0.0081   **
 weight         0.3744     0.0572     6.546   2.82e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
 Residual standard error: 7.785 on 97 degrees of freedom
-Multiple R-squared:  0.4301,  F-statistic: 36.61 on 2 and 97 DF</span></div>
-
-<p><strong>(a) Fitted model.</strong> \(\widehat{\text{height}}=132.27+0.53\,\text{shoe}+0.37\,\text{weight}\).</p>
-
-<p><strong>(b) Interpret the shoe slope.</strong> "<em>At fixed weight</em>, each extra 1&nbsp;cm of shoe size is associated with a 0.53&nbsp;cm increase in average height." The "holding weight constant" phrase is worth the mark.</p>
-
-<p><strong>(c) Predict height for shoe = 30, weight = 75.</strong></p>
-$$\widehat y=132.2677+0.5304(30)+0.3744(75)=176.26\ \text{cm}$$
-<p>(matches R's <code>predict()</code> fit of 176.2617; CI for the mean \((174.17,178.35)\), PI for a new person \((160.67,191.85)\) — note how much wider the PI is.)</p>
-
-<p><strong>(d) Global significance.</strong> Sample size \(n=97+(2+1)=100\). Fisher's global \(F=36.61\) on 2 and 97 df with a tiny \(p\)-value ⇒ at least one predictor is genuinely associated with height. Both individual \(t\)-tests are also significant (\(P=0.008\) and \(P\approx0\)), so both shoe and weight contribute after adjusting for the other.</p>
+Multiple R-squared:  0.4301,  Adjusted R-squared:  0.4184
+F-statistic: 36.61 on 2 and 97 DF,  p-value: 1.43e-12</span></div>
+<p>R also reports, for a student with shoe = 30&nbsp;cm and weight = 75&nbsp;kg:</p>
+<div class="rout"><span class="mono">&gt; predict(mod, data.frame(shoe=30, weight=75), interval="confidence")
+       fit      lwr      upr
+1 176.2617 174.169 178.354
+&gt; predict(mod, data.frame(shoe=30, weight=75), interval="prediction")
+       fit      lwr      upr
+1 176.2617 160.674 191.849</span></div>
+<p><strong>(a)</strong> Write the fitted regression model, defining your notation. <span class="marks">[2 marks]</span></p>
+<p><strong>(b)</strong> Interpret the <code>shoe</code> slope in context. <span class="marks">[2 marks]</span></p>
+<p><strong>(c)</strong> Using the <code>predict()</code> output, give the predicted height for a student with shoe = 30&nbsp;cm and weight = 75&nbsp;kg, and state which of the two intervals you would quote to capture one individual student's height — and why. <span class="marks">[3 marks]</span></p>
+<p><strong>(d)</strong> How many students were in the study? State the hypotheses the \(F\)-statistic tests and your conclusion, and say whether both predictors are individually significant. <span class="marks">[4 marks]</span></p>
+<details><summary>Show worked solution</summary>
+<p><strong>(a)</strong> \(\widehat{\text{height}}=132.27+0.53\,\text{shoe}+0.37\,\text{weight}\), where \(\widehat{\text{height}}\) is predicted height (cm), shoe is shoe length (cm) and weight is body weight (kg).</p>
+<p><strong>(b)</strong> "<em>At fixed weight</em>, each extra 1&nbsp;cm of shoe length is associated with a 0.53&nbsp;cm increase in average height." The "holding weight constant" clause is compulsory and worth the mark.</p>
+<p><strong>(c)</strong> Point estimate \(\widehat y=132.2677+0.5304(30)+0.3744(75)=176.26\) cm (R's <code>fit</code> = 176.2617). For <em>one individual</em> student you must quote the <strong>prediction interval</strong> \((160.67,\ 191.85)\), not the mean CI \((174.17,\ 178.35)\): the PI is much wider because it adds that student's own scatter about the fitted surface on top of the uncertainty in the surface itself.</p>
+<p><strong>(d)</strong> With \(p=2\) predictors, \(n=97+(2+1)=\boxed{100}\) students. The global \(F=36.61\) on 2 and 97 df (\(P=1.4\times10^{-12}\)) tests \(H_0:\beta_{\text{shoe}}=\beta_{\text{weight}}=0\) vs \(H_1:\) at least one \(\beta_j\neq0\); reject ⇒ the predictors jointly explain height. Both individual \(t\)-tests are also significant (\(P=0.008\) for shoe, \(P\approx0\) for weight), so each contributes after adjusting for the other.</p>
 </details>
+</div>
 
-<details>
-<summary>Example 5 — When a straight line fails: log transformation (notes §10.5)</summary>
-<p>Test score vs training week showed a <em>curved</em> scatter and a U-shaped residuals-vs-fitted plot — a textbook non-linearity signal. Refitting with \(\log(\text{score})\):</p>
-<div class="rout"><span class="mono">lm(formula = log(score) ~ week)
+<!-- ===== Example 5 — log transformation (notes §10.5) ===== -->
+<div class="card q">
+<p class="qhead"><strong>Example 5 · When a straight line fails — a log transformation</strong> <span class="marks">[notes §10.5 style · 12 marks]</span></p>
+<p>A training provider tracks each of 100 trainees' scores on a standardised skills test against the number of <strong>weeks</strong> of training completed (1 to 10 weeks). A first simple linear regression of <strong>score</strong> on week is fitted, but its residual plots look wrong, so the analyst refits the model using \(\log(\text{score})\) as the response.</p>
+<div class="figdesc"><strong>Figure A — diagnostics for the untransformed model</strong> (score ~ week). <em>Residuals vs Fitted:</em> a pronounced <em>U-shaped curve</em>, and the vertical spread clearly <em>fans out</em> as the fitted values grow. <em>Normal Q–Q:</em> the points bow away from the line at the upper tail.</div>
+<p>The analyst refits on the log scale. The R output for the transformed model is:</p>
+<div class="rout"><span class="mono">Call:
+lm(formula = log(score) ~ week, data = training)
+
+Coefficients:
              Estimate  Std. Error  t value  Pr(&gt;|t|)
 (Intercept)   3.01087    0.04404    68.36   &lt;2e-16 ***
 week          0.50370    0.01544    32.61   &lt;2e-16 ***
-Residual standard error: 0.2276 on 98 df
-Multiple R-squared:  0.9156</span></div>
-<p>The residual plot for the log model is now a flat, patternless band ⇒ the transform fixed the linearity/variance problem, and \(R^2\) jumped to 0.916.</p>
-<p><strong>Fitted model (log scale):</strong> \(\widehat{\ln(\text{score})}=3.011+0.504\,\text{week}\).</p>
-<p><strong>Back-transformed (original scale):</strong> \(\widehat{\text{score}}=e^{3.011}e^{0.504\,\text{week}}\).</p>
-<p><strong>Multiplicative interpretation:</strong> each extra week multiplies score by \(e^{0.504}\approx1.66\), i.e. a \(100(e^{0.504}-1)\approx66\%\) increase per week. (On a log model the slope is a <em>percentage</em> change, not an additive one.)</p>
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2276 on 98 degrees of freedom
+Multiple R-squared:  0.9156,  Adjusted R-squared:  0.9147</span></div>
+<div class="figdesc"><strong>Figure B — diagnostics for the log model</strong> (log(score) ~ week). <em>Residuals vs Fitted:</em> now a flat, patternless horizontal band around 0 — no curve, no funnel. <em>Normal Q–Q:</em> the points lie neatly on the diagonal.</div>
+<p><strong>(a)</strong> Using the residual plots for the untransformed model (Figure A), explain why a straight line on the original scale is unsuitable, naming the specific assumptions violated. <span class="marks">[3 marks]</span></p>
+<p><strong>(b)</strong> Using the R output for the log model, write the fitted model on the log scale and its back-transformed form on the original (score) scale. <span class="marks">[3 marks]</span></p>
+<p><strong>(c)</strong> Interpret the <code>week</code> slope of the log model in context, on the original scale. <span class="marks">[3 marks]</span></p>
+<p><strong>(d)</strong> State by what factor each extra week multiplies score, express it as an approximate percentage change per week, and give the number of trainees in the study. <span class="marks">[3 marks]</span></p>
+<details><summary>Show worked solution</summary>
+<p><strong>(a)</strong> The Residuals-vs-Fitted <em>U-shape</em> ⇒ <strong>linearity</strong> is violated (a straight line is the wrong mean shape). The spread <em>fanning out</em> ⇒ <strong>constant variance (homoscedasticity)</strong> is violated. The Q–Q upper-tail bow ⇒ <strong>normality</strong> of the errors is doubtful. A high \(R^2\) would <em>not</em> rescue the model — only the residual plots reveal that the straight-line shape is wrong.</p>
+<p><strong>(b)</strong> Log-scale fitted model:</p>
+$$\widehat{\ln(\text{score})}=3.011+0.504\,\text{week}.$$
+<p>Back-transforming (exponentiate both sides):</p>
+$$\widehat{\text{score}}=e^{3.011}e^{0.504\,\text{week}}=20.31\,e^{0.504\,\text{week}}.$$
+<p><strong>(c)</strong> On a log model the slope is a <em>multiplicative</em> (percentage) effect, not additive: each extra week multiplies the average score by \(e^{0.504}\approx1.66\).</p>
+<p><strong>(d)</strong> Each extra week multiplies score by \(e^{0.504}\approx1.66\), i.e. a \(100(e^{0.504}-1)\approx\boxed{66\%}\) increase per week. Sample size: \(n=98+2=\boxed{100}\) trainees.</p>
 </details>
+</div>
 </section>
 
 <!-- ============================================================= -->
@@ -602,7 +701,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 51.16 on 40 degrees of freedom
 Multiple R-squared:  0.9309,  Adjusted R-squared:  0.9292
 F-statistic: 538.7 on 1 and 40 DF,  p-value: &lt; 2.2e-16</span></div>
-<em>Tasks:</em> (a) fitted equation + interpret both coefficients; (b) sample size and is the slope significant? (c) 95% CI for the slope; (d) an interval at wind speed 9.0 m/s recorded 520 kW — find the residual; (e) would you predict output at 25 m/s? (f) interpret \(R^2\); (g) CI-for-mean vs PI-for-new at a fixed wind speed.
+<div class="figdesc"><strong>Diagnostic plots (for task h).</strong> <em>Residuals vs Fitted:</em> a roughly flat band about 0 with no clear curve or funnel across the fitted range. <em>Normal Q–Q:</em> points close to the reference line with only mild wobble at the tails.</div>
+<em>Tasks:</em> <strong>(a)</strong> fitted equation + interpret both coefficients <span class="marks">[3]</span>; <strong>(b)</strong> sample size and is the slope significant? <span class="marks">[2]</span>; <strong>(c)</strong> 95% CI for the slope <span class="marks">[3]</span>; <strong>(d)</strong> an interval at wind speed 9.0 m/s recorded 520 kW — find the residual <span class="marks">[2]</span>; <strong>(e)</strong> would you predict output at 25 m/s? <span class="marks">[2]</span>; <strong>(f)</strong> interpret \(R^2\) <span class="marks">[1]</span>; <strong>(g)</strong> CI-for-mean vs PI-for-new at a fixed wind speed <span class="marks">[3]</span>; <strong>(h)</strong> comment on the diagnostic plots above <span class="marks">[2]</span>.
 
 <details>
 <summary>Show worked solution</summary>
@@ -619,6 +719,7 @@ $$\widehat y = -90.1028 + 63.1460(9.0)=478.21\ \text{kW},\qquad e = y-\widehat y
 <p><strong>5 · Predict at 25 m/s?</strong> No. 25 m/s lies far beyond the observed range (max 13.8 m/s) — this is <strong>extrapolation</strong>. Worse, real turbines feather or cut out at high wind, so the straight-line trend certainly does not continue. Do not trust it.</p>
 <p><strong>6 · \(R^2\).</strong> \(R^2 = 0.9309\): 93.1% of the variability in power output is explained by the linear relationship with wind speed.</p>
 <p><strong>7 · CI vs PI.</strong> A 95% <em>confidence interval for the mean</em> at a fixed wind speed answers "where is the average output at this wind speed?" — it carries only the uncertainty in the fitted line. A 95% <em>prediction interval for a new</em> ten-minute interval answers "where will one future reading land?" and is <strong>always wider</strong>, because it adds the individual reading's own scatter \(\widehat\sigma=51.16\) kW (the \(+1\) under the root).</p>
+<p><strong>8 · Diagnostics.</strong> Residuals vs Fitted is a flat, patternless band ⇒ linearity and constant variance are satisfied; the Q–Q points sit close to the line ⇒ normality is reasonable; independence is assumed across the separate ten-minute intervals. No assumption looks violated, so the linear model is appropriate over the observed wind-speed range.</p>
 <div class="tip">Model sentence for (a): "\(\widehat{\text{Power}} = -90.10 + 63.15\,\text{WindSpeed}\); each 1 m/s rise in wind speed is associated with a 63.15 kW rise in average power output."</div>
 </details>
 </div>
@@ -645,7 +746,7 @@ F-statistic: 196.6 on 2 and 87 DF,  p-value: &lt; 2.2e-16</span></div>
 &gt; predict(mod, data.frame(TrainKm=60, Age=40), interval="prediction")
        fit      lwr      upr
 1  283.571  256.044  311.099</span></div>
-<em>Tasks:</em> (a) fitted model; (b) interpret the TrainKm slope; (c) sample size; (d) is each predictor significant, and is the model jointly useful? (e) predict for the 60 km / age-40 runner and state which interval a coach should quote for one individual; (f) 95% CI for the Age slope.
+<em>Tasks:</em> <strong>(a)</strong> fitted model <span class="marks">[2]</span>; <strong>(b)</strong> interpret the TrainKm slope <span class="marks">[2]</span>; <strong>(c)</strong> sample size <span class="marks">[1]</span>; <strong>(d)</strong> is each predictor significant, and is the model jointly useful? <span class="marks">[4]</span>; <strong>(e)</strong> predict for the 60 km / age-40 runner and state which interval a coach should quote for one individual <span class="marks">[3]</span>; <strong>(f)</strong> 95% CI for the Age slope <span class="marks">[3]</span>.
 
 <details>
 <summary>Show worked solution</summary>

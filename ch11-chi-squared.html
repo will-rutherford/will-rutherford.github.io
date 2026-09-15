@@ -278,22 +278,37 @@ table has df\(=2\); a 2×3 GoF over \(k=5\) categories has df\(=4\). The bold co
 expected-count arithmetic and <code>scipy.stats.chi2_contingency</code> agree to all shown digits.</p>
 
 <details open>
-<summary>★ FLAGSHIP — 2025 Q2(d) [5 marks]: test of independence, 2×3 table</summary>
-<p><strong>Setup.</strong> A study of \(n=120\) people records screen use before bed (\(X\): 0 = No,
-1 = Yes) and sleep quality (\(Y\): 0 = poor, 1 = fair, 2 = good). Parts (a)–(c) built marginals,
-expectations and correlation (that's <a href="ch03-multiple-rvs.html">Ch 3</a>). Part (d):
-<em>"Perform an appropriate statistical test to determine whether screen use is associated with sleep
-quality. Report the test statistic, the P-value, a statistical conclusion, and a conclusion in
-context."</em> The words <em>"associated with"</em> ⇒ <strong>χ² test of independence.</strong></p>
-
+<summary>★ FLAGSHIP — 2025 Q2 [16 marks], part (d) [5 marks]: test of independence, 2×3 table</summary>
+<p class="mono" style="color:var(--muted)">Transcribed in full from Semester 2 Examinations 2025, Question 2.</p>
+<p><strong>A study of \(n=120\) people investigates the relationship between screen use before bedtime
+and sleep quality.</strong> Let \(X\) denote whether a person uses screens within 30 minutes of bedtime
+(\(0=\)No, \(1=\)Yes). Let \(Y\) denote the person's sleep quality (\(0=\)poor, \(1=\)fair,
+\(2=\)good). The following table shows the joint frequency counts.</p>
 <div style="overflow-x:auto">
 <table>
-<tr><th></th><th>Y=0 poor</th><th>Y=1 fair</th><th>Y=2 good</th><th>Row total</th></tr>
+<tr><th></th><th>Y=0 (poor)</th><th>Y=1 (fair)</th><th>Y=2 (good)</th><th>Row total</th></tr>
 <tr><th>X=0 (No)</th><td>25</td><td>8</td><td>7</td><td>40</td></tr>
 <tr><th>X=1 (Yes)</th><td>15</td><td>20</td><td>45</td><td>80</td></tr>
 <tr><th>Col total</th><td>40</td><td>28</td><td>52</td><td>120</td></tr>
 </table>
 </div>
+<p style="font-size:13px;color:var(--muted)">Table 1: Joint frequency table of \(X\) and \(Y\). (Row and
+column totals are added here as a working aid; the exam paper prints only the inner \(2\times3\) block of
+counts.)</p>
+<p>Define the joint probability mass function (pmf) of \(X\) and \(Y\) as
+\(f(x,y)=\mathbb{P}(X=x,Y=y)=n_{xy}/120\), where \(n_{xy}\) is the number of individuals with \(X=x\)
+and \(Y=y\).</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Determine the marginal pmf of \(X\) and of \(Y\). <em>[4 marks]</em><br>
+<strong>(b)</strong> Determine the expectation of \(X\) and of \(Y\). <em>[2 marks]</em><br>
+<strong>(c)</strong> Determine the correlation between \(X\) and \(Y\). <em>[5 marks]</em><br>
+<strong>(d)</strong> Perform an appropriate statistical test to determine whether screen use is associated
+with sleep quality. Report the test statistic, the \(P\)-value, a statistical conclusion, and a conclusion
+in context. <em>[5 marks]</em>
+</div>
+<p>Parts (a)–(c) are the Ch 3 marginal / expectation / correlation build-up (worked on the
+<a href="ch03-multiple-rvs.html">Ch 3 page</a>). Part (d) — the words <em>"associated with"</em> on a
+table of counts ⇒ <strong>χ² test of independence</strong> — is solved below.</p>
 
 <p><strong>Step 1 — Hypotheses (words AND symbols).</strong><br>
 \(H_0\): screen use and sleep quality are <em>independent</em> (no association), i.e.
@@ -315,7 +330,7 @@ T = 10.208+0.190+6.160+5.104+0.095+3.080 = 24.84</div>
 
 <p><strong>Step 5 — P-value (bracket from the table).</strong> For df \(=2\), the largest tabulated
 quantile is the \(0.995\)-quantile \(=10.6\). Since \(t=24.84>10.6\),
-$$P=\mathbb{P}(\chi^2_2\ge 24.84)<0.005.$$
+$$P=\mathbb{P}(\chi^2_2\ge 24.84)\lt 0.005.$$
 (Exact value \(P\approx 4.0\times10^{-6}\); "\(P<0.005\)" is the correct exam answer from the table.)</p>
 
 <p><strong>Step 6 — Statistical conclusion.</strong> \(P<0.005<0.05\), so reject \(H_0\) at the 5% level.</p>
@@ -330,17 +345,26 @@ the association that the <em>data actually show</em>, not the one you assumed.</
 
 <details>
 <summary>2023 Q5(e) [5 marks]: independence with a borderline P-value (bracketing matters)</summary>
-<p><strong>Setup.</strong> 500 people surveyed on toothpaste preference (Non-herbal / Herbal) by age
-group (Youth / Working-age adult / Senior). <em>"Is there an association between toothpaste choice and
-age group?"</em></p>
+<p class="mono" style="color:var(--muted)">Transcribed in full from Semester 2 Examinations 2023, Question 5(e).</p>
+<p><strong>Context (full sub-question as printed).</strong> Question 5 concerns a company developing a new
+herbal toothpaste; parts (a)–(d) analyse a plaque-reduction trial with one-way ANOVA (that is
+<a href="ch08-anova.html">Ch 8</a>). Part (e) is a self-contained survey:</p>
+<p><em>"To better understand the current market before launching their new herbal toothpaste, the company
+surveyed 500 randomly selected individuals asking for their preference between herbal and non-herbal
+toothpaste. Based on the following results, is there an association between toothpaste choice and age
+group?"</em> <strong>[5 marks]</strong></p>
 <div style="overflow-x:auto">
 <table>
-<tr><th></th><th>Youth</th><th>Working-age</th><th>Senior</th><th>Row total</th></tr>
+<tr><th></th><th>Youth</th><th>Working age adult</th><th>Senior</th><th>Row total</th></tr>
 <tr><th>Non-herbal</th><td>26</td><td>70</td><td>56</td><td>152</td></tr>
 <tr><th>Herbal</th><td>83</td><td>174</td><td>91</td><td>348</td></tr>
 <tr><th>Col total</th><td>109</td><td>244</td><td>147</td><td>500</td></tr>
 </table>
 </div>
+<p style="font-size:13px;color:var(--muted)">Original exam table has the \(2\times3\) counts only; the row
+total (152, 348), column totals (109, 244, 147) and grand total \(n=500\) are computed as the first step
+of the solution below. The word <em>"association"</em> on a table of counts ⇒
+<strong>χ² test of independence</strong>.</p>
 <p><strong>\(H_0\):</strong> toothpaste choice and age are independent; <strong>\(H_1\):</strong> they are associated.</p>
 <p><strong>Expected counts</strong> (all \(\ge 5\) ✓):</p>
 <div class="mono">          Youth    Working   Senior
@@ -351,7 +375,7 @@ Herbal    75.86   169.82    102.31</div>
 (83−75.86)²/75.86 = 0.671   (174−169.82)²/169.82=0.103  (91−102.31)²/102.31=1.251
 T = 6.66,   df = (2−1)(3−1) = 2</div>
 <p><strong>P-value bracket (df 2):</strong> the \(0.950\)-quantile is \(5.99\) and the \(0.975\)-quantile
-is \(7.38\). Since \(5.99<6.66<7.38\),
+is \(7.38\). Since \(5.99\lt 6.66\lt 7.38\),
 $$0.025<P<0.05.$$
 (Exact \(P\approx 0.036\).) As \(P<0.05\), <strong>reject \(H_0\)</strong> at the 5% level: there is
 (just) significant evidence that toothpaste preference is associated with age group.</p>
@@ -362,17 +386,27 @@ earns the reject decision but loses the P-value mark.</div>
 
 <details>
 <summary>2024 Q5(e) [6 marks]: independence with a NON-significant result</summary>
-<p><strong>Setup.</strong> Croaking counts for Green vs Gray tree frogs, categorised 0 / 1–2 / 3+ times.
-<em>"Is there an association between frog type and the number of croaks?"</em> (a 3×2 table).</p>
+<p class="mono" style="color:var(--muted)">Transcribed in full from Semester 2 Examinations 2024, Question 5(e).</p>
+<p><strong>Context (full sub-question as printed).</strong> Question 5 fits a linear regression of gray
+tree frog inter-call interval on temperature; parts (a)–(d) are the regression / diagnostics
+(<a href="ch09-10-regression.html">Ch 9–10</a>). Part (e) is a self-contained follow-up study:</p>
+<p><em>"In a follow-up study, researchers have collected the following data on the number of times
+individual gray tree frogs and green tree frogs croaked during independent observation periods. Based on
+the following results, is there an association between frog type and the number of croaks?"</em>
+<strong>[6 marks]</strong></p>
 <div style="overflow-x:auto">
 <table>
-<tr><th>Croaks</th><th>Green</th><th>Gray</th><th>Row total</th></tr>
-<tr><th>0 times</th><td>7</td><td>8</td><td>15</td></tr>
-<tr><th>1–2 times</th><td>12</td><td>10</td><td>22</td></tr>
-<tr><th>3+ times</th><td>5</td><td>8</td><td>13</td></tr>
+<tr><th>Number of croaks</th><th>Green Tree Frog</th><th>Gray Tree Frog</th><th>Row total</th></tr>
+<tr><th>0 Times</th><td>7</td><td>8</td><td>15</td></tr>
+<tr><th>1–2 Times</th><td>12</td><td>10</td><td>22</td></tr>
+<tr><th>3 or more Times</th><td>5</td><td>8</td><td>13</td></tr>
 <tr><th>Col total</th><td>24</td><td>26</td><td>50</td></tr>
 </table>
 </div>
+<p style="font-size:13px;color:var(--muted)">Table 3: Frog croaking counts. The exam prints only the
+\(3\times2\) inner block; totals (15, 22, 13 by row; 24, 26 by column; \(n=50\)) are added as the first
+step of the solution. The word <em>"association"</em> ⇒ <strong>χ² test of independence</strong> on a
+\(3\times2\) table.</p>
 <p><strong>Expected counts:</strong></p>
 <div class="mono">        Green   Gray
 0        7.20   7.80
@@ -384,7 +418,7 @@ that the χ² approximation is borderline. Full marks acknowledge this rather th
 <div class="mono">T = 0.006+0.005 + 0.196+0.181 + 0.246+0.228 = 0.862
 df = (3−1)(2−1) = 2</div>
 <p><strong>P-value bracket (df 2):</strong> the \(0.250\)-quantile is \(0.575\) and the \(0.750\)-quantile
-is \(2.77\). Since \(0.575<0.862<2.77\),
+is \(2.77\). Since \(0.575\lt 0.862\lt 2.77\),
 $$0.25<P<0.75.$$
 (Exact \(P\approx 0.65\).) \(P\) is large, so <strong>do not reject \(H_0\)</strong>: there is no
 evidence of an association between frog type and croaking frequency — the counts are consistent with
@@ -393,9 +427,22 @@ the two being independent.</p>
 
 <details>
 <summary>GoF with known proportions — Frizzled Chickens 1:2:1 (notes Ex 11.3)</summary>
-<p><strong>Setup.</strong> Genetics predicts phenotype ratio FF : Ff : ff \(=1:2:1\), i.e.
-\(\pi=(\tfrac14,\tfrac12,\tfrac14)\). Of \(n=93\) chickens the observed counts are 23, 50, 20.
-<em>"Is this in accordance with the theory?"</em> ⇒ <strong>GoF test, known proportions.</strong></p>
+<p><strong>Study.</strong> In poultry genetics the "frizzle" feather gene is codominant: a cross of two
+frizzled (Ff) chickens is predicted by theory to produce offspring in the phenotype ratio
+FF : Ff : ff \(=1:2:1\) (normal : frizzled : woolly), i.e. the claimed proportions are
+\(\pi=(\pi_1,\pi_2,\pi_3)=(\tfrac14,\tfrac12,\tfrac14)\). A breeder raises \(n=93\) chicks from such
+crosses and records the phenotype of each. The observed counts are:</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Phenotype</th><th>FF (normal)</th><th>Ff (frizzled)</th><th>ff (woolly)</th><th>Total</th></tr>
+<tr><th>Observed count</th><td>23</td><td>50</td><td>20</td><td>93</td></tr>
+</table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether these data are in accordance with the
+genetic theory that the phenotypes occur in the ratio \(1:2:1\). State the hypotheses, the test statistic,
+its degrees of freedom, the \(P\)-value, and a conclusion in context. <em>[5 marks]</em>
+</div>
+<p>The phrase <em>"in accordance with the theory"</em> with the proportions supplied ⇒ <strong>χ²
+goodness-of-fit test, known proportions.</strong></p>
 <p><strong>\(H_0\):</strong> \(p_1=\tfrac14,\ p_2=\tfrac12,\ p_3=\tfrac14\).
 <strong>\(H_1\):</strong> \(H_0\) is not true (at least one \(p_i\) differs).</p>
 <p><strong>Expected</strong> \(E_i=n\pi_i\): \(E=(93/4,\,93/2,\,93/4)=(23.25,\,46.5,\,23.25)\), all \(\ge 5\) ✓.</p>
@@ -412,9 +459,22 @@ are identical.</div>
 
 <details>
 <summary>GoF "equally likely" categories — Possums in 5 areas (notes Ex 11.4.1)</summary>
-<p><strong>Setup.</strong> Counts of possums in 5 equal-sized areas: 234, 301, 256, 315, 274. "Does
-this indicate certain areas are preferred?" ⇒ GoF against <em>equal preference</em>
-\(\pi_i=\tfrac15\) for each area.</p>
+<p><strong>Study.</strong> A national park is divided into 5 areas of equal size and equal habitat. Over a
+survey period, ecologists trap and count the possums caught in each area to test whether the animals show
+any preference between areas. If the possums have no preference, each captured possum is equally likely to
+come from any of the 5 areas, i.e. the claimed proportions are \(\pi_i=\tfrac15\) for every area
+(\(i=1,\dots,5\)). The observed counts are:</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Area</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Total</th></tr>
+<tr><th>Possums counted</th><td>234</td><td>301</td><td>256</td><td>315</td><td>274</td><td>1380</td></tr>
+</table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether the data indicate that the possums prefer
+certain areas (i.e. whether the 5 areas are equally likely). State the hypotheses, the test statistic, its
+degrees of freedom, the \(P\)-value, and a conclusion in context. <em>[5 marks]</em>
+</div>
+<p>Equal-sized categories with no claimed ratio ⇒ <strong>χ² goodness-of-fit against equal preference</strong>,
+\(\pi_i=\tfrac15\) so \(E_i=n/k\).</p>
 <p><strong>\(H_0\):</strong> all \(p_i=\tfrac15\) (no area preference). <strong>\(H_1\):</strong> not all equal.</p>
 <p><strong>Expected:</strong> \(n=234+301+256+315+274=1380\), so each \(E_i=1380/5=276\) (all \(\gg 5\) ✓).</p>
 <div class="mono">T = [(234−276)² + (301−276)² + (256−276)² + (315−276)² + (274−276)²]/276
@@ -430,8 +490,15 @@ write "2" just because the independence examples did.</div>
 
 <details>
 <summary>Multinomial probability (the Ch 3 crossover) — notes Ex 11.1</summary>
-<p><strong>Setup.</strong> Army recruits fall in 3 IQ classes with \(p_1=0.266,\ p_2=0.468,\
-p_3=0.266\). For 7 new recruits, find \(\mathbb{P}(X_1=2,X_2=4,X_3=1)\).</p>
+<p><strong>Study.</strong> On enlistment, army recruits are sorted by a standardised aptitude test into
+one of three IQ classes: Class 1 (below average), Class 2 (average) and Class 3 (above average). Across
+the whole population of recruits the proportions falling in the three classes are
+\(p_1=0.266,\ p_2=0.468,\ p_3=0.266\). Let \((X_1,X_2,X_3)\) be the numbers of a fresh intake of
+\(n=7\) recruits that fall in each class, so \((X_1,X_2,X_3)\sim\mathsf{Mnom}(7;0.266,0.468,0.266)\).</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Find the probability that of the 7 new recruits, exactly 2 fall in Class 1, 4 in
+Class 2 and 1 in Class 3, i.e. \(\mathbb{P}(X_1=2,X_2=4,X_3=1)\). <em>[3 marks]</em>
+</div>
 <div class="mono">P = 7!/(2!·4!·1!) · (0.266)² · (0.468)⁴ · (0.266)¹
   = 105 · 0.070756 · 0.047976 · 0.266
   = 0.0948</div>
@@ -622,7 +689,7 @@ what the data actually show.</div>
 
 <details>
 <summary>4. You compute \(T=8.30\) on df \(=2\). Bracket the P-value using the provided table and give the 5%-level decision.</summary>
-<p>df 2 quantiles: \(0.975\to 7.38\), \(0.990\to 9.21\). Since \(7.38<8.30<9.21\),
+<p>df 2 quantiles: \(0.975\to 7.38\), \(0.990\to 9.21\). Since \(7.38\lt 8.30\lt 9.21\),
 \(0.01<P<0.025\). As \(P<0.05\), reject \(H_0\).</p>
 </details>
 
@@ -695,6 +762,11 @@ The word <em>associated</em> on a table of counts ⇒ <strong>χ² test of indep
 <tr><th>Unvaccinated</th><td>34</td><td>66</td><td>100</td></tr>
 <tr><th>Col total</th><td>52</td><td>148</td><td>200</td></tr>
 </table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether vaccination status is associated with
+catching a cold. State the hypotheses, the test statistic, its df, the \(P\)-value and a conclusion in
+context. <em>[5 marks]</em>
+</div>
 <p><strong>\(H_0\):</strong> vaccination status and cold outcome are independent (\(p_{ij}=p_iq_j\));
 <strong>\(H_1\):</strong> they are associated.</p>
 <p><strong>Expected</strong> \(E_{ij}=\text{row}\times\text{col}/n\):</p>
@@ -723,6 +795,11 @@ records main commute mode. <em>"Is commute mode associated with region?"</em></p
 <tr><th>South</th><td>15</td><td>25</td><td>40</td><td>80</td></tr>
 <tr><th>Col total</th><td>80</td><td>90</td><td>90</td><td>260</td></tr>
 </table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether commute mode is associated with region.
+State the hypotheses, the test statistic, its df, the \(P\)-value and a conclusion in context.
+<em>[6 marks]</em>
+</div>
 <p><strong>\(H_0\):</strong> region and commute mode independent; <strong>\(H_1\):</strong> associated.</p>
 <p><strong>Expected</strong> \(E_{ij}=\text{row}\times\text{col}/260\):</p>
 <div class="mono">          Car      Bus      Bike
@@ -840,9 +917,20 @@ associated with instrument family — but the conclusion is caveated because \(E
 
 <details>
 <summary>Worked B1 — claimed proportions, a clear rejection</summary>
-<p><strong>Setup.</strong> A textbook claims eye-colour proportions Brown : Blue : Hazel : Green
-\(=0.50:0.30:0.15:0.05\). In a sample of \(n=300\) the counts are 140, 78, 52, 30.
-<em>"Are the data consistent with the claimed proportions?"</em> ⇒ <strong>GoF, known proportions.</strong></p>
+<p><strong>Study.</strong> A textbook claims that in the adult population eye colour occurs in the
+proportions Brown : Blue : Hazel : Green \(=0.50:0.30:0.15:0.05\). To check the claim, a researcher
+records the eye colour of a random sample of \(n=300\) adults and obtains the counts below.</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Eye colour</th><th>Brown</th><th>Blue</th><th>Hazel</th><th>Green</th><th>Total</th></tr>
+<tr><th>Claimed proportion \(\pi_i\)</th><td>0.50</td><td>0.30</td><td>0.15</td><td>0.05</td><td>1.00</td></tr>
+<tr><th>Observed count</th><td>140</td><td>78</td><td>52</td><td>30</td><td>300</td></tr>
+</table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether the data are consistent with the claimed
+proportions. State the hypotheses, the test statistic, its df, the \(P\)-value and a conclusion in
+context. <em>[5 marks]</em>
+</div>
+<p>Claimed proportions supplied ⇒ <strong>GoF, known proportions.</strong></p>
 <p><strong>\(H_0\):</strong> \(p=(0.50,0.30,0.15,0.05)\); <strong>\(H_1\):</strong> \(H_0\) false.</p>
 <p><strong>Expected</strong> \(E_i=n\pi_i\):</p>
 <div class="mono">        Brown   Blue   Hazel  Green
@@ -858,8 +946,19 @@ green eyes are about twice as common here as the claim allows.</p>
 
 <details>
 <summary>Worked B2 — a genetics ratio, a non-rejection (2 categories)</summary>
-<p><strong>Setup.</strong> A single-gene cross predicts smooth : wrinkled seeds in ratio \(3:1\). Of
-\(n=280\) seeds, 212 are smooth and 68 wrinkled. <em>"Does this accord with the 3:1 theory?"</em></p>
+<p><strong>Study.</strong> Mendelian single-gene inheritance predicts that a particular pea cross produces
+smooth and wrinkled seeds in the ratio smooth : wrinkled \(=3:1\), i.e. claimed proportions
+\(\pi=(0.75,0.25)\). A geneticist grows \(n=280\) seeds from the cross and classifies each, obtaining the
+counts below.</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Seed type</th><th>Smooth</th><th>Wrinkled</th><th>Total</th></tr>
+<tr><th>Claimed proportion \(\pi_i\)</th><td>0.75</td><td>0.25</td><td>1.00</td></tr>
+<tr><th>Observed count</th><td>212</td><td>68</td><td>280</td></tr>
+</table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Test at the 5% significance level whether the data accord with the \(3:1\) theory.
+<em>[5 marks]</em>
+</div>
 <p><strong>\(H_0\):</strong> \(p=(0.75,0.25)\); <strong>\(H_1\):</strong> not 3:1.</p>
 <div class="mono">E = (280·0.75, 280·0.25) = (210, 70)     (both ≥ 5 ✓)
 (212−210)²/210 = 0.019     (68−70)²/70 = 0.057
@@ -880,9 +979,15 @@ what is the expected count for each face, and what df would a goodness-of-fit te
 </details></div>
 
 <div class="card q">
-<p><strong>B-Q2 [STANDARD · 5 marks].</strong> A café claims its small : medium : large coffee sales split
-\(0.20:0.30:0.50\). One day it sells \(n=200\) coffees: 42 small, 66 medium, 92 large. Test the claim at
-the 5% level.</p>
+<p><strong>B-Q2 [STANDARD · 5 marks].</strong> A café claims that its coffee sales split between the three
+cup sizes in the proportions small : medium : large \(=0.20:0.30:0.50\). To check the claim, the manager
+records the sizes of a random day's \(n=200\) coffee sales, obtaining the counts in the table below. Test
+the claim at the 5% significance level.</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Size</th><th>Small</th><th>Medium</th><th>Large</th><th>Total</th></tr>
+<tr><th>Claimed proportion \(\pi_i\)</th><td>0.20</td><td>0.30</td><td>0.50</td><td>1.00</td></tr>
+<tr><th>Observed sales</th><td>42</td><td>66</td><td>92</td><td>200</td></tr>
+</table></div>
 <details><summary>Show solution</summary>
 <p>\(H_0\): \(p=(0.20,0.30,0.50)\); \(H_1\): \(H_0\) false.</p>
 <div class="mono">E = (200·.20, 200·.30, 200·.50) = (40, 60, 100)     (all ≥ 5 ✓)
@@ -893,9 +998,15 @@ not reject \(H_0\): the day's sales are consistent with the claimed size split.<
 </details></div>
 
 <div class="card q">
-<p><strong>B-Q3 [EXAM-LEVEL · 5 marks].</strong> A shop believes weekday foot-traffic is spread <em>equally</em>
-across Mon–Fri. Over one week it counts 30, 52, 41, 48, 29 visitors (Mon…Fri), \(n=200\). Test at the 5%
-level whether traffic is uniform across weekdays, and say which day departs most.</p>
+<p><strong>B-Q3 [EXAM-LEVEL · 5 marks].</strong> A shop owner believes weekday foot-traffic is spread
+<em>equally</em> across the five weekdays Monday–Friday, i.e. each weekday has claimed proportion
+\(\pi_i=\tfrac15\). Over one representative week the number of visitors on each weekday is recorded,
+giving \(n=200\) visitors in total, as shown. Test at the 5% significance level whether foot-traffic is
+uniform across weekdays, and identify which day departs most from expectation.</p>
+<div style="overflow-x:auto"><table>
+<tr><th>Weekday</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Total</th></tr>
+<tr><th>Visitors</th><td>30</td><td>52</td><td>41</td><td>48</td><td>29</td><td>200</td></tr>
+</table></div>
 <details><summary>Show solution</summary>
 <p>Equal ⇒ \(\pi_i=1/5\), \(E_i=200/5=40\) each. \(H_0\): all \(p_i=1/5\); \(H_1\): not all equal.</p>
 <div class="mono">(30−40)²/40 = 2.500   (52−40)²/40 = 3.600   (41−40)²/40 = 0.025
@@ -936,6 +1047,10 @@ test is valid."</p>
 <tr><th>No reaction</th><td>28</td><td>60</td><td>62</td><td>150</td></tr>
 <tr><th>Col total</th><td>30</td><td>70</td><td>70</td><td>170</td></tr>
 </table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Assuming no association between reaction and donation site, compute the expected count
+for every cell of the table, and state whether the χ² test of independence is valid. <em>[3 marks]</em>
+</div>
 <p><strong>Totals.</strong> Row totals 20 and 150 give \(n=170\); column totals \(30, 70, 70\).</p>
 <div class="mono">E (row·col/170):   Mobile   Clinic  Hospital
 Reaction           3.53     8.24     8.24
@@ -959,6 +1074,10 @@ expected counts would you use, and is the test valid?"</p>
 <tr><th>Deli</th><td>16</td><td>19</td><td>20</td><td>55</td></tr>
 <tr><th>Col total</th><td>50</td><td>62</td><td>68</td><td>180</td></tr>
 </table></div>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Assuming store section and membership tier are independent, compute the expected
+count for every cell, and state whether the χ² test is valid. <em>[3 marks]</em>
+</div>
 <div class="mono">E (row·col/180):   Basic   Plus    Premium
 Produce            13.89   17.22   18.89
 Bakery             20.83   25.83   28.33
@@ -1020,8 +1139,12 @@ conclusion should be read with mild caution. (Watch the trap: the raw <em>observ
 
 <details>
 <summary>Worked D1 — three outcomes</summary>
-<p><strong>Setup.</strong> A weighted spinner lands Red, Green, Blue with probabilities
-\(0.5, 0.3, 0.2\). Spin it \(n=10\) times. Find \(\mathbb{P}(4\text{ Red},3\text{ Green},3\text{ Blue})\).</p>
+<p><strong>Setup.</strong> A weighted spinner lands on Red, Green or Blue with probabilities
+\(0.5, 0.3, 0.2\) respectively. It is spun \(n=10\) times independently.</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Find the probability of getting exactly 4 Reds, 3 Greens and 3 Blues, i.e.
+\(\mathbb{P}(4\text{ Red},3\text{ Green},3\text{ Blue})\). <em>[2 marks]</em>
+</div>
 <div class="mono">P = 10!/(4!·3!·3!) · (0.5)⁴ · (0.3)³ · (0.2)³
   = 4200 · 0.0625 · 0.027 · 0.008
   = 0.0567</div>
@@ -1032,9 +1155,12 @@ power. Keep full precision and give ≥3 sig figs.</div>
 
 <details>
 <summary>Worked D2 — four outcomes, and the link to expected counts</summary>
-<p><strong>Setup.</strong> Website visitors pick one of four plans with probabilities
-\(0.40, 0.25, 0.25, 0.10\). For \(n=10\) visitors, find
-\(\mathbb{P}(3,2,4,1)\) across the four plans.</p>
+<p><strong>Setup.</strong> Website visitors independently pick one of four subscription plans with
+probabilities \(0.40, 0.25, 0.25, 0.10\) respectively. Consider the next \(n=10\) visitors.</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Find the probability that the four plans are chosen 3, 2, 4 and 1 times respectively,
+i.e. \(\mathbb{P}(3,2,4,1)\). <em>[3 marks]</em>
+</div>
 <div class="mono">P = 10!/(3!·2!·4!·1!) · (0.4)³ · (0.25)² · (0.25)⁴ · (0.1)¹
   = 12600 · 0.064 · 0.0625 · 0.00390625 · 0.1
   = 0.0197</div>
@@ -1085,8 +1211,13 @@ The multinomial means feed straight into the χ² statistic.</p>
 
 <details>
 <summary>Worked E1 — bracketing a significant statistic (df 3)</summary>
-<p><strong>Setup.</strong> A χ² independence test on a 2×4 table gives \(T=8.10\). Bracket the P-value and
-give the 5%-level decision.</p>
+<p><strong>Setup.</strong> A χ² test of independence on a \(2\times4\) contingency table of counts yields
+the test statistic \(T=8.10\). (The table is not reproduced — this drill isolates the final
+bracketing-and-decision step, which is where P-value marks are typically won or lost.)</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Bracket the \(P\)-value using the provided χ² table and give the decision at the 5%
+significance level. <em>[2 marks]</em>
+</div>
 <p>df \(=(2-1)(4-1)=3\). From the df-3 row: the \(0.950\)-quantile is \(7.81\) and the \(0.975\)-quantile
 is \(9.35\). Since \(7.81\lt 8.10\lt 9.35\),
 $$0.025\lt P\lt 0.05.$$
@@ -1097,7 +1228,13 @@ bracket \(0.025\lt P\lt 0.05\) rather than a loose "\(P\lt 0.05\)".</div>
 
 <details>
 <summary>Worked E2 — a non-significant statistic + a full contextual conclusion (df 5)</summary>
-<p><strong>Setup.</strong> A goodness-of-fit test over \(k=6\) categories gives \(T=4.20\). df \(=k-1=5\).</p>
+<p><strong>Setup.</strong> A goodness-of-fit test comparing observed counts over \(k=6\) categories against
+a claimed model yields \(T=4.20\), on df \(=k-1=5\). (Counts omitted — this drill isolates the bracketing
+and contextual-conclusion step.)</p>
+<div class="method" style="background:var(--panel2)">
+<strong>(a)</strong> Bracket the \(P\)-value from the provided χ² table, give the 5%-level decision, and
+write a one-sentence conclusion in context. <em>[3 marks]</em>
+</div>
 <p>From the df-5 row: the \(0.250\)-quantile is \(2.67\) and the \(0.750\)-quantile is \(6.63\). Since
 \(2.67\lt 4.20\lt 6.63\),
 $$0.25\lt P\lt 0.75.$$

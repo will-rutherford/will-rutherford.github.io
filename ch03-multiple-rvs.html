@@ -333,14 +333,25 @@ the natural partner of the correlation part — see the full method on
 <details open>
 <summary>Example 1 (FLAGSHIP) — 2025 Q2: joint frequency table, screen use × sleep quality, n = 120 [16 marks]</summary>
 <div class="q card">
-<p><b>Setup.</b> \(X=\) uses screens within 30 min of bedtime (0 = No, 1 = Yes); \(Y=\) sleep quality
-(0 = poor, 1 = fair, 2 = good). \(f(x,y)=n_{xy}/120\).</p>
+<p><b>2025 Q2 [16 marks].</b> A study of \(n=120\) people investigates the relationship between screen use
+before bedtime and sleep quality. Let \(X\) denote whether a person uses screens within 30 minutes of
+bedtime (\(0=\)No, \(1=\)Yes). Let \(Y\) denote the person's sleep quality (\(0=\)poor, \(1=\)fair, \(2=\)good).
+The following table shows the joint frequency counts (row and column totals added for convenience).</p>
 <table>
 <tr><th>counts</th><th>Y=0 (poor)</th><th>Y=1 (fair)</th><th>Y=2 (good)</th><th>row total</th></tr>
 <tr><th>X=0 (No)</th><td>25</td><td>8</td><td>7</td><td><b>40</b></td></tr>
 <tr><th>X=1 (Yes)</th><td>15</td><td>20</td><td>45</td><td><b>80</b></td></tr>
 <tr><th>col total</th><td><b>40</b></td><td><b>28</b></td><td><b>52</b></td><td><b>120</b></td></tr>
 </table>
+<p>Define the joint probability mass function (pmf) of \(X\) and \(Y\) as
+\(f(x,y)=\mathbb P(X=x,\,Y=y)=n_{xy}/120\), where \(n_{xy}\) is the number of individuals with
+\(X=x\) and \(Y=y\).</p>
+<p><b>(a)</b> Determine the marginal pmf of \(X\) and of \(Y\). &nbsp;<b>[4 marks]</b><br>
+<b>(b)</b> Determine the expectation of \(X\) and of \(Y\). &nbsp;<b>[2 marks]</b><br>
+<b>(c)</b> Determine the correlation between \(X\) and \(Y\). &nbsp;<b>[5 marks]</b><br>
+<b>(d)</b> Perform an appropriate statistical test to determine whether screen use is associated with
+sleep quality. Report the test statistic, the \(P\)-value, a statistical conclusion, and a conclusion in
+context. &nbsp;<b>[5 marks]</b></p>
 </div>
 
 <p><b>(a) Marginal pmfs</b> — row/column totals ÷ 120:</p>
@@ -388,12 +399,20 @@ Full χ² method: <a href="ch11-chi-squared.html">ch11-chi-squared.html</a>.</di
 <details>
 <summary>Example 2 — 2024 Q1: parametric joint pmf table (find p, marginals, Cov, correlation) [12 marks]</summary>
 <div class="q card">
-<p>Joint pmf of leakage in tanks A, B (0 = none, 1 = leak), with \(0\le p\le 1\):</p>
+<p><b>2024 Q1 [12 marks].</b> A company has two chemical storage tanks (tank A and tank B). Frequent
+regular inspections are conducted to detect leaks. The following table gives the joint probability mass
+function (pmf) for (detectable) leakage of tanks A and B, as estimated based on a long history of past
+records. When a leakage is detected, this is coded as 1, while absence of (detectable) leakage is coded
+as 0. Let \(0\le p\le 1\).</p>
 <table>
 <tr><th></th><th>B = 0</th><th>B = 1</th></tr>
 <tr><th>A = 0</th><td>\(\tfrac14 p^2\)</td><td>\(p\)</td></tr>
 <tr><th>A = 1</th><td>\(p\)</td><td>\(p^2\)</td></tr>
 </table>
+<p><b>(a)</b> Find the value of \(p\). &nbsp;<b>[3 marks]</b><br>
+<b>(b)</b> What is the marginal pmf for \(A\)? &nbsp;<b>[2 marks]</b><br>
+<b>(c)</b> Determine the expected value and variance of \(A\). &nbsp;<b>[3 marks]</b><br>
+<b>(d)</b> Determine the covariance and correlation between \(A\) and \(B\). &nbsp;<b>[4 marks]</b></p>
 </div>
 <p><b>(a) Find p</b> — probabilities sum to 1:</p>
 <p>$$\tfrac14p^2+p+p+p^2=1\ \Rightarrow\ \tfrac54p^2+2p-1=0\ \Rightarrow\ 5p^2+8p-4=0\ \Rightarrow\ p=0.4$$
@@ -412,7 +431,14 @@ skeleton as 2025 Q2, but here you must first <b>solve for the parameter</b> befo
 <details>
 <summary>Example 3 — Tutorial 3 Q3: full covariance/correlation and independence (dependent case)</summary>
 <div class="q card">
-<p>Joint probabilities of number of tests \(T\in\{1,2,3\}\) and hours onsite \(H\in\{1,2,3,4\}\):</p>
+<p><b>Tutorial 3 Q3 (Maintenance).</b> A company works on maintenance of air handling units. They
+regularly send out a technician to check the unit for undesirable vibration. The fee charged depends on
+how many hours a technician spends on site and this partly depends on how many different vibration
+measurements they need to take. For a particular visit, the technician will make no more than 3
+measurements and spend no longer than 4 hours onsite. Let \(T\) be the number of measurements (tests)
+made \(\in\{1,2,3\}\) and \(H\) the number of hours spent onsite \(\in\{1,2,3,4\}\). After a year of such
+work, the following relative frequencies were observed and will be treated as the joint pmf \(f(t,h)\)
+(row and column totals added for convenience):</p>
 <table>
 <tr><th>T \ H</th><th>1</th><th>2</th><th>3</th><th>4</th><th>row</th></tr>
 <tr><th>1</th><td>0.10</td><td>0.10</td><td>0.08</td><td>0.02</td><td>0.30</td></tr>
@@ -420,6 +446,12 @@ skeleton as 2025 Q2, but here you must first <b>solve for the parameter</b> befo
 <tr><th>3</th><td>0.02</td><td>0.03</td><td>0.05</td><td>0.10</td><td>0.20</td></tr>
 <tr><th>col</th><td>0.22</td><td>0.28</td><td>0.28</td><td>0.22</td><td>1.00</td></tr>
 </table>
+<p>Determine: <b>(a)</b> the marginal distribution of the number of tests; &nbsp;<b>(b)</b> the marginal
+distribution of the number of hours onsite; &nbsp;<b>(c)</b> the (marginal) mean of the number of tests
+and of the number of hours onsite; &nbsp;<b>(d)</b> the (marginal) variance and standard deviation of the
+number of tests and of the number of hours onsite; &nbsp;<b>(e)</b> the covariance and correlation between
+the number of tests and the hours onsite; &nbsp;<b>(f)</b> are the number of tests and the number of hours
+onsite independent random variables?</p>
 </div>
 <p><b>Marginal means &amp; SDs</b> from the row/column totals:</p>
 <p class="mono">E[T]=1(.30)+2(.50)+3(.20)=1.9        Var(T)=0.49   σ_T=0.700
@@ -436,9 +468,14 @@ the product rule, not the covariance, for the independence part.</div>
 <details>
 <summary>Example 4 — CLT for a sample mean (parent shape unknown) [exam-style]</summary>
 <div class="q card">
-<p>A call centre's handling times have mean \(\mu=30\) s and SD \(\sigma=8\) s (distribution skewed, <b>not</b>
-normal). A shift handles \(n=100\) independent calls. Find the approximate probability the <b>mean</b>
-handling time exceeds 32 s, and that the <b>total</b> exceeds 3100 s.</p>
+<p><b>Exam-style [6 marks].</b> A call centre's individual call-handling times have mean \(\mu=30\) seconds
+and standard deviation \(\sigma=8\) seconds; the distribution of handling times is right-skewed and is
+<b>not</b> normal. During one shift the centre handles \(n=100\) independent calls. Let \(\bar X\) denote the
+sample mean handling time and \(S_{100}\) the total handling time over the shift.</p>
+<p><b>(a)</b> Using an appropriate approximation, find the approximate probability that the <b>mean</b>
+handling time exceeds 32 seconds. State the theorem you use and why it applies. &nbsp;<b>[3 marks]</b><br>
+<b>(b)</b> Find the approximate probability that the <b>total</b> handling time for the shift exceeds 3100
+seconds. &nbsp;<b>[3 marks]</b></p>
 </div>
 <p>By CLT, even though the parent is skewed, for \(n=100\) the mean is approximately normal:</p>
 <p>$$\bar X\ \overset{\text{approx}}{\sim}\ \mathcal N\Big(30,\ \tfrac{8^2}{100}\Big)=\mathcal N(30,\,0.64),\quad
@@ -453,9 +490,18 @@ pure CLT flag. Standardise with \(\sigma/\sqrt n\) for a mean, \(\sigma\sqrt n\)
 <details>
 <summary>Example 5 — Linear combinations of independent normals (sums &amp; differences) [Ch-3 exercises + tut 3]</summary>
 <div class="q card">
-<p>(i) Egg weights are \(\mathcal N(60,6^2)\) g, independent. A basket has 10 eggs. (ii) Two independently
-sampled people each weigh \(\mathcal N(75,10^2)\) kg. (iii) Men's heights \(\mathcal N(176,8^2)\), women's
-\(\mathcal N(162,7^2)\) cm.</p>
+<p><b>Exam-style (Ch-3 exercises + Tutorial 3 Q5) [9 marks].</b> In each part all quantities are
+independent and normally distributed.</p>
+<p><b>(i)</b> The weight of a single egg is normally distributed with mean 60 g and standard deviation
+6 g, i.e. \(\mathcal N(60,\,6^2)\), and eggs are independent of one another. A basket contains 10 eggs; let
+\(Y\) be the total weight of the basket's eggs. Find the distribution of \(Y\) and hence
+\(\mathbb P(Y\gt 630)\) g. &nbsp;<b>[3 marks]</b></p>
+<p><b>(ii)</b> Two people are sampled independently, each with weight \(\mathcal N(75,\,10^2)\) kg. Find the
+probability that their combined weight exceeds 180 kg. &nbsp;<b>[3 marks]</b></p>
+<p><b>(iii)</b> The height of Australian men (age 18+) is \(\mathcal N(176,\,8^2)\) cm and the height of
+Australian women (age 18+) is \(\mathcal N(162,\,7^2)\) cm. For a randomly chosen man and a randomly chosen
+woman, find the mean and standard deviation of the difference in height (man's height minus woman's
+height). &nbsp;<b>[3 marks]</b></p>
 </div>
 <p><b>(i) Total of 10 eggs</b> \(Y=X_1+\cdots+X_{10}\). Mean and (by independence) variance add:</p>
 <p class="mono">E[Y]=10×60=600     Var(Y)=10×6²=360     Y ~ N(600,360)
@@ -665,44 +711,44 @@ intermediate steps (don't round \(\mathbb E[XY]\) or the SDs early) and round on
 <h2>§7 · Self-check</h2>
 
 <details>
-<summary>1. A joint table has row totals for \(X\) of 30 and 70 out of \(n=100\). What is \(f_X\), and hence \(\mathbb E[X]\) if \(X\in\{0,1\}\)?</summary>
+<summary>1. A joint frequency table for two variables \(X,Y\) is built from \(n=100\) individuals. Summing across \(Y\), the row totals for \(X\) are \(30\) (for \(X=0\)) and \(70\) (for \(X=1\)), where \(X\in\{0,1\}\). Determine the marginal pmf \(f_X\), and hence \(\mathbb E[X]\). [2 marks]</summary>
 <p>\(f_X(0)=0.30,\ f_X(1)=0.70\). \(\mathbb E[X]=0(0.30)+1(0.70)=0.70\).</p>
 </details>
 
 <details>
-<summary>2. You find \(\text{Cov}(X,Y)=0\) for a table. Can you conclude \(X,Y\) are independent?</summary>
+<summary>2. For a joint distribution of two random variables \(X\) and \(Y\), you compute \(\text{Cov}(X,Y)=0\). Can you conclude that \(X\) and \(Y\) are independent? Justify your answer. [1 mark]</summary>
 <p><b>No.</b> Zero covariance rules out only linear association. Independence requires
 \(f(x,y)=f_X(x)f_Y(y)\) for every cell — check the product rule.</p>
 </details>
 
 <details>
-<summary>3. \(X\sim\mathcal N(50,4^2)\), \(Y\sim\mathcal N(45,3^2)\), independent. Distribution of \(X-Y\)?</summary>
+<summary>3. Two independent normal random variables satisfy \(X\sim\mathcal N(50,\,4^2)\) and \(Y\sim\mathcal N(45,\,3^2)\). State the distribution of the difference \(X-Y\), giving its mean, variance and standard deviation. [2 marks]</summary>
 <p>Mean \(=50-45=5\); variance \(=4^2+3^2=25\) (variances add). So \(X-Y\sim\mathcal N(5,\,25)\), sd \(=5\).</p>
 </details>
 
 <details>
-<summary>4. Widget masses have \(\mu=20\) g, \(\sigma=5\) g (non-normal). For \(n=64\), approximate \(P(\bar X \lt 19)\).</summary>
+<summary>4. Widget masses have mean \(\mu=20\) g and standard deviation \(\sigma=5\) g, with a distribution that is <i>not</i> normal. A sample of \(n=64\) independent widgets is taken; let \(\bar X\) be the sample mean mass. Using an appropriate approximation, find \(P(\bar X \lt 19)\) g. [3 marks]</summary>
 <p>CLT: \(\bar X\approx\mathcal N(20,\,5^2/64)\), sd \(=5/8=0.625\).
 \(P(\bar X \lt 19)=P\big(Z \lt (19-20)/0.625\big)=P(Z \lt -1.60)=0.0548.\)</p>
 </details>
 
 <details>
-<summary>5. A 2×4 contingency table of counts. What is the df for the χ² test of independence, and how do you get expected counts?</summary>
+<summary>5. A test of association is to be performed on a \(2\times4\) contingency table of counts (2 rows, 4 columns). State the degrees of freedom for the χ² test of independence, and state how each expected count is obtained. [2 marks]</summary>
 <p>df \(=(2-1)(4-1)=3\). Expected count in a cell \(=\)(its row total)\(\times\)(its column total)\(/n\).</p>
 </details>
 
 <details>
-<summary>6. From a table \(\mathbb E[X]=0.667\), \(\mathbb E[Y]=1.10\), \(\mathbb E[XY]=0.9167\), \(\sigma_X=0.471\), \(\sigma_Y=0.870\). Correlation?</summary>
+<summary>6. From a joint table you have obtained \(\mathbb E[X]=0.667\), \(\mathbb E[Y]=1.10\), \(\mathbb E[XY]=0.9167\), \(\sigma_X=0.471\) and \(\sigma_Y=0.870\). Determine the covariance and the correlation \(\varrho(X,Y)\). [3 marks]</summary>
 <p>\(\text{Cov}=0.9167-0.667\times1.10=0.1833\); \(\varrho=0.1833/(0.471\times0.870)=0.447\). (This is 2025 Q2(c).)</p>
 </details>
 
 <details>
-<summary>7. Independent normals cost \$100/L (sd 0.2 L) and \$200/L (sd 0.3 L). SD of total cost?</summary>
+<summary>7. Two reagents are used independently each week; the amount used of each is normally distributed. The first has a standard deviation of \(0.2\) L and costs \$100 per litre; the second has a standard deviation of \(0.3\) L and costs \$200 per litre. Find the standard deviation of the total weekly cost of the two reagents combined. [3 marks]</summary>
 <p>\(\text{Var}=100^2(0.2^2)+200^2(0.3^2)=400+3600=4000\); sd \(=\sqrt{4000}\approx\$63\). (Tut 3 Q4.)</p>
 </details>
 
 <details>
-<summary>8. LLN vs CLT — which answers "what does the sample average converge to?" and which "what is the probability the average exceeds a value?"</summary>
+<summary>8. Consider iid observations \(X_1,X_2,\dots\) with mean \(\mu\) and variance \(\sigma^2\), and the sample mean \(\bar X\). Of the Law of Large Numbers and the Central Limit Theorem, state which answers "what does the sample average \(\bar X\) converge to as \(n\to\infty\)?" and which answers "what is the probability that \(\bar X\) exceeds a given value?" [2 marks]</summary>
 <p>LLN answers the first (the average converges to \(\mu\)). CLT answers the second (the average is
 \(\approx\mathcal N(\mu,\sigma^2/n)\), so standardise to get the probability).</p>
 </details>
@@ -725,7 +771,9 @@ Tags: <span class="badge">WARM-UP</span> quick reflex · <span class="badge">STA
 <details>
 <summary>Worked A — vending-machine joint <i>probability</i> table (2×3), get marginals, E, Cov, ϱ</summary>
 <div class="q card">
-<p>\(X=\) drinks bought \(\in\{0,1,2\}\); \(Y=\) snacks bought \(\in\{0,1\}\). Joint pmf \(f(x,y)\):</p>
+<p>A vending machine records, for each transaction, \(X=\) the number of drinks bought \(\in\{0,1,2\}\) and
+\(Y=\) the number of snacks bought \(\in\{0,1\}\). The joint pmf \(f(x,y)=\mathbb P(X=x,Y=y)\) is given below
+(row and column totals shown for convenience):</p>
 <table>
 <tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>row \(f_X\)</th></tr>
 <tr><th>X=0</th><td>0.15</td><td>0.05</td><td><b>0.20</b></td></tr>
@@ -733,6 +781,9 @@ Tags: <span class="badge">WARM-UP</span> quick reflex · <span class="badge">STA
 <tr><th>X=2</th><td>0.10</td><td>0.30</td><td><b>0.40</b></td></tr>
 <tr><th>col \(f_Y\)</th><td><b>0.45</b></td><td><b>0.55</b></td><td><b>1.00</b></td></tr>
 </table>
+<p><b>(a)</b> Determine the marginal pmfs of \(X\) and \(Y\). &nbsp;<b>(b)</b> Determine \(\mathbb E[X]\) and
+\(\mathbb E[Y]\), and the standard deviations \(\sigma_X,\sigma_Y\). &nbsp;<b>(c)</b> Determine the
+covariance \(\text{Cov}(X,Y)\) and the correlation \(\varrho(X,Y)\).</p>
 </div>
 <p><b>Marginals</b> = row / column sums (shown bold above). Check each sums to 1 ✓.</p>
 <p class="mono">E[X]=0(.20)+1(.40)+2(.40)=1.20      E[X²]=0+.40+4(.40)=2.00  → Var(X)=2.00−1.20²=0.560  σ_X=0.748
@@ -748,7 +799,9 @@ just probabilities instead of counts (so no ÷ n step).</div>
 <details>
 <summary>Worked B — books × DVDs joint <i>frequency</i> table (3×3, n = 160)</summary>
 <div class="q card">
-<p>Library patrons: \(X=\) books borrowed \(\in\{0,1,2\}\), \(Y=\) DVDs borrowed \(\in\{0,1,2\}\); counts (\(f=n_{xy}/160\)):</p>
+<p>A library records, for \(n=160\) patrons, \(X=\) the number of books borrowed \(\in\{0,1,2\}\) and
+\(Y=\) the number of DVDs borrowed \(\in\{0,1,2\}\). The joint frequency counts \(n_{xy}\) are shown below,
+with joint pmf \(f(x,y)=n_{xy}/160\) (row and column totals added for convenience):</p>
 <table>
 <tr><th>counts</th><th>Y=0</th><th>Y=1</th><th>Y=2</th><th>row</th></tr>
 <tr><th>X=0</th><td>20</td><td>10</td><td>6</td><td><b>36</b></td></tr>
@@ -756,6 +809,8 @@ just probabilities instead of counts (so no ÷ n step).</div>
 <tr><th>X=2</th><td>8</td><td>20</td><td>36</td><td><b>64</b></td></tr>
 <tr><th>col</th><td><b>42</b></td><td><b>60</b></td><td><b>58</b></td><td><b>160</b></td></tr>
 </table>
+<p><b>(a)</b> Determine \(\mathbb E[X],\mathbb E[Y]\) and the standard deviations \(\sigma_X,\sigma_Y\).
+&nbsp;<b>(b)</b> Determine the covariance \(\text{Cov}(X,Y)\) and the correlation \(\varrho(X,Y)\).</p>
 </div>
 <p class="mono">E[X]=(0·36+1·60+2·64)/160 = 188/160 = 1.175    E[X²]=(0+60+4·64)/160=316/160=1.975 → σ_X=0.771
 E[Y]=(0·42+1·60+2·58)/160 = 176/160 = 1.100    E[Y²]=(0+60+4·58)/160=292/160=1.825 → σ_Y=0.784
@@ -768,8 +823,14 @@ Cov=1.5375 − 1.175×1.100 = 0.245     ϱ = 0.245/(0.771×0.784) = <b>0.405</b>
 <h4>✏️ Your turn</h4>
 
 <div class="card q">
-<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;A 2×2 joint pmf has \(f(0,0)=0.30,\ f(0,1)=0.10,\ f(1,0)=0.25,\ f(1,1)=0.35\),
-with \(X,Y\in\{0,1\}\). Find the marginal pmf of \(X\) and \(\mathbb E[X]\).</p>
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;Two Bernoulli variables \(X,Y\in\{0,1\}\) have the joint pmf
+\(f(x,y)=\mathbb P(X=x,Y=y)\) given in the table below.</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th></tr>
+<tr><th>X=0</th><td>0.30</td><td>0.10</td></tr>
+<tr><th>X=1</th><td>0.25</td><td>0.35</td></tr>
+</table>
+<p><b>(a)</b> Find the marginal pmf of \(X\). &nbsp;<b>(b)</b> Hence find \(\mathbb E[X]\).</p>
 <details><summary>Solution</summary>
 <p class="mono">f_X(0)=0.30+0.10=0.40    f_X(1)=0.25+0.35=0.60
 E[X]=0(0.40)+1(0.60)=<b>0.600</b></p>
@@ -777,9 +838,18 @@ E[X]=0(0.40)+1(0.60)=<b>0.600</b></p>
 </div>
 
 <div class="card q">
-<p><span class="badge">STANDARD · 6 marks</span> &nbsp;For the vending-machine table in Worked A, a colleague claims the
-covariance is exactly 0 because "\(Y\) is just 0/1". Recompute \(\text{Cov}(X,Y)\) and the correlation from scratch,
-and say in one sentence whether the claim holds.</p>
+<p><span class="badge">STANDARD · 6 marks</span> &nbsp;A vending machine records, for each transaction, \(X=\) the
+number of drinks bought \(\in\{0,1,2\}\) and \(Y=\) the number of snacks bought \(\in\{0,1\}\), with the joint
+pmf \(f(x,y)=\mathbb P(X=x,Y=y)\) given below.</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th></tr>
+<tr><th>X=0</th><td>0.15</td><td>0.05</td></tr>
+<tr><th>X=1</th><td>0.20</td><td>0.20</td></tr>
+<tr><th>X=2</th><td>0.10</td><td>0.30</td></tr>
+</table>
+<p>A colleague claims the covariance is exactly 0 because "\(Y\) is just 0/1".
+<b>(a)</b> Recompute \(\text{Cov}(X,Y)\) and the correlation \(\varrho(X,Y)\) from scratch. &nbsp;<b>(b)</b> State
+in one sentence whether the colleague's claim holds.</p>
 <details><summary>Solution</summary>
 <p class="mono">E[X]=1.20, E[Y]=0.55, E[XY]=0.80  (from the two non-zero-product cells)
 Cov = 0.80 − 1.20·0.55 = <b>0.140</b>   (≠ 0)
@@ -867,13 +937,15 @@ never proves independence — the product rule is the only valid test.</div>
 <details>
 <summary>Worked A — a table that <i>is</i> independent (full factorisation)</summary>
 <div class="q card">
-<p>\(X,Y\in\{0,1\}\) with marginals \(f_X=(0.4,0.6)\), \(f_Y=(0.3,0.7)\). The joint pmf is:</p>
+<p>Two variables \(X,Y\in\{0,1\}\) have marginals \(f_X=(0.4,0.6)\) and \(f_Y=(0.3,0.7)\). Their joint pmf
+\(f(x,y)=\mathbb P(X=x,Y=y)\) is given below (row and column totals shown for convenience).</p>
 <table>
 <tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>\(f_X\)</th></tr>
 <tr><th>X=0</th><td>0.12</td><td>0.28</td><td>0.40</td></tr>
 <tr><th>X=1</th><td>0.18</td><td>0.42</td><td>0.60</td></tr>
 <tr><th>\(f_Y\)</th><td>0.30</td><td>0.70</td><td>1.00</td></tr>
 </table>
+<p><b>(a)</b> Determine whether \(X\) and \(Y\) are independent, showing your check for every cell.</p>
 </div>
 <p>To <b>confirm</b> independence you must verify <i>every</i> cell equals row-prob × col-prob:</p>
 <p class="mono">0.12 = 0.40×0.30 ✓   0.28 = 0.40×0.70 ✓
@@ -884,7 +956,9 @@ never proves independence — the product rule is the only valid test.</div>
 <details>
 <summary>Worked B — Cov = 0 yet <i>dependent</i> (the classic exam trap, discrete version)</summary>
 <div class="q card">
-<p>\(X\in\{-1,0,1\}\) and \(Y=X^2\in\{0,1\}\), with \(f(-1,1)=0.25,\ f(0,0)=0.50,\ f(1,1)=0.25\) (all other cells 0):</p>
+<p>A random variable \(X\in\{-1,0,1\}\) and \(Y=X^2\in\{0,1\}\), with joint pmf
+\(f(-1,1)=0.25,\ f(0,0)=0.50,\ f(1,1)=0.25\) and all other cells \(0\). The full joint table
+(with marginal totals) is:</p>
 <table>
 <tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>\(f_X\)</th></tr>
 <tr><th>X=−1</th><td>0</td><td>0.25</td><td>0.25</td></tr>
@@ -892,6 +966,8 @@ never proves independence — the product rule is the only valid test.</div>
 <tr><th>X=1</th><td>0</td><td>0.25</td><td>0.25</td></tr>
 <tr><th>\(f_Y\)</th><td>0.50</td><td>0.50</td><td>1.00</td></tr>
 </table>
+<p><b>(a)</b> Show that \(\text{Cov}(X,Y)=0\). &nbsp;<b>(b)</b> Determine whether \(X\) and \(Y\) are independent,
+justifying your answer.</p>
 </div>
 <p class="mono">E[X]=−1(.25)+0+1(.25)=0        E[XY]=Σ xy f = (−1)(1)(.25)+(1)(1)(.25)=0
 Cov(X,Y)=E[XY]−E[X]E[Y]=0 − 0·0.5 = <b>0</b></p>
@@ -903,8 +979,14 @@ Here \(Y\) is a deterministic function of \(X\) — maximal dependence — yet t
 <h4>✏️ Your turn</h4>
 
 <div class="card q">
-<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;\(X,Y\in\{0,1\}\) with \(f(0,0)=0.20,\ f(0,1)=0.30,\ f(1,0)=0.30,\ f(1,1)=0.20\).
-Are \(X\) and \(Y\) independent?</p>
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;Two variables \(X,Y\in\{0,1\}\) have the joint pmf
+\(f(x,y)=\mathbb P(X=x,Y=y)\) given below.</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th></tr>
+<tr><th>X=0</th><td>0.20</td><td>0.30</td></tr>
+<tr><th>X=1</th><td>0.30</td><td>0.20</td></tr>
+</table>
+<p>Are \(X\) and \(Y\) independent? Justify your answer with an explicit check.</p>
 <details><summary>Solution</summary>
 <p class="mono">f_X=(0.50,0.50)  f_Y=(0.50,0.50)
 f(0,0)=0.20  but  f_X(0)f_Y(0)=0.50×0.50=0.25  →  0.20 ≠ 0.25</p>
