@@ -62,6 +62,7 @@
   <a href="index.html">🏠 Hub</a>
   <a href="ch04-05-data-descriptives.html">← Ch 4–5 Data</a>
   <a href="ch07-hypothesis-testing.html">Ch 7 Testing →</a>
+  <a href="#practice">🏋️ Practice</a>
   <a href="formulas.html">📄 Formula sheet</a>
   <a href="exam-2025.html">📝 Exams</a>
 </nav>
@@ -470,6 +471,439 @@ That bracket is the interval: \(\;\bar X\pm q\,S/\sqrt n\).</div>
 <summary>Q8. Which CIs require a normality assumption, and which are rescued by large \(n\)?</summary>
 <p>The <strong>mean CI</strong> (item 62) is exact under normality but the CLT rescues it for large \(n\), so normality is not essential when \(n\) is big. The <strong>proportion CIs</strong> rely on the CLT (need \(\ge5\) successes/failures). The <strong>chi-squared CI for \(\sigma^2\)</strong> genuinely needs normal data — the CLT does <em>not</em> save it — so always state that assumption there.</p>
 </details>
+</section>
+
+<!-- ============ SECTION 10: PRACTICE ARENA ============ -->
+<section id="practice">
+<h2>8 · Practice Arena</h2>
+<p>Brand-new scenarios — none of these appear in the 2021–2025 papers, the notes, or the tutorials. Same exam <em>style</em>, fresh numbers and stories, all worked with the <strong>provided formula sheet</strong> (t even for large \(n\) via the \(\infty\) row; pooled two-sample by default; sample sizes \(m,n\)). Every value below is checked with <code>scipy.stats</code>. Work each one on paper <em>first</em>, then open the solution.</p>
+
+<!-- ---------- TOPIC 1: one-sample mean ---------- -->
+<h3>① One-sample mean CI + interpretation</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-A1 — Espresso extraction time (95% CI)</summary>
+<div class="q card">A café dials in a new grinder. Over \(n=25\) consecutive shots the extraction time has mean \(\bar x=27.4\) s and \(s=2.1\) s. Assume shot times are approximately normal. <em>Construct a 95% CI for the true mean extraction time and interpret it.</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, mean of measurements → recipe ① (\(t_{n-1}\), item 62).
+<ol>
+<li>\(n=25\), df \(=24\). Quantile \(q=t_{0.975,24}\). Table row 24 → \(q=2.06\).</li>
+<li>Standard error: \(S/\sqrt n = 2.1/\sqrt{25}=2.1/5=0.420\) s.</li>
+<li>Margin of error: \(q\cdot\operatorname{s.e.}=2.06\times0.420=0.87\) s.</li>
+<li>CI: \(27.4\pm0.87=(26.53,\;28.27)\) s.</li>
+</ol></div>
+<p><strong>Answer: \((26.53,\;28.27)\) s.</strong></p>
+<div class="tip"><strong>Interpretation:</strong> "We are 95% confident that the true mean extraction time for this grinder setting lies between 26.53 s and 28.27 s. The whole interval sits inside the barista's 25–30 s target window, so the setting looks well dialled-in."</div>
+</details>
+
+<details>
+<summary>WE-A2 — Climbing-gym hang time (90% CI)</summary>
+<div class="q card">At a bouldering gym, \(n=16\) members hold a dead-hang; the times (assume normal) have \(\bar x=41.8\) s and \(s=7.5\) s. <em>Give a 90% CI for the mean dead-hang time.</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, mean → recipe ①. Note 90% → \(\alpha=0.10\), so \(q=t_{0.95,\,15}\).
+<ol>
+<li>df \(=15\); table row 15 at the 0.95 column → \(q=1.75\).</li>
+<li>\(\operatorname{s.e.}=7.5/\sqrt{16}=7.5/4=1.875\) s.</li>
+<li>ME \(=1.75\times1.875=3.29\) s.</li>
+<li>CI: \(41.8\pm3.29=(38.51,\;45.09)\) s.</li>
+</ol></div>
+<p><strong>Answer: \((38.51,\;45.09)\) s.</strong> We are 90% confident the population mean dead-hang time is between 38.51 s and 45.09 s.</p>
+<div class="trap">A 90% interval is <em>narrower</em> than a 95% one (smaller \(q\)) — being <em>less</em> sure buys precision. Don't reach for \(1.96\) here.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-A1 <span class="badge">WARM-UP</span> (3 marks) — parkrun finish times</summary>
+<div class="q card">A running club records the 5 km finish times of \(n=40\) members: \(\bar x=28.6\) min, \(s=4.2\) min. Construct a 95% CI for the mean finish time.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ① (\(t_{n-1}\)). df \(=39\) — not a table row, so use the nearest row 40: \(q=t_{0.975,40}=2.02\).
+<ol>
+<li>\(\operatorname{s.e.}=4.2/\sqrt{40}=0.664\) min.</li>
+<li>ME \(=2.02\times0.664=1.34\) min.</li>
+<li>CI: \(28.6\pm1.34=(27.26,\;29.94)\) min.</li>
+</ol></div>
+<p><strong>Answer: \((27.26,\;29.94)\) min.</strong> We are 95% confident the club's mean 5 km finish time is between 27.26 and 29.94 minutes.</p>
+</details></details>
+
+<details>
+<summary>YT-A2 <span class="badge">STANDARD</span> (4 marks) — sourdough rise</summary>
+<div class="q card">A baker measures the oven-spring (rise height) of \(n=12\) sourdough loaves: \(\bar x=8.3\) cm, \(s=1.1\) cm. Heights are approximately normal. Give a <strong>99%</strong> CI for the mean rise, and interpret it.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ①. 99% → \(\alpha=0.01\), \(q=t_{0.995,11}\); table row 11 → \(q=3.11\).
+<ol>
+<li>\(\operatorname{s.e.}=1.1/\sqrt{12}=0.318\) cm.</li>
+<li>ME \(=3.11\times0.318=0.99\) cm.</li>
+<li>CI: \(8.3\pm0.99=(7.31,\;9.29)\) cm.</li>
+</ol></div>
+<p><strong>Answer: \((7.31,\;9.29)\) cm.</strong> We are 99% confident the true mean rise height is between 7.31 cm and 9.29 cm. (Notice the interval is wide — small \(n\) and a demanding 99% both inflate \(q\).)</p>
+</details></details>
+
+<details>
+<summary>YT-A3 <span class="badge gold">STRETCH</span> (3 marks) — read the CI backwards</summary>
+<div class="q card">A 95% CI for a mean, built from a normal sample of \(n=16\), is reported as \((18.2,\;21.0)\). Recover the sample standard deviation \(s\).</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">The interval is \(\bar x\pm q\,s/\sqrt n\), so the half-width equals the margin of error.
+<ol>
+<li>Half-width \(=\tfrac12(21.0-18.2)=1.4\).</li>
+<li>df \(=15\), \(q=t_{0.975,15}=2.13\).</li>
+<li>\(1.4=2.13\cdot s/\sqrt{16}=2.13\,s/4\Rightarrow s=\dfrac{1.4\times4}{2.13}=2.63\).</li>
+</ol></div>
+<p><strong>Answer: \(s\approx2.63\).</strong> (Sanity check: centre \(=\tfrac12(18.2+21.0)=19.6=\bar x\).)</p>
+</details></details>
+
+<!-- ---------- TOPIC 2: two-sample mean ---------- -->
+<h3>② Two-sample mean CI — pooled &amp; Welch</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-B1 — Two keyboards, typing speed (pooled, 95%)</summary>
+<div class="q card">Ten typists test a mechanical keyboard \(X\) (\(\bar x=78\) wpm, \(s_X=6.0\)); ten <em>different</em> typists test a membrane keyboard \(Y\) (\(\bar y=71\) wpm, \(s_Y=6.4\)). The two sample SDs are almost identical, so treat the variances as equal. <em>Give a 95% CI for \(\mu_X-\mu_Y\).</em></div>
+<div class="method"><strong>Recognise:</strong> two independent groups, means, similar SDs → pooled recipe ③ (\(t_{m+n-2}\)).
+<ol>
+<li>\(m=n=10\). Pooled variance \(S_p^2=\dfrac{(10-1)6.0^2+(10-1)6.4^2}{10+10-2}=\dfrac{9(36)+9(40.96)}{18}=38.48\), so \(S_p=6.20\).</li>
+<li>\(\operatorname{s.e.}=S_p\sqrt{\tfrac1{10}+\tfrac1{10}}=6.20\sqrt{0.2}=2.774\).</li>
+<li>df \(=m+n-2=18\); \(q=t_{0.975,18}=2.10\).</li>
+<li>\(\bar x-\bar y=78-71=7\). ME \(=2.10\times2.774=5.83\).</li>
+<li>CI: \(7\pm5.83=(1.17,\;12.83)\) wpm.</li>
+</ol></div>
+<p><strong>Answer: \((1.17,\;12.83)\) wpm.</strong> The interval is entirely positive (excludes 0), so at the 5% level there is evidence the mechanical keyboard is faster — by somewhere between about 1 and 13 wpm on average.</p>
+</details>
+
+<details>
+<summary>WE-B2 — Two fertilisers, tomato yield (Welch, unequal variances, 95%)</summary>
+<div class="q card">Liquid fertiliser \(X\) on \(m=12\) plots gives yield \(\bar x=54\) kg (\(s_X=9.0\)); fertiliser \(Y\) on \(n=10\) plots gives \(\bar y=46\) kg (\(s_Y=3.5\)). The spreads look clearly different, so do <strong>not</strong> pool. <em>Give a 95% CI for \(\mu_X-\mu_Y\).</em></div>
+<div class="method"><strong>Recognise:</strong> two groups, means, unequal SDs → Welch recipe ④ (\(t_{\text{df}}\), item 66).
+<ol>
+<li>\(\operatorname{s.e.}=\sqrt{\dfrac{9.0^2}{12}+\dfrac{3.5^2}{10}}=\sqrt{6.75+1.225}=\sqrt{7.975}=2.824\).</li>
+<li>Welch df \(=\dfrac{(6.75+1.225)^2}{\frac{6.75^2}{11}+\frac{1.225^2}{9}}=14.76\) → round <em>down</em> to df \(=14\); \(q=t_{0.975,14}=2.14\).</li>
+<li>\(\bar x-\bar y=54-46=8\). ME \(=2.14\times2.824=6.04\).</li>
+<li>CI: \(8\pm6.04=(1.94,\;14.06)\) kg.</li>
+</ol></div>
+<p><strong>Answer: \((1.94,\;14.06)\) kg.</strong> Excludes 0 → evidence fertiliser \(X\) out-yields \(Y\).</p>
+<div class="tip">If you weren't given / couldn't compute the Welch df, the conservative fallback \(\text{df}=\min(m-1,n-1)=\min(11,9)=9\) gives \(q=t_{0.975,9}=2.26\) and CI \((1.61,\;14.39)\) — slightly wider, and you must say you used it.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-B1 <span class="badge">WARM-UP</span> (4 marks) — two note-taking methods (pooled)</summary>
+<div class="q card">Nine students revise with handwritten notes (\(\bar x=22\) on a recall quiz, \(s_X=4.0\)); nine others use typed notes (\(\bar y=18\), \(s_Y=4.2\)). SDs are similar → pool. Construct a 95% CI for \(\mu_X-\mu_Y\) and state a conclusion.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Pooled recipe ③. \(m=n=9\).
+<ol>
+<li>\(S_p^2=\dfrac{8(4.0^2)+8(4.2^2)}{16}=\dfrac{128+141.12}{16}=16.82\), \(S_p=4.10\).</li>
+<li>\(\operatorname{s.e.}=4.10\sqrt{\tfrac19+\tfrac19}=4.10\times0.4714=1.933\).</li>
+<li>df \(=16\), \(q=t_{0.975,16}=2.12\). ME \(=2.12\times1.933=4.10\).</li>
+<li>\(\bar x-\bar y=4\). CI: \(4\pm4.10=(-0.10,\;8.10)\).</li>
+</ol></div>
+<p><strong>Answer: \((-0.10,\;8.10)\).</strong> The interval <em>just barely</em> includes 0, so at the 5% level there is <strong>no</strong> conclusive evidence of a difference in mean recall between the two note-taking methods — though it is borderline.</p>
+</details></details>
+
+<details>
+<summary>YT-B2 <span class="badge">STANDARD</span> (5 marks) — commute times, bike vs bus (Welch)</summary>
+<div class="q card">A commuter logs \(m=20\) bike trips (\(\bar x=24\) min, \(s_X=5\)) and \(n=18\) bus trips (\(\bar y=27\) min, \(s_Y=9\)). Bus times are far more variable, so use Welch. Give a <strong>90%</strong> CI for \(\mu_{\text{bike}}-\mu_{\text{bus}}\).</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Welch recipe ④. 90% → \(q=t_{0.95,\text{df}}\).
+<ol>
+<li>\(\operatorname{s.e.}=\sqrt{\dfrac{5^2}{20}+\dfrac{9^2}{18}}=\sqrt{1.25+4.5}=\sqrt{5.75}=2.398\).</li>
+<li>Welch df \(=\dfrac{(1.25+4.5)^2}{\frac{1.25^2}{19}+\frac{4.5^2}{17}}=25.96\) → df \(=25\); \(q=t_{0.95,25}=1.71\).</li>
+<li>\(\bar x-\bar y=24-27=-3\). ME \(=1.71\times2.398=4.10\).</li>
+<li>CI: \(-3\pm4.10=(-7.10,\;1.10)\) min.</li>
+</ol></div>
+<p><strong>Answer: \((-7.10,\;1.10)\) min.</strong> Contains 0 → no evidence at the 10% level that the mean bike and bus commute times differ. (Conservative df \(=\min(19,17)=17\): \(q=1.74\), CI \((-7.17,\;1.17)\) — same conclusion.)</p>
+</details></details>
+
+<details>
+<summary>YT-B3 <span class="badge gold">EXAM-LEVEL</span> (12 marks) — flashcard app vs paper (multi-part, Q3 shape)</summary>
+<div class="q card">A learning-science study randomises 30 students to revise vocabulary either with a spaced-repetition <strong>app</strong> (group \(X\), \(m=15\)) or with <strong>paper</strong> flashcards (group \(Y\), \(n=15\)). The response is the improvement (post − pre) in a 40-word vocab test. Both groups look approximately normal.
+<table>
+<tr><th>Group</th><th>size</th><th>\(\bar x\)</th><th>\(s\)</th></tr>
+<tr><td>App \(X\)</td><td>15</td><td>14.2</td><td>3.1</td></tr>
+<tr><td>Paper \(Y\)</td><td>15</td><td>11.6</td><td>3.4</td></tr>
+</table>
+<strong>(a)</strong> Give a 95% CI for the mean improvement of the app group alone. <strong>(b)</strong> State, with a one-line reason, whether to pool, then give a 95% CI for \(\mu_X-\mu_Y\). <strong>(c)</strong> What do you conclude in context? <strong>(d)</strong> A follow-up study wants to estimate \(\mu_X\) to within a margin of error of 1 mark at 95%; taking \(\sigma\approx3.25\), how many app users are needed?</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method"><strong>(a)</strong> One-sample mean, recipe ① on group \(X\). df \(=14\), \(q=t_{0.975,14}=2.14\).
+<ol>
+<li>\(\operatorname{s.e.}=3.1/\sqrt{15}=0.800\). ME \(=2.14\times0.800=1.72\).</li>
+<li>CI: \(14.2\pm1.72=(12.48,\;15.92)\) marks.</li>
+</ol>
+"We are 95% confident the mean improvement for app users is between 12.48 and 15.92 marks."</div>
+<div class="method"><strong>(b)</strong> Sample SDs (3.1 vs 3.4) are close → assume equal variances, <strong>pool</strong> (recipe ③).
+<ol>
+<li>\(S_p^2=\dfrac{14(3.1^2)+14(3.4^2)}{28}=\dfrac{134.54+161.84}{28}=10.585\), \(S_p=3.25\).</li>
+<li>\(\operatorname{s.e.}=3.25\sqrt{\tfrac1{15}+\tfrac1{15}}=3.25\times0.3651=1.188\).</li>
+<li>df \(=m+n-2=28\), \(q=t_{0.975,28}=2.05\). ME \(=2.05\times1.188=2.43\).</li>
+<li>\(\bar x-\bar y=14.2-11.6=2.6\). CI: \(2.6\pm2.43=(0.17,\;5.03)\) marks.</li>
+</ol></div>
+<div class="method"><strong>(c)</strong> The difference interval \((0.17,\;5.03)\) excludes 0 (only just), so at the 5% level there is evidence the app produces a higher mean improvement than paper — by roughly 0.2 to 5 extra marks. The effect is real but its size is estimated imprecisely (the interval nearly touches 0).</div>
+<div class="method"><strong>(d)</strong> Sample size, recipe ⑦: require \(z\,\sigma/\sqrt n\le1\) with \(z=1.96\), \(\sigma=3.25\).
+\[n\ge\left(\frac{1.96\times3.25}{1}\right)^2=(6.37)^2=40.58\ \Rightarrow\ n=41.\]</div>
+<p><strong>Answers:</strong> (a) \((12.48,\;15.92)\); (b) pool → \((0.17,\;5.03)\); (c) evidence the app beats paper, excludes 0; (d) 41 app users.</p>
+</details></details>
+
+<!-- ---------- TOPIC 3: proportions ---------- -->
+<h3>③ Proportion CIs — one &amp; two sample</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-C1 — Seed germination (one-sample proportion, 95%)</summary>
+<div class="q card">A seed supplier plants \(n=200\) seeds under standard conditions; \(138\) germinate. <em>Construct a 95% CI for the true germination proportion \(p\).</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, yes/no counts → proportion recipe ⑤ (normal \(z\), item 67).
+<ol>
+<li>\(\widehat p=138/200=0.690\). Validity: \(n\widehat p=138\ge5\) and \(n(1-\widehat p)=62\ge5\) ✓.</li>
+<li>\(q=z_{0.975}=1.96\). \(\operatorname{s.e.}=\sqrt{\dfrac{0.690\times0.310}{200}}=\sqrt{0.001070}=0.0327\).</li>
+<li>ME \(=1.96\times0.0327=0.064\). CI: \(0.690\pm0.064=(0.626,\;0.754)\).</li>
+</ol></div>
+<p><strong>Answer: \((0.626,\;0.754)\),</strong> i.e. we are 95% confident the true germination rate is between about 63% and 75%.</p>
+</details>
+
+<details>
+<summary>WE-C2 — Checkout A/B test (two-sample proportion, 90%)</summary>
+<div class="q card">An online store A/B-tests two checkout designs. Of \(400\) shoppers on design \(X\), \(84\) abandon their cart; of \(400\) on design \(Y\), \(66\) abandon. <em>Give a 90% CI for \(p_X-p_Y\), the difference in abandonment rates.</em></div>
+<div class="method"><strong>Recognise:</strong> two groups, yes/no → two-sample proportion recipe ⑥ (\(z\), item 68).
+<ol>
+<li>\(\widehat p_X=84/400=0.210\), \(\widehat p_Y=66/400=0.165\). All counts \(\ge5\) ✓.</li>
+<li>90% → \(q=z_{0.95}=1.645\).</li>
+<li>\(\operatorname{s.e.}=\sqrt{\dfrac{0.210(0.790)}{400}+\dfrac{0.165(0.835)}{400}}=\sqrt{0.000759}=0.0276\).</li>
+<li>Diff \(=0.210-0.165=0.045\). ME \(=1.645\times0.0276=0.0453\).</li>
+<li>CI: \(0.045\pm0.0453=(-0.0003,\;0.0903)\).</li>
+</ol></div>
+<p><strong>Answer: \((-0.0003,\;0.090)\).</strong> The interval <em>just</em> includes 0, so at the 10% level there is no clear evidence the two checkout designs differ in abandonment rate — a hair away from significance.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-C1 <span class="badge">WARM-UP</span> (3 marks) — podcast completion</summary>
+<div class="q card">Of \(60\) listeners who start an episode, \(47\) finish it. Give a 95% CI for the true completion proportion.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ⑤. \(\widehat p=47/60=0.783\); \(n\widehat p=47\ge5\), \(n(1-\widehat p)=13\ge5\) ✓.
+<ol>
+<li>\(\operatorname{s.e.}=\sqrt{0.783(0.217)/60}=0.0532\). \(q=1.96\).</li>
+<li>ME \(=1.96\times0.0532=0.104\). CI: \(0.783\pm0.104=(0.679,\;0.888)\).</li>
+</ol></div>
+<p><strong>Answer: \((0.679,\;0.888)\)</strong> — 95% confident the true completion rate is between about 68% and 89%.</p>
+</details></details>
+
+<details>
+<summary>YT-C2 <span class="badge">STANDARD</span> (5 marks) — binge-watching, two apps</summary>
+<div class="q card">On streaming app \(X\), \(168\) of \(300\) users watched \(\ge3\) episodes in a sitting; on app \(Y\), \(141\) of \(300\) did. Give a 95% CI for \(p_X-p_Y\) and state a conclusion.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ⑥. \(\widehat p_X=168/300=0.560\), \(\widehat p_Y=141/300=0.470\).
+<ol>
+<li>\(\operatorname{s.e.}=\sqrt{\dfrac{0.560(0.440)}{300}+\dfrac{0.470(0.530)}{300}}=\sqrt{0.001652}=0.0406\).</li>
+<li>Diff \(=0.560-0.470=0.090\). \(q=1.96\). ME \(=1.96\times0.0406=0.0797\).</li>
+<li>CI: \(0.090\pm0.0797=(0.010,\;0.170)\).</li>
+</ol></div>
+<p><strong>Answer: \((0.010,\;0.170)\).</strong> Excludes 0 (just), so at the 5% level there is evidence app \(X\) has a higher binge rate than app \(Y\) — by roughly 1 to 17 percentage points.</p>
+</details></details>
+
+<details>
+<summary>YT-C3 <span class="badge gold">STRETCH</span> (3 marks) — when the method breaks</summary>
+<div class="q card">A rare-defect audit finds \(3\) faulty units in a batch of \(25\) (\(\widehat p=0.12\)). A colleague reports the "95% CI" as \((-0.007,\;0.247)\). What is wrong, and what should you do?</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Two red flags:
+<ol>
+<li><strong>Validity fails.</strong> The normal approximation needs \(\ge5\) successes <em>and</em> \(\ge5\) failures. Here \(n\widehat p=25\times0.12=3\lt5\), so the recipe-⑤ formula is not trustworthy.</li>
+<li><strong>Impossible endpoint.</strong> The lower limit \(-0.007\) is negative, but a proportion cannot be below 0 — a tell-tale sign the symmetric normal interval has been pushed outside \([0,1]\).</li>
+</ol>
+<strong>What to do:</strong> report that the large-sample normal CI is invalid here, and collect more data (or use an exact/Clopper–Pearson-type binomial interval, beyond this course's formula sheet).</div>
+<p><strong>Answer:</strong> fewer than 5 successes ⇒ normal-approx assumption violated; the negative lower bound confirms it. Don't quote the interval.</p>
+</details></details>
+
+<!-- ---------- TOPIC 4: variance / SD chi-squared ---------- -->
+<h3>④ CI for \(\sigma^2\) or \(\sigma\) — the chi-squared ambush</h3>
+<div class="trap">This is the one people forget to revise. The word <em>variance</em>, <em>standard deviation</em>, <em>variation</em>, or <em>variability</em> is your trigger for the \(\chi^2\) recipe ② — and the big quantile goes under the <em>lower</em> bound.</div>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-D1 — 3D-printer layer thickness (CI for variance, 95%)</summary>
+<div class="q card">A 3D printer's layer thickness (mm) is measured on \(n=20\) layers, giving \(s=0.08\) mm. Assume normality. <em>Construct a 95% CI for the variance \(\sigma^2\).</em></div>
+<div class="method"><strong>Recognise:</strong> one sample, variability, normal → recipe ② (\(\chi^2_{n-1}\), item 63).
+<ol>
+<li>df \(=19\). Quantiles of \(\chi^2_{19}\): \(q_1=\chi^2_{0.025,19}=8.91\) (lower), \(q_2=\chi^2_{0.975,19}=32.85\) (upper).</li>
+<li>\((n-1)s^2=19\times0.08^2=19\times0.0064=0.1216\).</li>
+<li>CI for \(\sigma^2\): \(\left(\dfrac{0.1216}{q_2},\;\dfrac{0.1216}{q_1}\right)=\left(\dfrac{0.1216}{32.85},\;\dfrac{0.1216}{8.91}\right)=(0.00370,\;0.01365)\) mm².</li>
+</ol></div>
+<p><strong>Answer: \(\sigma^2\in(0.00370,\;0.01365)\) mm².</strong></p>
+<div class="trap">The <em>big</em> quantile \(q_2=32.85\) divides to make the <em>lower</em> bound; the <em>small</em> quantile \(q_1=8.91\) makes the <em>upper</em> bound. Swap them and the interval comes out inside-out.</div>
+</details>
+
+<details>
+<summary>WE-D2 — Archery arrow spread (CI for SD, 95%)</summary>
+<div class="q card">An archer's arrow-to-centre distances (cm) for \(n=15\) shots have \(s=3.2\) cm. Assume normality. <em>Give a 95% CI for the standard deviation \(\sigma\).</em></div>
+<div class="method"><strong>Recognise:</strong> SD asked → build the variance CI (recipe ②) then square-root.
+<ol>
+<li>df \(=14\). \(\chi^2_{14}\): \(q_1=\chi^2_{0.025,14}=5.63\), \(q_2=\chi^2_{0.975,14}=26.12\).</li>
+<li>\((n-1)s^2=14\times3.2^2=14\times10.24=143.36\).</li>
+<li>CI for \(\sigma^2\): \(\left(\dfrac{143.36}{26.12},\;\dfrac{143.36}{5.63}\right)=(5.49,\;25.47)\) cm².</li>
+<li>CI for \(\sigma\): \(\left(\sqrt{5.49},\;\sqrt{25.47}\right)=(2.34,\;5.05)\) cm.</li>
+</ol></div>
+<p><strong>Answer: \(\sigma\in(2.34,\;5.05)\) cm.</strong></p>
+<div class="tip"><strong>Assumption:</strong> the distances are an iid sample from a <em>normal</em> distribution. Unlike the mean CI, the CLT does <strong>not</strong> rescue this one — normality genuinely matters.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-D1 <span class="badge">WARM-UP</span> (3 marks) — reaction-time consistency (variance)</summary>
+<div class="q card">A gamer's reaction times (ms) over \(n=25\) trials have \(s=5.0\) ms. Assume normality. Give a <strong>90%</strong> CI for the variance \(\sigma^2\).</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ②, 90% → \(\alpha=0.10\), so \(q_1=\chi^2_{0.05,24}\), \(q_2=\chi^2_{0.95,24}\). df \(=24\): \(q_1=13.85\), \(q_2=36.42\).
+<ol>
+<li>\((n-1)s^2=24\times5.0^2=600\).</li>
+<li>CI: \(\left(\dfrac{600}{36.42},\;\dfrac{600}{13.85}\right)=(16.48,\;43.33)\) ms².</li>
+</ol></div>
+<p><strong>Answer: \(\sigma^2\in(16.48,\;43.33)\) ms².</strong></p>
+</details></details>
+
+<details>
+<summary>YT-D2 <span class="badge">STANDARD</span> (4 marks) — pipette precision (SD)</summary>
+<div class="q card">A lab pipette dispenses a nominal 1 mL. Ten dispenses have \(s=0.15\) mL (assume normal). Give a 95% CI for the dispensing standard deviation \(\sigma\), and state the assumption.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ②, then square-root. df \(=9\): \(q_1=\chi^2_{0.025,9}=2.70\), \(q_2=\chi^2_{0.975,9}=19.02\).
+<ol>
+<li>\((n-1)s^2=9\times0.15^2=9\times0.0225=0.2025\).</li>
+<li>CI for \(\sigma^2\): \(\left(\dfrac{0.2025}{19.02},\;\dfrac{0.2025}{2.70}\right)=(0.01065,\;0.07499)\) mL².</li>
+<li>CI for \(\sigma\): \((\sqrt{0.01065},\;\sqrt{0.07499})=(0.103,\;0.274)\) mL.</li>
+</ol></div>
+<p><strong>Answer: \(\sigma\in(0.103,\;0.274)\) mL.</strong> Assumption: dispensed volumes are an iid normal sample.</p>
+</details></details>
+
+<details>
+<summary>YT-D3 <span class="badge gold">STRETCH</span> (4 marks) — tighter confidence, tighter tails</summary>
+<div class="q card">Battery-pack capacities (Wh) from \(n=30\) cells have \(s=2.4\) Wh (assume normal). Give a <strong>99%</strong> CI for \(\sigma\).</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ②, 99% → \(\alpha=0.01\): \(q_1=\chi^2_{0.005,29}\), \(q_2=\chi^2_{0.995,29}\). df \(=29\): \(q_1=13.12\), \(q_2=52.34\).
+<ol>
+<li>\((n-1)s^2=29\times2.4^2=29\times5.76=167.04\).</li>
+<li>CI for \(\sigma^2\): \(\left(\dfrac{167.04}{52.34},\;\dfrac{167.04}{13.12}\right)=(3.19,\;12.73)\) Wh².</li>
+<li>CI for \(\sigma\): \((\sqrt{3.19},\;\sqrt{12.73})=(1.79,\;3.57)\) Wh.</li>
+</ol></div>
+<p><strong>Answer: \(\sigma\in(1.79,\;3.57)\) Wh.</strong> Note how the 99% level pushes \(q_1\) down and \(q_2\) up, widening the interval versus a 95% one.</p>
+</details></details>
+
+<!-- ---------- TOPIC 5: margin of error / sample size ---------- -->
+<h3>⑤ Margin of error &amp; sample size</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-E1 — E-scooter range (mean sample size)</summary>
+<div class="q card">An e-scooter maker wants to estimate the mean range (km) on a full charge to within a 95% margin of error of \(1\) km. A pilot suggests \(\sigma\approx4.5\) km. <em>What is the smallest number of scooters to test?</em></div>
+<div class="method"><strong>Recognise:</strong> "margin of error no more than …" → sample-size recipe ⑦ (mean).
+<ol>
+<li>Require \(z\,\dfrac{\sigma}{\sqrt n}\le E\) with \(z=1.96\), \(\sigma=4.5\), \(E=1\).</li>
+<li>\(n\ge\left(\dfrac{z\sigma}{E}\right)^2=\left(\dfrac{1.96\times4.5}{1}\right)^2=(8.82)^2=77.79\).</li>
+<li>Round <strong>up</strong>: \(n=78\).</li>
+</ol></div>
+<p><strong>Answer: 78 scooters.</strong></p>
+</details>
+
+<details>
+<summary>WE-E2 — Campus survey (proportion sample size, no pilot)</summary>
+<div class="q card">A student union wants a 95% CI for the proportion who commute by bike, with margin of error \(\le 2.5\%\). No prior estimate of \(p\) is available. <em>How large must the sample be?</em></div>
+<div class="method"><strong>Recognise:</strong> proportion, worst-case → recipe ⑦ with \(p(1-p)\le\tfrac14\).
+<ol>
+<li>\(n\ge\left(\dfrac{z}{2E}\right)^2\) with \(z=1.96\), \(E=0.025\).</li>
+<li>\(n\ge\left(\dfrac{1.96}{2\times0.025}\right)^2=\left(\dfrac{1.96}{0.05}\right)^2=(39.2)^2=1536.6\).</li>
+<li>Round up: \(n=1537\).</li>
+</ol></div>
+<p><strong>Answer: 1537 students.</strong> Using worst-case \(p=0.5\) means you can size the survey <em>before</em> collecting any data.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-E1 <span class="badge">WARM-UP</span> (3 marks) — mean sample size</summary>
+<div class="q card">To estimate the mean weekly screen-free reading time (min) within a 95% margin of error of \(3\) min, taking \(\sigma\approx12\) min, how many people are needed?</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ⑦ (mean). \(n\ge\left(\dfrac{1.96\times12}{3}\right)^2=(7.84)^2=61.46\Rightarrow n=62\) (round up).</div>
+<p><strong>Answer: 62 people.</strong></p>
+</details></details>
+
+<details>
+<summary>YT-E2 <span class="badge">STANDARD</span> (3 marks) — proportion at 99%</summary>
+<div class="q card">A polling firm wants a <strong>99%</strong> CI for a yes/no referendum question, margin of error \(\le 4\%\), no pilot data. Find the minimum \(n\).</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method">Recipe ⑦ (proportion, worst case). 99% → \(z=2.576\), \(E=0.04\).
+\[n\ge\left(\frac{z}{2E}\right)^2=\left(\frac{2.576}{0.08}\right)^2=(32.2)^2=1036.7\Rightarrow n=1037.\]</div>
+<p><strong>Answer: 1037 respondents.</strong> (Tighter confidence than 95% ⇒ larger \(z\) ⇒ bigger sample.)</p>
+</details></details>
+
+<details>
+<summary>YT-E3 <span class="badge gold">STRETCH</span> (4 marks) — recover \(\sigma\) from a pilot, then size up</summary>
+<div class="q card">A pilot 95% CI for a mean, from \(n=9\) normal observations, came out as \((11.4,\;14.6)\). A full study wants margin of error \(\le0.5\) at 95%. How many observations are needed?</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method"><strong>Step 1 — recover \(s\) from the pilot.</strong> Half-width \(=\tfrac12(14.6-11.4)=1.6\); pilot df \(=8\), \(q=t_{0.975,8}=2.31\).
+\[1.6=2.31\cdot\frac{s}{\sqrt9}=2.31\cdot\frac{s}{3}\ \Rightarrow\ s=\frac{1.6\times3}{2.31}=2.08.\]
+<strong>Step 2 — size the full study</strong> (use \(z=1.96\), \(\sigma\approx s=2.08\)):
+\[n\ge\left(\frac{1.96\times2.08}{0.5}\right)^2=(8.15)^2=66.6\ \Rightarrow\ n=67.\]</div>
+<p><strong>Answer: 67 observations.</strong> The pilot's job was just to supply a working \(\sigma\); everything after is recipe ⑦.</p>
+</details></details>
+
+<!-- ---------- TOPIC 6: conceptual ---------- -->
+<h3>⑥ Estimator properties &amp; CI theory (concepts)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE-F1 — Which interpretation is correct? (MCQ)</summary>
+<div class="q card">A 95% CI for a population mean download speed is computed as \((48.2,\;53.6)\) Mbps. Which statement is correct?
+<br>&nbsp;&nbsp;<strong>A.</strong> There is a 95% probability that \(\mu\) lies in \((48.2,\;53.6)\).
+<br>&nbsp;&nbsp;<strong>B.</strong> 95% of individual users have a download speed between 48.2 and 53.6 Mbps.
+<br>&nbsp;&nbsp;<strong>C.</strong> If the study were repeated many times, about 95% of the intervals produced this way would contain \(\mu\).
+<br>&nbsp;&nbsp;<strong>D.</strong> 95% of sample means fall in \((48.2,\;53.6)\).</div>
+<div class="method"><strong>Answer: C.</strong> Why the others fail:
+<ul>
+<li><strong>A</strong> — once the numbers are in, \(\mu\) is a fixed constant and the interval is fixed; nothing is random, so "probability" is wrong. Say "confident".</li>
+<li><strong>B</strong> — that describes a <em>prediction</em> interval for individuals (far wider, \(\propto S\)), not a CI for the mean (\(\propto S/\sqrt n\)).</li>
+<li><strong>D</strong> — the CI is built around <em>this</em> \(\bar x\); it isn't a statement about where other sample means land.</li>
+</ul></div>
+</details>
+
+<details>
+<summary>WE-F2 — Comparing two unbiased estimators (efficiency)</summary>
+<div class="q card">\(X_1,\dots,X_n\) are iid with mean \(\mu\) and variance \(\sigma^2\). Consider two estimators of \(\mu\): the full mean \(\widehat\mu_A=\bar X=\tfrac1n\sum X_i\), and the "endpoints-only" average \(\widehat\mu_B=\tfrac12(X_1+X_n)\). <em>Show both are unbiased and say which you'd prefer for \(n\gt2\).</em></div>
+<div class="method"><strong>Unbiasedness</strong> (linearity of expectation):
+\[\mathbb E(\widehat\mu_A)=\tfrac1n\sum\mathbb E(X_i)=\tfrac1n(n\mu)=\mu,\qquad \mathbb E(\widehat\mu_B)=\tfrac12(\mu+\mu)=\mu.\]
+Both unbiased. <strong>Variance</strong> (independence ⇒ variances add, and \(\operatorname{Var}(aX)=a^2\operatorname{Var}X\)):
+\[\operatorname{Var}(\widehat\mu_A)=\frac{\sigma^2}{n},\qquad \operatorname{Var}(\widehat\mu_B)=\tfrac14(\sigma^2+\sigma^2)=\frac{\sigma^2}{2}.\]
+For \(n\gt2\), \(\sigma^2/n\lt\sigma^2/2\), so \(\widehat\mu_A\) has the smaller variance.</div>
+<p><strong>Prefer \(\widehat\mu_A=\bar X\):</strong> it is unbiased <em>and</em> more efficient (smaller variance) for every \(n\gt2\), because it uses all the data, not just two points.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary>YT-F1 <span class="badge">WARM-UP</span> (2 marks) — confidence vs probability</summary>
+<div class="q card">In one sentence, explain why it is wrong to say "there is a 95% probability the population mean lies in my computed interval \((7.1,\;9.3)\)".</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<p>Once the data are observed, both the interval endpoints and the parameter \(\mu\) are fixed numbers — \(\mu\) is either in \((7.1,9.3)\) or it isn't, with no randomness left. The 95% refers to the <em>long-run capture rate of the procedure</em> across many repeated samples, so we say we are "95% <strong>confident</strong>", not that there is a 95% probability.</p>
+</details></details>
+
+<details>
+<summary>YT-F2 <span class="badge">STANDARD</span> (3 marks) — width: two dials at once</summary>
+<div class="q card">A 95% CI for a mean has half-width (margin of error) \(2.0\). Holding everything else fixed, what happens to the half-width if you (a) switch to 99% confidence, and (b) instead quadruple the sample size? Which dial can shrink the interval <em>without</em> a trade-off?</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method"><ol>
+<li><strong>(a) 95%→99%:</strong> \(q\) grows (\(z\) roughly \(1.96\to2.58\)), so the half-width <em>grows</em> by a factor \(\approx2.58/1.96\approx1.32\) → about \(2.0\times1.32=2.6\). More confidence costs precision.</li>
+<li><strong>(b) \(n\to4n\):</strong> the s.e. \(=S/\sqrt n\) is divided by \(\sqrt4=2\), so the half-width <em>halves</em> → \(1.0\). This is the \(1/\sqrt n\) law: quartering the width needs 4× the data.</li>
+</ol></div>
+<p><strong>Answer:</strong> raising confidence <em>widens</em> (a trade-off); raising \(n\) is the only lever that tightens the interval without sacrificing confidence. Only more data buys precision for free.</p>
+</details></details>
+
+<details>
+<summary>YT-F3 <span class="badge gold">EXAM-LEVEL</span> (4 marks) — is this estimator any good?</summary>
+<div class="q card">\(X_1,\dots,X_n\) are iid with mean \(\mu\) and variance \(\sigma^2\). A student proposes estimating \(\mu\) by \(\widehat\mu=\dfrac{X_1+2X_2}{3}\). <strong>(a)</strong> Is it unbiased? <strong>(b)</strong> Find \(\operatorname{Var}(\widehat\mu)\). <strong>(c)</strong> Compare it to \(\bar X\) for the same \(n\) (take \(n=2\)) and comment.</div>
+<details style="margin-top:8px"><summary>Show solution</summary>
+<div class="method"><strong>(a) Unbiased?</strong> \(\mathbb E(\widehat\mu)=\tfrac13\big(\mathbb E X_1+2\mathbb E X_2\big)=\tfrac13(\mu+2\mu)=\mu\). Yes — unbiased (the weights \(\tfrac13,\tfrac23\) sum to 1).</div>
+<div class="method"><strong>(b) Variance</strong> (independence ⇒ add; pull out squared coefficients):
+\[\operatorname{Var}(\widehat\mu)=\left(\tfrac13\right)^2\sigma^2+\left(\tfrac23\right)^2\sigma^2=\tfrac19\sigma^2+\tfrac49\sigma^2=\tfrac59\sigma^2\approx0.556\,\sigma^2.\]</div>
+<div class="method"><strong>(c) Versus \(\bar X\).</strong> With \(n=2\), \(\bar X=\tfrac12(X_1+X_2)\) has \(\operatorname{Var}(\bar X)=\tfrac12\sigma^2=0.5\,\sigma^2\). Since \(0.5\lt0.556\), \(\bar X\) is <em>more efficient</em> — both are unbiased, but the equal-weights mean has the smaller variance.</div>
+<p><strong>Answer:</strong> (a) unbiased; (b) \(\tfrac59\sigma^2\); (c) \(\bar X\) beats it (variance \(\tfrac12\sigma^2\lt\tfrac59\sigma^2\)) — unequal weights waste information. In fact, among unbiased linear estimators, equal weights (\(\bar X\)) always minimise the variance.</p>
+</details></details>
+
+<div class="tip"><strong>How to use this arena.</strong> Cover the solution, write the full method — <em>recognise → quantile → s.e. → margin → interval → one context sentence</em> — then reveal and mark yourself. If you missed the <strong>recognise</strong> step (wrong recipe), reread §5 Wording triggers; if the arithmetic slipped, reread §6 Traps. Redo any question you didn't get clean until the recipe is automatic — that reflex is what earns the 7.</div>
 </section>
 
 <p style="color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px">

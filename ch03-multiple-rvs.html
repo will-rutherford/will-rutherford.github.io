@@ -65,6 +65,7 @@
   <a href="ch11-chi-squared.html">Ch 11 χ² test</a>
   <a href="formulas.html">Formula sheet</a>
   <a href="exam-2025.html">Exams</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -705,6 +706,509 @@ intermediate steps (don't round \(\mathbb E[XY]\) or the SDs early) and round on
 <p>LLN answers the first (the average converges to \(\mu\)). CLT answers the second (the average is
 \(\approx\mathcal N(\mu,\sigma^2/n)\), so standardise to get the probability).</p>
 </details>
+</section>
+
+<!-- ============ SECTION 8: PRACTICE ARENA ============ -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p class="tip">All scenarios and numbers below are <b>fresh</b> — none reuse a past-paper or notes/tutorial question.
+Every figure was verified in Python (marginals, expectations, Cov, ϱ, CLT tails, estimator variances) to ≥ 3 s.f.
+Tags: <span class="badge">WARM-UP</span> quick reflex · <span class="badge">STANDARD</span> typical part ·
+<span class="badge gold">EXAM-LEVEL</span> full Q2-shape · <span class="badge pre">STRETCH</span> harder twist.</p>
+
+<!-- ---------- 8.1 JOINT TABLES ---------- -->
+<div class="card">
+<h3>8.1 · Joint tables — marginals, expectations, covariance, correlation</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — vending-machine joint <i>probability</i> table (2×3), get marginals, E, Cov, ϱ</summary>
+<div class="q card">
+<p>\(X=\) drinks bought \(\in\{0,1,2\}\); \(Y=\) snacks bought \(\in\{0,1\}\). Joint pmf \(f(x,y)\):</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>row \(f_X\)</th></tr>
+<tr><th>X=0</th><td>0.15</td><td>0.05</td><td><b>0.20</b></td></tr>
+<tr><th>X=1</th><td>0.20</td><td>0.20</td><td><b>0.40</b></td></tr>
+<tr><th>X=2</th><td>0.10</td><td>0.30</td><td><b>0.40</b></td></tr>
+<tr><th>col \(f_Y\)</th><td><b>0.45</b></td><td><b>0.55</b></td><td><b>1.00</b></td></tr>
+</table>
+</div>
+<p><b>Marginals</b> = row / column sums (shown bold above). Check each sums to 1 ✓.</p>
+<p class="mono">E[X]=0(.20)+1(.40)+2(.40)=1.20      E[X²]=0+.40+4(.40)=2.00  → Var(X)=2.00−1.20²=0.560  σ_X=0.748
+E[Y]=0(.45)+1(.55)=0.55             E[Y²]=0.55 (Y is 0/1)   → Var(Y)=0.55−0.55²=0.2475 σ_Y=0.498</p>
+<p><b>E[XY]</b> — only cells with \(x\ne0\) <i>and</i> \(y\ne0\) survive (the \(Y=0\) column and \(X=0\) row vanish):</p>
+<p class="mono">E[XY]=1·1·(0.20)+2·1·(0.30)=0.20+0.60=0.80
+Cov(X,Y)=0.80 − 1.20×0.55 = 0.80 − 0.66 = 0.140
+ϱ = 0.140 / (0.748×0.498) = <b>0.376</b>  (3 s.f.)</p>
+<div class="tip">Positive, moderate: buying more drinks goes with buying snacks. Same six-step engine as the flagship,
+just probabilities instead of counts (so no ÷ n step).</div>
+</details>
+
+<details>
+<summary>Worked B — books × DVDs joint <i>frequency</i> table (3×3, n = 160)</summary>
+<div class="q card">
+<p>Library patrons: \(X=\) books borrowed \(\in\{0,1,2\}\), \(Y=\) DVDs borrowed \(\in\{0,1,2\}\); counts (\(f=n_{xy}/160\)):</p>
+<table>
+<tr><th>counts</th><th>Y=0</th><th>Y=1</th><th>Y=2</th><th>row</th></tr>
+<tr><th>X=0</th><td>20</td><td>10</td><td>6</td><td><b>36</b></td></tr>
+<tr><th>X=1</th><td>14</td><td>30</td><td>16</td><td><b>60</b></td></tr>
+<tr><th>X=2</th><td>8</td><td>20</td><td>36</td><td><b>64</b></td></tr>
+<tr><th>col</th><td><b>42</b></td><td><b>60</b></td><td><b>58</b></td><td><b>160</b></td></tr>
+</table>
+</div>
+<p class="mono">E[X]=(0·36+1·60+2·64)/160 = 188/160 = 1.175    E[X²]=(0+60+4·64)/160=316/160=1.975 → σ_X=0.771
+E[Y]=(0·42+1·60+2·58)/160 = 176/160 = 1.100    E[Y²]=(0+60+4·58)/160=292/160=1.825 → σ_Y=0.784
+E[XY]=(1·1·30 + 1·2·16 + 2·1·20 + 2·2·36)/160 = (30+32+40+144)/160 = 246/160 = 1.5375
+Cov=1.5375 − 1.175×1.100 = 0.245     ϱ = 0.245/(0.771×0.784) = <b>0.405</b>  (3 s.f.)</p>
+<div class="trap">Four cells feed \(\mathbb E[XY]\) here (the four with \(x,y\ge1\)). Drop even one — e.g. forget the
+\(2\times2\) corner cell of 36 — and Cov collapses. Tick each surviving cell off as you go.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;A 2×2 joint pmf has \(f(0,0)=0.30,\ f(0,1)=0.10,\ f(1,0)=0.25,\ f(1,1)=0.35\),
+with \(X,Y\in\{0,1\}\). Find the marginal pmf of \(X\) and \(\mathbb E[X]\).</p>
+<details><summary>Solution</summary>
+<p class="mono">f_X(0)=0.30+0.10=0.40    f_X(1)=0.25+0.35=0.60
+E[X]=0(0.40)+1(0.60)=<b>0.600</b></p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge">STANDARD · 6 marks</span> &nbsp;For the vending-machine table in Worked A, a colleague claims the
+covariance is exactly 0 because "\(Y\) is just 0/1". Recompute \(\text{Cov}(X,Y)\) and the correlation from scratch,
+and say in one sentence whether the claim holds.</p>
+<details><summary>Solution</summary>
+<p class="mono">E[X]=1.20, E[Y]=0.55, E[XY]=0.80  (from the two non-zero-product cells)
+Cov = 0.80 − 1.20·0.55 = <b>0.140</b>   (≠ 0)
+σ_X=0.748, σ_Y=0.498 → ϱ = 0.140/(0.748·0.498) = <b>0.376</b></p>
+<p>The claim is wrong: a 0/1 variable can still co-move with \(X\). Cov is positive, so more drinks pair with more snacks.</p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge gold">EXAM-LEVEL · 14 marks</span> &nbsp;<b>Food-truck orders (mirrors 2025 Q2 shape — fresh story &amp; numbers).</b>
+A campus food truck records, for \(n=200\) customers, \(X=\) number of tacos ordered \(\in\{0,1,2\}\) and
+\(Y=\) number of drinks ordered \(\in\{0,1,2\}\). Joint frequency counts \(n_{xy}\) (with \(f(x,y)=n_{xy}/200\)):</p>
+<table>
+<tr><th>counts</th><th>Y=0</th><th>Y=1</th><th>Y=2</th><th>row</th></tr>
+<tr><th>X=0</th><td>18</td><td>8</td><td>4</td><td>30</td></tr>
+<tr><th>X=1</th><td>20</td><td>34</td><td>26</td><td>80</td></tr>
+<tr><th>X=2</th><td>12</td><td>30</td><td>48</td><td>90</td></tr>
+<tr><th>col</th><td>50</td><td>72</td><td>78</td><td>200</td></tr>
+</table>
+<p>(a) Marginal pmfs of \(X\) and \(Y\). &nbsp;(b) \(\mathbb E[X],\mathbb E[Y]\). &nbsp;(c) \(\text{Cov}(X,Y)\) and \(\varrho\).
+&nbsp;(d) Are \(X,Y\) independent? &nbsp;(e) Perform an appropriate test of association; report the statistic, df, and a conclusion in context.</p>
+<details><summary>Full solution</summary>
+<p><b>(a) Marginals</b> (row/col totals ÷ 200):</p>
+<p class="mono">f_X: P(0)=30/200=0.150  P(1)=80/200=0.400  P(2)=90/200=0.450   (sum 1 ✓)
+f_Y: P(0)=50/200=0.250  P(1)=72/200=0.360  P(2)=78/200=0.390   (sum 1 ✓)</p>
+<p><b>(b) Expectations:</b></p>
+<p class="mono">E[X]=0(.150)+1(.400)+2(.450)=1.300     E[X²]=0+.400+4(.450)=2.200 → Var(X)=2.200−1.300²=0.510  σ_X=0.714
+E[Y]=0(.250)+1(.360)+2(.390)=1.140     E[Y²]=0+.360+4(.390)=1.920 → Var(Y)=1.920−1.140²=0.6204 σ_Y=0.788</p>
+<p><b>(c) Covariance &amp; correlation</b> — the four \(x,y\ge1\) cells feed \(\mathbb E[XY]\):</p>
+<p class="mono">E[XY]=(1·1·34 + 1·2·26 + 2·1·30 + 2·2·48)/200 = (34+52+60+192)/200 = 338/200 = 1.690
+Cov=1.690 − 1.300×1.140 = 1.690 − 1.482 = 0.208
+ϱ = 0.208 / (0.714×0.788) = <b>0.370</b>  (3 s.f.)  — positive, moderate: tacos and drinks move together.</p>
+<p><b>(d) Independent?</b> Test one cell against row-prob × col-prob:</p>
+<p class="mono">f(0,0)=18/200=0.090   but   f_X(0)f_Y(0)=0.150×0.250=0.0375   →  0.090 ≠ 0.0375</p>
+<p>One failing cell is enough: \(X\) and \(Y\) are <b>dependent</b>. (Never argue this from \(\varrho\ne0\); quote the cell.)</p>
+<p><b>(e) Test of association</b> — counts in a 2-way table → <b>χ² test of independence.</b></p>
+<div class="method">
+<b>H₀:</b> tacos and drinks are independent. &nbsp;<b>H₁:</b> they are associated.<br>
+Expected \(E_{ij}=\text{row}_i\times\text{col}_j/200\):
+<p class="mono">        Y=0    Y=1    Y=2
+X=0     7.50  10.80  11.70
+X=1    20.00  28.80  31.20
+X=2    22.50  32.40  35.10</p>
+\(\chi^2=\sum(O-E)^2/E\):
+<p class="mono">(18−7.5)²/7.5   =14.70   (8−10.8)²/10.8 =0.726   (4−11.7)²/11.7 =5.067
+(20−20)²/20     = 0       (34−28.8)²/28.8=0.939   (26−31.2)²/31.2=0.867
+(12−22.5)²/22.5 = 4.900   (30−32.4)²/32.4=0.178   (48−35.1)²/35.1=4.741
+χ² = 32.1,   df = (3−1)(3−1) = 4</p>
+<b>Decision.</b> \(\chi^2_{0.05,4}=9.49\), \(\chi^2_{0.01,4}=13.28\); observed \(32.1\) far exceeds both
+(\(P\)-value \(\approx 1.8\times10^{-6}\ll 0.05\)). <b>Reject H₀:</b> strong evidence that the number of tacos and
+the number of drinks a customer orders are associated.
+</div>
+<div class="tip">Same skeleton, five different skills: sum (a), weight (b), cross-product (c), one-cell factorisation (d),
+formal test (e). This is exactly how the 16-mark flagship is graded part-by-part.</div>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge pre">STRETCH · 6 marks</span> &nbsp;A joint pmf is given by the <b>formula</b>
+\(f(x,y)=c\,(x+y)\) for \(x\in\{1,2\}\) and \(y\in\{1,2,3\}\), and \(0\) elsewhere.
+(a) Find \(c\). &nbsp;(b) Find \(\varrho(X,Y)\). &nbsp;(c) Are \(X,Y\) independent?</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Probabilities sum to 1: \(\sum_{x,y}c(x+y)=c\big[(2{+}3{+}4)+(3{+}4{+}5)\big]=21c=1\Rightarrow c=\tfrac1{21}.\)</p>
+<p class="mono">cells (×1/21):   (1,1)=2  (1,2)=3  (1,3)=4  (2,1)=3  (2,2)=4  (2,3)=5
+f_X(1)=9/21  f_X(2)=12/21        f_Y(1)=5/21  f_Y(2)=7/21  f_Y(3)=9/21</p>
+<p><b>(b)</b></p>
+<p class="mono">E[X]=(1·9+2·12)/21 = 33/21 = 1.5714     E[X²]=(1·9+4·12)/21=57/21=2.7143 → Var(X)=0.2449 σ_X=0.4949
+E[Y]=(1·5+2·7+3·9)/21 = 46/21 = 2.1905   E[Y²]=(1·5+4·7+9·9)/21=114/21=5.4286 → Var(Y)=0.6304 σ_Y=0.7940
+E[XY]=Σ xy·f = 72/21 = 3.4286
+Cov = 3.4286 − 1.5714×2.1905 = <b>−0.01361</b>     ϱ = −0.01361/(0.4949×0.7940) = <b>−0.0346</b></p>
+<p><b>(c)</b> Check a cell: \(f(1,1)=2/21=0.0952\) but \(f_X(1)f_Y(1)=\tfrac{9}{21}\cdot\tfrac{5}{21}=0.102\).
+Not equal → <b>dependent</b>.</p>
+<div class="tip">Lovely trap: \(\varrho\approx-0.03\) is almost zero, yet \(X,Y\) are <b>not</b> independent. Near-zero correlation
+never proves independence — the product rule is the only valid test.</div>
+</details>
+</div>
+</div>
+
+<!-- ---------- 8.2 INDEPENDENCE ---------- -->
+<div class="card">
+<h3>8.2 · Independence checking</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — a table that <i>is</i> independent (full factorisation)</summary>
+<div class="q card">
+<p>\(X,Y\in\{0,1\}\) with marginals \(f_X=(0.4,0.6)\), \(f_Y=(0.3,0.7)\). The joint pmf is:</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>\(f_X\)</th></tr>
+<tr><th>X=0</th><td>0.12</td><td>0.28</td><td>0.40</td></tr>
+<tr><th>X=1</th><td>0.18</td><td>0.42</td><td>0.60</td></tr>
+<tr><th>\(f_Y\)</th><td>0.30</td><td>0.70</td><td>1.00</td></tr>
+</table>
+</div>
+<p>To <b>confirm</b> independence you must verify <i>every</i> cell equals row-prob × col-prob:</p>
+<p class="mono">0.12 = 0.40×0.30 ✓   0.28 = 0.40×0.70 ✓
+0.18 = 0.60×0.30 ✓   0.42 = 0.60×0.70 ✓</p>
+<p>All four hold → \(X,Y\) are <b>independent</b>. (Here \(\text{Cov}=0\) too, but you earned the mark from the product rule, not from Cov.)</p>
+</details>
+
+<details>
+<summary>Worked B — Cov = 0 yet <i>dependent</i> (the classic exam trap, discrete version)</summary>
+<div class="q card">
+<p>\(X\in\{-1,0,1\}\) and \(Y=X^2\in\{0,1\}\), with \(f(-1,1)=0.25,\ f(0,0)=0.50,\ f(1,1)=0.25\) (all other cells 0):</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>\(f_X\)</th></tr>
+<tr><th>X=−1</th><td>0</td><td>0.25</td><td>0.25</td></tr>
+<tr><th>X=0</th><td>0.50</td><td>0</td><td>0.50</td></tr>
+<tr><th>X=1</th><td>0</td><td>0.25</td><td>0.25</td></tr>
+<tr><th>\(f_Y\)</th><td>0.50</td><td>0.50</td><td>1.00</td></tr>
+</table>
+</div>
+<p class="mono">E[X]=−1(.25)+0+1(.25)=0        E[XY]=Σ xy f = (−1)(1)(.25)+(1)(1)(.25)=0
+Cov(X,Y)=E[XY]−E[X]E[Y]=0 − 0·0.5 = <b>0</b></p>
+<p>But check a cell: \(f(-1,0)=0\) while \(f_X(-1)f_Y(0)=0.25\times0.50=0.125\). Since \(0\ne0.125\), <b>dependent</b>.</p>
+<div class="trap">This is the single most-tested subtlety of the chapter: \(\text{Cov}=0\) does <b>not</b> imply independence.
+Here \(Y\) is a deterministic function of \(X\) — maximal dependence — yet the linear measure \(\varrho\) is exactly 0.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;\(X,Y\in\{0,1\}\) with \(f(0,0)=0.20,\ f(0,1)=0.30,\ f(1,0)=0.30,\ f(1,1)=0.20\).
+Are \(X\) and \(Y\) independent?</p>
+<details><summary>Solution</summary>
+<p class="mono">f_X=(0.50,0.50)  f_Y=(0.50,0.50)
+f(0,0)=0.20  but  f_X(0)f_Y(0)=0.50×0.50=0.25  →  0.20 ≠ 0.25</p>
+<p>One failing cell ⇒ <b>not independent</b>. (In fact Cov \(=0.04-0.25=-0.04\ne0\) here too, but the product-rule check is the rigorous answer.)</p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge">STANDARD · 5 marks</span> &nbsp;A 2×3 joint pmf:</p>
+<table>
+<tr><th>\(f(x,y)\)</th><th>Y=0</th><th>Y=1</th><th>Y=2</th></tr>
+<tr><th>X=0</th><td>0.10</td><td>0.15</td><td>0.05</td></tr>
+<tr><th>X=1</th><td>0.20</td><td>0.30</td><td>0.20</td></tr>
+</table>
+<p>Determine whether \(X\) and \(Y\) are independent, showing your check.</p>
+<details><summary>Solution</summary>
+<p class="mono">f_X: P(0)=0.30, P(1)=0.70        f_Y: P(0)=0.30, P(1)=0.45, P(2)=0.25
+Test f(0,0): 0.10  vs  f_X(0)f_Y(0)=0.30×0.30=0.09  →  0.10 ≠ 0.09</p>
+<p>The first cell already fails, so \(X\) and \(Y\) are <b>not independent</b>. (You may stop at one counterexample.)</p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge gold">EXAM-LEVEL · 6 marks</span> &nbsp;For a joint pmf you have computed \(\text{Cov}(X,Y)=0\).
+A student writes "therefore \(X\) and \(Y\) are independent." (a) Explain in one sentence why this reasoning is invalid.
+(b) Using the discrete pmf \(X\in\{-2,0,2\}\) with \(P=\tfrac13\) each and \(Y=X^2\), show \(\text{Cov}(X,Y)=0\) but the
+variables are dependent.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Zero covariance rules out only a <i>linear</i> relationship; variables can be strongly dependent through a
+non-linear link (e.g. \(Y=X^2\)) while \(\varrho=0\). Independence requires \(f(x,y)=f_X(x)f_Y(y)\) for all cells.</p>
+<p><b>(b)</b> \(Y=X^2\in\{0,4\}\): \(P(Y=0)=\tfrac13\) (from \(X=0\)), \(P(Y=4)=\tfrac23\) (from \(X=\pm2\)).</p>
+<p class="mono">E[X]=(−2+0+2)/3=0
+E[XY]=E[X·X²]=E[X³]=((−2)³+0³+2³)/3=(−8+0+8)/3=0
+Cov=E[XY]−E[X]E[Y]=0 − 0·E[Y]=<b>0</b></p>
+<p>But \(f(0,4)=P(X=0,Y=4)=0\) while \(f_X(0)f_Y(4)=\tfrac13\cdot\tfrac23=\tfrac29\ne0\) → <b>dependent</b>.
+Knowing \(X=0\) tells you \(Y=0\) for certain, so they cannot be independent.</p>
+</details>
+</div>
+</div>
+
+<!-- ---------- 8.3 LINEAR COMBINATIONS ---------- -->
+<div class="card">
+<h3>8.3 · Linear combinations &amp; their variance</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — a total of independent normals (variances add)</summary>
+<div class="q card">
+<p>A parcel holds <b>3 books</b>, each \(\mathcal N(0.80,\,0.05^2)\) kg, and <b>2 magazines</b>, each
+\(\mathcal N(0.30,\,0.02^2)\) kg, all independent. Let \(T\) be the total weight. Find its distribution and
+\(\mathbb P(T\gt 3.1)\) kg.</p>
+</div>
+<p>Means and (by independence) variances add:</p>
+<p class="mono">E[T]=3(0.80)+2(0.30)=2.40+0.60=3.00
+Var(T)=3(0.05²)+2(0.02²)=0.0075+0.0008=0.0083   sd(T)=0.0911
+T ~ N(3.00, 0.0083)
+P(T > 3.1)=P(Z > (3.1−3.00)/0.0911)=P(Z > 1.098)=1−0.8639=<b>0.136</b></p>
+<div class="tip">Each of the 5 items contributes its own \(\sigma^2\) to the sum; you do <b>not</b> multiply one book's variance by
+\(3^2\) — that would be the variance of \(3X\) (one book weighed thrice), a different quantity.</div>
+</details>
+
+<details>
+<summary>Worked B — a difference, and a variance with a covariance term</summary>
+<div class="q card">
+<p>(i) Two bottling machines fill volumes \(A\sim\mathcal N(500,4^2)\) and \(B\sim\mathcal N(498,3^2)\) mL,
+independent. Find \(\mathbb P(A\lt B)\). &nbsp;(ii) Monthly returns \(X\) (sd 4%) and \(Y\) (sd 6%) have
+\(\varrho=0.3\). Find the sd of the equal-weight portfolio \(P=0.5X+0.5Y\).</p>
+</div>
+<p><b>(i)</b> Difference \(D=A-B\): means subtract, <b>variances add</b>:</p>
+<p class="mono">D ~ N(500−498, 4²+3²) = N(2, 25),  sd=5
+P(A < B)=P(D < 0)=P(Z < (0−2)/5)=P(Z < −0.400)=<b>0.345</b></p>
+<p><b>(ii)</b> Here \(X,Y\) are <b>not</b> independent, so keep the cross term.
+\(\text{Cov}(X,Y)=\varrho\sigma_X\sigma_Y=0.3(4)(6)=7.2\):</p>
+<p class="mono">Var(P)=0.5²(4²)+0.5²(6²)+2(0.5)(0.5)(7.2)=4+9+3.6=16.6   sd(P)=<b>4.07%</b></p>
+<div class="trap">Drop the \(2ab\,\text{Cov}\) term and you'd get \(\sqrt{13}=3.61\) — understating the risk. The cross term
+only vanishes when the variables are independent (or \(\varrho=0\)).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;\(X,Y\) are independent with \(\text{Var}(X)=9\), \(\text{Var}(Y)=16\).
+Find \(\text{Var}(2X-3Y)\).</p>
+<details><summary>Solution</summary>
+<p class="mono">Var(2X−3Y)=2²·9 + (−3)²·16 = 4·9 + 9·16 = 36 + 144 = <b>180</b></p>
+<p>Both coefficients are squared — the minus sign disappears, so variances still add.</p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge">STANDARD · 5 marks</span> &nbsp;A pallet's fixed frame weighs 8 kg. On it sit 5 independent boxes,
+each \(\mathcal N(12,\,1.5^2)\) kg. Find the distribution of the total loaded weight \(T\) and \(\mathbb P(T\gt 72)\) kg.</p>
+<details><summary>Solution</summary>
+<p class="mono">T = 8 + X₁+…+X₅
+E[T]=8+5(12)=68        Var(T)=5(1.5²)=11.25   sd=3.354   (the constant 8 adds 0 variance)
+T ~ N(68, 11.25)
+P(T > 72)=P(Z > (72−68)/3.354)=P(Z > 1.193)=1−0.8835=<b>0.117</b></p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge gold">EXAM-LEVEL · 6 marks</span> &nbsp;A café's daily counts are \(X=\) lattes (mean 40, sd 8) and
+\(Y=\) muffins (mean 25, sd 6), with \(\varrho(X,Y)=0.5\). Daily revenue is \(R=4.5X+3.8Y\) dollars.
+(a) Find \(\mathbb E[R]\). &nbsp;(b) Find \(\text{sd}(R)\). &nbsp;(c) Treating \(R\) as approximately normal, find \(\mathbb P(R\gt 300)\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Linearity (no independence needed):</p>
+<p class="mono">E[R]=4.5(40)+3.8(25)=180+95=<b>275</b></p>
+<p><b>(b)</b> \(X,Y\) dependent → include the cross term. \(\text{Cov}=\varrho\sigma_X\sigma_Y=0.5(8)(6)=24\):</p>
+<p class="mono">Var(R)=4.5²(8²)+3.8²(6²)+2(4.5)(3.8)(24)
+      =20.25(64)+14.44(36)+34.2(24)
+      =1296+519.84+820.8 = 2636.64      sd(R)=<b>51.3</b></p>
+<p><b>(c)</b></p>
+<p class="mono">P(R > 300)=P(Z > (300−275)/51.35)=P(Z > 0.487)=1−0.6868=<b>0.313</b></p>
+<div class="tip">The mean needs no independence; the variance <i>does</i> care — the \(+2ab\,\text{Cov}\) term is worth ~\$820 of
+variance here, so ignoring it materially changes the probability.</div>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge pre">STRETCH · 4 marks</span> &nbsp;Independent measurements each have sd \(\sigma=15\). You will report the
+sample mean \(\bar X\) of \(n\) of them. How large must \(n\) be so that \(\text{sd}(\bar X)\lt 2\)?</p>
+<details><summary>Solution</summary>
+<p class="mono">sd(X̄)=σ/√n=15/√n < 2  ⇒  √n > 7.5  ⇒  n > 56.25  ⇒  n = <b>57</b></p>
+<p>Standard error shrinks like \(1/\sqrt n\), so halving it costs 4× the sample — the recurring price of precision.</p>
+</details>
+</div>
+</div>
+
+<!-- ---------- 8.4 CLT ---------- -->
+<div class="card">
+<h3>8.4 · CLT &amp; normal approximation</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — CLT for a mean and a total (skewed parent)</summary>
+<div class="q card">
+<p>Ride-hail wait times are exponential with mean \(\mu=6\) min (so \(\sigma=6\) min too), heavily right-skewed.
+Over \(n=50\) independent rides, find \(\mathbb P(\bar X\gt 7)\) and \(\mathbb P(\text{total}\lt 280)\) min.</p>
+</div>
+<p>By the CLT the parent's skew is irrelevant for \(n=50\):</p>
+<p class="mono">X̄ ≈ N(6, 6²/50)=N(6, 0.72)   sd(X̄)=6/√50=0.8485
+P(X̄ > 7)=P(Z > (7−6)/0.8485)=P(Z > 1.179)=1−0.8807=<b>0.119</b>
+
+S₅₀ ≈ N(50·6, 50·6²)=N(300, 1800)   sd=42.43
+P(S₅₀ < 280)=P(Z < (280−300)/42.43)=P(Z < −0.471)=<b>0.319</b></p>
+<div class="trap">Mean uses \(\sigma/\sqrt n=0.849\); total uses \(\sigma\sqrt n=42.4\). Mixing the two is the #1 CLT error.</div>
+</details>
+
+<details>
+<summary>Worked B — normal approximation to a binomial count</summary>
+<div class="q card">
+<p>A machine produces items with a 8% defect rate. In a batch of \(n=300\) independent items, approximate
+\(\mathbb P(X\ge 30)\) defectives.</p>
+</div>
+<p>Check validity: \(np=24\gt5\) and \(n(1-p)=276\gt5\) ✓. So \(X\approx\mathcal N(np,\,np(1-p))\):</p>
+<p class="mono">X ≈ N(24, 300·0.08·0.92)=N(24, 22.08)   sd=4.699
+P(X ≥ 30)=P(Z ≥ (30−24)/4.699)=P(Z ≥ 1.277)=1−0.8992=<b>0.101</b></p>
+<div class="tip">A binomial is a sum of \(n\) iid Bernoulli\((p)\) trials, so the CLT applies directly — that is <i>why</i> the
+normal approximation works. (Per the STAT1301 formula sheet, no continuity correction is required.)</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;A population has \(\mu=100\), \(\sigma=20\). For a sample of \(n=64\),
+state the approximate distribution of the sample mean \(\bar X\).</p>
+<details><summary>Solution</summary>
+<p class="mono">X̄ ≈ N(μ, σ²/n)=N(100, 20²/64)=N(100, 6.25)   sd(X̄)=20/8=<b>2.5</b></p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge">STANDARD · 5 marks</span> &nbsp;Battery lifetimes have \(\mu=40\) h and \(\sigma=12\) h (distribution
+not normal). For \(n=36\) independent batteries, approximate \(\mathbb P(\bar X\lt 37)\) h.</p>
+<details><summary>Solution</summary>
+<p class="mono">X̄ ≈ N(40, 12²/36)=N(40, 4)   sd(X̄)=12/6=2
+P(X̄ < 37)=P(Z < (37−40)/2)=P(Z < −1.50)=<b>0.0668</b></p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge gold">EXAM-LEVEL · 6 marks</span> &nbsp;In a town, 45% of adults support a new policy. A random sample of
+\(n=200\) adults is taken; let \(X\) be the number who support it. (a) State the approximate distribution of \(X\).
+(b) Approximate \(\mathbb P(X\gt 100)\). (c) State the approximate distribution of the sample proportion
+\(\hat p=X/n\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(X\sim\text{Bin}(200,0.45)\); \(np=90\gt5\), \(n(1-p)=110\gt5\) ✓, so</p>
+<p class="mono">X ≈ N(np, np(1−p))=N(90, 200·0.45·0.55)=N(90, 49.5)   sd=7.036</p>
+<p><b>(b)</b></p>
+<p class="mono">P(X > 100)=P(Z > (100−90)/7.036)=P(Z > 1.421)=1−0.9224=<b>0.0776</b></p>
+<p><b>(c)</b> Dividing by \(n\) rescales the normal:</p>
+<p class="mono">p̂ ≈ N(p, p(1−p)/n)=N(0.45, 0.45·0.55/200)=N(0.450, 0.001238)   sd=<b>0.0352</b></p>
+<div class="tip">\(\hat p\) is just \(X/n\), a linear rescaling, so mean \(\to p\) and variance \(\to\) (that of \(X\)) \(/n^2=p(1-p)/n\).
+This is the exact CLT statement behind every proportion confidence interval in Ch 6.</div>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge pre">STRETCH · 4 marks</span> &nbsp;Observations have \(\sigma=10\). How large must \(n\) be so that the sample
+mean is within 1 unit of \(\mu\) with probability at least 0.95, i.e. \(\mathbb P(|\bar X-\mu|\lt 1)\ge0.95\)?</p>
+<details><summary>Solution</summary>
+<p>\(P(|\bar X-\mu|\lt1)\ge0.95\) needs \(1\) to be at least \(1.96\) standard errors: \(1\ge1.96\cdot\sigma/\sqrt n\).</p>
+<p class="mono">√n ≥ 1.96·10/1 = 19.6   ⇒   n ≥ 384.16   ⇒   n = <b>385</b></p>
+<p>The 1.96 is the two-sided 95% \(Z\)-value — the same constant that sets 95% confidence interval widths later.</p>
+</details>
+</div>
+</div>
+
+<!-- ---------- 8.5 ESTIMATORS ---------- -->
+<div class="card">
+<h3>8.5 · Estimator properties (unbiasedness &amp; variance)</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — Uniform(0,θ): build an unbiased estimator and find its variance</summary>
+<div class="q card">
+<p>\(X_1,\dots,X_n\) are iid \(\text{Uniform}(0,\theta)\), so \(\mathbb E[X]=\theta/2\) and \(\text{Var}(X)=\theta^2/12\).
+Consider \(\hat\theta=2\bar X\). Show it is unbiased and find \(\text{Var}(\hat\theta)\).</p>
+</div>
+<p><b>Unbiased?</b> Use linearity:</p>
+<p class="mono">E[θ̂]=E[2X̄]=2·E[X̄]=2·(θ/2)=θ   ✓  unbiased</p>
+<p><b>Variance</b> (the \(X_i\) are independent, so \(\text{Var}(\bar X)=\sigma^2/n\)):</p>
+<p class="mono">Var(θ̂)=Var(2X̄)=4·Var(X̄)=4·(θ²/12)/n = <b>θ²/(3n)</b></p>
+<div class="tip">The estimator is a <i>recipe</i> in the random sample, so it has a mean and a variance. "Unbiased" means that
+mean lands exactly on \(\theta\); the variance says how tightly it clusters — and it shrinks like \(1/n\).</div>
+</details>
+
+<details>
+<summary>Worked B — comparing two unbiased estimators (efficiency)</summary>
+<div class="q card">
+<p>From iid \(X_1,X_2,X_3\) with mean \(\mu\) and variance \(\sigma^2\), consider
+\(\hat\mu_1=\tfrac13(X_1+X_2+X_3)\) and \(\hat\mu_2=\tfrac14(X_1+2X_2+X_3)\). Which is the better estimator of \(\mu\)?</p>
+</div>
+<p>Both are unbiased — check the coefficients sum to 1:</p>
+<p class="mono">E[μ̂₁]=(μ+μ+μ)/3=μ ✓      E[μ̂₂]=(μ+2μ+μ)/4=μ ✓</p>
+<p>Compare variances (independence ⇒ variances add, coefficients squared):</p>
+<p class="mono">Var(μ̂₁)=(1²+1²+1²)/3² · σ² = 3/9 σ² = 0.3333 σ²
+Var(μ̂₂)=(1²+2²+1²)/4² · σ² = 6/16 σ² = 0.3750 σ²</p>
+<p>\(\hat\mu_1\) (the plain sample mean) has the smaller variance, so it is <b>more efficient</b>. Both hit the target on
+average, but \(\hat\mu_1\) scatters less.</p>
+<div class="trap">Unbiasedness alone doesn't crown a winner — infinitely many unbiased estimators exist. Among them we
+prefer the one with <b>least variance</b>. The equal-weight mean beats the lopsided weighting here.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><span class="badge">WARM-UP · 3 marks</span> &nbsp;\(X_1,\dots,X_n\) are iid with mean \(\mu\). Show that the sample mean
+\(\bar X\) is an unbiased estimator of \(\mu\).</p>
+<details><summary>Solution</summary>
+<p class="mono">E[X̄]=E[(1/n)Σ Xᵢ]=(1/n)Σ E[Xᵢ]=(1/n)(nμ)=μ   ✓  unbiased</p>
+<p>Linearity only — no independence needed for the <i>mean</i>.</p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge">STANDARD · 5 marks</span> &nbsp;\(X_1,\dots,X_n\) are iid exponential with mean \(\theta\) (so
+\(\mathbb E[X]=\theta\) and \(\text{Var}(X)=\theta^2\)). Let \(\hat\theta=\bar X\). Show \(\hat\theta\) is unbiased and
+find \(\text{Var}(\hat\theta)\).</p>
+<details><summary>Solution</summary>
+<p class="mono">E[θ̂]=E[X̄]=θ            ✓ unbiased
+Var(θ̂)=Var(X̄)=Var(X)/n = <b>θ²/n</b></p>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge gold">EXAM-LEVEL · 6 marks</span> &nbsp;Service times \(X_1,\dots,X_n\) are iid with mean \(\theta\) and
+variance \(\theta^2\) (a skewed, non-normal model). The estimator is \(\hat\theta=\bar X\).
+(a) Show \(\hat\theta\) is unbiased. &nbsp;(b) Find \(\text{Var}(\hat\theta)\). &nbsp;(c) State the approximate distribution of
+\(\hat\theta\) when \(n\) is large, justifying the tool used.</p>
+<details><summary>Full solution</summary>
+<p><b>(a)</b> \(\mathbb E[\hat\theta]=\mathbb E[\bar X]=\tfrac1n\sum\mathbb E[X_i]=\tfrac1n(n\theta)=\theta\). Unbiased. ✓</p>
+<p><b>(b)</b> Independence ⇒ \(\text{Var}(\bar X)=\text{Var}(X)/n=\theta^2/n\).</p>
+<p><b>(c)</b> \(\hat\theta=\bar X\) is an average of \(n\) iid pieces, so by the <b>Central Limit Theorem</b>, for large \(n\):</p>
+<p class="mono">θ̂ ≈ N(θ, θ²/n)</p>
+<p>The parent's skew doesn't matter — the CLT delivers approximate normality of the <i>estimator</i> (its sampling
+distribution), which is exactly what "the approximate distribution of \(\hat\theta\) for large \(n\)" asks for.</p>
+<div class="tip">This is the Type-D template: unbiased (mean = θ) + variance (\(\theta^2/n\)) + CLT gives the approximate
+normal sampling distribution. It underlies the standard-error and confidence-interval machinery of Ch 6.</div>
+</details>
+</div>
+
+<div class="card q">
+<p><span class="badge pre">STRETCH · 5 marks</span> &nbsp;From iid \(X_1,X_2\) with mean \(\mu\), variance \(\sigma^2\), consider
+\(\hat\mu_a=\tfrac13(2X_1+X_2)\) and \(\hat\mu_b=\tfrac12(X_1+X_2)\). Show both are unbiased, find each variance, and
+state which is more efficient and by how much (relative efficiency).</p>
+<details><summary>Solution</summary>
+<p class="mono">E[μ̂ₐ]=(2μ+μ)/3=μ ✓     E[μ̂_b]=(μ+μ)/2=μ ✓   (both unbiased)
+Var(μ̂ₐ)=(2²+1²)/3² σ² = 5/9 σ² = 0.5556 σ²
+Var(μ̂_b)=(1²+1²)/2² σ² = 2/4 σ² = 0.5000 σ²</p>
+<p>\(\hat\mu_b\) has the smaller variance → <b>more efficient</b>. Relative efficiency
+\(=\dfrac{\text{Var}(\hat\mu_a)}{\text{Var}(\hat\mu_b)}=\dfrac{5/9}{1/2}=\dfrac{10}{9}\approx1.11\): \(\hat\mu_a\)
+carries about 11% more variance. Equal weighting is optimal when the observations are iid.</p>
+</details>
+</div>
+</div>
+
+<div class="tip"><b>🏋️ How to train here.</b> Attempt each question <b>before</b> opening its solution — write your own working on
+paper first, then check. Star every one you miss, and <b>redo the starred questions from scratch after ~2 days</b>
+(spaced practice locks it in far better than re-reading). Sit at least one full <span class="badge gold">EXAM-LEVEL</span>
+part under timed conditions, and always carry full precision through the middle, rounding only the final answer to ≥ 3 s.f.</div>
 </section>
 
 </main>

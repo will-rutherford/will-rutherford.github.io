@@ -71,6 +71,7 @@
   <a href="#triggers">Triggers</a>
   <a href="#traps">Traps</a>
   <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -549,6 +550,292 @@ $$F(x)=\begin{cases}0 & x\lt0\\[2pt]\tfrac23 x & 0\le x\lt1\\[2pt]\tfrac23+\tfra
 <div class="card" style="text-align:center">
 <p>Next: <a href="ch03-multiple-rvs.html">Chapter 3 — Multiple Random Variables →</a> (joint pmf, covariance, correlation) · <a href="index.html">← back to Hub</a></p>
 </div>
+
+<!-- ============================ PRACTICE ARENA ============================ -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Brand-new questions — <b>none of these appear in the 2021–2025 papers, the notes, or the tutorials</b>. Same exam styles, fresh scenarios and fresh numbers. Every answer below was verified by computation. <span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> <span class="badge" style="background:#34d399;color:#032117">STANDARD</span> <span class="badge gold">EXAM-LEVEL</span> <span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span></p>
+
+<!-- ---------- TOPIC 1 ---------- -->
+<h3>① Probability rules &amp; counting</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked — a committee drawn from a mixed group (counting → probability)</summary>
+<div class="q card">A student club has <b>7 women</b> and <b>5 men</b>. A committee of <b>4</b> is chosen at random. (a) In how many ways can the committee be formed? (b) How many committees have exactly 2 women and 2 men? (c) What is \(\mathbb{P}(\text{exactly 2 women and 2 men})\)?</div>
+<div class="method"><ol>
+<li><b>Order matters?</b> No — a committee is an unordered set → use combinations \(\binom{n}{k}\).</li>
+<li><b>(a)</b> Choose any 4 of the 12 people: \(\displaystyle\binom{12}{4}=\frac{12\cdot11\cdot10\cdot9}{4!}=495.\)</li>
+<li><b>(b)</b> Choose 2 of 7 women <i>and</i> 2 of 5 men (multiply — independent choices): \(\binom{7}{2}\binom{5}{2}=21\times10=210.\)</li>
+<li><b>(c)</b> Equally-likely committees, so \(\mathbb{P}=\dfrac{|A|}{|\Omega|}=\dfrac{210}{495}=\dfrac{14}{33}\approx\boxed{0.424}.\)</li>
+</ol></div>
+</details>
+
+<details>
+<summary>Worked — the addition rule and "exactly one" (two events)</summary>
+<div class="q card">For events \(A,B\): \(\mathbb{P}(A)=0.55,\ \mathbb{P}(B)=0.40,\ \mathbb{P}(A\cap B)=0.25.\) Find (a) \(\mathbb{P}(A\cup B)\); (b) \(\mathbb{P}(A^c\cap B^c)\); (c) \(\mathbb{P}(\text{exactly one of }A,B)\).</div>
+<div class="method"><ol>
+<li><b>(a) Addition rule</b> (subtract the overlap once): \(\mathbb{P}(A\cup B)=0.55+0.40-0.25=\boxed{0.70}.\)</li>
+<li><b>(b)</b> "Neither" is the complement of "at least one": \(\mathbb{P}(A^c\cap B^c)=1-\mathbb{P}(A\cup B)=1-0.70=\boxed{0.30}.\)</li>
+<li><b>(c)</b> Exactly one = union minus the overlap counted out entirely: \(\mathbb{P}(A\cup B)-\mathbb{P}(A\cap B)=0.70-0.25=\boxed{0.45}\) (equivalently \(\mathbb{P}(A)+\mathbb{P}(B)-2\mathbb{P}(A\cap B)\)).</li>
+</ol></div>
+<p class="tip">Draw the 2-circle Venn: overlap 0.25, \(A\)-only \(0.30\), \(B\)-only \(0.15\), outside \(0.30\) — they sum to 1, a quick self-check.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> A car number-plate has 3 letters (A–Z) followed by 3 digits (0–9), repeats allowed. How many distinct plates? <b>(2 marks)</b></summary>
+<p>Ordered, with replacement, independent positions: \(26^3\times10^3=17\,576\times1000=\boxed{17\,576\,000}\) (\(1.76\times10^7\) to 3 s.f.).</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#34d399;color:#032117">STANDARD</span> A box holds 5 red, 4 blue and 3 green balls (12 total). Three are drawn at random without replacement. Find \(\mathbb{P}(\text{one of each colour})\). <b>(3 marks)</b></summary>
+<p>Unordered draw of 3 from 12: \(|\Omega|=\binom{12}{3}=220.\) Favourable = choose 1 of each colour: \(\binom{5}{1}\binom{4}{1}\binom{3}{1}=5\cdot4\cdot3=60.\)</p>
+<p>\(\mathbb{P}=\dfrac{60}{220}=\dfrac{3}{11}\approx\boxed{0.273}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge gold">EXAM-LEVEL</span> In a suburb, 60% of homes take newspaper \(A\), 35% take \(B\), and 20% take both. Pick a home at random. Find \(\mathbb{P}(\)at least one\()\), \(\mathbb{P}(\)neither\()\), \(\mathbb{P}(\)exactly one\()\) and \(\mathbb{P}(A\) only\()\). <b>(6 marks)</b></summary>
+<p>\(\mathbb{P}(A)=0.60,\ \mathbb{P}(B)=0.35,\ \mathbb{P}(A\cap B)=0.20.\)</p>
+<p><b>At least one:</b> \(\mathbb{P}(A\cup B)=0.60+0.35-0.20=\boxed{0.75}.\)</p>
+<p><b>Neither:</b> \(1-0.75=\boxed{0.25}.\)</p>
+<p><b>Exactly one:</b> \(0.75-0.20=\boxed{0.55}\) (or \(0.60+0.35-2(0.20)\)).</p>
+<p><b>\(A\) only:</b> \(\mathbb{P}(A)-\mathbb{P}(A\cap B)=0.60-0.20=\boxed{0.40}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span> How many distinct arrangements are there of the letters of the word <b>STATISTICS</b>? <b>(3 marks)</b></summary>
+<p>10 letters with repeats: S×3, T×3, I×2, A×1, C×1. Distinct arrangements (multinomial):
+$$\frac{10!}{3!\,3!\,2!\,1!\,1!}=\frac{3\,628\,800}{6\cdot6\cdot2}=\frac{3\,628\,800}{72}=\boxed{50\,400}.$$</p>
+<p class="tip">Divide the \(10!\) orderings by the internal rearrangements of each repeated letter block — they produce identical "words".</p>
+</details>
+
+<!-- ---------- TOPIC 2 ---------- -->
+<h3>② Conditional probability &amp; Bayes</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked — Bayes: which machine made the defective item?</summary>
+<div class="q card">A factory runs two machines. <b>Machine 1</b> makes 60% of output with a 3% defect rate; <b>Machine 2</b> makes 40% with a 7% defect rate. An item is picked at random. (a) \(\mathbb{P}(\text{defective})\). (b) Given it is defective, \(\mathbb{P}(\text{it came from Machine 2})\).</div>
+<div class="method"><ol>
+<li>Let \(M_1,M_2\) = made by each machine, \(D\) = defective. Given: \(\mathbb{P}(M_1)=0.6,\ \mathbb{P}(M_2)=0.4,\ \mathbb{P}(D\mid M_1)=0.03,\ \mathbb{P}(D\mid M_2)=0.07.\)</li>
+<li><b>(a) Law of Total Probability:</b> \(\mathbb{P}(D)=0.6(0.03)+0.4(0.07)=0.018+0.028=\boxed{0.046}.\)</li>
+<li><b>(b) Bayes:</b> \(\displaystyle\mathbb{P}(M_2\mid D)=\frac{\mathbb{P}(D\mid M_2)\mathbb{P}(M_2)}{\mathbb{P}(D)}=\frac{0.028}{0.046}=\frac{14}{23}\approx\boxed{0.609}.\)</li>
+</ol></div>
+<p class="tip">Machine 2 makes only 40% of items but over 60% of the <i>defects</i> — the higher defect rate dominates once you condition on \(D\).</p>
+</details>
+
+<details>
+<summary>Worked — sequential draws without replacement (product rule)</summary>
+<div class="q card">A jar has <b>8 white</b> and <b>5 black</b> marbles. Two are drawn without replacement. (a) \(\mathbb{P}(\text{both white})\). (b) \(\mathbb{P}(\text{2nd is white}\mid \text{1st is black})\).</div>
+<div class="method"><ol>
+<li><b>(a) Product rule</b> \(\mathbb{P}(W_1\cap W_2)=\mathbb{P}(W_1)\,\mathbb{P}(W_2\mid W_1)=\dfrac{8}{13}\cdot\dfrac{7}{12}=\dfrac{56}{156}=\dfrac{14}{39}\approx\boxed{0.359}.\)</li>
+<li><b>(b)</b> Once a black is removed, 12 marbles remain, 8 white: \(\mathbb{P}(W_2\mid B_1)=\dfrac{8}{12}=\dfrac{2}{3}\approx\boxed{0.667}.\)</li>
+</ol></div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> Given \(\mathbb{P}(A\cap B)=0.12\) and \(\mathbb{P}(B)=0.30\), find \(\mathbb{P}(A\mid B)\). <b>(2 marks)</b></summary>
+<p>\(\mathbb{P}(A\mid B)=\dfrac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}=\dfrac{0.12}{0.30}=\boxed{0.400}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#34d399;color:#032117">STANDARD</span> For events \(A,B\): \(\mathbb{P}(A)=0.40,\ \mathbb{P}(B)=0.25,\ \mathbb{P}(A\cup B)=0.55.\) Are \(A\) and \(B\) independent? <b>(3 marks)</b></summary>
+<p>First recover the overlap: \(\mathbb{P}(A\cap B)=\mathbb{P}(A)+\mathbb{P}(B)-\mathbb{P}(A\cup B)=0.40+0.25-0.55=0.10.\)</p>
+<p>Test independence: \(\mathbb{P}(A)\mathbb{P}(B)=0.40\times0.25=0.10=\mathbb{P}(A\cap B).\) They match, so \(A,B\) are <b>independent</b>.</p>
+</details>
+
+<details>
+<summary><span class="badge gold">EXAM-LEVEL</span> 30% of incoming emails are spam. The word "free" appears in 60% of spam emails but only 4% of legitimate ("ham") emails. An email contains "free". (a) \(\mathbb{P}(\text{contains "free"})\); (b) \(\mathbb{P}(\text{spam}\mid\text{"free"})\); (c) \(\mathbb{P}(\text{ham}\mid\text{no "free"})\). <b>(9 marks)</b></summary>
+<p>Let \(S\) = spam (\(0.30\)), \(H\) = ham (\(0.70\)), \(F\) = contains "free". \(\mathbb{P}(F\mid S)=0.60,\ \mathbb{P}(F\mid H)=0.04.\)</p>
+<p><b>(a)</b> \(\mathbb{P}(F)=0.30(0.60)+0.70(0.04)=0.180+0.028=\boxed{0.208}.\)</p>
+<p><b>(b)</b> \(\mathbb{P}(S\mid F)=\dfrac{0.180}{0.208}=\dfrac{45}{52}\approx\boxed{0.865}.\)</p>
+<p><b>(c)</b> \(\mathbb{P}(F^c)=1-0.208=0.792;\ \mathbb{P}(H\cap F^c)=0.70(0.96)=0.672.\) So \(\mathbb{P}(H\mid F^c)=\dfrac{0.672}{0.792}\approx\boxed{0.848}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span> An insurer classes drivers as low / medium / high risk with proportions 50% / 30% / 20%. Their annual accident probabilities are 0.01, 0.05 and 0.15. (a) \(\mathbb{P}(\text{a random driver has an accident})\); (b) given an accident occurred, \(\mathbb{P}(\text{high-risk})\). <b>(6 marks)</b></summary>
+<p><b>(a) Total probability:</b> \(\mathbb{P}(\text{Acc})=0.50(0.01)+0.30(0.05)+0.20(0.15)=0.005+0.015+0.030=\boxed{0.050}.\)</p>
+<p><b>(b) Bayes:</b> \(\mathbb{P}(\text{High}\mid\text{Acc})=\dfrac{0.20(0.15)}{0.050}=\dfrac{0.030}{0.050}=\boxed{0.600}.\)</p>
+<p class="tip">High-risk drivers are just 20% of the pool but cause 60% of accidents — the classic base-rate reversal.</p>
+</details>
+
+<!-- ---------- TOPIC 3 ---------- -->
+<h3>③ Discrete random variables &amp; the Binomial</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked — a discrete pmf from a table: constant, mean, variance</summary>
+<div class="q card">A discrete RV \(X\) has pmf \(f(x)=c(x+1)\) for \(x=0,1,2,3\) and 0 otherwise. Find (a) \(c\); (b) \(\mathbb{E}(X)\); (c) \(\operatorname{Var}(X)\).</div>
+<div class="method"><ol>
+<li><b>(a)</b> Probabilities must sum to 1: \(c(1+2+3+4)=10c=1\Rightarrow c=\boxed{0.1}.\) So \(f=0.1,0.2,0.3,0.4\) at \(x=0,1,2,3\).</li>
+<li><b>(b)</b> \(\mathbb{E}(X)=\sum x f(x)=0(0.1)+1(0.2)+2(0.3)+3(0.4)=0.2+0.6+1.2=\boxed{2.0}.\)</li>
+<li><b>(c)</b> \(\mathbb{E}(X^2)=0+1(0.2)+4(0.3)+9(0.4)=0.2+1.2+3.6=5.0;\) \(\operatorname{Var}=5.0-2.0^2=\boxed{1.0}\) (sd \(=1.0\)).</li>
+</ol></div>
+</details>
+
+<details>
+<summary>Worked — Binomial: exactly / at least (free-throw shooter)</summary>
+<div class="q card">A player sinks each free throw independently with probability \(p=0.8\). She takes \(n=12\) shots; let \(X\) be the number made. Find (a) \(\mathbb{P}(X=10)\); (b) \(\mathbb{P}(X\ge 11)\); (c) \(\mathbb{E}(X)\) and \(\operatorname{sd}(X)\).</div>
+<div class="method"><ol>
+<li>\(X\sim\text{Bin}(12,0.8)\).</li>
+<li><b>(a)</b> \(\mathbb{P}(X=10)=\binom{12}{10}(0.8)^{10}(0.2)^{2}=66\,(0.8)^{10}(0.04)\approx\boxed{0.283}.\)</li>
+<li><b>(b)</b> \(\mathbb{P}(X\ge11)=\mathbb{P}(X=11)+\mathbb{P}(X=12)=\binom{12}{11}(0.8)^{11}(0.2)+(0.8)^{12}\approx0.2062+0.0687=\boxed{0.275}.\)</li>
+<li><b>(c)</b> \(\mathbb{E}=np=12(0.8)=9.6;\ \operatorname{sd}=\sqrt{np(1-p)}=\sqrt{12(0.8)(0.2)}=\sqrt{1.92}\approx\boxed{1.386}.\)</li>
+</ol></div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> \(X\sim\text{Bin}(6,\tfrac12)\). Find \(\mathbb{P}(X=3)\). <b>(2 marks)</b></summary>
+<p>\(\mathbb{P}(X=3)=\binom{6}{3}(0.5)^3(0.5)^3=20\cdot(0.5)^6=\dfrac{20}{64}=\dfrac{5}{16}=\boxed{0.3125}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#34d399;color:#032117">STANDARD</span> A production line produces items independently, 8% defective. In a sample of 20, find \(\mathbb{P}(\text{no defectives})\) and \(\mathbb{P}(\text{at least one defective})\). <b>(3 marks)</b></summary>
+<p>\(X\sim\text{Bin}(20,0.08)\). \(\mathbb{P}(X=0)=(0.92)^{20}\approx\boxed{0.189}.\)</p>
+<p>\(\mathbb{P}(X\ge1)=1-(0.92)^{20}\approx1-0.189=\boxed{0.811}\) (complement trick).</p>
+</details>
+
+<details>
+<summary><span class="badge gold">EXAM-LEVEL</span> A call centre receives 25 independent calls; each requires escalation with probability 0.15. Let \(X\) = number escalated. Find (a) \(\mathbb{P}(X=3)\); (b) \(\mathbb{P}(X\ge5)\); (c) \(\mathbb{E}(X)\) and \(\operatorname{sd}(X)\); (d) the most likely number (mode). <b>(8 marks)</b></summary>
+<p>\(X\sim\text{Bin}(25,0.15)\).</p>
+<p><b>(a)</b> \(\mathbb{P}(X=3)=\binom{25}{3}(0.15)^3(0.85)^{22}=2300\,(0.15)^3(0.85)^{22}\approx\boxed{0.217}.\)</p>
+<p><b>(b)</b> \(\mathbb{P}(X\ge5)=1-\mathbb{P}(X\le4)\approx1-0.6821=\boxed{0.318}\) (sum \(x=0\ldots4\), then complement).</p>
+<p><b>(c)</b> \(\mathbb{E}=np=25(0.15)=3.75;\ \operatorname{sd}=\sqrt{25(0.15)(0.85)}=\sqrt{3.1875}\approx\boxed{1.785}.\)</p>
+<p><b>(d)</b> The pmf peaks at \(x=\boxed{3}\) (near \(\lfloor(n+1)p\rfloor=\lfloor3.9\rfloor=3\)); \(\mathbb{P}(X=3)\approx0.217\) is the largest term.</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span> Let \(X\) be the sum of two fair six-sided dice. Find (a) \(\mathbb{P}(X=7)\); (b) \(\mathbb{E}(X)\); (c) \(\mathbb{P}(X\ge10)\). <b>(4 marks)</b></summary>
+<p>36 equally-likely ordered outcomes.</p>
+<p><b>(a)</b> Sum 7 occurs 6 ways \((1,6),\dots,(6,1)\): \(\mathbb{P}=\dfrac{6}{36}=\dfrac16\approx\boxed{0.167}.\)</p>
+<p><b>(b)</b> By symmetry about 7 (or \(\mathbb{E}=\mathbb{E}(D_1)+\mathbb{E}(D_2)=3.5+3.5\)): \(\mathbb{E}(X)=\boxed{7}.\)</p>
+<p><b>(c)</b> Sums 10, 11, 12 occur in \(3+2+1=6\) ways: \(\mathbb{P}(X\ge10)=\dfrac{6}{36}=\dfrac16\approx\boxed{0.167}.\)</p>
+</details>
+
+<!-- ---------- TOPIC 4 ---------- -->
+<h3>④ Continuous RVs — pdf / cdf / median / mode ★ (the flagship shape)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked — THE FLAGSHIP: \(f(x)=c\,x^{b}\) with a probability condition</summary>
+<div class="q card">\(X\) has pdf \(f(x)=c\,x^{b}\) for \(0\le x\le 4\) (\(c\gt0,\ b\gt0\)), and \(\mathbb{P}\!\left(X\lt 2\right)=\tfrac18\). Find (a) \(b\) and \(c\); (b) \(\mathbb{P}(X\gt3)\); (c) the median and the mode.</div>
+<div class="method"><ol>
+<li><b>Eq 1 (normalise):</b> \(\displaystyle\int_0^4 c x^b\,dx=\frac{c\,4^{b+1}}{b+1}=1.\)</li>
+<li><b>Eq 2 (given condition):</b> \(\displaystyle\int_0^2 c x^b\,dx=\frac{c\,2^{b+1}}{b+1}=\frac18.\)</li>
+<li><b>Divide Eq 2 by Eq 1</b> to kill \(c\) and \(b+1\): \(\left(\dfrac{2}{4}\right)^{b+1}=\left(\dfrac12\right)^{b+1}=\dfrac18=\left(\dfrac12\right)^{3}\Rightarrow b+1=3\Rightarrow \boxed{b=2}.\)</li>
+<li>Back-substitute: \(c=\dfrac{b+1}{4^{b+1}}=\dfrac{3}{4^{3}}=\dfrac{3}{64}\approx\boxed{0.0469}.\)</li>
+<li><b>(b)</b> \(F(x)=\dfrac{c x^{3}}{3}=\dfrac{x^3}{64}\), so \(\mathbb{P}(X\gt3)=1-F(3)=1-\dfrac{27}{64}=\dfrac{37}{64}\approx\boxed{0.578}.\)</li>
+<li><b>(c) Median:</b> \(\dfrac{m^3}{64}=\tfrac12\Rightarrow m^3=32\Rightarrow m=32^{1/3}\approx\boxed{3.17}.\) <b>Mode:</b> \(f=\tfrac{3}{64}x^2\) increases on \([0,4]\), so the density peaks at the right endpoint, \(\text{mode}=\boxed{4}.\)</li>
+</ol></div>
+</details>
+
+<details>
+<summary>Worked — triangular density \(f(x)=k\,x\): cdf, mean, sd, median</summary>
+<div class="q card">\(X\) has pdf \(f(x)=k\,x\) for \(0\le x\le 3\), 0 otherwise. Find (a) \(k\); (b) the cdf; (c) \(\mathbb{E}(X)\) and \(\operatorname{sd}(X)\); (d) the median.</div>
+<div class="method"><ol>
+<li><b>(a)</b> \(\displaystyle\int_0^3 kx\,dx=\frac{9k}{2}=1\Rightarrow k=\boxed{\tfrac29}\approx0.222.\)</li>
+<li><b>(b)</b> For \(0\le x\le3\): \(F(x)=\int_0^x \tfrac29 u\,du=\dfrac{x^2}{9}\). Full form:
+$$F(x)=\begin{cases}0 & x\lt0\\[2pt]\dfrac{x^2}{9} & 0\le x\le3\\[4pt]1 & x\gt3.\end{cases}$$</li>
+<li><b>(c)</b> \(\mathbb{E}(X)=\int_0^3 x\cdot\tfrac29 x\,dx=\tfrac29\cdot\tfrac{27}{3}=\boxed{2};\) \(\mathbb{E}(X^2)=\int_0^3 \tfrac29 x^3\,dx=\tfrac29\cdot\tfrac{81}{4}=\tfrac92=4.5;\) \(\operatorname{Var}=4.5-2^2=0.5,\ \operatorname{sd}=\sqrt{0.5}\approx\boxed{0.707}.\)</li>
+<li><b>(d) Median:</b> \(\dfrac{m^2}{9}=\tfrac12\Rightarrow m^2=4.5\Rightarrow m=\sqrt{4.5}\approx\boxed{2.12}.\)</li>
+</ol></div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> \(f(x)=c\,x\) for \(0\le x\le2\). Find \(c\) and \(\mathbb{P}(X\gt1)\). <b>(3 marks)</b></summary>
+<p>\(\int_0^2 cx\,dx=2c=1\Rightarrow c=\boxed{\tfrac12}.\) \(\mathbb{P}(X\gt1)=\int_1^2 \tfrac12 x\,dx=\tfrac14(4-1)=\dfrac34=\boxed{0.750}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#34d399;color:#032117">STANDARD</span> \(f(x)=k\,x^{2}\) for \(0\le x\le2\). Find (a) \(k\); (b) \(\mathbb{E}(X)\); (c) the median. <b>(4 marks)</b></summary>
+<p><b>(a)</b> \(\int_0^2 kx^2\,dx=\tfrac{8k}{3}=1\Rightarrow k=\boxed{\tfrac38}=0.375.\)</p>
+<p><b>(b)</b> \(\mathbb{E}(X)=\int_0^2 x\cdot\tfrac38 x^2\,dx=\tfrac38\cdot\tfrac{16}{4}=\tfrac{3}{2}=\boxed{1.50}.\)</p>
+<p><b>(c)</b> \(F(x)=\tfrac{x^3}{8}\); median \(\tfrac{m^3}{8}=\tfrac12\Rightarrow m^3=4\Rightarrow m=4^{1/3}\approx\boxed{1.59}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge gold">EXAM-LEVEL</span> \(X\) has pdf \(f(x)=c\,x^{b}\) on \(0\le x\le3\) with \(\mathbb{P}(X\lt1)=\tfrac{1}{27}\). Find (a) \(b,c\); (b) the cdf; (c) \(\mathbb{P}(1\lt X\lt2)\); (d) \(\mathbb{E}(X)\) and \(\operatorname{Var}(X)\); (e) the median. <b>(12 marks)</b></summary>
+<p><b>(a)</b> Normalise: \(\dfrac{c\,3^{b+1}}{b+1}=1\). Condition: \(\dfrac{c\,1^{b+1}}{b+1}=\dfrac{1}{27}\). Divide: \(\left(\tfrac13\right)^{b+1}=\tfrac{1}{27}=\left(\tfrac13\right)^3\Rightarrow b+1=3\Rightarrow \boxed{b=2}\); then \(c=\dfrac{3}{3^{3}}=\dfrac{1}{9}\approx\boxed{0.111}.\)</p>
+<p><b>(b)</b> \(F(x)=\int_0^x \tfrac19 u^2\,du=\dfrac{x^3}{27}\):
+$$F(x)=\begin{cases}0 & x\lt0\\[2pt]\dfrac{x^3}{27} & 0\le x\le3\\[4pt]1 & x\gt3.\end{cases}$$</p>
+<p><b>(c)</b> \(\mathbb{P}(1\lt X\lt2)=F(2)-F(1)=\dfrac{8-1}{27}=\dfrac{7}{27}\approx\boxed{0.259}.\)</p>
+<p><b>(d)</b> \(\mathbb{E}(X)=\int_0^3 x\cdot\tfrac19 x^2\,dx=\tfrac19\cdot\tfrac{81}{4}=\tfrac94=\boxed{2.25};\) \(\mathbb{E}(X^2)=\int_0^3 \tfrac19 x^4\,dx=\tfrac19\cdot\tfrac{243}{5}=5.4;\) \(\operatorname{Var}=5.4-2.25^2=\boxed{0.3375}\) (sd \(\approx0.581\)).</p>
+<p><b>(e) Median:</b> \(\dfrac{m^3}{27}=\tfrac12\Rightarrow m^3=13.5\Rightarrow m\approx\boxed{2.38}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span> A decreasing density: \(f(x)=c\,(1-x^{2})\) for \(0\le x\le1\). Find (a) \(c\); (b) \(\mathbb{P}(X\lt0.5)\); (c) \(\mathbb{E}(X)\); (d) state the mode. <b>(6 marks)</b></summary>
+<p><b>(a)</b> \(\int_0^1 c(1-x^2)\,dx=c\left(1-\tfrac13\right)=\tfrac{2c}{3}=1\Rightarrow c=\boxed{\tfrac32}.\)</p>
+<p><b>(b)</b> \(\mathbb{P}(X\lt0.5)=\tfrac32\int_0^{0.5}(1-x^2)\,dx=\tfrac32\left(0.5-\tfrac{0.125}{3}\right)=\tfrac32(0.4583)=\dfrac{11}{16}=\boxed{0.6875}.\)</p>
+<p><b>(c)</b> \(\mathbb{E}(X)=\tfrac32\int_0^1 x(1-x^2)\,dx=\tfrac32\left(\tfrac12-\tfrac14\right)=\tfrac32\cdot\tfrac14=\dfrac38=\boxed{0.375}.\)</p>
+<p><b>(d)</b> \(f\) is <i>decreasing</i> on \([0,1]\) (since \(f'=-3x\lt0\)), so it peaks at the left endpoint: \(\text{mode}=\boxed{0}.\)</p>
+<p class="tip">Opposite to the \(cx^b\) case (\(b\gt0\)) where the mode sits at the <i>right</i> end — always read off the direction the density slopes.</p>
+</details>
+
+<!-- ---------- TOPIC 5 ---------- -->
+<h3>⑤ The Normal distribution</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked — forward probabilities and a percentile (battery life)</summary>
+<div class="q card">Battery life \(X\sim\mathcal N(40,\,5^2)\) hours. Find (a) \(\mathbb{P}(X\lt35)\); (b) \(\mathbb{P}(38\lt X\lt48)\); (c) the 90th percentile.</div>
+<div class="method"><ol>
+<li>\(\mu=40,\ \sigma=5.\)</li>
+<li><b>(a)</b> \(Z=\dfrac{35-40}{5}=-1\); \(\mathbb{P}(X\lt35)=\Phi(-1)=1-\Phi(1)\approx\boxed{0.1587}.\)</li>
+<li><b>(b)</b> \(z_1=\dfrac{38-40}{5}=-0.4,\ z_2=\dfrac{48-40}{5}=1.6\); \(\Phi(1.6)-\Phi(-0.4)\approx0.9452-0.3446=\boxed{0.6006}.\)</li>
+<li><b>(c)</b> Reverse: \(\Phi(z)=0.90\Rightarrow z\approx1.2816\); \(x=40+1.2816(5)\approx\boxed{46.4}\) hours.</li>
+</ol></div>
+</details>
+
+<details>
+<summary>Worked — solve for the mean (packaging fill weight)</summary>
+<div class="q card">A machine fills packets to a weight \(X\sim\mathcal N(\mu,\,2^2)\) grams. The target is that only 2% of packets fall below 500 g. What mean \(\mu\) achieves this?</div>
+<div class="method"><ol>
+<li>Require \(\mathbb{P}(X\lt500)=0.02\). Find \(z\) with \(\Phi(z)=0.02\Rightarrow z\approx-2.0537.\)</li>
+<li>\(\dfrac{500-\mu}{2}=-2.0537\Rightarrow \mu=500+2.0537(2)\approx\boxed{504\text{ g}}\) (504.1 g to 4 s.f.).</li>
+</ol></div>
+<p class="tip">"Only 2% below" → the cutoff sits in the <i>left</i> tail, so \(z\) is negative; set \((\text{cutoff}-\mu)/\sigma=z\) and solve for the unknown.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><span class="badge" style="background:#0ea5e9;color:#03202e">WARM-UP</span> \(Z\sim\mathcal N(0,1)\). Find \(\mathbb{P}(Z\lt1.5)\) and \(\mathbb{P}(Z\gt1.5)\). <b>(2 marks)</b></summary>
+<p>From the table \(\Phi(1.5)\approx0.9332\), so \(\mathbb{P}(Z\lt1.5)=\boxed{0.9332}\) and \(\mathbb{P}(Z\gt1.5)=1-0.9332=\boxed{0.0668}.\)</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#34d399;color:#032117">STANDARD</span> Exam marks \(X\sim\mathcal N(70,\,4^2)\). Find \(\mathbb{P}(X\gt78)\) and \(\mathbb{P}(66\lt X\lt74)\). <b>(3 marks)</b></summary>
+<p>\(\mu=70,\ \sigma=4.\) \(\mathbb{P}(X\gt78)\): \(z=\dfrac{78-70}{4}=2\Rightarrow 1-\Phi(2)\approx\boxed{0.0228}.\)</p>
+<p>\(\mathbb{P}(66\lt X\lt74)\): \(z=\pm1\Rightarrow \Phi(1)-\Phi(-1)=2\Phi(1)-1\approx\boxed{0.6827}\) (the "within 1 sd" rule).</p>
+</details>
+
+<details>
+<summary><span class="badge gold">EXAM-LEVEL</span> Adult heights \(X\sim\mathcal N(175,\,8^2)\) cm. Find (a) \(\mathbb{P}(X\gt190)\); (b) \(\mathbb{P}(165\lt X\lt185)\); (c) the height exceeded by only 5% of adults; (d) the interquartile range. <b>(8 marks)</b></summary>
+<p>\(\mu=175,\ \sigma=8.\)</p>
+<p><b>(a)</b> \(z=\dfrac{190-175}{8}=1.875\); \(\mathbb{P}(X\gt190)=1-\Phi(1.875)\approx\boxed{0.0304}.\)</p>
+<p><b>(b)</b> \(z_1=\dfrac{165-175}{8}=-1.25,\ z_2=\dfrac{185-175}{8}=1.25\); \(\Phi(1.25)-\Phi(-1.25)=2\Phi(1.25)-1\approx\boxed{0.7887}.\)</p>
+<p><b>(c)</b> \(\Phi(z)=0.95\Rightarrow z\approx1.6449\); \(x=175+1.6449(8)\approx\boxed{188}\) cm (188.2 cm).</p>
+<p><b>(d)</b> \(Q_3-Q_1=(0.6745-(-0.6745))\sigma=2(0.6745)(8)\approx\boxed{10.8}\) cm (\(Q_1\approx169.6,\ Q_3\approx180.4\)).</p>
+</details>
+
+<details>
+<summary><span class="badge" style="background:#a78bfa;color:#1e1033">STRETCH</span> A dimension \(X\sim\mathcal N(\mu,\sigma^2)\) satisfies \(\mathbb{P}(X\lt20)=0.10\) and \(\mathbb{P}(X\gt50)=0.05\). Find \(\mu\) and \(\sigma\). <b>(5 marks)</b></summary>
+<p>Two standardised equations. \(\Phi(z)=0.10\Rightarrow z=-1.2816\) gives \(\dfrac{20-\mu}{\sigma}=-1.2816.\) \(\Phi(z)=0.95\Rightarrow z=1.6449\) gives \(\dfrac{50-\mu}{\sigma}=1.6449.\)</p>
+<p>Subtract: \(\dfrac{50-20}{\sigma}=1.6449-(-1.2816)=2.9265\Rightarrow \sigma=\dfrac{30}{2.9265}\approx\boxed{10.25}.\)</p>
+<p>Then \(\mu=20+1.2816(10.25)\approx\boxed{33.14}.\) (Check: \(\mathbb{P}(X\lt20)\approx0.10,\ \mathbb{P}(X\gt50)\approx0.05.\) ✓)</p>
+</details>
+
+<div class="tip"><b>How to train here.</b> (1) Read only the question, hide the solution, and actually write your attempt on paper first — the reveal is for <i>checking</i>, not reading. (2) Climb the ladder in order: WARM-UP → STANDARD → EXAM-LEVEL → STRETCH; the EXAM-LEVEL multi-parts are shaped like the real Question 1. (3) Mark anything you got wrong and <b>redo it from scratch after 2 days</b> — if you can't reproduce the method cold, you haven't learnt it yet. (4) Time the EXAM-LEVEL ones at roughly 1.5 minutes per mark to build exam pace.</div>
+</section>
 
 </main>
 </body>

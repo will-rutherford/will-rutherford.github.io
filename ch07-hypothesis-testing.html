@@ -73,6 +73,7 @@
   <a href="#triggers">Triggers</a>
   <a href="#traps">Traps</a>
   <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -605,6 +606,519 @@ Assumptions:  independence; normality (from histograms/CLT); equal var if pooled
 
 <details><summary>8. Two-sample proportion test: 20/153 males vs 16/154 females are left-handed. What is the pooled \(\hat P\) and the null distribution of \(Z\)?</summary>
 <p>\(\hat P=(20+16)/(153+154)=36/307=0.117\). Under \(H_0:p_M=p_F\), \(Z=\dfrac{\hat p_M-\hat p_F}{\sqrt{\hat P(1-\hat P)(1/153+1/154)}}\overset{\text{approx}}{\sim}\mathcal N(0,1)\). (Tutorial 6 / notes Ex 7.9-style.)</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Fresh scenarios you have <b>not</b> seen in the notes, tutorials, or any 2021–2025 paper — same exam <i>style</i>, new numbers. Work each in the <b>6-step ritual</b>, bracket every P-value from the \(t\)/normal tables, and always finish with a context sentence. Every figure below is verified with <code>scipy.stats</code>.</p>
+<p class="tip">How to use the arena: read the "📖 Learn from these" pair first (they are written exactly as a marker wants to see it), then cover the solutions and attempt "✏️ Your turn". Only reveal a solution once you have committed your own hypotheses + statistic + bracket to paper.</p>
+
+<!-- ---------- 8.1 ONE-SAMPLE t ---------- -->
+<h3>8.1 · One-sample \(t\)-test</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — bottle fill volume (two-sided)</summary>
+<p><b>Q.</b> A craft brewery labels its bottles \(330\) mL. A quality officer measures \(n=12\) randomly chosen bottles and finds mean \(\bar x = 332.5\) mL, \(s = 3.8\) mL. Is there evidence the mean fill <i>differs</i> from the labelled \(330\) mL? Use \(\alpha=0.05\).</p>
+<div class="mono">1. Model:  X₁,…,X₁₂ ~iid N(μ, σ²), σ unknown  (fill volumes).
+2. Hypotheses:  Let μ = population mean fill volume (mL).
+      H₀: μ = 330    vs    H₁: μ ≠ 330    (two-sided — "differs").
+3. Statistic:  T = (X̄ − 330)/(S/√n).
+4. Null dist:  T ~ t₁₁.
+5. Outcome:  t = (332.5 − 330)/(3.8/√12) = 2.5/1.0970 = 2.28   (2 s.f.; verified 2.279).
+6. P-value (two-sided) = 2·P(t₁₁ ≥ 2.28):
+      t-table df=11:  2.201 → γ=0.975 (tail 0.025),  2.718 → γ=0.99 (tail 0.01).
+      2.201 < 2.28 < 2.718 ⇒ one tail in (0.01, 0.025) ⇒ 0.02 < P < 0.05.   (exact 0.044)
+7. Conclusion:  P < 0.05 ⇒ reject H₀.
+      In context: there is (moderate) evidence the mean fill volume is not 330 mL —
+      the line appears to be slightly over-filling.</div>
+<p class="tip">Borderline case: the bracket \(0.02\lt P\lt0.05\) sits entirely below \(0.05\), so the decision is safe without needing the exact decimal.</p>
+</details>
+
+<details>
+<summary>Worked B — library noise level (one-sided)</summary>
+<p><b>Q.</b> A university library advertises that its "quiet zone" averages no more than \(45\) dB. A student records the sound level on \(n=16\) random afternoons: \(\bar x = 47.2\) dB, \(s = 4.5\) dB. Is there evidence the true mean <i>exceeds</i> \(45\) dB? \(\alpha=0.05\).</p>
+<div class="mono">1. Model:  X₁,…,X₁₆ ~iid N(μ, σ²), σ unknown.
+2. Hypotheses:  Let μ = population mean afternoon noise level (dB).
+      H₀: μ = 45    vs    H₁: μ > 45    (right one-sided — "exceeds").
+3. Statistic:  T = (X̄ − 45)/(S/√n).
+4. Null dist:  T ~ t₁₅.
+5. Outcome:  t = (47.2 − 45)/(4.5/√16) = 2.2/1.125 = 1.96   (verified 1.956).
+6. P-value (right tail) = P(t₁₅ ≥ 1.96):
+      t-table df=15:  1.753 → 0.95 (tail 0.05),  2.131 → 0.975 (tail 0.025).
+      1.753 < 1.96 < 2.131 ⇒ 0.025 < P < 0.05.   (exact 0.035)
+7. Conclusion:  P < 0.05 ⇒ reject H₀.
+      In context: there is evidence the quiet zone is louder than the advertised 45 dB
+      on average.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> A pro e-sports team claims its players react in under \(250\) ms. In \(n=9\) trials a player averages \(\bar x = 238\) ms with \(s = 18\) ms. Test \(H_1:\mu\lt250\) at \(\alpha=0.05\).</p>
+<details><summary>Solution</summary>
+<div class="mono">H₀: μ = 250  vs  H₁: μ < 250  (left one-sided — "under 250").
+t = (238 − 250)/(18/√9) = −12/6 = −2.0,  df = 8.
+Left tail:  |t| = 2.0 between 1.860 (tail .05) and 2.306 (tail .025) on df=8
+   ⇒ 0.025 < P < 0.05.   (exact 0.040)
+P < 0.05 ⇒ reject H₀.
+Context: evidence the player's mean reaction time is below 250 ms.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> An artisan chocolatier labels bars \(100\) g. A consumer group weighs \(n=10\) bars: \(\bar x = 101.8\) g, \(s = 2.4\) g. Is the mean mass different from \(100\) g? State hypotheses with notation, run the test, bracket \(P\), conclude in context.</p>
+<details><summary>Solution</summary>
+<div class="mono">Let μ = population mean bar mass (g).
+H₀: μ = 100  vs  H₁: μ ≠ 100  (two-sided — "different").
+Model: X₁,…,X₁₀ ~iid N(μ,σ²).   T = (X̄−100)/(S/√10) ~ t₉.
+t = (101.8 − 100)/(2.4/√10) = 1.8/0.7589 = 2.37   (verified 2.372).
+P (two-sided) = 2·P(t₉ ≥ 2.37): df=9  2.262 → .975 (tail .025), 2.821 → .99 (tail .01)
+   ⇒ one tail (0.01,0.025) ⇒ 0.02 < P < 0.05.   (exact 0.042)
+P < 0.05 ⇒ reject H₀.
+Context: evidence the mean bar mass differs from the labelled 100 g (bars run slightly heavy).</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q3.</b> A hobbyist claims a new battery pack gives their racing drone a mean flight time <i>greater</i> than \(120\) s. Over \(n=20\) flights: \(\bar x = 126.4\) s, \(s = 9.2\) s. (a) State hypotheses (define notation). (b) Perform the test, report \(t\) to 2 s.f. and bracket \(P\). (c) State a statistical and a context conclusion. (d) Name one assumption and how you would check it.</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) Let μ = population mean flight time (s) with the new pack.
+    H₀: μ = 120  vs  H₁: μ > 120  (right one-sided — "greater than").
+(b) Model X₁,…,X₂₀ ~iid N(μ,σ²).  T = (X̄−120)/(S/√20) ~ t₁₉.
+    t = (126.4 − 120)/(9.2/√20) = 6.4/2.0572 = 3.1   (verified 3.111).
+    Right tail: df=19  2.861 → .995 (tail .005), 3.174 → .9975 (tail .0025)
+       ⇒ 0.0025 < P < 0.005.   (exact 0.0029)
+(c) P < 0.01 ⇒ strong evidence, reject H₀.
+    Context: strong evidence the new pack's mean flight time exceeds 120 s.
+(d) Assumption: flight times ~ Normal (and independent flights). Check with a
+    histogram / QQ-plot of the 20 times for rough symmetry & no outliers; n=20 also
+    lets the CLT help the sampling distribution of X̄.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q4.</b> In Q3 you rejected \(H_0\) with \(0.0025\lt P\lt0.005\). A teammate writes "so there is a \(99.7\%\) chance the true mean beats 120 s." Explain in one sentence why that reading is wrong, and give the correct interpretation of the P-value.</p>
+<details><summary>Solution</summary>
+<div class="mono">Wrong: the P-value is NOT P(H₁ true) or P(H₀ false) — it says nothing directly
+about the probability of any hypothesis.
+Correct: "IF the true mean were exactly 120 s, a sample mean as far above 120 as
+ours (or further) would occur with probability between 0.0025 and 0.005" — i.e. our
+data would be very surprising under H₀, which is why we reject it.</div>
+</details>
+</div>
+
+<!-- ---------- 8.2 PAIRED t ---------- -->
+<h3>8.2 · Paired \(t\)-test (recognition + execution)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — same typists, two keyboards (recognise the pairing)</summary>
+<p><b>Q.</b> Ten office workers each type a standard passage on a membrane keyboard and again on a mechanical keyboard (order randomised). For each typist the change \(D=\text{(mechanical} - \text{membrane)}\) in words-per-minute is recorded; the differences have mean \(\bar d = 4.3\) WPM and SD \(s_D = 5.2\) WPM. Is there a difference between keyboards?</p>
+<div class="mono">Recognise PAIRED: the SAME 10 typists use both keyboards ⇒ one measurement per pair
+⇒ collapse to differences D and run a one-sample t-test on D (NOT t₁₈).
+1. Model:  D₁,…,D₁₀ ~iid N(μ_D, σ²).
+2. Hypotheses:  Let μ_D = mean of (mechanical − membrane) WPM per typist.
+      H₀: μ_D = 0   vs   H₁: μ_D ≠ 0   (two-sided — "a difference").
+3. Statistic:  T = (D̄ − 0)/(S_D/√10).
+4. Null dist:  T ~ t₉   (n = 10 pairs ⇒ df = 9).
+5. Outcome:  t = 4.3/(5.2/√10) = 4.3/1.6444 = 2.61   (verified 2.615).
+6. P (two-sided) = 2·P(t₉ ≥ 2.61): df=9  2.262 → .975 (tail .025), 2.821 → .99 (tail .01)
+      ⇒ one tail (0.01,0.025) ⇒ 0.02 < P < 0.05.   (exact 0.028)
+7. P < 0.05 ⇒ reject H₀.
+      In context: evidence the two keyboards give different mean typing speeds
+      (mechanical faster in this sample).</div>
+<p class="trap">If you had wrongly treated this as two independent samples of 10, you would use \(t_{18}\) and an inflated SE — pairing removes the typist-to-typist variability and is the more powerful (and correct) design.</p>
+</details>
+
+<details>
+<summary>Worked B — dominant vs non-dominant hand grip (two-sided)</summary>
+<p><b>Q.</b> Fifteen athletes have grip strength (kg) measured on their dominant and non-dominant hands. The paired differences \(D=\text{(dominant} - \text{non-dominant)}\) have \(\bar d = 3.6\) kg, \(s_D = 6.0\) kg. Test whether the hands differ.</p>
+<div class="mono">PAIRED: two measurements on the SAME 15 athletes ⇒ work on differences.
+1. Model:  D₁,…,D₁₅ ~iid N(μ_D, σ²).
+2. Let μ_D = mean (dominant − non-dominant) grip difference (kg).
+      H₀: μ_D = 0   vs   H₁: μ_D ≠ 0.
+3&4. T = (D̄ − 0)/(S_D/√15) ~ t₁₄.
+5. t = 3.6/(6.0/√15) = 3.6/1.5492 = 2.32   (verified 2.324).
+6. P (two-sided) = 2·P(t₁₄ ≥ 2.32): df=14  2.145 → .975 (tail .025), 2.624 → .99 (tail .01)
+      ⇒ one tail (0.01,0.025) ⇒ 0.02 < P < 0.05.   (exact 0.036)
+7. P < 0.05 ⇒ reject H₀.
+      In context: evidence of a mean grip-strength difference between the two hands
+      (dominant stronger here).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · recognition · 2 marks</span> <b>Q1 (tricky — paired or independent?).</b> For each study, decide whether a <b>paired</b> or an <b>independent two-sample</b> \(t\)-test is appropriate, and state the df in terms of the sizes given.</p>
+<ul>
+<li>(i) 20 gym members have resting heart rate measured, then again after an 8-week program.</li>
+<li>(ii) Grip strength of 15 left-handed vs 15 right-handed volunteers.</li>
+<li>(iii) A twin study: in each of 12 twin pairs, one twin is randomly given tutoring and the other is not; end-of-term test scores are compared.</li>
+<li>(iv) 30 widgets sampled from production line A and 30 from line B.</li>
+</ul>
+<details><summary>Solution</summary>
+<div class="mono">(i) PAIRED — same 20 people before/after ⇒ t on 20 differences, df = 19.
+(ii) INDEPENDENT — two different groups of people ⇒ two-sample t, df up to m+n−2 = 28.
+(iii) PAIRED — matched pairs! Even though the twins are different people, they are
+      linked as a pair (one treated, one control), so use the 12 pair-differences,
+      df = 11.  ← the deliberate trap: "different people" does NOT force independent;
+      a matched/pair design is paired.
+(iv) INDEPENDENT — two separate samples ⇒ two-sample t, df up to 58.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Eighteen students each complete a timed reading test before and after a two-week speed-reading app. For each student \(D=\text{(after} - \text{before)}\) reading speed (words/min) is recorded: \(\bar d = 5.1\), \(s_D = 8.4\). Test whether the app <i>increases</i> reading speed (\(H_1:\mu_D\gt0\)) at \(\alpha=0.05\).</p>
+<details><summary>Solution</summary>
+<div class="mono">PAIRED (same 18 students before/after).
+Let μ_D = mean (after − before) reading speed (words/min).
+H₀: μ_D = 0  vs  H₁: μ_D > 0  (right one-sided — "increases").
+T = (D̄ − 0)/(S_D/√18) ~ t₁₇.
+t = 5.1/(8.4/√18) = 5.1/1.9799 = 2.58   (verified 2.576).
+Right tail: df=17  2.567 → .99 (tail .01), 2.898 → .995 (tail .005)
+   ⇒ 0.005 < P < 0.01.   (exact 0.0098)
+P < 0.01 ⇒ strong evidence, reject H₀.
+Context: strong evidence the app increases mean reading speed.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q3.</b> A panel of \(12\) tasters scores a chocolate for "bitterness" from two roasters, \(D=\text{(Roaster X} - \text{Roaster Y)}\): \(\bar d = -1.2\), \(s_D = 3.1\). Test for a difference (\(\alpha=0.05\)) and comment on what a <i>non-</i>rejection does and does not tell you.</p>
+<details><summary>Solution</summary>
+<div class="mono">Let μ_D = mean (X − Y) bitterness difference.  H₀: μ_D = 0  vs  H₁: μ_D ≠ 0.
+t = −1.2/(3.1/√12) = −1.2/0.8949 = −1.34,  df = 11.
+Two-sided: |t| = 1.34 < 1.363 (=t₁₁,.90, tail .10) ⇒ one tail > 0.10 ⇒ P > 0.20.  (exact 0.207)
+P > 0.05 ⇒ do NOT reject H₀.
+Context: no significant evidence the two roasters differ in mean bitterness.
+Interpretation: this is NOT proof the roasters are identical — only that these 12
+tasters give insufficient evidence of a difference (could be low power with n=12).</div>
+</details>
+</div>
+
+<!-- ---------- 8.3 TWO-SAMPLE t (pooled vs Welch) ---------- -->
+<h3>8.3 · Two-sample \(t\)-test — pooled vs Welch choice</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — streaming latency, two providers (SDs differ ⇒ Welch)</summary>
+<p><b>Q.</b> A gamer compares ping (ms) on two internet providers. ISP&nbsp;A: \(m=14\), \(\bar x = 42\), \(s_X = 12\). ISP&nbsp;B: \(n=16\), \(\bar y = 35\), \(s_Y = 5\). Is A's mean ping <i>higher</i> than B's? \(\alpha=0.05\).</p>
+<div class="mono">Two INDEPENDENT groups. SD ratio = 12/5 = 2.4 (> 2) ⇒ variances clearly unequal
+⇒ use WELCH (do NOT pool).
+1. Model:  X₁..X₁₄ ~iid N(μ_X,σ_X²) [A],  Y₁..Y₁₆ ~iid N(μ_Y,σ_Y²) [B], independent.
+2. Let μ_X, μ_Y = population mean ping (ms) for A, B.
+      H₀: μ_X = μ_Y   vs   H₁: μ_X > μ_Y   (right one-sided — "higher").
+3. T = (X̄ − Ȳ)/√(S_X²/m + S_Y²/n).
+5. SE = √(12²/14 + 5²/16) = √(10.286 + 1.5625) = 3.442
+   t = (42 − 35)/3.442 = 2.03   (verified 2.034).
+4. Welch df = (10.286+1.5625)² / (10.286²/13 + 1.5625²/15) = 16.9 → round DOWN to 16.
+6. Right tail P(t₁₆ ≥ 2.03): df=16  1.746 → .95 (tail .05), 2.120 → .975 (tail .025)
+      ⇒ 0.025 < P < 0.05.   (exact 0.029)
+7. P < 0.05 ⇒ reject H₀.
+      In context: evidence ISP A has a higher mean ping than ISP B.
+Justification line to write: "s_X/s_Y ≈ 2.4 > 2, so I do not assume equal variances
+and use the Welch test (always valid); df rounded down to 16 for the table."</div>
+</details>
+
+<details>
+<summary>Worked B — concrete strength, two mixes (SDs close ⇒ pooled)</summary>
+<p><b>Q.</b> Compressive strength (MPa) of two concrete mixes. Mix&nbsp;1: \(m=8\), \(\bar x = 38.5\), \(s_X = 2.1\). Mix&nbsp;2: \(n=8\), \(\bar y = 35.2\), \(s_Y = 2.3\). Do the mixes differ in mean strength? \(\alpha=0.05\).</p>
+<div class="mono">Two INDEPENDENT groups. SD ratio = 2.3/2.1 = 1.10 (< 2) ⇒ equal-variance assumption
+reasonable ⇒ POOLED (exact t₁₄).
+1. Let μ_X, μ_Y = population mean strength (MPa) of mix 1, mix 2.
+      H₀: μ_X = μ_Y   vs   H₁: μ_X ≠ μ_Y   (two-sided — "differ").
+2. S_p² = ((8−1)·2.1² + (8−1)·2.3²)/(8+8−2) = (30.87 + 37.03)/14 = 4.85 ⇒ S_p = 2.20.
+3. T = (X̄ − Ȳ)/(S_p√(1/m+1/n)) ~ t₁₄  (exact).
+5. SE = 2.20·√(1/8+1/8) = 2.20·0.5 = 1.101
+   t = (38.5 − 35.2)/1.101 = 3.3/1.101 = 3.00   (verified 2.997).
+6. P (two-sided) = 2·P(t₁₄ ≥ 3.00): df=14  2.977 → .995 (tail .005), 3.326 → .9975 (tail .0025)
+      ⇒ one tail (0.0025,0.005) ⇒ 0.005 < P < 0.01.   (exact 0.0096)
+7. P < 0.01 ⇒ strong evidence, reject H₀.
+      In context: strong evidence the two mixes differ in mean compressive strength.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · multi-part · 17 marks</span> <b>Q1 (flagship, mirrors the real Q3 shape).</b> A sleep researcher compares hours of deep sleep on two mattress firmnesses. Volunteers were randomised to one mattress for a week. <b>Soft:</b> \(n_S=15\), \(\bar x_S = 1.85\) h, \(s_S = 0.42\). <b>Firm:</b> \(n_F=15\), \(\bar x_F = 2.12\) h, \(s_F = 0.40\). Histograms of both groups are roughly symmetric.</p>
+<ul>
+<li>(a) Construct a \(95\%\) CI for the <b>Firm</b> population mean deep-sleep time. [4]</li>
+<li>(b) The aim is to see whether firmness produces a <i>different</i> mean deep-sleep time. State the hypotheses in mathematical form, explaining all notation. [4]</li>
+<li>(c) Perform an appropriate two-sample test; report \(t\) to 2 s.f. and give a statistical + context conclusion. [7]</li>
+<li>(d) State the assumptions and justify your pooled-vs-Welch choice. [2]</li>
+</ul>
+<details><summary>Solution</summary>
+<div class="mono">(a) 95% CI for μ_F (one-sample t, df=14, t₀.₉₇₅,₁₄ = 2.145):
+    2.12 ± 2.145·(0.40/√15) = 2.12 ± 2.145·0.10328 = 2.12 ± 0.22 = (1.90, 2.34) h.
+    Interpret: 95% confident the Firm population mean deep-sleep time is 1.90–2.34 h.
+
+(b) Let μ_S = population mean deep-sleep hours on the Soft mattress,
+        μ_F = population mean deep-sleep hours on the Firm mattress.
+    H₀: μ_S = μ_F   vs   H₁: μ_S ≠ μ_F   (two-sided — "a different").
+
+(c) Two INDEPENDENT groups. SD ratio = 0.42/0.40 = 1.05 (< 2) ⇒ POOLED, exact t₂₈.
+    S_p² = (14·0.42² + 14·0.40²)/28 = (2.4696+2.24)/28 = 0.16820 ⇒ S_p = 0.410.
+    SE = 0.410·√(1/15+1/15) = 0.410·0.36515 = 0.1498.
+    t = (1.85 − 2.12)/0.1498 = −0.27/0.1498 = −1.8   (verified −1.803).
+    P (two-sided) = 2·P(t₂₈ ≥ 1.80): df=28  1.701 → .95 (tail .05), 2.048 → .975 (tail .025)
+       ⇒ one tail (0.025,0.05) ⇒ 0.05 < P < 0.10.   (exact 0.082)
+    Statistical: P > 0.05 ⇒ do NOT reject H₀.
+    Context: no significant evidence that mattress firmness changes mean deep-sleep time
+    (consistent with (a)/the difference CI containing 0).
+
+(d) Assumptions: (i) observations independent within & between groups (randomised);
+    (ii) each group's deep-sleep times approx Normal — histograms roughly symmetric,
+    supported by CLT. Pooled vs Welch: SDs 0.42 vs 0.40 give ratio ≈ 1.05 ≪ 2, so the
+    equal-variance assumption is very reasonable ⇒ pooled (Welch would give the same
+    conclusion; it is always a safe fallback).</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Delivery times (min) for two courier firms. Firm P: \(m=10\), \(\bar x = 34\), \(s_X = 9\). Firm Q: \(n=12\), \(\bar y = 28\), \(s_Y = 4\). Is P <i>slower</i> on average? Justify pooled vs Welch, then test at \(\alpha=0.05\).</p>
+<details><summary>Solution</summary>
+<div class="mono">SD ratio = 9/4 = 2.25 (> 2) ⇒ WELCH.
+Let μ_X, μ_Y = mean delivery time (min) for P, Q.
+H₀: μ_X = μ_Y  vs  H₁: μ_X > μ_Y  (right one-sided — "slower").
+SE = √(9²/10 + 4²/12) = √(8.1 + 1.3333) = 3.0715.
+t = (34 − 28)/3.0715 = 6/3.0715 = 1.95   (verified 1.954).
+Welch df = (8.1+1.3333)²/(8.1²/9 + 1.3333²/11) = 88.99/(7.29+0.1616) = 11.9 → 11.
+Right tail P(t₁₁ ≥ 1.95): df=11  1.796 → .95 (tail .05), 2.201 → .975 (tail .025)
+   ⇒ 0.025 < P < 0.05.   (exact 0.038 on df=11).
+P < 0.05 ⇒ reject H₀.
+Context: evidence Firm P is slower on average than Firm Q.
+(Note: with Welch df=11 the bracket is 0.025 < P < 0.05; a marker rewards the correct
+ df-down rounding and the SD-ratio justification for choosing Welch.)</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q3.</b> Two independent groups have \(m=n=40\) and sample SDs \(s_X=11.0\), \(s_Y=10.6\). A student insists on Welch "to be safe". Is that wrong? What does the pooled test buy you here, and roughly how do the two df compare?</p>
+<details><summary>Solution</summary>
+<div class="mono">Not wrong — Welch is always valid and costs no marks. But here SD ratio = 11.0/10.6
+≈ 1.04 ≪ 2, so pooling is well justified and gives the EXACT t-distribution with the
+clean df = m+n−2 = 78. Welch's df would be ≈ 77.9 → 77, essentially identical, so both
+routes give the same bracket and conclusion. Takeaway: pooled ⇒ exact + tidy df when
+SDs are similar; Welch ⇒ safe default when they are not (or when unsure).</div>
+</details>
+</div>
+
+<!-- ---------- 8.4 PROPORTION TESTS ---------- -->
+<h3>8.4 · Proportion tests (one- &amp; two-sample)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — one-sample proportion, Normal approx (seed germination)</summary>
+<p><b>Q.</b> A seed supplier claims a \(92\%\) germination rate. A gardener sows \(n=80\) seeds and \(68\) germinate. Is there evidence the true rate is <i>below</i> \(0.92\)? \(\alpha=0.05\).</p>
+<div class="mono">1. Model:  X = # germinating ~ Bin(80, p).
+2. Hypotheses:  H₀: p = 0.92   vs   H₁: p < 0.92   (left one-sided — "below").
+3. Statistic (Normal approx, denominator uses p₀):
+      Z = (p̂ − p₀)/√(p₀(1−p₀)/n),   p̂ = 68/80 = 0.85.
+   Check: n·p₀ = 73.6 ≥ 5,  n(1−p₀) = 6.4 ≥ 5 ⇒ Normal approx acceptable.
+4. Null dist:  Z ~ N(0,1) approx.
+5. z = (0.85 − 0.92)/√(0.92·0.08/80) = −0.07/0.030332 = −2.31   (verified −2.308).
+6. P (left tail) = P(Z ≤ −2.31) = 1 − Φ(2.31) = 1 − 0.9896 = 0.0104.
+7. P < 0.05 ⇒ reject H₀.
+      In context: evidence the true germination rate is below the claimed 92%.
+[Exact binomial P(X ≤ 68 | p=0.92) = 0.025 — same decision; use exact if asked.]</div>
+<p class="trap">The test denominator uses \(p_0=0.92\), NOT \(\hat p=0.85\). A confidence interval would use \(\hat p\).</p>
+</details>
+
+<details>
+<summary>Worked B — two-sample proportion (app crash rates)</summary>
+<p><b>Q.</b> Version 1 of an app crashed in \(24\) of \(300\) sessions; Version 2 crashed in \(12\) of \(280\). Is Version 1's crash rate <i>higher</i>? \(\alpha=0.05\).</p>
+<div class="mono">1. Model:  X ~ Bin(300, p₁) [v1],  Y ~ Bin(280, p₂) [v2], independent.
+2. Hypotheses:  H₀: p₁ = p₂   vs   H₁: p₁ > p₂   (right one-sided — "higher").
+3. Z = (p̂₁ − p̂₂)/√(p̂(1−p̂)(1/m+1/n)) ~ N(0,1),  pooled p̂ = (X+Y)/(m+n).
+5. p̂₁ = 24/300 = 0.0800,  p̂₂ = 12/280 = 0.0429,  p̂ = 36/580 = 0.0621.
+   SE = √(0.0621·0.9379·(1/300+1/280)) = √(0.0582·0.006905) = 0.02004
+   z = (0.0800 − 0.0429)/0.02004 = 0.0371/0.02004 = 1.85   (verified 1.853).
+6. P (right tail) = P(Z ≥ 1.85) = 1 − Φ(1.85) = 1 − 0.9678 = 0.0322.
+7. P < 0.05 ⇒ reject H₀.
+      In context: evidence Version 1 has a higher crash rate than Version 2.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q1.</b> A council claims \(60\%\) of households recycle correctly. In a survey of \(n=120\) households, \(78\) do. Is the true proportion <i>different</i> from \(0.60\)? Test at \(\alpha=0.05\) (Normal approx).</p>
+<details><summary>Solution</summary>
+<div class="mono">H₀: p = 0.60  vs  H₁: p ≠ 0.60  (two-sided — "different").  p̂ = 78/120 = 0.65.
+z = (0.65 − 0.60)/√(0.60·0.40/120) = 0.05/0.044721 = 1.12   (verified 1.118).
+P (two-sided) = 2·P(Z ≥ 1.12) = 2(1 − Φ(1.12)) = 2(1 − 0.8686) = 0.263.
+P > 0.05 ⇒ do NOT reject H₀.
+Context: no significant evidence the true recycling proportion differs from 60%.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q2.</b> A trial reports a mild side-effect in \(45\) of \(240\) patients on drug A and \(30\) of \(260\) on drug B. Is there a <i>difference</i> in side-effect rates? State hypotheses with notation, test at \(\alpha=0.05\), conclude in context.</p>
+<details><summary>Solution</summary>
+<div class="mono">Let p_A, p_B = population side-effect proportions for drugs A, B.
+H₀: p_A = p_B  vs  H₁: p_A ≠ p_B  (two-sided — "a difference").
+p̂_A = 45/240 = 0.1875,  p̂_B = 30/260 = 0.1154,  pooled p̂ = 75/500 = 0.150.
+SE = √(0.150·0.850·(1/240+1/260)) = √(0.1275·0.008013) = 0.031966
+z = (0.1875 − 0.1154)/0.031966 = 0.0721/0.031966 = 2.26   (verified 2.256).
+P (two-sided) = 2·P(Z ≥ 2.26) = 2(1 − Φ(2.26)) = 2(1 − 0.9881) = 0.0238.
+P < 0.05 ⇒ reject H₀.
+Context: evidence the two drugs differ in side-effect rate (A higher here).</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q3.</b> A coin is tossed \(n=10\) times and lands heads \(9\) times. Test \(H_0:p=0.5\) vs \(H_1:p\gt0.5\). Why should you use the <i>exact</i> binomial rather than the Normal approximation, and what is the exact P-value?</p>
+<details><summary>Solution</summary>
+<div class="mono">n = 10 is small, so the Normal approx is unreliable — prefer the EXACT binomial.
+Under H₀, X ~ Bin(10, 0.5).  P-value = P(X ≥ 9) = C(10,9)(.5)¹⁰ + C(10,10)(.5)¹⁰
+   = (10 + 1)/1024 = 11/1024 = 0.0107.   (verified 0.01074)
+P < 0.05 ⇒ reject H₀: evidence the coin favours heads.</div>
+</details>
+</div>
+
+<!-- ---------- 8.5 NON-ZERO / ONE-SIDED CLAIM NULLS ---------- -->
+<h3>8.5 · Non-zero &amp; one-sided "claim" nulls ("at least \(k\) more…")</h3>
+<div class="tip">When a claim is "<b>at least</b> \(k\) more/larger/longer", put the boundary value \(k\) in \(H_0\) and test the direction that would <b>disprove</b> the claim: \(H_0:\theta=k\) vs \(H_1:\theta\lt k\). The statistic becomes \(t=(\text{estimate}-k)/SE\) — the hypothesised value \(k\), not \(0\), goes in the numerator.</div>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — firmware "adds at least 90 min" (paired, non-zero null)</summary>
+<p><b>Q.</b> A phone maker claims a firmware update adds <i>at least</i> \(90\) minutes of battery life. The same \(12\) phones are timed before and after the update; differences \(D=\text{(after} - \text{before)}\) have \(\bar d = 74\) min, \(s_D = 33\). Is the "\(\ge 90\) min" claim supported? \(\alpha=0.05\).</p>
+<div class="mono">PAIRED (same 12 phones) AND a non-zero claim ⇒ δ₀ = 90.
+1. Let μ_D = mean (after − before) battery gain (min).
+2. Claim is "≥ 90"; test whether the data undercut it:
+      H₀: μ_D = 90   vs   H₁: μ_D < 90   (left one-sided).
+3&4. T = (D̄ − 90)/(S_D/√12) ~ t₁₁.
+5. t = (74 − 90)/(33/√12) = −16/9.5263 = −1.68   (verified −1.680).
+6. P (left tail) = P(t₁₁ ≤ −1.68): |t| = 1.68 between 1.363 (tail .10) and 1.796 (tail .05)
+      on df=11 ⇒ 0.05 < P < 0.10.   (exact 0.061)
+7. P > 0.05 ⇒ do NOT reject H₀.
+      In context: not quite enough evidence (at 5%) to reject the "≥ 90 min" claim,
+      though the sample gain (74 min) is below 90 and the evidence is borderline/weak.</div>
+<p class="trap">Numerator uses \(90\), not \(0\). Testing against \(0\) here answers a different question ("is there <i>any</i> gain?") and would wrongly reject.</p>
+</details>
+
+<details>
+<summary>Worked B — fertiliser "at least 0.5 t/ha more" (two-sample, non-zero null)</summary>
+<p><b>Q.</b> A fertiliser is advertised to raise wheat yield by <i>at least</i> \(0.5\) t/ha. Treated plots (\(m=10\)): \(\bar x = 8.9\), \(s_X = 0.6\). Control plots (\(n=10\)): \(\bar y = 8.6\), \(s_Y = 0.5\). Assume equal variances. Is the "\(\ge 0.5\)" claim supported? \(\alpha=0.05\).</p>
+<div class="mono">Two INDEPENDENT groups, SD ratio 0.6/0.5 = 1.2 (<2) ⇒ POOLED, exact t₁₈. Claim δ₀ = 0.5.
+1. Let μ_X, μ_Y = mean yield (t/ha) treated, control.
+2. H₀: μ_X − μ_Y = 0.5   vs   H₁: μ_X − μ_Y < 0.5   (left one-sided).
+3. S_p² = (9·0.6² + 9·0.5²)/18 = (3.24+2.25)/18 = 0.305 ⇒ S_p = 0.5523.
+   T = ((X̄−Ȳ) − 0.5)/(S_p√(1/m+1/n)) ~ t₁₈.
+5. SE = 0.5523·√(1/10+1/10) = 0.5523·0.4472 = 0.2470
+   t = ((8.9−8.6) − 0.5)/0.2470 = (0.3 − 0.5)/0.2470 = −0.81   (verified −0.810).
+6. P (left tail): |t| = 0.81 < 1.330 (=t₁₈,.90, tail .10) ⇒ P > 0.10.   (exact 0.214)
+7. P > 0.05 ⇒ do NOT reject H₀.
+      In context: no evidence against the "≥ 0.5 t/ha" claim — the observed 0.3 t/ha gain
+      is within sampling noise of 0.5.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q1.</b> A bakery advertises that its sourdough loaves weigh <i>at least</i> \(800\) g. A consumer weighs \(n=16\) loaves: \(\bar x = 788\) g, \(s = 22\) g. Is the "\(\ge 800\) g" claim contradicted at \(\alpha=0.05\)?</p>
+<details><summary>Solution</summary>
+<div class="mono">Let μ = mean loaf weight (g).  Claim "≥ 800" ⇒ test the boundary:
+H₀: μ = 800  vs  H₁: μ < 800  (left one-sided).
+t = (788 − 800)/(22/√16) = −12/5.5 = −2.18,  df = 15.   (verified −2.182)
+Left tail: |t| = 2.18 between 2.131 (tail .025) and 2.602 (tail .01) on df=15
+   ⇒ 0.01 < P < 0.025.   (exact 0.023)
+P < 0.05 ⇒ reject H₀.
+Context: evidence the mean loaf weight is below 800 g — the "at least 800 g" claim is
+not supported.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q2.</b> In Q1 the same data could be tested with \(H_0:\mu=800\) vs \(H_1:\mu\ne800\) (two-sided). Would the bracketed P-value and the decision change? Explain which framing matches the bakery's claim.</p>
+<details><summary>Solution</summary>
+<div class="mono">Two-sided P = 2·(one-tail) ⇒ bracket doubles to 0.02 < P < 0.05 (exact 0.045); still
+reject at 5%, but "closer" to the boundary. The one-sided H₁: μ < 800 is the RIGHT
+framing: the claim is directional ("at least 800 g"), and we only care about evidence
+that loaves are LIGHTER than claimed — using the one-sided test puts all of α in the
+relevant tail and is the more powerful, appropriate choice here.</div>
+</details>
+</div>
+
+<!-- ---------- 8.6 TYPE I / II & POWER ---------- -->
+<h3>8.6 · Type I / II error &amp; power in context</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — quality-control decision rule (Type I, Type II, power)</summary>
+<p><b>Q.</b> A machine should produce acceptable parts with probability \(p=0.9\). From a batch, \(n=20\) parts are inspected and the line is <b>stopped</b> (reject \(H_0:p=0.9\)) if the number acceptable is \(X\le 16\). (a) Find \(\alpha=\mathbb P(\text{Type I})\). (b) If the machine has degraded to \(p=0.75\), find \(\beta\) and the power.</p>
+<div class="mono">X ~ Bin(20, p).  Rejection region: X ≤ 16.
+(a) Type I error = stop the line when it is actually fine (p = 0.9):
+    α = P(X ≤ 16 | p = 0.9) = 0.133.   (verified 0.13295)
+(b) Under the alternative p = 0.75:
+    β = P(fail to stop | p = 0.75) = P(X > 16 | p = 0.75) = P(X ≥ 17 | p = 0.75)
+      = 0.225.   (verified 0.22516)
+    Power = 1 − β = P(X ≤ 16 | p = 0.75) = 0.775.
+Context: when the machine is fine there is a 13% chance of a needless stop (Type I);
+when it has degraded to 75% acceptable, the rule correctly stops the line 77.5% of the
+time (power) but misses the fault 22.5% of the time (Type II).</div>
+<p class="tip">To shrink \(\alpha\) you would tighten the rule (e.g. stop only if \(X\le15\)) — but that raises \(\beta\). The two errors trade off; only more data (larger \(n\)) improves both at once.</p>
+</details>
+
+<details>
+<summary>Worked B — power of a one-sample \(t\)-test (signal-to-noise)</summary>
+<p><b>Q.</b> A one-sample \(t\)-test of \(H_0:\mu=0\) vs \(H_1:\mu\gt0\) at \(\alpha=0.05\) uses \(n=8\). What is the (approximate) power if the truth is \(\mu=2,\ \sigma=3\)? What happens at \(n=30\)?</p>
+<div class="mono">Reject if T = X̄/(S/√8) > t₇,.₉₅ = 1.895.
+Signal-to-noise: μ/σ = 2/3 = 0.667.  Non-centrality ncp = μ/(σ/√n) = 2/(3/√8) = 1.886.
+Under H₁, T ~ non-central t₇ with ncp = 1.886.
+Power = P(T > 1.895 | H₁) = 0.52   (verified 0.522).
+With n = 30: ncp = 2/(3/√30) = 3.65 ⇒ power = 0.97   (verified 0.972).</div>
+<p class="tip">Same effect \(\mu/\sigma\), very different power: \(n=8\) is a coin-flip (52%), \(n=30\) is near-certain (97%). Power rises with \(n\), with a larger true effect \(|\mu|\), with smaller \(\sigma\), and with larger \(\alpha\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q1.</b> A germination test rejects \(H_0:p=0.8\) (in favour of \(H_1:p\lt0.8\)) if, out of \(n=15\) seeds, at most \(X\le9\) germinate. (a) Find \(\alpha\). (b) Find the power if truly \(p=0.5\). Interpret both in context.</p>
+<details><summary>Solution</summary>
+<div class="mono">X ~ Bin(15, p).  Reject if X ≤ 9.
+(a) α = P(X ≤ 9 | p = 0.8) = 0.0611.   (verified 0.06105)
+    Type I: declaring germination has dropped below 80% when it truly is 80%.
+(b) Power = P(reject | p = 0.5) = P(X ≤ 9 | p = 0.5) = 0.849.   (verified 0.84912)
+    So if the true rate is 50%, the test correctly flags the drop 84.9% of the time;
+    β = 0.151 (misses it 15.1% of the time).</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q2.</b> In the bakery test of §8.5 Q1 you rejected the "\(\ge800\) g" claim. Describe, in the story's language, what a Type I and a Type II error would be here, and one way to raise the power.</p>
+<details><summary>Solution</summary>
+<div class="mono">Type I error: concluding the loaves average under 800 g when in truth they average
+   at least 800 g (falsely accusing the bakery of underweight loaves).
+Type II error: failing to detect underweight loaves when they truly average below 800 g
+   (letting a genuinely underweight product pass).
+Raise power by: weighing more loaves (larger n), or if the true shortfall is larger /
+   the weight variability (σ) smaller — all push power up.</div>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q3.</b> Two labs run the same one-sample \(t\)-test on the same true effect. Lab A uses \(\alpha=0.05\); Lab B uses \(\alpha=0.01\). Which has higher power, and what have they traded to get it?</p>
+<details><summary>Solution</summary>
+<div class="mono">Lab A (α = 0.05) has the LARGER rejection region, so higher power (smaller β) — it
+detects the effect more often. The trade-off: a larger α means a higher Type I error
+rate (more false rejections when H₀ is actually true). Lowering α to 0.01 (Lab B) guards
+harder against false positives but sacrifices power. You cannot shrink both α and β at
+fixed n; only more data improves both.</div>
+</details>
+</div>
+
+<!-- ---------- 8.7 P-VALUE BRACKETING DRILLS ---------- -->
+<h3>8.7 · P-value bracketing drills</h3>
+<p>Speed reps: given a statistic, its reference distribution and the alternative, bracket the P-value from the tables and decide at \(\alpha=0.05\). Cover the answers; aim for &lt; 30 s each.</p>
+<div class="card q">
+<p><b>Drill set.</b> Bracket each P-value (and give the decision at \(\alpha=0.05\)).</p>
+<ol>
+<li>\(t = 2.35\), \(t_{12}\), one-sided (\(H_1:\mu\gt\mu_0\)).</li>
+<li>\(t = 1.58\), \(t_{20}\), two-sided.</li>
+<li>\(t = 3.05\), \(t_{7}\), two-sided.</li>
+<li>\(t = 2.62\), \(t_{25}\), one-sided (right).</li>
+<li>\(z = 1.42\), \(\mathcal N(0,1)\), two-sided.</li>
+<li>\(z = 2.20\), \(\mathcal N(0,1)\), one-sided (right).</li>
+</ol>
+<details><summary>Solutions</summary>
+<div class="mono">1. df=12: 2.179 → .975 (tail .025), 2.681 → .99 (tail .01). 2.35 between
+   ⇒ 0.01 < P < 0.025.  (exact 0.018)  → reject at 0.05.
+2. df=20: 1.325 → .90 (tail .10), 1.725 → .95 (tail .05). |t|=1.58 between
+   ⇒ one tail (0.05,0.10) ⇒ two-sided 0.10 < P < 0.20.  (exact 0.130)  → do NOT reject.
+3. df=7: 2.998 → .99 (tail .01), 3.499 → .995 (tail .005). |t|=3.05 between
+   ⇒ one tail (0.005,0.01) ⇒ two-sided 0.01 < P < 0.02.  (exact 0.019)  → reject.
+4. df=25: 2.485 → .99 (tail .01), 2.787 → .995 (tail .005). 2.62 between
+   ⇒ 0.005 < P < 0.01.  (exact 0.0074)  → reject.
+5. Φ(1.42) = 0.9222 ⇒ two-sided P = 2(1 − 0.9222) = 0.156.  → do NOT reject.
+6. Φ(2.20) = 0.9861 ⇒ one-sided P = 1 − 0.9861 = 0.0139.  → reject at 0.05.</div>
+</details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> Work each question start-to-finish on paper the way the marker reads it: (1) hypotheses with notation defined in words, (2) test choice + a one-line assumption/justification (pooled vs Welch, paired vs independent, exact vs Normal), (3) statistic to 2 s.f. with df, (4) a <i>bracketed</i> P-value from the tables (never a fabricated decimal), (5) a statistical decision vs \(\alpha\), (6) one plain-English sentence in the story's language. If you can produce all six from a cold read of the prompt, you have the exam's single biggest question locked.</div>
 </section>
 
 <footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">

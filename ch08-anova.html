@@ -68,6 +68,7 @@
   <a href="ch09-10-regression.html">Ch 9–10 Regression →</a>
   <a href="formulas.html">📄 Formula sheet</a>
   <a href="exam-2025.html">📝 Exam 2025</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -517,6 +518,447 @@ Always define \(\mu_i\) etc. in words ("mean response for level \(i\)").</div>
 STAT1301 Ch 8 · sources: notes pp 159–184, <span class="mono">STAT1301_formula.pdf</span> (ANOVA), exams 2023 Q5 · 2024 Q4 · 2025 Q4. All worked numbers verified in Python.<br>
 <span class="badge pre">PRE-LECTURE — verify against lecture material when Week 8 slides are released</span>
 </p>
+
+<!-- ============ 8. PRACTICE ARENA ============ -->
+<section id="practice">
+<h2>§8 · Practice Arena 🏋️</h2>
+<p>All-new scenarios and numbers — <em>none</em> reuse a past-exam or notes context, so nothing here is memorised, only <em>drilled</em>. Every table below was generated so that the DF add up, SS add up (SST = ΣSS), MS = SS/DF, and F = MS<sub>effect</sub>/MSE hold <strong>exactly</strong>; all P-values were checked in Python/scipy. Work each "Your turn" with the answer hidden first, then open the solution.</p>
+<div class="tip">How to read the tags: <strong>WARM-UP</strong> = one idea, ~1 min · <strong>STANDARD</strong> = a normal exam part · <strong>EXAM-LEVEL</strong> = full past-paper difficulty, the two ⭐ gapped tables live here · <strong>STRETCH</strong> = harder/back-to-front, builds 7-level robustness.</div>
+
+<!-- ---------- TOPIC 1 ---------- -->
+<h3>Topic 1 — One-way ANOVA: complete the table &amp; run the F-test</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE1.1 — Espresso extraction yield (one-way, 3 roasts) — full table + test</summary>
+<p><strong>Setup.</strong> A café measures <em>extraction yield</em> (%) for three roast levels — Light, Medium, Dark — with \(n_i=12\) shots each, so \(d=3\), \(n=36\). A one-way ANOVA gives factor (Roast) SS \(=18.62\) and total SS \(=96.50\).</p>
+<p><strong>Step 1 — DF from the design.</strong> Factor \(=d-1=2\); Error \(=n-d=33\); Total \(=n-1=35\) (check \(2+33=35\) ✓).</p>
+<p><strong>Step 2 — the missing SS by additivity.</strong> \(\text{SSE}=\text{SST}-\text{SSF}=96.50-18.62=77.88\).</p>
+<p><strong>Step 3 — mean squares.</strong> \(\text{MSF}=18.62/2=9.31\); \(\text{MSE}=77.88/33=2.3600\).</p>
+<p><strong>Step 4 — F.</strong> \(F=9.31/2.3600=3.945\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Roast</td><td class="fill">2</td><td>18.62</td><td class="fill">9.31</td><td class="fill">3.945</td></tr>
+<tr><td>Residuals</td><td class="fill">33</td><td class="fill">77.88</td><td class="fill">2.360</td><td></td></tr>
+<tr><td>Total</td><td class="fill">35</td><td>96.50</td><td></td><td></td></tr>
+</table>
+<p><strong>Test.</strong> \(H_0:\mu_{\text{Light}}=\mu_{\text{Med}}=\mu_{\text{Dark}}\) vs \(H_1:\) not all equal (\(\mu_i\) = mean % extraction yield for roast \(i\)). Under \(H_0\), \(F\sim F(2,33)\). Observed \(f=3.945\); \(F_{0.05}(2,33)\approx3.28\), and P \(=\mathbb P(F_{2,33}\gt3.945)=0.029\). Since \(3.945\gt3.28\) (equivalently \(0.029\lt0.05\)) <strong>reject \(H_0\)</strong>: mean extraction yield differs significantly across roast levels.</p>
+<p><strong>Follow-ups.</strong> Pooled SD \(=\sqrt{2.360}=1.536\%\); \(R^2=18.62/96.50=0.193\) — roast explains \(19.3\%\) of the variation in yield.</p>
+</details>
+
+<details>
+<summary>WE1.2 — E-scooter range (one-way, 4 brands) — SSE given directly</summary>
+<p><strong>Setup.</strong> A reviewer records the real-world <em>range</em> (km) of four e-scooter brands (Volt, Zippi, Nimbus, Cruz), \(n_i=15\) each ⇒ \(d=4\), \(n=60\). The ANOVA gives factor (Brand) SS \(=53.80\) and residual SS \(=245.00\).</p>
+<p><strong>DF:</strong> Factor \(=3\); Error \(=56\); Total \(=59\). &nbsp; <strong>SST</strong> \(=53.80+245.00=298.80\).</p>
+<p><strong>MS:</strong> \(\text{MSF}=53.80/3=17.933\); \(\text{MSE}=245.00/56=4.3750\). &nbsp; <strong>F</strong> \(=17.933/4.3750=4.099\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Brand</td><td class="fill">3</td><td>53.80</td><td class="fill">17.933</td><td class="fill">4.099</td></tr>
+<tr><td>Residuals</td><td class="fill">56</td><td>245.00</td><td class="fill">4.375</td><td></td></tr>
+<tr><td>Total</td><td class="fill">59</td><td class="fill">298.80</td><td></td><td></td></tr>
+</table>
+<p><strong>Test.</strong> \(F\sim F(3,56)\), \(f=4.099\); \(F_{0.05}(3,56)\approx2.77\), P \(=\mathbb P(F_{3,56}\gt4.099)=0.011\lt0.05\) ⇒ <strong>reject</strong>: mean range differs across brands. \(R^2=53.80/298.80=0.180\) (brand explains \(18.0\%\)).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT1.1 — DF skeleton [2 marks]</summary>
+<p>A one-way study compares <em>battery life</em> (hours) of 3 laptop models, 12 units each. Give all three DF.</p>
+<hr>
+<p><strong>Solution.</strong> \(d=3,\ n=36\). Factor \(=d-1=2\); Error \(=n-d=33\); Total \(=n-1=35\). (Check \(2+33=35\).)</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT1.2 — Keyboard typing speed, complete + test [5 marks]</summary>
+<p>Typing speed (WPM) is compared across 3 mechanical-switch types (Linear, Tactile, Clicky), \(n_i=15\) ⇒ \(d=3,\ n=45\). ANOVA gives switch SS \(=40.5\), residual SS \(=486.0\). Complete the table and test at 5%.</p>
+<hr>
+<p><strong>DF:</strong> \(2,\ 42,\ 44\). &nbsp; <strong>SST</strong> \(=40.5+486.0=526.5\). &nbsp; <strong>MSF</strong> \(=40.5/2=20.25\); <strong>MSE</strong> \(=486.0/42=11.571\); <strong>F</strong> \(=20.25/11.571=1.750\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Switch type</td><td class="fill">2</td><td>40.5</td><td class="fill">20.25</td><td class="fill">1.750</td></tr>
+<tr><td>Residuals</td><td class="fill">42</td><td>486.0</td><td class="fill">11.571</td><td></td></tr>
+<tr><td>Total</td><td class="fill">44</td><td class="fill">526.5</td><td></td><td></td></tr>
+</table>
+<p><strong>Test.</strong> \(H_0:\mu_{\text{Lin}}=\mu_{\text{Tac}}=\mu_{\text{Cli}}\). \(F\sim F(2,42)\), \(f=1.750\); \(F_{0.05}(2,42)\approx3.22\), P \(=\mathbb P(F_{2,42}\gt1.750)=0.186\gt0.05\) ⇒ <strong>do not reject \(H_0\)</strong>: no significant difference in mean typing speed across switch types.</p>
+</details>
+
+<details>
+<summary>⭐ <strong>EXAM-LEVEL</strong> · YT1.3 — GAPPED one-way table: energy-drink reaction time [6 marks]</summary>
+<p><strong>The flagship one-way drill — a fresh gapped X-cell table.</strong> Reaction time (ms) is measured for 4 energy drinks (Placebo, Cola-X, Guarana, Taurine+), \(n_i=10\) each ⇒ \(d=4,\ n=40\). Using the design and the partial information, find every \(X\) cell, then test at 5% and give \(R^2\).</p>
+<div class="mono">Source        DF    SS       MS      F
+Drink          X    3120     X       X
+Residuals      X    X        240
+Total          X    11760</div>
+<hr>
+<p><strong>Step 1 — DF from design.</strong> Drink \(=d-1=3\); Residuals \(=n-d=36\); Total \(=39\) (check \(3+36=39\) ✓).</p>
+<p><strong>Step 2 — Residual SS by additivity.</strong> \(\text{SSE}=\text{SST}-\text{SSF}=11760-3120=8640\). Self-check with the given MSE: \(8640/36=240=\text{MSE}\) ✓.</p>
+<p><strong>Step 3 — MS &amp; F.</strong> \(\text{MSF}=3120/3=1040\); \(F=1040/240=4.333\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Drink</td><td class="fill">3</td><td>3120</td><td class="fill">1040</td><td class="fill">4.333</td></tr>
+<tr><td>Residuals</td><td class="fill">36</td><td class="fill">8640</td><td>240</td><td></td></tr>
+<tr><td>Total</td><td class="fill">39</td><td>11760</td><td></td><td></td></tr>
+</table>
+<p><strong>Test.</strong> \(H_0:\mu_1=\mu_2=\mu_3=\mu_4\) (\(\mu_i\) = mean reaction time, ms, for drink \(i\)). \(F\sim F(3,36)\), \(f=4.333\); \(F_{0.05}(3,36)\approx2.87\), P \(=\mathbb P(F_{3,36}\gt4.333)=0.010\lt0.05\) ⇒ <strong>reject</strong>: mean reaction time differs across energy drinks. \(R^2=3120/11760=0.265\) — drink explains \(26.5\%\) of the variation.</p>
+<div class="tip">Novel X-pattern vs 2025: here you're handed a factor <em>SS</em>, the total <em>SS</em>, and the residual <em>MS</em>. The residual MS isn't strictly needed to finish (additivity gives SSE), so use it as a free consistency check — if \(\text{SSE}/\text{DF}_E\neq240\), you slipped somewhere.</div>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT1.4 — Work backwards from \(F\) and MSE [4 marks]</summary>
+<p>A one-way ANOVA on \(d=3\) groups, \(n=30\), reports \(\text{MSE}=4.00\) and \(F=5.50\) but the SS column is smudged. Reconstruct SSF, SSE, SST, and state the test conclusion at 5%.</p>
+<hr>
+<p><strong>DF:</strong> Factor \(=2\); Error \(=27\); Total \(=29\). Work each SS from the identities:</p>
+<ul>
+<li>\(\text{MSF}=F\times\text{MSE}=5.50\times4.00=22.0\Rightarrow \text{SSF}=\text{MSF}\times\text{DF}=22.0\times2=44.0\).</li>
+<li>\(\text{SSE}=\text{MSE}\times\text{DF}=4.00\times27=108.0\).</li>
+<li>\(\text{SST}=44.0+108.0=152.0\).</li>
+</ul>
+<p><strong>Test.</strong> \(F\sim F(2,27)\), \(f=5.50\); \(F_{0.05}(2,27)\approx3.35\), P \(=\mathbb P(F_{2,27}\gt5.50)=0.0099\lt0.05\) ⇒ <strong>reject \(H_0\)</strong>: the group means are not all equal.</p>
+<div class="tip">The identity toolkit runs in <em>both</em> directions: \(\text{SS}=\text{MS}\times\text{DF}\) and \(\text{MS}_{\text{eff}}=F\times\text{MSE}\) rebuild any smudged cell.</div>
+</details>
+
+<!-- ---------- TOPIC 2 ---------- -->
+<h3>Topic 2 — Two-way ANOVA: DF-first table completion &amp; the interaction F-test</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE2.1 — Sourdough rise: Flour(3) × Hydration(2) — complete + interaction test</summary>
+<p><strong>Setup.</strong> Loaf <em>rise height</em> (cm) by Factor A = flour type (Wholemeal, Rye, Spelt; \(d_1=3\)) and Factor B = hydration (65% / 80%; \(d_2=2\)), balanced with 8 loaves per cell ⇒ \(n=3\times2\times8=48\). Partial table:</p>
+<div class="mono">Source        DF    SS      MS      F
+Flour          X   12.40    X       X
+Hydration      X    5.76    X       X
+Interaction    X    X       X       X
+Residuals      X   30.24    X
+Total          X   49.84</div>
+<p><strong>DF (design first):</strong> Flour \(=2\); Hydration \(=1\); Interaction \(=(3-1)(2-1)=2\); Residuals \(=n-d_1d_2=48-6=42\); Total \(=47\) (check \(2+1+2+42=47\) ✓).</p>
+<p><strong>MSE:</strong> \(30.24/42=0.7200\) — the shared denominator.</p>
+<p><strong>Interaction SS by additivity:</strong> \(\text{SSF12}=\text{SST}-\text{SSF1}-\text{SSF2}-\text{SSE}=49.84-12.40-5.76-30.24=1.44\).</p>
+<p><strong>MS &amp; F:</strong> \(\text{MSF1}=12.40/2=6.20\Rightarrow F_1=6.20/0.72=8.611\); \(\text{MSF2}=5.76/1=5.76\Rightarrow F_2=5.76/0.72=8.000\); \(\text{MSF12}=1.44/2=0.72\Rightarrow F_{12}=0.72/0.72=1.000\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Flour</td><td class="fill">2</td><td>12.40</td><td class="fill">6.20</td><td class="fill">8.611</td></tr>
+<tr><td>Hydration</td><td class="fill">1</td><td>5.76</td><td class="fill">5.76</td><td class="fill">8.000</td></tr>
+<tr><td>Interaction</td><td class="fill">2</td><td class="fill">1.44</td><td class="fill">0.72</td><td class="fill">1.000</td></tr>
+<tr><td>Residuals</td><td class="fill">42</td><td>30.24</td><td class="fill">0.720</td><td></td></tr>
+<tr><td>Total</td><td class="fill">47</td><td>49.84</td><td></td><td></td></tr>
+</table>
+<p><strong>Interaction test.</strong> \(H_0:\gamma_{ij}=0\ \forall i,j\) vs \(H_1:\) some \(\gamma_{ij}\neq0\). Under \(H_0\), \(F=\text{MSF12}/\text{MSE}\sim F(2,42)\). Observed \(f=1.000\); P \(=\mathbb P(F_{2,42}\gt1.000)=0.377\gt0.05\) ⇒ <strong>no significant interaction</strong>: the effect of hydration on rise is consistent across flours. Because there is no interaction, the main effects <em>can</em> be read on their own — and both are significant (\(F_1\): P \(=0.0007\); \(F_2\): P \(=0.0071\)).</p>
+</details>
+
+<details>
+<summary>WE2.2 — Drone flight time: Temperature(2) × Propeller(3) — all three F-tests</summary>
+<p><strong>Setup.</strong> <em>Flight time</em> (min) by Factor A = ambient temperature (Cold / Warm; \(d_1=2\)) and Factor B = propeller design (2-blade, 3-blade, Toroidal; \(d_2=3\)), 6 flights per cell ⇒ \(n=36\). Given SS: Temp \(=40.5\), Propeller \(=88.2\), Interaction \(=9.6\), Residuals \(=133.2\).</p>
+<p><strong>DF:</strong> Temp \(=1\); Propeller \(=2\); Interaction \(=1\times2=2\); Residuals \(=36-6=30\); Total \(=35\). &nbsp; <strong>SST</strong> \(=40.5+88.2+9.6+133.2=271.5\).</p>
+<p><strong>MSE</strong> \(=133.2/30=4.440\). Then \(F_{\text{Temp}}=(40.5/1)/4.440=9.122\); \(F_{\text{Prop}}=(88.2/2)/4.440=9.932\); \(F_{\text{Int}}=(9.6/2)/4.440=1.081\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Temperature</td><td class="fill">1</td><td>40.5</td><td class="fill">40.50</td><td class="fill">9.122</td></tr>
+<tr><td>Propeller</td><td class="fill">2</td><td>88.2</td><td class="fill">44.10</td><td class="fill">9.932</td></tr>
+<tr><td>Interaction</td><td class="fill">2</td><td>9.6</td><td class="fill">4.80</td><td class="fill">1.081</td></tr>
+<tr><td>Residuals</td><td class="fill">30</td><td>133.2</td><td class="fill">4.440</td><td></td></tr>
+<tr><td>Total</td><td class="fill">35</td><td class="fill">271.5</td><td></td><td></td></tr>
+</table>
+<p><strong>Tests (all vs MSE).</strong> Interaction: \(F(2,30)\), \(f=1.081\), P \(=0.352\gt0.05\) ⇒ not significant, so main effects are interpretable. Temperature: \(F(1,30)\), \(f=9.122\), P \(=0.0051\lt0.05\) ⇒ significant. Propeller: \(F(2,30)\), \(f=9.932\), P \(=0.0005\lt0.05\) ⇒ significant. Both factors matter; their effects simply add.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT2.1 — Interaction &amp; error DF [2 marks]</summary>
+<p>A balanced \(4\times2\) two-way design has 5 replicates per cell. Give the interaction DF and the error DF.</p>
+<hr>
+<p><strong>Solution.</strong> \(d_1=4,\ d_2=2,\ n=4\times2\times5=40\). Interaction \(=(4-1)(2-1)=3\); Error \(=n-d_1d_2=40-8=32\). (Total \(=39\); check \(3+1+3+32=39\).)</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT2.2 — Solar panel output: Coating(2) × Tilt(2) [5 marks]</summary>
+<p>Power output (W/m²) by Factor A = surface coating (Standard / Anti-reflective) and Factor B = tilt angle (15° / 30°), balanced with 7 panels per cell ⇒ \(2\times2\times7=28\). Given SS: Coating \(=24.5\), Tilt \(=60.5\), Interaction \(=2.0\), Residuals \(=90.0\). Complete the table and test the interaction at 5%.</p>
+<hr>
+<p><strong>DF:</strong> Coating \(=1\); Tilt \(=1\); Interaction \(=1\); Residuals \(=28-4=24\); Total \(=27\). &nbsp; <strong>SST</strong> \(=24.5+60.5+2.0+90.0=177.0\). &nbsp; <strong>MSE</strong> \(=90.0/24=3.750\).</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Coating</td><td class="fill">1</td><td>24.5</td><td class="fill">24.50</td><td class="fill">6.533</td></tr>
+<tr><td>Tilt</td><td class="fill">1</td><td>60.5</td><td class="fill">60.50</td><td class="fill">16.133</td></tr>
+<tr><td>Interaction</td><td class="fill">1</td><td>2.0</td><td class="fill">2.00</td><td class="fill">0.533</td></tr>
+<tr><td>Residuals</td><td class="fill">24</td><td>90.0</td><td class="fill">3.750</td><td></td></tr>
+<tr><td>Total</td><td class="fill">27</td><td class="fill">177.0</td><td></td><td></td></tr>
+</table>
+<p><strong>Interaction test.</strong> \(H_0:\gamma_{ij}=0\ \forall i,j\). \(F\sim F(1,24)\), \(f=0.533\); \(F_{0.05}(1,24)\approx4.26\), P \(=\mathbb P(F_{1,24}\gt0.533)=0.472\gt0.05\) ⇒ <strong>no significant interaction</strong>. (Both main effects are significant: Coating P \(=0.017\), Tilt P \(=0.0005\).)</p>
+</details>
+
+<details>
+<summary>⭐ <strong>EXAM-LEVEL</strong> · YT2.3 — GAPPED two-way table: cake height [6 marks]</summary>
+<p><strong>This is the flagship two-way drill — a fresh gapped table with a different X-pattern from 2025 Q4.</strong> A bakery studies sponge-cake <em>height</em> (mm) under Factor A = oven setting (Fan / Conventional / Convection; \(d_1=3\)) and Factor B = recipe (Butter / Oil; \(d_2=2\)), balanced with 5 cakes per cell ⇒ \(n=3\times2\times5=30\). Using the design and the partial information, find every \(X\) cell, then test the interaction at 5%.</p>
+<div class="mono">Source        DF    SS      MS      F
+Oven           X    X       X      2.980
+Recipe         X   4.05     X       X
+Interaction    X    X      3.150    X
+Residuals      X    X      2.550
+Total          X   86.75</div>
+<hr>
+<p><strong>Step 1 — DF from design.</strong> Oven \(=2\); Recipe \(=1\); Interaction \(=(3-1)(2-1)=2\); Residuals \(=30-6=24\); Total \(=29\) (check \(2+1+2+24=29\) ✓).</p>
+<p><strong>Step 2 — MSE is given:</strong> \(\text{MSE}=2.550\) (shared denominator).</p>
+<p><strong>Step 3 — Interaction from its MS.</strong> \(\text{SSF12}=\text{MSF12}\times\text{DF}=3.150\times2=6.30\); \(F_{12}=3.150/2.550=1.235\).</p>
+<p><strong>Step 4 — Oven from its \(F\).</strong> \(\text{MSF1}=F\times\text{MSE}=2.980\times2.550=7.60\); \(\text{SSF1}=7.60\times2=15.20\).</p>
+<p><strong>Step 5 — Recipe from its SS.</strong> \(\text{MSF2}=4.05/1=4.05\); \(F_2=4.05/2.550=1.588\).</p>
+<p><strong>Step 6 — Residual SS by additivity.</strong> \(\text{SSE}=\text{SST}-15.20-4.05-6.30=86.75-25.55=61.20\). Check: \(61.20/24=2.550=\text{MSE}\) ✓.</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Oven</td><td class="fill">2</td><td class="fill">15.20</td><td class="fill">7.60</td><td>2.980</td></tr>
+<tr><td>Recipe</td><td class="fill">1</td><td>4.05</td><td class="fill">4.05</td><td class="fill">1.588</td></tr>
+<tr><td>Interaction</td><td class="fill">2</td><td class="fill">6.30</td><td>3.150</td><td class="fill">1.235</td></tr>
+<tr><td>Residuals</td><td class="fill">24</td><td class="fill">61.20</td><td>2.550</td><td></td></tr>
+<tr><td>Total</td><td class="fill">29</td><td>86.75</td><td></td><td></td></tr>
+</table>
+<p><strong>Interaction test.</strong> \(H_0:\gamma_{ij}=0\ \forall i,j\) vs \(H_1:\) some \(\gamma_{ij}\neq0\). Under \(H_0\), \(F\sim F(2,24)\). Observed \(f=1.235\); \(F_{0.05}(2,24)\approx3.40\), P \(=\mathbb P(F_{2,24}\gt1.235)=0.309\gt0.05\) ⇒ <strong>do not reject \(H_0\)</strong>: no significant evidence of an oven × recipe interaction on cake height.</p>
+<div class="tip">Notice the back-solve order here differs from a "one missing SS" table: you were handed an \(F\) (Oven), an MS (Interaction) and an SS (Recipe) — three different entry points. Always fix DF and MSE first, then each row unlocks from whatever single number it was given.</div>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT2.4 — GAPPED \(4\times2\) germination: which effects are significant? [7 marks]</summary>
+<p>Seed <em>germination count</em> (per tray) under Factor A = light colour (Red, Blue, White, Far-red; \(d_1=4\)) and Factor B = soil mix (Peat / Coir; \(d_2=2\)), balanced with 5 trays per cell ⇒ \(n=40\). Partial table:</p>
+<div class="mono">Source        DF    SS      MS      F
+Light          X    X      32.00    X
+Soil           X   18.00    X       X
+Interaction    X   30.00    X       X
+Residuals      X    X       4.00
+Total          X   272.00</div>
+<hr>
+<p><strong>DF:</strong> Light \(=3\); Soil \(=1\); Interaction \(=(4-1)(2-1)=3\); Residuals \(=40-8=32\); Total \(=39\) (check \(3+1+3+32=39\) ✓).</p>
+<p><strong>Light from its MS:</strong> \(\text{SSF1}=32.00\times3=96.00\); \(F_1=32.00/4.00=8.000\).</p>
+<p><strong>Interaction:</strong> \(\text{MSF12}=30.00/3=10.00\); \(F_{12}=10.00/4.00=2.500\).</p>
+<p><strong>Soil:</strong> \(\text{MSF2}=18.00/1=18.00\); \(F_2=18.00/4.00=4.500\).</p>
+<p><strong>Residual SS by additivity:</strong> \(\text{SSE}=272.00-96.00-18.00-30.00=128.00\). Check \(128.00/32=4.00=\text{MSE}\) ✓.</p>
+<table>
+<tr><th>Source</th><th>DF</th><th>SS</th><th>MS</th><th>\(F\)</th></tr>
+<tr><td>Light</td><td class="fill">3</td><td class="fill">96.00</td><td>32.00</td><td class="fill">8.000</td></tr>
+<tr><td>Soil</td><td class="fill">1</td><td>18.00</td><td class="fill">18.00</td><td class="fill">4.500</td></tr>
+<tr><td>Interaction</td><td class="fill">3</td><td>30.00</td><td class="fill">10.00</td><td class="fill">2.500</td></tr>
+<tr><td>Residuals</td><td class="fill">32</td><td class="fill">128.00</td><td>4.00</td><td></td></tr>
+<tr><td>Total</td><td class="fill">39</td><td>272.00</td><td></td><td></td></tr>
+</table>
+<p><strong>Verdict at 5% (all denominators \(=32\)).</strong> Interaction \(F(3,32)\), \(f=2.500\), \(F_{0.05}\approx2.90\), P \(=0.077\gt0.05\) ⇒ not significant (read main effects freely). Light \(F(3,32)\), \(f=8.000\), P \(=0.0004\lt0.05\) ⇒ significant. Soil \(F(1,32)\), \(f=4.500\), \(F_{0.05}\approx4.15\), P \(=0.042\lt0.05\) ⇒ significant (just). <strong>Conclusion:</strong> both light colour and soil mix affect mean germination, with no evidence their effects depend on each other.</p>
+</details>
+
+<!-- ---------- TOPIC 3 ---------- -->
+<h3>Topic 3 — Reading interaction plots</h3>
+<p class="tip">These plots aren't drawn here — instead the pattern is <em>described in words</em> so you practise the exam skill of turning "what the lines do" into "what it means". The lines plot <strong>mean response (y)</strong> against the levels of one factor, with a separate line for each level of the other factor.</p>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE3.1 — Parallel lines (car fuel economy) → no interaction</summary>
+<p><strong>Plot described.</strong> Mean fuel economy (km/L) on the y-axis against <em>tyre pressure</em> (Low / High) on the x-axis; two lines, one for <em>Eco</em> driving mode and one for <em>Sport</em>. Both lines slope gently upward from Low to High pressure, and the Eco line sits about 4 km/L above the Sport line at <em>both</em> pressures — the vertical gap between the lines is essentially constant.</p>
+<p><strong>Interpretation.</strong> The lines are (near) <strong>parallel</strong> ⇒ <em>little/no evidence of an interaction</em>. The benefit of higher tyre pressure is about the same whether you drive in Eco or Sport, and the Eco-vs-Sport gap is about the same at either pressure. The two factors appear to act <strong>independently</strong> (their effects add). A formal interaction \(F\)-test would confirm this.</p>
+</details>
+
+<details>
+<summary>WE3.2 — Crossing lines (crop yield) → interaction present</summary>
+<p><strong>Plot described.</strong> Mean crop yield (t/ha) against <em>irrigation</em> (Drip / Flood); one line for variety <em>Alpha</em>, one for variety <em>Omega</em>. Under Drip, Alpha is well above Omega; under Flood, the lines <strong>cross over</strong> so Omega ends up above Alpha.</p>
+<p><strong>Interpretation.</strong> The lines <strong>cross</strong> (strongly non-parallel) ⇒ <em>clear visual evidence of an interaction</em>: which variety yields more <em>depends on</em> the irrigation method — Alpha wins under Drip, Omega wins under Flood. You must <strong>not</strong> summarise "the best variety" as a single answer; the variety effect reverses across irrigation. Confirm with the interaction \(F\)-test, and if significant, analyse each variety within a fixed irrigation type.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT3.1 — What does "parallel" mean? [1 mark]</summary>
+<p>On an interaction plot the two lines are almost perfectly parallel. In one sentence, what does that indicate?</p>
+<hr>
+<p><strong>Solution.</strong> Parallel lines indicate <em>no (or negligible) interaction</em> — the effect of one factor is the same across all levels of the other, so the factors act independently.</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT3.2 — One flat, one steep line [2 marks]</summary>
+<p>Mean recovery time (days) against <em>physiotherapy</em> (None / Daily) for two age groups: the <em>Under-40</em> line is almost flat, while the <em>Over-60</em> line drops steeply from None to Daily. The lines do not cross but clearly fan apart. Comment on interaction.</p>
+<hr>
+<p><strong>Solution.</strong> The lines are <strong>not parallel</strong> (one flat, one steep) ⇒ <em>possible interaction</em>: physiotherapy barely changes recovery time for the under-40s but shortens it substantially for the over-60s, so the effect of physiotherapy <em>depends on</em> age group. (Non-parallel without crossing still signals interaction.) A formal interaction \(F\)-test is needed to confirm.</p>
+</details>
+
+<details>
+<summary><strong>EXAM-LEVEL</strong> · YT3.3 — Reconcile plot with the F-test [3 marks]</summary>
+<p>An analyst says "the interaction lines look a bit non-parallel, so there <em>must</em> be an interaction." The interaction \(F\)-test returns \(F(2,24)=1.24\), P \(=0.31\). Explain who is right and how to word the conclusion.</p>
+<hr>
+<p><strong>Solution.</strong> The plot only shows <em>sample</em> means, which will rarely be exactly parallel even when no true interaction exists — mild non-parallelism can easily be random scatter. The formal test decides: P \(=0.31\gt0.05\), so we <strong>do not reject</strong> \(H_0:\gamma_{ij}=0\) — there is <em>no statistically significant interaction</em>. The visual "wobble" is not beyond what chance produces, so the analyst is over-reading the picture; the \(F\)-test is the arbiter.</p>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT3.4 — Significant interaction: what you may and may not say [3 marks]</summary>
+<p>In a fertiliser-brand × soil-type study on plant height, the interaction is significant (P \(=0.004\)) and the plot lines cross. A colleague reports "Brand C is best overall." Why is that statement unsafe, and what should be reported instead?</p>
+<hr>
+<p><strong>Solution.</strong> A significant interaction means each brand's effect <em>depends on soil type</em>; because the lines cross, the best brand in one soil may be worst in another, so there is no single "best overall" brand — a main-effect (marginal) statement averages over soils and is misleading. Report the <strong>interaction</strong> itself, then analyse brands <em>within each soil type separately</em> (e.g. R's <span class="mono">subset=</span>), quoting the best brand per soil.</p>
+</details>
+
+<!-- ---------- TOPIC 4 ---------- -->
+<h3>Topic 4 — Assessing the assumptions</h3>
+<p class="tip">The three assumptions on the errors: <strong>independence</strong>, <strong>normality</strong>, <strong>constant variance</strong>. Diagnostic tools: Normal Q–Q plot (normality), residuals-vs-fitted band / group SDs (equal variance), and the <em>design</em> (independence — never a plot).</p>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE4.1 — All three look fine (bakery study)</summary>
+<p><strong>Plots described.</strong> Residuals-vs-fitted shows a roughly even horizontal band of points with no funnel or curve; the Normal Q–Q plot has points lying close to the reference line with only mild wiggle at the extremes; the four group SDs are \(1.9, 2.1, 2.3, 2.0\) (largest/smallest \(=1.2\), well under 2). Participants/cakes were randomly assigned to ovens.</p>
+<p><strong>Verdict.</strong> <em>Constant variance</em> — even band, similar SDs (ratio \(1.2\lt2\)) ⇒ OK. <em>Normality</em> — Q–Q points near the line ⇒ reasonable. <em>Independence</em> — random assignment, no repeated measures on the same unit ⇒ plausible. All three assumptions appear satisfied, so the ANOVA \(F\)-test is trustworthy.</p>
+</details>
+
+<details>
+<summary>WE4.2 — A funnel + unequal SDs → equal-variance fails</summary>
+<p><strong>Plots described.</strong> Residuals-vs-fitted <em>fans out</em> — small scatter at low fitted values widening to large scatter at high fitted values (a clear funnel); group SDs are \(0.8, 1.5, 3.4\) (largest/smallest \(=4.3\)). Q–Q plot is close to the line.</p>
+<p><strong>Verdict.</strong> <em>Constant variance is violated</em>: the funnel and the SD ratio \(4.3\) (far above the ≈2 rule of thumb) show spread grows with the mean. Normality looks fine (Q–Q on the line), and independence is argued from the design. Because equal variance fails, the standard \(F\)-test is unreliable — a variance-stabilising transformation (e.g. \(\log\) or \(\sqrt{\cdot}\) of the response) should be considered before trusting the ANOVA.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT4.1 — Name the assumptions [2 marks]</summary>
+<p>State the three assumptions the ANOVA \(F\)-test places on the errors, and name one diagnostic for each.</p>
+<hr>
+<p><strong>Solution.</strong> (1) <strong>Independence</strong> — argued from the randomised design (not a plot). (2) <strong>Normality</strong> — Normal Q–Q plot of residuals roughly on the line. (3) <strong>Constant variance (homoscedasticity)</strong> — even band in residuals-vs-fitted / comparable group SDs.</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT4.2 — Curved Q–Q tails [2 marks]</summary>
+<p>The residuals-vs-fitted plot is a clean even band, but the Normal Q–Q plot curves up sharply at both ends (heavy S-shape). What do you conclude?</p>
+<hr>
+<p><strong>Solution.</strong> Equal variance looks fine (even band), but the strong S-curve in the Q–Q plot signals a departure from <strong>normality</strong> (heavy tails). With large groups the \(F\)-test is fairly robust, but the normality assumption is questionable — note it, and consider a transformation or a non-parametric alternative if groups are small.</p>
+</details>
+
+<details>
+<summary><strong>EXAM-LEVEL</strong> · YT4.3 — Full assessment from plots + SD table [4 marks]</summary>
+<p>A one-way study (3 groups) reports group SDs \(2.4, 2.6, 2.5\); residuals-vs-fitted is an even band; Q–Q points sit on the line; treatments were randomly allocated. Give a one-line verdict on each assumption and an overall statement.</p>
+<hr>
+<p><strong>Solution.</strong></p>
+<ul>
+<li><strong>Constant variance:</strong> SDs \(2.4/2.5/2.6\) are near-identical (ratio \(1.08\)) and the residual band is even ⇒ satisfied.</li>
+<li><strong>Normality:</strong> Q–Q points on the line ⇒ satisfied.</li>
+<li><strong>Independence:</strong> random allocation, no repeated measures ⇒ plausible.</li>
+</ul>
+<p>All three hold, so the ANOVA \(F\)-test and its P-value are valid here.</p>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT4.4 — Why independence isn't in the plots [3 marks]</summary>
+<p>A student writes: "The residuals-vs-fitted plot shows no pattern, so the observations are independent." Explain what's wrong and how independence should actually be justified.</p>
+<hr>
+<p><strong>Solution.</strong> A residual plot can reveal <em>non-constant variance</em> or <em>the wrong mean model</em>, but it cannot demonstrate <em>independence</em> — dependent data (e.g. repeated measures on the same subject, or time-ordered readings) can still produce a patternless-looking scatter. Independence must be argued from the <strong>study design</strong>: proper randomisation of units to treatments and no repeated/clustered measurements on the same unit. Claiming "the plot shows independence" loses the mark.</p>
+</details>
+
+<!-- ---------- TOPIC 5 ---------- -->
+<h3>Topic 5 — Reading Bonferroni multiple-comparison output</h3>
+<p class="tip">Rule: each printed value is an <strong>adjusted</strong> P-value. Entry \(\lt\alpha\) ⇒ that pair differs significantly; entry \(\ge\alpha\) (often \(1.000\)) ⇒ no significant difference. With \(d\) groups there are \(m=\binom{d}{2}\) comparisons.</p>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE5.1 — Four coffee grinders (which differ?)</summary>
+<p><strong>Context.</strong> After a significant ANOVA on <em>grind uniformity</em> across 4 grinders (Blade, Burr-flat, Burr-conical, Hand), Bonferroni pairwise output (\(\alpha=0.05\)):</p>
+<div class="mono">              Blade   Burr-flat  Burr-conical
+Burr-flat     0.004   -          -
+Burr-conical  0.001   1.000      -
+Hand          1.000   0.021      0.008</div>
+<p><strong>Read it.</strong> Entries \(\lt0.05\): Blade–Burr-flat (0.004), Blade–Burr-conical (0.001), Hand–Burr-flat (0.021), Hand–Burr-conical (0.008). Entries \(\ge0.05\): Blade–Hand (1.000), Burr-flat–Burr-conical (1.000).</p>
+<p><strong>Conclusion in context.</strong> The two burr grinders differ significantly from both Blade and Hand grinders, but <em>not</em> from each other; Blade and Hand also do not differ. So the grinders split into two indistinguishable camps — {Blade, Hand} vs {Burr-flat, Burr-conical} — with a real difference in mean grind uniformity <em>between</em> the camps. (\(m=\binom42=6\) comparisons.)</p>
+</details>
+
+<details>
+<summary>WE5.2 — Three protein powders + evaluating a marketing claim</summary>
+<p><strong>Context.</strong> ANOVA on muscle-recovery score for 3 powders (Whey, Pea, Blend) is significant; the maker claims "our Pea powder works just as well as Whey." Bonferroni output (\(\alpha=0.05\)):</p>
+<div class="mono">        Whey    Pea
+Pea     0.013   -
+Blend   1.000   0.026</div>
+<p><strong>Read it.</strong> Whey–Pea \(=0.013\lt0.05\) ⇒ significant difference; Whey–Blend \(=1.000\) ⇒ no difference; Pea–Blend \(=0.026\lt0.05\) ⇒ significant difference.</p>
+<p><strong>Evaluate the claim.</strong> Because Whey and Pea differ <em>significantly</em> (adjusted P \(=0.013\)), the data <strong>do not support</strong> the "just as well as Whey" claim — Pea's mean recovery score is significantly different from Whey's (and Pea also differs from Blend, while Whey and Blend are indistinguishable).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT5.1 — One entry [1 mark]</summary>
+<p>In a Bonferroni matrix the entry for "Method X vs Method Y" is \(1.000\) at \(\alpha=0.05\). What does that tell you?</p>
+<hr>
+<p><strong>Solution.</strong> \(1.000\ge0.05\) ⇒ <em>no significant difference</em> between Method X and Method Y. (It does <em>not</em> mean the means are identical — only that the data give no evidence they differ.)</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT5.2 — Three teaching apps [2 marks]</summary>
+<p>ANOVA on test scores for 3 apps (Alpha, Beta, Gamma) is significant. Bonferroni (\(\alpha=0.05\)): Alpha–Beta \(=0.002\), Alpha–Gamma \(=0.310\), Beta–Gamma \(=0.041\). Which apps differ?</p>
+<hr>
+<p><strong>Solution.</strong> Alpha–Beta (0.002) and Beta–Gamma (0.041) are \(\lt0.05\) ⇒ both significant; Alpha–Gamma (0.310) \(\ge0.05\) ⇒ not significant. So Beta differs from both Alpha and Gamma, while Alpha and Gamma are statistically indistinguishable.</p>
+</details>
+
+<details>
+<summary><strong>EXAM-LEVEL</strong> · YT5.3 — Four fertiliser regimes in context [3 marks]</summary>
+<p>A significant ANOVA on tomato yield across 4 regimes (Control, N, P, NP). Bonferroni output (\(\alpha=0.05\)):</p>
+<div class="mono">        Control   N       P
+N       0.020     -       -
+P       1.000     0.033   -
+NP      0.001     0.045   0.002</div>
+<p>State how many comparisons were made and summarise which regimes differ, in context.</p>
+<hr>
+<p><strong>Solution.</strong> \(m=\binom42=6\) comparisons. Significant (\(\lt0.05\)): Control–N (0.020), Control–NP (0.001), N–P (0.033), N–NP (0.045), P–NP (0.002). Not significant: Control–P (1.000). <strong>In context:</strong> the combined <em>NP</em> regime differs from every other regime (highest yield); adding N alone or P alone each differ from some others, but P alone is indistinguishable from the Control. The clear standout is the NP combination.</p>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT5.4 — Why adjust, and to what threshold? [3 marks]</summary>
+<p>With 5 groups, an analyst plans all pairwise comparisons at \(\alpha=0.05\) <em>without</em> adjustment. How many comparisons is that, why is it a problem, and what per-comparison threshold does Bonferroni use?</p>
+<hr>
+<p><strong>Solution.</strong> \(m=\binom52=10\) comparisons. Running 10 independent tests each at \(0.05\) inflates the family-wise Type-I error to roughly \(1-(0.95)^{10}\approx0.40\) — about a 40% chance of at least one false positive. Bonferroni controls this by testing each comparison at \(\alpha_{\text{adj}}=\alpha/m=0.05/10=0.005\) (equivalently multiplying each raw P-value by 10 and comparing to \(0.05\)), keeping the overall error at \(\le0.05\).</p>
+</details>
+
+<!-- ---------- TOPIC 6 ---------- -->
+<h3>Topic 6 — \(R^2\) and conceptual questions</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>WE6.1 — \(R^2\) and pooled SD from a completed table</summary>
+<p><strong>Given</strong> a one-way table: Factor SS \(=53.80\), Error SS \(=245.00\), Total SS \(=298.80\), Error DF \(=56\).</p>
+<p><strong>\(R^2=\dfrac{\text{SSF}}{\text{SST}}=\dfrac{53.80}{298.80}=0.180\)</strong> — the factor explains \(18.0\%\) of the total variation in the response; the remaining \(82\%\) is within-group (unexplained) noise. Equivalently \(R^2=1-\text{SSE}/\text{SST}=1-245.00/298.80=0.180\) ✓.</p>
+<p><strong>Pooled SD</strong> \(=\sqrt{\text{MSE}}=\sqrt{245.00/56}=\sqrt{4.375}=2.09\). This single number estimates the common within-group standard deviation \(\sigma\).</p>
+<div class="trap">A statistically significant factor can still have a <em>small</em> \(R^2\): "significant" answers "is there any effect?", while \(R^2\) answers "how much of the spread does it explain?" — different questions.</div>
+</details>
+
+<details>
+<summary>WE6.2 — What do MSF and MSE each estimate?</summary>
+<p><strong>Question style.</strong> "In a one-way ANOVA, what does each mean square estimate, and why is \(F\approx1\) under \(H_0\)?"</p>
+<p><strong>Answer.</strong> <strong>MSE</strong> always estimates the common error variance \(\sigma^2\) — it pools the within-group scatter and is unbiased for \(\sigma^2\) whether or not \(H_0\) is true. <strong>MSF</strong> estimates \(\sigma^2\) <em>plus</em> a non-negative term driven by how far the true group means spread apart; under \(H_0:\mu_1=\dots=\mu_d\) that extra term is \(0\), so MSF also estimates \(\sigma^2\). Hence under \(H_0\) both numerator and denominator estimate the same \(\sigma^2\) and \(F=\text{MSF}/\text{MSE}\approx1\); when the means genuinely differ, MSF is inflated and \(F\) grows — which is why ANOVA is a <strong>right-one-sided</strong> test.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<details>
+<summary><strong>WARM-UP</strong> · YT6.1 — Compute \(R^2\) [1 mark]</summary>
+<p>An ANOVA has SSF \(=168.0\) and SST \(=490.0\). Find \(R^2\) and interpret.</p>
+<hr>
+<p><strong>Solution.</strong> \(R^2=168.0/490.0=0.343\) — the factor explains \(34.3\%\) of the total variation in the response.</p>
+</details>
+
+<details>
+<summary><strong>STANDARD</strong> · YT6.2 — Why not just run all the t-tests? [2 marks]</summary>
+<p>A classmate wants to compare 5 diets by running a \(t\)-test on every pair instead of one ANOVA. In 1–2 sentences, why is that flawed and what is the correct approach?</p>
+<hr>
+<p><strong>Solution.</strong> Running all \(\binom52=10\) pairwise \(t\)-tests inflates the overall Type-I error rate far above \(5\%\) (many chances for a false positive). The correct approach is a single ANOVA \(F\)-test at controlled \(\alpha\); <em>only if</em> it rejects do you follow up with adjusted (e.g. Bonferroni) pairwise comparisons.</p>
+</details>
+
+<details>
+<summary><strong>EXAM-LEVEL</strong> · YT6.3 — \(R^2\), pooled SD, and interpretation together [4 marks]</summary>
+<p>From a completed one-way table: Factor SS \(=18.62\), Error SS \(=77.88\), Error DF \(=33\), Total SS \(=96.50\). Report \(R^2\), the pooled standard deviation, and interpret both in context (response = extraction yield %).</p>
+<hr>
+<p><strong>Solution.</strong> \(R^2=18.62/96.50=0.193\) ⇒ roast level explains \(19.3\%\) of the variation in extraction yield; the other \(80.7\%\) is shot-to-shot noise within roasts. Pooled SD \(=\sqrt{77.88/33}=\sqrt{2.360}=1.54\%\) ⇒ within any roast, individual yields scatter around their roast mean with a standard deviation of about \(1.5\) percentage points. So roast has a real but modest influence relative to the within-roast variability.</p>
+</details>
+
+<details>
+<summary><strong>STRETCH</strong> · YT6.4 — Why is the P-value a right tail only? [3 marks]</summary>
+<p>Explain, using what MSF and MSE estimate, why the ANOVA P-value is \(\mathbb P(F\gt f)\) (right tail) and never two-sided.</p>
+<hr>
+<p><strong>Solution.</strong> MSE estimates \(\sigma^2\) regardless of \(H_0\); MSF estimates \(\sigma^2\) plus a <em>non-negative</em> quantity that grows only when the group means differ. So departures from \(H_0\) can push \(F\) only <em>upward</em> — a true difference never makes \(F\) systematically less than 1. Evidence against \(H_0\) therefore lives entirely in the <strong>upper</strong> tail, so the P-value is \(\mathbb P(F\gt f)\); a small \(F\) (near 0) just means the group means are unusually close, which is not evidence against equality. Hence the test is right-one-sided and the P-value is never doubled.</p>
+</details>
+
+<div class="tip"><strong>Using this arena.</strong> Cover the answer, write the full table or sentence on paper first, <em>then</em> open the solution — recognition ≠ recall, and the exam wants recall. Re-drill the two ⭐ gapped tables (YT2.3, YT2.4) until the DF-first → MSE → back-solve order is automatic: that single routine is worth the most guaranteed marks in the paper. If a step feels shaky, jump back to <a href="#formulas">§2 formulas</a> or the <a href="#worked">§3 worked examples</a>, then return and try again clean.</div>
+
+</section>
 
 </main>
 </body>

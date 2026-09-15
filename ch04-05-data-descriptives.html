@@ -64,6 +64,7 @@
   <a href="ch06-estimation-cis.html">Ch 6 ›</a>
   <a href="formulas.html">Formula sheet</a>
   <a href="exam-2025.html">Exams</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -490,6 +491,289 @@ If instead you see a long right tail: "Group X is clearly right-skewed with a lo
 Sources: STAT1301 course notes Ch 4 (pp 67–80) &amp; Ch 5 (pp 81–118); Ch 4 &amp; 5 solutions; tutorial sheet 4; past exams 2021–2025. All published numbers verified by computation.
 <br><a href="index.html">← back to Hub</a> · <a href="ch06-estimation-cis.html">next: Ch 6 Estimation &amp; CIs →</a>
 </p>
+
+<!-- ============ 8. PRACTICE ARENA ============ -->
+<section id="practice">
+<h2>8 · Practice Arena &nbsp;<span class="badge gold">TRAIN HERE</span></h2>
+<p>Brand-new scenarios and numbers — <b>not</b> from any past paper, tutorial or the notes. Each topic gives you <b>📖 Learn from these</b> (fully-worked, click to open) then <b>✏️ Your turn</b> (attempt first, then reveal). Every number is verified by computation using the notes' \((n+1)p\) quantile method and the \(n-1\) variance. Interpretation questions include a <b>model sentence</b> — copy its structure, that's where the marks are.</p>
+
+<!-- ---------- TOPIC 1: STUDY DESIGN ---------- -->
+<div class="card">
+<h3>🎓 Topic 1 — Study design: observational vs randomised, confounding, causation &amp; sampling</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — Classify a randomised trial, its variables, and the conclusion allowed</summary>
+<div class="card q">
+<p><b>Q.</b> A fitness centre enrols 60 volunteers and uses a random-number generator to allocate them to one of two 8-week programmes — high-intensity intervals (HIIT) or steady-state cycling — then records each person's change in resting heart rate (bpm). The HIIT group improved significantly more (\(p=0.01\)). (a) What type of study is this? (b) Classify <em>change in resting heart rate</em> and <em>programme</em>. (c) Is a causal conclusion allowed? (d) Give one strength and one weakness.</p>
+</div>
+<p><b>(a)</b> A <b>designed (randomised) experiment</b> — the researchers <em>actively assigned</em> the treatment (programme) using a random mechanism.</p>
+<p><b>(b)</b> <em>Change in resting heart rate</em> is <b>quantitative, continuous</b> (any real value in bpm, and it can be negative). <em>Programme</em> takes two unordered categories {HIIT, steady-state} → <b>qualitative, nominal</b> (a two-level factor; binary = nominal).</p>
+<p><b>(c)</b> <span style="color:var(--good)"><b>Yes.</b></span> Because subjects were <em>randomly assigned</em>, the two groups have (approximately) the same distribution of every other variable — age, fitness, diet, measured or not — so a difference in outcome must be caused by the programme. Model sentence: <em>"HIIT causes a greater reduction in resting heart rate than steady-state cycling."</em></p>
+<p><b>(d)</b> <b>Strength:</b> randomisation removes confounding (and one could blind the <em>assessor</em> who reads the heart-rate monitor to remove measurement bias). <b>Weakness:</b> the 60 subjects are <em>volunteers</em> — a self-selected sample that may not represent all adults, so the result may not generalise; participants also cannot be blinded to which exercise they do.</p>
+</details>
+
+<details>
+<summary>Worked B — Observational data: association, confounding, and a sampling flaw</summary>
+<div class="card q">
+<p><b>Q.</b> A meal-tracking app reports that users who log breakfast every day have a lower average body-fat percentage than users who skip it. (a) What type of study is this? (b) State the strongest valid conclusion. (c) Name a plausible confounder and explain how it produces the pattern. (d) The data come only from people who downloaded the app and chose to log meals — name the sampling problem and say whether a bigger sample fixes it.</p>
+</div>
+<p><b>(a)</b> <b>Observational</b> — no one assigned breakfast habits; the app merely <em>recorded</em> behaviour that users chose themselves.</p>
+<p><b>(b)</b> <b>Association only:</b> <em>"logging breakfast daily is associated with lower body-fat percentage."</em> Never "causes".</p>
+<p><b>(c)</b> A plausible confounder is <b>overall health-consciousness</b> (or general physical-activity level): health-conscious people <em>both</em> tend to eat a regular breakfast <em>and</em> exercise/eat well, so this third variable drives both the explanatory variable and the response — manufacturing a breakfast–bodyfat link even if breakfast itself does nothing.</p>
+<p><b>(d)</b> A <b>self-selected / convenience sample</b> of app users (people motivated enough to download and log meals) → <b>sampling bias</b>; they are not representative of the general population. A larger sample of the <em>same</em> kind of user just makes you more precisely wrong — only a better sampling method fixes bias, not size.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q"><p><span class="badge">WARM-UP · 2 marks</span> &nbsp;<b>1.</b> A city transport authority randomly assigns 400 commuters to receive either a real-time bus app or a printed timetable, then measures weekly minutes spent waiting at stops. Is this an observational study or a designed experiment, and does it license a causal conclusion?</p></div>
+<details><summary>Show solution</summary>
+<p><b>Designed (randomised) experiment</b> — commuters were <em>randomly assigned</em> to the two conditions. <span style="color:var(--good)">Causal language is allowed:</span> any difference in average waiting time can be attributed to the app itself (randomisation balances all other commuter characteristics across the two groups).</p>
+</details>
+
+<div class="card q"><p><span class="badge">STANDARD · 3 marks</span> &nbsp;<b>2.</b> A newspaper reports that students who own a laptop score higher on the final exam than students who don't. (i) Give the strongest valid conclusion. (ii) Name one confounder. (iii) In one sentence, explain how that confounder could produce the pattern <em>without</em> laptops causing higher scores.</p></div>
+<details><summary>Show solution</summary>
+<p><b>(i)</b> Observational data ⇒ <b>association only</b>: <em>"owning a laptop is associated with higher final-exam scores."</em></p>
+<p><b>(ii)</b> A confounder such as <b>household income</b> (or family socioeconomic status).</p>
+<p><b>(iii)</b> Wealthier families can both afford a laptop <em>and</em> provide tutoring, textbooks, a quiet study space and better-resourced schools — so income drives both laptop ownership and exam performance, creating the association even if the laptop itself has no effect on scores.</p>
+</details>
+
+<div class="card q"><p><span class="badge gold">EXAM-LEVEL · 4 marks</span> &nbsp;<b>3.</b> A university has 12,000 students — Science 3,600, Arts 2,400, Business 3,000, Engineering 3,000 — and wants to survey \(n=200\) about campus food. (i) Name a sampling method that guarantees every faculty is represented and compute how many students to draw from each faculty under <em>proportional</em> allocation. (ii) Instead, the researcher stands outside the Engineering building and surveys the first 200 students who walk past. Name this method and give one reason it is biased.</p></div>
+<details><summary>Show solution</summary>
+<p><b>(i) Stratified sampling</b> (strata = faculties), taking an SRS of \(n\,N_s/N\) from each. With \(n/N = 200/12000 = 1/60\):</p>
+<table>
+<tr><th>Faculty</th><th>Size \(N_s\)</th><th>Sampled \(=N_s/60\)</th></tr>
+<tr><td>Science</td><td>3,600</td><td>60</td></tr>
+<tr><td>Arts</td><td>2,400</td><td>40</td></tr>
+<tr><td>Business</td><td>3,000</td><td>50</td></tr>
+<tr><td>Engineering</td><td>3,000</td><td>50</td></tr>
+<tr><td><b>Total</b></td><td><b>12,000</b></td><td><b>200</b></td></tr>
+</table>
+<p><b>(ii) Convenience sampling.</b> It is biased because it over-represents Engineering students (and whoever happens to walk past at that time), so it is not representative of the whole student body — their food opinions may differ systematically from other faculties'.</p>
+</details>
+
+<div class="card q"><p><span class="badge pre">STRETCH · 3 marks</span> &nbsp;<b>4.</b> A wellness website runs an online poll — "Do you feel less stressed after using our meditation guide?" — and 8,000 users respond, 82% saying yes. The site claims the guide reduces stress. Identify two <em>distinct</em> flaws (one about the sample, one about the design) and state what study design would actually establish causation.</p></div>
+<details><summary>Show solution</summary>
+<p><b>Flaw 1 — sampling (voluntary response / self-selected):</b> only motivated, already-satisfied users bother to answer an opt-in poll, so the 82% is biased upward. The huge \(n=8{,}000\) does <em>not</em> rescue it — a biased sampling frame stays biased at any size.</p>
+<p><b>Flaw 2 — design (no control, no randomisation):</b> there is no comparison group, so improvement could be placebo effect, natural stress fluctuation, or regression to the mean, none of which are ruled out. Association cannot become causation.</p>
+<p><b>Fix:</b> a <b>randomised controlled trial</b> — randomly assign participants to the meditation guide or a control/sham activity (ideally double-blind), then compare stress change between groups.</p>
+</details>
+</div>
+
+<!-- ---------- TOPIC 2: BY-HAND SUMMARY STATS ---------- -->
+<div class="card">
+<h3>🔢 Topic 2 — By-hand summary statistics: mean, median, SD, IQR, five-number summary</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — Five-number summary, IQR, outlier check &amp; shape (n = 11)</summary>
+<div class="card q">
+<p><b>Q.</b> Eleven weekday trips on a shared e-scooter had distances (km): <span class="mono">3.6, 2.4, 5.1, 2.1, 4.0, 7.9, 3.0, 4.4, 2.4, 5.8, 3.3</span>. Give the five-number summary and IQR, check for boxplot outliers, and describe the shape.</p>
+</div>
+<p><b>Step 1 — order</b> (\(n=11\)):</p>
+<p class="mono">2.1, 2.4, 2.4, 3.0, 3.3, 3.6, 4.0, 4.4, 5.1, 5.8, 7.9</p>
+<p><b>Step 2 — median</b>, position \((n+1)\times0.5 = 6\): the 6th value \(=\mathbf{3.6}\).</p>
+<p><b>Step 3 — \(Q_1\)</b>, position \((n+1)\times0.25 = 3\): the 3rd value \(=\mathbf{2.4}\).</p>
+<p><b>Step 4 — \(Q_3\)</b>, position \((n+1)\times0.75 = 9\): the 9th value \(=\mathbf{5.1}\).</p>
+<p><b>Five-number summary:</b> min \(=2.1\), \(Q_1=2.4\), median \(=3.6\), \(Q_3=5.1\), max \(=7.9\). &nbsp; <b>IQR</b> \(=5.1-2.4=\mathbf{2.7}\).</p>
+<p><b>Outliers:</b> fences \(=2.4-1.5(2.7)=-1.65\) and \(5.1+1.5(2.7)=9.15\). The max \(7.9\) is inside \([-1.65,\,9.15]\) ⇒ <b>no outliers</b>.</p>
+<p><b>Shape:</b> the median sits closer to \(Q_1\) than \(Q_3\) (\(Q_2-Q_1=1.2\) vs \(Q_3-Q_2=1.5\)) and the upper whisker is much longer (\(\text{max}-Q_3=2.8\) vs \(Q_1-\text{min}=0.3\)) — a long right tail ⇒ <b>right-skewed</b>. Consistent with mean \(=4.0\) exceeding the median \(3.6\).</p>
+</details>
+
+<details>
+<summary>Worked B — Mean, median, sample variance &amp; SD by hand, and choosing the right centre (n = 6)</summary>
+<div class="card q">
+<p><b>Q.</b> Umbrellas sold (in hundreds) on six rainy days: <span class="mono">4, 6, 7, 9, 11, 17</span>. Compute the mean, median, sample variance and SD (≥3 s.f.), and state whether the mean or median better summarises the centre.</p>
+</div>
+<p><b>Mean:</b> \(\bar x=\dfrac{4+6+7+9+11+17}{6}=\dfrac{54}{6}=\mathbf{9.00}\).</p>
+<p><b>Median</b> (\(n=6\), position \((n+1)/2=3.5\) → average 3rd &amp; 4th): \((7+9)/2=\mathbf{8.00}\).</p>
+<p><b>Variance</b> — deviations from 9: \(-5,-3,-2,0,2,8\); squares \(25,9,4,0,4,64\); sum \(=106\).</p>
+<p>\[s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2=\frac{106}{5}=\mathbf{21.2},\qquad s=\sqrt{21.2}=\mathbf{4.60}.\]</p>
+<p><b>Which centre?</b> \(Q_1\) sits at position \(1.75\) → \((4+6)/2=5\); \(Q_3\) at \(5.25\) → \((11+17)/2=14\); so the upper half of the box (\(Q_3-Q_2=6\)) is twice the lower (\(Q_2-Q_1=3\)) and the single large value 17 drags the mean above the median. The data are <b>right-skewed</b>, so the <b>median (8)</b> is the more honest summary of the centre.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q"><p><span class="badge">WARM-UP · 2 marks</span> &nbsp;<b>1.</b> Five short-quiz scores (out of 20): <span class="mono">8, 11, 12, 15, 19</span>. Find the mean and the median.</p></div>
+<details><summary>Show solution</summary>
+<p><b>Mean</b> \(=\dfrac{8+11+12+15+19}{5}=\dfrac{65}{5}=\mathbf{13.0}\). <b>Median</b> (\(n=5\), position \(3\)) \(=\) 3rd value \(=\mathbf{12.0}\).</p>
+</details>
+
+<div class="card q"><p><span class="badge">STANDARD · 3 marks</span> &nbsp;<b>2.</b> Nine daily counts of app crashes: <span class="mono">15, 21, 12, 40, 18, 15, 27, 14, 22</span>. Give the five-number summary and determine whether any day is a boxplot outlier.</p></div>
+<details><summary>Show solution</summary>
+<p>Ordered (\(n=9\)): <span class="mono">12, 14, 15, 15, 18, 21, 22, 27, 40</span>.</p>
+<ul>
+<li><b>Median</b>, position \(10\times0.5=5\): 5th value \(=\mathbf{18}\).</li>
+<li><b>\(Q_1\)</b>, position \(10\times0.25=2.5\) → average 2nd &amp; 3rd \(=(14+15)/2=\mathbf{14.5}\).</li>
+<li><b>\(Q_3\)</b>, position \(10\times0.75=7.5\) → average 7th &amp; 8th \(=(22+27)/2=\mathbf{24.5}\).</li>
+</ul>
+<p><b>Five-number summary:</b> (12, 14.5, 18, 24.5, 40); IQR \(=24.5-14.5=10\).</p>
+<p><b>Outlier check:</b> upper fence \(=24.5+1.5(10)=39.5\); lower fence \(=14.5-15=-0.5\). The value \(\mathbf{40}\) exceeds 39.5 ⇒ it <b>is a boxplot outlier</b>.</p>
+</details>
+
+<div class="card q"><p><span class="badge gold">EXAM-LEVEL · 4 marks</span> &nbsp;<b>3.</b> Six cable breaking-strengths (kN): <span class="mono">5, 8, 8, 10, 14, 15</span>. (i) Compute the sample variance and SD (≥3 s.f.). (ii) Are SD or IQR appropriate here, and why?</p></div>
+<details><summary>Show solution</summary>
+<p><b>(i)</b> Mean \(=\dfrac{5+8+8+10+14+15}{6}=\dfrac{60}{6}=10\). Deviations \(-5,-2,-2,0,4,5\); squares \(25,4,4,0,16,25\); sum \(=74\).</p>
+<p>\[s^2=\frac{74}{5}=\mathbf{14.8},\qquad s=\sqrt{14.8}=\mathbf{3.85}\ \text{kN}.\]</p>
+<p><b>(ii)</b> Five-number summary is (5, 6.5, 9, 14.5, 15) with no value beyond the fences \([6.5-12,\,14.5+12]=[-5.5,\,26.5]\) ⇒ <b>no outliers</b>, and the distribution is roughly symmetric. So the <b>SD (with the mean)</b> is a reasonable summary of spread; you would only switch to the <b>IQR</b> if the data were clearly skewed or had outliers.</p>
+</details>
+
+<div class="card q"><p><span class="badge pre">STRETCH · 3 marks</span> &nbsp;<b>4.</b> Five potted plants have a mean height of 15 cm. Four of the heights are 10, 12, 15 and 20 cm. (i) Find the fifth height. (ii) Then give the median.</p></div>
+<details><summary>Show solution</summary>
+<p><b>(i)</b> Mean \(=15\) over 5 plants ⇒ total \(=15\times5=75\). Known four sum to \(10+12+15+20=57\), so the fifth \(=75-57=\mathbf{18}\) cm.</p>
+<p><b>(ii)</b> Full ordered set: <span class="mono">10, 12, 15, 18, 20</span>; median (position 3) \(=\mathbf{15}\) cm.</p>
+</details>
+</div>
+
+<!-- ---------- TOPIC 3: PLOT INTERPRETATION ---------- -->
+<div class="card">
+<h3>📊 Topic 3 — Plot interpretation: shape · centre · spread · outliers (marks live in the sentences)</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — Read a histogram from its frequency table (shape, centre, mean vs median)</summary>
+<div class="card q">
+<p><b>Q.</b> The table gives delivery times (minutes) for 40 online orders. Describe the distribution (shape, centre, spread) and say whether the mean or median is larger.</p>
+<table>
+<tr><th>Time (min)</th><th>[10,20)</th><th>[20,30)</th><th>[30,40)</th><th>[40,50)</th><th>[50,60)</th><th>[60,70)</th></tr>
+<tr><td>Count</td><td>3</td><td>9</td><td>14</td><td>8</td><td>4</td><td>2</td></tr>
+</table>
+</div>
+<p><b>Shape:</b> single-peaked (unimodal), with the <b>modal class 30–40 min</b>; the counts fall away slowly to the right (14 → 8 → 4 → 2) giving a <b>long right tail</b> ⇒ <b>right-skewed</b>.</p>
+<p><b>Centre:</b> the cumulative counts are 3, 12, 26, 34, 38, 40, so the 20th–21st observations (the middle) fall in the <b>30–40 min class</b> — that is where the median lies.</p>
+<p><b>Spread:</b> values range over roughly 10–70 min.</p>
+<p><b>Mean vs median:</b> the right tail pulls the mean up, so <b>mean &gt; median</b>.</p>
+<p class="tip"><b>Model sentence:</b> <em>"The distribution of delivery times is unimodal and right-skewed, centred around 30–40 minutes, with most orders under 40 minutes and a small tail of slow deliveries up to 70 minutes; the right skew means the mean exceeds the median, so the median is the better centre to report."</em></p>
+</details>
+
+<details>
+<summary>Worked B — Compare two side-by-side boxplots (centre, spread, shape, outliers)</summary>
+<div class="card q">
+<p><b>Q.</b> Delivery times (minutes) on two courier routes have the five-number summaries below, and Route B has a single point flagged at 78. Compare the two distributions.</p>
+<table>
+<tr><th>Route</th><th>Min</th><th>\(Q_1\)</th><th>Median</th><th>\(Q_3\)</th><th>Max</th></tr>
+<tr><td>A</td><td>12</td><td>22</td><td>27</td><td>33</td><td>45</td></tr>
+<tr><td>B</td><td>18</td><td>28</td><td>35</td><td>46</td><td>78*</td></tr>
+</table>
+</div>
+<p><b>Centre:</b> Route B is slower — median 35 vs 27 min.</p>
+<p><b>Spread:</b> Route B is more variable — IQR \(=46-28=18\) vs Route A's \(33-22=11\).</p>
+<p><b>Shape:</b> Route A is roughly symmetric (\(Q_2-Q_1=5\approx Q_3-Q_2=6\), whiskers similar). Route B is <b>right-skewed</b> — the upper half of its box (\(Q_3-Q_2=11\)) is far wider than the lower (\(Q_2-Q_1=7\)).</p>
+<p><b>Outliers:</b> Route B's upper fence \(=46+1.5(18)=73\); the flagged point at <b>78 exceeds 73, so it is a genuine boxplot outlier</b>. Route A has none (fences \(22-16.5=5.5\) and \(33+16.5=49.5\)).</p>
+<p class="tip"><b>Model sentence:</b> <em>"Route B has both a higher median delivery time and greater variability than Route A, and is right-skewed with a high outlier at 78 minutes, whereas Route A is roughly symmetric with no outliers — so Route A is both faster and more consistent."</em></p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q"><p><span class="badge">WARM-UP · 2 marks</span> &nbsp;<b>1.</b> A histogram of house prices in a suburb has a tall cluster of bars on the left and a few short bars trailing far to the right. Name the shape, and state whether the mean or median is larger and which you would report.</p></div>
+<details><summary>Show solution</summary>
+<p><b>Right-skewed</b> (long right tail). The high-priced tail pulls the mean up, so <b>mean &gt; median</b>. Report the <b>median</b>, which is robust to the skew and the honest centre for prices.</p>
+</details>
+
+<div class="card q"><p><span class="badge">STANDARD · 3 marks</span> &nbsp;<b>2.</b> The frequency table gives the number of pages printed by each of 50 students in a week. Comment on the shape, name the modal class, and identify which class contains the median.</p>
+<table>
+<tr><th>Pages</th><th>0–4</th><th>5–9</th><th>10–14</th><th>15–19</th><th>20–24</th></tr>
+<tr><td>Count</td><td>6</td><td>20</td><td>14</td><td>7</td><td>3</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<p><b>Shape:</b> unimodal and <b>right-skewed</b> — the counts rise to a peak then trail off to the right (20 → 14 → 7 → 3).</p>
+<p><b>Modal class:</b> <b>5–9 pages</b> (highest count, 20).</p>
+<p><b>Median class:</b> cumulative counts are 6, 26, 40, 47, 50; the 25th–26th observations (the middle of 50) fall in the <b>5–9 pages</b> class.</p>
+<p class="tip"><b>Model sentence:</b> <em>"Weekly printing is unimodal and right-skewed, most heavily concentrated in the 5–9 page class where the median also lies, with a thin upper tail of heavy users up to 24 pages."</em></p>
+</details>
+
+<div class="card q"><p><span class="badge gold">EXAM-LEVEL · 4 marks</span> &nbsp;<b>3.</b> Side-by-side boxplots of two tutorial groups' exam scores have the five-number summaries below (Group Q has one point flagged at 95). Write a full comparison (centre, spread, shape, outliers), then state which group would more likely violate the normality assumption of a two-sample \(t\)-test.</p>
+<table>
+<tr><th>Group</th><th>Min</th><th>\(Q_1\)</th><th>Median</th><th>\(Q_3\)</th><th>Max</th></tr>
+<tr><td>P</td><td>41</td><td>55</td><td>62</td><td>68</td><td>79</td></tr>
+<tr><td>Q</td><td>30</td><td>52</td><td>58</td><td>68</td><td>95*</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<p><b>Centre:</b> Group P is slightly higher — median 62 vs 58.</p>
+<p><b>Spread:</b> similar boxes (P: IQR \(=68-55=13\); Q: IQR \(=68-52=16\)), but Q's overall range is wider (30–95 vs 41–79).</p>
+<p><b>Shape:</b> P is roughly symmetric (\(Q_2-Q_1=7\approx Q_3-Q_2=6\)); Q is <b>right-skewed</b> with a long lower reach and a high tail.</p>
+<p><b>Outliers:</b> Group Q's upper fence \(=68+1.5(16)=92\); the flagged point at <b>95 &gt; 92 is an outlier</b>. Group P has none (fences \(55-19.5=35.5\), \(68+19.5=87.5\)).</p>
+<p><b>Normality:</b> <b>Group Q</b> is more likely to violate normality — it is skewed and carries a high outlier, whereas Group P looks approximately symmetric and bell-consistent.</p>
+<p class="tip"><b>Model sentence:</b> <em>"Group P is roughly symmetric with no outliers, while Group Q has a similar centre but is right-skewed with a high outlier at 95, so the normality assumption is more doubtful for Group Q."</em></p>
+</details>
+
+<div class="card q"><p><span class="badge pre">STRETCH · 3 marks</span> &nbsp;<b>4.</b> A normal Q–Q plot of daily website load times follows the straight reference line through the middle but bends <em>upward, away from the line</em>, at the right-hand end. What does this say about the distribution's shape and the normality assumption, and what remedy would you suggest?</p></div>
+<details><summary>Show solution</summary>
+<p>At the right end the <b>sample quantiles are larger than the corresponding normal quantiles</b> (points above the line), which means the upper tail is heavier/longer than a normal's ⇒ the data are <b>right-skewed, not normal</b>.</p>
+<p><b>Verdict:</b> the normality assumption is <b>doubtful</b>. <b>Remedy:</b> apply a <b>log</b> (or reciprocal) transform to pull in the right tail, or use a robust/Welch-type method that does not lean on normality.</p>
+</details>
+</div>
+
+<!-- ---------- TOPIC 4: SCATTERPLOTS & CORRELATION ---------- -->
+<div class="card">
+<h3>📈 Topic 4 — Scatterplots &amp; correlation: direction · strength · form · caution</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — Compute the correlation by hand and interpret it (n = 5)</summary>
+<div class="card q">
+<p><b>Q.</b> For five students, hours studied \(x\) and quiz score \(y\) (out of 10) were: \((1,3),(2,4),(3,4),(4,6),(5,8)\). Compute the sample correlation \(r\) and describe the relationship.</p>
+</div>
+<p><b>Means:</b> \(\bar x=3\), \(\bar y=5\). Build the deviation table:</p>
+<table>
+<tr><th>\(x_i-\bar x\)</th><th>\(y_i-\bar y\)</th><th>product</th><th>\((x_i-\bar x)^2\)</th><th>\((y_i-\bar y)^2\)</th></tr>
+<tr><td>−2</td><td>−2</td><td>4</td><td>4</td><td>4</td></tr>
+<tr><td>−1</td><td>−1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>0</td><td>−1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>3</td><td>6</td><td>4</td><td>9</td></tr>
+<tr><td colspan="2"><b>Σ</b></td><td><b>12</b></td><td><b>10</b></td><td><b>16</b></td></tr>
+</table>
+<p>\[r=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum(x_i-\bar x)^2}\sqrt{\sum(y_i-\bar y)^2}}=\frac{12}{\sqrt{10}\,\sqrt{16}}=\frac{12}{\sqrt{160}}=\mathbf{0.949}.\]</p>
+<p><b>Interpretation:</b> \(r=+0.949\) is a <b>strong positive linear</b> relationship — quiz score tends to rise almost in lock-step with hours studied. <span class="trap" style="display:inline">Caution: strong correlation is not proof of causation, and \(r\) captures the <em>linear</em> pattern only.</span></p>
+</details>
+
+<details>
+<summary>Worked B — Interpret a negative correlation and describe the scatter</summary>
+<div class="card q">
+<p><b>Q.</b> Across six people, average daily screen time \(x\) (hours) and hours of sleep \(y\) had a reported correlation of \(r=-0.98\), and the scatterplot shows points falling tightly from top-left to bottom-right. Describe the relationship, covering direction, strength, form and one caution.</p>
+</div>
+<p><b>Direction:</b> <b>negative</b> — more screen time is associated with <em>less</em> sleep (points slope downward left-to-right).</p>
+<p><b>Strength &amp; form:</b> \(|r|=0.98\) is very close to 1, so the relationship is <b>very strong and closely linear</b> — the cloud hugs a straight downward line.</p>
+<p><b>Caution:</b> this looks observational, so \(r=-0.98\) shows a strong <em>association</em> only — it does <b>not</b> prove screen time <em>causes</em> less sleep (a confounder such as evening work habits could drive both), and \(r\) would miss any non-linear structure.</p>
+<p class="tip"><b>Model sentence:</b> <em>"There is a very strong negative linear association between screen time and sleep (\(r=-0.98\)): people with more screen time tend to sleep less, though as observational data this is association, not proof of causation."</em></p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q"><p><span class="badge">WARM-UP · 2 marks</span> &nbsp;<b>1.</b> A scatterplot of a car's age (years) against its resale value shows points sloping steadily downward from top-left to bottom-right in a fairly tight band. Describe the direction and strength, and give the likely sign of \(r\).</p></div>
+<details><summary>Show solution</summary>
+<p><b>Negative</b> direction (value falls as age rises) and a <b>moderately strong to strong</b>, roughly linear relationship (tight band). So \(r\) is <b>negative</b> — plausibly around \(-0.8\).</p>
+</details>
+
+<div class="card q"><p><span class="badge">STANDARD · 3 marks</span> &nbsp;<b>2.</b> Compute \(r\) by hand for \(x=\{2,4,6,8,10\}\), \(y=\{5,4,6,5,7\}\) and interpret it in words.</p></div>
+<details><summary>Show solution</summary>
+<p><b>Means:</b> \(\bar x=6\), \(\bar y=5.4\).</p>
+<p>Products \((x_i-\bar x)(y_i-\bar y)\): \((-4)(-0.4)=1.6\); \((-2)(-1.4)=2.8\); \((0)(0.6)=0\); \((2)(-0.4)=-0.8\); \((4)(1.6)=6.4\) → \(\sum=10\).</p>
+<p>\(\sum(x_i-\bar x)^2=16+4+0+4+16=40\); \(\sum(y_i-\bar y)^2=0.16+1.96+0.36+0.16+2.56=5.2\).</p>
+<p>\[r=\frac{10}{\sqrt{40}\,\sqrt{5.2}}=\frac{10}{\sqrt{208}}=\mathbf{0.693}.\]</p>
+<p><b>Interpretation:</b> a <b>moderate positive</b> linear relationship — \(y\) tends to increase with \(x\), but the points scatter fairly loosely around the line.</p>
+</details>
+
+<div class="card q"><p><span class="badge gold">EXAM-LEVEL · 4 marks</span> &nbsp;<b>3.</b> A researcher finds \(r=0.05\) between daily coffee cups and typing speed, yet the scatterplot shows a clear inverted-U (speed rises with the first few cups, then falls). (i) Explain how \(r\) can be near zero despite a strong relationship. (ii) State what you can and cannot conclude, remembering the data are observational.</p></div>
+<details><summary>Show solution</summary>
+<p><b>(i)</b> \(r\) measures <b>linear</b> association only. In a symmetric inverted-U the rising and falling halves contribute positive and negative cross-products that roughly cancel, so \(r\approx0\) even though the pattern is strong. A near-zero \(r\) means "no <em>linear</em> relationship", <b>not</b> "no relationship".</p>
+<p><b>(ii)</b> You <em>can</em> say there is a strong <b>non-linear (curved) relationship</b> between cups and typing speed; you <em>cannot</em> say they are unrelated, and — because the data are observational — you cannot claim coffee <b>causes</b> the change in speed either (confounding, e.g. time of day, is uncontrolled).</p>
+</details>
+
+<div class="card q"><p><span class="badge pre">STRETCH · 3 marks</span> &nbsp;<b>4.</b> Two variables have \(r=0.9\). A student concludes: "increasing \(x\) will cause \(y\) to increase, and \(x\) explains 90% of the variation in \(y\)." Identify the two errors.</p></div>
+<details><summary>Show solution</summary>
+<p><b>Error 1 — causation:</b> \(r=0.9\) is a strong <em>association</em>, but correlation does not imply causation. Establishing that \(x\) <em>causes</em> \(y\) needs a randomised experiment; the link could be confounding or reverse causation.</p>
+<p><b>Error 2 — "90% explained":</b> the proportion of variation in \(y\) explained by a linear fit is \(r^2\), not \(r\). Here \(r^2=0.9^2=0.81\), i.e. <b>81%</b>, not 90%. (And even that describes only the <em>linear</em> part of the relationship.)</p>
+</details>
+</div>
+
+<p class="tip"><b>How to train in this arena:</b> attempt every "Your turn" question <em>on paper with your Casio and the formula sheet</em> before opening the solution — the marks come from writing the method and the model sentence, not from recognising the answer. For interpretation questions, grade yourself against the <b>model sentence</b>: did you name direction/shape, cite the plot feature or number, and give a verdict? For by-hand stats, always re-check that you used the \((n+1)p\) position rule, averaged neighbours when the position was fractional, and divided the variance by \(n-1\) (the Casio <span class="mono">sx</span> key), quoting ≥3 significant figures.</p>
+</section>
 
 </main>
 </body>

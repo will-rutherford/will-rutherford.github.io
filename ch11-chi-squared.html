@@ -65,6 +65,7 @@
   <a href="ch07-hypothesis-testing.html">Ch 7 (testing)</a>
   <a href="formulas.html">Formula sheet ▶</a>
   <a href="exam-2025.html">Exams</a>
+  <a href="#practice">🏋️ Practice</a>
 </nav>
 
 <main>
@@ -665,6 +666,501 @@ conclusion.</em>
 All numerics verified with Python (<code>scipy.stats.chi2_contingency</code> + manual expected-count
 arithmetic agree). Sources: notes pp 227–236; exams 2023 Q5(e), 2024 Q5(e), 2025 Q2(d); χ² table exam p.13.
 </p>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>8 · Practice Arena</h2>
+<div class="card q">
+<strong>How to train here.</strong> Every scenario and number below is <em>fresh</em> — none appears
+in the 2021–2025 papers or the notes, so nothing is memorised, only the pipeline. Each topic gives you
+<strong>📖 two fully-worked examples</strong> to read, then <strong>✏️ your-turn questions</strong>
+(WARM-UP → STANDARD → EXAM-LEVEL → STRETCH). Attempt each one on paper with the χ² table from §2 open,
+THEN reveal the solution. All answers were recomputed in Python (<code>scipy.stats</code> + hand
+arithmetic agree to the shown digits).</p>
+</div>
+
+<!-- ---------- TOPIC A: INDEPENDENCE ---------- -->
+<h3>A · Test of independence on r×c tables</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A1 — a 2×2 table: flu-shot vs catching a cold</summary>
+<p><strong>Setup.</strong> \(n=200\) office workers; half received a flu-shot. Over winter it was
+recorded whether each caught a cold. <em>"Is vaccination status associated with catching a cold?"</em>
+The word <em>associated</em> on a table of counts ⇒ <strong>χ² test of independence.</strong></p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Cold</th><th>No cold</th><th>Row total</th></tr>
+<tr><th>Vaccinated</th><td>18</td><td>82</td><td>100</td></tr>
+<tr><th>Unvaccinated</th><td>34</td><td>66</td><td>100</td></tr>
+<tr><th>Col total</th><td>52</td><td>148</td><td>200</td></tr>
+</table></div>
+<p><strong>\(H_0\):</strong> vaccination status and cold outcome are independent (\(p_{ij}=p_iq_j\));
+<strong>\(H_1\):</strong> they are associated.</p>
+<p><strong>Expected</strong> \(E_{ij}=\text{row}\times\text{col}/n\):</p>
+<div class="mono">          Cold    No cold
+Vacc      26.00    74.00      (100·52/200, 100·148/200)
+Unvacc    26.00    74.00</div>
+<div class="tip">Smallest \(E\) is 26 (\(\ge 5\)) ⇒ approximation valid — say so for the mark.</div>
+<div class="mono">(18−26)²/26 = 2.462     (82−74)²/74 = 0.865
+(34−26)²/26 = 2.462     (66−74)²/74 = 0.865
+T = 2.462+0.865+2.462+0.865 = 6.653     df = (2−1)(2−1) = 1</div>
+<p><strong>P-value (df 1).</strong> Between the \(0.990\)-quantile \(6.63\) and the \(0.995\)-quantile
+\(7.88\): since \(6.63\lt 6.653\lt 7.88\), \(0.005\lt P\lt 0.01\) (exact \(P\approx 0.0099\)).</p>
+<p><strong>Conclusion.</strong> \(P\lt 0.05\) ⇒ reject \(H_0\). Vaccinated workers caught <em>fewer</em>
+colds than expected (18 vs 26.0) and unvaccinated <em>more</em> (34 vs 26.0): vaccination status is
+associated with a lower rate of colds in this sample.</p>
+</details>
+
+<details>
+<summary>Worked A2 — a 3×3 table: city region vs commute mode</summary>
+<p><strong>Setup.</strong> A transport authority samples \(n=260\) commuters across three regions and
+records main commute mode. <em>"Is commute mode associated with region?"</em></p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Car</th><th>Bus</th><th>Bike</th><th>Row total</th></tr>
+<tr><th>North</th><td>40</td><td>30</td><td>30</td><td>100</td></tr>
+<tr><th>Central</th><td>25</td><td>35</td><td>20</td><td>80</td></tr>
+<tr><th>South</th><td>15</td><td>25</td><td>40</td><td>80</td></tr>
+<tr><th>Col total</th><td>80</td><td>90</td><td>90</td><td>260</td></tr>
+</table></div>
+<p><strong>\(H_0\):</strong> region and commute mode independent; <strong>\(H_1\):</strong> associated.</p>
+<p><strong>Expected</strong> \(E_{ij}=\text{row}\times\text{col}/260\):</p>
+<div class="mono">          Car      Bus      Bike
+North     30.77    34.62    34.62
+Central   24.62    27.69    27.69
+South     24.62    27.69    27.69      (all E ≥ 5 ✓, min 24.62)</div>
+<p><strong>Statistic</strong> (per-cell \((O-E)^2/E\)):</p>
+<div class="mono">North    2.769   0.615   0.615
+Central  0.006   1.928   2.137
+South    3.756   0.262   5.470
+T = 17.56     df = (3−1)(3−1) = 4</div>
+<p><strong>P-value (df 4).</strong> The largest tabulated quantile is \(14.9\) (\(0.995\)); since
+\(17.56\gt 14.9\), \(P\lt 0.005\) (exact \(P\approx 0.0015\)).</p>
+<p><strong>Conclusion.</strong> Reject \(H_0\). Commute mode is associated with region: North commuters
+over-use cars (40 vs 30.8 expected) while South commuters over-use bikes (40 vs 27.7) — the modes are
+clearly not distributed the same way across regions.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><strong>A-Q1 [WARM-UP · 2 marks].</strong> A study cross-tabulates 4 diet types against 5 blood-pressure
+categories. What are the degrees of freedom for the χ² test of independence?</p>
+<details><summary>Show solution</summary>
+<p>df \(=(r-1)(c-1)=(4-1)(5-1)=\boxed{12}\). (Not \(rc-1=19\), and not \(k-1\).)</p>
+</details></div>
+
+<div class="card q">
+<p><strong>A-Q2 [STANDARD · 5 marks].</strong> 200 runners followed one of two training programs; each
+finish was graded Top / Middle / Back. Test at the 5% level whether finishing tier is associated with
+program.</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Top</th><th>Middle</th><th>Back</th><th>Row total</th></tr>
+<tr><th>Program 1</th><td>30</td><td>45</td><td>25</td><td>100</td></tr>
+<tr><th>Program 2</th><td>20</td><td>25</td><td>55</td><td>100</td></tr>
+<tr><th>Col total</th><td>50</td><td>70</td><td>80</td><td>200</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<p>\(H_0\): tier ⟂ program; \(H_1\): associated.</p>
+<div class="mono">E (row·col/200):    Top    Mid    Back
+Program 1          25.00  35.00  40.00
+Program 2          25.00  35.00  40.00      (all ≥ 5 ✓)
+contributions:
+P1:  (30−25)²/25=1.000  (45−35)²/35=2.857  (25−40)²/40=5.625
+P2:  (20−25)²/25=1.000  (25−35)²/35=2.857  (55−40)²/40=5.625
+T = 18.96     df = (2−1)(3−1) = 2</div>
+<p>df 2: \(18.96\gt 10.6\) (the \(0.995\)-quantile) ⇒ \(P\lt 0.005\) (exact \(\approx 7.6\times10^{-5}\)).
+Reject \(H_0\). Finishing tier <em>is</em> associated with program: Program 1 over-fills Top (30 vs 25)
+while Program 2 piles into Back (55 vs 40).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>A-Q3 [EXAM-LEVEL · 6 marks].</strong> A horticulture trial split 150 seedlings evenly across
+three fertiliser brands (A, B, C) and recorded whether each plant flowered within 8 weeks. Earlier parts
+built the marginal proportions and the joint pmf of (brand, outcome). <em>Final part:</em> "Perform an
+appropriate statistical test to determine whether flowering is associated with fertiliser brand. Report
+the test statistic, the P-value, a statistical conclusion, and a conclusion in context."</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Flowered</th><th>Did not</th><th>Row total</th></tr>
+<tr><th>Brand A</th><td>38</td><td>12</td><td>50</td></tr>
+<tr><th>Brand B</th><td>27</td><td>23</td><td>50</td></tr>
+<tr><th>Brand C</th><td>15</td><td>35</td><td>50</td></tr>
+<tr><th>Col total</th><td>80</td><td>70</td><td>150</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<p><strong>\(H_0\):</strong> flowering ⟂ brand; <strong>\(H_1\):</strong> associated.</p>
+<div class="mono">E (row·col/150):   Flowered  Did not
+Brand A            26.67     23.33
+Brand B            26.67     23.33
+Brand C            26.67     23.33     (all ≥ 5 ✓)
+contributions:
+A:  (38−26.67)²/26.67 = 4.817   (12−23.33)²/23.33 = 5.505
+B:  (27−26.67)²/26.67 = 0.004   (23−23.33)²/23.33 = 0.005
+C:  (15−26.67)²/26.67 = 5.104   (35−23.33)²/23.33 = 5.833
+T = 21.27     df = (3−1)(2−1) = 2</div>
+<p>df 2: \(21.27\gt 10.6\) ⇒ \(P\lt 0.005\) (exact \(\approx 2.4\times10^{-5}\)). Reject \(H_0\) at
+the 5% level. <strong>In context:</strong> flowering success is strongly associated with brand — Brand A
+flowered far more than expected (38 vs 26.7) and Brand C far less (15 vs 26.7), while Brand B sat almost
+exactly at its expectation. The brands are not interchangeable.</p>
+<div class="tip">This is the exam pattern: χ² is the <em>last</em> part after Ch 3 marginal/joint work.
+The marks live in correct \(E\), correct df \(=2\), a bracketed \(P\), and naming the <em>direction</em>
+(A best, C worst).</div>
+</details></div>
+
+<div class="card q">
+<p><strong>A-Q4 [STRETCH · 5 marks].</strong> Among 150 conservatoire students it is recorded whether
+each has perfect pitch (Yes / No) and their principal instrument family (Strings / Keys / Winds). Only 12
+students have perfect pitch. Test for an association — and comment on validity.</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Strings</th><th>Keys</th><th>Winds</th><th>Row total</th></tr>
+<tr><th>Perfect pitch</th><td>3</td><td>4</td><td>5</td><td>12</td></tr>
+<tr><th>No perfect pitch</th><td>37</td><td>56</td><td>45</td><td>138</td></tr>
+<tr><th>Col total</th><td>40</td><td>60</td><td>50</td><td>150</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<div class="mono">E (row·col/150):   Strings  Keys   Winds
+Perfect pitch      3.20     4.80   4.00
+No perfect pitch   36.80    55.20  46.00</div>
+<div class="trap"><strong>Validity fails:</strong> three expected counts (3.20, 4.80, 4.00) are below 5,
+so the χ² approximation is unreliable here. State this — in practice you would pool instrument families
+or collect more perfect-pitch students.</div>
+<div class="mono">contributions:
+PP:  (3−3.20)²/3.20=0.013  (4−4.80)²/4.80=0.133  (5−4.00)²/4.00=0.250
+No:  (37−36.80)²/36.80=0.001 (56−55.20)²/55.20=0.012 (45−46.00)²/46.00=0.022
+T = 0.430     df = (2−1)(3−1) = 2</div>
+<p>Even ignoring the validity issue: df 2, \(0.430\lt 0.575\) (the \(0.250\)-quantile) ⇒ \(P\gt 0.75\)
+(exact \(\approx 0.81\)). Do <strong>not</strong> reject \(H_0\): no evidence that perfect pitch is
+associated with instrument family — but the conclusion is caveated because \(E\lt 5\) in three cells.</p>
+</details></div>
+
+<!-- ---------- TOPIC B: GOODNESS-OF-FIT ---------- -->
+<h3>B · Goodness-of-fit to claimed proportions</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked B1 — claimed proportions, a clear rejection</summary>
+<p><strong>Setup.</strong> A textbook claims eye-colour proportions Brown : Blue : Hazel : Green
+\(=0.50:0.30:0.15:0.05\). In a sample of \(n=300\) the counts are 140, 78, 52, 30.
+<em>"Are the data consistent with the claimed proportions?"</em> ⇒ <strong>GoF, known proportions.</strong></p>
+<p><strong>\(H_0\):</strong> \(p=(0.50,0.30,0.15,0.05)\); <strong>\(H_1\):</strong> \(H_0\) false.</p>
+<p><strong>Expected</strong> \(E_i=n\pi_i\):</p>
+<div class="mono">        Brown   Blue   Hazel  Green
+E        150.0   90.0   45.0   15.0     (all ≥ 5 ✓)
+(O−E)²/E: 0.667  1.600  1.089  15.000
+T = 0.667+1.600+1.089+15.000 = 18.36     df = k−1 = 4−1 = 3</div>
+<div class="tip">Notice one cell (Green: 30 seen vs 15 expected) contributes 15 of the 18.36 — always scan
+for the cell driving the rejection; it is the story you tell in the conclusion.</div>
+<p><strong>P-value (df 3).</strong> \(18.36\gt 12.8\) (the \(0.995\)-quantile) ⇒ \(P\lt 0.005\) (exact
+\(\approx 0.00037\)). Reject \(H_0\): the data are <em>not</em> consistent with the claimed proportions —
+green eyes are about twice as common here as the claim allows.</p>
+</details>
+
+<details>
+<summary>Worked B2 — a genetics ratio, a non-rejection (2 categories)</summary>
+<p><strong>Setup.</strong> A single-gene cross predicts smooth : wrinkled seeds in ratio \(3:1\). Of
+\(n=280\) seeds, 212 are smooth and 68 wrinkled. <em>"Does this accord with the 3:1 theory?"</em></p>
+<p><strong>\(H_0\):</strong> \(p=(0.75,0.25)\); <strong>\(H_1\):</strong> not 3:1.</p>
+<div class="mono">E = (280·0.75, 280·0.25) = (210, 70)     (both ≥ 5 ✓)
+(212−210)²/210 = 0.019     (68−70)²/70 = 0.057
+T = 0.076     df = k−1 = 2−1 = 1</div>
+<p><strong>P-value (df 1).</strong> \(0.076\lt 0.102\) (the \(0.250\)-quantile) ⇒ \(P\gt 0.75\) (exact
+\(\approx 0.78\)). Do not reject \(H_0\): the counts are entirely consistent with the \(3:1\) theory.</p>
+<div class="tip">A 2-category GoF has df \(=1\) — it is the smallest χ² test there is, but the machinery
+(\(E_i=n\pi_i\), \(\sum(O-E)^2/E\), upper tail) is identical to any other.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><strong>B-Q1 [WARM-UP · 2 marks].</strong> A six-sided die is rolled 120 times. Under "the die is fair",
+what is the expected count for each face, and what df would a goodness-of-fit test use?</p>
+<details><summary>Show solution</summary>
+<p>Fair ⇒ \(\pi_i=1/6\), so \(E_i=n/k=120/6=\boxed{20}\) for every face. df \(=k-1=6-1=\boxed{5}\).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>B-Q2 [STANDARD · 5 marks].</strong> A café claims its small : medium : large coffee sales split
+\(0.20:0.30:0.50\). One day it sells \(n=200\) coffees: 42 small, 66 medium, 92 large. Test the claim at
+the 5% level.</p>
+<details><summary>Show solution</summary>
+<p>\(H_0\): \(p=(0.20,0.30,0.50)\); \(H_1\): \(H_0\) false.</p>
+<div class="mono">E = (200·.20, 200·.30, 200·.50) = (40, 60, 100)     (all ≥ 5 ✓)
+(42−40)²/40 = 0.100     (66−60)²/60 = 0.600     (92−100)²/100 = 0.640
+T = 1.34     df = k−1 = 3−1 = 2</div>
+<p>df 2: \(0.575\lt 1.34\lt 2.77\) ⇒ \(0.25\lt P\lt 0.75\) (exact \(\approx 0.51\)). \(P\gt 0.05\), so do
+not reject \(H_0\): the day's sales are consistent with the claimed size split.</p>
+</details></div>
+
+<div class="card q">
+<p><strong>B-Q3 [EXAM-LEVEL · 5 marks].</strong> A shop believes weekday foot-traffic is spread <em>equally</em>
+across Mon–Fri. Over one week it counts 30, 52, 41, 48, 29 visitors (Mon…Fri), \(n=200\). Test at the 5%
+level whether traffic is uniform across weekdays, and say which day departs most.</p>
+<details><summary>Show solution</summary>
+<p>Equal ⇒ \(\pi_i=1/5\), \(E_i=200/5=40\) each. \(H_0\): all \(p_i=1/5\); \(H_1\): not all equal.</p>
+<div class="mono">(30−40)²/40 = 2.500   (52−40)²/40 = 3.600   (41−40)²/40 = 0.025
+(48−40)²/40 = 1.600   (29−40)²/40 = 3.025
+T = 10.75     df = k−1 = 5−1 = 4</div>
+<p>df 4: \(9.49\lt 10.75\lt 11.1\), i.e. the \(0.950\)- and \(0.975\)-quantiles ⇒ \(0.025\lt P\lt 0.05\)
+(exact \(\approx 0.030\)). Since \(P\lt 0.05\), reject \(H_0\): foot-traffic is <em>not</em> uniform.
+Tuesday is busiest (52 vs 40) and Friday quietest (29 vs 40) — those two cells drive the departure.</p>
+<div class="trap">df here is \(k-1=4\), NOT \((r-1)(c-1)\). A one-row list of category counts is always a GoF
+(df \(=k-1\)), never an independence test.</div>
+</details></div>
+
+<div class="card q">
+<p><strong>B-Q4 [STRETCH · 3 marks].</strong> A researcher wants to test whether a count variable follows a
+Poisson distribution, grouping the data into \(k=7\) categories. The Poisson mean \(\lambda\) is
+<em>estimated from the same data</em> before computing expected counts. What degrees of freedom does the
+GoF test use, and why?</p>
+<details><summary>Show solution</summary>
+<p>df \(=k-1-r\) where \(r\) is the number of parameters estimated. Here \(r=1\) (the mean \(\lambda\)),
+so df \(=7-1-1=\boxed{5}\). Every parameter fitted from the data "buys" the model an extra chance to
+match, so one df is subtracted per estimated parameter (Theorem 11.2).</p>
+</details></div>
+
+<!-- ---------- TOPIC C: EXPECTED COUNTS + VALIDITY ---------- -->
+<h3>C · Expected-count computation &amp; validity checking</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked C1 — build the E-table and flag a validity failure</summary>
+<p><strong>Setup.</strong> A blood bank tabulates 220 donors by whether they had a mild reaction
+(Yes / No) against donation site (Mobile / Clinic / Hospital). Reactions are rare — only 20 donors
+reacted. Before any test, "compute the expected counts assuming no association, and state whether the χ²
+test is valid."</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Mobile</th><th>Clinic</th><th>Hospital</th><th>Row total</th></tr>
+<tr><th>Reaction</th><td>2</td><td>10</td><td>8</td><td>20</td></tr>
+<tr><th>No reaction</th><td>28</td><td>60</td><td>62</td><td>150</td></tr>
+<tr><th>Col total</th><td>30</td><td>70</td><td>70</td><td>170</td></tr>
+</table></div>
+<p><strong>Totals.</strong> Row totals 20 and 150 give \(n=170\); column totals \(30, 70, 70\).</p>
+<div class="mono">E (row·col/170):   Mobile   Clinic  Hospital
+Reaction           3.53     8.24     8.24
+No reaction        26.47    61.76    61.76</div>
+<div class="trap"><strong>Validity check fails in one cell:</strong> \(E(\text{Reaction, Mobile})=3.53\lt 5\).
+The χ² approximation is therefore doubtful; you would pool the Mobile column with another site (or gather
+more reaction data) before trusting the test.</div>
+<p>If you did proceed: \(T=1.19\), df \(=(2-1)(3-1)=2\), \(P\approx 0.55\) — but the honest exam answer
+leads with the validity flag.</p>
+</details>
+
+<details>
+<summary>Worked C2 — full E-table for a 3×3, all cells valid</summary>
+<p><strong>Setup.</strong> 180 shoppers are cross-classified by store section visited first (Produce /
+Bakery / Deli) and membership tier (Basic / Plus / Premium). "If section and tier were independent, what
+expected counts would you use, and is the test valid?"</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Basic</th><th>Plus</th><th>Premium</th><th>Row total</th></tr>
+<tr><th>Produce</th><td>12</td><td>18</td><td>20</td><td>50</td></tr>
+<tr><th>Bakery</th><td>22</td><td>25</td><td>28</td><td>75</td></tr>
+<tr><th>Deli</th><td>16</td><td>19</td><td>20</td><td>55</td></tr>
+<tr><th>Col total</th><td>50</td><td>62</td><td>68</td><td>180</td></tr>
+</table></div>
+<div class="mono">E (row·col/180):   Basic   Plus    Premium
+Produce            13.89   17.22   18.89
+Bakery             20.83   25.83   28.33
+Deli               15.28   18.94   20.78</div>
+<div class="tip">Smallest \(E\) is 13.89 (\(\ge 5\)) ⇒ valid. As a sanity check, each row of \(E\) sums to
+its observed row total (e.g. \(13.89+17.22+18.89=50\)) and each column to its column total — a fast way
+to catch an arithmetic slip.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><strong>C-Q1 [WARM-UP · 2 marks].</strong> In a contingency table with \(n=400\), one row totals 160 and
+one column totals 75. Assuming independence, what is the expected count in that row–column cell?</p>
+<details><summary>Show solution</summary>
+<p>\(E=\dfrac{\text{row}\times\text{col}}{n}=\dfrac{160\times 75}{400}=\boxed{30}\).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>C-Q2 [STANDARD · 3 marks].</strong> For the 2×2 table below, compute all expected counts under
+independence and state whether the χ² test is valid.</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Pass</th><th>Fail</th><th>Row total</th></tr>
+<tr><th>Tutored</th><td>44</td><td>16</td><td>60</td></tr>
+<tr><th>Not tutored</th><td>36</td><td>24</td><td>60</td></tr>
+<tr><th>Col total</th><td>80</td><td>40</td><td>120</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<div class="mono">E (row·col/120):   Pass   Fail
+Tutored            40.00  20.00     (60·80/120, 60·40/120)
+Not tutored        40.00  20.00</div>
+<p>Smallest \(E=20\ge 5\) ⇒ the test is valid.</p>
+</details></div>
+
+<div class="card q">
+<p><strong>C-Q3 [EXAM-LEVEL · 4 marks].</strong> A small pilot cross-tabulates 60 patients by treatment
+(Drug / Placebo) and outcome (Improved / Same / Worse). Compute the expected counts under independence
+and decide whether the χ² test is trustworthy.</p>
+<div style="overflow-x:auto"><table>
+<tr><th></th><th>Improved</th><th>Same</th><th>Worse</th><th>Row total</th></tr>
+<tr><th>Drug</th><td>18</td><td>9</td><td>3</td><td>30</td></tr>
+<tr><th>Placebo</th><td>10</td><td>12</td><td>8</td><td>30</td></tr>
+<tr><th>Col total</th><td>28</td><td>21</td><td>11</td><td>60</td></tr>
+</table></div>
+<details><summary>Show solution</summary>
+<div class="mono">E (row·col/60):   Improved  Same   Worse
+Drug              14.00     10.50  5.50
+Placebo           14.00     10.50  5.50</div>
+<p>All six expected counts are \(\ge 5\) (smallest is 5.50), so the validity rule is <em>just</em>
+satisfied — but with \(n=60\) and two cells barely above 5, note the approximation is borderline and the
+conclusion should be read with mild caution. (Watch the trap: the raw <em>observed</em> count 3 is below
+5, but the rule is about <em>expected</em> counts, and \(E=5.50\ge 5\).)</p>
+</details></div>
+
+<!-- ---------- TOPIC D: MULTINOMIAL PROBABILITY ---------- -->
+<h3>D · Multinomial probability computation</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked D1 — three outcomes</summary>
+<p><strong>Setup.</strong> A weighted spinner lands Red, Green, Blue with probabilities
+\(0.5, 0.3, 0.2\). Spin it \(n=10\) times. Find \(\mathbb{P}(4\text{ Red},3\text{ Green},3\text{ Blue})\).</p>
+<div class="mono">P = 10!/(4!·3!·3!) · (0.5)⁴ · (0.3)³ · (0.2)³
+  = 4200 · 0.0625 · 0.027 · 0.008
+  = 0.0567</div>
+<p>So about a \(5.7\%\) chance of that exact breakdown.</p>
+<div class="tip">Compute the coefficient \(10!/(4!\,3!\,3!)=4200\) first, then multiply by each probability
+power. Keep full precision and give ≥3 sig figs.</div>
+</details>
+
+<details>
+<summary>Worked D2 — four outcomes, and the link to expected counts</summary>
+<p><strong>Setup.</strong> Website visitors pick one of four plans with probabilities
+\(0.40, 0.25, 0.25, 0.10\). For \(n=10\) visitors, find
+\(\mathbb{P}(3,2,4,1)\) across the four plans.</p>
+<div class="mono">P = 10!/(3!·2!·4!·1!) · (0.4)³ · (0.25)² · (0.25)⁴ · (0.1)¹
+  = 12600 · 0.064 · 0.0625 · 0.00390625 · 0.1
+  = 0.0197</div>
+<p>About \(2.0\%\). <strong>Link:</strong> the <em>mean</em> count for plan \(i\) is \(\mathbb{E}[X_i]=np_i\)
+— here \((4, 2.5, 2.5, 1)\). Those are exactly the "expected counts" a GoF test would compare against, so
+the multinomial pmf and the χ² machinery describe the same object.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><strong>D-Q1 [WARM-UP · 2 marks].</strong> A fair three-way spinner (each outcome probability
+\(1/3\)) is spun 6 times. Find \(\mathbb{P}(2,2,2)\).</p>
+<details><summary>Show solution</summary>
+<div class="mono">P = 6!/(2!·2!·2!) · (1/3)² · (1/3)² · (1/3)²
+  = 90 · (1/3)⁶ = 90/729 = 0.1235</div>
+<p>About \(12.3\%\).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>D-Q2 [STANDARD · 3 marks].</strong> In a region, delivery outcomes are On-time, Late, Failed with
+probabilities \(0.60, 0.25, 0.15\). Of the next \(n=10\) deliveries, find the probability that 5 are
+on-time, 3 late and 2 failed.</p>
+<details><summary>Show solution</summary>
+<div class="mono">P = 10!/(5!·3!·2!) · (0.6)⁵ · (0.25)³ · (0.15)²
+  = 2520 · 0.07776 · 0.015625 · 0.0225
+  = 0.0689</div>
+<p>About \(6.9\%\).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>D-Q3 [EXAM-LEVEL · 3 marks].</strong> Using the delivery probabilities from D-Q2, for a batch of
+\(n=40\) deliveries, (i) give the expected number in each category, and (ii) explain how those numbers
+would be used if you later tested "are these 40 deliveries consistent with the claimed 0.60/0.25/0.15
+split?"</p>
+<details><summary>Show solution</summary>
+<p>(i) \(\mathbb{E}[X_i]=np_i\): On-time \(=40(0.60)=24\), Late \(=40(0.25)=10\), Failed
+\(=40(0.15)=6\). All \(\ge 5\).</p>
+<p>(ii) Those are the expected counts \(E_i\) for a goodness-of-fit test: you would form
+\(T=\sum(O-E_i)^2/E_i\) over the three categories with df \(=k-1=2\), then bracket the upper-tail P-value.
+The multinomial means feed straight into the χ² statistic.</p>
+</details></div>
+
+<!-- ---------- TOPIC E: P-VALUE BRACKETING + CONCLUSIONS ---------- -->
+<h3>E · P-value bracketing &amp; conclusions in context</h3>
+
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked E1 — bracketing a significant statistic (df 3)</summary>
+<p><strong>Setup.</strong> A χ² independence test on a 2×4 table gives \(T=8.10\). Bracket the P-value and
+give the 5%-level decision.</p>
+<p>df \(=(2-1)(4-1)=3\). From the df-3 row: the \(0.950\)-quantile is \(7.81\) and the \(0.975\)-quantile
+is \(9.35\). Since \(7.81\lt 8.10\lt 9.35\),
+$$0.025\lt P\lt 0.05.$$
+(Exact \(P\approx 0.044\).) As \(P\lt 0.05\), <strong>reject \(H_0\)</strong> at the 5% level.</p>
+<div class="tip">Name <em>both</em> bounding quantiles (\(7.81\) and \(9.35\)) — that is what earns the tight
+bracket \(0.025\lt P\lt 0.05\) rather than a loose "\(P\lt 0.05\)".</div>
+</details>
+
+<details>
+<summary>Worked E2 — a non-significant statistic + a full contextual conclusion (df 5)</summary>
+<p><strong>Setup.</strong> A goodness-of-fit test over \(k=6\) categories gives \(T=4.20\). df \(=k-1=5\).</p>
+<p>From the df-5 row: the \(0.250\)-quantile is \(2.67\) and the \(0.750\)-quantile is \(6.63\). Since
+\(2.67\lt 4.20\lt 6.63\),
+$$0.25\lt P\lt 0.75.$$
+(Exact \(P\approx 0.52\).) \(P\) is large, so <strong>do not reject \(H_0\)</strong>.</p>
+<p><strong>Contextual conclusion (template).</strong> "There is no evidence that the observed category
+counts depart from the claimed model; the data are consistent with it." When you <em>do</em> reject,
+upgrade this to name the direction — <em>which</em> categories were over- or under-represented — because
+χ² alone never tells you strength or direction; only the O-vs-E comparison does.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+
+<div class="card q">
+<p><strong>E-Q1 [WARM-UP · 2 marks].</strong> A 2×2 independence test gives \(T=4.00\). Bracket \(P\) and
+give the 5%-level decision.</p>
+<details><summary>Show solution</summary>
+<p>df \(=1\). df-1 row: \(0.950\)-quantile \(3.84\), \(0.975\)-quantile \(5.02\). Since
+\(3.84\lt 4.00\lt 5.02\), \(0.025\lt P\lt 0.05\) (exact \(\approx 0.046\)). \(P\lt 0.05\) ⇒ reject
+\(H_0\).</p>
+</details></div>
+
+<div class="card q">
+<p><strong>E-Q2 [STANDARD · 3 marks].</strong> A χ² test on a 3×2 table (df 2) gives \(T=5.50\). Bracket
+\(P\) and state the decision at the 5% level. Watch the boundary.</p>
+<details><summary>Show solution</summary>
+<p>df 2: \(0.900\)-quantile \(4.61\), \(0.950\)-quantile \(5.99\). Since \(4.61\lt 5.50\lt 5.99\),
+\(0.05\lt P\lt 0.10\) (exact \(\approx 0.064\)). Because \(P\gt 0.05\), <strong>do not reject</strong>
+\(H_0\) at the 5% level — the result is suggestive but not significant.</p>
+<div class="trap">\(T=5.50\) is just <em>below</em> the \(0.950\)-quantile \(5.99\), so it fails at 5%. Reading
+the wrong column (or rounding \(T\) up) is exactly how a "reject" is claimed by mistake here.</div>
+</details></div>
+
+<div class="card q">
+<p><strong>E-Q3 [EXAM-LEVEL · 4 marks].</strong> A study tests whether commuters' preferred podcast genre
+is uniform across 6 genres (\(k=6\), df 5) and obtains \(T=16.0\). The two largest departures are
+True-crime (observed well <em>above</em> its expected 40) and Sport (well <em>below</em> its expected 40).
+Bracket the P-value and write a full conclusion in context.</p>
+<details><summary>Show solution</summary>
+<p>df 5: \(0.990\)-quantile \(15.1\), \(0.995\)-quantile \(16.7\). Since \(15.1\lt 16.0\lt 16.7\),
+\(0.005\lt P\lt 0.01\) (exact \(\approx 0.0068\)). \(P\lt 0.05\) ⇒ reject \(H_0\).</p>
+<p><strong>In context:</strong> podcast-genre preference is <em>not</em> uniform — genres are chosen at
+significantly different rates. The pattern is driven by True-crime being over-represented (above its
+expected 40) and Sport under-represented (below 40); listeners lean towards True-crime and away from
+Sport.</p>
+</details></div>
+
+<div class="card q">
+<p><strong>E-Q4 [STRETCH · 3 marks].</strong> A goodness-of-fit test over \(k=5\) categories gives
+\(T=9.90\). Bracket \(P\) and give the 5%-level decision.</p>
+<details><summary>Show solution</summary>
+<p>df \(=k-1=4\). df-4 row: \(0.950\)-quantile \(9.49\), \(0.975\)-quantile \(11.1\). Since
+\(9.49\lt 9.90\lt 11.1\), \(0.025\lt P\lt 0.05\) (exact \(\approx 0.042\)). \(P\lt 0.05\) ⇒ reject
+\(H_0\): the category counts depart from the claimed model.</p>
+</details></div>
+
+<div class="tip"><strong>Using the arena.</strong> Do it in two passes. <em>Pass 1 — recognition:</em> read
+each prompt and, before any arithmetic, say out loud "independence (df \((r-1)(c-1)\))" or "GoF (df
+\(k-1\))" and write the hypotheses — that split is where most marks are won or lost. <em>Pass 2 —
+execution:</em> build \(E\), check every \(E\ge 5\), sum \((O-E)^2/E\), bracket the upper-tail P from the
+§2 table naming <em>both</em> quantiles, then finish with a sentence in the story's own words that names
+the <em>direction</em> of the association. Re-attempt any question you needed the solution for a day later
+— fluency on this pipeline is worth a guaranteed 5–6 marks.</div>
+</section>
 
 </main>
 </body>
