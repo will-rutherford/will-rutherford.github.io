@@ -1143,11 +1143,15 @@ P(S₅₀ < 280)=P(Z < (280−300)/42.43)=P(Z < −0.471)=<b>0.319</b></p>
 <p>A machine produces items with a 8% defect rate. In a batch of \(n=300\) independent items, approximate
 \(\mathbb P(X\ge 30)\) defectives.</p>
 </div>
-<p>Check validity: \(np=24\gt5\) and \(n(1-p)=276\gt5\) ✓. So \(X\approx\mathcal N(np,\,np(1-p))\):</p>
+<p>Check validity: \(np=24\gt5\) and \(n(1-p)=276\gt5\) ✓. So \(X\approx\mathcal N(np,\,np(1-p))\).
+\(X\) is a <b>discrete count</b>, so apply the <b>continuity correction</b> (formula-sheet item 59:
+\(P(X\ge x)\approx P(Y\ge x-0.5)\)):</p>
 <p class="mono">X ≈ N(24, 300·0.08·0.92)=N(24, 22.08)   sd=4.699
-P(X ≥ 30)=P(Z ≥ (30−24)/4.699)=P(Z ≥ 1.277)=1−0.8992=<b>0.101</b></p>
+P(X ≥ 30) ≈ P(Y ≥ 29.5)=P(Z ≥ (29.5−24)/4.699)=P(Z ≥ 1.17)=1−0.8790=<b>0.121</b></p>
 <div class="tip">A binomial is a sum of \(n\) iid Bernoulli\((p)\) trials, so the CLT applies directly — that is <i>why</i> the
-normal approximation works. (Per the STAT1301 formula sheet, no continuity correction is required.)</div>
+normal approximation works. And because \(X\) only takes integer values, the ±0.5 continuity correction (sheet item 59)
+applies: it gives 0.121 vs the exact binomial 0.1226 — while skipping it gives 0.101, noticeably off. The
+formulas page flags forgetting the ±0.5 as a standard 1-mark loss.</div>
 </details>
 
 <h4>✏️ Your turn</h4>
@@ -1177,8 +1181,13 @@ P(X̄ < 37)=P(Z < (37−40)/2)=P(Z < −1.50)=<b>0.0668</b></p>
 <details><summary>Solution</summary>
 <p><b>(a)</b> \(X\sim\text{Bin}(200,0.45)\); \(np=90\gt5\), \(n(1-p)=110\gt5\) ✓, so</p>
 <p class="mono">X ≈ N(np, np(1−p))=N(90, 200·0.45·0.55)=N(90, 49.5)   sd=7.036</p>
-<p><b>(b)</b></p>
-<p class="mono">P(X > 100)=P(Z > (100−90)/7.036)=P(Z > 1.421)=1−0.9224=<b>0.0776</b></p>
+<p><b>(b)</b> \(X\) is a discrete count → continuity correction (sheet item 59: \(P(X\gt x)\approx P(Y\gt x+0.5)\)):</p>
+<p class="mono">P(X > 100) ≈ P(Y > 100.5)=P(Z > (100.5−90)/7.036)=P(Z > 1.49)=1−0.9319=<b>0.0681</b></p>
+<p>(Exact binomial: \(0.0681\) — the corrected answer is spot on; without the correction you get \(0.0776\).)</p>
+<div class="trap"><b>Don't double-shift.</b> \(P(X\gt100)\) and \(P(X\ge101)\) are the <em>same event</em> — item 59 has a
+matching line for each form and both land on \(100.5\): use \(\gt100 \Rightarrow +0.5 \Rightarrow 100.5\), or
+\(\ge101 \Rightarrow -0.5 \Rightarrow 100.5\). Converting \(\gt100\) to \(\ge101\) and <em>then</em> adding \(0.5\)
+(→ \(101.5\), \(z=1.63\), \(0.0516\)) applies the correction twice — a classic error.</div>
 <p><b>(c)</b> Dividing by \(n\) rescales the normal:</p>
 <p class="mono">p̂ ≈ N(p, p(1−p)/n)=N(0.45, 0.45·0.55/200)=N(0.450, 0.001238)   sd=<b>0.0352</b></p>
 <div class="tip">\(\hat p\) is just \(X/n\), a linear rescaling, so mean \(\to p\) and variance \(\to\) (that of \(X\)) \(/n^2=p(1-p)/n\).
