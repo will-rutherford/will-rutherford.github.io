@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Exam Command Hub</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* ---- hub-specific ---- */
+  .hero-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .stat{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:8px 16px;min-width:90px}
+  .stat b{display:block;font-size:22px;color:var(--accent)}
+  .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .chapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .chapcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.15s;color:var(--ink)}
+  .chapcard:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--panel2)}
+  .chapcard .ct{font-size:11px;color:var(--accent2);font-weight:700;letter-spacing:.5px}
+  .chapcard h3{margin:4px 0 6px;font-size:16px;color:#ddd6fe}
+  .chapcard p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .chapcard .wt{display:inline-block;margin-top:9px;font-size:11px;font-weight:700;background:rgba(167,139,250,.12);color:var(--accent);border:1px solid #3b2f80;border-radius:6px;padding:2px 8px}
+  .chapcard .wt.hi{background:rgba(251,191,36,.14);color:var(--gold);border-color:#5a4718}
+  .examrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .examrow a{text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px;font-weight:700}
+  .examrow a:hover{background:var(--accent);color:#1e1b4b}
+  /* decision tree */
+  .tree{margin:10px 0}
+  .node{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:8px;padding:10px 14px;margin:8px 0}
+  .node>.qn{font-weight:700;color:#ddd6fe}
+  .branch{margin:8px 0 8px 18px;border-left:2px dashed var(--line);padding-left:14px}
+  .opt{font-size:13.5px;margin:6px 0}
+  .opt .lbl{display:inline-block;background:rgba(14,165,233,.15);border:1px solid #1d3a4a;color:#7dd3fc;border-radius:6px;padding:1px 8px;font-weight:700;font-size:12px;margin-right:6px}
+  .leaf{background:var(--code);border:1px solid #245040;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:13.5px}
+  .leaf b{color:var(--accent)}
+  .fs{color:var(--muted);font-size:12px}
+  .trigtag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:5px;background:var(--panel2);border:1px solid var(--line);color:#ddd6fe;white-space:nowrap}
+  .sticky-th th{position:sticky;top:46px;z-index:5}
+  .tablewrap{overflow-x:auto}
+  .conc{background:var(--code);border:1px dashed #245040;border-radius:8px;padding:10px 13px;margin:8px 0;font-size:13.5px}
+  .conc b{color:var(--good)}
+  code{background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <h1>MATH1052 · Exam Command Hub</h1>
+  <p><b>Multivariate Calculus &amp; Ordinary Differential Equations</b> — Semester 2 2026 final exam</p>
+  <div class="hero-stats">
+    <div class="stat"><b>7</b><span>chapters</span></div>
+    <div class="stat"><b>12</b><span>papers worked</span></div>
+    <div class="stat"><b>161</b><span>worked examples</span></div>
+    <div class="stat"><b>207</b><span>practice questions</span></div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><b>100</b><span>marks</span></div>
+    <div class="stat"><b>8</b><span>questions</span></div>
+    <div class="stat"><b>120</b><span>minutes</span></div>
+    <div class="stat"><b>+10</b><span>min planning</span></div>
+  </div>
+  <p style="margin-top:12px">
+    <span class="badge pre">NO calculator · no notes</span>
+    <span class="badge gold">Formula sheet (8 items) on the last page</span>
+    <span class="badge">"You must justify all answers"</span>
+  </p>
+  <p class="fs">The formula sheet is tiny and you have no calculator. The exam tests two things:
+  <b style="color:var(--ink)">can you recognise which routine a question wants, and can you write it up so every method and justification mark is visible?</b> This hub trains both.</p>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-first-order-odes.html">Ch1</a>
+  <a href="ch02-second-order-odes.html">Ch2</a>
+  <a href="ch03-surfaces-contours.html">Ch3</a>
+  <a href="ch04-limits-partials-tangent-planes.html">Ch4</a>
+  <a href="ch05-gradient-chain-rule.html">Ch5</a>
+  <a href="ch06-optimisation.html">Ch6</a>
+  <a href="ch07-curves-vector-fields.html">Ch7</a>
+  <a href="foundations.html">🧱 Foundations</a>
+  <a href="formulas.html">📄 Formulas</a>
+  <a href="notebook.html">📓 Notebook</a>
+  <a href="exam-2025.html">📝 Exams</a>
+  <a href="#engine">⚙️ Decision Engine</a>
+  <a href="#strategy">⏱️ Strategy</a>
+  <a href="#pattern">🧩 Q pattern</a>
+</nav>
+
+<main>
+
+<!-- ============ CHAPTER DIRECTORY ============ -->
+<section id="chapters">
+  <h2>Chapter directory</h2>
+  <p>Seven chapter pages. The weight badges come from the <b>six 8-question papers (2023 S1 – 2025 S2)</b>:
+  the marks each chapter actually took on each paper. The recent exam is <b>entirely multivariable</b>. Chapters 3–7
+  earned every mark from 2021 to 2025.</p>
+
+  <div class="chapgrid">
+    <a class="chapcard" href="ch01-first-order-odes.html">
+      <div class="ct">CHAPTER 1 <span class="badge pre" style="margin:0 0 0 4px">NOT IN 2021–25 FINALS</span></div>
+      <h3>First-order ODEs</h3>
+      <p>Separable, linear (integrating factor), substitution \(y=xu\), equilibria &amp; stability, slope fields,
+      Euler's method, models (cooling, mixing, logistic).</p>
+      <span class="wt">still on syllabus · not in any 2021–25 final · 4 × 10 marks in 2020</span>
+    </a>
+    <a class="chapcard" href="ch02-second-order-odes.html">
+      <div class="ct">CHAPTER 2 <span class="badge pre" style="margin:0 0 0 4px">NOT IN 2021–25 FINALS</span></div>
+      <h3>Second-order linear ODEs</h3>
+      <p>Characteristic equation (3 cases), undetermined coefficients + overlap/resonance rule, reduction of order,
+      spring–mass–damper.</p>
+      <span class="wt">still on syllabus · not in any 2021–25 final · 2 × 10 marks in 2020</span>
+    </a>
+    <a class="chapcard" href="ch03-surfaces-contours.html">
+      <div class="ct">CHAPTER 3</div>
+      <h3>Surfaces, Contours &amp; Cross-sections</h3>
+      <p>Completing the square → standard conic, contour diagrams, cross-sections, quadric surfaces, labelled sketches,
+      matching graphs/contour maps.</p>
+      <span class="wt">core · ≈ 12 marks every paper · Q1, Q3 or Q4</span>
+    </a>
+    <a class="chapcard" href="ch04-limits-partials-tangent-planes.html">
+      <div class="ct">CHAPTER 4</div>
+      <h3>Limits, Partials &amp; Approximation</h3>
+      <p>Two-path test, polar/squeeze, continuity, partials from the definition, tangent planes, linear &amp;
+      quadratic approximation, error estimates.</p>
+      <span class="wt">core · ≈ 12 marks every paper (24 in 2025 S2) · usually Q2</span>
+    </a>
+    <a class="chapcard" href="ch05-gradient-chain-rule.html">
+      <div class="ct">CHAPTER 5</div>
+      <h3>Gradient, Directional Derivative &amp; Chain Rule</h3>
+      <p>\(\nabla f\), \(D_{\mathbf u}f\), steepest ascent/descent, reverse problems, tree-diagram chain rule, related
+      rates, implicit differentiation, "show that" identities.</p>
+      <span class="wt hi">≈ 24 marks (10–36) · two Qs on 5 of 6 papers</span>
+    </a>
+    <a class="chapcard" href="ch06-optimisation.html">
+      <div class="ct">CHAPTER 6</div>
+      <h3>Optimisation</h3>
+      <p>Critical points + Hessian test, \(D=0\) cases, global extrema on closed regions, "does a global max exist?",
+      Lagrange multipliers in 2 &amp; 3 variables, applied problems.</p>
+      <span class="wt hi">≈ 24 marks (12–29) · Lagrange on every paper</span>
+    </a>
+    <a class="chapcard" href="ch07-curves-vector-fields.html">
+      <div class="ct">CHAPTER 7</div>
+      <h3>Curves &amp; Vector Fields</h3>
+      <p>Parametrisations, velocity/speed/acceleration, integrate \(\mathbf a\to\mathbf v\to\mathbf r\), arc length,
+      conservative test, potentials, work via the fundamental theorem.</p>
+      <span class="wt hi">≈ 24–30 marks every paper · Q7 + Q8 on 5 of 6</span>
+    </a>
+  </div>
+
+  <div class="trap">Chapters 1–2 (ODEs) made up 6 of the 20 questions in the 2020 papers. They have not appeared in <b>any</b> of the ten
+  final papers from 2021 to 2025. They are still in the course summary, the tutorials (T01–T03) and the posters, so they are
+  <b>still on the syllabus</b> and could come back. Treat them as insurance: learn the core recipes, but spend most of your time on Ch 3–7.</div>
+
+  <h3>Reference &amp; past papers</h3>
+  <div class="card" style="margin-bottom:10px">
+    <a href="foundations.html" style="font-weight:700">🧱 foundations.html</a>: <strong>start here if any single-variable step feels slow.</strong>
+    Derivatives, integrals, trig values, exp/log, solving systems, vectors, complex roots, lines &amp; planes and Taylor
+    series, drilled for a paper with no calculator.
+  </div>
+  <div class="card" style="margin-bottom:10px">
+    <a href="formulas.html" style="font-weight:700">📄 formulas.html</a>: the one-page formula sheet taken apart item by item (approximation,
+    directional derivative, chain rule, implicit differentiation, Hessian, Lagrange, work, arc length), plus
+    <a href="formulas.html#not">everything that is NOT on it</a>.
+  </div>
+  <div class="card" style="margin-bottom:10px">
+    <a href="notebook.html" style="font-weight:700">📓 notebook.html</a>: the crib. The crucial rules for each chapter, one line each, the
+    <a href="notebook.html#top10">top 10</a> and the <a href="notebook.html#ritual">exam-day write-up rituals</a>. Copy it into your physical notebook.
+  </div>
+  <div class="examrow">
+    <a href="exam-2020.html">2020 <span class="fs">ODE-heavy</span></a>
+    <a href="exam-2021.html">2021 <span class="fs">10 Qs</span></a>
+    <a href="exam-2022.html">2022 <span class="fs">10 / 9 Qs</span></a>
+    <a href="exam-2023.html">2023 <span class="fs">8 Qs</span></a>
+    <a href="exam-2024.html">2024 <span class="fs">8 Qs</span></a>
+    <a href="exam-2025.html">2025 <span class="fs">8 Qs</span></a>
+  </div>
+  <p class="fs">Each exam page covers both semesters: 12 papers, every question worked, every answer checked with SymPy.
+  The 2023–2025 papers use the current format and are the best mock exams.</p>
+</section>
+
+<!-- ============ MASTER DECISION ENGINE ============ -->
+<section id="engine">
+  <h2>⚙️ The Master Decision Engine</h2>
+  <p>The exam never says "use the two-path test" or "this is a conservative field, use the potential." It gives you a
+  function and asks a question. The key skill is <b>translating wording → routine</b>. Use the
+  <b>trigger table</b> to decode a phrase, then the <b>decision tree</b> to pick the exact multivariable procedure.
+  Each chapter's §5 has the full trigger table; this is the whole-course summary.</p>
+
+  <div class="tip">Read the <em>verb</em> first. "Determine / find / evaluate" = compute it. "Show that" = the answer is given, and every step of
+  the working earns the marks. "Justify / explain / does it exist?" = a conclusion <b>sentence</b> that carries its own mark.
+  "Sketch" = marks for <em>labels</em> (intercepts, asymptotes, levels, start point and arrow), not for artistry.</div>
+
+  <h3>A. Wording-trigger table: phrase → method → chapter</h3>
+  <p class="fs">Built from the §5 trigger tables of the seven chapter pages. Exam phrasings are quoted.</p>
+  <div class="tablewrap">
+  <table>
+    <thead class="sticky-th"><tr><th>If the question says…</th><th>It's asking for…</th><th>Method</th><th>Study</th></tr></thead>
+    <tbody>
+      <!-- CH3 -->
+      <tr><td><em>"sketch the contour which passes through \((x_0,y_0)\)"</em></td><td>One level curve</td><td>\(c=f(x_0,y_0)\) first (1 mark); set \(f=c\), complete the square, name the conic, label intercepts</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <tr><td><em>"sketch the contours \(z=a,b,c\) on the same set of axes"</em></td><td>Contour diagram</td><td>Check the range first (a level can be empty); one general standard form in \(c\); tag each curve with its level</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <tr><td><em>"show that the contours \(z=z_0\) are ellipses / hyperbolas"</em></td><td>General conic proof</td><td>Keep \(z_0\) as a letter; clear denominators, complete the square, reach "\(=1\)"; state centre in terms of \(z_0\)</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <tr><td><em>"label all intercepts … asymptotes … centre"</em></td><td>Sketch marks</td><td>\(y=0\) and \(x=0\) per curve (write "none"); asymptotes dashed with equations</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <tr><td><em>"find the minimum value of \(z\)"</em> / <em>"maximum temperature"</em> after a contour part</td><td>Extreme from the square</td><td>Reuse the completed square: squares + constant ⇒ constant is the min at the centre; for \(c/D\) minimise \(D\)</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a>·<a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td><em>"match … enter 0 if there is no match"</em></td><td>Graph/contour matching</td><td>Fingerprints: zero set, sign, symmetry, spacing. Expect at least one 0</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <tr><td><em>"isotherms / level curves / contour lines"</em></td><td>Contours</td><td>All mean \(f(x,y)=c\)</td><td><a href="ch03-surfaces-contours.html#triggers">Ch3</a></td></tr>
+      <!-- CH4 -->
+      <tr><td><em>"Show that \(\lim\) … does not exist"</em></td><td>Two-path test</td><td>Two explicit paths, two different values, a conclusion sentence</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"Evaluate the limit, if it exists. If not, explain why"</em></td><td>Decide first</td><td>Equal weighted degree top &amp; bottom ⇒ likely DNE (paths). Function of \(x^2+y^2\) only / higher-degree top ⇒ polar or squeeze</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"along \(y=mx\) … along \(y=kx^2\) …"</em> both give 0</td><td>Curved path</td><td>Balance degrees: the path that kills the denominator's bracket (\(y=x^2\), \(y=x^3\), \(x=y^2\))</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"Is \(f\) continuous at \((0,0)\)?"</em> / <em>"find \(c\) so that \(f\) is continuous"</em></td><td>Continuity</td><td>Write the definition \(\lim f=f(0,0)\); limit DNE ⇒ not continuous; exists ⇒ \(c=\) the limit</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"use the definition of the partial derivative"</em> / <em>"do \(f_x(0,0)\), \(f_y(0,0)\) exist?"</em></td><td>\(h\)-limit</td><td>\(\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\): top formula for \(f(h,0)\), given value for \(f(0,0)\)</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"equation of the tangent plane to \(z=f(x,y)\) at \((a,b)\)"</em></td><td>Tangent plane</td><td>\(z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\)</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"use the linear approximation to estimate \(f(\ldots)\)"</em> / <em>"approximate \(\sqrt{(3.02)^2+\ldots}\)"</em></td><td>Linearisation (sheet)</td><td>\(P(x,y)\) at a base point with exact values; watch the sign of \(\Delta x\)</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"maximum error" / "% error in each measurement"</em></td><td>Error estimate</td><td>\(|E|\approx|f_x|E_1+|f_y|E_2\) (absolute values: worst case)</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <tr><td><em>"quadratic / second-order approximation"</em></td><td>\(Q(x,y)\) (sheet)</td><td>Six numbers \(f,f_x,f_y,f_{xx},f_{xy},f_{yy}\); the mixed term has no \(\tfrac12\)</td><td><a href="ch04-limits-partials-tangent-planes.html#triggers">Ch4</a></td></tr>
+      <!-- CH5 -->
+      <tr><td><em>"rate of change of \(f\) at \(P\) in the direction of \(\mathbf v\)"</em> / <em>"towards the point \(Q\)"</em></td><td>Directional derivative (sheet)</td><td>\(\nabla f(P)\cdot\mathbf v/\|\mathbf v\|\). Normalise! Towards \(Q\): \(\mathbf v=Q-P\)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"direction of greatest increase / steepest ascent"</em></td><td>A vector</td><td>\(\nabla f(P)\); greatest <b>decrease</b> / "water flows" ⇒ \(-\nabla f(P)\)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"maximum rate of change"</em></td><td>A number</td><td>\(\|\nabla f(P)\|\)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"directions of greatest change"</em> (no "increase")</td><td>Both directions</td><td>\(\pm\nabla f(P)\) (2025 S2 Q3b)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"direction in which \(f\) does not change"</em> / <em>"walks along the contour"</em></td><td>Perpendicular to \(\nabla f\)</td><td>2-D: \(\pm(-f_y,f_x)\); 3-D: a whole plane. Say "⟂ \(\nabla f\)" (1 mark)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"the rates towards \(P_1\) and \(P_2\) are …; determine \(\nabla f\)"</em> / <em>"attains its maximum value of \(M\) in the direction…"</em></td><td>Reverse problem</td><td>Two linear equations in \((a,b)\) / \(\nabla f=M\times\) unit vector</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"with the aid of a tree diagram"</em></td><td>Chain rule</td><td>Draw the tree (2 marks in 2025 S1 Q4), then one term per path</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"at a certain instant … increasing at … how fast is … changing?"</em></td><td>Related rates</td><td>\(\frac{dz}{dt}=z_x\dot x+z_y\dot y\) (sheet); "decreasing" ⇒ negative rate; state increasing/decreasing</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"rate of change experienced by the particle at time \(t\)"</em></td><td>Chain rule along a path</td><td>\(\frac{d}{dt}T(\mathbf r(t))=\nabla T\cdot\mathbf r'(t)\)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a>·<a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"let \(f\) be differentiable, \(g=f(ax+by)\); show that \(a\,g_y=b\,g_x\)"</em></td><td>"Show that" identity</td><td>\(u=ax+by\): \(g_x=f'(u)a\), \(g_y=f'(u)b\), combine</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"find \(y'(x)\)" for a curve \(F(x,y)=0\)</em> / <em>"tangent line at \(x=a\)"</em></td><td>Implicit differentiation (sheet)</td><td>\(y'=-F_x/F_y\); solve for every \(y\) at \(x=a\) first</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <tr><td><em>"tangent plane to the surface \(F(x,y,z)=k\)"</em></td><td>Level-surface normal</td><td>\(\nabla F(P)\) is the normal: \(\nabla F(P)\cdot(\mathbf x-P)=0\)</td><td><a href="ch05-gradient-chain-rule.html#triggers">Ch5</a></td></tr>
+      <!-- CH6 -->
+      <tr><td><em>"determine and classify (all) the critical points"</em></td><td>Hessian test (sheet)</td><td>\(f_x=f_y=0\) by cases → \(D=f_{xx}f_{yy}-f_{xy}^2\) → a table, one verdict sentence per point</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td>\(D=0\) appears</td><td>Inconclusive test</td><td>Say "inconclusive", then a slice along a line through the point showing a sign change</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td><em>"absolute max and min on the closed region bounded by …"</em></td><td>Closed-region extrema</td><td>EVT + interior critical points (strictly inside) + each edge + corners → candidate table</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td><em>"Does \(f\) attain a global maximum? Explain."</em></td><td>Existence argument</td><td>Usually "no": a line along which \(f\to\infty\). If yes: a bound plus where it is attained</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td><em>"use Lagrange multipliers" / "subject to" / "on the sphere / circle / plane"</em></td><td>Constrained extrema (sheet)</td><td>Name \(f\) and \(g\); \(\nabla f=\lambda\nabla g\) + constraint; factor, never divide; evaluate \(f\) at every candidate</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <tr><td><em>"closest to / farthest from"</em>, <em>"fixed surface area"</em>, <em>"inscribed in"</em></td><td>Applied Lagrange</td><td>Distance² is \(f\); the fixed quantity is \(g\); reject non-physical roots out loud</td><td><a href="ch06-optimisation.html#triggers">Ch6</a></td></tr>
+      <!-- CH7 -->
+      <tr><td><em>"velocity" / "speed" / "acceleration"</em></td><td>Motion quantities</td><td>\(\mathbf r'\) (vector) / \(\|\mathbf r'\|\) (scalar) / \(\mathbf r''\) (vector)</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"position at time \(t\)"</em> given \(\mathbf a\) or \(\mathbf v\)</td><td>Integrate with ICs</td><td>One constant per component, fixed from the initial data</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"distance travelled" / "arc length"</em></td><td>Arc length (sheet)</td><td>\(\int_a^b\|\mathbf r'(t)\|\,dt\); the speed is designed to simplify (perfect square)</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"hits the ground" / "maximum height" / "first time …"</em></td><td>Projectile events</td><td>\(z(t)=0\) positive root / \(z'(t)=0\) / smallest \(t\gt0\) with all coordinates matching</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"straight line from \(A\) to \(B\)" / "counterclockwise starting at …"</em></td><td>Parametrise</td><td>\(A+t(B-A)\), \(0\le t\le1\); circle \((h+R\cos t,k+R\sin t)\) with signs fixed by start &amp; direction</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"sketch the path; indicate the starting point and direction"</em></td><td>Path sketch</td><td>Eliminate \(t\), state the portion traced, mark \(\mathbf r(a)\), \(\mathbf r(b)\) and an arrow</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"show that \(\mathbf F\) is conservative"</em> / <em>"determine \(A,B\) so that \(\mathbf F\) is conservative"</em></td><td>Curl test</td><td>State "\(P_y=Q_x\)", compute both (3-D: all three pairs); match coefficients</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"find a potential function \(f\) with \(\mathbf F=\nabla f\)"</em></td><td>Potential</td><td>\(\int P\,dx+h(y)\), fix \(h\) from \(f_y=Q\); check \(\nabla f=\mathbf F\)</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"calculate the work along [ugly \(\mathbf r(t)\)]"</em> after a potential part</td><td>Fundamental theorem</td><td>\(W=f(\mathbf r(b))-f(\mathbf r(a))\): end minus start, endpoints only</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"use the formula \(W=\int\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)"</em></td><td>Direct line integral (sheet)</td><td>Required even if you know \(f\): parametrise, differentiate, substitute, dot, integrate</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <tr><td><em>"around the closed curve"</em></td><td>Closed loop</td><td>Conservative ⇒ \(W=0\), with the reason stated</td><td><a href="ch07-curves-vector-fields.html#triggers">Ch7</a></td></tr>
+      <!-- ODE -->
+      <tr><td>\(y'=f(x)g(y)\) / <em>"separable"</em></td><td>Separation</td><td>Equilibria \(g(y)=0\) first, then \(\int\frac{dy}{g}=\int f\,dx\)</td><td><a href="ch01-first-order-odes.html#triggers">Ch1</a></td></tr>
+      <tr><td><em>"linear first-order"</em>, \(a(x)y'+b(x)y=c(x)\)</td><td>Integrating factor</td><td>Standard form, \(I=e^{\int p}\); use the stated interval to drop \(|\cdot|\)</td><td><a href="ch01-first-order-odes.html#triggers">Ch1</a></td></tr>
+      <tr><td><em>"find all equilibria and decide which are stable"</em></td><td>Phase line</td><td>Sign of each factor → sign of \(y'\) per region → arrows → verdict per equilibrium</td><td><a href="ch01-first-order-odes.html#triggers">Ch1</a></td></tr>
+      <tr><td><em>"general solution of \(ay''+by'+cy=r(x)\)"</em></td><td>\(y_H+y_P\)</td><td>Characteristic equation (3 cases) → trial for \(y_P\) (overlap ⇒ multiply by \(x\))</td><td><a href="ch02-second-order-odes.html#triggers">Ch2</a></td></tr>
+      <tr><td><em>"\(y=x^n\) is a solution for some \(n\)" / "reduction of order"</em></td><td>Second solution</td><td>Find \(n\); \(y=u\,y_1\) in standard form; \(v=u'\)</td><td><a href="ch02-second-order-odes.html#triggers">Ch2</a></td></tr>
+      <tr><td><em>"overdamped, underdamped or critically damped?"</em></td><td>Damping case</td><td>\(\Delta=\beta^2-4mk\): \(\gt0\) over, \(=0\) critical, \(\lt0\) under</td><td><a href="ch02-second-order-odes.html#triggers">Ch2</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>B. Decision tree: which multivariable procedure?</h3>
+  <p>Walk it top-down. The order follows the course (and roughly the paper): limits → partials → approximation → gradient →
+  chain/implicit → critical points → Lagrange → curves → line integrals.</p>
+
+  <div class="tree">
+    <div class="node">
+      <div class="qn">① Is there a limit or "continuous at \((0,0)\)"?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Same weighted degree top &amp; bottom</span> e.g. \(\frac{x^2y}{x^4+y^2}\) → expect <b>DNE</b>.
+          <div class="leaf"><b>Two-path test</b>: axes / \(y=mx\) first; if they agree, the curve that balances degrees (\(y=x^2\), \(y=x^3\), \(x=t^5\)-type). Two values + sentence. <span class="fs">2023 S2 Q8, 2024 S1 Q2, 2025 S1 Q2.</span></div></div>
+        <div class="opt"><span class="lbl">Top degree higher / only \(x^2+y^2\) / a bounded factor</span> → expect the limit <b>exists</b>.
+          <div class="leaf"><b>Polar</b> (\(\theta\) must vanish) or <b>squeeze</b> \(|\ldots|\le Cr\to0\). Then continuity: compare with \(f(0,0)\); "find \(c\)" ⇒ \(c=\) limit. <span class="fs">2021 S2 Q3, 2024 S2 Q2(b).</span></div></div>
+        <div class="opt"><span class="lbl">"Do the partials exist at (0,0)?"</span>
+          <div class="leaf"><b>Definition</b>: \(f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\). Classic twist: discontinuous yet partials exist. <span class="fs">2025 S1 Q2, 2025 S2 Q4.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">② Partials, tangent plane or an estimate?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Surface \(z=f(x,y)\)</span>
+          <div class="leaf"><b>Tangent plane</b> \(z=f+f_x(x-a)+f_y(y-b)\) · normal \(\langle f_x,f_y,-1\rangle\). <span class="fs">2025 S2 Q2.</span></div></div>
+        <div class="opt"><span class="lbl">Level surface \(F=k\)</span>
+          <div class="leaf">Normal \(=\nabla F(P)\) (→ ④ territory). <span class="fs">2021 S2 Q2.</span></div></div>
+        <div class="opt"><span class="lbl">"Estimate / approximate"</span>
+          <div class="leaf"><b>Linear</b> \(P(x,y)\) (sheet), or <b>quadratic</b> \(Q(x,y)\) if asked; errors ⇒ \(|f_x|E_1+|f_y|E_2\). <span class="fs">2022 S1 Q1, 2022 S2 Q1, 2021 S2 Q9.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">③ Rates in a direction?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Given \(f\), a point and a direction</span>
+          <div class="leaf">\(\nabla f(P)\) → \(D_{\mathbf u}f=\nabla f\cdot\mathbf v/\|\mathbf v\|\). Max increase: \(\nabla f\), rate \(\|\nabla f\|\). No change: \(\perp\nabla f\). <span class="fs">2023 S1 Q1, 2024 S1 Q1, 2024 S2 Q4.</span></div></div>
+        <div class="opt"><span class="lbl">Given the rates, find \(\nabla f\)</span>
+          <div class="leaf"><b>Reverse problem</b>: set \(\nabla f=(a,b)\), one equation per rate, solve. <span class="fs">2025 S1 Q1, 2023 S2 Q7, 2022 S1 Q6.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">④ Variables depend on other variables?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">\(z=f(x,y)\), \(x,y\) functions of \(t\) or \((s,t)\)</span>
+          <div class="leaf"><b>Chain rule + tree diagram</b>; related rates with signs; "in terms of \(u,v\)" means substitute back. <span class="fs">2023 S1 Q4, 2024 S1 Q4, 2025 S1 Q4, 2024 S2 Q6.</span></div></div>
+        <div class="opt"><span class="lbl">\(g=f(\text{combination})\), "show that"</span>
+          <div class="leaf">Name the inside \(u\), \(g_x=f'(u)u_x\), \(g_y=f'(u)u_y\), combine to the target. <span class="fs">2025 S2 Q3, 2022 S1 Q4.</span></div></div>
+        <div class="opt"><span class="lbl">A curve \(F(x,y)=0\)</span>
+          <div class="leaf"><b>Implicit</b> \(y'=-F_x/F_y\) → tangent line. <span class="fs">2024 S2 Q3, 2022 S1 Q5, 2021 S1 Q3.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑤ Max / min?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">No constraint</span> "critical points / classify"
+          <div class="leaf"><b>Hessian test</b>: \(\nabla f=\mathbf 0\) by cases → \(D\) table. \(D=0\) ⇒ slice argument. "Global max?" ⇒ a line with \(f\to\pm\infty\). <span class="fs">2025 S2 Q6, 2023 S1 Q5, 2023 S2 Q1.</span></div></div>
+        <div class="opt"><span class="lbl">Closed bounded region</span> triangle / square / disk
+          <div class="leaf"><b>EVT</b>: interior critical points + each edge (1-D, endpoints) + corners → compare. <span class="fs">2024 S1 Q5, 2025 S1 Q5.</span></div></div>
+        <div class="opt"><span class="lbl">On a curve / surface</span> "subject to", "on the sphere"
+          <div class="leaf"><b>Lagrange</b>: \(\nabla f=\lambda\nabla g\) + \(g=c\); factor, never divide; evaluate all candidates; justify existence (closed &amp; bounded, or growth). <span class="fs">on every 2021–25 paper.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑥ A moving point \(\mathbf r(t)\)?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Given \(\mathbf a\) or \(\mathbf v\)</span>
+          <div class="leaf"><b>Integrate</b> \(\mathbf a\to\mathbf v\to\mathbf r\), one constant per component; then events (\(z=0\), max height, first time). <span class="fs">2025 S1 Q7, 2025 S2 Q7, 2023 S1 Q7.</span></div></div>
+        <div class="opt"><span class="lbl">Given \(\mathbf r(t)\)</span>
+          <div class="leaf">Speed \(\|\mathbf r'\|\) (simplifies by design) → <b>arc length</b> \(\int\|\mathbf r'\|\,dt\). <span class="fs">2024 S1 Q7, 2024 S2 Q7, 2023 S2 Q5.</span></div></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑦ Work / line integral of \(\mathbf F\)?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">\(P_y=Q_x\) holds</span> conservative
+          <div class="leaf"><b>Potential</b> \(f\) → \(W=f(\text{end})-f(\text{start})\). Closed loop ⇒ 0. The path can be as ugly as it likes. <span class="fs">Q8 on 5 of the 6 recent papers.</span></div></div>
+        <div class="opt"><span class="lbl">\(P_y\ne Q_x\)</span> or "use the formula"
+          <div class="leaf"><b>Direct</b>: \(\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\), piece by piece. <span class="fs">2021 S2 Q8, 2020 S2 Q10.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trap"><b>Two forks that lose the most marks.</b> (1) <em>Limit exists vs DNE:</em> paths can only ever prove
+  <b>non-existence</b>. Agreement along ten lines proves nothing. Existence needs polar (with \(\theta\) gone) or a squeeze.
+  (2) <em>Lagrange algebra:</em> dividing by \(x\), \(z\) or \(\lambda\) throws away a case, and in 2022 S1 and 2023 S1 that lost
+  case held the answer. Factor, then branch.</div>
+  <div class="tip">For contours (Ch 3) and ODEs (Ch 1–2) there's no tree needed. Contours are always "complete the square → standard form → label".
+  ODEs are "classify the equation (separable / linear / constant-coefficient 2nd-order) → its one recipe". See each chapter's §2.</div>
+</section>
+
+<!-- ============ EXAM-DAY STRATEGY ============ -->
+<section id="strategy">
+  <h2>⏱️ Exam-day strategy</h2>
+
+  <h3>The 10-minute planning playbook</h3>
+  <p>You get 10 minutes of planning time before writing starts. Use it to sort the questions, not to admire them.</p>
+  <div class="method">
+    <ol>
+      <li><b>Label all 8 questions by routine</b> using the slot map below (e.g. "Q2 limit, two-path", "Q6 Lagrange, sphere",
+      "Q8 conservative → potential"). In the S1 papers the order has been identical three years running.</li>
+      <li><b>Mark each part</b> ✓ (instant), ~ (routine but long), or ? (needs an idea). This gives you your running order.</li>
+      <li><b>Find the idea for each "?" part now</b>: which path kills the denominator, which substitution for the chain rule,
+      whether \(\mathbf F\) is conservative. You can often answer these in your head.</li>
+      <li><b>Check what the formula sheet gives</b> (approximations, \(D_{\mathbf u}f\), chain rule, implicit, Hessian, Lagrange,
+      work, arc length) and what it does <em>not</em> give: limits, continuity, the conservative test, potentials, the
+      \(D\) classification rules, every ODE method. <a href="formulas.html#not">Full list</a>.</li>
+      <li><b>Start with the fastest full question</b>: usually the gradient question (Q1 in S1 papers), the Q7 motion question or Q8
+      conservative field. Bank ~40 marks of pure routine early.</li>
+    </ol>
+  </div>
+
+  <h3>Time per mark</h3>
+  <p><b>100 marks in 120 minutes = 1.2 min per mark.</b> Work at <b>~1.1 min/mark</b> and bank ~10 minutes for checking.
+  Questions are 10, 12, 13, 14 or 18 marks:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Question worth…</th><th>Target time</th><th>Hard stop (move on)</th><th>Typical</th></tr></thead>
+    <tbody>
+      <tr><td>10 marks</td><td>11 min</td><td>14 min</td><td>arc length (2024 S2 Q7), show-that (2025 S2 Q3)</td></tr>
+      <tr><td>12 marks</td><td>13 min</td><td>16 min</td><td>most questions: gradient, limit, contour, chain rule, Lagrange</td></tr>
+      <tr><td>13–14 marks</td><td>15 min</td><td>18 min</td><td>closed-region extrema, motion, conservative work</td></tr>
+      <tr><td>18 marks</td><td>20 min</td><td>24 min</td><td>the conservative-field finale (2024 S2 Q8, 2025 S2 Q8)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="fs">2025 S2 at target pace: 6 × 13 + 11 + 20 = 109 min, leaving 11 min to check.</p>
+
+  <h3>When to skip and come back</h3>
+  <div class="method">
+    <ul>
+      <li><b>Hard stop reached</b>: write the method line (formula, set-up, the system you'd solve) and move on. Method marks
+      are paid per step. A correct set-up with a wrong final answer still earns most of the marks.</li>
+      <li><b>Skip the known time sinks</b> until last: the curved-path limit when lines all agree (2023 S2 Q8b), a sketch with
+      many labels, a Lagrange system with three or more cases, and the edges of a closed region.</li>
+      <li><b>Never skip a "show that" entirely.</b> The answer is given, so later parts can use it even if you can't prove it.
+      Write "using the given result" and carry on.</li>
+      <li><b>Later parts often don't need earlier ones.</b> A potential function makes the work part a one-line subtraction.
+      "Does \(f\) attain a global max?" needs only a line along which \(f\to\infty\).</li>
+      <li><b>Last 10 minutes:</b> check signs (\(x-a\) with negative base points, \(\cos 3\pi\), end minus start), that each
+      constraint holds at your Lagrange candidates, and that every direction vector was normalised.</li>
+    </ul>
+  </div>
+
+  <h3>Marks for sentences: the 2025 S1 marking scheme</h3>
+  <p>The marking scheme pays for <b>written justification</b>, separately from the calculation. From the
+  <a href="exam-2025.html#lessons">2025 S1 marking scheme</a>:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Habit</th><th>Marks it earned in 2025 S1</th></tr></thead>
+    <tbody>
+      <tr><td>Writing the definition (of continuity / of \(\partial f/\partial x\))</td><td>1 (Q2b) + 2 (Q2c)</td></tr>
+      <tr><td>Stating "direction of no change ⟂ \(\nabla f\)"</td><td>1 (Q1c)</td></tr>
+      <tr><td>Getting the direction vector right before dotting</td><td>1 (Q1b)</td></tr>
+      <tr><td>Tree diagram</td><td>2 (Q4a)</td></tr>
+      <tr><td>Saying "(0,0) is not in the interior"</td><td>1 (Q5b)</td></tr>
+      <tr><td>Naming the Extreme Value Theorem</td><td>1 (Q5c)</td></tr>
+      <tr><td>Formulation + special cases in Lagrange</td><td>2 + 2 (Q6)</td></tr>
+      <tr><td>Start point + arrow on a path sketch</td><td>part of 2 (Q8a)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="trap">That is roughly <b>14 marks for sentences, not calculation</b>. Other schemes say the same thing: in 2024 S2 the Lagrange
+  formulation was 3/12, the DNE conclusion sentence 2/6, and "in terms of \(u\) and \(v\)" 3/8. In 2022 S2, 3/5 went for the limit
+  definition of \(f_x\) before any numbers. A 7 depends on these marks.</div>
+
+  <h3>The write-up rituals (from the <a href="notebook.html#ritual">Notebook</a>)</h3>
+  <div class="grid2">
+    <div class="card"><b>Critical points: 5 lines</b>
+      <ol style="margin:6px 0 0 18px;padding:0;font-size:14px">
+        <li>\(f_x=\ldots,\ f_y=\ldots\)</li>
+        <li>Solve \(f_x=f_y=0\) <b>by cases</b>; list every point</li>
+        <li>\(f_{xx},f_{xy},f_{yy}\) and \(D=f_{xx}f_{yy}-f_{xy}^2\) as a formula</li>
+        <li>Table: point · \(D\) · sign of \(f_{xx}\) · type</li>
+        <li>Conclusion sentence per point (\(D=0\) ⇒ "inconclusive" + slice)</li>
+      </ol>
+      <a class="fs" href="notebook.html#rit-crit">→ worked instance</a></div>
+    <div class="card"><b>Lagrange: 4 lines</b>
+      <ol style="margin:6px 0 0 18px;padding:0;font-size:14px">
+        <li>"Maximise \(f=\ldots\) subject to \(g=c\). By Lagrange, \(\nabla f=\lambda\nabla g\)."</li>
+        <li>The full system, <b>including the constraint</b></li>
+        <li>Solve by cases (factor, never divide); list all candidates</li>
+        <li>Evaluate \(f\) at every candidate + why extremes exist (EVT or growth)</li>
+      </ol>
+      <a class="fs" href="notebook.html#rit-lagrange">→ worked instance</a></div>
+    <div class="card"><b>Conservative → potential → work: 3 lines</b>
+      <ol style="margin:6px 0 0 18px;padding:0;font-size:14px">
+        <li>"\(P_y=\ldots=Q_x\) on \(\mathbb R^2\), so \(\mathbf F\) is conservative."</li>
+        <li>\(f=\int P\,dx+h(y)\); \(f_y=Q\) fixes \(h\); check \(\nabla f=\mathbf F\)</li>
+        <li>"By the fundamental theorem, \(W=f(\mathbf r(b))-f(\mathbf r(a))=\ldots\)"</li>
+      </ol>
+      <a class="fs" href="notebook.html#rit-cons">→ worked instance</a></div>
+    <div class="card"><b>Continuity / limits</b>
+      <ol style="margin:6px 0 0 18px;padding:0;font-size:14px">
+        <li>Write the definition: "continuous at \((0,0)\) iff \(\lim f=f(0,0)\)"</li>
+        <li>DNE: path 1 → value, path 2 → different value</li>
+        <li>Exists: polar/squeeze with the bound shown</li>
+        <li>Conclusion sentence ("so \(f\) is not continuous at …")</li>
+      </ol>
+      <a class="fs" href="notebook.html#rit-cont">→ worked instance</a></div>
+  </div>
+
+  <h3>How to present a sketch</h3>
+  <div class="method">
+    <ul>
+      <li><b>Show the algebra that gives the shape</b>: complete the square, then write the standard form ("\(=1\)"). In the 2024 S2
+      scheme a contour sketch was 1 (level value) + 3 (working to standard form) + 2 (intercepts) + 2 (graph).</li>
+      <li><b>Name the curve</b>: "ellipse centred \((1,-2)\), semi-axes 3 and 2" or "hyperbola opening left/right".</li>
+      <li><b>Label every intercept</b> with exact coordinates (surds, not decimals). Write "no \(y\)-intercepts" if there are none.</li>
+      <li><b>Asymptotes dashed, with their equations</b>. Level value written on each contour.</li>
+      <li><b>Domain restrictions</b>: \(z=\sqrt{\ldots}\) gives half-curves; state them before squaring (2025 S2 Q1).</li>
+      <li><b>Paths</b>: start point, end point, an arrow for the direction of travel, and the portion traced
+      (e.g. \((e^t,e^{2t})\) is only the right half of \(y=x^2\)).</li>
+      <li>Use a ruler for axes, keep the sketch big (half a page), and don't spend time on shading.</li>
+    </ul>
+  </div>
+
+  <h3>No calculator: exact values only</h3>
+  <div class="tip">Keep \(\sqrt2\), \(\ln 2\), \(e^6\), \(\pi\), \(\tfrac{0.06}{7}\) exact until the last line. Questions are designed with clean
+  numbers. If you get \(\sqrt{47.3}\), you probably made an arithmetic slip, so go back one step. For a numerical estimate
+  (linear approximation), the paper gives the hint value you need (e.g. \(\ln 2\approx0.6931\)).
+  Drill the trig table and standard integrals on <a href="foundations.html">Foundations</a>.</div>
+</section>
+
+<!-- ============ QUESTION → CHAPTER PATTERN ============ -->
+<section id="pattern">
+  <h2>🧩 How the 8 questions map to chapters</h2>
+  <p>The current format (8 questions, 100 marks) has run since 2023. The <b>Semester 1 papers follow one fixed order</b>:
+  2023 S1, 2024 S1 and 2025 S1 have the same topic in every slot. The <b>Semester 2 papers use the same eight topics</b>, shuffle the
+  first six slots, and keep curves and conservative fields at the end.</p>
+
+  <h3>A. Slot by slot, 2023 S1 → 2025 S2 (the current 8-question format)</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Paper</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th></tr></thead>
+    <tbody>
+      <tr><td><a href="exam-2023.html#s1"><b>2023 S1</b></a></td><td>Gradient, \(D_{\mathbf u}f\) <span class="trigtag">Ch5</span></td><td>Limit, removable discont. <span class="trigtag">Ch4</span></td><td>Contour match + sketch <span class="trigtag">Ch3</span></td><td>Chain rule (bugs) <span class="trigtag">Ch5</span></td><td>Critical pts, global max? <span class="trigtag">Ch6</span></td><td>Lagrange, circle <span class="trigtag">Ch6</span></td><td>Velocity/accel., path <span class="trigtag">Ch7</span></td><td>Helix: length, work, potential <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2023.html#s2"><b>2023 S2</b></a></td><td>Critical pts, absolute? <span class="trigtag">Ch6</span></td><td>Lagrange, line <span class="trigtag">Ch6</span></td><td>Gradient, max increase <span class="trigtag">Ch5</span></td><td>Graph match + hyperbolas <span class="trigtag">Ch3</span></td><td>Arc length in \(\mathbb R^3\) <span class="trigtag">Ch7</span></td><td>Path + conservative work <span class="trigtag">Ch7</span></td><td>Reverse \(\nabla f\) → \(a,b,c\) <span class="trigtag">Ch5</span></td><td>Limit DNE, curved path <span class="trigtag">Ch4</span></td></tr>
+      <tr><td><a href="exam-2024.html#s1"><b>2024 S1</b></a></td><td>Gradient, steepest ascent (3-D) <span class="trigtag">Ch5</span></td><td>Limit: lines, parabolas, cubic <span class="trigtag">Ch4</span></td><td>Paraboloid contour + min <span class="trigtag">Ch3</span></td><td>Related rates (triangle) <span class="trigtag">Ch5</span></td><td>Global extrema, triangle <span class="trigtag">Ch6</span></td><td>Lagrange, cylinder <span class="trigtag">Ch6</span></td><td>Speed + arc length <span class="trigtag">Ch7</span></td><td>Conservative, spiral path <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2024.html#s2"><b>2024 S2</b></a></td><td>Isotherm sketch + max T <span class="trigtag">Ch3</span></td><td>Two limits: DNE, polar <span class="trigtag">Ch4</span></td><td>Implicit tangent line <span class="trigtag">Ch5</span></td><td>Gradient, steepest ascent <span class="trigtag">Ch5</span></td><td>Lagrange, sphere <span class="trigtag">Ch6</span></td><td>Chain rule, change of vars <span class="trigtag">Ch5</span></td><td>Velocity + arc length <span class="trigtag">Ch7</span></td><td>Make conservative, work <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2025.html#s1"><b>2025 S1</b></a></td><td>Reverse \(\nabla f\) from two rates <span class="trigtag">Ch5</span></td><td>Limit, continuity, \(f_x\) by defn <span class="trigtag">Ch4</span></td><td>Hyperbola contour + crit. pt <span class="trigtag">Ch3/6</span></td><td>Chain rule, tree (spherical) <span class="trigtag">Ch5</span></td><td>Global extrema, square <span class="trigtag">Ch6</span></td><td>Lagrange, sphere <span class="trigtag">Ch6</span></td><td>Two particles: integrate \(\mathbf v\) <span class="trigtag">Ch7</span></td><td>Conservative, work two ways <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2025.html#s2"><b>2025 S2</b></a></td><td>Contours + cross-section <span class="trigtag">Ch3</span></td><td>Partials, tangent plane, approx <span class="trigtag">Ch4</span></td><td>"Show that" \(ag_y=bg_x\) <span class="trigtag">Ch5</span></td><td>Continuity + partials by defn <span class="trigtag">Ch4</span></td><td>Lagrange, plane <span class="trigtag">Ch6</span></td><td>Critical points \(\times e^{-2x}\) <span class="trigtag">Ch6</span></td><td>Projectile (cliff diver) <span class="trigtag">Ch7</span></td><td>Conservative, wild path <span class="trigtag">Ch7</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>B. The reliable theme per slot</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Slot</th><th>S1 template (2023, 2024, 2025: 3/3)</th><th>S2 papers (2023 / 2024 / 2025)</th><th>Hit rate for the S1 theme</th><th>Study</th></tr></thead>
+    <tbody>
+      <tr><td><b>Q1</b></td><td>Gradient / directional derivative / steepest ascent (incl. reverse problem)</td><td>critical pts / contour / contour</td><td>3 of 6</td><td><a href="ch05-gradient-chain-rule.html#types">Ch5</a></td></tr>
+      <tr><td><b>Q2</b></td><td>2-D limit &amp; continuity (two-path test, polar, \(f_x\) by definition)</td><td>Lagrange / limits / tangent plane + approx</td><td>4 of 6 (Ch 4: 5 of 6)</td><td><a href="ch04-limits-partials-tangent-planes.html#types">Ch4</a></td></tr>
+      <tr><td><b>Q3</b></td><td>Contours: complete the square, sketch, extreme value</td><td>gradient / implicit tangent / "show that"</td><td>3 of 6</td><td><a href="ch03-surfaces-contours.html#types">Ch3</a></td></tr>
+      <tr><td><b>Q4</b></td><td>Chain rule: tree diagram / related rates</td><td>contours / gradient / continuity + partials</td><td>3 of 6</td><td><a href="ch05-gradient-chain-rule.html#types">Ch5</a></td></tr>
+      <tr><td><b>Q5</b></td><td>Critical points, or global extrema on a closed region</td><td>arc length / Lagrange / Lagrange</td><td>3 of 6</td><td><a href="ch06-optimisation.html#types">Ch6</a></td></tr>
+      <tr><td><b>Q6</b></td><td>Lagrange multipliers</td><td>conservative work / chain rule / critical points</td><td>3 of 6 (Lagrange in Q5 or Q6: 5 of 6)</td><td><a href="ch06-optimisation.html#types">Ch6</a></td></tr>
+      <tr><td><b>Q7</b></td><td>Particle motion: integrate \(\mathbf a\to\mathbf v\to\mathbf r\), speed, arc length</td><td>reverse \(\nabla f\) / velocity + arc / projectile</td><td><b>5 of 6</b></td><td><a href="ch07-curves-vector-fields.html#types">Ch7</a></td></tr>
+      <tr><td><b>Q8</b></td><td>Conservative field → potential → work (13–18 marks)</td><td>limit DNE / conservative / conservative</td><td><b>5 of 6</b></td><td><a href="ch07-curves-vector-fields.html#types">Ch7</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip"><b>What's fixed regardless of order:</b> every one of the six papers had a gradient/directional-derivative question,
+  a 2-D limit or continuity question, a contour question, a Lagrange question, a curves question and a line-integral question; five of six
+  also had a chain-rule/implicit question (not 2023 S2) and critical points or a closed region (not 2024 S2). The last two slots (Q7 + Q8, ≈ 24–30 marks)
+  have been Ch 7 in five of six papers. If you can do those eight routines cold, you have covered ~100% of the recent marks.</div>
+
+  <div class="card q">
+    <h3 style="margin-top:0">Correction to the "obvious" slot map</h3>
+    <p style="margin:0">A plausible guess is Q1 contours · Q2 partials/tangent plane · Q3 gradient/chain rule · Q4 limits · Q5 Lagrange · Q6 critical
+    points. That is exactly <b>2025 S2</b> and no other paper. The three S1 papers instead run
+    <b>gradient → limits → contours → chain rule → critical points/closed region → Lagrange</b>. If your exam is a Semester 2 paper,
+    expect the same eight topics in a different order. Plan in the first minute and don't rely on the order.</p>
+  </div>
+
+  <h3>C. The older formats: 2021–2022 (10 or 9 questions) and 2020</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Paper</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th></tr></thead>
+    <tbody>
+      <tr><td><a href="exam-2021.html#s1"><b>2021 S1</b></a></td><td>Common tangent plane <span class="trigtag">Ch4</span></td><td>Limit DNE <span class="trigtag">Ch4</span></td><td>Implicit tangent <span class="trigtag">Ch5</span></td><td>Ellipse contours <span class="trigtag">Ch3</span></td><td>\(D_{\mathbf u}f\), descent <span class="trigtag">Ch5</span></td><td>Chain rule \(e^u\cos\theta\) <span class="trigtag">Ch5</span></td><td>Lagrange, road <span class="trigtag">Ch6</span></td><td>Critical pts <span class="trigtag">Ch6</span></td><td>Cardioid arc length <span class="trigtag">Ch7</span></td><td>Conservative <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2021.html#s2"><b>2021 S2</b></a></td><td>Hyperbola contour <span class="trigtag">Ch3</span></td><td>Tangent plane ⟂ line <span class="trigtag">Ch4</span></td><td>\(c\) for continuity <span class="trigtag">Ch4</span></td><td>Helix length 20 <span class="trigtag">Ch7</span></td><td>Critical pts <span class="trigtag">Ch6</span></td><td>Lagrange, sphere <span class="trigtag">Ch6</span></td><td>\(D_{\mathbf u}f\) to a point <span class="trigtag">Ch5</span></td><td>Non-conservative work <span class="trigtag">Ch7</span></td><td>Linear approx <span class="trigtag">Ch4</span></td><td>Chain \(dz/dt\) <span class="trigtag">Ch5</span></td></tr>
+      <tr><td><a href="exam-2022.html#s1"><b>2022 S1</b></a></td><td>Quadratic approx <span class="trigtag">Ch4</span></td><td>Hyperbola contours <span class="trigtag">Ch3</span></td><td>Two-path continuity <span class="trigtag">Ch4</span></td><td>Chain "show that" <span class="trigtag">Ch5</span></td><td>Implicit tangents <span class="trigtag">Ch5</span></td><td>Reverse \(D_{\mathbf u}f\) <span class="trigtag">Ch5</span></td><td>Critical pts <span class="trigtag">Ch6</span></td><td>Lagrange <span class="trigtag">Ch6</span></td><td>Polar curve speed <span class="trigtag">Ch7</span></td><td>Conservative <span class="trigtag">Ch7</span></td></tr>
+      <tr><td><a href="exam-2022.html#s2"><b>2022 S2</b></a></td><td>Linear approx (3 vars) <span class="trigtag">Ch4</span></td><td>\(f_x\) by defn; continuity <span class="trigtag">Ch4</span></td><td>\(D_{\mathbf u}f\), descent <span class="trigtag">Ch5</span></td><td>Match graphs; contour <span class="trigtag">Ch3</span></td><td>Chain \(dC/dt\) <span class="trigtag">Ch5</span></td><td>Critical pts, \(D=0\) <span class="trigtag">Ch6</span></td><td>Lagrange, cone <span class="trigtag">Ch6</span></td><td>Space curve impact <span class="trigtag">Ch7</span></td><td>Potential + work <span class="trigtag">Ch7</span></td><td class="fs">(9 Qs)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The same topics were already there in 2021–22, just spread over 9–10 shorter questions: approximations and limits early, Ch 5 in
+  the middle, <b>Ch 6 then Ch 7 at the end</b>. <b>2020</b> (both papers 10 × 10, online) was the older syllabus: 6 of 20
+  questions were ODEs (<a href="ch01-first-order-odes.html#types">Ch 1</a>: 4, <a href="ch02-second-order-odes.html#types">Ch 2</a>: 2),
+  plus lines-and-planes geometry. See <a href="exam-2020.html#lessons">What 2020 teaches</a>.</p>
+
+  <div class="card q">
+    <h3 style="margin-top:0">Things the papers keep doing</h3>
+    <ul style="margin:0">
+      <li><b>The conservative-field finale is the biggest single question.</b> 14–18 marks, with an ugly path you never
+      parametrise. The same spiral \((t\cos t,\,t\sin t)\), \(t\in[0,\pi/2]\) appeared in <em>both</em> 2024 papers' Q8.</li>
+      <li><b>Discontinuous but the partials exist.</b> 2025 S1 Q2 and 2025 S2 Q4 both used this twist. Know the \(h\)-limit definition cold.</li>
+      <li><b>Completing the square does triple duty.</b> It gives the contour shape, the intercepts and the extreme value
+      (2024 S1 Q3 min \(z=1\); 2024 S2 Q1 max \(T=100\)).</li>
+      <li><b>The Lagrange case you'd cancel is the answer.</b> \(x=0\) in 2022 S1, \(\lambda=0\) in 2023 S1, \(z=0\) cases on the
+      sphere. Factor, never divide.</li>
+      <li><b>Reverse problems.</b> "Here are the rates, find \(\nabla f\)" (2025 S1 Q1, 2023 S2 Q7, 2022 S1 Q6). This is the same
+      dot product, solved backwards.</li>
+      <li><b>Speed simplifies by design.</b> If \(\|\mathbf r'\|\) doesn't collapse to a perfect square or a constant, recheck your derivative.</li>
+    </ul>
+  </div>
+</section>
+
+<p class="fs" style="text-align:center;margin-top:40px">MATH1052 Exam Command Hub · built from the 2020–2025 final papers (12 papers), their solutions and
+marking schemes (2022 S2, 2024 S2, 2025 S1), the course summary, posters and tutorials T01–T11 ·
+<a href="index.html">🏠 Hub</a> · <a href="formulas.html">Formula sheet</a> · <a href="notebook.html">Notebook</a> · <a href="exam-2025.html">Latest papers</a></p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Worked Exams 2020 (S1 &amp; S2)</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  button{background:var(--accent);color:#1e1b4b;border:none;padding:7px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12.5px}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;background:var(--panel2);color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"📝 CONCLUSION IN CONTEXT — ";color:var(--gold);font-weight:700}
+  .ans{background:rgba(167,139,250,.12);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:block;overflow-x:auto}
+  .fig{background:var(--panel2);border:1px dashed #3a4656;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:var(--muted)}
+  .fig:before{content:"🖼 FIGURE — ";color:var(--accent2);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>MATH1052 — Fully Worked Exams, 2020</h1>
+  <p><b>Semester 1 &amp; Semester 2, 2020</b> · Multivariate Calculus &amp; Ordinary Differential Equations</p>
+  <p>online, 120 min (+30 min upload) · <b>100 marks · 10 questions × 10 marks</b> each paper · no calculator</p>
+  <span class="badge gold">Every final answer verified with SymPy (74 checks)</span>
+  <span class="badge pre">ODE-heavy legacy papers — 30% ODEs</span>
+  <span class="badge">Formula sheet printed on last page</span>
+</header>
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="exam-2020.html" style="background:var(--accent);color:#1e1b4b">2020 (this)</a>
+  <a href="exam-2021.html">2021</a>
+  <a href="exam-2022.html">2022</a>
+  <a href="exam-2023.html">2023</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="#s1">S1 paper</a>
+  <a href="#s2">S2 paper</a>
+  <a href="#lessons">Lessons</a>
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+</nav>
+<main>
+
+<div class="card" style="border:2px solid var(--warn);background:rgba(251,191,36,.07)">
+<h3 style="margin-top:0;color:var(--warn)">⚠️ Read this first — how to use the 2020 papers</h3>
+<p>These two papers come from the <b>2020 online, open-textbook</b> format: 10 questions × 10 marks, and <b>3 of the 10 questions (30 marks) are ODEs</b> in each paper. They also include a <b>lines &amp; planes</b> question (vector geometry) that has since dropped off the paper.</p>
+<p><b>Recent papers (2023–2025) look different:</b> 8 questions (12,12,10,12,12,12,12,18 marks), mostly multivariable calculus — surfaces, partial derivatives, gradient/chain rule, optimisation, Lagrange, curves &amp; line integrals — with <b>at most one ODE question</b> (and none in 2025 S2).</p>
+<p>👉 So use this page as <b>ODE drill</b> (equilibria &amp; stability, integrating factor, homogeneous substitution, reduction of order, undetermined coefficients) and as extra practice on the multivariable questions — <b>not</b> as a guide to the current format or mark balance. For the format, study <a href="exam-2025.html">2025</a> and <a href="exam-2024.html">2024</a>.</p>
+</div>
+
+<p class="tip">Instructions on the day (2020): <i>"Answer all questions and show all of your work. Each question is worth 10 marks."</i> Materials: course textbook + workbook (S2 also allowed one A4 double-sided handwritten sheet), bilingual dictionary — <b>no calculator</b>. The formula sheet on the last page gives linear/quadratic approximation, directional derivative, chain rule, implicit differentiation, Hessian \(D\), Lagrange \(\nabla f=\lambda\nabla g\) and work \(W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\). Every ODE method must be known cold.</p>
+
+<h2>At a glance</h2>
+<div class="grid2">
+<div>
+<h3>Semester 1, 2020</h3>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s1-q1">1</a></td><td>Plane normal, distance, line ∩ plane</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a> (legacy)</td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q2">2</a></td><td>Conic — hyperbola sketch</td><td><a href="ch03-surfaces-contours.html">Ch 3</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q3">3</a></td><td>Critical points &amp; Hessian</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q4">4</a></td><td>Velocity → acceleration, position</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★</td></tr>
+<tr><td><a href="#s1-q5">5</a></td><td>ODE: \(y=xu\) substitution</td><td><a href="ch01-first-order-odes.html">Ch 1</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q6">6</a></td><td>Arc length; chain rule \(dV/dt\)</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a> / <a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q7">7</a></td><td>2nd-order ODE, complex roots + \(e^{3x}\)</td><td><a href="ch02-second-order-odes.html">Ch 2</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q8">8</a></td><td>Lagrange multipliers</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★★★</td></tr>
+<tr><td><a href="#s1-q9">9</a></td><td>Conservative field, potential</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s1-q10">10</a></td><td>ODE equilibria &amp; stability</td><td><a href="ch01-first-order-odes.html">Ch 1</a></td><td>10</td><td>★★★</td></tr>
+</table>
+</div>
+<div>
+<h3>Semester 2, 2020</h3>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s2-q1">1</a></td><td>ODE equilibria &amp; stability</td><td><a href="ch01-first-order-odes.html">Ch 1</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s2-q2">2</a></td><td>Linear ODE, integrating factor</td><td><a href="ch01-first-order-odes.html">Ch 1</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s2-q3">3</a></td><td>Reduction of order</td><td><a href="ch02-second-order-odes.html">Ch 2</a></td><td>10</td><td>★★★</td></tr>
+<tr><td><a href="#s2-q4">4</a></td><td>Line of intersection of planes</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a> (legacy)</td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s2-q5">5</a></td><td>Tangent plane &amp; normal</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>10</td><td>★</td></tr>
+<tr><td><a href="#s2-q6">6</a></td><td>Critical points &amp; Hessian</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s2-q7">7</a></td><td>Global extrema on the unit ball</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★★★</td></tr>
+<tr><td><a href="#s2-q8">8</a></td><td>Ellipse sketch, parametrise, tangent</td><td><a href="ch03-surfaces-contours.html">Ch 3</a> / <a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★★</td></tr>
+<tr><td><a href="#s2-q9">9</a></td><td>Velocity, speed, arc length, \(dT/dt\)</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a> / <a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>10</td><td>★</td></tr>
+<tr><td><a href="#s2-q10">10</a></td><td>Work along a parabola</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★</td></tr>
+</table>
+</div>
+</div>
+
+<!-- =================================================================== -->
+<!-- ========================= SEMESTER 1 ============================== -->
+<!-- =================================================================== -->
+<h2 id="s1" style="margin-top:44px;font-size:26px">📘 Semester 1, 2020</h2>
+<p class="tip">Official source: handwritten tutor solutions (<code>sem_1_2020_updated</code>) — no mark-by-mark scheme. Tips below flag what those solutions stress.</p>
+
+<!-- ============================ S1 Q1 ============================ -->
+<section id="s1-q1">
+<h2>Question 1 — Planes, distance &amp; intersection <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+A plane is given by \(P=(0,1,-1)+\lambda(1,0,2)+\mu(0,2,-4)\), where \(\lambda,\mu\in\mathbb R\).
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(i)</b> Determine a normal vector to \(P\).
+<details><summary>Worked solution</summary>
+<div class="when">A plane in vector form \(A+\lambda\mathbf u+\mu\mathbf v\) has two in-plane directions. A normal is perpendicular to both, so take the <b>cross product</b> \(\mathbf u\times\mathbf v\).</div>
+Point on the plane \(A=(0,1,-1)\); directions \(\mathbf u=(1,0,2)\), \(\mathbf v=(0,2,-4)\).
+$$\mathbf u\times\mathbf v=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\1&0&2\\0&2&-4\end{vmatrix}
+=\mathbf i(0-4)-\mathbf j(-4-0)+\mathbf k(2-0)=(-4,\,4,\,2)=2(-2,\,2,\,1).$$
+Check: \((-2,2,1)\cdot(1,0,2)=0\) ✓ and \((-2,2,1)\cdot(0,2,-4)=0\) ✓.
+<div class="ans">\(\mathbf n=(-2,\,2,\,1)\) (any non-zero multiple is fine).</div>
+<div class="tip">Show the dot-product check — two quick lines that prove your normal is right and protect you from a sign slip in the middle component of the cross product.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(ii)</b> Let \(X\) be a point on the line
+$$L:\quad -x=\frac{y+1}{3}=2-z.$$
+Write down an expression for the distance from the point \(X\) to the plane \(P\).
+<details><summary>Worked solution</summary>
+<div class="when">Distance from a point to a plane = length of the projection of \(\overrightarrow{AX}\) onto the <b>unit</b> normal: \(d=\dfrac{|\overrightarrow{AX}\cdot\mathbf n|}{\|\mathbf n\|}\). First parametrise the line by setting the common ratio equal to \(\lambda\).</div>
+<b>Parametrise \(L\):</b> set \(-x=\dfrac{y+1}{3}=2-z=\lambda\):
+$$X=(x,y,z)=(-\lambda,\;-1+3\lambda,\;2-\lambda),\qquad\lambda\in\mathbb R.$$
+<b>Vector from the plane point:</b> \(\overrightarrow{AX}=X-A=(-\lambda,\;3\lambda-2,\;3-\lambda)\).<br>
+<b>Project onto the normal</b> (\(\|\mathbf n\|=\sqrt{4+4+1}=3\)):
+$$d=\frac{|\overrightarrow{AX}\cdot\mathbf n|}{\|\mathbf n\|}=\frac{|-2(-\lambda)+2(3\lambda-2)+1(3-\lambda)|}{3}=\frac{|2\lambda+6\lambda-4+3-\lambda|}{3}.$$
+<div class="ans">\(d(\lambda)=\dfrac{|7\lambda-1|}{3}\), where \(X=(-\lambda,-1+3\lambda,2-\lambda)\).</div>
+<div class="tip">The official solution first writes the general form \(d=\dfrac{|-2a+2b+c-1|}{3}\) for \(X=(a,b,c)\) (i.e. the plane is \(-2x+2y+z=1\)), then substitutes the line. Either route is fine — the marks are for (1) parametrising the line, (2) the projection formula, (3) \(\|\mathbf n\|=3\), (4) simplifying.</div>
+<div class="trap">Forgetting to divide by \(\|\mathbf n\|\) (using \(\mathbf n\) instead of the unit normal) gives \(|7\lambda-1|\) — three times too big. And keep the absolute value: distance is never negative.</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(iii)</b> Using this, determine the point of intersection between the line from (ii) and the plane \(P\).
+<details><summary>Worked solution</summary>
+<div class="when">"Using this" ⇒ the intersection point is the point of the line at <b>distance zero</b> from the plane.</div>
+$$d=0\iff 7\lambda-1=0\iff\lambda=\tfrac17.$$
+$$x=-\tfrac17,\qquad y=-1+\tfrac37=-\tfrac47,\qquad z=2-\tfrac17=\tfrac{13}7.$$
+Check in \(-2x+2y+z=1\): \(\tfrac27-\tfrac87+\tfrac{13}7=\tfrac77=1\) ✓.
+<div class="ans">Intersection point \(\left(-\tfrac17,\,-\tfrac47,\,\tfrac{13}7\right)\).</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q2 ============================ -->
+<section id="s1-q2">
+<h2>Question 2 — Conic section (hyperbola) <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let a conic section be given by
+$$4x^2-y^2+4x=6y-4.$$
+</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(i)</b> Determine the type of conic section.
+<details><summary>Worked solution</summary>
+<div class="when">Group \(x\)-terms and \(y\)-terms, <b>complete the square</b> in each, then divide to get "\(=1\)". Opposite signs on the squares ⇒ hyperbola; same signs ⇒ ellipse; one square only ⇒ parabola.</div>
+$$4x^2+4x-y^2-6y=-4$$
+$$4\big[(x+\tfrac12)^2-\tfrac14\big]-\big[(y+3)^2-9\big]=-4$$
+$$4(x+\tfrac12)^2-1-(y+3)^2+9=-4\;\Rightarrow\;4(x+\tfrac12)^2-(y+3)^2=-12.$$
+Divide by \(-12\):
+$$\frac{(y+3)^2}{12}-\frac{(x+\tfrac12)^2}{3}=1,\qquad\text{i.e.}\qquad \frac{(y+3)^2}{(2\sqrt3)^2}-\frac{(x+\tfrac12)^2}{(\sqrt3)^2}=1.$$
+<div class="ans">A <b>hyperbola</b> centred at \(\left(-\tfrac12,-3\right)\), opening <b>up/down</b> (the \(y\)-term is positive), \(a=2\sqrt3\) (vertical), \(b=\sqrt3\).</div>
+<div class="trap">When you divide by a <b>negative</b> number the signs of both squares flip. Here that is what makes the hyperbola open vertically, not horizontally. Students who don't flip sketch it sideways.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(ii)</b> Sketch the conic section. Be sure to identify the center, foci, or asymptotes.
+<details><summary>Worked solution</summary>
+<div class="when">For \(\dfrac{(y-k)^2}{a^2}-\dfrac{(x-h)^2}{b^2}=1\): vertices \((h,k\pm a)\), asymptotes \(y-k=\pm\dfrac ab(x-h)\), foci \((h,k\pm c)\) with \(c^2=a^2+b^2\).</div>
+<b>Centre</b> \((-\tfrac12,-3)\). <b>Vertices</b> \((-\tfrac12,\,-3\pm2\sqrt3)\approx(-0.5,\,0.46)\) and \((-0.5,\,-6.46)\).<br>
+<b>Asymptotes</b> — for large \(|x|,|y|\) the "1" is negligible: \(\dfrac{(y+3)^2}{12}\approx\dfrac{(x+\frac12)^2}{3}\Rightarrow y+3=\pm2(x+\tfrac12)\):
+$$y=2x-2\qquad\text{and}\qquad y=-2x-4.$$
+<b>Foci:</b> \(c^2=12+3=15\Rightarrow\) foci \(\left(-\tfrac12,\,-3\pm\sqrt{15}\right)\approx(-0.5,\,0.87),\ (-0.5,\,-6.87)\).<br>
+<b>Intercepts (nice for the sketch):</b> \(x=0\Rightarrow y^2+6y-4=0\Rightarrow y=-3\pm\sqrt{13}\approx0.61,\,-6.61\); \(y=0\Rightarrow4x^2+4x+4=0\), no real roots, so no \(x\)-intercepts.
+<div class="fig">Two branches: an upper "U" with lowest point at \((-\tfrac12,-3+2\sqrt3)\approx(-0.5,0.46)\) crossing the \(y\)-axis at \(\approx0.61\), and a lower "∩" with highest point at \((-\tfrac12,-3-2\sqrt3)\approx(-0.5,-6.46)\). Both branches hug the dashed asymptotes \(y=2x-2\) and \(y=-2x-4\), which cross at the centre \((-\tfrac12,-3)\).</div>
+<div class="ans">Hyperbola, centre \((-\tfrac12,-3)\), vertices \((-\tfrac12,-3\pm2\sqrt3)\), foci \((-\tfrac12,-3\pm\sqrt{15})\), asymptotes \(y=2x-2,\ y=-2x-4\).</div>
+<div class="tip">The question says "center, foci, <i>or</i> asymptotes" — the official solution labels the centre, vertices and both asymptotes. Labelling foci as well costs 20 seconds and removes any doubt.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q3 ============================ -->
+<section id="s1-q3">
+<h2>Question 3 — Critical points <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(h(x,y)=20+x^2-y^2+xy^2+y^3.\)
+</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(i)</b> Find all critical points of \(h(x,y)\).
+<details><summary>Worked solution</summary>
+<div class="when">Critical points: \(\nabla h=\mathbf 0\) (or undefined). Solve the easier equation for one variable and substitute.</div>
+$$\nabla h=(h_x,h_y)=\left(2x+y^2,\;-2y+2xy+3y^2\right),$$
+defined for all \((x,y)\), so critical points need \(\nabla h=\mathbf 0\):
+$$\text{(1) } 2x+y^2=0,\qquad \text{(2) } -2y+2xy+3y^2=0.$$
+From (1): \(x=-\tfrac{y^2}{2}\). Into (2):
+$$-2y+2\left(-\tfrac{y^2}2\right)y+3y^2=-2y-y^3+3y^2=-y(y^2-3y+2)=-y(y-1)(y-2)=0.$$
+So \(y=0,1,2\) giving \(x=0,-\tfrac12,-2\).
+<div class="ans">Critical points: \((0,0),\ \left(-\tfrac12,1\right),\ (-2,2)\).</div>
+<div class="tip">State "∇h is defined everywhere" — the official solution does, because the definition of critical point includes points where the gradient doesn't exist.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(ii)</b> Classify each critical point as a local minimum, local maximum, or saddle point.
+<details><summary>Worked solution</summary>
+<div class="when">Second-derivative test (formula sheet): \(D=h_{xx}h_{yy}-h_{xy}^2\). \(D\lt0\) saddle; \(D\gt0\) and \(h_{xx}\gt0\) min; \(D\gt0\) and \(h_{xx}\lt0\) max; \(D=0\) inconclusive.</div>
+$$h_{xx}=2,\quad h_{xy}=2y,\quad h_{yy}=-2+2x+6y,\qquad D=\begin{vmatrix}2&2y\\2y&-2+2x+6y\end{vmatrix}.$$
+<table>
+<tr><th>Point</th><th>\(D\)</th><th>\(h_{xx}\)</th><th>Type</th></tr>
+<tr><td>\((0,0)\)</td><td>\(2(-2)-0=-4\lt0\)</td><td>—</td><td>saddle</td></tr>
+<tr><td>\((-\tfrac12,1)\)</td><td>\(2(3)-2^2=2\gt0\)</td><td>\(2\gt0\)</td><td>local min</td></tr>
+<tr><td>\((-2,2)\)</td><td>\(2(6)-4^2=-4\lt0\)</td><td>—</td><td>saddle</td></tr>
+</table>
+<div class="ans">\((0,0)\) saddle; \(\left(-\tfrac12,1\right)\) local minimum (value \(\tfrac{79}4\)); \((-2,2)\) saddle.</div>
+<div class="trap">At \((-2,2)\): \(h_{yy}=-2+2(-2)+6(2)=6\) — a sign slip on the \(2x\) term turns this into \(D\gt0\) and a wrong "min". Substitute carefully, one term at a time.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q4 ============================ -->
+<section id="s1-q4">
+<h2>Question 4 — From velocity to position <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider a particle moving through space with velocity \(\mathbf v(t)=\cos(t)\,\mathbf i-\sin(t)\,\mathbf j+t\,\mathbf k.\)
+</div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(i)</b> Determine its acceleration vector.
+<details><summary>Worked solution</summary>
+<div class="when">\(\mathbf a=\dfrac{d\mathbf v}{dt}\), component by component.</div>
+<div class="ans">\(\mathbf a(t)=-\sin(t)\,\mathbf i-\cos(t)\,\mathbf j+\mathbf k\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">7 marks</span><b>(ii)</b> Determine the position vector, supposing the particle starts at position \((3,-2,3)\) at time \(t=0\).
+<details><summary>Worked solution</summary>
+<div class="when">Integrate each component of \(\mathbf v\), with a <b>separate constant per component</b>, then fix the constants from \(\mathbf r(0)\).</div>
+$$x(t)=\int\cos t\,dt=\sin t+a,\qquad x(0)=0+a=3\Rightarrow a=3.$$
+$$y(t)=\int-\sin t\,dt=\cos t+b,\qquad y(0)=1+b=-2\Rightarrow b=-3.$$
+$$z(t)=\int t\,dt=\tfrac{t^2}2+c,\qquad z(0)=c=3.$$
+<div class="ans">\(\mathbf r(t)=\big(\sin t+3\big)\mathbf i+\big(\cos t-3\big)\mathbf j+\left(\tfrac{t^2}2+3\right)\mathbf k.\)</div>
+<div class="trap">The classic slip: \(y(0)=\cos 0+b=1+b\), <b>not</b> \(0+b\). Getting \(b=-2\) here is the most common lost mark. Always verify \(\mathbf r(0)=(3,-2,3)\) at the end.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q5 ============================ -->
+<section id="s1-q5">
+<h2>Question 5 — Homogeneous ODE via \(y=xu\) <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider the ODE
+$$\frac{dy}{dx}=\frac{x+y}{x-y},$$
+and show that it becomes separable using the substitution \(y(x)=xu(x)\). (You do <i>not</i> need to solve the ODE.)
+<details><summary>Worked solution</summary>
+<div class="when">Right side depends only on \(y/x\) (a "homogeneous" ODE) ⇒ \(y=xu\). Product rule gives \(y'=u+xu'\); the \(x\)'s cancel on the right; isolate \(u'\) as \(f(x)\,g(u)\).</div>
+<b>Differentiate the substitution</b> (product rule):
+$$y=xu\;\Rightarrow\;\frac{dy}{dx}=u+x\frac{du}{dx}.$$
+<b>Substitute</b> (assume \(x\ne0\)):
+$$u+x\frac{du}{dx}=\frac{x+xu}{x-xu}=\frac{x(1+u)}{x(1-u)}=\frac{1+u}{1-u}.$$
+<b>Isolate \(u'\):</b>
+$$x\frac{du}{dx}=\frac{1+u}{1-u}-u=\frac{1+u-u(1-u)}{1-u}=\frac{1+u^2}{1-u}.$$
+$$\frac{du}{dx}=\underbrace{\frac1x}_{f(x)}\cdot\underbrace{\frac{1+u^2}{1-u}}_{g(u)}.$$
+This is of the form \(\dfrac{du}{dx}=f(x)g(u)\), hence <b>separable</b>:
+$$\int\frac{1-u}{1+u^2}\,du=\int\frac1x\,dx.$$
+<div class="ans">With \(y=xu\): \(\dfrac{du}{dx}=\dfrac1x\cdot\dfrac{1+u^2}{1-u}\) — a product of a function of \(x\) and a function of \(u\), so the ODE is separable.</div>
+<div class="tip">In a "show that" question the final sentence earns the mark: name the form \(u'=f(x)g(u)\) and write the words "which is separable". State the assumption \(x\ne0\) (and \(u\ne1\), i.e. \(y\ne x\)) as the official solution does.</div>
+<div class="trap">Writing \(y'=u'\) (forgetting the product rule) — the whole question collapses. \(y=xu\) is a product; its derivative has two terms.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q6 ============================ -->
+<section id="s1-q6">
+<h2>Question 6 — Arc length &amp; rate of change along a path <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider a particle moving in the plane along the curve \(\mathbf r(t)=\big(R\cos(\omega t),\,R\sin(\omega t)\big)\) for some constants \(R,\omega\gt0\).
+</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(i)</b> Determine the distance the particle travels for \(t\in[0,2\pi]\).
+<details><summary>Worked solution</summary>
+<div class="when">Distance travelled = arc length \(=\int_a^b\|\mathbf r'(t)\|\,dt\).</div>
+$$\mathbf r'(t)=\big(-R\omega\sin(\omega t),\;R\omega\cos(\omega t)\big),$$
+$$\|\mathbf r'(t)\|=\sqrt{R^2\omega^2\big(\sin^2(\omega t)+\cos^2(\omega t)\big)}=R\omega\quad(\text{since }R,\omega\gt0).$$
+$$\text{distance}=\int_0^{2\pi}R\omega\,dt=2\pi R\omega.$$
+<div class="ans">Distance \(=2\pi R\omega\).</div>
+<div class="trap">This is <b>not</b> the circumference \(2\pi R\). With angular speed \(\omega\) the particle goes round \(\omega\) times in \(t\in[0,2\pi]\), so it travels \(2\pi R\omega\). Also note \(\sqrt{R^2\omega^2}=R\omega\) only because \(R,\omega\gt0\) — say so.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(ii)</b> Suppose the plane has a voltage given by \(V(x,y)=xy+x^2+y^3+3.\) Determine the change in voltage the particle experiences at time \(t\).
+<details><summary>Worked solution</summary>
+<div class="when">"Change experienced at time \(t\)" = rate \(\dfrac{dV}{dt}\) along the path ⇒ <b>chain rule</b> (formula sheet): \(\dfrac{dV}{dt}=V_x\dfrac{dx}{dt}+V_y\dfrac{dy}{dt}\).</div>
+\(V_x=y+2x,\quad V_y=x+3y^2;\quad \dfrac{dx}{dt}=-R\omega\sin(\omega t),\quad\dfrac{dy}{dt}=R\omega\cos(\omega t).\)
+$$\frac{dV}{dt}=\big(R\sin\omega t+2R\cos\omega t\big)(-R\omega\sin\omega t)+\big(R\cos\omega t+3R^2\sin^2\omega t\big)(R\omega\cos\omega t)$$
+$$=-R^2\omega\sin^2\omega t-2R^2\omega\sin\omega t\cos\omega t+R^2\omega\cos^2\omega t+3R^3\omega\sin^2\omega t\cos\omega t.$$
+Using \(\cos^2-\sin^2=\cos2\theta\) and \(2\sin\cos=\sin2\theta\):
+<div class="ans">\(\dfrac{dV}{dt}=R^2\omega\cos(2\omega t)-R^2\omega\sin(2\omega t)+3R^3\omega\sin^2(\omega t)\cos(\omega t).\)</div>
+<div class="tip">Draw the tree diagram (\(V\to x,y\to t\)) as the official solution does — it shows the marker you know which derivatives multiply. The double-angle tidy-up is optional; the unsimplified line is already a full-mark answer.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q7 ============================ -->
+<section id="s1-q7">
+<h2>Question 7 — Second-order inhomogeneous ODE <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Find the general solution \(y(x)\) to the ODE
+$$4y''-4y'+5y=e^{3x}.$$
+<details><summary>Worked solution</summary>
+<div class="when">Constant-coefficient linear ODE: \(y=y_H+y_P\). \(y_H\) from the characteristic equation; \(y_P\) by undetermined coefficients — forcing \(e^{3x}\) ⇒ guess \(ae^{3x}\) (3 is not a root, so no extra \(x\)).</div>
+<b>Homogeneous part.</b> Characteristic equation \(4r^2-4r+5=0\):
+$$r=\frac{4\pm\sqrt{16-80}}{8}=\frac{4\pm8i}{8}=\tfrac12\pm i.$$
+Complex roots \(\alpha\pm\beta i\) with \(\alpha=\tfrac12,\ \beta=1\):
+$$y_H=e^{x/2}\big(A\sin x+B\cos x\big),\qquad A,B\in\mathbb R.$$
+<b>Particular part.</b> Try \(y_P=ae^{3x}\), \(y_P'=3ae^{3x}\), \(y_P''=9ae^{3x}\):
+$$4(9a)-4(3a)+5a=36a-12a+5a=29a=1\;\Rightarrow\;a=\tfrac1{29}.$$
+<div class="ans">\(y(x)=e^{x/2}\big(A\sin x+B\cos x\big)+\dfrac{1}{29}e^{3x},\qquad A,B\in\mathbb R.\)</div>
+<div class="trap">Don't forget the leading 4: dividing the discriminant gives \(\sqrt{-64}=8i\), so \(\beta=\tfrac88=1\), not 2. And the "general solution" must contain <b>two</b> arbitrary constants — write "\(A,B\in\mathbb R\)".</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q8 ============================ -->
+<section id="s1-q8">
+<h2>Question 8 — Lagrange multipliers <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Find the maximum and minimum values of the function \(f(x,y)=x^2+y^3\) subject to the constraint \(x^4+y^6-2=0\).
+<details><summary>Worked solution</summary>
+<div class="when">Extremise \(f\) on a curve \(g=0\) ⇒ Lagrange: \(\nabla f=\lambda\nabla g\) plus the constraint. <b>Factor</b> instead of dividing, so the zero cases aren't lost. The constraint curve is closed and bounded, so a max and min exist.</div>
+\(\nabla f=(2x,\,3y^2)\), \(\nabla g=(4x^3,\,6y^5)\):
+$$\text{(1) }2x=4\lambda x^3,\qquad\text{(2) }3y^2=6\lambda y^5,\qquad\text{(3) }x^4+y^6=2.$$
+(1) \(\Rightarrow 2x(1-2\lambda x^2)=0\Rightarrow x=0\ \text{or}\ 2\lambda x^2=1\).<br>
+(2) \(\Rightarrow 3y^2(1-2\lambda y^3)=0\Rightarrow y=0\ \text{or}\ 2\lambda y^3=1\).<br>
+<b>Case \(x=0\):</b> (3) gives \(y^6=2\Rightarrow y^3=\pm\sqrt2\). Then \(f=\pm\sqrt2\).<br>
+<b>Case \(y=0\):</b> (3) gives \(x^4=2\Rightarrow x^2=\sqrt2\). Then \(f=\sqrt2\).<br>
+<b>Case \(x,y\ne0\):</b> \(2\lambda x^2=1=2\lambda y^3\Rightarrow x^2=y^3\) (so \(y\gt0\)). Into (3): \(y^6+y^6=2\Rightarrow y^6=1\Rightarrow y=1\) (discard \(y=-1\) since \(y^3=x^2\ge0\)), \(x=\pm1\). Then \(f=1+1=2\).
+<table>
+<tr><th>Point(s)</th><th>\(f\)</th></tr>
+<tr><td>\((0,\,2^{1/6})\)</td><td>\(\sqrt2\)</td></tr>
+<tr><td>\((0,\,-2^{1/6})\)</td><td>\(-\sqrt2\)</td></tr>
+<tr><td>\((\pm2^{1/4},\,0)\)</td><td>\(\sqrt2\)</td></tr>
+<tr><td>\((\pm1,\,1)\)</td><td>\(2\)</td></tr>
+</table>
+<div class="ans">Maximum value \(2\) (at \((\pm1,1)\)); minimum value \(-\sqrt2\) (at \((0,-2^{1/6})\)).</div>
+<div class="trap">Dividing (1) by \(x\) or (2) by \(y^2\) silently throws away the \(x=0\) case — and that is exactly where the <b>minimum</b> lives. Factor, list every case, then compare values.</div>
+<div class="tip">Say why extrema exist: "\(g=0\) is a closed, bounded curve and \(f\) is continuous, so \(f\) attains a max and a min, which must be among the Lagrange points."</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q9 ============================ -->
+<section id="s1-q9">
+<h2>Question 9 — Conservative field &amp; line integral <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let a vector field in \(\mathbb R^3\) be defined by \(\mathbf F(x,y,z)=(2xy^2+3x^2,\;2yx^2,\;1).\)<br>
+Evaluate \(\displaystyle\int_C\mathbf F\cdot d\mathbf r\), where \(C\) is the curve \(\big(t^2-1,\ \sin^3(\tfrac{\pi t}{2}),\ 2t\big)\) for \(0\le t\le1\).
+<details><summary>Worked solution</summary>
+<div class="when">An ugly path (\(\sin^3\)) is the examiner's signal: <b>don't parametrise</b> — check \(\mathbf F\) is conservative, find a potential \(f\), and use the Fundamental Theorem: \(\int_C\nabla f\cdot d\mathbf r=f(\text{end})-f(\text{start})\).</div>
+<b>Conservative check</b> (\(\mathbf F=(P,Q,R)\)):
+$$P_y=4xy=Q_x,\qquad P_z=0=R_x,\qquad Q_z=0=R_y\ \checkmark$$
+<b>Potential:</b> want \(f_x=2xy^2+3x^2\), \(f_y=2yx^2\), \(f_z=1\).
+$$f=\int(2xy^2+3x^2)\,dx=x^2y^2+x^3+g(y,z).$$
+\(f_y=2x^2y+g_y=2x^2y\Rightarrow g_y=0\Rightarrow g=h(z)\); \(f_z=h'(z)=1\Rightarrow h=z+C\).
+$$f(x,y,z)=x^2y^2+x^3+z.$$
+<b>Endpoints:</b> \(\mathbf r(0)=(-1,0,0)\), \(\mathbf r(1)=\big(0,\sin^3(\tfrac\pi2),2\big)=(0,1,2)\).
+$$\int_C\mathbf F\cdot d\mathbf r=f(0,1,2)-f(-1,0,0)=(0+0+2)-(0-1+0)=2+1=3.$$
+<div class="ans">\(\displaystyle\int_C\mathbf F\cdot d\mathbf r=3.\)</div>
+<div class="tip">The official solution simply asserts "the vector field is conservative". Show the three cross-partial checks — it's the justification that licenses using the potential.</div>
+<div class="trap">\(f(-1,0,0)=(-1)^3=-1\), so subtracting it <b>adds</b> 1. Sign errors at the start point are the usual way to get 1 instead of 3.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q10 ============================ -->
+<section id="s1-q10">
+<h2>Question 10 — Equilibrium solutions &amp; stability <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider the ODE \(\;x\dot y+x-y=y^2x\dot y+xy-1.\)
+</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(i)</b> Determine all equilibrium solutions to the ODE.
+<details><summary>Worked solution</summary>
+<div class="when">Equilibrium solution = <b>constant</b> solution \(y=c\). Put \(y'=0\) and \(y=c\); the identity must hold <b>for all \(x\)</b>.</div>
+With \(y=c\), \(y'=0\):
+$$x-c=xc-1\iff (x+1)-c(x+1)=0\iff(1-c)(x+1)=0.$$
+For this to hold for every \(x\) we need \(c=1\). (The factor \(x+1=0\) is a single \(x\)-value, not a solution \(y=\text{const}\).)
+<div class="ans">The only equilibrium solution is \(y=1\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(ii)</b> Determine if each equilibrium solution is stable or not. Justify your answer.
+<details><summary>Worked solution</summary>
+<div class="when">Write the ODE as \(y'=F(x,y)\) and study the <b>sign of \(y'\)</b> just above and just below the equilibrium (for large \(x\), here \(x\gt0\)). Both sides move toward it ⇒ stable; both away ⇒ unstable; one toward, one away ⇒ semi-stable.</div>
+<b>Solve for \(y'\):</b>
+$$xy'-y^2xy'=xy-1-x+y\;\Rightarrow\;x(1-y^2)\,y'=(x+1)(y-1)$$
+$$y'=\frac{(x+1)(y-1)}{x(1-y^2)},\qquad x\ne0,\ y\ne\pm1.$$
+<b>Sign analysis for \(x\gt0\):</b>
+<table>
+<tr><th>Region</th><th>\(x+1\)</th><th>\(y-1\)</th><th>\(x\)</th><th>\(1-y^2\)</th><th>\(y'\)</th><th>Motion</th></tr>
+<tr><td>\(y\gt1\)</td><td>+</td><td>+</td><td>+</td><td>−</td><td>\(\lt0\)</td><td>down, <b>toward</b> \(y=1\)</td></tr>
+<tr><td>\(-1\lt y\lt1\)</td><td>+</td><td>−</td><td>+</td><td>+</td><td>\(\lt0\)</td><td>down, <b>away from</b> \(y=1\)</td></tr>
+</table>
+<div class="ans">\(y=1\) is <b>semi-stable</b> (official answer): solutions starting just above approach it, solutions starting just below move away — so it is <b>not stable</b>.</div>
+<div class="tip">The official solution sketches the phase picture: arrows pointing down on both sides of the line \(y=1\). A one-line table of signs + that sketch is the full justification.</div>
+<div class="trap">Deeper point (beyond the marking): the factor \(y-1\) actually cancels, \(y'=-\dfrac{x+1}{x(1+y)}\), and the coefficient of \(y'\) in the original ODE vanishes on \(y=1\) — the ODE is singular there. Nearby solutions don't creep up to \(y=1\) asymptotically; they <b>reach it</b> with slope \(\approx-\tfrac12\). Either way it is not stable. On the day, give the sign-analysis answer the marker expects (semi-stable / not stable) and, if you like, a one-line remark.</div>
+</details></div>
+</section>
+
+<!-- =================================================================== -->
+<!-- ========================= SEMESTER 2 ============================== -->
+<!-- =================================================================== -->
+<h2 id="s2" style="margin-top:50px;font-size:26px">📗 Semester 2, 2020</h2>
+<p class="tip">Official source: handwritten marking scheme (<code>MATH1052-2020-2 sols</code>) with <b>per-step marks</b> ("1p", "2p"). The mark splits are quoted below — they show exactly what a marker pays for.</p>
+
+<!-- ============================ S2 Q1 ============================ -->
+<section id="s2-q1">
+<h2>Question 1 — Equilibria &amp; stability <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Find all equilibrium solutions of the following ODE:
+$$\frac{dy}{dt}=e^{t+y}(3-y)(y+4)^2(t-2).$$
+Decide which of these equilibrium solutions are stable. Justify your answer.
+<details><summary>Worked solution</summary>
+<div class="when">Equilibria: values of \(y\) making \(\dot y=0\) <b>for all \(t\)</b>. Stability is about \(t\to\infty\), so do the sign analysis for large \(t\) (here \(t\gt2\)).</div>
+<b>Equilibria [2 marks].</b> \(e^{t+y}\gt0\) always, and \(t-2\) is not identically zero, so \(\dot y\equiv0\iff(3-y)(y+4)^2=0\):
+$$y=3\qquad\text{and}\qquad y=-4.$$
+<b>Signs of the factors [3 marks].</b> For \(t\gt2\): \(t-2\gt0\); \(e^{t+y}\gt0\); \((y+4)^2\gt0\) for \(y\ne-4\); \(3-y\gt0\iff y\lt3\).<br>
+<b>Direction field for \(t\gt2\) [3 marks]:</b>
+<table>
+<tr><th>Region</th><th>\(\dot y\)</th><th>Motion</th></tr>
+<tr><td>\(y\gt3\)</td><td>\(\lt0\)</td><td>decreases toward 3</td></tr>
+<tr><td>\(-4\lt y\lt3\)</td><td>\(\gt0\)</td><td>increases toward 3, away from −4</td></tr>
+<tr><td>\(y\lt-4\)</td><td>\(\gt0\)</td><td>increases toward −4</td></tr>
+</table>
+<div class="ans">\(y=3\) is <b>stable</b> [1 mark]. \(y=-4\) is <b>not stable</b> (semi-stable: attracts from below, repels above) [1 mark].</div>
+<div class="tip">Marking scheme: 2 + 3 (factor signs "or equivalent working") + 3 (direction table) + 1 + 1. Half the marks are for the <b>justification</b>, not the labels.</div>
+<div class="trap">The \((t-2)\) factor <b>reverses</b> every arrow for \(t\lt2\). If you test signs at, say, \(t=0\) you'll get the stabilities backwards. Always analyse the long-run region \(t\gt2\) and say so. And a squared factor \((y+4)^2\) never changes sign — that's what makes −4 semi-stable.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q2 ============================ -->
+<section id="s2-q2">
+<h2>Question 2 — Linear first-order ODE <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Find the general solution of the following ODE, assuming \(0\lt x\lt\frac\pi2\):
+$$\sin(x)\cos^2(x)\,y'+\cos^3(x)\,y=1.$$
+<details><summary>Worked solution</summary>
+<div class="when">Linear in \(y\) and \(y'\) ⇒ divide by the coefficient of \(y'\) to get \(y'+p(x)y=q(x)\), then integrating factor \(I=e^{\int p\,dx}\).</div>
+<b>Domain note [1 mark].</b> On \(0\lt x\lt\frac\pi2\): \(\sin x\gt0,\ \cos x\gt0\), so we may divide.
+$$y'+\frac{\cos x}{\sin x}\,y=\frac{1}{\sin x\cos^2x}.$$
+<b>Integrating factor [3 marks]:</b>
+$$I(x)=e^{\int\cot x\,dx}=e^{\ln|\sin x|}=|\sin x|=\sin x\quad(\text{as }\sin x\gt0).$$
+<b>Multiply through [2 marks]:</b>
+$$\frac{d}{dx}\big[\sin x\;y\big]=\frac{\sin x}{\sin x\cos^2x}=\frac1{\cos^2x}=\sec^2x.$$
+<b>Integrate [2 marks]:</b> \(\sin x\;y=\tan x+C\).
+<div class="ans">\(y=\dfrac{\tan x+C}{\sin x}=\dfrac1{\cos x}+\dfrac{C}{\sin x}=\sec x+C\csc x,\qquad C\in\mathbb R\) [2 marks].</div>
+<div class="tip">The 1 mark for "\(\sin x,\cos x\gt0\)" is exactly why the question gives the interval: it lets you drop the absolute value \(|\sin x|\to\sin x\). Always say it.</div>
+<div class="trap">Forgetting to divide by \(\sin x\cos^2x\) first and using \(p=\cos^3x\) as the "p" in \(e^{\int p}\) — the integrating factor must be built from the <b>standard form</b>.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q3 ============================ -->
+<section id="s2-q3">
+<h2>Question 3 — Reduction of order <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+For some positive integer \(n\), the function \(y=x^n\) is a solution of the ODE
+$$2x^2y''-3xy'-3y=0.$$
+Find the value of \(n\). Use the obtained solution and the method of reduction of order to find the general solution of the ODE, for \(x\gt0\).
+<details><summary>Worked solution</summary>
+<div class="when">Step 1: substitute the trial \(x^n\) to get a polynomial in \(n\). Step 2: reduction of order — set \(y=u\,y_1\); \(u\) satisfies \(u''+u'\left(p+\dfrac{2y_1'}{y_1}\right)=0\), which is first-order in \(v=u'\).</div>
+<b>Find \(n\) [2 + 1 marks].</b> \(y=x^n,\ y'=nx^{n-1},\ y''=n(n-1)x^{n-2}\):
+$$\big(2n(n-1)-3n-3\big)x^n=0\;\Rightarrow\;2n^2-5n-3=(2n+1)(n-3)=0.$$
+\(n\) is a positive integer ⇒ \(n=3\), \(y_1=x^3\).<br>
+<b>Standard form [1 mark]:</b> \(y''-\dfrac{3}{2x}y'-\dfrac{3}{2x^2}y=0\), so \(p(x)=-\dfrac3{2x}\).<br>
+<b>Equation for \(u\) [1 + 1 marks]</b> (with \(y=u\,x^3\), \(\;2y_1'/y_1=6/x\)):
+$$u''+u'\left(-\frac3{2x}+\frac6x\right)=u''+\frac{9}{2x}u'=0.$$
+<b>Solve for \(v=u'\) [1 + 1 marks].</b> \(v=0\) is a solution; if \(v\ne0\):
+$$\frac{v'}{v}=-\frac9{2x}\;\Rightarrow\;\ln|v|=-\tfrac92\ln x+c\;\Rightarrow\;v=Ax^{-9/2}.$$
+<b>Integrate [1 mark]:</b> \(u=\int Ax^{-9/2}dx=-\tfrac27Ax^{-7/2}+B=\tilde A\,x^{-7/2}+B\).
+<div class="ans">\(y=u\,x^3=\tilde A\,x^{-1/2}+B\,x^3,\qquad \tilde A,B\in\mathbb R\) [1 mark].</div>
+<div class="tip">Sanity check: the other root \(n=-\tfrac12\) of \(2n^2-5n-3=0\) is exactly the second solution you obtained — Euler-type ODEs always work this way. Great way to verify under exam pressure.</div>
+<div class="trap">The \(u\)-equation uses \(p\) from the <b>standard form</b> (leading coefficient 1). Using \(-3x\) instead of \(-\tfrac3{2x}\) gives nonsense.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q4 ============================ -->
+<section id="s2-q4">
+<h2>Question 4 — Intersection of two planes <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider the planes \(2x+3y+4z=0\) and \(x-z=2\). Their intersection is a line \(L\).
+</div>
+
+<div class="card q"><span class="marks">7 marks</span><b>(i)</b> Find symmetric equations of \(L\).
+<details><summary>Worked solution</summary>
+<div class="when">Direction of \(L\) is perpendicular to both normals ⇒ \(\mathbf v=\mathbf n_1\times\mathbf n_2\). Then find any one point on both planes (set one coordinate to 0).</div>
+<b>Normals [1 + 1]:</b> \(\mathbf n_1=(2,3,4)\), \(\mathbf n_2=(1,0,-1)\).<br>
+<b>Direction [1 + 1]:</b>
+$$\mathbf v=\mathbf n_1\times\mathbf n_2=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\2&3&4\\1&0&-1\end{vmatrix}=-3\mathbf i+6\mathbf j-3\mathbf k\;\parallel\;(-1,2,-1).$$
+<b>Point [1]:</b> set \(z=0\): \(x=2\), then \(4+3y=0\Rightarrow y=-\tfrac43\). Point \(\left(2,-\tfrac43,0\right)\). Check: \(4-4+0=0\) ✓, \(2-0=2\) ✓.<br>
+<b>Vector equation [1]:</b> \(\mathbf r=\left(2,-\tfrac43,0\right)+\lambda(-1,2,-1)\), i.e. \(x=2-\lambda,\ y=-\tfrac43+2\lambda,\ z=-\lambda\).<br>
+<b>Symmetric form [1]</b> — solve each for \(\lambda\):
+<div class="ans">\(L:\quad 2-x=\dfrac{y+\frac43}{2}=-z\qquad\Big(\text{equivalently } \dfrac{x-2}{-1}=\dfrac{3y+4}{6}=\dfrac{z}{-1}\Big).\)</div>
+<div class="tip">An alternative scheme on the same page solves the system by elimination: \(4\times(x-z=2)\) added to the first plane gives \(6x+3y=8\), leading to \(x=z+2=\dfrac{y-\frac83}{-2}\) — the same line. Either method earns full marks.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(ii)</b> For what value of \(a\) is \(L\) parallel to the plane \(ax+4y-z=19\)?
+<details><summary>Worked solution</summary>
+<div class="when">A line is parallel to a plane ⇔ its direction is <b>perpendicular to the plane's normal</b>: \(\mathbf n\cdot\mathbf v=0\).</div>
+$$\mathbf n=(a,4,-1)\ [1],\qquad \mathbf n\cdot\mathbf v=(a,4,-1)\cdot(-1,2,-1)=-a+8+1=0\ [1].$$
+<div class="ans">\(a=9\) [1].</div>
+<div class="tip">Bonus check: the point \((2,-\tfrac43,0)\) gives \(18-\tfrac{16}3\ne19\), so \(L\) is parallel to the plane and not lying inside it.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q5 ============================ -->
+<section id="s2-q5">
+<h2>Question 5 — Tangent plane <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+<b>(i)</b> (7 marks) Find an equation of the plane tangent to the surface \(z=x^2+y^2+e^{xy}\) at the point \((3,2)\).<br>
+<b>(ii)</b> (3 marks) Find a normal vector to this plane.
+</div>
+
+<div class="card q"><span class="marks">7 marks</span><b>(i)</b> Tangent plane.
+<details><summary>Worked solution</summary>
+<div class="when">Tangent plane to \(z=f(x,y)\) at \((a,b)\) = the linear approximation on the formula sheet: \(z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\).</div>
+$$f_x=2x+ye^{xy}\ [1],\qquad f_x(3,2)=6+2e^6\ [1]$$
+$$f_y=2y+xe^{xy}\ [1],\qquad f_y(3,2)=4+3e^6\ [1]$$
+$$f(3,2)=9+4+e^6=13+e^6\ [1]$$
+<div class="ans">\(z=13+e^6+(6+2e^6)(x-3)+(4+3e^6)(y-2)\) [1 + 1].</div>
+<div class="tip">Leave \(e^6\) exact — no calculator, and the marker wants exact values.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(ii)</b> Normal vector.
+<details><summary>Worked solution</summary>
+<div class="when">Rewrite the plane as \(ax+by+cz=d\); the normal is \((a,b,c)\).</div>
+$$(6+2e^6)x+(4+3e^6)y-z=d,\qquad d=3(6+2e^6)+2(4+3e^6)-(13+e^6)=13+11e^6\ [2].$$
+<div class="ans">\(\mathbf n=\big(6+2e^6,\;4+3e^6,\;-1\big)\) [1] (i.e. \((f_x,f_y,-1)\)).</div>
+<div class="trap">The normal has a <b>−1</b> in the \(z\)-slot (from moving \(z\) to the left side). Writing \((f_x,f_y,1)\) is a sign error.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q6 ============================ -->
+<section id="s2-q6">
+<h2>Question 6 — Critical points <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(g(x,y)=x^3+y^2-6xy+6x+3y.\)
+</div>
+
+<div class="card q"><span class="marks">6 marks</span><b>(i)</b> Find ALL critical points of \(g(x,y)\).
+<details><summary>Worked solution</summary>
+<div class="when">Set \(\nabla g=\mathbf 0\). \(g_y\) is linear in \(y\) ⇒ solve it for \(y\), substitute into \(g_x=0\).</div>
+$$\nabla g=\big(3x^2-6y+6\ [1],\ \ 2y-6x+3\ [1]\big)=(0,0)\ [1].$$
+\(g_y=0\Rightarrow y=3x-\tfrac32\). Into \(g_x=0\):
+$$3x^2-6\left(3x-\tfrac32\right)+6=3x^2-18x+15=0\;\Rightarrow\;x^2-6x+5=(x-1)(x-5)=0\ [1].$$
+<div class="ans">\(x=1\Rightarrow y=\tfrac32\): \(\left(1,\tfrac32\right)\) [1]; \(\;x=5\Rightarrow y=\tfrac{27}2\): \(\left(5,\tfrac{27}2\right)\) [1].</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(ii)</b> Classify ONE critical point from part (i) as a local minimum, local maximum, or saddle point.
+<details><summary>Worked solution</summary>
+<div class="when">Hessian determinant \(D=g_{xx}g_{yy}-g_{xy}^2\) (formula sheet).</div>
+$$D=\begin{vmatrix}g_{xx}&g_{xy}\\g_{yx}&g_{yy}\end{vmatrix}\ [1]=\begin{vmatrix}6x&-6\\-6&2\end{vmatrix}\ [1]=12x-36\ [1].$$
+<ul>
+<li>At \(\left(1,\tfrac32\right)\): \(D=12-36=-24\lt0\) ⇒ <b>saddle point</b>.</li>
+<li>At \(\left(5,\tfrac{27}2\right)\): \(D=60-36=24\gt0\) and \(g_{xx}=6(5)=30\gt0\) ⇒ <b>local minimum</b>.</li>
+</ul>
+<div class="ans">Either one earns the final mark: \(\left(1,\tfrac32\right)\) saddle, or \(\left(5,\tfrac{27}2\right)\) local minimum.</div>
+<div class="trap">The official solution writes "\(g_{xx}=60\)" — a slip (it copied \(12x\)); the correct value is \(g_{xx}=6x=30\). The conclusion is unchanged, but it shows how easily \(D\) and \(g_{xx}\) get mixed up. Compute them on separate lines.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q7 ============================ -->
+<section id="s2-q7">
+<h2>Question 7 — Global extrema on the unit ball <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider the function \(f(x,y,z)=x+yz.\) Use the method of Lagrange multipliers to find the global minimum and global maximum of \(f(x,y,z)\), for \((x,y,z)\) in the unit ball.<br>
+<i>Hint: The unit ball is the set of points \((x,y,z)\) such that \(x^2+y^2+z^2\le1\). It is known that the unit ball is closed and bounded, and that its boundary consists of the points satisfying the constraint \(x^2+y^2+z^2=1\).</i>
+<details><summary>Worked solution</summary>
+<div class="when">Closed bounded region ⇒ global extrema exist and occur at <b>interior critical points</b> or on the <b>boundary</b>. Check the interior first, then Lagrange on the boundary sphere.</div>
+<b>Where extrema can be [1]:</b> at critical points of \(f\) inside, or on the boundary.<br>
+<b>Interior [1 + 1]:</b> \(\nabla f=(1,z,y)\ne\mathbf 0\) (first component is 1), so no interior critical points — the extrema lie on \(x^2+y^2+z^2=1\).<br>
+<b>Lagrange [1 + 2]:</b> \(g=x^2+y^2+z^2-1\), \(\nabla g=(2x,2y,2z)\):
+$$\text{(1) }1=2\lambda x,\qquad\text{(2) }z=2\lambda y,\qquad\text{(3) }y=2\lambda z.$$
+(1) forces \(\lambda\ne0\) and \(x\ne0\).<br>
+<b>Case \(yz\ne0\) [1 + 1]:</b> (2)/(3): \(\dfrac zy=\dfrac yz\Rightarrow z^2=y^2\Rightarrow z=\pm y\); then (2) gives \(\lambda=\pm\tfrac12\), and (1) gives \(x=\pm1\). But then \(y^2+z^2=1-x^2=0\), contradicting \(yz\ne0\). No points.<br>
+<b>Case \(yz=0\):</b> if \(y=0\), (2) gives \(z=0\); if \(z=0\), (3) gives \(y=0\). So \(y=z=0\), \(x=\pm1\).<br>
+Candidates \((\pm1,0,0)\) with \(f=\pm1\) [1].
+<div class="ans">Global maximum \(1\) at \((1,0,0)\); global minimum \(-1\) at \((-1,0,0)\) [1].</div>
+<div class="tip">Independent check you can write in one line: \(|yz|\le\tfrac12(y^2+z^2)\le\tfrac12(1-x^2)\), so \(f\le x+\tfrac12(1-x^2)\le1\) on the ball, with equality at \(x=1\). Similarly \(f\ge-1\).</div>
+<div class="trap">Skipping the interior check loses 2–3 marks even when the final answer is right. The marking scheme pays for "no interior critical points, so extrema are on the boundary" explicitly.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q8 ============================ -->
+<section id="s2-q8">
+<h2>Question 8 — Ellipse: sketch, parametrise, tangent direction <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Sketch the conic section given by
+$$4x^2-16x+y^2-2y+13=0.$$
+Find a parametric representation of this curve. Identify a point on the curve for which the velocity vector (tangent to the curve) is parallel to the line \(y=-x\).
+<details><summary>Worked solution</summary>
+<div class="when">Complete the square → standard ellipse → parametrise with \(x=h+a\cos t,\ y=k+b\sin t\). "Tangent parallel to \(y=-x\)" ⇒ \(\mathbf r'(t)\) is a multiple of \((1,-1)\).</div>
+<b>Standard form [2]:</b>
+$$4(x^2-4x+4)+(y^2-2y+1)=-13+16+1=4\;\Rightarrow\;(x-2)^2+\frac{(y-1)^2}{4}=1.$$
+<b>Ellipse [1], centre \((2,1)\) [1], semi-axes \(a=1\) (horizontal), \(b=2\) (vertical) [1].</b>
+<div class="fig">Vertical ellipse centred at \((2,1)\): leftmost/rightmost points \((1,1),(3,1)\); bottom/top \((2,-1),(2,3)\). Since the bottom point is below the \(x\)-axis, the ellipse crosses it where \((x-2)^2=\tfrac34\), i.e. \(x=2\pm\tfrac{\sqrt3}2\). Sketch with those four extreme points labelled [1].</div>
+<b>Parametrisation [1]:</b>
+$$\mathbf r(t)=\big(2+\cos t,\;1+2\sin t\big),\qquad 0\le t\lt2\pi.$$
+<b>Tangent vector [1]:</b> \(\mathbf r'(t)=(-\sin t,\;2\cos t)\).<br>
+<b>Parallel to \(y=-x\)</b> ⇔ \(\mathbf r'(t)=(s,-s)\) for some \(s\ne0\) ⇔ \(-\sin t=-2\cos t\) ⇔ \(\tan t=2\) ⇒ \(t=\arctan2\) [1].<br>
+With \(\cos t=\tfrac1{\sqrt5},\ \sin t=\tfrac2{\sqrt5}\):
+<div class="ans">\(\mathbf r_0=\big(2+\cos(\arctan2),\,1+2\sin(\arctan2)\big)=\left(2+\tfrac1{\sqrt5},\;1+\tfrac4{\sqrt5}\right)\) [1]. (The other point is \(\left(2-\tfrac1{\sqrt5},\,1-\tfrac4{\sqrt5}\right)\) at \(t=\arctan2+\pi\).)</div>
+<div class="tip">The official answer leaves it as \(\cos(\arctan2)\) — acceptable, but simplifying via a 1–2–\(\sqrt5\) right triangle looks sharper and lets you verify: \(\mathbf r'=\left(-\tfrac2{\sqrt5},\tfrac2{\sqrt5}\right)\parallel(1,-1)\) ✓.</div>
+<div class="trap">"Velocity parallel to \(y=-x\)" is about the <b>direction</b> vector \((1,-1)\), not the point lying on \(y=-x\). And \(a=1\) goes with \(\cos\) in \(x\), \(b=2\) with \(\sin\) in \(y\) — swapping them gives a curve that isn't the ellipse.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q9 ============================ -->
+<section id="s2-q9">
+<h2>Question 9 — A bird's flight <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+In this problem, time is measured in seconds (s), length in metres (m) and temperature in degree Celsius (°C). A bird flies following the trajectory given by
+$$\mathbf r(t)=t\,\mathbf i+\frac{t^3}{3}\,\mathbf j+\frac{\sqrt2}{2}t^2\,\mathbf k,\qquad t\ge0.$$
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(i)</b> Compute the velocity, acceleration and speed of the bird at time \(t=2\).
+<details><summary>Worked solution</summary>
+<div class="when">\(\mathbf v=\mathbf r'\), \(\mathbf a=\mathbf v'\), speed \(=\|\mathbf v\|\). Look for a perfect square under the root.</div>
+$$\mathbf v(t)=\mathbf i+t^2\mathbf j+\sqrt2\,t\,\mathbf k\ [1],\qquad \mathbf a(t)=2t\,\mathbf j+\sqrt2\,\mathbf k\ [1]$$
+$$\|\mathbf v(t)\|=\sqrt{1+t^4+2t^2}=\sqrt{(1+t^2)^2}=1+t^2\ [1].$$
+<div class="ans">At \(t=2\) [1]: \(\mathbf v(2)=\mathbf i+4\mathbf j+2\sqrt2\,\mathbf k\) m/s, \(\;\mathbf a(2)=4\mathbf j+\sqrt2\,\mathbf k\) m/s², \(\;\|\mathbf v(2)\|=5\) m/s.</div>
+<div class="tip">Include units — the question defines them, and the marking scheme writes m/s and m/s² next to each answer.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(ii)</b> Compute the length of the bird's flight path from time \(t=0\) to time \(t=2\).
+<details><summary>Worked solution</summary>
+$$L=\int_0^2\|\mathbf v(t)\|\,dt\ [1]=\int_0^2(1+t^2)\,dt=\left[t+\tfrac{t^3}3\right]_0^2\ [1]=2+\tfrac83.$$
+<div class="ans">\(L=\dfrac{14}3\) m [1].</div>
+<div class="tip">The examiner designed \(1+t^4+2t^2\) to be a perfect square so the integral is easy. If your integrand won't simplify, recheck \(\mathbf v\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(iii)</b> Assume the temperature at the point \((x,y,z)\) is given by \(T(x,y,z)=25-\dfrac{z}{100}\). Determine the rate of change in temperature experienced by the bird at time \(t\).
+<details><summary>Worked solution</summary>
+<div class="when">"Rate of change experienced along the path" ⇒ chain rule \(\dfrac{dT}{dt}=T_x\dot x+T_y\dot y+T_z\dot z\) (formula sheet).</div>
+$$\frac{dT}{dt}=0\cdot1+0\cdot t^2+\left(-\frac1{100}\right)\sqrt2\,t\ [1].$$
+<div class="ans">\(\dfrac{dT}{dt}=-\dfrac{\sqrt2\,t}{100}\) °C/s [1].</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q10 ============================ -->
+<section id="s2-q10">
+<h2>Question 10 — Work along a parabola <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Determine the work done by the force
+$$\mathbf F(x,y,z)=x\,\mathbf i+y\,\mathbf j+e^z\cos(xy)\,\mathbf k$$
+in moving an object along the parabola \(y=x^2,\ z=0\), from \(x=-1\) to \(x=2\).
+<details><summary>Worked solution</summary>
+<div class="when">Work \(=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) (formula sheet). Parametrise with \(x=t\). Notice \(z'=0\) kills the scary \(\mathbf k\)-component.</div>
+<b>Parametrise [1 + 2]:</b> \(\mathbf r(t)=(t,\,t^2,\,0)\), \(-1\le t\le2\). <b>Derivative [1]:</b> \(\mathbf r'(t)=(1,\,2t,\,0)\).<br>
+<b>Field on the path [2]:</b> \(\mathbf F(\mathbf r(t))=\big(t,\,t^2,\,e^0\cos(t^3)\big)\).<br>
+<b>Set up [1] and dot [1]:</b>
+$$W=\int_{-1}^{2}\big(t,\,t^2,\,\cos t^3\big)\cdot(1,\,2t,\,0)\,dt=\int_{-1}^{2}\big(t+2t^3\big)\,dt\ [1]$$
+$$=\left[\frac{t^2}2+\frac{t^4}2\right]_{-1}^{2}=\left(2+8\right)-\left(\tfrac12+\tfrac12\right)=10-1.$$
+<div class="ans">\(W=9\) [1].</div>
+<div class="tip">Alternative: \((x,y)\) part \(x\,\mathbf i+y\,\mathbf j=\nabla\big(\tfrac{x^2+y^2}2\big)\) and \(dz=0\), so \(W=\tfrac{x^2+y^2}2\Big|_{(-1,1)}^{(2,4)}=10-1=9\). Same answer in one line.</div>
+</details></div>
+</section>
+
+<!-- ============================ LESSONS ============================ -->
+<section id="lessons">
+<h2>What 2020 teaches</h2>
+<div class="card">
+<h3>1 · The ODE toolkit, drilled (6 of 20 questions)</h3>
+<ul>
+<li><b>Equilibria &amp; stability</b> (S1 Q10, S2 Q1): constant solutions → sign table → arrows. Half the marks are the justification. Watch factors like \((t-2)\) that flip direction, and squared factors that never change sign (→ semi-stable). → <a href="ch01-first-order-odes.html">Ch 1</a></li>
+<li><b>Integrating factor</b> (S2 Q2): standard form first; use the given interval to drop \(|\cdot|\). → <a href="ch01-first-order-odes.html">Ch 1</a></li>
+<li><b>Substitution \(y=xu\)</b> (S1 Q5): product rule, cancel \(x\), end with "\(u'=f(x)g(u)\), separable". → <a href="ch01-first-order-odes.html">Ch 1</a></li>
+<li><b>Undetermined coefficients</b> (S1 Q7) and <b>reduction of order</b> (S2 Q3). → <a href="ch02-second-order-odes.html">Ch 2</a></li>
+</ul>
+<h3>2 · The multivariable core — still examined today</h3>
+<ul>
+<li>Critical points + Hessian appear in <b>both</b> papers (S1 Q3, S2 Q6); Lagrange in both (S1 Q8 on a curve, S2 Q7 on a ball with interior check). → <a href="ch06-optimisation.html">Ch 6</a></li>
+<li>Curves: velocity/acceleration/position with ICs, arc length with a hidden perfect square, chain rule along a path (S1 Q4, Q6; S2 Q9). → <a href="ch07-curves-vector-fields.html">Ch 7</a>, <a href="ch05-gradient-chain-rule.html">Ch 5</a></li>
+<li>Line integrals: ugly path ⇒ look for a potential (S1 Q9); nice path ⇒ parametrise directly (S2 Q10). → <a href="ch07-curves-vector-fields.html">Ch 7</a></li>
+<li>Conics: complete the square, divide to "=1", label centre/vertices/asymptotes or axes (S1 Q2, S2 Q8). → <a href="ch03-surfaces-contours.html">Ch 3</a></li>
+</ul>
+<h3>3 · Legacy topics</h3>
+<p>Lines &amp; planes geometry (S1 Q1, S2 Q4) — cross products, point-to-plane distance, line of intersection. Useful vector fluency (normals, \(\mathbf n\cdot\mathbf v=0\)), but not a standalone question on the recent papers. Tangent planes (S2 Q5) remain core → <a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>.</p>
+<h3>4 · Time allocation</h3>
+<p>10 × 10 marks in 120 min ⇒ <b>12 min per question</b>. The quick wins (S1 Q4, S2 Q5, Q9, Q10) take 6–8 min — bank that time for the Lagrange and stability questions, where case analysis and justification eat minutes.</p>
+<h3>5 · Marker habits (from the S2 scheme)</h3>
+<ul>
+<li>Marks are paid <b>per step</b>: gradient components, the \(D\) formula, each case, each constant. A wrong final answer with visible correct steps still scores 6–8/10.</li>
+<li>State domains/assumptions ("\(\sin x\gt0\) on \((0,\tfrac\pi2)\)", "\(x\ne0\)", "\(R,\omega\gt0\)") — they are worth marks.</li>
+<li>Keep exact values (\(e^6\), \(\sqrt2\), \(\arctan2\)); no calculator is allowed.</li>
+</ul>
+</div>
+</section>
+
+<p class="tip" style="margin-top:30px">Finished. Cross-check: each paper \(10\times10=100\) marks. Every final answer on this page (normals, intersection points, conic data, critical points &amp; \(D\) values, ODE solutions, Lagrange extrema, potentials, work, arc lengths, rates) was recomputed and asserted with SymPy — <code>verify/exam-2020.py</code>, 74 checks passing.</p>
+
+</main>
+<footer style="max-width:960px;margin:0 auto;padding:10px 18px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)">
+Sources: <i>Semester One Final Examinations 2020 MATH1052</i> (question paper), <i>sem_1_2020_updated</i> (handwritten tutor solutions), <i>MATH1052-2020-2</i> (question paper) and <i>MATH1052-2020-2 sols</i> (handwritten marking scheme with per-step marks). Questions transcribed verbatim; solutions re-worked and verified with SymPy.<br>
+<a href="../index.html">⇄ Switch subject</a> · <a href="index.html">🏠 Hub</a> · <a href="exam-2021.html">2021 →</a> · <a href="exam-2025.html">2025 (latest format)</a>
+</footer>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

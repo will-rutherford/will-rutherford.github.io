@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 3 Surfaces, Contours &amp; Cross-sections</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 3 — Surfaces, Contours &amp; Cross-sections</h1>
+  <p>Turn a surface \(z=f(x,y)\) into flat conics, then sketch and <b>label</b> them. The opening question on most recent papers.</p>
+  <div>
+    <span class="badge gold">⭐ On 11 of 12 papers 2020–2025 · 5–12 marks</span>
+    <span class="badge">Summary p 5 · Poster A “Conics”</span>
+    <span class="badge pre">Nothing on the formula sheet — know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch02-second-order-odes.html">← Ch 2 Second-order ODEs</a>
+  <a href="ch04-limits-partials-tangent-planes.html">Ch 4 Limits &amp; partials →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">This chapter needs one algebra skill above all: <b>completing the square</b>. If \(2x^2-12x = 2(x-3)^2-18\) doesn't feel automatic, do the drill in <a href="foundations.html#algebra">the Ground Floor</a> first. Everything else here is built on it.</div>
+
+<div class="card">
+<h3>🧭 A surface is a landscape; a contour map is its topographic map</h3>
+<p>A function of two variables \(z=f(x,y)\) gives a height \(z\) above every point \((x,y)\) of the floor. Put all the points \((x,y,f(x,y))\) together and you get a <b>surface</b> in 3-D: a hill, a bowl, a saddle, a ridge.</p>
+<p>You can't draw 3-D surfaces reliably by hand, especially in an exam. So you <b>slice</b> the surface with flat planes and draw the 2-D curves you get:</p>
+<ul>
+<li><b>Horizontal slices</b> \(z=c\) give <b>contours</b> (also called <b>level curves</b>). You draw them in the \(xy\)-plane, like the height lines on a hiking map. Each one is labelled with its height \(c\).</li>
+<li><b>Vertical slices</b> \(x=k\) or \(y=k\) give <b>cross-sections</b> (also called <b>traces</b>). You draw them in the \(yz\)-plane (for \(x=k\)) or the \(xz\)-plane (for \(y=k\)). Each one shows the profile you'd see if you cut the hill with a knife.</li>
+</ul>
+<p>Summary p 5 puts it in one line: “Contour: \(z=f(x,y)=C\) is a horizontal cross-section… Cross-section: the intersection of a surface with a vertical plane such as \(x=k\) or \(y=C\).”</p>
+</div>
+
+<div class="card">
+<h3>🧭 Why every slice in this course is a conic</h3>
+<p>Almost every surface you meet in MATH1052 is <b>quadratic</b>: the variables appear at most squared (\(x^2, y^2, xy, x, y\)). Set \(z=c\) and you're left with a degree-2 equation in \(x\) and \(y\). Every degree-2 curve in the plane is a <b>conic</b>: a circle, ellipse, parabola or hyperbola, or a degenerate version (a point, two lines, or nothing at all).</p>
+<p>So the whole chapter comes down to one skill used over and over:</p>
+<div class="method"><b>The master routine</b>
+<ol>
+<li><b>Set the slice</b>: \(z=c\) (contour), or \(x=k\) / \(y=k\) (cross-section). If the question gives a <i>point</i>, first compute \(c=f(\text{point})\).</li>
+<li><b>Clear</b> any roots, fractions or exponentials so you have a polynomial equation. Record any restriction this creates, e.g. \(z\ge -3\), or “point \((0,0)\) excluded”.</li>
+<li><b>Complete the square</b> in each variable.</li>
+<li><b>Divide</b> to get “\(=1\)” (or “\(y=\dots\)” for a parabola). This is the <b>standard form</b>.</li>
+<li><b>Read off</b> the type, centre/vertex, semi-axes, orientation and asymptotes.</li>
+<li><b>Intercepts</b>: set \(y=0\) to get the \(x\)-intercepts and \(x=0\) to get the \(y\)-intercepts. If there are none, <b>say so</b>.</li>
+<li><b>Sketch and label</b>: axes named, key points marked with coordinates, asymptotes dashed, each curve tagged with its level.</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>The conic zoo — what each standard form tells you</h3>
+<table>
+<tr><th>Standard form</th><th>Curve</th><th>Read off</th></tr>
+<tr><td>\((x-h)^2+(y-k)^2=r^2\)</td><td>Circle</td><td>centre \((h,k)\), radius \(r\)</td></tr>
+<tr><td>\(\dfrac{(x-h)^2}{a^2}+\dfrac{(y-k)^2}{b^2}=1\)</td><td>Ellipse</td><td>centre \((h,k)\); reaches \(a\) left/right and \(b\) up/down. Major axis along the larger of \(a,b\)</td></tr>
+<tr><td>\(\dfrac{(x-h)^2}{a^2}-\dfrac{(y-k)^2}{b^2}=1\)</td><td>\(x\)-hyperbola (opens left/right)</td><td>centre \((h,k)\); vertices \((h\pm a,k)\); asymptotes \(y-k=\pm\frac ba(x-h)\)</td></tr>
+<tr><td>\(\dfrac{(y-k)^2}{b^2}-\dfrac{(x-h)^2}{a^2}=1\)</td><td>\(y\)-hyperbola (opens up/down)</td><td>centre \((h,k)\); vertices \((h,k\pm b)\); <b>same</b> asymptotes \(y-k=\pm\frac ba(x-h)\)</td></tr>
+<tr><td>\(y=a(x-h)^2+k\)</td><td>Parabola (up if \(a\gt0\), down if \(a\lt0\))</td><td>vertex \((h,k)\), axis of symmetry \(x=h\)</td></tr>
+<tr><td>\(x=a(y-k)^2+h\)</td><td>Sideways parabola (right if \(a\gt0\), left if \(a\lt0\))</td><td>vertex \((h,k)\), axis of symmetry \(y=k\)</td></tr>
+<tr><td>\((x-h)(y-k)=c\;\) i.e. \(\;y=k+\dfrac{c}{x-h}\)</td><td>Rectangular hyperbola</td><td>centre \((h,k)\); asymptotes \(x=h\) and \(y=k\)</td></tr>
+</table>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 280 200" width="280" height="200" role="img" aria-label="Ellipse with semi-axes a and b" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="140.0" y1="8" x2="140.0" y2="192" stroke="#9aa7b8" stroke-width="1"/>
+<text x="145.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="100.0" x2="272" y2="100.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="266" y="95.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="230,100 229,91 226,82 220,74 213,66 204,59 193,54 181,49 168,45 154,43 140,43 126,43 112,45 99,49 87,54 76,59 67,66 60,74 54,82 51,91 50,100 51,109 54,118 60,126 67,134 76,141 87,146 99,151 112,155 126,157 140,157 154,157 168,155 181,151 193,146 204,141 213,134 220,126 226,118 229,109 230,100" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<polyline points="140,100 230,100" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+<polyline points="140,100 140,43" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<text x="185.0" y="95.0" fill="#fbbf24" font-size="11" text-anchor="middle">a</text>
+<text x="145.0" y="71.3" fill="#38bdf8" font-size="11" text-anchor="start">b</text>
+<circle cx="230.0" cy="100.0" r="3.2" fill="#fbbf24"/>
+<circle cx="50.0" cy="100.0" r="3.2" fill="#fbbf24"/>
+<circle cx="140.0" cy="42.7" r="3.2" fill="#fbbf24"/>
+<circle cx="140.0" cy="157.3" r="3.2" fill="#fbbf24"/>
+<text x="228.0" y="114.0" fill="#e8edf4" font-size="10" text-anchor="end">(h+a, k)</text>
+<text x="146.0" y="38.7" fill="#e8edf4" font-size="10" text-anchor="start">(h, k+b)</text>
+<circle cx="140.0" cy="100.0" r="2.5" fill="#e8edf4"/>
+<text x="136.0" y="114.0" fill="#e8edf4" font-size="10" text-anchor="end">centre (h,k)</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Ellipse: label centre, both semi-axes a, b</figcaption></figure><figure style="margin:0;text-align:center"><svg viewBox="0 0 280 201" width="280" height="201" role="img" aria-label="x-hyperbola with dashed asymptotes and the a-by-b box" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="140.0" y1="8" x2="140.0" y2="193" stroke="#9aa7b8" stroke-width="1"/>
+<text x="145.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="100.5" x2="272" y2="100.5" stroke="#9aa7b8" stroke-width="1"/>
+<text x="266" y="95.5" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="19,187 261,14" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="19,14 261,187" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="89.6" y="64.5" width="100.8" height="72.1" fill="none" stroke="#2a3340" stroke-dasharray="3,3"/>
+<polyline points="265,182 251,171 239,162 229,153 220,145 213,138 207,132 201,126 197,120 194,115 192,110 191,105 190,100 191,96 192,91 194,86 197,81 201,75 207,69 213,63 220,56 229,48 239,39 251,30 265,19" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<polyline points="15,182 29,171 41,162 51,153 60,145 67,138 73,132 79,126 83,120 86,115 88,110 89,105 90,100 89,96 88,91 86,86 83,81 79,75 73,69 67,63 60,56 51,48 41,39 29,30 15,19" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<circle cx="190.4" cy="100.5" r="3.2" fill="#fbbf24"/>
+<circle cx="89.6" cy="100.5" r="3.2" fill="#fbbf24"/>
+<text x="194.4" y="114.5" fill="#e8edf4" font-size="10" text-anchor="start">(a,0)</text>
+<text x="85.6" y="114.5" fill="#e8edf4" font-size="10" text-anchor="end">(−a,0)</text>
+<text x="245.8" y="21.2" fill="#9aa7b8" font-size="10" text-anchor="end">y = (b/a)x</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">x-hyperbola: vertices (±a,0), dashed asymptotes y = ±(b/a)x</figcaption></figure><figure style="margin:0;text-align:center"><svg viewBox="0 0 280 201" width="280" height="201" role="img" aria-label="y-hyperbola opening up and down, same asymptotes" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="140.0" y1="8" x2="140.0" y2="193" stroke="#9aa7b8" stroke-width="1"/>
+<text x="145.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="100.5" x2="272" y2="100.5" stroke="#9aa7b8" stroke-width="1"/>
+<text x="266" y="95.5" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="19,187 261,14" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="19,14 261,187" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="89.6" y="64.5" width="100.8" height="72.1" fill="none" stroke="#2a3340" stroke-dasharray="3,3"/>
+<polyline points="41,21 54,29 67,37 78,43 88,48 97,53 105,57 113,59 120,62 127,63 133,64 140,64 147,64 153,63 160,62 167,59 175,57 183,53 192,48 202,43 213,37 226,29 239,21" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<polyline points="41,180 54,172 67,164 78,158 88,153 97,148 105,144 113,142 120,139 127,138 133,137 140,137 147,137 153,138 160,139 167,142 175,144 183,148 192,153 202,158 213,164 226,172 239,180" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<circle cx="140.0" cy="64.5" r="3.2" fill="#fbbf24"/>
+<circle cx="140.0" cy="136.5" r="3.2" fill="#fbbf24"/>
+<text x="145.0" y="59.5" fill="#e8edf4" font-size="10" text-anchor="start">(0,b)</text>
+<text x="145.0" y="150.5" fill="#e8edf4" font-size="10" text-anchor="start">(0,−b)</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">y-hyperbola: vertices (0,±b), same asymptotes</figcaption></figure></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 250 232" width="250" height="232" role="img" aria-label="Upward parabola with vertex and intercepts" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="125.0" y1="8" x2="125.0" y2="224" stroke="#9aa7b8" stroke-width="1"/>
+<text x="130.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="139.5" x2="242" y2="139.5" stroke="#9aa7b8" stroke-width="1"/>
+<text x="236" y="134.5" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="81,22 85,43 90,64 95,83 100,101 104,117 109,132 114,145 119,157 123,168 128,177 133,185 138,191 142,196 147,199 152,202 157,202 161,202 166,199 171,196 176,191 180,185 185,177 190,168 195,157 200,145 204,132 209,117 214,101 219,83 223,64 228,43 233,22" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<circle cx="156.7" cy="202.3" r="3.2" fill="#fbbf24"/>
+<text x="162.7" y="206.3" fill="#e8edf4" font-size="10" text-anchor="start">vertex (h,k)</text>
+<circle cx="111.9" cy="139.5" r="3.2" fill="#38bdf8"/>
+<circle cx="201.6" cy="139.5" r="3.2" fill="#38bdf8"/>
+<circle cx="125.0" cy="170.9" r="3.2" fill="#4ade80"/>
+<text x="33.0" y="29.7" fill="#e8edf4" font-size="10" text-anchor="start">y = a(x−h)² + k, a&gt;0</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Up-parabola: vertex + x- and y-intercepts</figcaption></figure><figure style="margin:0;text-align:center"><svg viewBox="0 0 250 214" width="250" height="214" role="img" aria-label="Sideways parabola opening left" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="125.0" y1="8" x2="125.0" y2="206" stroke="#9aa7b8" stroke-width="1"/>
+<text x="130.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="107.0" x2="242" y2="107.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="236" y="102.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="28,177 49,172 68,167 86,163 102,158 117,154 131,149 143,144 153,140 163,135 171,130 177,126 182,121 186,116 188,112 188,107 188,102 186,98 182,93 177,88 171,84 163,79 153,74 143,70 131,65 117,60 102,56 86,51 68,47 49,42 28,37" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<circle cx="188.4" cy="107.0" r="3.2" fill="#fbbf24"/>
+<text x="194.4" y="102.0" fill="#e8edf4" font-size="10" text-anchor="start">vertex</text>
+<circle cx="125.0" cy="63.2" r="3.2" fill="#4ade80"/>
+<circle cx="125.0" cy="150.8" r="3.2" fill="#4ade80"/>
+<text x="23.5" y="26.4" fill="#e8edf4" font-size="10" text-anchor="start">x = −(y−k)² + h</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Sideways parabola x = h − (y−k)²: opens left</figcaption></figure></div>
+<p class="tip">Foci are only asked for on older papers (2020 S1 Q2). Ellipse: foci at distance \(c=\sqrt{a^2-b^2}\) from the centre along the major axis. Hyperbola: \(c=\sqrt{a^2+b^2}\) from the centre along the axis through the vertices.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Identify the conic by eye, before any algebra</h3>
+<p>Look only at the <b>squared terms</b> (T04 Q1 is this drill). Move everything to one side, then:</p>
+<table>
+<tr><th>Squared terms</th><th>Conic</th><th>Example</th></tr>
+<tr><td>\(x^2\) and \(y^2\) with the <b>same sign</b>, equal coefficients</td><td>Circle</td><td>\(x^2+y^2-2=0\)</td></tr>
+<tr><td>\(x^2\) and \(y^2\) with the <b>same sign</b>, different coefficients</td><td>Ellipse</td><td>\(4x^2+9y^2-8x=32\)</td></tr>
+<tr><td>\(x^2\) and \(y^2\) with <b>opposite signs</b></td><td>Hyperbola</td><td>\(x^2-2y^2=4+y\)</td></tr>
+<tr><td>only <b>one</b> of \(x^2, y^2\)</td><td>Parabola</td><td>\(y^2+3x=12\)</td></tr>
+<tr><td>an \(xy\) term and no squares</td><td>Rectangular hyperbola</td><td>\(xy-2x+y=5\)</td></tr>
+</table>
+<p class="trap">“Same sign” gives an ellipse <i>only if the right-hand side has the right sign</i>. After completing the square you might get \((x-1)^2+2(y+3)^2=0\) (a single <b>point</b>) or \(=-4\) (<b>no curve at all</b>). Opposite signs with right-hand side \(0\) give <b>two crossing lines</b>. These degenerate cases appear exactly at the max, min or saddle height of a surface. Say “the contour is the single point…” or “the contour is the pair of lines…”, and never force an ellipse.</p>
+</div>
+
+<div class="card">
+<h3>Completing the square — the only algebra you need</h3>
+<div class="method"><b>Recipe</b> (for \(Ax^2+Bx\)):
+<ol>
+<li><b>Factor out the coefficient of \(x^2\) first</b>: \(Ax^2+Bx = A\left(x^2+\frac BAx\right)\).</li>
+<li>Halve the new \(x\)-coefficient and square it: \(x^2+px = \left(x+\frac p2\right)^2-\frac{p^2}{4}\).</li>
+<li>Multiply back by \(A\): the correction becomes \(-A\cdot\frac{p^2}{4}\). <b>Forgetting to multiply the correction by \(A\) is the #1 algebra error in this chapter.</b></li>
+</ol></div>
+$$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x^2-2x) = -(x-1)^2+1.$$
+<p class="tip">Check every completed square by mentally expanding it back out. It takes five seconds and protects every mark that follows.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Hyperbolas: which way do they open, and where are the asymptotes?</h3>
+<p>Get the equation into the form “\(\text{(positive square)} - \text{(negative square)} = 1\)”, with a \(+1\) on the right. <b>The variable in the positive term is the direction the hyperbola opens.</b></p>
+<ul>
+<li>\(\frac{(x-1)^2}{4}-\frac{(y+2)^2}{9}=1\): the \(x\) term is positive, so it's an <b>\(x\)-hyperbola</b>. It opens left and right, with vertices at \((1\pm2,\,-2)\).</li>
+<li>\(\frac{(x-1)^2}{4}-\frac{(y+2)^2}{9}=-1\): multiply by \(-1\) to get \(\frac{(y+2)^2}{9}-\frac{(x-1)^2}{4}=1\). Now the \(y\) term is positive, so it's a <b>\(y\)-hyperbola</b>. It opens up and down, with vertices at \((1,\,-2\pm3)\).</li>
+</ul>
+<p><b>Asymptotes: set the right-hand side to 0.</b> \(\frac{(x-1)^2}{4}=\frac{(y+2)^2}{9}\) gives \(y+2=\pm\frac32(x-1)\). This works because far from the centre the “\(=1\)” becomes negligible compared with the huge squared terms, so the curve hugs the lines where the left side equals zero. Both hyperbolas above share these asymptotes, and they pass through the <b>centre</b> \((1,-2)\), not the origin.</p>
+</div>
+
+<div class="card">
+<h3>Rectangular hyperbolas \((x-h)(y-k)=c\)</h3>
+<p>When the surface has an \(xy\) term and no \(x^2\) or \(y^2\) (like \(z=(x-3)(y+1)\), 2021 S2 Q1), <b>factor</b> instead of completing the square. For example, \(xy-2x+y = (x+1)(y-2)+2\). Then the contour \(z=c\) is \((x+1)(y-2)=c-2\), which gives \(y=2+\frac{c-2}{x+1}\). That's the familiar \(1/x\) curve shifted, with a vertical asymptote at \(x=-1\) and a horizontal asymptote at \(y=2\). If the constant on the right is positive, the branches sit top-right and bottom-left of the centre. If it's negative, they sit in the other two quadrants.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 270 236" width="270" height="236" role="img" aria-label="Rectangular hyperbola (x-h)(y-k)=c with asymptotes x=h and y=k" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="135.0" y1="8" x2="135.0" y2="228" stroke="#9aa7b8" stroke-width="1"/>
+<text x="140.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="118.0" x2="262" y2="118.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="256" y="113.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="165,222 165,14" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="14,103 256,103" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="14,112 16,112 17,112 19,112 20,112 22,113 23,113 25,113 26,113 28,113 29,113 31,113 32,113 34,113 35,114 37,114 38,114 40,114 41,114 43,114 44,114 46,114 47,115 49,115 50,115 52,115 53,115 55,115 56,116 58,116 59,116 61,116 62,116 64,116 65,117 67,117 68,117 70,117 71,118 73,118 74,118 76,118 78,119 79,119 81,119 82,119 84,120 85,120 87,120 88,121 90,121 91,121 93,122 94,122 96,123 97,123 99,123 100,124 102,124 103,125 105,125 106,126 108,127 109,127 111,128 112,129 114,129 115,130 117,131 118,132 120,133 121,134 123,135 124,136 126,137 127,139 129,140 130,142 132,144 133,146 135,148 137,150 138,153 140,156 141,159 143,163 144,167 146,172 147,177 149,184 150,192 152,202 153,215" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<polyline points="180,14 182,22 183,29 185,35 186,39 188,44 189,47 191,51 192,54 194,56 196,59 197,61 199,63 200,64 202,66 203,67 205,69 206,70 208,71 209,72 211,73 212,74 214,75 215,76 217,77 218,78 220,78 221,79 223,80 224,80 226,81 227,81 229,82 230,82 232,83 233,83 235,84 236,84 238,85 239,85 241,85 242,86 244,86 245,86 247,87 248,87 250,87 251,88 253,88 254,88 256,88" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<polyline points="14,94 16,94 17,94 19,94 20,94 22,94 23,94 25,94 26,93 28,93 29,93 31,93 32,93 34,93 35,93 37,93 38,93 40,92 41,92 43,92 44,92 46,92 47,92 49,92 50,91 52,91 53,91 55,91 56,91 58,91 59,90 61,90 62,90 64,90 65,90 67,89 68,89 70,89 71,89 73,89 74,88 76,88 78,88 79,88 81,87 82,87 84,87 85,86 87,86 88,86 90,85 91,85 93,85 94,84 96,84 97,83 99,83 100,82 102,82 103,81 105,81 106,80 108,80 109,79 111,78 112,78 114,77 115,76 117,75 118,74 120,73 121,72 123,71 124,70 126,69 127,67 129,66 130,64 132,63 133,61 135,59 137,56 138,54 140,51 141,47 143,44 144,39 146,35 147,29 149,22 150,14" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,3"/>
+<polyline points="177,215 179,202 180,192 182,184 183,177 185,172 186,167 188,163 189,159 191,156 192,153 194,150 196,148 197,146 199,144 200,142 202,140 203,139 205,137 206,136 208,135 209,134 211,133 212,132 214,131 215,130 217,129 218,129 220,128 221,127 223,127 224,126 226,125 227,125 229,124 230,124 232,123 233,123 235,123 236,122 238,122 239,121 241,121 242,121 244,120 245,120 247,120 248,119 250,119 251,119 253,119 254,118 256,118" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,3"/>
+<circle cx="165.2" cy="103.1" r="2.5" fill="#e8edf4"/>
+<text x="170.2" y="98.1" fill="#e8edf4" font-size="10" text-anchor="start">(h,k)</text>
+<text x="253.0" y="25.9" fill="#a78bfa" font-size="10" text-anchor="end">c&gt;0</text>
+<text x="17.0" y="25.9" fill="#38bdf8" font-size="10" text-anchor="start">c&lt;0</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">(x−h)(y−k) = c: asymptotes x = h, y = k; c&gt;0 top-right/bottom-left, c&lt;0 the other two quadrants</figcaption></figure></div>
+</div>
+
+<div class="card">
+<h3>🧭 Contour <i>diagrams</i>: the spacing is information</h3>
+<p>A contour diagram shows several level curves, usually at equally spaced heights like \(z=1,2,3,\dots\), on one set of axes. The spacing tells you about the slope:</p>
+<ul>
+<li><b>Close together</b> means the height changes fast, so the surface is <b>steep</b>. Far apart means it's <b>flat</b>.</li>
+<li><b>Plane</b> \(z=ax+by+c\): the contours are <b>equally spaced parallel lines</b> (Summary p 5).</li>
+<li><b>Paraboloid</b> \(z=x^2+y^2\): circles of radius \(\sqrt z\), which <b>crowd together further out</b>, because a bowl gets steeper as you climb.</li>
+<li><b>Cone</b> \(z=\sqrt{x^2+y^2}\): circles of radius \(z\), <b>equally spaced</b>, because a cone has constant slope.</li>
+<li><b>Saddle</b> \(z=x^2-y^2\): hyperbolas that open left–right for \(z\gt0\) and up–down for \(z\lt0\). The level \(z=0\) is the pair of lines \(y=\pm x\), which are the common asymptotes.</li>
+</ul>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 260 260" width="260" height="260" role="img" aria-label="Contours z = 1..5 of the paraboloid z = x^2 + y^2: circles crowding outward" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="130.0" y1="8" x2="130.0" y2="252" stroke="#9aa7b8" stroke-width="1"/>
+<text x="135.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="130.0" x2="252" y2="130.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="246" y="125.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="175,130 174,123 172,116 170,110 166,104 162,98 156,94 150,90 144,88 137,86 130,85 123,86 116,88 110,90 104,94 98,98 94,104 90,110 88,116 86,123 85,130 86,137 88,144 90,150 94,156 98,162 104,166 110,170 116,172 123,174 130,175 137,174 144,172 150,170 156,166 162,162 166,156 170,150 172,144 174,137 175,130" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<text x="163.5" y="96.5" fill="#a78bfa" font-size="10" text-anchor="start">z=1</text>
+<polyline points="193,130 192,120 190,111 186,101 181,93 175,85 167,79 159,74 149,70 140,68 130,67 120,68 111,70 101,74 93,79 85,85 79,93 74,101 70,111 68,120 67,130 68,140 70,149 74,159 79,167 85,175 93,181 101,186 111,190 120,192 130,193 140,192 149,190 159,186 167,181 175,175 181,167 186,159 190,149 192,140 193,130" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<text x="176.6" y="83.4" fill="#38bdf8" font-size="10" text-anchor="start">z=2</text>
+<polyline points="207,130 206,118 203,106 199,95 193,85 185,75 175,67 165,61 154,57 142,54 130,53 118,54 106,57 95,61 85,67 75,75 67,85 61,95 57,106 54,118 53,130 54,142 57,154 61,165 67,175 75,185 85,193 95,199 106,203 118,206 130,207 142,206 154,203 165,199 175,193 185,185 193,175 199,165 203,154 206,142 207,130" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+<text x="186.6" y="73.4" fill="#fbbf24" font-size="10" text-anchor="start">z=3</text>
+<polyline points="219,130 218,116 215,102 210,89 202,78 193,67 182,58 171,50 158,45 144,42 130,41 116,42 102,45 89,50 78,58 67,67 58,78 50,89 45,102 42,116 41,130 42,144 45,158 50,171 58,182 67,193 78,202 89,210 102,215 116,218 130,219 144,218 158,215 171,210 182,202 193,193 202,182 210,171 215,158 218,144 219,130" fill="none" stroke="#4ade80" stroke-width="1.6"/>
+<text x="195.1" y="64.9" fill="#4ade80" font-size="10" text-anchor="start">z=4</text>
+<polyline points="230,130 229,114 225,99 219,85 211,71 201,59 189,49 175,41 161,35 146,31 130,30 114,31 99,35 85,41 71,49 59,59 49,71 41,85 35,99 31,114 30,130 31,146 35,161 41,175 49,189 59,201 71,211 85,219 99,225 114,229 130,230 146,229 161,225 175,219 189,211 201,201 211,189 219,175 225,161 229,146 230,130" fill="none" stroke="#f87171" stroke-width="1.6"/>
+<text x="202.5" y="57.5" fill="#f87171" font-size="10" text-anchor="start">z=5</text>
+<circle cx="130.0" cy="130.0" r="2.5" fill="#e8edf4"/>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Paraboloid z = x²+y²: z = 1…5 → radii √z, circles crowd outward (surface steepens)</figcaption></figure><figure style="margin:0;text-align:center"><svg viewBox="0 0 260 260" width="260" height="260" role="img" aria-label="Contours of the cone z = sqrt(x^2+y^2): equally spaced circles" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="130.0" y1="8" x2="130.0" y2="252" stroke="#9aa7b8" stroke-width="1"/>
+<text x="135.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="130.0" x2="252" y2="130.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="246" y="125.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="152,130 152,127 151,123 150,120 148,117 146,114 143,112 140,110 137,109 133,108 130,108 127,108 123,109 120,110 117,112 114,114 112,117 110,120 109,123 108,127 108,130 108,133 109,137 110,140 112,143 114,146 117,148 120,150 123,151 127,152 130,152 133,152 137,151 140,150 143,148 146,146 148,143 150,140 151,137 152,133 152,130" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<polyline points="175,130 174,123 172,116 170,110 166,104 162,98 156,94 150,90 144,88 137,86 130,85 123,86 116,88 110,90 104,94 98,98 94,104 90,110 88,116 86,123 85,130 86,137 88,144 90,150 94,156 98,162 104,166 110,170 116,172 123,174 130,175 137,174 144,172 150,170 156,166 162,162 166,156 170,150 172,144 174,137 175,130" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<polyline points="197,130 196,120 194,109 190,100 184,91 177,83 169,76 160,70 151,66 140,64 130,63 120,64 109,66 100,70 91,76 83,83 76,91 70,100 66,109 64,120 63,130 64,140 66,151 70,160 76,169 83,177 91,184 100,190 109,194 120,196 130,197 140,196 151,194 160,190 169,184 177,177 184,169 190,160 194,151 196,140 197,130" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+<polyline points="219,130 218,116 215,102 210,89 202,78 193,67 182,58 171,50 158,45 144,42 130,41 116,42 102,45 89,50 78,58 67,67 58,78 50,89 45,102 42,116 41,130 42,144 45,158 50,171 58,182 67,193 78,202 89,210 102,215 116,218 130,219 144,218 158,215 171,210 182,202 193,193 202,182 210,171 215,158 218,144 219,130" fill="none" stroke="#4ade80" stroke-width="1.6"/>
+<polyline points="242,130 240,113 236,96 229,79 220,64 209,51 196,40 181,31 164,24 147,20 130,18 113,20 96,24 79,31 64,40 51,51 40,64 31,79 24,96 20,113 18,130 20,147 24,164 31,181 40,196 51,209 64,220 79,229 96,236 113,240 130,242 147,240 164,236 181,229 196,220 209,209 220,196 229,181 236,164 240,147 242,130" fill="none" stroke="#f87171" stroke-width="1.6"/>
+<text x="195.1" y="64.9" fill="#4ade80" font-size="10" text-anchor="start">z=2</text>
+<text x="163.5" y="96.5" fill="#38bdf8" font-size="10" text-anchor="start">z=1</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Cone z = √(x²+y²): radii = z, equally spaced (constant slope)</figcaption></figure></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 280 280" width="280" height="280" role="img" aria-label="Saddle z = x^2 - y^2: hyperbolas for z&gt;0 open left-right, for z&lt;0 open up-down, z=0 is the pair of asymptote lines" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="140.0" y1="8" x2="140.0" y2="272" stroke="#9aa7b8" stroke-width="1"/>
+<text x="145.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="140.0" x2="272" y2="140.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="266" y="135.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="14,266 266,14" fill="none" stroke="#e8edf4" stroke-width="1.4"/>
+<polyline points="14,14 266,266" fill="none" stroke="#e8edf4" stroke-width="1.4"/>
+<polyline points="265,258 250,243 238,230 227,218 218,207 210,197 203,189 197,181 192,174 188,167 185,161 182,156 181,150 180,145 179,140 180,135 181,130 182,124 185,119 188,113 192,106 197,99 203,91 210,83 218,73 227,62 238,50 250,37 265,22" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<polyline points="15,258 30,243 42,230 53,218 62,207 70,197 77,189 83,181 88,174 92,167 95,161 98,156 99,150 100,145 101,140 100,135 99,130 98,124 95,119 92,113 88,106 83,99 77,91 70,83 62,73 53,62 42,50 30,37 15,22" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<polyline points="265,237 254,222 244,208 236,195 230,183 225,171 221,161 219,150 219,140 219,130 221,119 225,109 230,97 236,85 244,72 254,58 265,43" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<polyline points="15,237 26,222 36,208 44,195 50,183 55,171 59,161 61,150 61,140 61,130 59,119 55,109 50,97 44,85 36,72 26,58 15,43" fill="none" stroke="#a78bfa" stroke-width="1.6"/>
+<polyline points="22,15 37,30 50,42 62,53 73,62 83,70 91,77 99,83 106,88 113,92 119,95 124,98 130,99 135,100 140,101 145,100 150,99 156,98 161,95 167,92 174,88 181,83 189,77 197,70 207,62 218,53 230,42 243,30 258,15" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<polyline points="22,265 37,250 50,238 62,227 73,218 83,210 91,203 99,197 106,192 113,188 119,185 124,182 130,181 135,180 140,179 145,180 150,181 156,182 161,185 167,188 174,192 181,197 189,203 197,210 207,218 218,227 230,238 243,250 258,265" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<polyline points="43,15 58,26 72,36 85,44 97,50 109,55 119,59 130,61 140,61 150,61 161,59 171,55 183,50 195,44 208,36 222,26 237,15" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<polyline points="43,265 58,254 72,244 85,236 97,230 109,225 119,221 130,219 140,219 150,219 161,221 171,225 183,230 195,236 208,244 222,254 237,265" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<text x="182.4" y="152.0" fill="#a78bfa" font-size="10" text-anchor="start">z=1</text>
+<text x="221.8" y="152.0" fill="#a78bfa" font-size="10" text-anchor="start">z=4</text>
+<text x="144.0" y="97.6" fill="#38bdf8" font-size="10" text-anchor="start">z=−1</text>
+<text x="144.0" y="58.2" fill="#38bdf8" font-size="10" text-anchor="start">z=−4</text>
+<text x="242.4" y="23.8" fill="#e8edf4" font-size="10" text-anchor="end">z=0</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">Saddle z = x² − y²: z&gt;0 left–right hyperbolas, z&lt;0 up–down, z = 0 the asymptote pair</figcaption></figure></div>
+<p class="tip">T06 Q2 (steel-plate isotherms) asks you to notice exactly this: “the contours become closer together as you move away from the origin.” One sentence like that is the kind of observation markers reward.</p>
+</div>
+
+<div class="card">
+<h3>Quadric surfaces — name them from the equation</h3>
+<p>These are the 3-D “conics”. Recognise them by (i) how many variables are squared, (ii) the signs, and (iii) which variable, if any, appears only to the first power.</p>
+<table>
+<tr><th>Equation (centred at origin)</th><th>Surface</th><th>Contours \(z=c\)</th><th>Cross-sections \(x=k\) / \(y=k\)</th></tr>
+<tr><td>\(\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1\)</td><td>Ellipsoid</td><td>ellipses (shrinking to points at \(z=\pm c\))</td><td>ellipses</td></tr>
+<tr><td>\(\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac zc\)</td><td>Elliptic paraboloid (bowl)</td><td>ellipses (\(c\gt0\): need \(z\ge0\))</td><td>parabolas opening up</td></tr>
+<tr><td>\(\frac{x^2}{a^2}-\frac{y^2}{b^2}=\frac zc\)</td><td>Hyperbolic paraboloid (saddle)</td><td>hyperbolas; lines at \(z=0\)</td><td>one family up-parabolas, the other down-parabolas</td></tr>
+<tr><td>\(\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac{z^2}{c^2}\)</td><td>Double (elliptic) cone</td><td>ellipses; a point at \(z=0\)</td><td>hyperbolas; a pair of lines through the vertex when \(k=0\)</td></tr>
+<tr><td>\(\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1\)</td><td>Hyperboloid of <b>one</b> sheet</td><td>ellipses for <b>every</b> \(z\)</td><td>hyperbolas</td></tr>
+<tr><td>\(\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1\)</td><td>Hyperboloid of <b>two</b> sheets</td><td>ellipses only for \(|z|\ge c\); nothing in between</td><td>hyperbolas</td></tr>
+<tr><td>equation missing a variable, e.g. \(x^2+z^2=1\)</td><td>Cylinder along the missing axis</td><td>—</td><td>the same curve repeated</td></tr>
+</table>
+<p class="tip"><b>Counting trick.</b> With three squared variables: all \(+\) gives an ellipsoid; one minus with \(=1\) gives one sheet; two minus with \(=1\) (equivalently one minus with \(=-1\)) gives two sheets; \(=0\) gives a cone. With two squares and one linear variable, it's a paraboloid: same signs make a bowl, opposite signs a saddle. The <b>linear</b> or <b>odd-one-out</b> variable is the axis (T06 Q5: \(x-(y+1)^2+(z-2)^2=0\) is a saddle with the \(x\)-axis playing the role of \(z\)).</p>
+</div>
+
+<div class="card">
+<h3>Cross-sections: label the right axes, keep the right half</h3>
+<div class="method"><ol>
+<li>Substitute the fixed value: \(y=k\) leaves \(z\) as a function of \(x\). Draw it on axes <b>labelled \(x\) (horizontal) and \(z\) (vertical)</b>. For \(x=k\), use \(y\) and \(z\).</li>
+<li>Identify the conic exactly as for contours. The only difference is that one of the variables is now \(z\).</li>
+<li>“Show the cross-sections are parabolas” means: do this for a <b>general</b> \(k\), and show the equation has the form \(z=A(x-h)^2+B\) (or \((z-p)^2=x-q\)) for every \(k\). Then state the vertex in terms of \(k\).</li>
+</ol></div>
+<p class="trap"><b>Square roots give half-curves.</b> For \(z=\sqrt{\dots}-3\), squaring gives \((z+3)^2=\dots\), but only points with \(z+3\ge0\) are on the surface. The cross-section is the <b>upper half</b> of the parabola. Any intercept with \(z\lt-3\) (like \(z=-5\) in 2025 S2 Q1(b)) is <b>not</b> on the surface. Likewise \(z=\sqrt{9-x^2-y^2}\) is only the top half of a sphere, so its cross-sections are semicircles.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Rational surfaces: “show all contours are circles/ellipses/hyperbolas”</h3>
+<p>For \(z=\dfrac{8y}{x^2+2y^2}\) (2021 S1 Q4) or \(z=\dfrac{2x}{x^2-y^2}\) (2022 S1 Q2), set \(z=z_0\), <b>multiply by the denominator</b>, and complete the square with \(z_0\) kept as a letter. The centre and size then depend on \(z_0\). For example, \(\frac{x^2}{8/z_0^2}+\frac{(y-2/z_0)^2}{4/z_0^2}=1\) is an ellipse <b>for every</b> \(z_0\ne0\), and that is exactly what the question asks you to show.</p>
+<p class="trap">Multiplying by the denominator can quietly add points where the denominator is zero. Those points are <b>not</b> in the domain. In both exam examples every contour passes through the origin, which is excluded. Mark it with an <b>open circle</b> and write “\((0,0)\) excluded”. The official solutions skip this, but it is a correct and cheap extra line.</p>
+</div>
+
+<div class="card">
+<h3>Matching functions ↔ contour maps / graphs</h3>
+<p>Two recent papers (2023 S1 Q3(a), 2023 S2 Q4(a)) had a quick “enter 0, 1, 2 or 3” matching table. Use <b>fingerprints</b>, not algebra:</p>
+<table>
+<tr><th>Function feature</th><th>Contour fingerprint</th><th>Graph fingerprint</th></tr>
+<tr><td>linear, e.g. \(y-x\)</td><td>parallel, equally spaced straight lines</td><td>tilted plane</td></tr>
+<tr><td>\(x^2+y^2\), \(x^2+y^2-xy\) (positive quadratic form)</td><td>nested circles / (tilted) ellipses</td><td>bowl</td></tr>
+<tr><td>\(x^2-y^2\), \((y^2-1)x\) (sign changes)</td><td>hyperbola-like curves crossing at a saddle; zero set is lines</td><td>saddle / pass</td></tr>
+<tr><td>\(y^2-x\) (one variable linear)</td><td>nested parabolas \(x=y^2-c\)</td><td>parabolic trough</td></tr>
+<tr><td>depends on one variable only, e.g. \(x^3\)</td><td>parallel lines \(x=\text{const}\), unequally spaced</td><td>a curve extruded along the other axis</td></tr>
+<tr><td>\(e^x\cos y\)</td><td>periodic in \(y\), oscillating</td><td>waves whose size grows with \(x\)</td></tr>
+<tr><td>\(e^x(\cos y-1)\le0\)</td><td>—</td><td>never above the \(xy\)-plane (check the <b>sign</b>!)</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">None of this is on the formula sheet. The exam skill is <b>fast, clean algebra</b> plus a <b>fully labelled</b> sketch. Every method below ends in something you draw.</p>
+
+<div class="card">
+<h3>M1 · Contour through a given point</h3>
+$$ c = f(x_0,y_0), \qquad \text{contour: } f(x,y)=c$$
+<div class="when">“Sketch the contour which passes through \((x_0,y_0)\)” (2024 S1 Q3, 2024 S2 Q1, 2025 S1 Q3). <b>First line of your answer = evaluate \(f\) at the point.</b> That line is worth 1 mark by itself (2024 S2 marking scheme).</div>
+<p><b>Mini-example.</b> \(f=x^2+4y^2-2x\) through \((3,1)\): \(c=9+4-6=7\), so the contour is \((x-1)^2+4y^2=8\), i.e. \(\frac{(x-1)^2}{8}+\frac{y^2}{2}=1\).</p>
+</div>
+
+<div class="card">
+<h3>M2 · Standard form by completing the square</h3>
+$$ A x^2 + Bx + Cy^2 + Dy + E = 0 \;\Longrightarrow\; A\Big(x+\tfrac{B}{2A}\Big)^2 + C\Big(y+\tfrac{D}{2C}\Big)^2 = \tfrac{B^2}{4A}+\tfrac{D^2}{4C}-E $$
+<div class="when">Any quadratic with \(x^2\) and/or \(y^2\) terms. Then divide by the right-hand side to get “\(=1\)”.</div>
+<p><b>Mini-example.</b> \(x^2-6x+4y^2+8y+9=0\) becomes \((x-3)^2-9+4(y+1)^2-4+9=0\), so \((x-3)^2+4(y+1)^2=4\), i.e. \(\frac{(x-3)^2}{4}+(y+1)^2=1\).</p>
+</div>
+
+<div class="card">
+<h3>M3 · Intercepts (the marks are literally for these)</h3>
+$$ x\text{-intercepts: set } y=0;\qquad y\text{-intercepts: set } x=0 $$
+<div class="when">Every sketch question says “label all \(x\)- and \(y\)-intercepts”. Solve each resulting one-variable quadratic. A negative square means <b>no intercept</b>. Write “no \(x\)-intercepts” explicitly (worth 1 mark in 2025 S1). A zero discriminant means the curve <b>touches</b> the axis at one point.</div>
+<p><b>Mini-example.</b> For \(\frac{(x-3)^2}{4}+(y+1)^2=1\), setting \(y=0\) gives \((x-3)^2=0\), so the curve <b>touches</b> the \(x\)-axis at \((3,0)\). Setting \(x=0\) gives \((y+1)^2=1-\frac94\lt0\), so there are <b>no \(y\)-intercepts</b>.</p>
+</div>
+
+<div class="card">
+<h3>M4 · Hyperbola asymptotes</h3>
+$$ \frac{(x-h)^2}{a^2}-\frac{(y-k)^2}{b^2}=\pm1 \;\Longrightarrow\; \text{asymptotes } y-k=\pm\frac{b}{a}(x-h)$$
+<div class="when">Any hyperbola, whenever the question says “asymptotes”, or even when it doesn't (2025 S1 gave 1 mark for them). Draw them <b>dashed</b> through the centre, then draw the branches hugging them.</div>
+<p><b>Mini-example.</b> \(y^2-\frac{(x-1)^2}{4}=1\): setting the right side to 0 gives \(y^2=\frac{(x-1)^2}{4}\), so \(y=\pm\frac{x-1}{2}\).</p>
+</div>
+
+<div class="card">
+<h3>M5 · Several contours on one set of axes</h3>
+<div class="when">“Sketch the contours \(z=-2,0,1\) on the same set of axes” (2025 S2 Q1), “contours \(z=1\) and \(z=-4\)” (2023 S2 Q4). Complete the square <b>once</b> with a general \(c\), then substitute each level. Check the range first: some levels may be impossible (empty) or degenerate.</div>
+<p><b>Mini-example.</b> \(z=4x^2-y^2\). Level \(4\): \(x^2-\frac{y^2}{4}=1\). Level \(0\): the lines \(y=\pm2x\). Level \(-4\): \(\frac{y^2}{4}-x^2=1\). All three share the asymptotes \(y=\pm2x\).</p>
+</div>
+
+<div class="card">
+<h3>M6 · Vertical cross-sections</h3>
+$$ y=k:\; z=f(x,k)\ \text{drawn in the } xz\text{-plane};\qquad x=k:\; z=f(k,y)\ \text{drawn in the } yz\text{-plane}$$
+<div class="when">“Show that the cross-sections for \(y=k\) are parabolas” (2025 S2 Q1(b)), or “use contours and/or cross-sections to sketch the surface” (T06 Q4). Keep \(k\) general, then specialise.</div>
+<p><b>Mini-example.</b> For \(z=x^2-y^2+2y\) and \(x=k\): \(z=-(y-1)^2+1+k^2\). This is a down-parabola in the \(yz\)-plane with vertex \((y,z)=(1,\,1+k^2)\), for every \(k\).</p>
+</div>
+
+<div class="card">
+<h3>M7 · “Show all contours are …” for a rational \(f\)</h3>
+<div class="when">\(z=\dfrac{\text{linear}}{\text{quadratic}}\) (2021 S1 Q4, 2022 S1 Q2). Set \(z=z_0\ne0\), multiply out, complete the square with \(z_0\) as a letter, and divide to reach “\(=1\)”. Name the family and give the centre in terms of \(z_0\). Mention the excluded point(s).</div>
+<p><b>Mini-example.</b> \(z=\frac{4x}{x^2+y^2}\): \(z_0(x^2+y^2)=4x\) gives \(\left(x-\frac2{z_0}\right)^2+y^2=\frac4{z_0^2}\). These are circles with centre \(\left(\frac2{z_0},0\right)\) and radius \(\frac2{|z_0|}\), all through the excluded origin.</p>
+</div>
+
+<div class="card">
+<h3>M8 · Max/min of a quadratic surface by completing the square</h3>
+<div class="when">A follow-up part like “find the minimum value of \(z\)” (2024 S1 Q3(b)) or “determine the maximum temperature” (2024 S2 Q1(b)). The completed square you already have <b>is</b> the answer: \((x+1)^2+4(y-1)^2+1\ge1\), so the minimum is \(1\), at \((-1,1)\). For \(T=\frac{100}{D}\), \(T\) is largest where the positive denominator \(D\) is smallest. Ch 6 does this with derivatives, but this is faster.</div>
+</div>
+
+<div class="card">
+<h3>M9 · The sketch-labelling checklist (use it on every sketch)</h3>
+<div class="method"><ol>
+<li>Axes drawn and <b>named</b> (\(x,y\) for contours; \(x,z\) or \(y,z\) for cross-sections).</li>
+<li>Each curve tagged with its level, e.g. “\(z=1\)”.</li>
+<li>Centre (ellipse/hyperbola) or vertex (parabola) marked with coordinates.</li>
+<li>All intercepts marked with <b>exact</b> values (\(1\pm2\sqrt5\), not \(5.47\)). Missing intercepts stated in words.</li>
+<li>Hyperbolas: asymptotes dashed, with their equations written.</li>
+<li>Excluded points as open circles; half-curves drawn as halves.</li>
+<li>Rough scale honest: an ellipse with \(a=2,b=1\) should look twice as wide as it is tall.</li>
+</ol></div>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Each one is written the way a marker wants to read it and ends with the <b>labelling checklist</b>. Every centre, intercept and asymptote is checked with SymPy. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Parabolas, upright and sideways (vertex + intercepts)</summary>
+<p><b>Q.</b> Sketch (a) \(y=x^2-4x-5\) and (b) \(x=-y^2+2y+3\), labelling the vertex and all intercepts. <b>[3 + 3 marks]</b></p>
+<p><b>(a)</b> Complete the square: \(y=(x-2)^2-4-5=(x-2)^2-9\). This is an <b>upward</b> parabola (the coefficient of the square is \(+1\)) with vertex \((2,-9)\) and axis \(x=2\).</p>
+<ul><li>\(y\)-intercept: \(x=0\) gives \(y=-5\).</li><li>\(x\)-intercepts: \((x-2)^2=9\), so \(x-2=\pm3\), giving \(x=-1\) and \(x=5\). (Check: the roots are symmetric about \(x=2\).)</li></ul>
+<p><b>(b)</b> \(x=-(y^2-2y)+3=-\big[(y-1)^2-1\big]+3=-(y-1)^2+4\). This is a <b>sideways</b> parabola <b>opening left</b> (the coefficient is \(-1\)) with vertex \((4,1)\) and axis \(y=1\).</p>
+<ul><li>\(x\)-intercept: \(y=0\) gives \(x=3\).</li><li>\(y\)-intercepts: \(0=-(y-1)^2+4\), so \(y-1=\pm2\), giving \(y=3\) and \(y=-1\).</li></ul>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> vertex \((2,-9)\) / \((4,1)\); every intercept \((-1,0),(5,0),(0,-5)\) / \((3,0),(0,3),(0,-1)\); correct opening direction; symmetric shape about the axis.</div>
+</details>
+
+<details>
+<summary>Example 2 — Ellipse from a messy quadratic (tangent intercept!)</summary>
+<p><b>Q.</b> Identify and sketch \(9x^2+4y^2-36x+8y+4=0\). Label the centre, semi-axes and all intercepts. <b>[6 marks]</b></p>
+<p><b>Identify first:</b> \(x^2\) and \(y^2\) have the same sign and different coefficients, so expect an ellipse.</p>
+$$9(x^2-4x)+4(y^2+2y)+4=0 \;\Rightarrow\; 9\big[(x-2)^2-4\big]+4\big[(y+1)^2-1\big]+4=0$$
+$$9(x-2)^2+4(y+1)^2=36 \;\Rightarrow\; \frac{(x-2)^2}{4}+\frac{(y+1)^2}{9}=1.$$
+<p>This is an <b>ellipse</b> with centre \((2,-1)\), semi-axis \(2\) horizontally and \(3\) vertically. The major axis is vertical. Extreme points: \((0,-1),(4,-1),(2,2),(2,-4)\).</p>
+<ul>
+<li>\(x\)-intercepts (\(y=0\)): \(\frac{(x-2)^2}{4}=1-\frac19=\frac89\), so \((x-2)^2=\frac{32}{9}\), giving \(x=2\pm\frac{4\sqrt2}{3}\).</li>
+<li>\(y\)-intercepts (\(x=0\)): \(1+\frac{(y+1)^2}{9}=1\), so \(y=-1\) (a double root). The ellipse <b>touches</b> the \(y\)-axis at \((0,-1)\), its leftmost point.</li>
+</ul>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> centre \((2,-1)\); the four extreme points or the semi-axes \(2\) and \(3\); \(x\)-intercepts \(2\pm\frac{4\sqrt2}{3}\); the tangency at \((0,-1)\) (say “touches”); taller than wide.</div>
+</details>
+
+<details>
+<summary>Example 3 — Hyperbola: centre, vertices, asymptotes, missing intercepts</summary>
+<p><b>Q.</b> Classify and sketch \(x^2-4y^2-2x-16y-19=0\), labelling intercepts and asymptotes. <b>[7 marks]</b></p>
+$$(x-1)^2-1-4\big[(y+2)^2-4\big]-19=0 \;\Rightarrow\; (x-1)^2-4(y+2)^2=4 \;\Rightarrow\; \frac{(x-1)^2}{4}-(y+2)^2=1.$$
+<p>The \(x\) term is positive, so this is an <b>\(x\)-hyperbola</b> (opening left/right) with centre \((1,-2)\), \(a=2\), \(b=1\) and vertices \((-1,-2)\) and \((3,-2)\).</p>
+<ul>
+<li><b>Asymptotes</b> (set the right side to 0): \((y+2)^2=\frac{(x-1)^2}{4}\), so \(y=-2\pm\frac12(x-1)\).</li>
+<li>\(x\)-intercepts: \(\frac{(x-1)^2}{4}=1+4=5\), so \(x=1\pm2\sqrt5\).</li>
+<li>\(y\)-intercepts: \(\frac14-(y+2)^2=1\), so \((y+2)^2=-\frac34\lt0\). <b>No \(y\)-intercepts</b>. This makes sense: the gap between the branches, from \(x=-1\) to \(x=3\), contains the \(y\)-axis.</li>
+</ul>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> centre \((1,-2)\) (a dot, not on the curve); vertices \((-1,-2),(3,-2)\); both asymptotes dashed with equations; \(x\)-intercepts \(1\pm2\sqrt5\); the words “no \(y\)-intercepts”.</div>
+</details>
+
+<details>
+<summary>Example 4 — Saddle contour family \(z=4x^2-y^2\) for \(z=-4,0,4\)</summary>
+<p><b>Q.</b> Sketch the contours \(z=-4, 0, 4\) of \(z=4x^2-y^2\) on the same axes. Label each contour and all intercepts. <b>[6 marks]</b> (Same style as T06 Q1.)</p>
+<div class="mono">z = 4:   4x² − y² = 4   ⇒  x² − y²/4 = 1      x-hyperbola, vertices (±1, 0)
+         x-int: x = ±1;   y-int: −y² = 4  ⇒  none
+z = 0:   4x² − y² = 0   ⇒  (2x − y)(2x + y) = 0  ⇒  the two LINES y = 2x and y = −2x
+z = −4:  4x² − y² = −4  ⇒  y²/4 − x² = 1      y-hyperbola, vertices (0, ±2)
+         y-int: y = ±2;   x-int: 4x² = −4  ⇒  none
+All three share the asymptotes y = ±2x (the z = 0 contour itself).</div>
+<p>The surface is a <b>saddle</b> (hyperbolic paraboloid). Along the \(x\)-axis it rises (\(z=4x^2\)); along the \(y\)-axis it falls (\(z=-y^2\)).</p>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> each curve tagged \(z=4\), \(z=0\), \(z=-4\); intercepts \((\pm1,0)\) and \((0,\pm2)\); \(z=0\) drawn as two straight lines \(y=\pm2x\) (not a hyperbola); the positive-level curve opening left/right and the negative-level curve up/down.</div>
+</details>
+
+<details>
+<summary>Example 5 — Paraboloid: contours, a cross-section, and the minimum</summary>
+<p><b>Q.</b> Let \(z=x^2+y^2-2x+4y+1\). (a) Find the minimum value of \(z\). (b) Sketch the contours \(z=-4, 0, 5\). (c) Sketch the cross-section \(y=-2\). <b>[2 + 5 + 3 marks]</b></p>
+<p><b>(a)</b> \(z=(x-1)^2+(y+2)^2-4\ge-4\), with equality only at \((1,-2)\). The <b>minimum is \(-4\)</b>. The surface is a circular paraboloid (bowl) with lowest point \((1,-2,-4)\).</p>
+<p><b>(b)</b> The contour \(z=c\) is \((x-1)^2+(y+2)^2=c+4\): a circle about \((1,-2)\) with radius \(\sqrt{c+4}\).</p>
+<div class="mono">z = −4:  radius 0  ⇒  the single POINT (1, −2)
+z =  0:  radius 2  ⇒  x-int: (x−1)² + 4 = 4 ⇒ x = 1 (touches the x-axis at (1,0))
+                      y-int: 1 + (y+2)² = 4 ⇒ y = −2 ± √3
+z =  5:  radius 3  ⇒  x-int: (x−1)² = 5 ⇒ x = 1 ± √5
+                      y-int: (y+2)² = 8 ⇒ y = −2 ± 2√2</div>
+<p><b>(c)</b> With \(y=-2\), \(z=(x-1)^2-4\). In the <b>\(xz\)-plane</b> this is an up-parabola with vertex \((x,z)=(1,-4)\), \(x\)-intercepts \(x=-1, 3\) (where \(z=0\)), and \(z\)-intercept \(z=-3\).</p>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> (b) concentric circles centred at \((1,-2)\), tagged \(z=0\) and \(z=5\), the point \(z=-4\) marked; every intercept, exact. (c) axes labelled <b>\(x\)</b> and <b>\(z\)</b>; vertex \((1,-4)\); intercepts \(x=-1,3\) and \(z=-3\).</div>
+</details>
+
+<details>
+<summary>Example 6 — An \(xy\) surface: rectangular-hyperbola contour</summary>
+<p><b>Q.</b> For \(z=xy-2x+y\), sketch the contour \(z=5\). Label all intercepts and asymptotes. <b>[5 marks]</b> (Same style as 2021 S2 Q1.)</p>
+<p>There's an \(xy\) term and no squares, so <b>factor</b> rather than complete the square: \(xy-2x+y=(x+1)(y-2)+2\). Check: \(xy-2x+y-2+2\). ✓</p>
+$$ z=5:\quad (x+1)(y-2)=3 \;\Longrightarrow\; y=2+\frac{3}{x+1}.$$
+<ul>
+<li>This is a rectangular hyperbola with centre \((-1,2)\) and <b>asymptotes \(x=-1\) and \(y=2\)</b>. Because \(3\gt0\), the branches lie top-right and bottom-left of the centre.</li>
+<li>\(y\)-intercept: \(x=0\) gives \(y=2+3=5\).</li>
+<li>\(x\)-intercept: \(y=0\) gives \((x+1)(-2)=3\), so \(x=-\frac52\).</li>
+</ul>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> dashed asymptotes \(x=-1\), \(y=2\); intercepts \((0,5)\) (right branch) and \((-\frac52,0)\) (left branch); branches in the correct quadrants relative to \((-1,2)\).</div>
+</details>
+
+<details>
+<summary>Example 7 — Rational surface: “show every contour is a circle”</summary>
+<p><b>Q.</b> Let \(z=\dfrac{4x}{x^2+y^2}\), \((x,y)\ne(0,0)\). (a) Show that for every \(c\ne0\) the contour \(z=c\) is a circle, and give its centre and radius. (b) Sketch the contours \(z=2\) and \(z=-1\). <b>[5 + 4 marks]</b></p>
+<p><b>(a)</b> \(c(x^2+y^2)=4x\), so \(x^2-\frac4cx+y^2=0\). Completing the square:</p>
+$$\Big(x-\frac2c\Big)^2+y^2=\frac{4}{c^2}.$$
+<p>For every \(c\ne0\) this is a <b>circle</b> with centre \(\left(\frac2c,0\right)\) and radius \(\frac{2}{|c|}\). Since the centre is at distance \(\frac{2}{|c|}\) from the origin, every circle passes through \((0,0)\). That point is <b>not in the domain</b>, so it is removed from every contour.</p>
+<p><b>(b)</b> \(z=2\): \((x-1)^2+y^2=1\), with centre \((1,0)\), radius \(1\), and \(x\)-intercepts \(0\) (excluded) and \(2\). \(z=-1\): \((x+2)^2+y^2=4\), with centre \((-2,0)\), radius \(2\), and \(x\)-intercepts \(0\) (excluded) and \(-4\). (For \(c=0\): \(x=0\), the \(y\)-axis minus the origin.)</p>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> the general standard form with \(c\) visible; centre and radius for each level; the two circles tangent to the \(y\)-axis at the origin, on opposite sides; <b>open circle at \((0,0)\)</b> with “excluded”.</div>
+</details>
+
+<details>
+<summary>Example 8 — Square-root surface: domain, contours, half-hyperbola cross-section</summary>
+<p><b>Q.</b> Let \(z=\sqrt{x^2+y^2-4}\). (a) State the domain and range. (b) Sketch the contours \(z=0\), \(z=\sqrt5\), \(z=2\sqrt3\). (c) Sketch the cross-section \(y=0\). <b>[2 + 4 + 4 marks]</b></p>
+<p><b>(a)</b> Need \(x^2+y^2\ge4\): the plane outside, and on, the circle of radius 2. Range \(z\ge0\).</p>
+<p><b>(b)</b> \(z=c\ge0\) gives \(x^2+y^2=4+c^2\): circles about the origin with radius \(\sqrt{4+c^2}\). So \(z=0\) has radius \(2\), \(z=\sqrt5\) has radius \(3\), and \(z=2\sqrt3\) has radius \(4\). Equal steps in radius need growing steps in \(z\).</p>
+<p><b>(c)</b> With \(y=0\), \(z=\sqrt{x^2-4}\). Squaring gives \(x^2-z^2=4\) <b>with \(z\ge0\)</b>. In the \(xz\)-plane this is the <b>upper half</b> of an \(x\)-hyperbola: vertices \((\pm2,0)\), asymptotes \(z=\pm x\) (only the parts with \(z\ge0\), i.e. \(z=|x|\) far out), and nothing for \(|x|\lt2\).</p>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> (b) three circles tagged with their \(z\)-values and radii \(2,3,4\). (c) axes \(x\) and \(z\); vertices \((\pm2,0)\); dashed guide lines \(z=\pm x\); <b>only the upper halves drawn</b>, with a note “\(z\ge0\)”.</div>
+</details>
+
+<details>
+<summary>Example 9 — Name a quadric and describe its traces</summary>
+<p><b>Q.</b> Identify the surface \(4x^2+y^2-z^2=4\) and describe its traces in the planes \(z=k\), \(x=0\) and \(y=0\). <b>[5 marks]</b></p>
+<p>There are three squared variables with one minus sign and a positive right side, so this is a <b>hyperboloid of one sheet</b> around the \(z\)-axis (the odd one out).</p>
+<ul>
+<li>\(z=k\): \(4x^2+y^2=4+k^2\), i.e. \(\frac{x^2}{(4+k^2)/4}+\frac{y^2}{4+k^2}=1\). This is an <b>ellipse for every \(k\)</b> (the surface is one connected tube), smallest at \(k=0\) (\(x^2+\frac{y^2}{4}=1\), the “waist”).</li>
+<li>\(x=0\): \(y^2-z^2=4\), a hyperbola in the \(yz\)-plane opening along \(\pm y\).</li>
+<li>\(y=0\): \(4x^2-z^2=4\), i.e. \(x^2-\frac{z^2}{4}=1\), a hyperbola in the \(xz\)-plane opening along \(\pm x\).</li>
+</ul>
+<div class="tip"><b>🏷️ What the marker wants:</b> the name (“hyperboloid of one sheet”); the axis (\(z\)); the justification (“horizontal traces are ellipses for every \(z\), vertical traces are hyperbolas”).</div>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>Contour/conic sketching appears on <b>11 of the 12</b> papers from 2020–2025 (2022 S2 is the only one without it), usually as Question 1–4 and worth 5–12 marks. The five styles below cover every instance.</p>
+<table>
+<tr><th>Paper</th><th>Q</th><th>Surface / curve</th><th>Task</th><th>Marks</th></tr>
+<tr><td>2025 S2</td><td>1</td><td>\(z=\sqrt{x+y^2}-3\)</td><td>contours \(z=-2,0,1\); show \(y=k\) sections are parabolas; sketch \(k=2\)</td><td>6 + 6</td></tr>
+<tr><td>2025 S1</td><td>3(a)</td><td>\(f=4y^2-x^2+2x\)</td><td>contour through \((1,1)\); intercepts + asymptotes</td><td>8 (+4 crit. pt)</td></tr>
+<tr><td>2024 S2</td><td>1</td><td>\(T=\dfrac{100}{3+x^2+2y^2-4y}\)</td><td>contour through \((2,1)\); max temperature</td><td>8 + 4</td></tr>
+<tr><td>2024 S1</td><td>3</td><td>\(z=4y^2-8y+x^2+2x+6\)</td><td>contour through \((-1,2)\); min of \(z\)</td><td>8 + 4</td></tr>
+<tr><td>2023 S2</td><td>4</td><td>\(z=\frac14x^2-\frac19y^2-x+\frac29y+\frac89\)</td><td>match graphs (3); contours \(z=1,-4\) + name the curves (9)</td><td>3 + 9</td></tr>
+<tr><td>2023 S1</td><td>3</td><td>\(f=x^2y^2+2x^2y+x^2+1\)</td><td>match contour maps (4); contours \(f=1,5\) (8)</td><td>4 + 8</td></tr>
+<tr><td>2022 S1</td><td>2</td><td>\(z=\dfrac{2x}{x^2-y^2}\)</td><td>show contours are hyperbolas; sketch \(z=1\)</td><td>5 + 5</td></tr>
+<tr><td>2021 S2</td><td>1</td><td>\(z=(x-3)(y+1)\)</td><td>sketch contour \(z=-2\), intercepts</td><td>5</td></tr>
+<tr><td>2021 S1</td><td>4</td><td>\(z=\dfrac{8y}{x^2+2y^2}\)</td><td>show contours are ellipses; sketch \(z_0=2\)</td><td>6 + 4</td></tr>
+<tr><td>2020 S2</td><td>8</td><td>\(4x^2-16x+y^2-2y+13=0\)</td><td>sketch conic, parametrise, point with tangent \(\parallel y=-x\)</td><td>10</td></tr>
+<tr><td>2020 S1</td><td>2</td><td>\(4x^2-y^2+4x=6y-4\)</td><td>type of conic; sketch with centre, foci/asymptotes</td><td>5 + 5</td></tr>
+</table>
+
+<!-- Type A -->
+<div class="card q">
+<h3>Type A — Contour through a given point (+ a quick max/min) <span class="marks">flagship · 8 + 4 marks</span></h3>
+<p><b>Looks like:</b> “Sketch the contour which passes through \((x_0,y_0)\). Label all \(x\)-intercepts and \(y\)-intercepts [and asymptotes].” Then a 4-mark follow-up: min/max value or classify the critical point. <b>Instances:</b> 2024 S2 Q1, 2024 S1 Q3, 2025 S1 Q3, 2021 S2 Q1 (level given directly).</p>
+<div class="method"><b>Routine</b> (2024 S2 marking scheme: 1 mark value · 3 marks working to standard form · 2 marks intercepts · 2 marks graph):
+<ol><li>\(c=f(x_0,y_0)\). Write it down.</li><li>\(f=c\), complete the square, reach “\(=1\)”.</li><li>Name the curve with its centre (and asymptotes for a hyperbola).</li><li>Intercepts, or “none”.</li><li>Sketch with every label. Make sure the given point lies on your curve.</li></ol></div>
+
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 S2 Q1 <span class="marks">[12 marks]</span></b></p>
+<p>A thin metal plate is located in the \(xy\)-plane. The temperature \(T\) at a point \((x,y)\) on the metal plate is given by</p>
+$$T(x,y)=\frac{100}{3+x^2+2y^2-4y}.$$
+<ul><li>(a) Sketch the contour of \(T\) which passes through the point \((x,y)=(2,1)\). Label the \(x\)-intercepts and \(y\)-intercepts of the contour. <b>[8 marks]</b></li>
+<li>(b) Determine the maximum temperature on the metal plate. <b>[4 marks]</b></li></ul>
+</div>
+<details>
+<summary>Full worked solution — 2024 S2 Q1(a)–(b)</summary>
+<p><b>(a)</b> \(T(2,1)=\dfrac{100}{3+4+2-4}=\dfrac{100}{5}=20\). <i>[1 mark]</i></p>
+<p>The isotherm \(T=20\) is \(3+x^2+2y^2-4y=5\). Completing the square in \(y\): \(x^2+2\big[(y-1)^2-1\big]+3=5\), so</p>
+$$x^2+2(y-1)^2=4 \;\Longleftrightarrow\; \frac{x^2}{4}+\frac{(y-1)^2}{2}=1. \quad\textit{[3 marks]}$$
+<p>This is an <b>ellipse</b> with centre \((0,1)\), semi-axes \(2\) (horizontal) and \(\sqrt2\) (vertical).</p>
+<ul><li>\(x\)-intercepts (\(y=0\)): \(\frac{x^2}{4}+\frac12=1\), so \(x=\pm\sqrt2\).</li><li>\(y\)-intercepts (\(x=0\)): \((y-1)^2=2\), so \(y=1\pm\sqrt2\). <i>[2 marks]</i></li></ul>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 280 205" width="280" height="205" role="img" aria-label="2024 S2 Q1(a): ellipse x^2/4 + (y-1)^2/2 = 1 through (2,1)" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="140.0" y1="8" x2="140.0" y2="197" stroke="#9aa7b8" stroke-width="1"/>
+<text x="145.0" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="142.7" x2="272" y2="142.7" stroke="#9aa7b8" stroke-width="1"/>
+<text x="266" y="137.7" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="224,102 223,94 220,85 215,77 208,69 199,62 189,56 178,52 166,48 153,46 140,46 127,46 114,48 102,52 91,56 81,62 72,69 65,77 60,85 57,94 56,102 57,111 60,120 65,128 72,136 81,143 91,149 102,153 114,157 127,159 140,159 153,159 166,157 178,153 189,149 199,143 208,136 215,128 220,120 223,111 224,103" fill="none" stroke="#a78bfa" stroke-width="2"/>
+<circle cx="140.0" cy="102.5" r="2.5" fill="#e8edf4"/>
+<text x="145.0" y="98.5" fill="#e8edf4" font-size="10" text-anchor="start">(0,1)</text>
+<circle cx="199.4" cy="142.7" r="3.2" fill="#4ade80"/>
+<circle cx="80.6" cy="142.7" r="3.2" fill="#4ade80"/>
+<text x="202.4" y="155.7" fill="#4ade80" font-size="10" text-anchor="start">√2</text>
+<text x="77.6" y="155.7" fill="#4ade80" font-size="10" text-anchor="end">−√2</text>
+<circle cx="140.0" cy="45.6" r="3.2" fill="#38bdf8"/>
+<circle cx="140.0" cy="159.4" r="3.2" fill="#38bdf8"/>
+<text x="145.0" y="42.6" fill="#38bdf8" font-size="10" text-anchor="start">1+√2</text>
+<text x="145.0" y="171.4" fill="#38bdf8" font-size="10" text-anchor="start">1−√2</text>
+<circle cx="224.0" cy="102.5" r="3.2" fill="#fbbf24"/>
+<text x="229.0" y="106.5" fill="#fbbf24" font-size="10" text-anchor="start">(2,1)</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">2024 S2 Q1(a): isotherm T = 20</figcaption></figure></div>
+<p><b>(b)</b> \(3+x^2+2y^2-4y=x^2+2(y-1)^2+1\ge1\), with equality only at \((0,1)\). The denominator is positive and smallest there, so \(T\) is largest there: \(T_{\max}=\dfrac{100}{1}=\boxed{100}\) at \((0,1)\).</p>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> centre \((0,1)\); \(x\)-intercepts \(\pm\sqrt2\); \(y\)-intercepts \(1\pm\sqrt2\); the point \((2,1)\) on the curve (it's the right-hand extreme point). The official sketch earns 2 marks for exactly these.</div>
+</details>
+
+<details>
+<summary>Also Type A — 2024 S1 Q3 (8 + 4 marks): \(z=4y^2-8y+x^2+2x+6\), contour through \((-1,2)\); minimum of \(z\)</summary>
+<p><b>Question (verbatim):</b> Consider the surface \(z=4y^2-8y+x^2+2x+6\). (a) (8 marks) Sketch the contour which passes through \((x,y)=(-1,2)\). Label all \(x\)-intercepts and \(y\)-intercepts of this contour. (b) (4 marks) Find the minimum value of \(z\) on the surface.</p>
+<p><b>(a)</b> \(z(-1,2)=16-16+1-2+6=5\). Then \(4(y-1)^2-4+(x+1)^2-1+6=5\), so</p>
+$$(x+1)^2+4(y-1)^2=4 \;\Longleftrightarrow\; \frac{(x+1)^2}{4}+(y-1)^2=1.$$
+<p>This is an ellipse with centre \((-1,1)\) and semi-axes \(2\) and \(1\). Extreme points: \((-3,1),(1,1),(-1,2),(-1,0)\).</p>
+<ul><li>\(x\)-intercept: \(y=0\) gives \((x+1)^2=0\), so \(x=-1\). The ellipse <b>touches</b> the \(x\)-axis at \((-1,0)\).</li><li>\(y\)-intercepts: \(x=0\) gives \(1+4(y-1)^2=4\), so \(y=1\pm\frac{\sqrt3}{2}\).</li></ul>
+<p><b>(b)</b> \(z=(x+1)^2+4(y-1)^2+1\ge1\), so the <b>minimum is \(1\)</b>, at \((-1,1)\).</p>
+<div class="tip"><b>🏷️ Labels:</b> centre \((-1,1)\); \((-3,1)\) and \((1,1)\); the tangency \((-1,0)\) on the \(x\)-axis; \(y\)-intercepts \(1\pm\frac{\sqrt3}{2}\); the given point \((-1,2)\) at the top.</div>
+</details>
+
+<details>
+<summary>Also Type A — 2025 S1 Q3 (8 + 4 marks): \(f=4y^2-x^2+2x\), contour through \((1,1)\) — a hyperbola</summary>
+<p><b>Question (verbatim):</b> Consider the surface given by \(f(x,y)=4y^2-x^2+2x\). (a) (8 marks) Sketch the contour which passes through \((x,y)=(1,1)\). Label any \(x\)-intercepts, \(y\)-intercepts and asymptotes of the contour. (b) (4 marks) Find and classify the critical point(s) of \(f\).</p>
+<p><b>(a)</b> \(f(1,1)=4-1+2=5\). Then \(4y^2-\big[(x-1)^2-1\big]=5\), so \(4y^2-(x-1)^2=4\):</p>
+$$ y^2-\frac{(x-1)^2}{4}=1. \qquad\textit{[3 marks: working + standard form]}$$
+<p>The \(y\) term is positive, so this is a <b>\(y\)-hyperbola</b> with centre \((1,0)\) and vertices \((1,\pm1)\). The given point \((1,1)\) is a vertex.</p>
+<ul><li>Asymptotes: \(y=\pm\frac12(x-1)\). <i>[1 mark]</i></li>
+<li>\(x\)-intercepts: \(y=0\) gives \(-(x-1)^2=4\), so <b>no \(x\)-intercepts</b>. <i>[1 mark]</i></li>
+<li>\(y\)-intercepts: \(x=0\) gives \(4y^2=5\), so \(y=\pm\frac{\sqrt5}{2}\). <i>[1 mark]</i></li></ul>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 320 186" width="320" height="186" role="img" aria-label="2025 S1 Q3(a): y-hyperbola centred (1,0), vertices (1,±1), asymptotes y=±(x-1)/2" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="135.7" y1="8" x2="135.7" y2="178" stroke="#9aa7b8" stroke-width="1"/>
+<text x="140.7" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="93.0" x2="312" y2="93.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="306" y="88.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="14,161 306,25" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="14,25 306,161" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+<polyline points="33,30 49,37 64,43 77,49 89,53 100,57 109,60 118,63 126,65 134,67 141,69 147,70 154,70 160,70 166,70 173,70 179,69 186,67 194,65 202,63 211,60 220,57 231,53 243,49 256,43 271,37 287,30" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<polyline points="33,156 49,149 64,143 77,137 89,133 100,129 109,126 118,123 126,121 134,119 141,117 147,116 154,116 160,116 166,116 173,116 179,117 186,119 194,121 202,123 211,126 220,129 231,133 243,137 256,143 271,149 287,156" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<circle cx="160.0" cy="70.4" r="3.2" fill="#fbbf24"/>
+<circle cx="160.0" cy="115.6" r="3.2" fill="#fbbf24"/>
+<text x="165.0" y="66.4" fill="#e8edf4" font-size="10" text-anchor="start">(1,1)</text>
+<text x="165.0" y="128.6" fill="#e8edf4" font-size="10" text-anchor="start">(1,−1)</text>
+<circle cx="135.7" cy="67.8" r="3.2" fill="#4ade80"/>
+<circle cx="135.7" cy="118.2" r="3.2" fill="#4ade80"/>
+<text x="131.7" y="64.8" fill="#4ade80" font-size="10" text-anchor="end">√5/2</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">2025 S1 Q3(a): contour f = 5</figcaption></figure></div>
+<p><b>(b)</b> \(f=4y^2-(x-1)^2+1\), or via \(\nabla f=(-2x+2,\,8y)=\mathbf 0\): the only critical point is \((1,0)\). \(f\) increases in \(y\) and decreases in \(x\) away from it (Hessian determinant \(=(-2)(8)-0=-16\lt0\)), so it is a <b>saddle point</b> with \(f(1,0)=1\).</p>
+<div class="tip"><b>🏷️ Labels (MS: “2 marks for sketch; must label intercepts and asymptotes”):</b> dashed asymptotes \(y=\pm\frac{x-1}{2}\) through \((1,0)\); vertices \((1,\pm1)\); \(y\)-intercepts \(\pm\frac{\sqrt5}{2}\); the words “no \(x\)-intercepts”.</div>
+</details>
+
+<details>
+<summary>Also Type A — 2021 S2 Q1 (5 marks): \(z=(x-3)(y+1)\), contour \(z=-2\)</summary>
+<p><b>Question (verbatim):</b> Consider the surface \(z=(x-3)(y+1)\). Sketch the contour \(z=-2\). Indicate all \(x\)-intercepts and \(y\)-intercepts.</p>
+<p>\((x-3)(y+1)=-2\), so \(y=-1-\dfrac{2}{x-3}\). This is a rectangular hyperbola with centre \((3,-1)\) and asymptotes \(x=3\), \(y=-1\). Because \(-2\lt0\), the branches lie top-left and bottom-right of the centre.</p>
+<ul><li>\(x\)-intercept: \(y=0\) gives \(x-3=-2\), so \(x=1\).</li><li>\(y\)-intercept: \(x=0\) gives \(-3(y+1)=-2\), so \(y=-\frac13\).</li></ul>
+<p>Both intercepts are on the top-left branch. The bottom-right branch crosses neither axis.</p>
+<div class="tip"><b>🏷️ Labels:</b> asymptotes \(x=3\), \(y=-1\) dashed; \((1,0)\), \((0,-\frac13)\); correct quadrants.</div>
+</details>
+</div>
+
+<!-- Type B -->
+<div class="card q">
+<h3>Type B — Several contours on one set of axes (+ a cross-section) <span class="marks">~8–12 marks</span></h3>
+<p><b>Looks like:</b> “Sketch the contour curves for \(z=\dots\) on the same set of axes. Clearly label all intercepts”; “for each contour, describe what kind of curve it is”; “show that the cross-sections for \(y=k\) are parabolas”. <b>Instances:</b> 2025 S2 Q1, 2023 S2 Q4(b), 2023 S1 Q3(b).</p>
+<div class="method"><b>Routine:</b> (1) find the range of \(z\), since some levels may be impossible; (2) complete the square once with general \(c\); (3) substitute each level and name each curve; (4) intercepts per curve; (5) one sketch with every curve tagged.</div>
+
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q1 <span class="marks">[12 marks]</span></b></p>
+<p>Consider the surface $$z=\sqrt{x+y^2}-3.$$</p>
+<ul><li>(a) Sketch the contour curves for \(z=-2\), \(z=0\), and \(z=1\) on the same set of axes. Clearly label all intercepts with the coordinate axes for each contour. <b>[6 marks]</b></li>
+<li>(b) Show that the cross-sections of the surface for \(y=k\) are parabolas. Sketch the cross-section for \(k=2\), indicating its vertex and intercepts. <b>[6 marks]</b></li></ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q1(a)–(b)</summary>
+<p><b>Range first.</b> \(\sqrt{\;\cdot\;}\ge0\), so \(z\ge-3\). For \(z\ge-3\):</p>
+$$ z=\sqrt{x+y^2}-3 \iff z+3=\sqrt{x+y^2} \iff (z+3)^2=x+y^2\quad(z\ge-3).$$
+<p><b>(a)</b> The contour \(z=c\) is \(x=(c+3)^2-y^2\): a sideways parabola <b>opening left</b>, with vertex \(((c+3)^2,0)\).</p>
+<table>
+<tr><th>Level</th><th>Contour</th><th>Vertex / \(x\)-int</th><th>\(y\)-intercepts</th></tr>
+<tr><td>\(z=-2\)</td><td>\(x=1-y^2\)</td><td>\((1,0)\)</td><td>\(y=\pm1\)</td></tr>
+<tr><td>\(z=0\)</td><td>\(x=9-y^2\)</td><td>\((9,0)\)</td><td>\(y=\pm3\)</td></tr>
+<tr><td>\(z=1\)</td><td>\(x=16-y^2\)</td><td>\((16,0)\)</td><td>\(y=\pm4\)</td></tr>
+</table>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 440 220" width="440" height="220" role="img" aria-label="2025 S2 Q1(a): three leftward parabolas x = c - y^2 with vertices at x = 1, 9, 16" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="88.9" y1="8" x2="88.9" y2="212" stroke="#9aa7b8" stroke-width="1"/>
+<text x="93.9" y="14" fill="#9aa7b8" font-size="12" font-style="italic">y</text>
+<line x1="8" y1="110.0" x2="432" y2="110.0" stroke="#9aa7b8" stroke-width="1"/>
+<text x="426" y="105.0" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="33,148 50,144 66,139 78,134 89,129 97,124 103,120 106,115 108,110 106,105 103,100 97,96 89,91 78,86 66,81 50,76 33,72" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+<circle cx="107.6" cy="110.0" r="3.2" fill="#38bdf8"/>
+<text x="110.6" y="123.0" fill="#38bdf8" font-size="10" text-anchor="start">1</text>
+<circle cx="88.9" cy="90.8" r="3.2" fill="#38bdf8"/>
+<circle cx="88.9" cy="129.2" r="3.2" fill="#38bdf8"/>
+<text x="84.9" y="87.8" fill="#38bdf8" font-size="10" text-anchor="end">1</text>
+<text x="111.6" y="104.0" fill="#38bdf8" font-size="10" text-anchor="start">z=−2</text>
+<polyline points="28,177 60,172 89,168 116,163 140,158 163,153 183,148 200,144 215,139 228,134 239,129 247,124 253,120 256,115 257,110 256,105 253,100 247,96 239,91 228,86 215,81 200,76 183,72 163,67 140,62 116,57 89,52 60,48 28,43" fill="none" stroke="#a78bfa" stroke-width="1.8"/>
+<circle cx="257.5" cy="110.0" r="3.2" fill="#a78bfa"/>
+<text x="260.5" y="123.0" fill="#a78bfa" font-size="10" text-anchor="start">9</text>
+<circle cx="88.9" cy="52.4" r="3.2" fill="#a78bfa"/>
+<circle cx="88.9" cy="167.6" r="3.2" fill="#a78bfa"/>
+<text x="84.9" y="49.4" fill="#a78bfa" font-size="10" text-anchor="end">3</text>
+<text x="261.5" y="104.0" fill="#a78bfa" font-size="10" text-anchor="start">z=0</text>
+<polyline points="50,192 89,187 125,182 159,177 191,172 220,168 247,163 272,158 294,153 314,148 331,144 346,139 359,134 370,129 378,124 384,120 387,115 389,110 387,105 384,100 378,96 370,91 359,86 346,81 331,76 314,72 294,67 272,62 247,57 220,52 191,48 159,43 125,38 89,33 50,28" fill="none" stroke="#4ade80" stroke-width="1.8"/>
+<circle cx="388.5" cy="110.0" r="3.2" fill="#4ade80"/>
+<text x="391.5" y="123.0" fill="#4ade80" font-size="10" text-anchor="start">16</text>
+<circle cx="88.9" cy="33.2" r="3.2" fill="#4ade80"/>
+<circle cx="88.9" cy="186.8" r="3.2" fill="#4ade80"/>
+<text x="84.9" y="30.2" fill="#4ade80" font-size="10" text-anchor="end">4</text>
+<text x="392.5" y="104.0" fill="#4ade80" font-size="10" text-anchor="start">z=1</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">2025 S2 Q1(a): contours z = −2, 0, 1 (x = 1−y², 9−y², 16−y²)</figcaption></figure></div>
+<p><b>(b)</b> Put \(y=k\): \((z+3)^2=x+k^2\), i.e. \(x=(z+3)^2-k^2\). For every \(k\) this is a parabola in the \(xz\)-plane (sideways, opening in the \(+x\) direction) with vertex \((x,z)=(-k^2,-3)\). Only its upper half \(z\ge-3\) lies on the surface.</p>
+<p>For \(k=2\): \((z+3)^2=x+4\), with vertex \((-4,-3)\).</p>
+<ul><li>\(x\)-intercept (\(z=0\)): \(9=x+4\), so \(x=5\).</li>
+<li>\(z\)-intercept (\(x=0\)): \((z+3)^2=4\), so \(z+3=\pm2\), giving \(z=-1\) or \(z=-5\). Since \(z\ge-3\), <b>only \(z=-1\)</b> is on the surface.</li></ul>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="2025 S2 Q1(b): cross-section y=2 is the upper half (z &gt;= -3) of the sideways parabola (z+3)^2 = x+4" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+<line x1="135.7" y1="8" x2="135.7" y2="192" stroke="#9aa7b8" stroke-width="1"/>
+<text x="140.7" y="14" fill="#9aa7b8" font-size="12" font-style="italic">z</text>
+<line x1="8" y1="48.4" x2="312" y2="48.4" stroke="#9aa7b8" stroke-width="1"/>
+<text x="306" y="43.4" fill="#9aa7b8" font-size="12" font-style="italic">x</text>
+<polyline points="38,117 38,115 39,113 40,112 41,110 42,108 44,106 46,104 49,102 52,100 55,98 58,96 62,94 66,93 71,91 76,89 81,87 86,85 92,83 98,81 105,79 111,77 118,76 126,74 134,72 142,70 150,68 159,66 168,64 178,62 187,60 197,59 208,57 219,55 230,53 241,51 253,49 265,47 277,45 290,43 303,42" fill="none" stroke="#a78bfa" stroke-width="2.2"/>
+<polyline points="253,185 241,183 230,182 219,180 208,178 197,176 187,174 178,172 168,170 159,168 150,166 142,164 134,163 126,161 118,159 111,157 105,155 98,153 92,151 86,149 81,147 76,146 71,144 66,142 62,140 58,138 55,136 52,134 49,132 46,130 44,129 42,127 41,125 40,123 39,121 38,119 38,117" fill="none" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="4,4"/>
+<circle cx="38.3" cy="117.2" r="3.2" fill="#fbbf24"/>
+<text x="42.3" y="131.2" fill="#e8edf4" font-size="10" text-anchor="start">vertex (−4,−3)</text>
+<circle cx="257.3" cy="48.4" r="3.2" fill="#4ade80"/>
+<text x="257.3" y="42.4" fill="#e8edf4" font-size="10" text-anchor="middle">(5,0)</text>
+<circle cx="135.7" cy="71.3" r="3.2" fill="#4ade80"/>
+<text x="140.7" y="75.3" fill="#e8edf4" font-size="10" text-anchor="start">(0,−1)</text>
+<circle cx="135.7" cy="163.1" r="3.2" fill="#0e1117" stroke="#f87171" stroke-width="1.6"/>
+<text x="144.7" y="167.1" fill="#f87171" font-size="10" text-anchor="start">z=−5: not on surface</text>
+</svg><figcaption style="color:#9aa7b8;font-size:12.5px;margin-top:4px">2025 S2 Q1(b): only the solid half (z ≥ −3) lies on the surface</figcaption></figure></div>
+<div class="trap">The official solution sketch draws the full parabola and boxes both \(z=-1\) and \(z=-5\). Strictly, \(z=-5\lt-3\) is not on the surface. Write the restriction \(z\ge-3\), draw the upper half solid, and add a remark if you like: “the lower half (dashed) satisfies the squared equation but not the original.” You lose nothing, and you're protected against a strict marker.</div>
+<div class="tip"><b>🏷️ What the marker wants labelled:</b> (a) three left-opening parabolas, each tagged with its \(z\)-value, vertices \(1, 9, 16\) on the \(x\)-axis, \(y\)-intercepts \(\pm1,\pm3,\pm4\). (b) axes \(x\) and <b>\(z\)</b>; vertex \((-4,-3)\); intercepts \((5,0)\) and \((0,-1)\); the general-\(k\) equation showing “parabola for every \(k\)”.</div>
+</details>
+
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2023 S2 Q4(b) <span class="marks">[9 marks]</span></b></p>
+<p>Consider the surface $$z=\frac14x^2-\frac19y^2-x+\frac29y+\frac89.$$ Sketch the contours \(z=1\) and \(z=-4\). In addition, for each contour, describe what kind of curve it is. <b>Hint:</b> If \(z=0\), then \(y=(8-3x)/2\) or \(y=(3x-4)/2\).</p>
+</div>
+<details>
+<summary>Full worked solution — 2023 S2 Q4(b)</summary>
+<p>Complete both squares, using \(\frac89=1-\frac19\):</p>
+$$z=\tfrac14(x^2-4x+4)-\tfrac19(y^2-2y+1)=\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}.$$
+<p>This is a saddle centred at \((2,1)\). The hint is the \(z=0\) contour, \(y-1=\pm\frac32(x-2)\), which is exactly the pair of asymptotes.</p>
+<p><b>\(z=1\):</b> \(\dfrac{(x-2)^2}{4}-\dfrac{(y-1)^2}{9}=1\). This is a <b>horizontal (\(x\)-) hyperbola</b> with centre \((2,1)\), \(a=2\), \(b=3\), and vertices \((0,1)\) and \((4,1)\).</p>
+<ul><li>\(x\)-intercepts: \(\frac{(x-2)^2}{4}=1+\frac19\), so \(x=2\pm\frac{2\sqrt{10}}{3}\). \(y\)-intercept: \(x=0\) gives \(y=1\), the vertex \((0,1)\) sitting on the \(y\)-axis.</li></ul>
+<p><b>\(z=-4\):</b> \(\dfrac{(x-2)^2}{4}-\dfrac{(y-1)^2}{9}=-4\), so \(\dfrac{(y-1)^2}{36}-\dfrac{(x-2)^2}{16}=1\). This is a <b>vertical (\(y\)-) hyperbola</b> with centre \((2,1)\) and vertices \((2,7)\) and \((2,-5)\).</p>
+<ul><li>\(y\)-intercepts: \(x=0\) gives \((y-1)^2=45\), so \(y=1\pm3\sqrt5\). \(x\)-intercepts: \(\frac{(x-2)^2}{16}=\frac1{36}-1\lt0\), so none.</li></ul>
+<p><b>Asymptotes for both:</b> \(y=1\pm\frac32(x-2)\), i.e. \(y=\frac{3x-4}{2}\) and \(y=\frac{8-3x}{2}\).</p>
+<div class="tip"><b>🏷️ Labels:</b> centre \((2,1)\); the two dashed asymptotes (the hint lines); \(z=1\) branches through \((0,1),(4,1)\); \(z=-4\) branches through \((2,7),(2,-5)\); each tagged with its level and named (“horizontal hyperbola”, “vertical hyperbola”). Naming the curve is explicitly asked for, so it earns marks.</div>
+</details>
+
+<details>
+<summary>Also Type B — 2023 S1 Q3(b) (8 marks): \(f=x^2y^2+2x^2y+x^2+1\), contours \(f=1\) and \(f=5\)</summary>
+<p><b>Question (verbatim):</b> Consider the function \(f:\mathbb R^2\to\mathbb R\) given by the formula \(f(x,y)=x^2y^2+2x^2y+x^2+1\). Sketch the contours \(f(x,y)=1\) and \(f(x,y)=5\).</p>
+<p><b>Spot the factor:</b> \(f=x^2(y^2+2y+1)+1=x^2(y+1)^2+1\).</p>
+<ul><li>\(f=1\): \(x^2(y+1)^2=0\), so \(x=0\) or \(y=-1\). The contour is the <b>two lines</b> \(x=0\) (the \(y\)-axis) and \(y=-1\).</li>
+<li>\(f=5\): \(x^2(y+1)^2=4\), so \(x(y+1)=\pm2\), giving \(y=-1+\frac2x\) and \(y=-1-\frac2x\). These are <b>two rectangular hyperbolas</b>, both with asymptotes \(x=0\) and \(y=-1\). \(x\)-intercepts: \(x=2\) (for \(+\)) and \(x=-2\) (for \(-\)). No \(y\)-intercepts, since \(x=0\) is an asymptote.</li></ul>
+<div class="tip"><b>🏷️ Labels:</b> the official solution says “Highlight \(y\)-axis and \(y=-1\) on graph for \(f=1\)”. For \(f=5\), draw all four branches (one in each quadrant around \((0,-1)\)) with intercepts \((\pm2,0)\).</div>
+</details>
+</div>
+
+<!-- Type C -->
+<div class="card q">
+<h3>Type C — “Show that all contours are ellipses / hyperbolas” (rational \(f\)) <span class="marks">10 marks</span></h3>
+<p><b>Looks like:</b> \(z=\dfrac{\text{linear}}{\text{quadratic}}\); “for any \(z_0\ne0\) show that the contours \(z=z_0\) are …”, then “sketch the contour for \(z_0=\dots\)”. <b>Instances:</b> 2022 S1 Q2, 2021 S1 Q4.</p>
+<div class="method"><b>Routine:</b> multiply by the denominator, gather terms, complete the square carrying \(z_0\), divide by the right-hand side (a positive expression in \(z_0\)) to reach “\(=1\)”, then name it: “ellipse centred \((0,2/z_0)\) for every \(z_0\ne0\)”.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2021 S1 Q4 <span class="marks">[10 marks]</span></b></p>
+<p>Consider the surface $$z=\frac{8y}{x^2+2y^2}.$$ (a) Show that all contours \(z=z_0\) (with \(z_0\in\mathbb R\setminus\{0\}\)) are ellipses. <b>(6 marks)</b> (b) Sketch the contour for \(z_0=2\). <b>(4 marks)</b></p>
+</div>
+<details>
+<summary>Full worked solution — 2021 S1 Q4(a)–(b)</summary>
+<p><b>(a)</b> Set \(z=z_0\ne0\): \(x^2+2y^2=\dfrac{8y}{z_0}\), so \(x^2+2\left(y^2-\dfrac{4}{z_0}y\right)=0\), and</p>
+$$x^2+2\Big(y-\frac{2}{z_0}\Big)^2-\frac{8}{z_0^2}=0 \;\Longrightarrow\; \frac{x^2}{8/z_0^2}+\frac{(y-2/z_0)^2}{4/z_0^2}=1.$$
+<p>Both denominators are positive for every \(z_0\ne0\), so each contour is an <b>ellipse</b> with centre \((0,\,2/z_0)\) and semi-axes \(\frac{2\sqrt2}{|z_0|}\) (horizontal) and \(\frac{2}{|z_0|}\) (vertical).</p>
+<p><b>(b)</b> \(z_0=2\): \(\dfrac{x^2}{2}+(y-1)^2=1\). This is an ellipse with centre \((0,1)\) and semi-axes \(\sqrt2\) and \(1\). Extreme points: \((\pm\sqrt2,1)\), \((0,2)\), \((0,0)\).</p>
+<ul><li>\(y\)-intercepts: \(y=0\) and \(y=2\). \(x\)-intercept: only \(x=0\) (the ellipse touches the \(x\)-axis at the origin).</li></ul>
+<div class="trap">The origin is on this ellipse but <b>not in the domain</b> (the denominator \(x^2+2y^2=0\) there). Draw an <b>open circle</b> at \((0,0)\). The official solution stops at the standard form; this extra line shows you understand what the equation means.</div>
+<div class="tip"><b>🏷️ Labels:</b> centre \((0,1)\); \((\pm\sqrt2,1)\); top \((0,2)\); open circle at \((0,0)\).</div>
+</details>
+
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2022 S1 Q2 <span class="marks">[10 marks]</span></b></p>
+<p>Consider the surface $$z=\frac{2x}{x^2-y^2}.$$ a) For any \(z_0\ne0\), show that the contours \(z=z_0\) of the surface are hyperbolas. <b>(5 marks)</b> b) Sketch the contour for \(z=1\). Be sure to indicate the hyperbola’s center, and asymptotes. <b>(5 marks)</b></p>
+</div>
+<details>
+<summary>Full worked solution — 2022 S1 Q2(a)–(b)</summary>
+<p><b>(a)</b> \(z_0(x^2-y^2)=2x\), so \(z_0x^2-2x-z_0y^2=0\), so \(z_0\left(x-\frac1{z_0}\right)^2-\frac1{z_0}-z_0y^2=0\). Multiply by \(z_0\):</p>
+$$z_0^2\Big(x-\frac1{z_0}\Big)^2-z_0^2y^2=1 \quad\Longleftrightarrow\quad \frac{(x-1/z_0)^2}{1/z_0^2}-\frac{y^2}{1/z_0^2}=1.$$
+<p>For every \(z_0\ne0\) this is an <b>\(x\)-hyperbola</b> with centre \((1/z_0,0)\) and asymptotes \(y=\pm(x-1/z_0)\).</p>
+<p><b>(b)</b> \(z=1\): \((x-1)^2-y^2=1\). Centre \((1,0)\), vertices \((0,0)\) and \((2,0)\), asymptotes \(y=\pm(x-1)\).</p>
+<div class="trap">The vertex \((0,0)\) makes \(x^2-y^2=0\), so it is <b>excluded</b>. It is the <i>only</i> point of this hyperbola on the lines \(y=\pm x\) (solve \((x-1)^2-x^2=1\) to get \(x=0\)). Open circle at the origin; the left branch is otherwise complete.</div>
+<div class="tip"><b>🏷️ Labels (question says “be sure to indicate”):</b> centre \((1,0)\) — a dot <i>not</i> on the curve; asymptotes \(y=x-1\) and \(y=1-x\) dashed; vertices \((0,0)^{\circ}\) (open) and \((2,0)\).</div>
+</details>
+</div>
+
+<!-- Type D -->
+<div class="card q">
+<h3>Type D — Classify and sketch a conic (centre, foci, asymptotes) <span class="marks">10 marks · older papers</span></h3>
+<p><b>Looks like:</b> a bare conic equation; “determine the type”, “sketch, identifying the centre, foci or asymptotes”, sometimes followed by a parametrisation (links to Ch 7). <b>Instances:</b> 2020 S1 Q2, 2020 S2 Q8.</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S1 Q2 <span class="marks">[10 marks]</span></b></p>
+<p>Let a conic section be given by \(4x^2-y^2+4x=6y-4\). (i) Determine the type of conic section. <b>(5 marks)</b> (ii) Sketch the conic section. Be sure to identify the center, foci, or asymptotes. <b>(5 marks)</b></p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S1 Q2</summary>
+<p><b>(i)</b> \(4x^2+4x-(y^2+6y)=-4\), so \(4\left(x+\frac12\right)^2-1-\big[(y+3)^2-9\big]=-4\), so</p>
+$$4\Big(x+\tfrac12\Big)^2-(y+3)^2=-12 \;\Longleftrightarrow\; \frac{(y+3)^2}{12}-\frac{(x+\frac12)^2}{3}=1.$$
+<p>This is a <b>hyperbola</b> opening up/down (a \(y\)-hyperbola) with centre \(\left(-\frac12,-3\right)\).</p>
+<p><b>(ii)</b> \(b=\sqrt{12}=2\sqrt3\) (vertical), \(a=\sqrt3\). Vertices \(\left(-\frac12,\,-3\pm2\sqrt3\right)\). Asymptotes \(y+3=\pm\frac{2\sqrt3}{\sqrt3}\left(x+\frac12\right)\), i.e. \(y=-3\pm2\left(x+\frac12\right)\) (\(y=2x-2\) and \(y=-2x-4\)). Foci: \(c=\sqrt{12+3}=\sqrt{15}\), so the foci are at \(\left(-\frac12,\,-3\pm\sqrt{15}\right)\).</p>
+<ul><li>\(y\)-intercepts: \(x=0\) gives \(1-(y+3)^2=-12\), so \(y=-3\pm\sqrt{13}\). \(x\)-intercepts: \(y=0\) gives \(4x^2+4x+4=0\) with discriminant \(\lt0\), so none.</li></ul>
+<div class="tip"><b>🏷️ Labels:</b> centre \(\left(-\frac12,-3\right)\); vertices; foci; both asymptotes with equations; intercepts \(y=-3\pm\sqrt{13}\); “no \(x\)-intercepts”.</div>
+</details>
+
+<details>
+<summary>Also Type D — 2020 S2 Q8 (10 marks): ellipse, parametrisation, tangent parallel to \(y=-x\)</summary>
+<p><b>Question (verbatim):</b> Sketch the conic section given by \(4x^2-16x+y^2-2y+13=0\). Find a parametric representation of this curve. Identify a point on the curve for which the velocity vector (tangent to the curve) is parallel to the line \(y=-x\).</p>
+<p>\(4(x-2)^2-16+(y-1)^2-1+13=0\), so \(4(x-2)^2+(y-1)^2=4\), i.e. \((x-2)^2+\dfrac{(y-1)^2}{4}=1\). This is an ellipse with centre \((2,1)\), semi-axes \(1\) (horizontal) and \(2\) (vertical). Extreme points \((1,1),(3,1),(2,3),(2,-1)\). \(x\)-intercepts: \(y=0\) gives \((x-2)^2=\frac34\), so \(x=2\pm\frac{\sqrt3}{2}\). It lies entirely in \(x\ge1\), so there are no \(y\)-intercepts.</p>
+<p><b>Parametrisation:</b> \(\mathbf r(t)=(2+\cos t,\;1+2\sin t)\), \(0\le t\lt2\pi\). Velocity \(\mathbf r'(t)=(-\sin t,\;2\cos t)\).</p>
+<p>Parallel to \((1,-1)\) means \(-\sin t=-2\cos t\), i.e. \(\tan t=2\). This gives \((\cos t,\sin t)=\pm\left(\frac1{\sqrt5},\frac2{\sqrt5}\right)\), so the points are \(\left(2+\frac1{\sqrt5},\,1+\frac4{\sqrt5}\right)\) and \(\left(2-\frac1{\sqrt5},\,1-\frac4{\sqrt5}\right)\). Either one answers the question.</p>
+</details>
+</div>
+
+<!-- Type E -->
+<div class="card q">
+<h3>Type E — Match functions with contour maps / graphs <span class="marks">3–4 marks, no working</span></h3>
+<p><b>Looks like:</b> a table of functions and three pictures; “Enter 0 if there is no match. No justification is required.” <b>Instances:</b> 2023 S1 Q3(a) (contour maps), 2023 S2 Q4(a) (3-D graphs).</p>
+<details>
+<summary>How the official answers were reached (both papers)</summary>
+<p><b>2023 S1 Q3(a)</b>: functions \(y-x\), \((y^2-1)x\), \(y^2+x^2-xy\), \(y^2-x\). The maps are (1) curves around straight lines \(x=0\), \(y=\pm1\) crossing like a saddle; (2) nested parabola-shaped arcs; (3) tilted nested ellipses. Official answers: \(y-x\to0\) (its contours would be parallel straight lines, not shown); \((y^2-1)x\to1\) (zero set is exactly the lines \(x=0\), \(y=\pm1\)); \(y^2+x^2-xy\to3\) (positive quadratic with an \(xy\) term gives tilted ellipses); \(y^2-x\to2\) (contours \(x=y^2-c\), nested parabolas).</p>
+<p><b>2023 S2 Q4(a)</b>: \(x^2+y^2\), \(e^x(\cos y-1)\), \(x^3\), \(x^2-y^2\), \(e^x\cos y\). The figures are (1) waves growing in size, taking positive and negative values; (2) a bowl; (3) a surface depending on one variable, rising steeply on one side and falling on the other. Official: \(x^2+y^2\to2\), \(x^3\to3\), \(e^x\cos y\to1\), and \(e^x(\cos y-1)\to0\) (it is never positive, but Figure 1 rises well above the plane). \(x^2-y^2\) has no figure (a saddle isn't shown), so \(0\).</p>
+<div class="tip">Quick sign and zero-set tests beat staring: “where is \(f=0\)?” and “can \(f\) be positive?” settle most rows in seconds.</div>
+</details>
+</div>
+</section>
+
+<!-- ================= 5. WORDING TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the verb, and you know the routine <b>and</b> what the marks are for.</p>
+<table>
+<tr><th>When the exam says…</th><th>It means / do this</th></tr>
+<tr><td>“sketch the contour which <b>passes through</b> \((x_0,y_0)\)”</td><td>Line 1: \(c=f(x_0,y_0)\) (1 mark). Then \(f=c\), standard form, intercepts, sketch. Check the point is on your curve.</td></tr>
+<tr><td>“sketch the contours \(z=a, b, c\) <b>on the same set of axes</b>”</td><td>One general standard form in \(c\); one diagram; every curve tagged with its level. Check the range first, since a level can be empty or degenerate.</td></tr>
+<tr><td>“<b>label all intercepts</b> with the coordinate axes”</td><td>\(y=0\) for \(x\)-intercepts and \(x=0\) for \(y\)-intercepts, for <b>each</b> curve. Exact surds. Write “none” when there are none.</td></tr>
+<tr><td>“label … <b>asymptotes</b>” / “indicate the hyperbola’s <b>center, and asymptotes</b>”</td><td>Hyperbola: set the right side to 0 to get the lines through the centre, drawn dashed with equations. Rectangular: \(x=h\), \(y=k\).</td></tr>
+<tr><td>“<b>describe what kind of curve</b> it is” / “determine the <b>type</b> of conic”</td><td>Name it precisely: “horizontal hyperbola centred \((2,1)\), \(a=2\), \(b=3\)”, “ellipse centred …”, “pair of lines”, “single point”.</td></tr>
+<tr><td>“<b>show that</b> the contours \(z=z_0\) are ellipses/hyperbolas” (\(z_0\ne0\))</td><td>Keep \(z_0\) as a letter; complete the square; reach “\(=1\)” with positive denominators; state “for all \(z_0\ne0\) …” and give the centre in terms of \(z_0\).</td></tr>
+<tr><td>“show that the <b>cross-sections</b> for \(y=k\) are parabolas”</td><td>Substitute \(y=k\) (general \(k\)); rearrange to parabola form in \(x\) and \(z\); give the vertex as a function of \(k\). Sketch on \(x\)–\(z\) axes.</td></tr>
+<tr><td>“find the <b>minimum value of \(z\)</b>” / “<b>maximum temperature</b>” right after a contour part</td><td>Reuse the completed square: sum of squares plus a constant means the constant is the min, at the centre. For \(100/D\), max \(T\) is where \(D\) is smallest.</td></tr>
+<tr><td>“<b>isothermal curves</b> / isotherms / level curves / contour lines”</td><td>All mean contours \(f=c\).</td></tr>
+<tr><td>“use contours <b>and/or cross-sections</b> to sketch the surface”</td><td>A few contours <b>and</b> the \(x=0\), \(y=0\) sections; name the quadric (bowl / saddle / cone …).</td></tr>
+<tr><td>“<b>identify</b> the surface”</td><td>Quadric name + axis + centre/vertex (e.g. “saddle centred \((0,-1,2)\) with the \(x\)-axis in the role of \(z\)”).</td></tr>
+<tr><td>“<b>match</b> … enter 0 if there is no match”</td><td>Fingerprints: zero set, sign, symmetry, spacing. There's usually at least one 0.</td></tr>
+<tr><td>\(z=\sqrt{\dots}\), \(\ln(\dots)\), a fraction</td><td>State the <b>domain/range restriction</b> before squaring or clearing. Half-curves and excluded points follow from it.</td></tr>
+</table>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+<div class="trap"><b>Not factoring the coefficient before completing the square.</b> \(4y^2-8y\ne(2y-2)^2-4\) in a useful way. Write \(4(y^2-2y)=4(y-1)^2-4\). The correction term is multiplied by the coefficient.</div>
+<div class="trap"><b>Skipping the value at the given point.</b> In 2024 S2 the first mark was for \(T(2,1)=20\) alone. Always write it as its own line.</div>
+<div class="trap"><b>Not stating that intercepts don't exist.</b> 2025 S1 awarded a mark for “no \(x\)-intercepts”. If you silently omit them, the marker can't tell whether you checked.</div>
+<div class="trap"><b>Wrong hyperbola orientation.</b> The positive term (after making the right side \(+1\)) decides the direction. With \(=-4\) on the right you must divide by \(-4\), which flips which term is positive (2023 S2: \(z=1\) opens sideways, \(z=-4\) opens up/down).</div>
+<div class="trap"><b>Asymptotes through the origin instead of the centre.</b> For centre \((1,0)\) they are \(y=\pm\frac12(x-1)\), not \(y=\pm\frac12x\).</div>
+<div class="trap"><b>Calling a degenerate level a conic.</b> At the critical height the “ellipse” is a point and the “hyperbola” is two lines (2023 S1: \(f=1\) is the two lines \(x=0\), \(y=-1\)).</div>
+<div class="trap"><b>Forgetting that \(\sqrt{\ }\ge0\).</b> 2025 S2: \(z\ge-3\). The contour at a level below the range is <b>empty</b>, and the cross-section is a <b>half</b>-parabola, so \(z=-5\) is not an intercept of the surface.</div>
+<div class="trap"><b>Drawing through excluded points.</b> Rational surfaces (2021 S1, 2022 S1) have contours through the origin, where \(f\) is undefined. Open circle.</div>
+<div class="trap"><b>Cross-section on the wrong axes.</b> A \(y=k\) section lives in the \(xz\)-plane. Label the vertical axis \(z\), and give the vertex as \((x,z)\).</div>
+<div class="trap"><b>Touching vs crossing.</b> A double root means the curve is <b>tangent</b> to the axis (2024 S1: the ellipse touches the \(x\)-axis at \((-1,0)\)). Draw it just kissing the axis and label it.</div>
+<div class="trap"><b>Decimals instead of exact values.</b> No calculator: write \(1\pm\frac{\sqrt3}{2}\), \(2\pm\frac{2\sqrt{10}}{3}\). An approximate position on the sketch is fine, but the label must be exact.</div>
+<div class="trap"><b>Unlabelled curves in a multi-contour sketch.</b> Three parabolas without “\(z=-2\)”, “\(z=0\)”, “\(z=1\)” tags can't be marked as correct.</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+<details><summary>1. Without completing the square: what conic is \(3x^2-5y^2+6x-10y=4\)?</summary><p>Opposite signs on \(x^2\) and \(y^2\), so a <b>hyperbola</b> (or a line pair if the constant works out to zero).</p></details>
+<details><summary>2. Complete the square: \(3x^2+12x\).</summary><p>\(3(x^2+4x)=3\big[(x+2)^2-4\big]=3(x+2)^2-12\).</p></details>
+<details><summary>3. Which way does \(\frac{(y-2)^2}{4}-\frac{(x+1)^2}{9}=1\) open, and what are its vertices and asymptotes?</summary><p>The \(y\) term is positive, so it opens up/down. Centre \((-1,2)\), vertices \((-1,0)\) and \((-1,4)\), asymptotes \(y-2=\pm\frac23(x+1)\).</p></details>
+<details><summary>4. What does \(\frac{(x-1)^2}{4}-\frac{(y+2)^2}{9}=-1\) become?</summary><p>Multiply by \(-1\): \(\frac{(y+2)^2}{9}-\frac{(x-1)^2}{4}=1\). A \(y\)-hyperbola with the same centre and asymptotes as the \(=+1\) version.</p></details>
+<details><summary>5. The contour \(z=c\) of \(z=(x-1)^2+2(y+3)^2+5\) for \(c=5\)? For \(c=3\)?</summary><p>\(c=5\): the single point \((1,-3)\) (the minimum). \(c=3\): empty (no points, since \(z\ge5\)).</p></details>
+<details><summary>6. Contours of a plane \(z=3x-y\) look like…?</summary><p>Parallel straight lines \(y=3x-c\), equally spaced for equally spaced \(c\).</p></details>
+<details><summary>7. For \(z=x^2+y^2\), why do contours at \(z=1,2,3,4\) get closer together?</summary><p>Radii are \(\sqrt z=1,1.41,1.73,2\). The gaps shrink because the bowl steepens as you go out.</p></details>
+<details><summary>8. \(y=k\) cross-section of \(z=x^2-y^2\)?</summary><p>\(z=x^2-k^2\): an up-parabola in the \(xz\)-plane with vertex \((0,-k^2)\).</p></details>
+<details><summary>9. Name: \(x^2+y^2-z^2=-1\).</summary><p>Hyperboloid of <b>two</b> sheets about the \(z\)-axis. Nothing for \(|z|\lt1\).</p></details>
+<details><summary>10. Name: \(y=x^2+z^2\).</summary><p>Circular paraboloid opening along the \(+y\) axis (\(y\) is the linear variable).</p></details>
+<details><summary>11. \(z=\frac{6y}{x^2+y^2}\). What is every contour \(z=c\ne0\)?</summary><p>\(x^2+\left(y-\frac3c\right)^2=\frac9{c^2}\): circles centred \((0,3/c)\) with radius \(3/|c|\), all through the excluded origin.</p></details>
+<details><summary>12. \((x+2)(y-1)=-3\): asymptotes and which quadrants?</summary><p>Asymptotes \(x=-2\), \(y=1\). Since the constant is negative, the branches are top-left and bottom-right of \((-2,1)\).</p></details>
+<details><summary>13. You get \(y\)-intercept equation \((y-1)^2=0\). What do you write and draw?</summary><p>“The curve touches the \(y\)-axis at \((0,1)\)”, drawn tangent, not crossing.</p></details>
+<details><summary>14. Why is \(z=-5\) not an intercept of the 2025 S2 cross-section?</summary><p>\(z=\sqrt{x+y^2}-3\ge-3\). Squaring introduced the lower half, which isn't on the surface.</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p class="tip">All questions are new (none are past-paper or tutorial questions), written in exam style, and verified with SymPy. Do each one on paper with a <b>real sketch</b> before opening the solution, then tick off the labelling checklist.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Completing the square &amp; identifying conics</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Identify by eye, then confirm a hyperbola</summary>
+<p><b>Q.</b> (a) Without completing the square, identify: (i) \(3x^2+5y^2-6x=7\); (ii) \(y^2-2x^2+4y=1\); (iii) \(x^2+6x-2y=0\). (b) Put (ii) in standard form and give its centre, vertices and asymptotes.</p>
+<p><b>(a)</b> (i) Same signs, different coefficients: <b>ellipse</b>. (ii) Opposite signs: <b>hyperbola</b>. (iii) Only \(x^2\): <b>parabola</b> (opening up, since \(y=\frac12(x^2+6x)\)).</p>
+<p><b>(b)</b> \((y+2)^2-4-2x^2=1\), so \((y+2)^2-2x^2=5\), so</p>
+$$\frac{(y+2)^2}{5}-\frac{x^2}{5/2}=1.$$
+<p>A \(y\)-hyperbola with centre \((0,-2)\) and vertices \((0,-2\pm\sqrt5)\). Asymptotes: \((y+2)^2=2x^2\), so \(y=-2\pm\sqrt2\,x\). Since the vertices are on the \(y\)-axis, the \(y\)-intercepts are \(-2\pm\sqrt5\). \(x\)-intercepts: \(4-2x^2=5\) has none.</p>
+<div class="tip"><b>🏷️ Labels:</b> centre \((0,-2)\); vertices \((0,-2\pm\sqrt5)\); asymptotes \(y=-2\pm\sqrt2x\); “no \(x\)-intercepts”.</div>
+</details>
+<details>
+<summary>Worked B — Ellipse with coefficients on both squares</summary>
+<p><b>Q.</b> Sketch \(2x^2+12x+3y^2-6y+9=0\), labelling centre and intercepts.</p>
+<p>\(2(x+3)^2-18+3(y-1)^2-3+9=0\), so \(2(x+3)^2+3(y-1)^2=12\), so</p>
+$$\frac{(x+3)^2}{6}+\frac{(y-1)^2}{4}=1.$$
+<p>An ellipse with centre \((-3,1)\) and semi-axes \(\sqrt6\approx2.45\) (horizontal) and \(2\) (vertical). \(x\)-intercepts: \(2(x+3)^2=12-3=9\), so \(x=-3\pm\frac{3\sqrt2}{2}\). \(y\)-intercepts: \(x=0\) gives \(18+3(y-1)^2=12\), impossible, so <b>none</b>. (The ellipse only reaches \(x=-3+\sqrt6\lt0\).)</p>
+<div class="tip"><b>🏷️ Labels:</b> centre \((-3,1)\); \(x\)-intercepts \(-3\pm\frac{3\sqrt2}{2}\); “no \(y\)-intercepts”; wider than tall.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Identify each conic without completing the square: (a) \(x^2+y^2+8x=0\); (b) \(4y^2-x^2=4+8y\); (c) \(x=3y^2-6y\); (d) \(5x^2+2y^2=10\). Then give the centre and radius of (a).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) circle   (b) hyperbola   (c) sideways parabola (opens right)   (d) ellipse
+(a) (x+4)² − 16 + y² = 0  ⇒  (x+4)² + y² = 16:  centre (−4, 0), radius 4.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Write \(x^2-6x+4y^2+8y+9=0\) in standard form, name the curve, and find all intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">(x−3)² − 9 + 4(y+1)² − 4 + 9 = 0  ⇒  (x−3)² + 4(y+1)² = 4  ⇒  (x−3)²/4 + (y+1)² = 1
+Ellipse, centre (3, −1), semi-axes 2 (horizontal) and 1 (vertical).
+x-int (y=0):  (x−3)²/4 + 1 = 1  ⇒  x = 3  — TOUCHES the x-axis at (3, 0) (its top point).
+y-int (x=0):  9/4 + (y+1)² = 1  ⇒  (y+1)² = −5/4  ⇒  none.
+Label: centre, (1,−1), (5,−1), tangency (3,0), "no y-intercepts".</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 7 marks</span> <b>Q3.</b> Classify and sketch \(9x^2-18x-4y^2-16y-43=0\). Label the centre, vertices, asymptotes and all intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">9(x−1)² − 9 − 4(y+2)² + 16 − 43 = 0  ⇒  9(x−1)² − 4(y+2)² = 36
+                                      ⇒  (x−1)²/4 − (y+2)²/9 = 1
+x-hyperbola (opens left/right), centre (1, −2), a = 2, b = 3.
+Vertices (−1, −2) and (3, −2).
+Asymptotes: (y+2)²/9 = (x−1)²/4  ⇒  y = −2 ± (3/2)(x − 1).
+x-int (y=0): 9(x−1)² = 36 + 16 = 52  ⇒  x = 1 ± 2√13/3.
+y-int (x=0): 9 − 4(y+2)² = 36  ⇒  (y+2)² < 0  ⇒  none.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q4.</b> For which constants \(c\) is \(x^2+4x+y^2-2y=c\) (a) a circle, (b) a single point, (c) empty? (d) For which \(c\) does the circle pass through the origin, and what is its radius then?</p>
+<details><summary>Solution</summary>
+<div class="mono">(x+2)² + (y−1)² = c + 5.
+(a) c > −5: circle, centre (−2, 1), radius √(c+5).
+(b) c = −5: the point (−2, 1).      (c) c < −5: no points.
+(d) (0,0) on it ⇔ 0 + 0 = c ⇒ c = 0; radius √5 (= distance from (−2,1) to the origin ✓).</div>
+</details></div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Ellipse contours of bowls &amp; temperature plates</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Contour through a point (full exam write-up)</summary>
+<p><b>Q.</b> Let \(f(x,y)=x^2+4y^2-2x\). Sketch the contour of \(f\) through \((3,1)\), labelling all intercepts. <b>[8 marks]</b></p>
+<p>\(f(3,1)=9+4-6=7\). Then \((x-1)^2-1+4y^2=7\), so \((x-1)^2+4y^2=8\), so</p>
+$$\frac{(x-1)^2}{8}+\frac{y^2}{2}=1.$$
+<p>An ellipse with centre \((1,0)\), semi-axes \(2\sqrt2\) (horizontal) and \(\sqrt2\) (vertical).</p>
+<ul><li>\(x\)-intercepts: \((x-1)^2=8\), so \(x=1\pm2\sqrt2\).</li><li>\(y\)-intercepts: \(1+4y^2=8\), so \(y=\pm\frac{\sqrt7}{2}\).</li></ul>
+<div class="tip"><b>🏷️ Labels:</b> \(f(3,1)=7\) stated; centre \((1,0)\); \(x\)-intercepts \(1\pm2\sqrt2\); \(y\)-intercepts \(\pm\frac{\sqrt7}{2}\); the point \((3,1)\) on the curve.</div>
+</details>
+<details>
+<summary>Worked B — Temperature plate: isotherm and maximum</summary>
+<p><b>Q.</b> \(T(x,y)=\dfrac{36}{x^2+9y^2+18y+12}\). (a) Find the maximum temperature. (b) Sketch the isotherm through \((3,-1)\), labelling intercepts. <b>[4 + 8 marks]</b></p>
+<p><b>(a)</b> Denominator \(=x^2+9(y+1)^2+3\ge3\), with equality at \((0,-1)\). So \(T_{\max}=\frac{36}{3}=12\) at \((0,-1)\).</p>
+<p><b>(b)</b> \(T(3,-1)=\frac{36}{9+9-18+12}=\frac{36}{12}=3\). The isotherm \(T=3\) is where the denominator equals \(12\): \(x^2+9(y+1)^2=9\), i.e.</p>
+$$\frac{x^2}{9}+(y+1)^2=1.$$
+<p>An ellipse with centre \((0,-1)\) and semi-axes \(3\) and \(1\). \(x\)-intercepts: \(\frac{x^2}{9}+1=1\), so \(x=0\) — it <b>touches</b> the \(x\)-axis at the origin (its top point). \(y\)-intercepts: \((y+1)^2=1\), so \(y=0\) and \(y=-2\).</p>
+<div class="tip"><b>🏷️ Labels:</b> \(T(3,-1)=3\); centre \((0,-1)\); \((\pm3,-1)\) (one is the given point); tangency at \((0,0)\); bottom \((0,-2)\).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> For \(z=x^2+y^2\), sketch the contours \(z=1,4,9\). The radii are equally spaced but the \(z\)-steps are not. What would equally spaced \(z\)-levels look like, and what does that say about the surface?</p>
+<details><summary>Solution</summary>
+<div class="mono">z = 1, 4, 9  ⇒  circles about the origin of radius 1, 2, 3.
+Equal z-steps (z = 1, 2, 3, 4) give radii 1, √2, √3, 2 — gaps shrinking outward:
+the bowl gets steeper the further you are from the origin.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Let \(f(x,y)=4x^2+y^2+8x-6y\). Sketch the contour of \(f\) through the origin, labelling its centre and all intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">f(0,0) = 0.   4(x+1)² − 4 + (y−3)² − 9 = 0  ⇒  4(x+1)² + (y−3)² = 13
+              ⇒  (x+1)²/(13/4) + (y−3)²/13 = 1
+Ellipse, centre (−1, 3), semi-axes √13/2 (horizontal), √13 (vertical).
+x-int (y=0):  4x² + 8x = 0  ⇒  x = 0, −2.
+y-int (x=0):  y² − 6y = 0   ⇒  y = 0, 6.
+(Faster: set y=0 / x=0 in the ORIGINAL equation — no surds needed.)</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> The temperature on a plate is \(T(x,y)=\dfrac{50}{2+x^2-2x+2y^2}\). (a) Sketch the isotherm through \((3,1)\). Label its centre and all intercepts. <b>[8]</b> (b) Find the maximum temperature and where it occurs. <b>[4]</b></p>
+<details><summary>Solution</summary>
+<div class="mono">(a) T(3,1) = 50/(2+9−6+2) = 50/7.
+    Isotherm: 2 + x² − 2x + 2y² = 7  ⇒  (x−1)² − 1 + 2y² = 5  ⇒  (x−1)² + 2y² = 6
+              ⇒  (x−1)²/6 + y²/3 = 1
+    Ellipse, centre (1, 0), semi-axes √6 (horizontal), √3 (vertical).
+    x-int: (x−1)² = 6 ⇒ x = 1 ± √6.     y-int: 1 + 2y² = 6 ⇒ y = ±√10/2.
+(b) Denominator = (x−1)² + 2y² + 1 ≥ 1, equality at (1, 0).
+    T_max = 50/1 = 50 at (1, 0).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 7 marks</span> <b>Q4.</b> Let \(z=4-x^2-4y^2\). (a) Show \(z\le4\) and describe the contour \(z=4\). (b) Sketch the contours \(z=0\) and \(z=-12\), with intercepts. (c) Sketch the cross-section \(x=0\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) x² + 4y² ≥ 0 ⇒ z ≤ 4; z = 4 only at (0,0): the contour is a single point (the peak).
+(b) z = 0:   x² + 4y² = 4   ⇒ x²/4 + y² = 1     x-int ±2, y-int ±1.
+    z = −12: x² + 4y² = 16  ⇒ x²/16 + y²/4 = 1   x-int ±4, y-int ±2.
+    Nested ellipses about the origin (an upside-down elliptic paraboloid).
+(c) x = 0: z = 4 − 4y², in the yz-plane: down-parabola, vertex (y,z) = (0, 4),
+    y-intercepts (z=0) y = ±1.  Axes labelled y and z.</div>
+</details></div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Hyperbolas, saddles &amp; rectangular hyperbolas</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — A saddle's contour family including the degenerate level</summary>
+<p><b>Q.</b> Let \(z=x^2-4y^2+6x\). (a) Find the level of the contour through \((-1,1)\) and describe it. (b) Sketch the contours \(z=-5\) and \(z=-13\) on the same axes as (a), with intercepts.</p>
+<p>Complete the square: \(z=(x+3)^2-9-4y^2\), so \((x+3)^2-4y^2=z+9\).</p>
+<p><b>(a)</b> \(z(-1,1)=1-4-6=-9\). Then \((x+3)^2-4y^2=0\), so \(y=\pm\frac12(x+3)\): <b>two lines crossing at \((-3,0)\)</b>, the saddle point. This is the degenerate level.</p>
+<p><b>(b)</b> \(z=-5\): \((x+3)^2-4y^2=4\), so \(\frac{(x+3)^2}{4}-y^2=1\). An \(x\)-hyperbola with vertices \((-5,0)\) and \((-1,0)\) (these are the \(x\)-intercepts). \(y\)-intercepts: \(9-4y^2=4\), so \(y=\pm\frac{\sqrt5}{2}\).</p>
+<p>\(z=-13\): \((x+3)^2-4y^2=-4\), so \(y^2-\frac{(x+3)^2}{4}=1\). A \(y\)-hyperbola with vertices \((-3,\pm1)\). \(y\)-intercepts: \(9-4y^2=-4\), so \(y=\pm\frac{\sqrt{13}}{2}\). No \(x\)-intercepts.</p>
+<p>All three share the asymptotes \(y=\pm\frac12(x+3)\), which are the level \(-9\) itself.</p>
+<div class="tip"><b>🏷️ Labels:</b> the two lines tagged \(z=-9\); \(z=-5\) branches through \((-5,0),(-1,0)\) and crossing the \(y\)-axis at \(\pm\frac{\sqrt5}{2}\); \(z=-13\) through \((-3,\pm1)\), crossing the \(y\)-axis at \(\pm\frac{\sqrt{13}}{2}\).</div>
+</details>
+<details>
+<summary>Worked B — Rectangular hyperbolas of \(z=(x+2)(y-1)\) for \(z=\pm4\)</summary>
+<p><b>Q.</b> Sketch the contours \(z=4\) and \(z=-4\) of \(z=(x+2)(y-1)\), labelling asymptotes and intercepts.</p>
+<p>Both share the asymptotes \(x=-2\) and \(y=1\).</p>
+<ul><li>\(z=4\): \(y=1+\frac{4}{x+2}\), with branches top-right and bottom-left of \((-2,1)\). \(y\)-intercept: \(x=0\) gives \(y=3\). \(x\)-intercept: \(y=0\) gives \(x+2=-4\), so \(x=-6\).</li>
+<li>\(z=-4\): \(y=1-\frac{4}{x+2}\), with branches top-left and bottom-right. \(y\)-intercept: \(y=1-2=-1\). \(x\)-intercept: \(x+2=4\), so \(x=2\).</li></ul>
+<div class="tip"><b>🏷️ Labels:</b> dashed \(x=-2\), \(y=1\); \((0,3)\), \((-6,0)\) on \(z=4\); \((0,-1)\), \((2,0)\) on \(z=-4\); each branch pair tagged.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Give the vertices and asymptotes of (a) \(\frac{x^2}{9}-\frac{y^2}{16}=1\) and (b) \(\frac{y^2}{9}-\frac{x^2}{16}=1\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) opens left/right, vertices (±3, 0), asymptotes y = ±(4/3)x.
+(b) opens up/down,   vertices (0, ±3), asymptotes y = ±(3/4)x.
+(Set the right-hand side to 0 and solve for y: e.g. y² = 16x²/9 ⇒ y = ±4x/3.)</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Let \(f(x,y)=y^2-4x^2-8x\). Sketch the contour of \(f\) through \((0,3)\). Label all intercepts and asymptotes.</p>
+<details><summary>Solution</summary>
+<div class="mono">f(0,3) = 9.   y² − 4[(x+1)² − 1] = 9  ⇒  y² − 4(x+1)² = 5  ⇒  y²/5 − (x+1)²/(5/4) = 1
+y-hyperbola (opens up/down), centre (−1, 0), vertices (−1, ±√5).
+Asymptotes: y² = 4(x+1)²  ⇒  y = ±2(x + 1).
+y-int (x=0): y² − 4 = 5 ⇒ y = ±3  (the given point is one of them ✓).
+x-int (y=0): −4(x+1)² = 5 ⇒ none.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Let \(z=xy+3x-2y\). (a) Write \(z\) in the form \((x-h)(y-k)+m\). (b) Describe the contour \(z=6\). (c) Sketch the contours \(z=10\) and \(z=2\) on one diagram, labelling asymptotes and intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) (x−2)(y+3) = xy + 3x − 2y − 6  ⇒  z = (x−2)(y+3) + 6.
+(b) z = 6: (x−2)(y+3) = 0 ⇒ the two lines x = 2 and y = −3 (degenerate level).
+(c) Asymptotes for both: x = 2, y = −3.
+    z = 10: (x−2)(y+3) = 4  ⇒ y = −3 + 4/(x−2)   branches top-right / bottom-left
+            x-int: 3(x−2) = 4 ⇒ x = 10/3;   y-int: −2(y+3) = 4 ⇒ y = −5.
+    z = 2:  (x−2)(y+3) = −4 ⇒ y = −3 − 4/(x−2)   branches top-left / bottom-right
+            x-int: 3(x−2) = −4 ⇒ x = 2/3;   y-int: −2(y+3) = −4 ⇒ y = −1.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q4.</b> Show that every curve \(2x^2-8y^2-4x-16y=c\) (with \(c\) constant) has the same asymptotes, and find them. For which \(c\) is the curve (a) a pair of lines, (b) a hyperbola opening left/right, (c) a hyperbola opening up/down?</p>
+<details><summary>Solution</summary>
+<div class="mono">2(x−1)² − 2 − 8(y+1)² + 8 = c  ⇒  2(x−1)² − 8(y+1)² = c − 6.
+Asymptotes (RHS → 0): (y+1)² = (x−1)²/4 ⇒ y = −1 ± (x−1)/2  — independent of c.
+(a) c = 6: the lines themselves.   (b) c > 6: x-hyperbola.   (c) c < 6: y-hyperbola.</div>
+</details></div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Contour diagrams: several levels, spacing, reading a map</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Cone vs paraboloid from their contour spacing</summary>
+<p><b>Q.</b> Sketch the contours \(z=1,2,3\) for (i) \(z=\sqrt{x^2+y^2}\) and (ii) \(z=x^2+y^2\). Explain from the diagrams which surface has constant slope.</p>
+<p>(i) \(x^2+y^2=z^2\): circles of radius \(1,2,3\), <b>equally spaced</b>. (ii) \(x^2+y^2=z\): radii \(1,\sqrt2,\sqrt3\), gaps shrinking. Equal height steps over equal horizontal distances mean constant slope, so the <b>cone</b> has constant slope. The paraboloid's slope increases outward.</p>
+<div class="tip"><b>🏷️ Labels:</b> every circle tagged with its \(z\) and its radius.</div>
+</details>
+<details>
+<summary>Worked B — A plane: equally spaced parallel lines</summary>
+<p><b>Q.</b> Sketch the contours \(z=-1,1,3\) of \(z=2x-y+1\), with intercepts.</p>
+<p>The contour \(z=c\) is \(y=2x+1-c\).</p>
+<div class="mono">z = −1:  y = 2x + 2    x-int −1,  y-int 2
+z =  1:  y = 2x        through the origin
+z =  3:  y = 2x − 2    x-int 1,   y-int −2
+Parallel lines of slope 2, equally spaced (equal z-steps) — a tilted plane.</div>
+<div class="tip"><b>🏷️ Labels:</b> each line tagged with \(z\); intercepts; the direction of increasing \(z\) (towards larger \(x\), smaller \(y\)).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Sketch the contours \(z=-1,0,2\) of \(z=x-y^2\), labelling each vertex and all intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">z = c ⇔ x = y² + c: sideways parabolas opening RIGHT, vertex (c, 0).
+z = −1: vertex (−1,0); y-int: 0 = y² − 1 ⇒ y = ±1.
+z =  0: vertex (0,0) — the only intercept.
+z =  2: vertex (2,0); y-int: y² = −2 ⇒ none.
+Same shape shifted right by the level: a parabolic trough.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Let \(z=e^{x^2+4y^2}\). (a) What is the range of \(z\)? (b) Sketch the contours \(z=1\), \(z=e\), \(z=e^4\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) x² + 4y² ≥ 0 ⇒ z ≥ e⁰ = 1.  Range [1, ∞).
+(b) z = c ⇔ x² + 4y² = ln c.
+    z = 1:   the point (0,0).
+    z = e:   x² + 4y² = 1  ⇒ ellipse, x-int ±1, y-int ±1/2.
+    z = e⁴:  x² + 4y² = 4  ⇒ x²/4 + y² = 1, x-int ±2, y-int ±1.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> Let \(z=9x^2-y^2-18x-4y\). Sketch the contours \(z=-5\), \(z=4\) and \(z=-14\) on the same axes. For each, say what kind of curve it is and label all intercepts, vertices and asymptotes.</p>
+<details><summary>Solution</summary>
+<div class="mono">z = 9(x−1)² − 9 − (y+2)² + 4 = 9(x−1)² − (y+2)² − 5.   Saddle centred (1, −2).
+z = −5:   9(x−1)² = (y+2)² ⇒ the lines y = −2 ± 3(x−1)  (these are all the asymptotes).
+z = 4:    9(x−1)² − (y+2)² = 9 ⇒ (x−1)² − (y+2)²/9 = 1: horizontal hyperbola,
+          vertices (0,−2), (2,−2).   x-int: 9(x−1)² = 13 ⇒ x = 1 ± √13/3.
+          y-int: x=0 ⇒ (y+2)² = 0 ⇒ y = −2 (the vertex (0,−2) lies on the y-axis).
+z = −14:  9(x−1)² − (y+2)² = −9 ⇒ (y+2)²/9 − (x−1)² = 1: vertical hyperbola,
+          vertices (1, 1), (1, −5).   x-int: none.   y-int: (y+2)² = 18 ⇒ y = −2 ± 3√2.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q4.</b> A surface \(z=f(x,y)\) has the property that its contour \(f=c\) is the circle \(x^2+y^2=4-c\) for every \(c\le4\). Find \(f\), its maximum, and the radii of the contours \(c=4,3,0,-5\). Is the surface a cone?</p>
+<details><summary>Solution</summary>
+<div class="mono">c = 4 − x² − y²  ⇒  f(x,y) = 4 − x² − y²;   max 4 at (0,0).
+Radii √(4−c): c = 4 → 0,  3 → 1,  0 → 2,  −5 → 3.
+Equal radius steps need z-steps 1, 3, 5 (growing) ⇒ slope increasing ⇒ an upside-down
+paraboloid, NOT a cone (a cone would have equal z-steps for equal radius steps).</div>
+</details></div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Vertical cross-sections &amp; square-root surfaces</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Both families of cross-sections of a saddle</summary>
+<p><b>Q.</b> Let \(z=x^2-y^2+2y\). (a) Show that the cross-sections \(x=k\) are parabolas opening down and find their vertices. (b) Show that the cross-sections \(y=k\) are parabolas opening up. (c) Sketch \(x=0\) and \(y=3\).</p>
+<p><b>(a)</b> \(x=k\): \(z=-(y^2-2y)+k^2=-(y-1)^2+1+k^2\). A down-parabola in the \(yz\)-plane with vertex \((y,z)=(1,\,1+k^2)\), for every \(k\).</p>
+<p><b>(b)</b> \(y=k\): \(z=x^2+(2k-k^2)\). An up-parabola in the \(xz\)-plane with vertex \((x,z)=(0,\,2k-k^2)\). One family opens up and the other opens down, so the surface is a <b>saddle</b>.</p>
+<p><b>(c)</b> \(x=0\): \(z=-(y-1)^2+1\), vertex \((1,1)\), \(y\)-intercepts \(y=0,2\) (where \(z=0\)). \(y=3\): \(z=x^2-3\), vertex \((0,-3)\), \(x\)-intercepts \(\pm\sqrt3\).</p>
+<div class="tip"><b>🏷️ Labels:</b> axes \(y,z\) for \(x=0\) and \(x,z\) for \(y=3\); vertices \((1,1)\) and \((0,-3)\); intercepts \(0,2\) and \(\pm\sqrt3\); the vertex formula in \(k\) for the “show” parts.</div>
+</details>
+<details>
+<summary>Worked B — Half-ellipsoid \(z=\sqrt{16-x^2-4y^2}\)</summary>
+<p><b>Q.</b> For \(z=\sqrt{16-x^2-4y^2}\): (a) domain and range; (b) contours \(z=0\) and \(z=2\sqrt3\); (c) cross-sections \(y=0\) and \(x=0\).</p>
+<p><b>(a)</b> The domain is \(x^2+4y^2\le16\) (the inside of an ellipse). The range is \(0\le z\le4\).</p>
+<p><b>(b)</b> Square: \(x^2+4y^2=16-z^2\). For \(z=0\): \(\frac{x^2}{16}+\frac{y^2}{4}=1\) (intercepts \(\pm4\), \(\pm2\)). For \(z=2\sqrt3\): \(x^2+4y^2=4\), i.e. \(\frac{x^2}{4}+y^2=1\) (intercepts \(\pm2\), \(\pm1\)).</p>
+<p><b>(c)</b> \(y=0\): \(x^2+z^2=16\), \(z\ge0\): an upper semicircle of radius \(4\) in the \(xz\)-plane. \(x=0\): \(4y^2+z^2=16\), \(z\ge0\): the upper half of an ellipse with \(y\)-intercepts \(\pm2\) and top \((0,4)\).</p>
+<div class="tip"><b>🏷️ Labels:</b> “\(z\ge0\)” stated; halves only; intercepts and the top point \(z=4\).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> For \(z=x^2+2y^2\), write down and name the cross-sections \(x=1\) and \(y=1\), giving the vertex of each (with the correct axes).</p>
+<details><summary>Solution</summary>
+<div class="mono">x = 1: z = 1 + 2y²  — up-parabola in the yz-plane, vertex (y,z) = (0, 1).
+y = 1: z = x² + 2   — up-parabola in the xz-plane, vertex (x,z) = (0, 2).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Let \(z=\sqrt{x-y^2+4}\). (a) Sketch the contours \(z=0\), \(z=2\), \(z=3\) on one set of axes, labelling intercepts. What is the contour \(z=-1\)? (b) Show the cross-sections \(y=k\) are (half-)parabolas and sketch \(k=1\) with its vertex and intercepts.</p>
+<details><summary>Solution</summary>
+<div class="mono">z ≥ 0.  Squaring: z² = x − y² + 4  ⇔  x = y² + z² − 4.
+(a) z = 0: x = y² − 4  (opens right) vertex (−4,0); y-int ±2; x-int −4.
+    z = 2: x = y²      vertex (0,0) — the origin is the only intercept.
+    z = 3: x = y² + 5  vertex (5,0); x-int 5; no y-intercepts.
+    z = −1: EMPTY (a square root is never negative).
+(b) y = k: z² = x − k² + 4 with z ≥ 0 ⇒ x = z² + (k² − 4):
+    the upper half (z ≥ 0) of a sideways parabola in the xz-plane, vertex (k² − 4, 0).
+    k = 1: x = z² − 3, vertex (−3, 0) = its x-intercept;
+           z-int (x=0): z² = 3 ⇒ z = √3 only (z ≥ 0).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> Let \(z=1+\sqrt{9-x^2-y^2}\). (a) Find the range of \(z\). (b) Sketch the contours \(z=1\), \(z=3\), \(z=4\), and state the contour \(z=5\). (c) Sketch the cross-section \(y=0\), labelling all intercepts with the \(x\)- and \(z\)-axes.</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) 0 ≤ √(9 − x² − y²) ≤ 3 ⇒ 1 ≤ z ≤ 4.
+(b) (z−1)² = 9 − x² − y² ⇒ x² + y² = 9 − (z−1)².
+    z = 1: circle radius 3;  z = 3: x² + y² = 5, radius √5;  z = 4: the point (0,0).
+    z = 5: empty (above the top).
+(c) y = 0: x² + (z−1)² = 9 with z ≥ 1 ⇒ upper semicircle, centre (x,z) = (0,1), radius 3.
+    z-int (x = 0): z = 4 (z = −2 rejected, as z ≥ 1).
+    x-int (z = 0): impossible, since z ≥ 1 ⇒ NO x-intercepts
+    (the endpoints of the semicircle are (±3, 1), which are not on the x-axis).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q4.</b> For the double cone \(z^2=x^2+y^2\), describe the cross-sections \(y=k\) for \(k\ne0\) and \(k=0\). What changes for the upper cone \(z=\sqrt{x^2+y^2}\)?</p>
+<details><summary>Solution</summary>
+<div class="mono">y = k ≠ 0: z² − x² = k² ⇒ z²/k² − x²/k² = 1: a hyperbola in the xz-plane opening up/down,
+          vertices (0, ±|k|), asymptotes z = ±x.   (e.g. k = 2: z² − x² = 4.)
+y = 0:    z² = x² ⇒ the two lines z = ±x.
+Upper cone (z ≥ 0): only the TOP branch of each hyperbola, and z = |x| (a V) at k = 0.</div>
+</details></div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · “Show that every contour is …” — rational surfaces</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Circles with a moving centre</summary>
+<p><b>Q.</b> Let \(z=\dfrac{2(x+y)}{x^2+y^2}\), \((x,y)\ne(0,0)\). (a) Show every contour \(z=c\), \(c\ne0\), is a circle. (b) Sketch \(z=2\).</p>
+<p><b>(a)</b> \(c(x^2+y^2)=2x+2y\), so \(x^2-\frac2cx+y^2-\frac2cy=0\), so</p>
+$$\Big(x-\frac1c\Big)^2+\Big(y-\frac1c\Big)^2=\frac{2}{c^2}.$$
+<p>These are circles with centre \(\left(\frac1c,\frac1c\right)\) and radius \(\frac{\sqrt2}{|c|}\), for every \(c\ne0\). The distance from the centre to the origin is also \(\frac{\sqrt2}{|c|}\), so every circle passes through the <b>excluded</b> origin.</p>
+<p><b>(b)</b> \(c=2\): \(\left(x-\frac12\right)^2+\left(y-\frac12\right)^2=\frac12\). Centre \(\left(\frac12,\frac12\right)\), radius \(\frac{1}{\sqrt2}\). Intercepts: \((1,0)\), \((0,1)\), and the origin (open circle).</p>
+<div class="tip"><b>🏷️ Labels:</b> general form with \(c\); centre and radius; \((1,0)\), \((0,1)\); open circle at \((0,0)\).</div>
+</details>
+<details>
+<summary>Worked B — Hyperbolas whose vertex is the excluded point</summary>
+<p><b>Q.</b> Let \(z=\dfrac{4y}{y^2-x^2}\). (a) Show every contour \(z=z_0\ne0\) is a hyperbola. (b) Sketch \(z_0=2\), showing centre and asymptotes.</p>
+<p><b>(a)</b> \(z_0y^2-4y-z_0x^2=0\), so \(z_0\left(y-\frac2{z_0}\right)^2-\frac4{z_0}-z_0x^2=0\), so</p>
+$$\Big(y-\frac2{z_0}\Big)^2-x^2=\frac4{z_0^2}\quad\Longleftrightarrow\quad\frac{(y-2/z_0)^2}{4/z_0^2}-\frac{x^2}{4/z_0^2}=1.$$
+<p>A \(y\)-hyperbola with centre \((0,2/z_0)\) and asymptotes \(y-\frac2{z_0}=\pm x\), for every \(z_0\ne0\).</p>
+<p><b>(b)</b> \(z_0=2\): \((y-1)^2-x^2=1\). Centre \((0,1)\), vertices \((0,0)\) and \((0,2)\), asymptotes \(y=1\pm x\). The vertex \((0,0)\) makes \(y^2-x^2=0\), so it is <b>excluded</b>. It's the only excluded point on this curve (solving with \(y=\pm x\) gives only \(x=0\)).</p>
+<div class="tip"><b>🏷️ Labels:</b> centre \((0,1)\) (not on the curve); dashed \(y=1+x\), \(y=1-x\); vertex \((0,2)\); open circle at \((0,0)\).</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Describe every contour of \(z=\dfrac{y-1}{x^2}\) (\(x\ne0\)) and sketch \(z=-1,0,2\).</p>
+<details><summary>Solution</summary>
+<div class="mono">z = c ⇔ y = 1 + c x²  (x ≠ 0): parabolas with vertex (0,1) — but (0,1) is excluded.
+c = −1: y = 1 − x² (down; x-int ±1);  c = 0: the line y = 1;  c = 2: y = 1 + 2x² (up).
+All pass through the hole at (0, 1): draw open circles there.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 7 marks</span> <b>Q2.</b> Let \(z=\dfrac{2x}{x^2+4y^2}\). (a) Show that every contour \(z=c\ne0\) is an ellipse, and give its centre and semi-axes. (b) Sketch \(z=1\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) c(x² + 4y²) = 2x ⇒ (x − 1/c)² + 4y² = 1/c²  ⇒  (x − 1/c)²/(1/c²) + y²/(1/(4c²)) = 1.
+    Ellipse, centre (1/c, 0), semi-axes 1/|c| (horizontal) and 1/(2|c|) (vertical).
+(b) c = 1: (x − 1)² + 4y² = 1: centre (1,0), semi-axes 1 and 1/2.
+    x-int: 0 (EXCLUDED — open circle) and 2.   y-int: only the origin (excluded).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> Consider \(z=\dfrac{6x}{x^2-4y^2}\). (a) For \(z_0\ne0\), show the contours \(z=z_0\) are hyperbolas. <b>[5]</b> (b) Sketch the contour \(z=3\), indicating the centre, vertices and asymptotes. <b>[5]</b></p>
+<details><summary>Solution</summary>
+<div class="mono">(a) z₀x² − 6x − 4z₀y² = 0 ⇒ z₀(x − 3/z₀)² − 9/z₀ − 4z₀y² = 0
+    ⇒ (x − 3/z₀)² − 4y² = 9/z₀²  ⇒  (x − 3/z₀)²/(9/z₀²) − y²/(9/(4z₀²)) = 1:
+    an x-hyperbola centred (3/z₀, 0) for every z₀ ≠ 0, asymptotes y = ±(x − 3/z₀)/2.
+(b) z₀ = 3: (x − 1)² − 4y² = 1.  Centre (1,0); vertices (0,0) and (2,0);
+    asymptotes y = ±(x − 1)/2.
+    (0,0) makes x² − 4y² = 0 ⇒ EXCLUDED (open circle); it is the only point of the
+    curve on the lines x = ±2y (substituting gives y = 0 only).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q4.</b> Let \(z=\dfrac{x^2+y^2}{2x}\) (\(x\ne0\)). Show that every contour is a circle tangent to the \(y\)-axis. Explain why there is no contour at \(z=0\).</p>
+<details><summary>Solution</summary>
+<div class="mono">x² + y² = 2z₀x ⇒ (x − z₀)² + y² = z₀²: circle centre (z₀, 0), radius |z₀|,
+touching the y-axis at the origin — which is excluded (x ≠ 0), so each contour is a
+circle with one point removed.
+z₀ = 0 would need x² + y² = 0 ⇒ (0,0), which is outside the domain ⇒ no contour.</div>
+</details></div>
+
+<!-- ---------- 8.7 ---------- -->
+<h3>8.7 · Quadric surfaces &amp; matching</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — Name seven surfaces in one minute</summary>
+<p><b>Q.</b> Identify: (a) \(x^2+4y^2+9z^2=36\); (b) \(z=4x^2+y^2\); (c) \(z=y^2-x^2\); (d) \(x^2+y^2-z^2=1\); (e) \(-x^2-y^2+z^2=1\); (f) \(z^2=x^2+y^2\); (g) \(x^2+z^2=4\).</p>
+<div class="mono">(a) all +, = 36 → ELLIPSOID; intercepts x = ±6, y = ±3, z = ±2.
+(b) two squares same sign, z linear → ELLIPTIC PARABOLOID (bowl up the z-axis).
+(c) two squares opposite signs, z linear → HYPERBOLIC PARABOLOID (saddle).
+(d) one minus, = 1 → HYPERBOLOID OF ONE SHEET about the z-axis.
+(e) two minus, = 1 → HYPERBOLOID OF TWO SHEETS about the z-axis (|z| ≥ 1).
+(f) = 0 form → DOUBLE CONE about the z-axis.
+(g) y missing → CIRCULAR CYLINDER of radius 2 along the y-axis.</div>
+<div class="tip"><b>🏷️ What the marker wants:</b> the name <b>and</b> the axis, plus one justifying trace (e.g. “horizontal traces are circles, vertical traces hyperbolas”).</div>
+</details>
+<details>
+<summary>Worked B — Matching table with a “0”</summary>
+<p><b>Q.</b> Match \(f_1=x^2+y^2\), \(f_2=\sqrt{x^2+y^2}\), \(f_3=x^2-y^2\), \(f_4=2x+y\), \(f_5=y-x^2\) with contour maps: <b>(1)</b> equally spaced concentric circles; <b>(2)</b> parallel equally spaced lines; <b>(3)</b> nested parabolas opening upward; <b>(4)</b> concentric circles crowding outward. Enter 0 for no match.</p>
+<div class="mono">f₁ → 4 (radii √c crowd)    f₂ → 1 (radii = c, equal)    f₃ → 0 (hyperbolas, not shown)
+f₄ → 2 (plane)             f₅ → 3 (y = x² + c: parabolas opening up)</div>
+<div class="tip">The two circle maps are told apart <b>only</b> by spacing. That's the whole point of the question.</div>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Name each surface and its axis: (a) \(y=x^2+z^2\); (b) \(x^2-y^2-z^2=4\); (c) \(4x^2+y^2=z^2\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) circular paraboloid opening along +y.
+(b) hyperboloid of TWO sheets about the x-axis (x² ≥ 4 needed).
+(c) elliptic double cone about the z-axis.</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> For \(x^2+y^2-z^2=1\): (a) describe the contours \(z=k\) and explain why the surface is “one sheet”; (b) describe the traces \(x=0\) and \(x=1\).</p>
+<details><summary>Solution</summary>
+<div class="mono">(a) x² + y² = 1 + k²: a circle of radius √(1+k²) for EVERY k (never empty) —
+    the slices never disappear, so the surface is one connected tube (smallest at z = 0).
+(b) x = 0: y² − z² = 1, a hyperbola in the yz-plane opening along ±y.
+    x = 1: y² − z² = 0 ⇒ two lines z = ±y (degenerate: the plane is tangent to the waist).</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 4 marks</span> <b>Q3.</b> Match each function with a description of its graph, or enter 0: \(g_1=e^{-(x^2+y^2)}\), \(g_2=\sin x\), \(g_3=x^2+y^2\), \(g_4=-(x^2+y^2)\). Graphs: <b>(1)</b> a single smooth bump with maximum 1, flattening to 0 far away; <b>(2)</b> an upward bowl; <b>(3)</b> corrugated ridges parallel to the \(y\)-axis.</p>
+<details><summary>Solution</summary>
+<div class="mono">g₁ → 1 (max e⁰ = 1 at the origin, → 0 as r → ∞)
+g₂ → 3 (independent of y: the curve sin x extruded along y)
+g₃ → 2 (bowl)
+g₄ → 0 (a DOWNWARD bowl: nothing matches — check the sign!)</div>
+</details></div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q4.</b> Identify \(x-(y-2)^2-(z+1)^2=0\): name, vertex and axis. Describe the trace in the plane \(x=4\) and in the plane \(z=-1\).</p>
+<details><summary>Solution</summary>
+<div class="mono">x = (y−2)² + (z+1)²: circular paraboloid, vertex (0, 2, −1), opening along +x
+(axis the line y = 2, z = −1).
+x = 4: (y−2)² + (z+1)² = 4 — circle of radius 2 centred (y,z) = (2, −1).
+z = −1: x = (y−2)² — parabola in the xy-plane, vertex (0, 2), opening in +x.</div>
+</details></div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every sketch, write in this order: (1) the level (evaluate at the point if one is given); (2) completed square leading to standard form; (3) the name of the curve with centre/vertex; (4) asymptotes if it's a hyperbola; (5) intercepts, or “none”; (6) any restriction (half-curve, excluded point); (7) a sketch with every item labelled. That order matches how the marking schemes hand out marks (value 1 · working 3 · intercepts 2 · graph 2).</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 3 Surfaces, Contours &amp; Cross-sections · built from the MATH1052 Summary (p 5), Poster A (Conics), Tutorials T04 (conic sections) and T06 (contours &amp; cross-sections), and the past papers 2020 S1 – 2025 S2 with their official solutions/marking schemes. Every centre, vertex, radius, intercept, asymptote and cross-section equation verified with SymPy (<code>verify/ch03.py</code>).
+<br><a href="../index.html">⇄ Switch subject</a> · <a href="index.html">🏠 Hub</a> · <a href="ch02-second-order-odes.html">← Ch 2</a> · <a href="ch04-limits-partials-tangent-planes.html">Ch 4 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 7 Parametrised Curves &amp; Vector Fields</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 7 — Parametrised Curves &amp; Vector Fields</h1>
+  <p>The last two questions of every recent paper. Motion along curves, arc length, work, and the conservative-field finale worth up to 18 marks.</p>
+  <div>
+    <span class="badge gold">⭐ Highest-yield chapter · ~22–30 marks per paper</span>
+    <span class="badge">Summary pp 6–7 · Poster B · Tutorial 11</span>
+    <span class="badge">Formula sheet gives the work integral &amp; arc length only. Know the \(P_y=Q_x\) test and potentials cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch06-optimisation.html">← Ch 6 Optimisation</a>
+  <a href="exam-2025.html">Past exams →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">This chapter leans on single-variable integration (substitution, integration by parts, \(\int\sec t\,dt\)), trig identities (\(\sin^2+\cos^2=1\), double angles) and dot products. If any of those feel shaky, do <a href="foundations.html#integrals">Ground Floor · integrals</a>, <a href="foundations.html#trig">· trig</a> and <a href="foundations.html#vectors">· vectors</a> first.</div>
+
+<div class="card">
+<h3>🧭 The big picture: a curve is a movie, not a picture</h3>
+<p>Until now a curve was a <i>picture</i>: a set of points satisfying an equation like \(x^2+y^2=4\). A <b>parametrisation</b> turns the picture into a <b>movie</b>. It tells you <i>where</i> a particle is at each instant \(t\):</p>
+$$\mathbf r(t)=\big(x(t),\,y(t),\,z(t)\big),\qquad a\le t\le b .$$
+<p>The movie carries information the picture doesn't:</p>
+<ul>
+<li><b>a start and an end</b>: \(\mathbf r(a)\) and \(\mathbf r(b)\);</li>
+<li><b>a direction of travel</b> (orientation): clockwise or anticlockwise, left to right or right to left;</li>
+<li><b>a speed</b>: how fast the particle covers the ground;</li>
+<li><b>how many times</b> the curve is traced. \(t\in[0,4\pi]\) goes round a circle twice.</li>
+</ul>
+<p>One picture has infinitely many movies. \((\cos t,\sin t)\), \((\cos 2t,\sin 2t)\) and \((\cos t,-\sin t)\) all draw the unit circle, but at different speeds and in different directions. Exam questions test exactly these differences: "trace out <b>clockwise</b> starting from…", "indicate the <b>starting point and the direction of travel</b>", "the length of the path <b>travelled</b>".</p>
+</div>
+
+<div class="card">
+<h3>🧭 The standard curves you must be able to write down instantly</h3>
+<table>
+<tr><th>Curve</th><th>Parametrisation</th><th>Notes</th></tr>
+<tr><td>Line through \(\mathbf r_0\) in direction \(\mathbf v\)</td><td>\(\mathbf r(t)=\mathbf r_0+t\mathbf v,\ t\in\mathbb R\)</td><td>Works in 2-D and 3-D.</td></tr>
+<tr><td>Segment from \(P\) to \(Q\)</td><td>\(\mathbf r(t)=P+t(Q-P),\ 0\le t\le 1\)</td><td>\(t=0\) gives \(P\) and \(t=1\) gives \(Q\). Equivalently \((1-t)P+tQ\).</td></tr>
+<tr><td>Segment from \(P\) to \(Q\) during \(t_0\le t\le t_1\)</td><td>\(\mathbf r(t)=P+\dfrac{t-t_0}{t_1-t_0}(Q-P)\)</td><td>The summary's "fixed time interval" version.</td></tr>
+<tr><td>Circle, centre \((h,k)\), radius \(R\)</td><td>\((h+R\cos t,\ k+R\sin t),\ 0\le t\le 2\pi\)</td><td><b>Anticlockwise</b>, starting at the rightmost point \((h+R,k)\).</td></tr>
+<tr><td>Same circle, <b>clockwise</b></td><td>\((h+R\cos t,\ k-R\sin t)\)</td><td>Flip the sign of the sine (or use \(-t\)).</td></tr>
+<tr><td>Ellipse \(\dfrac{(x-h)^2}{a^2}+\dfrac{(y-k)^2}{b^2}=1\)</td><td>\((h+a\cos t,\ k+b\sin t)\)</td><td>\(a\) is the semi-axis along \(x\) and \(b\) along \(y\). Anticlockwise.</td></tr>
+<tr><td>Graph \(y=g(x)\), \(a\le x\le b\)</td><td>\((t,\ g(t)),\ a\le t\le b\)</td><td>"Let \(x=t\)". This is the default for parabolas etc.</td></tr>
+<tr><td>Helix (radius \(R\), climb \(c\) per radian)</td><td>\((R\cos t,\ R\sin t,\ ct)\)</td><td>Circle in the \(xy\)-plane, rising steadily in \(z\).</td></tr>
+</table>
+<p><b>How to control the start point and direction.</b> Add a phase or swap the trig functions. \((R\sin t,\,R\cos t)\) starts at the <i>top</i> \((0,R)\) and goes <i>clockwise</i>. \((-R\cos t,\,-R\sin t)\) starts at the <i>left</i> \((-R,0)\) and goes anticlockwise. <b>Always check two things</b>: plug in \(t=0\) (right start?), and plug in a quarter-turn \(t=\pi/2\) (right direction?).</p>
+</div>
+
+<div class="trap"><b>The course summary's direction rule is back-to-front.</b> The MATH1052 summary (p 6) says \(x=r\cos(\omega t+\phi)+h,\ y=r\sin(\omega t+\phi)+k\) is "clockwise if \(\omega\gt0\)". That is wrong. With \(\omega\gt0\), at \(t=0,\phi=0\) the particle is at the rightmost point \((h+r,k)\) with velocity \((0,r\omega)\), i.e. moving <b>up</b>, so the motion is <b>anticlockwise</b>. (Tutorial 11 Q2(a) agrees: clockwise needs \(\cos(-t),\sin(-t)\).) Don't memorise a rule. Check with \(t=0\) and \(t=\pi/2\).</div>
+
+<div class="card">
+<h3>🧭 Going backwards: eliminating the parameter</h3>
+<p>Exams often hand you \(\mathbf r(t)\) and ask "what path is this?" or "sketch the path". The trick is to find a relation between \(x\) and \(y\) with no \(t\) in it:</p>
+<ul>
+<li><b>Trig pairs</b>: isolate \(\cos t\) and \(\sin t\), then use \(\cos^2t+\sin^2t=1\). \(x=1+2\cos t,\ y=-3+5\sin t \Rightarrow \frac{(x-1)^2}{4}+\frac{(y+3)^2}{25}=1\).</li>
+<li><b>Double angles</b>: 2023 S1 Q7 has \(x=16\sin\pi t,\ y=4\cos 2\pi t\). Use \(\cos2\theta=1-2\sin^2\theta\) to get \(y=4-\frac{x^2}{32}\), a parabola.</li>
+<li><b>Polynomials</b>: solve one coordinate for \(t\) and substitute. \(y=2t\Rightarrow t=y/2\), then \(x=-4t^2+8t+1=5-(y-2)^2\) (2023 S2 Q6).</li>
+<li><b>Polar-looking</b>: \(x^2+y^2\) often simplifies. For \((t\cos t,\,t\sin t)\), \(x^2+y^2=t^2\), so the distance from the origin equals \(t\): a spiral (2024 S1/S2 Q8). For \((e^t\sin t,e^t\cos t)\), the radius is \(e^t\) (2022 S2 Q9).</li>
+</ul>
+<p class="trap">Eliminating \(t\) can <b>lose</b> information. \((e^t,e^{2t})\) satisfies \(y=x^2\) but only traces the half with \(x\gt0\). \((\cos^2t,\sin^2t)\) satisfies \(x+y=1\) but stays inside the segment \(0\le x\le1\), and it runs back and forth. State the actual portion traced, the start, the end and the direction.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Position → velocity → acceleration (and back)</h3>
+<p>Differentiate component by component:</p>
+$$\mathbf v(t)=\mathbf r'(t)=\big(x'(t),y'(t),z'(t)\big),\qquad \mathbf a(t)=\mathbf v'(t)=\mathbf r''(t).$$
+<ul>
+<li><b>Velocity</b> \(\mathbf v\) is a <b>vector</b>. It is tangent to the path and points in the direction of motion.</li>
+<li><b>Speed</b> \(\|\mathbf v\|=\sqrt{x'^2+y'^2+z'^2}\) is a <b>scalar</b>, always \(\ge 0\). "Find the speed" wants a number or a function, <i>not</i> a vector.</li>
+<li><b>Acceleration</b> \(\mathbf a\) is a vector. Constant speed does <i>not</i> mean zero acceleration: uniform circular motion has \(\mathbf a\) pointing at the centre.</li>
+</ul>
+<p><b>Going backwards</b> (the projectile/diver question) means integrating twice. <b>Each integration creates a constant vector</b>, and the initial conditions pin it down:</p>
+$$\mathbf v(t)=\mathbf v(0)+\int_0^t\mathbf a(s)\,ds,\qquad \mathbf r(t)=\mathbf r(0)+\int_0^t\mathbf v(s)\,ds .$$
+<p>For constant gravity \(\mathbf a=(0,0,-g)\) this gives the formula worth memorising (and deriving in the exam):</p>
+$$\mathbf r(t)=\mathbf r_0+\mathbf v_0\,t+\tfrac12\mathbf a\,t^2=\big(x_0+u_1t,\ y_0+u_2t,\ z_0+u_3t-\tfrac{g}{2}t^2\big).$$
+<p class="tip">Markers give marks for <b>showing the integration and the constants</b>. The 2025 S2 official solution writes \(\mathbf v(t)=(c_1,c_2,-9.8t+c_3)\), then "as \(\mathbf v(0)=(2,0,0)\Rightarrow c_1=2,c_2=0,c_3=0\)". Copy that shape. Don't just quote the final formula.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Arc length: add up speed × time</h3>
+<p>Distance = speed × time when speed is constant. When it varies, chop time into tiny pieces and add: \(\Delta s\approx\|\mathbf r'(t)\|\Delta t\). In the limit:</p>
+$$L=\int_a^b\|\mathbf r'(t)\|\,dt=\int_a^b\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}\;dt\qquad(\text{on the formula sheet}).$$
+<p>For a graph \(y=g(x)\) (put \(x=t\)) this becomes \(L=\int_a^b\sqrt{1+g'(x)^2}\,dx\).</p>
+<p><b>The exam secret: the square root always collapses.</b> With no calculator, examiners pick curves where \(\|\mathbf r'\|^2\) is a perfect square or a constant. Look for:</p>
+<ul>
+<li><b>\(\sin^2+\cos^2\)</b>: circles and helices give a constant speed. \((\cos3t,\sin3t,1+4t)\) has \(\|\mathbf r'\|=\sqrt{9+16}=5\).</li>
+<li><b>cross terms cancelling</b>: \((t^2\cos t,t^2\sin t,16-2t)\) gives \(t^4+4t^2+4=(t^2+2)^2\) (2024 S1 Q7).</li>
+<li><b>"\(1+(\text{something})^2\)" completing to a square</b>: \(1+(A-B)^2=(A+B)^2\) whenever \(4AB=1\). Example: \(1+t^2(t^2+2)=(t^2+1)^2\) (T11 Q4b).</li>
+<li><b>half-angle</b>: \(2-2\cos t=4\sin^2(t/2)\) (the cardioid, 2021 S1 Q9).</li>
+<li><b>exponential factor</b>: \(e^{-t}(\cos t,\sin t,1)\) gives \(\|\mathbf r'\|^2=3e^{-2t}\) (2023 S2 Q5).</li>
+</ul>
+<p class="trap">\(\sqrt{A^2}=|A|\), not \(A\). If the speed is \(3|\sin t\cos t|\) you must split the interval where the sign changes, or use symmetry. Otherwise a whole astroid can come out as length \(0\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Vector fields and work</h3>
+<p>A <b>vector field</b> \(\mathbf F(x,y)=\big(P(x,y),Q(x,y)\big)\) attaches an arrow to every point: a force, a wind or a current. When a particle moves along \(C\), the field pushes it. The <b>work done</b> adds up "force component along the direction of motion × distance":</p>
+$$W=\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F\big(\mathbf r(t)\big)\cdot\mathbf r'(t)\,dt\qquad(\text{on the formula sheet}).$$
+<p>Why the dot product? Only the part of the force <i>along</i> the motion does work. A force perpendicular to the path (like the string's pull on a ball on a string) does none. For a constant force along a straight segment this reduces to the school formula \(W=\mathbf F\cdot\mathbf d\).</p>
+<div class="method"><b>The summary's "Bop It" routine (direct computation):</b>
+<ol>
+<li><b>Par it</b>: parametrise the path \(\mathbf r(t)\), \(a\le t\le b\), in the right direction.</li>
+<li><b>Diff it</b>: find \(\mathbf r'(t)\).</li>
+<li><b>F in t</b>: substitute \(x=x(t),y=y(t),(z=z(t))\) into \(\mathbf F\) to get \(\mathbf F(\mathbf r(t))\).</li>
+<li><b>Dot it</b>: form \(\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\), a single function of \(t\).</li>
+<li><b>Int it</b>: \(W=\int_a^b(\dots)\,dt\).</li>
+</ol></div>
+<p class="trap">Direction matters. Reversing the path negates the work: \(\int_{-C}\mathbf F\cdot d\mathbf r=-\int_C\mathbf F\cdot d\mathbf r\). Arc length doesn't care about direction. Work does.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Conservative fields: when the path doesn't matter</h3>
+<p>Some fields are the <b>gradient of a scalar function</b>: \(\mathbf F=\nabla f=(f_x,f_y)\). Then \(f\) is called a <b>potential</b>, and \(\mathbf F\) is <b>conservative</b> (also called a <b>gradient field</b>). For these fields, work behaves like height change on a hill: only the start and end points matter.</p>
+<p><b>Fundamental theorem for line integrals.</b> If \(\mathbf F=\nabla f\) and \(C\) runs from \(A\) to \(B\), then</p>
+$$\int_C\mathbf F\cdot d\mathbf r=f(B)-f(A).$$
+<p><i>Why:</i> by the chain rule (<a href="ch05-gradient-chain-rule.html">Ch 5</a>), \(\frac{d}{dt}f(\mathbf r(t))=f_x x'+f_y y'=\nabla f\cdot\mathbf r'\). So the work integrand is an exact derivative, and \(\int_a^b\frac{d}{dt}f(\mathbf r(t))\,dt=f(\mathbf r(b))-f(\mathbf r(a))\).</p>
+<p>Three consequences examiners exploit:</p>
+<ol>
+<li><b>Path independence.</b> Any two paths from \(A\) to \(B\) give the same work. So a horrible path like \(x=t\cos(\pi t),\ y=2t^2\sin(\pi t)\) (2025 S2 Q8) needs only its endpoints.</li>
+<li><b>Closed loops give zero.</b> If \(A=B\) then \(W=f(A)-f(A)=0\).</li>
+<li><b>Contrapositive test.</b> If some closed loop has nonzero work, or two paths give different work, then \(\mathbf F\) is <i>not</i> conservative.</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>🧭 The test: \(P_y=Q_x\) (and curl in 3-D)</h3>
+<p>If \(\mathbf F=(P,Q)=(f_x,f_y)\), then \(P_y=f_{xy}\) and \(Q_x=f_{yx}\). By Clairaut (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>) these are equal. So:</p>
+$$\mathbf F=(P,Q)\ \text{conservative}\ \Longrightarrow\ \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}.$$
+<p>MATH1052 uses the converse too: if \(P_y=Q_x\) everywhere on \(\mathbb R^2\) (or any region with no holes), then \(\mathbf F\) is conservative. This is the "show that \(\mathbf F\) is conservative" routine in every paper. (The 2021 S1 solutions note there is a "simply connected domain" subtlety, but that is MATH2001 material, not tested here.)</p>
+<p><b>3-D version</b> (2020 S1 Q9 and 2023 S1 Q8 use 3-D fields). \(\mathbf F=(P,Q,R)\) is conservative on \(\mathbb R^3\) iff all three cross-partials match:</p>
+$$P_y=Q_x,\qquad P_z=R_x,\qquad Q_z=R_y\qquad(\text{i.e. }\nabla\times\mathbf F=\mathbf 0).$$
+</div>
+
+<div class="card">
+<h3>🧭 Building the potential: partial integration</h3>
+<div class="method">
+<ol>
+<li>Integrate \(P\) with respect to \(x\), treating \(y\) as a constant: \(f=\int P\,dx+g(y)\). The "constant" is an <b>unknown function of \(y\)</b>.</li>
+<li>Differentiate that \(f\) with respect to \(y\) and set it equal to \(Q\).</li>
+<li>Everything except \(g'(y)\) must cancel. Solve for \(g'(y)\) (it depends on \(y\) only), then integrate.</li>
+<li>State \(f\) (take the constant \(=0\)), and <b>check</b> \(\nabla f=\mathbf F\).</li>
+</ol>
+In 3-D, add one more round: \(f=\int P\,dx+g(y,z)\). Match \(f_y=Q\) to find \(g_y\) and integrate to get \(g=h(y)+k(z)\)-type pieces. Then match \(f_z=R\).</div>
+<p class="trap">If \(g'(y)\) turns out to depend on \(x\), you made an algebra slip <i>or</i> the field is not conservative. Never "fix" it by pretending \(x\) is constant.</p>
+</div>
+
+<div class="card">
+<h3>Which method? A one-glance map of Chapter 7</h3>
+<table>
+<tr><th>Question gives / asks</th><th>Method</th><th>Sheet?</th></tr>
+<tr><td>"Write a parametrisation" of a line, circle, ellipse or segment</td><td>Standard templates + check \(t=0\) and a quarter-turn</td><td>✗ know cold</td></tr>
+<tr><td>\(\mathbf r(t)\): find velocity, acceleration, speed</td><td>Differentiate componentwise; speed \(=\|\mathbf r'\|\)</td><td>✗</td></tr>
+<tr><td>\(\mathbf a(t)\) or \(\mathbf v(t)\) + starting data: find \(\mathbf r(t)\)</td><td>Integrate twice; fix constants with ICs</td><td>✗</td></tr>
+<tr><td>Length / distance travelled</td><td>\(L=\int\|\mathbf r'\|\,dt\); make the root a perfect square</td><td>✓</td></tr>
+<tr><td>Work, field <b>not</b> conservative (or "use the formula")</td><td>\(\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)</td><td>✓</td></tr>
+<tr><td>"Show \(\mathbf F\) is conservative"</td><td>\(P_y=Q_x\) (3-D: all three pairs)</td><td>✗</td></tr>
+<tr><td>"Find a potential"</td><td>Partial integration + \(g(y)\)</td><td>✗</td></tr>
+<tr><td>Work, field conservative, nasty path</td><td>\(W=f(\text{end})-f(\text{start})\)</td><td>✗</td></tr>
+<tr><td>Work around a closed curve</td><td>Conservative ⇒ 0. Otherwise compute it directly</td><td>✗</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">The 2022–2025 formula sheets print only \(W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) and \(L=\int_a^b\|\mathbf r'(t)\|\,dt\). Everything else on this page (templates, the \(P_y=Q_x\) test, partial integration, the fundamental theorem) you must bring in your head.</p>
+
+<div class="card">
+<h3>M1 · Parametrising a segment or line <span style="color:var(--muted);font-weight:400">(not on sheet)</span></h3>
+$$\mathbf r(t)=P+t\,(Q-P),\quad 0\le t\le 1\qquad\text{or}\qquad \mathbf r(t)=\mathbf r_0+t\mathbf v,\ t\in\mathbb R.$$
+<div class="when">"Straight line from \(A\) to \(B\)", "line through … in the direction of …", or the straight-line leg of a composite path (2025 S1 Q8(e): the straight line from \((1,0)\) to \((-1,0)\)).</div>
+<p><b>Mini-example.</b> From \((1,0)\) to \((-1,0)\): \(\mathbf r(t)=(1,0)+t(-2,0)=(1-2t,\,0)\), \(0\le t\le1\). Check: \(\mathbf r(0)=(1,0)\) ✓ and \(\mathbf r(1)=(-1,0)\) ✓.</p>
+</div>
+
+<div class="card">
+<h3>M2 · Parametrising circles and ellipses with a given start and direction</h3>
+$$\text{anticlockwise from the right: }(h+a\cos t,\ k+b\sin t);\qquad\text{clockwise from the right: }(h+a\cos t,\ k-b\sin t).$$
+<div class="when">"Circle of radius … centred at … traced clockwise starting from …", "ellipse crossing the axes at …", "half of the ellipse", "one revolution".</div>
+<p><b>Recipe:</b> (1) put the curve in standard form, completing the square if needed (<a href="ch03-surfaces-contours.html">Ch 3</a>); (2) read off \(h,k,a,b\); (3) choose \(\sin\)/\(\cos\) and signs so that \(t=0\) is the required start; (4) check the direction at \(t=\pi/2\); (5) state the \(t\)-range (\(2\pi\) for one lap, \(\pi\) for half).</p>
+</div>
+
+<div class="card">
+<h3>M3 · Velocity, acceleration, speed</h3>
+$$\mathbf v=\mathbf r',\qquad \mathbf a=\mathbf r'',\qquad \text{speed}=\|\mathbf r'\|.$$
+<div class="when">"Find the velocity / acceleration / speed at time \(t\) (or at \(t=\dots\))", "show the speed is constant", "velocity parallel to the line …" (then \(\mathbf v=k\,\mathbf d\)).</div>
+<p><b>Mini-example</b> (2024 S2 Q7). \(\mathbf r=(\cos\frac{\pi t}4-1,\ \sin\frac{\pi t}4)\), so \(\mathbf v=\left(-\frac\pi4\sin\frac{\pi t}4,\ \frac\pi4\cos\frac{\pi t}4\right)\) and the speed is \(\frac\pi4\).</p>
+</div>
+
+<div class="card">
+<h3>M4 · Integrating acceleration with initial conditions</h3>
+$$\mathbf v(t)=\int\mathbf a\,dt+\mathbf c_1,\ \ \mathbf c_1\text{ from }\mathbf v(0);\qquad \mathbf r(t)=\int\mathbf v\,dt+\mathbf c_2,\ \ \mathbf c_2\text{ from }\mathbf r(0).$$
+<div class="when">"A diver/ball/stone … initial velocity … acceleration due to gravity is …", "a particle has velocity \(\mathbf v(t)=\dots\) and starts at …". Follow-ups: "when does it hit the ground" (set \(z=0\), take the positive root), "where does it land" (substitute that time), "maximum height" (set \(v_z=0\)).</div>
+<p><b>Mini-example.</b> \(\mathbf a=(0,0,-10)\), \(\mathbf v_0=(4,3,10)\), \(\mathbf r_0=(0,0,15)\) gives \(\mathbf r=(4t,\,3t,\,15+10t-5t^2)\). It lands when \(5t^2-10t-15=0\iff(t-3)(t+1)=0\), so \(t=3\).</p>
+</div>
+
+<div class="card">
+<h3>M5 · Arc length <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+$$L=\int_a^b\|\mathbf r'(t)\|\,dt,\qquad\text{graph: }L=\int_a^b\sqrt{1+g'(x)^2}\,dx.$$
+<div class="when">"Length of the curve", "distance travelled", "how far does it travel in … seconds", "find \(a\) so that the helix has length 20".</div>
+<p><b>Recipe:</b> differentiate → square and add → <b>expand and look for \(\sin^2+\cos^2\) or a perfect square</b> → take the root (with \(|\cdot|\)) → integrate. If the speed is constant \(c\), then \(L=c\,(b-a)\) with no integral needed.</p>
+</div>
+
+<div class="card">
+<h3>M6 · Work by direct computation <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+$$W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt .$$
+<div class="when">The field is <b>not</b> conservative (\(P_y\ne Q_x\)), or the question says "use the formula \(W=\int\mathbf F\cdot\mathbf r'\,dt\)" (2023 S1 Q8(b), 2025 S1 Q8(e)ii), or the path is a closed loop of a non-conservative field.</div>
+<p><b>Mini-example.</b> \(\mathbf F=(x-2y,3x+y)\) once anticlockwise round \(x^2+y^2=4\): the integrand is \(8\sin^2t+12\cos^2t\), so \(W=8\pi+12\pi=20\pi\ne0\). The field is not conservative.</p>
+</div>
+
+<div class="card">
+<h3>M7 · Conservative test</h3>
+$$\text{2-D: } \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x};\qquad\text{3-D: } P_y=Q_x,\ P_z=R_x,\ Q_z=R_y.$$
+<div class="when">"Show that \(\mathbf F\) is conservative", "is \(\mathbf F\) a gradient field? justify", "determine \(A\) and \(B\) so that \(\mathbf F\) is conservative" (match coefficients of the polynomial identity \(P_y\equiv Q_x\)).</div>
+<p><b>Marker's statement</b> (2024 S2 MS gives <b>2 marks</b> just for it): "A vector field \(\mathbf F=P\mathbf i+Q\mathbf j\) is conservative if \(\partial P/\partial y=\partial Q/\partial x\)." Write it, compute both sides, compare, conclude.</p>
+</div>
+
+<div class="card">
+<h3>M8 · Potential by partial integration, then the fundamental theorem</h3>
+$$f=\int P\,dx+g(y),\quad f_y=Q\Rightarrow g'(y);\qquad W=f(\mathbf r(b))-f(\mathbf r(a)).$$
+<div class="when">After showing \(\mathbf F\) is conservative, "find a potential \(f\) with \(\mathbf F=\nabla f\)", then "compute the work along [horrible path]". Evaluate \(\mathbf r\) at the two endpoint times and plug into \(f\).</div>
+<p><b>Mini-example</b> (2025 S2 Q8). \(\mathbf F=(2x\cos y,-x^2\sin y)\), so \(f=x^2\cos y\). The path has \(\mathbf r(0)=(0,0)\) and \(\mathbf r(3)=(3\cos3\pi,\,18\sin3\pi)=(-3,0)\), so \(W=9\cos0-0=9\).</p>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Each example is written as a full-marks answer, including the justification sentences markers look for. Every number is verified with SymPy. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Three parametrisations with prescribed start and direction</summary>
+<p><b>Q.</b> Write a parametrisation, with a \(t\)-range, for each curve. <b>[6 marks]</b></p>
+<ul>
+<li>(a) The line segment from \((1,-2)\) to \((4,2)\).</li>
+<li>(b) The circle of radius 2 centred at \((1,3)\), traced once <b>clockwise</b> starting from \((3,3)\).</li>
+<li>(c) The ellipse \(\dfrac{x^2}{9}+\dfrac{y^2}{4}=1\), traced once <b>anticlockwise</b> starting from \((0,2)\).</li>
+</ul>
+<p><b>(a)</b> The direction vector is \(Q-P=(4,2)-(1,-2)=(3,4)\), so</p>
+$$\mathbf r(t)=(1,-2)+t(3,4)=(1+3t,\ -2+4t),\qquad 0\le t\le1.$$
+<p>Check: \(\mathbf r(0)=(1,-2)\) ✓ and \(\mathbf r(1)=(4,2)\) ✓. (The segment has length \(\|(3,4)\|=5\).)</p>
+<p><b>(b)</b> The start \((3,3)=(1+2,\,3)\) is the rightmost point, so use \(\cos\) in \(x\). For clockwise motion the particle must move <b>down</b> from the rightmost point, so use \(-\sin\) in \(y\):</p>
+$$\mathbf r(t)=(1+2\cos t,\ 3-2\sin t),\qquad 0\le t\le 2\pi.$$
+<p>Check: \(\mathbf r(0)=(3,3)\) ✓. \(\mathbf r'(0)=(0,-2)\), pointing down, so the motion is clockwise ✓. \((x-1)^2+(y-3)^2=4\cos^2t+4\sin^2t=4\) ✓.</p>
+<p><b>(c)</b> Here \(a=3\) (along \(x\)) and \(b=2\) (along \(y\)). The start \((0,2)\) is the top. Anticlockwise from the top means moving <b>left</b>:</p>
+$$\mathbf r(t)=(-3\sin t,\ 2\cos t),\qquad 0\le t\le2\pi.$$
+<p>Check: \(\mathbf r(0)=(0,2)\) ✓. \(\mathbf r(\pi/2)=(-3,0)\), so it goes top → left: anticlockwise ✓. \(\frac{9\sin^2t}{9}+\frac{4\cos^2t}{4}=1\) ✓.</p>
+<p class="tip">Write the two checks (start point and quarter-turn) in the exam. They take 20 seconds and prove to the marker the orientation is deliberate, not luck.</p>
+</details>
+
+<details>
+<summary>Example 2 — Projectile: integrate a → v → r, then landing time, max height, impact speed</summary>
+<p><b>Q.</b> A ball is thrown from the point \((0,0,15)\) (metres) with initial velocity \(\mathbf v_0=(4,3,10)\) m/s. Take the acceleration to be \(\mathbf a=(0,0,-10)\) m/s².</p>
+<ul>
+<li>(a) Find the velocity and position vectors at time \(t\). <b>[5 marks]</b></li>
+<li>(b) When and where does the ball hit the ground \(z=0\)? <b>[4 marks]</b></li>
+<li>(c) Find the maximum height and the speed on impact. <b>[3 marks]</b></li>
+</ul>
+<p><b>(a)</b> Integrate the acceleration componentwise:</p>
+$$\mathbf v(t)=\int(0,0,-10)\,dt=(c_1,\ c_2,\ -10t+c_3).$$
+<p>From \(\mathbf v(0)=(4,3,10)\) we get \(c_1=4,\ c_2=3,\ c_3=10\), so \(\boxed{\mathbf v(t)=(4,\ 3,\ 10-10t)}\). Integrate again:</p>
+$$\mathbf r(t)=(4t+c_4,\ 3t+c_5,\ 10t-5t^2+c_6).$$
+<p>From \(\mathbf r(0)=(0,0,15)\) we get \(c_4=c_5=0,\ c_6=15\), so \(\boxed{\mathbf r(t)=(4t,\ 3t,\ 15+10t-5t^2)}\).</p>
+<p><b>(b)</b> The ball hits the ground when \(z=0\): \(15+10t-5t^2=0\iff t^2-2t-3=0\iff(t-3)(t+1)=0\). Time must be positive, so \(t=3\) s, and the ball lands at \(\mathbf r(3)=(12,\,9,\,0)\).</p>
+<p><b>(c)</b> Maximum height is when \(v_z=10-10t=0\), i.e. \(t=1\): \(z(1)=15+10-5=20\) m. On impact \(\mathbf v(3)=(4,3,-20)\), so the speed is \(\sqrt{16+9+400}=\sqrt{425}=5\sqrt{17}\) m/s.</p>
+<p class="trap">Reject the negative root \(t=-1\) <b>explicitly</b> ("\(t\ge0\)"). Speed is the magnitude, a positive number. Don't give \((4,3,-20)\) as "the speed".</p>
+</details>
+
+<details>
+<summary>Example 3 — Arc length where the square root collapses</summary>
+<p><b>Q.</b> Find the length of \(\mathbf r(t)=(6t,\ 3\sqrt2\,t^2,\ 2t^3)\) for \(0\le t\le1\). <b>[5 marks]</b></p>
+$$\mathbf r'(t)=(6,\ 6\sqrt2\,t,\ 6t^2),\qquad \|\mathbf r'\|^2=36+72t^2+36t^4=36(1+2t^2+t^4)=36(1+t^2)^2.$$
+<p>So \(\|\mathbf r'(t)\|=6(1+t^2)\), which is positive, so no absolute value issue. Then</p>
+$$L=\int_0^1 6(1+t^2)\,dt=6\left[t+\tfrac{t^3}{3}\right]_0^1=6\cdot\tfrac43=\boxed{8}.$$
+<p class="tip">The coefficients \(6,\,6\sqrt2,\,6\) were chosen so that \(36+72t^2+36t^4\) is \(36(1+t^2)^2\). When you see a middle coefficient that is exactly twice the geometric mean of the outer two, spot the square immediately.</p>
+</details>
+
+<details>
+<summary>Example 4 — Helix: constant speed, length without integrating</summary>
+<p><b>Q.</b> Find the speed of \(\mathbf r(t)=(3\cos t,\ 3\sin t,\ 4t)\) and the length of one full turn \(0\le t\le2\pi\). <b>[4 marks]</b></p>
+$$\mathbf r'=(-3\sin t,\ 3\cos t,\ 4),\qquad\|\mathbf r'\|=\sqrt{9\sin^2t+9\cos^2t+16}=\sqrt{25}=5.$$
+<p>The speed is constant at 5, so \(L=\int_0^{2\pi}5\,dt=10\pi\).</p>
+<p class="tip">Same idea as 2021 S2 Q4 ("find \(a\) such that the helix has length 20"): once the speed is a constant \(c\), \(L=c\cdot a\), so you solve \(c\,a=20\).</p>
+</details>
+
+<details>
+<summary>Example 5 — Work by direct computation along two different paths (non-conservative)</summary>
+<p><b>Q.</b> Let \(\mathbf F(x,y)=(xy,\ x-y)\). (a) Compute the work done moving a particle from \((0,0)\) to \((1,1)\) along the parabola \(y=x^2\). (b) Repeat along the straight line \(y=x\). (c) What do you conclude? <b>[8 marks]</b></p>
+<p><b>(a)</b> Par it: \(\mathbf r(t)=(t,t^2)\), \(0\le t\le1\). Diff it: \(\mathbf r'=(1,2t)\). F in t: \(\mathbf F(\mathbf r(t))=(t\cdot t^2,\ t-t^2)=(t^3,\ t-t^2)\). Dot it: \(t^3+2t(t-t^2)=2t^2-t^3\). Int it:</p>
+$$W_1=\int_0^1(2t^2-t^3)\,dt=\tfrac23-\tfrac14=\boxed{\tfrac{5}{12}}.$$
+<p><b>(b)</b> \(\mathbf r(t)=(t,t)\), \(\mathbf r'=(1,1)\), \(\mathbf F(\mathbf r(t))=(t^2,0)\), so \(W_2=\int_0^1t^2\,dt=\boxed{\tfrac13}\).</p>
+<p><b>(c)</b> Same endpoints, different work, so the work is path-dependent and \(\mathbf F\) is <b>not conservative</b>. This agrees with the test: \(P_y=x\) while \(Q_x=1\), and these are not equal.</p>
+</details>
+
+<details>
+<summary>Example 6 — Conservative field on a nasty path (the fundamental theorem)</summary>
+<p><b>Q.</b> Let \(\mathbf F(x,y)=(2xy+e^x,\ x^2+3y^2)\). (a) Show \(\mathbf F\) is conservative. (b) Find a potential. (c) Find the work done by \(\mathbf F\) along \(\mathbf r(t)=\big(t\cos(2\pi t),\ t^2+\sin(\pi t)\big)\), \(0\le t\le1\). <b>[14 marks]</b></p>
+<p><b>(a)</b> A field \(\mathbf F=P\mathbf i+Q\mathbf j\) on \(\mathbb R^2\) is conservative if \(P_y=Q_x\). Here \(P_y=\frac{\partial}{\partial y}(2xy+e^x)=2x\) and \(Q_x=\frac{\partial}{\partial x}(x^2+3y^2)=2x\). They are equal, so \(\mathbf F\) is conservative.</p>
+<p><b>(b)</b> We need \(f_x=2xy+e^x\) and \(f_y=x^2+3y^2\). Integrating the first with respect to \(x\):</p>
+$$f(x,y)=x^2y+e^x+g(y).$$
+<p>Then \(f_y=x^2+g'(y)\). Setting this equal to \(x^2+3y^2\) gives \(g'(y)=3y^2\), so \(g(y)=y^3\) (constant taken as 0). Hence \(\boxed{f(x,y)=x^2y+e^x+y^3}\). Check: \(\nabla f=(2xy+e^x,\ x^2+3y^2)=\mathbf F\) ✓.</p>
+<p><b>(c)</b> Since \(\mathbf F=\nabla f\), the work depends only on the endpoints. \(\mathbf r(0)=(0,\,0)\) and \(\mathbf r(1)=(\cos2\pi,\ 1+\sin\pi)=(1,1)\). So</p>
+$$W=f(1,1)-f(0,0)=(1+e+1)-(0+1+0)=\boxed{e+1}.$$
+<p class="tip">The direct integral \(\int_0^1\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) here is a monster (a product of \(\cos 2\pi t\), \(e^{t\cos2\pi t}\), …). SymPy's numerical integration gives \(3.71828\ldots=e+1\), confirming the answer. The examiner <i>designed</i> the path to be unintegrable by hand so that you use path independence.</p>
+</details>
+
+<details>
+<summary>Example 7 — Work around a closed loop of a non-conservative field</summary>
+<p><b>Q.</b> Compute the work done by \(\mathbf F=(x-2y,\ 3x+y)\) moving a particle once anticlockwise around the circle \(x^2+y^2=4\). Is \(\mathbf F\) conservative? <b>[6 marks]</b></p>
+<p>Par it: \(\mathbf r(t)=(2\cos t,\,2\sin t)\), \(0\le t\le2\pi\). Then \(\mathbf r'=(-2\sin t,\,2\cos t)\) and \(\mathbf F(\mathbf r(t))=(2\cos t-4\sin t,\ 6\cos t+2\sin t)\).</p>
+$$\mathbf F\cdot\mathbf r'=-4\sin t\cos t+8\sin^2t+12\cos^2t+4\sin t\cos t=8\sin^2t+12\cos^2t.$$
+$$W=\int_0^{2\pi}(8\sin^2t+12\cos^2t)\,dt=8\pi+12\pi=\boxed{20\pi}.$$
+<p>(We used \(\int_0^{2\pi}\sin^2t\,dt=\int_0^{2\pi}\cos^2t\,dt=\pi\).) The curve is closed but \(W\ne0\), so \(\mathbf F\) is <b>not</b> conservative. The test agrees: \(P_y=-2\ne3=Q_x\).</p>
+</details>
+
+<details>
+<summary>Example 8 — A 3-D conservative field along a helix</summary>
+<p><b>Q.</b> Let \(\mathbf F(x,y,z)=(yz,\ xz+2y,\ xy+1)\) and \(C:\ \mathbf r(t)=(\cos t,\sin t,t/\pi)\), \(0\le t\le2\pi\). Show \(\mathbf F\) is conservative, find a potential, and find the work along \(C\). <b>[10 marks]</b></p>
+<p><b>Test</b> (all three pairs): \(P_y=z=Q_x\) ✓, \(P_z=y=R_x\) ✓, \(Q_z=x=R_y\) ✓. So \(\mathbf F\) is conservative on \(\mathbb R^3\).</p>
+<p><b>Potential.</b> \(f=\int yz\,dx=xyz+g(y,z)\). Then \(f_y=xz+g_y=xz+2y\Rightarrow g_y=2y\Rightarrow g=y^2+h(z)\). Then \(f_z=xy+h'(z)=xy+1\Rightarrow h(z)=z\). So \(\boxed{f=xyz+y^2+z}\).</p>
+<p><b>Work.</b> \(\mathbf r(0)=(1,0,0)\) and \(\mathbf r(2\pi)=(1,0,2)\), so \(W=f(1,0,2)-f(1,0,0)=2-0=\boxed{2}\). (The direct integral also gives 2. Verified.)</p>
+</details>
+
+<details>
+<summary>Example 9 — Unknown constants that make a field conservative</summary>
+<p><b>Q.</b> Let \(\mathbf F=(3x^2y+Ay^2,\ Bx^3+4xy+1)\). (a) Find \(A,B\) so that \(\mathbf F\) is conservative. (b) For these values, find a potential and the work done along any path from \((1,0)\) to \((2,1)\). <b>[12 marks]</b></p>
+<p><b>(a)</b> \(P_y=3x^2+2Ay\) and \(Q_x=3Bx^2+4y\). For \(P_y=Q_x\) to hold for <b>all</b> \((x,y)\), match coefficients: \(x^2\): \(3=3B\Rightarrow B=1\); \(y\): \(2A=4\Rightarrow A=2\).</p>
+<p><b>(b)</b> \(f=\int(3x^2y+2y^2)\,dx=x^3y+2xy^2+g(y)\). Then \(f_y=x^3+4xy+g'(y)=x^3+4xy+1\Rightarrow g=y\). So \(f=x^3y+2xy^2+y\) and</p>
+$$W=f(2,1)-f(1,0)=(8+4+1)-0=\boxed{13}.$$
+<p class="tip">"Match coefficients" is the justification. Write "since this must hold for all \(x,y\)". A marker won't accept \(A=2\) from plugging in a single point.</p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>From 2022 to 2025, <b>the last two questions of every paper</b> come from this chapter: Q7 is motion or arc length, Q8 is the conservative-field finale. Together they are 22–30 of the 100 marks. The older (2020–2021, 10-questions × 10-marks) papers have the same topics as Q4, Q6, Q8–Q10.</p>
+
+<table>
+<tr><th>Paper</th><th>Question</th><th>Topic</th><th>Marks</th><th>Type</th></tr>
+<tr><td>2025 S2</td><td>Q7</td><td>Diver: integrate \(\mathbf a\to\mathbf v\to\mathbf r\), time to water, landing point</td><td>12</td><td>B</td></tr>
+<tr><td>2025 S2</td><td>Q8</td><td>\((2x\cos y,-x^2\sin y)\): show conservative, potential, work on nasty path</td><td>18</td><td>A</td></tr>
+<tr><td>2025 S1</td><td>Q7</td><td>Two bugs: integrate velocities, distance \(\sqrt{14-4\sin2t}\), first time 4 m apart</td><td>13</td><td>B</td></tr>
+<tr><td>2025 S1</td><td>Q8</td><td>\((e^y,xe^y)\): sketch half-ellipse, conservative, potential, work; then the straight segment directly</td><td>14</td><td>A + D + E</td></tr>
+<tr><td>2024 S2</td><td>Q7</td><td>Velocity and length of a circular arc</td><td>10</td><td>C</td></tr>
+<tr><td>2024 S2</td><td>Q8</td><td>Find \(A,B\) for conservative, potential, work on spiral \((t\cos t,t\sin t)\)</td><td>18</td><td>A</td></tr>
+<tr><td>2024 S1</td><td>Q7</td><td>Jacaranda flower: speed at \(t=\pi\), distance on \([0,2]\)</td><td>13</td><td>C</td></tr>
+<tr><td>2024 S1</td><td>Q8</td><td>Is \(\mathbf F\) conservative, sketch spiral, work</td><td>14</td><td>A + D</td></tr>
+<tr><td>2023 S2</td><td>Q5</td><td>Length of \(e^{-t}(\cos t,\sin t,1)\)</td><td>10</td><td>C</td></tr>
+<tr><td>2023 S2</td><td>Q6</td><td>\((4x^3y,x^4)\): sketch path (10 marks!), work</td><td>14</td><td>D + A</td></tr>
+<tr><td>2023 S1</td><td>Q7</td><td>Hexbug: \(\mathbf v,\mathbf a\), show parabolic path, first return</td><td>13</td><td>D</td></tr>
+<tr><td>2023 S1</td><td>Q8</td><td>3-D field on helix: length, work via formula, potential, check</td><td>14</td><td>C + E + A</td></tr>
+<tr><td>2022 S2</td><td>Q8</td><td>Asteroid hits the unit sphere: when/where, velocity and speed on impact</td><td>12</td><td>B/C</td></tr>
+<tr><td>2022 S2</td><td>Q9</td><td>\(P_y=Q_x\), potential, sketch \((e^t\sin t,e^t\cos t)\), work</td><td>13</td><td>A + D</td></tr>
+<tr><td>2022 S1</td><td>Q9 / Q10</td><td>Motorcycle on polar curve, speed 6 and distance 30 / conservative, work \(=e^2\)</td><td>10 / 10</td><td>C / A</td></tr>
+<tr><td>2021 S2</td><td>Q4 / Q8</td><td>Helix length 20 ⇒ \(a\) / \((-2y^2,3xy)\) not conservative ⇒ direct work</td><td>10 / 15</td><td>C / E</td></tr>
+<tr><td>2021 S1</td><td>Q9 / Q10</td><td>Polar arc-length formula, cardioid length 24 / conservative, work \(2+\sin1\)</td><td>10 / 10</td><td>C / A</td></tr>
+<tr><td>2020 S2</td><td>Q8 / Q9 / Q10</td><td>Parametrise ellipse, tangent ∥ \(y=-x\) / bird: \(\mathbf v,\mathbf a\), speed, length / work along \(y=x^2\)</td><td>10 each</td><td>D / C / E</td></tr>
+<tr><td>2020 S1</td><td>Q4 / Q6 / Q9</td><td>Integrate \(\mathbf v\) with IC / circle distance / 3-D conservative work</td><td>10 each</td><td>B / C / A</td></tr>
+</table>
+
+<div class="card q">
+<h3>Type A — The conservative-field finale <span class="marks">flagship · 13–18 marks</span></h3>
+<p><b>Looks like:</b> "Consider the force field \(\mathbf F(x,y)=\dots\). (a) Show that \(\mathbf F\) is conservative [or: find \(A,B\) so that it is]. (b) Determine a potential function \(f\) such that \(\mathbf F=\nabla f\). (c) Calculate the work done … along the path [an ugly parametrisation]."</p>
+<div class="method"><b>Routine (and where the marks sit, per the 2024 S2 marking scheme):</b>
+<ol>
+<li>State the criterion "\(\mathbf F=P\mathbf i+Q\mathbf j\) is conservative if \(P_y=Q_x\)" <b>(2 marks for the statement alone)</b>.</li>
+<li>Compute \(P_y\) and \(Q_x\). Compare them, or match coefficients to find constants <b>(3 marks)</b>. Write the resulting field out <b>(1 mark)</b>.</li>
+<li>Potential: \(f=\int P\,dx+g(y)\). Differentiate, match with \(Q\), solve for \(g\) <b>(5 marks working, 1 mark correct \(f\))</b>.</li>
+<li>Work: "since \(\mathbf F\) is conservative, \(W=f(\mathbf r(b))-f(\mathbf r(a))\)". Compute both endpoints <b>(3 marks)</b>, then evaluate <b>(3 marks)</b>.</li>
+</ol></div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q8 <span class="marks">[18 marks]</span></b></p>
+<p>Consider the force field</p>
+$$\mathbf F(x,y)=(2x\cos y,\ -x^2\sin y).$$
+<ul>
+<li>(a) <b>(5 marks)</b> Show that the force field \(\mathbf F\) is conservative.</li>
+<li>(b) <b>(7 marks)</b> Determine a potential function \(f:\mathbb R^2\to\mathbb R\) such that \(\mathbf F=\nabla f\).</li>
+<li>(c) <b>(6 marks)</b> Calculate the work done by the force field \(\mathbf F\) when moving a particle along the path defined by
+$$x(t)=t\cos(\pi t),\qquad y(t)=2t^2\sin(\pi t),\qquad 0\le t\le3.$$</li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q8(a)–(c)</summary>
+<p><b>(a)</b> Write \(\mathbf F=(P,Q)\) with \(P=2x\cos y\) and \(Q=-x^2\sin y\). A vector field on \(\mathbb R^2\) is conservative if \(\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}\). We have</p>
+$$\frac{\partial P}{\partial y}=-2x\sin y,\qquad \frac{\partial Q}{\partial x}=-2x\sin y.$$
+<p>These are equal for all \((x,y)\in\mathbb R^2\), so \(\mathbf F\) is conservative.</p>
+<p><b>(b)</b> We need \(f_x=2x\cos y\) and \(f_y=-x^2\sin y\). Integrating the first with respect to \(x\):</p>
+$$f(x,y)=\int2x\cos y\,dx=x^2\cos y+\varphi(y).$$
+<p>Then \(f_y=-x^2\sin y+\varphi'(y)\). Setting this equal to \(-x^2\sin y\) gives \(\varphi'(y)=0\), so \(\varphi(y)=C\). Taking \(C=0\): \(\boxed{f(x,y)=x^2\cos y}\).</p>
+<p><b>(c)</b> Since \(\mathbf F=\nabla f\) is conservative, the work is path-independent: \(W=\int_C\mathbf F\cdot d\mathbf r=f(\mathbf r(3))-f(\mathbf r(0))\). The endpoints are</p>
+$$\mathbf r(0)=(0,0),\qquad \mathbf r(3)=\big(3\cos3\pi,\ 18\sin3\pi\big)=(-3,\,0).$$
+$$W=f(-3,0)-f(0,0)=(-3)^2\cos0-0=\boxed{9}.$$
+<p class="tip">Do <b>not</b> try the direct integral. The official solution uses only the endpoints. Evaluate \(\cos3\pi=-1\) and \(\sin3\pi=0\) carefully. This is where people lose the marks.</p>
+</details>
+<p><b>Variant — 2024 S2 Q8 [18 marks]:</b> \(\mathbf F=(5x^2y+Ay^2+xy^2)\mathbf i+(Bx^3+3yx+yx^2)\mathbf j\), path \((t\cos t,t\sin t)\), \(0\le t\le\pi/2\). \(P_y=5x^2+2Ay+2xy\) and \(Q_x=3Bx^2+3y+2xy\), so \(B=\frac53\) and \(A=\frac32\). The potential is \(f=\frac53x^3y+\frac32xy^2+\frac12x^2y^2\). The endpoints are \((0,0)\) and \((0,\frac\pi2)\), and \(f\) vanishes at both (every term has a factor \(x\)), so \(W=0\).</p>
+<p><b>Variant — 2023 S2 Q6 [14 marks]:</b> \(\mathbf F=(4x^3y,x^4)=\nabla(x^4y)\) along \(x=-4t^2+8t+1,\ y=2t\), \(t\in[0,2]\). The path is \(x=5-(y-2)^2\), a leftward parabola with vertex \((5,2)\), from \((1,0)\) to \((1,4)\). \(W=f(1,4)-f(1,0)=4\).</p>
+</div>
+
+<div class="card q">
+<h3>Type B — Motion from acceleration or velocity <span class="marks">~10–13 marks</span></h3>
+<p><b>Looks like:</b> "A diver / particle / two bugs … initial position … initial velocity … acceleration \(\mathbf a=\dots\). Determine the position vector at time \(t\). When does it hit …? Where is it then?"</p>
+<div class="method"><b>Routine:</b> integrate componentwise with constants → fix the constants with \(\mathbf v(0)\) → integrate again → fix with \(\mathbf r(0)\) → box \(\mathbf r(t)\). Then solve the event equation (\(z=0\), distance \(=4\), …) for the <b>first positive</b> \(t\), and substitute back.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q7 <span class="marks">[12 marks]</span></b></p>
+<p>A diver jumps from a cliff 40 metres above sea level, starting at position \((0,0,40)\). The diver pushes off horizontally with an initial velocity \(\vec v_0=(2,0,0)\), and the acceleration due to gravity is \(\vec a=(0,0,-9.8)\).</p>
+<ul>
+<li>(a) <b>(5 marks)</b> Determine the position vector of the diver at time \(t\).</li>
+<li>(b) <b>(4 marks)</b> Determine the time it takes for the diver to hit the water.</li>
+<li>(c) <b>(3 marks)</b> Determine the diver's position at the moment they hit the water.</li>
+</ul>
+<p style="color:var(--muted);font-size:13px">(The official solutions booklet prints the part marks as 5/3/2. The question paper, quoted here, has 5/4/3.)</p>
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q7(a)–(c)</summary>
+<p><b>(a)</b> \(\mathbf a=\dfrac{d\mathbf v}{dt}=(0,0,-9.8)\), so</p>
+$$\mathbf v(t)=\Big(\int0\,dt,\int0\,dt,\int-9.8\,dt\Big)=(c_1,\ c_2,\ -9.8t+c_3).$$
+<p>As \(\mathbf v(0)=(2,0,0)=(c_1,c_2,c_3)\), \(c_1=2,\ c_2=0,\ c_3=0\): \(\mathbf v(t)=(2,\,0,\,-9.8t)\). Next,</p>
+$$\mathbf r(t)=\Big(\int2\,dt,\int0\,dt,\int-9.8t\,dt\Big)=(2t+c_4,\ c_5,\ -4.9t^2+c_6).$$
+<p>As \(\mathbf r(0)=(0,0,40)\), \(c_4=c_5=0\) and \(c_6=40\):</p>
+$$\boxed{\mathbf r(t)=(2t,\ 0,\ 40-4.9t^2)}.$$
+<p><b>(b)</b> The diver hits the water when \(z=0\): \(4.9t^2=40\Rightarrow t^2=\dfrac{40}{4.9}=\dfrac{400}{49}\Rightarrow t=\dfrac{20}{7}\approx2.86\) s (taking \(t\gt0\)).</p>
+<p><b>(c)</b> \(\mathbf r\!\left(\tfrac{20}{7}\right)=\left(\tfrac{40}{7},\ 0,\ 40-4.9\cdot\tfrac{400}{49}\right)=\boxed{\left(\tfrac{40}{7},\,0,\,0\right)}\).</p>
+<p class="tip">No calculator: turn \(4.9\) into \(\tfrac{49}{10}\) so that \(\tfrac{40}{4.9}=\tfrac{400}{49}\) is a perfect square over a perfect square. Examiners pick numbers like this on purpose.</p>
+</details>
+<p><b>Variant — 2025 S1 Q7 [13 marks]:</b> \(\mathbf v_A=(6\sin3t,6\cos3t,0)\) from \((-2,0,2)\) gives \(\mathbf r_A=(-2\cos3t,\,2\sin3t,\,2)\). \(\mathbf v_B=(\cos t,-\sin t,0)\) from \((0,1,-1)\) gives \(\mathbf r_B=(\sin t,\,\cos t,\,-1)\). Then \(\|\mathbf r_A-\mathbf r_B\|^2=14-4\sin2t\) (using \(\sin(3t-t)\)). Distance 4 means \(\sin2t=-\tfrac12\), first at \(2t=\tfrac{7\pi}6\), so \(t=\tfrac{7\pi}{12}\) and \(\mathbf r_A=(-\sqrt2,-\sqrt2,2)\). <b>2020 S1 Q4:</b> \(\mathbf v=(\cos t,-\sin t,t)\) from \((3,-2,3)\) gives \(\mathbf r=(3+\sin t,\ \cos t-3,\ 3+\tfrac{t^2}{2})\).</p>
+</div>
+
+<div class="card q">
+<h3>Type C — Speed and arc length of a given curve <span class="marks">~10–13 marks</span></h3>
+<p><b>Looks like:</b> "Determine the speed at \(t=\dots\)", "determine the distance travelled / the length of the path in \(0\le t\le\dots\)", "find \(a\) such that the helix has length 20", "show that the speed is constant".</p>
+<div class="method"><b>Routine:</b> \(\mathbf r'\) → \(\|\mathbf r'\|^2\) → <b>expand, cancel the cross terms, use \(\sin^2+\cos^2=1\)</b> → recognise a square → \(L=\int\|\mathbf r'\|\,dt\).</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 S1 Q7 <span class="marks">[13 marks]</span></b></p>
+<p>A jacaranda flower tumbles to the ground along the curve</p>
+$$\mathbf r(t)=t^2\cos(t)\,\mathbf i+t^2\sin(t)\,\mathbf j+(16-2t)\,\mathbf k.$$
+<ul>
+<li>(a) <b>(8 marks)</b> Determine the speed of the jacaranda flower at \(t=\pi\).</li>
+<li>(b) <b>(5 marks)</b> Determine the distance travelled by the jacaranda flower in the time interval \(0\le t\le2\).</li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2024 S1 Q7(a)–(b)</summary>
+<p><b>(a)</b> Product rule on each component:</p>
+$$\mathbf r'(t)=\big(2t\cos t-t^2\sin t,\ \ 2t\sin t+t^2\cos t,\ \ -2\big).$$
+$$\begin{aligned}\|\mathbf r'\|^2&=(4t^2\cos^2t-4t^3\sin t\cos t+t^4\sin^2t)+(4t^2\sin^2t+4t^3\sin t\cos t+t^4\cos^2t)+4\\&=4t^2+t^4+4=(t^2+2)^2.\end{aligned}$$
+<p>So the speed is \(\|\mathbf r'(t)\|=t^2+2\) (positive), and at \(t=\pi\) the speed is \(\boxed{\pi^2+2}\).</p>
+<p><b>(b)</b> \(L=\displaystyle\int_0^2(t^2+2)\,dt=\left[\tfrac{t^3}3+2t\right]_0^2=\tfrac83+4=\boxed{\tfrac{20}{3}}\).</p>
+<p class="tip">Most of the 8 marks in (a) are for the expansion. <b>Show the cancelling \(\pm4t^3\sin t\cos t\) terms explicitly</b>. That is the line the official solution strikes through.</p>
+</details>
+<p><b>Other instances, one line each:</b> 2024 S2 Q7: speed \(\frac\pi4\), \(L=\frac\pi2\). 2023 S2 Q5: \(\|\mathbf r'\|=\sqrt3e^{-t}\), \(L=\sqrt3(1-e^{-1})\). 2021 S2 Q4: speed 5, so \(5a=20\Rightarrow a=4\). 2021 S1 Q9: \(\|\mathbf r'\|^2=f^2+f'^2\); for the cardioid \(f=3(1-\cos t)\) this is \(36\sin^2\frac t2\), giving \(L=24\). 2022 S1 Q9: speed \(2\,|d\theta/dt|=6\), distance in 5 s is 30 m. 2020 S2 Q9: \(\|\mathbf r'\|=1+t^2\), \(L=\frac{14}3\). 2022 S2 Q8: speed on impact \(\sqrt3\). 2020 S1 Q6: circle distance \(2\pi R\omega\).</p>
+</div>
+
+<div class="card q">
+<h3>Type D — Identify, sketch or parametrise a path <span class="marks">3–13 marks (up to 10 for a sketch!)</span></h3>
+<p><b>Looks like:</b> "Show the hexbug moves along a parabolic path; give the Cartesian equation", "sketch the path \(C\); indicate the starting point and the direction of travel", "find a parametric representation of this [conic]", "when does it first return to its starting point?"</p>
+<div class="method"><b>Routine:</b> eliminate \(t\) (trig identity or substitution) → name the curve → table a few \(t\)-values including the endpoints → sketch <b>only the traced portion</b> with an arrow and labelled start/end points.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2023 S1 Q7 <span class="marks">[13 marks]</span></b></p>
+<p>A hexbug moves on a table so that its position at time \(t\) is</p>
+$$\mathbf r(t)=16\sin(\pi t)\,\mathbf i+4\cos(2\pi t)\,\mathbf j.$$
+<ul>
+<li>(a) <b>(4 marks)</b> Find the velocity and acceleration of the hexbug at time \(t\).</li>
+<li>(b) <b>(5 marks)</b> Show that the hexbug moves along a parabolic path. Give the cartesian equation of the path. <i>Hint:</i> \(\cos(2\theta)=1-2\sin^2\theta\).</li>
+<li>(c) <b>(4 marks)</b> Determine when the hexbug first returns to its starting point.</li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2023 S1 Q7(a)–(c)</summary>
+<p><b>(a)</b> \(\mathbf v(t)=\mathbf r'(t)=16\pi\cos(\pi t)\,\mathbf i-8\pi\sin(2\pi t)\,\mathbf j\) and \(\mathbf a(t)=\mathbf v'(t)=-16\pi^2\sin(\pi t)\,\mathbf i-16\pi^2\cos(2\pi t)\,\mathbf j\).</p>
+<p><b>(b)</b> \(x=16\sin\pi t\Rightarrow\sin\pi t=\frac{x}{16}\). Using the hint with \(\theta=\pi t\):</p>
+$$y=4\cos2\pi t=4\big(1-2\sin^2\pi t\big)=4\Big(1-\frac{2x^2}{256}\Big)=4-\frac{x^2}{32}.$$
+<p>This is a downward parabola with vertex \((0,4)\). Since \(|x|\le16\), the hexbug oscillates along the arc from \((-16,-4)\) to \((16,-4)\).</p>
+<p><b>(c)</b> \(\mathbf r(0)=(0,4)\). We need \(16\sin\pi t=0\) <b>and</b> \(4\cos2\pi t=4\), i.e. \(\sin\pi t=0\) and \(\cos2\pi t=1\). Both first hold again at \(t=1\). (At \(t=1\) the bug is back at the vertex, now moving the other way.) So it first returns at \(\boxed{t=1}\).</p>
+<p class="trap">A common wrong answer is \(t=2\), the period of \(\sin\pi t\). Returning to the start point only requires the <i>position</i> to repeat, not the velocity.</p>
+</details>
+<p><b>Sketch instances:</b> 2025 S1 Q8(a) \((\cos t,\frac12\sin t)\), \(t\in[0,\pi]\): the upper half of the ellipse \(x^2+4y^2=1\) from \((1,0)\) to \((-1,0)\), anticlockwise. The marking scheme gives 1 mark for the equation and 2 for the sketch, which "must indicate start point and direction of travel". 2024 S1 Q8(b) \((t\cos t,t\sin t)\): spiral arc from the origin to \((0,\frac\pi2)\). 2022 S2 Q9(c) \((e^t\sin t,e^t\cos t)\): \(r=e^t\) grows from 1 to \(e^\pi\), from \((0,1)\) through \((e^{\pi/2},0)\) to \((0,-e^\pi)\), clockwise.</p>
+</div>
+
+<div class="card q">
+<h3>Type E — Direct work integral (non-conservative, or "use the formula") <span class="marks">~4–15 marks</span></h3>
+<p><b>Looks like:</b> "Determine whether \(\mathbf F\) is conservative. Determine the work done … along [path]", where the answer to the first part is <b>no</b>. Or "Use the formula \(W=\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\) to determine …", where they want the direct route even if a potential exists.</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2021 S2 Q8 <span class="marks">[15 marks]</span></b></p>
+<p>Let \(\mathbf F(x,y)=-2y^2\,\mathbf i+3xy\,\mathbf j\).</p>
+<ul>
+<li>(a) Determine whether \(\mathbf F\) is a conservative vector field.</li>
+<li>(b) Determine the work done by the force \(\mathbf F\) in moving a particle along the path parametrised by \(\mathbf r(t)=(t^3-2t)\,\mathbf i+(t^2-2)\,\mathbf j,\ 0\le t\le1\).</li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2021 S2 Q8(a)–(b)</summary>
+<p><b>(a)</b> \(P=-2y^2\Rightarrow P_y=-4y\) and \(Q=3xy\Rightarrow Q_x=3y\). Since \(-4y\ne3y\) (for \(y\ne0\)), \(\mathbf F\) is <b>not</b> conservative. So we must integrate directly.</p>
+<p><b>(b)</b> \(\mathbf r'(t)=(3t^2-2,\ 2t)\) and \(\mathbf F(\mathbf r(t))=\big(-2(t^2-2)^2,\ 3(t^3-2t)(t^2-2)\big)\). Notice \(t^3-2t=t(t^2-2)\):</p>
+$$\mathbf F\cdot\mathbf r'=-2(t^2-2)^2(3t^2-2)+6t^2(t^2-2)^2=(t^2-2)^2\big(-6t^2+4+6t^2\big)=4(t^2-2)^2.$$
+$$W=\int_0^14(t^4-4t^2+4)\,dt=4\left(\tfrac15-\tfrac43+4\right)=4\cdot\tfrac{43}{15}=\boxed{\tfrac{172}{15}}.$$
+<p class="tip">Factor before you expand. Spotting \(t^3-2t=t(t^2-2)\) turns a degree-8 polynomial into \(4(t^2-2)^2\).</p>
+</details>
+<p><b>Other instances:</b> 2020 S2 Q10: \(\mathbf F=(x,y,e^z\cos xy)\) on \(y=x^2,z=0\), \(x\) from \(-1\) to \(2\). With \(z=0\) the \(\mathbf k\)-component meets \(z'=0\), leaving \(\int_{-1}^2(t+2t^3)\,dt=9\). 2023 S1 Q8(b): helix \((\cos t,\sin t,t)\), \(\mathbf F=(-\frac x2,-\frac y2,\frac14)\). The integrand is \(\frac14\), so \(W=\frac{3\pi}4\), and part (d) checks this with \(f=-\frac{x^2+y^2}{4}+\frac z4\). 2025 S1 Q8(e): segment \((1-2t,0)\). \(\mathbf F\cdot\mathbf r'=-2\), so \(W=-2\), the same as via the potential.</p>
+</div>
+
+<div class="card q">
+<h3>Type F — Rates of change along a moving point <span class="marks">cross-over with Ch 5</span></h3>
+<p>2023 S1 Q4 (distance between two bugs, rate at \(t=\pi\)), 2020 S1 Q6(ii) (voltage change along a circle), 2020 S2 Q9(iii) (temperature change felt by the bird, \(\frac{dT}{dt}=-\frac{z'(t)}{100}=-\frac{\sqrt2\,t}{100}\)). The parametrisation supplies \(x(t),y(t),z(t)\). The rest is the chain rule \(\frac{dT}{dt}=\nabla T\cdot\mathbf r'(t)\). See <a href="ch05-gradient-chain-rule.html">Ch 5</a>.</p>
+</div>
+</section>
+
+<!-- ================= 5. WORDING TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the verb, then choose the tool. Most lost marks in this chapter come from computing the wrong thing, e.g. velocity when speed was asked, or a direct integral when path independence was the point.</p>
+
+<h4>A · What is being asked for?</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"velocity" / "velocity vector"</td><td>\(\mathbf r'(t)\). A <b>vector</b>.</td></tr>
+<tr><td>"speed"</td><td>\(\|\mathbf r'(t)\|\). A <b>scalar</b> \(\ge0\).</td></tr>
+<tr><td>"acceleration"</td><td>\(\mathbf r''(t)\). A vector.</td></tr>
+<tr><td>"position vector at time \(t\)" given \(\mathbf a\) or \(\mathbf v\)</td><td>Integrate. <b>Show the constants and fix them from the initial data.</b></td></tr>
+<tr><td>"distance travelled" / "length of the path" / "arc length"</td><td>\(\int_a^b\|\mathbf r'\|\,dt\). If the speed is constant, speed × time.</td></tr>
+<tr><td>"how long before it hits the ground/water"</td><td>Solve \(z(t)=0\) and take the <b>positive</b> root.</td></tr>
+<tr><td>"maximum height"</td><td>\(z'(t)=0\), then evaluate \(z\) there.</td></tr>
+<tr><td>"first time …" / "first returns to its starting point"</td><td>Smallest \(t\gt0\) solving the equation. Check that <i>all</i> coordinates match.</td></tr>
+<tr><td>"velocity (tangent) parallel to the line …"</td><td>\(\mathbf r'(t)=k\,\mathbf d\) with \(\mathbf d\) the line's direction. Cross-multiply to get \(\tan t=\dots\).</td></tr>
+</table>
+
+<h4>B · Parametrisation wording</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"line through \(P\) in the direction of \(\mathbf v\)"</td><td>\(\mathbf r=P+t\mathbf v\), \(t\in\mathbb R\).</td></tr>
+<tr><td>"straight line (path) from \(A\) to \(B\)"</td><td>\(\mathbf r=A+t(B-A)\), \(0\le t\le1\). Order matters for work.</td></tr>
+<tr><td>"clockwise" / "counterclockwise, starting from …"</td><td>Choose signs so \(t=0\) is the start. Check the direction at \(t=\pi/2\).</td></tr>
+<tr><td>"ellipse crossing the \(x\)-axis at \(\pm a\) and \(y\)-axis at \(\pm b\)"</td><td>\((a\cos t,\ b\sin t)\), then adjust the start and direction.</td></tr>
+<tr><td>"sketch the conic … find a parametric representation"</td><td>Complete the square → standard form → \((h+a\cos t,\,k+b\sin t)\).</td></tr>
+<tr><td>"show that it moves along a parabolic / elliptical path"</td><td>Eliminate \(t\) (use the hint identity). State the equation <b>and</b> the portion traced.</td></tr>
+<tr><td>"sketch the path; indicate the starting point and the direction of travel"</td><td>Mark \(\mathbf r(a)\) and \(\mathbf r(b)\), and draw an <b>arrow</b>. Marks are lost without both.</td></tr>
+</table>
+
+<h4>C · Field / work wording</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"show that \(\mathbf F\) is conservative"</td><td>State "conservative if \(P_y=Q_x\)", compute both, then say "equal ⇒ conservative". In 3-D check all three pairs.</td></tr>
+<tr><td>"is \(\mathbf F\) conservative? explain / justify"</td><td>Same test. The answer might be <b>no</b>, and then the work must be done directly.</td></tr>
+<tr><td>"determine \(A\) and \(B\) such that \(\mathbf F\) is conservative"</td><td>Write \(P_y\equiv Q_x\) and match coefficients of each monomial.</td></tr>
+<tr><td>"find a potential function \(f\) such that \(\mathbf F=\nabla f\)" / "gradient field"</td><td>Partial integration with \(+g(y)\). Check \(\nabla f=\mathbf F\).</td></tr>
+<tr><td>"calculate the work … along [ugly \(\mathbf r(t)\)]" after a potential part</td><td>\(W=f(\mathbf r(b))-f(\mathbf r(a))\). Only the endpoints are needed.</td></tr>
+<tr><td>"use the potential function in part (c) to …"</td><td>The fundamental theorem. Don't integrate.</td></tr>
+<tr><td>"use the formula \(W=\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\)"</td><td>Direct route required, even if you know \(f\). Show Par / Diff / F in t / Dot / Int.</td></tr>
+<tr><td>"use (c) to check your answer for (b)"</td><td>Compute both ways and state that they agree.</td></tr>
+<tr><td>"around the closed curve …"</td><td>Conservative ⇒ \(W=0\), with the reason stated. Otherwise parametrise each piece and add.</td></tr>
+<tr><td>"travels along the \(x\)-axis to …, then around the circle to …" (a composite path)</td><td>Conservative: endpoints only. Otherwise one parametrisation per piece.</td></tr>
+</table>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Speed vs velocity.</b> "Determine the speed" wants \(\|\mathbf r'\|\), a number or function. Writing the velocity vector gets at most the formula mark. The reverse also costs marks: 2024 S2 Q7(a) asks for velocity, and the marking scheme gives 3 of 4 marks "for correct velocity vector".</div>
+
+<div class="trap"><b>Forgetting the integration constants (or getting them from the wrong data).</b> \(\mathbf v(0)\) fixes the constants in \(\mathbf v\), and \(\mathbf r(0)\) fixes those in \(\mathbf r\). A common slip is \(\mathbf r(t)=\mathbf v_0t-\frac12gt^2\) with the initial height (the 40 m cliff) missing.</div>
+
+<div class="trap"><b>Taking the negative root for the landing time.</b> \(t^2=\frac{400}{49}\) has two roots. State "\(t\gt0\), so \(t=\frac{20}{7}\)".</div>
+
+<div class="trap"><b>\(\sqrt{A^2}=|A|\).</b> For \(\mathbf r=(\cos^3t,\sin^3t)\), the speed is \(3|\sin t\cos t|\), not \(3\sin t\cos t\). Integrating the latter over \([0,2\pi]\) gives the absurd length 0. Split at the sign changes or use symmetry (4 × the first quadrant = 6).</div>
+
+<div class="trap"><b>Using the wrong orientation.</b> Work changes sign when the path is reversed. "From \((1,0)\) to \((-1,0)\)" needs \(\mathbf r(0)=(1,0)\). The summary's claim that \(\omega\gt0\) is clockwise is wrong (see §1). Test with \(t=0\) and \(t=\pi/2\).</div>
+
+<div class="trap"><b>Doing the direct integral when the field is conservative.</b> The 2025 S2 Q8 path \(x=t\cos\pi t,\ y=2t^2\sin\pi t\) is designed to be impossible by hand. If you have already shown \(\mathbf F\) conservative, the marks are for "\(W=f(\mathbf r(3))-f(\mathbf r(0))\)" plus correct endpoints (the 2024 S2 MS gives 3 marks for the endpoints and 3 for the evaluation).</div>
+
+<div class="trap"><b>Endpoint arithmetic.</b> \(\cos3\pi=-1\), \(\sin3\pi=0\), \(\cos\frac\pi2=0\), \(e^{\pi}\cos\pi=-e^{\pi}\). Most finale errors are here, not in the calculus. Write \(\mathbf r(a)\) and \(\mathbf r(b)\) on their own line before substituting into \(f\).</div>
+
+<div class="trap"><b>The "\(+C\)" in a potential must be a function.</b> When integrating \(f_x\) with respect to \(x\), write \(+g(y)\), not \(+C\). Otherwise you lose the pure-\(y\) terms (e.g. the \(-y^3\) in 2022 S2 Q9's \(f=3x+x^2y-y^3\), or the \(+y\) in 2024 S1 Q8).</div>
+
+<div class="trap"><b>Adding \(\int P\,dx\) and \(\int Q\,dy\).</b> For \(\mathbf F=(2xy+1,\ x^2+1)\) this gives \(2x^2y+x+y\), whose gradient is \((4xy+1,\,2x^2+1)\ne\mathbf F\): the shared term is double-counted. Use \(g'(y)\) matching. The correct potential is \(x^2y+x+y\).</div>
+
+<div class="trap"><b>Stopping at "\(P_y=Q_x\)" with no conclusion.</b> The statement of the criterion is worth marks (2 of 6 in 2024 S2 Q8(a)), and so is the concluding sentence. Write: "Since \(P_y=Q_x\) on \(\mathbb R^2\), \(\mathbf F\) is conservative."</div>
+
+<div class="trap"><b>Only one cross-partial checked in 3-D.</b> A 3-D field needs \(P_y=Q_x\), \(P_z=R_x\) <b>and</b> \(Q_z=R_y\). Checking only the first proves nothing.</div>
+
+<div class="trap"><b>Sketches without start point or arrow.</b> The 2025 S1 marking scheme says the sketch "must indicate start point and direction of travel". Also sketch only the portion traced: \(t\in[0,\pi]\) of \((\cos t,\frac12\sin t)\) is the <i>upper half</i> of the ellipse, not the full ellipse.</div>
+
+<div class="trap"><b>Eliminating \(t\) loses the domain.</b> \((e^t,e^{2t})\) is only the right half of \(y=x^2\). \(16\sin\pi t\) confines the hexbug to \(|x|\le16\). State the restriction.</div>
+
+<div class="trap"><b>Official-solution typo to ignore.</b> The 2022 S1 Q10 solution writes \(W=f(1,1)-f(0,1)\) but actually evaluates \(f(1,0)\), which is correct since the segment starts at \((1,0)\). The answer \(e^2\) is right. Always read the start point off the question.</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. Parametrise the segment from \((2,-1)\) to \((5,3)\). How long is it?</summary>
+<p>\(\mathbf r(t)=(2,-1)+t(3,4)=(2+3t,\,-1+4t)\), \(0\le t\le1\). Its length is \(\|(3,4)\|=\boxed5\).</p></details>
+
+<details><summary>2. Does \((\cos t,\,\sin t)\) go clockwise or anticlockwise? How do you check without memorising?</summary>
+<p>Anticlockwise. At \(t=0\) it is at \((1,0)\), and at \(t=\pi/2\) it is at \((0,1)\): right → top is anticlockwise. (Or: \(\mathbf r'(0)=(0,1)\) points up at the rightmost point.)</p></details>
+
+<details><summary>3. A particle has \(\mathbf r'(t)=(3\cos t,\,-3\sin t,\,4)\). What is its speed? How far does it go for \(0\le t\le2\)?</summary>
+<p>Speed \(=\sqrt{9+16}=5\), constant, so the distance is \(5\times2=\boxed{10}\).</p></details>
+
+<details><summary>4. \(\mathbf a=(0,0,-10)\), \(\mathbf v(0)=(1,0,0)\), \(\mathbf r(0)=(0,0,20)\). Write \(\mathbf r(t)\) and the landing time.</summary>
+<p>\(\mathbf r(t)=(t,\,0,\,20-5t^2)\). \(z=0\Rightarrow t^2=4\Rightarrow t=2\) (reject \(-2\)).</p></details>
+
+<details><summary>5. What is the difference between the arc-length integrand and the work integrand?</summary>
+<p>Arc length: \(\|\mathbf r'(t)\|\), which ignores direction and is always \(\ge0\). Work: \(\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\), which depends on the field and on the direction of travel, and can be negative.</p></details>
+
+<details><summary>6. State the test for \(\mathbf F=(P,Q)\) to be conservative, and the 3-D version.</summary>
+<p>2-D: \(P_y=Q_x\). 3-D: \(P_y=Q_x,\ P_z=R_x,\ Q_z=R_y\) (curl \(\mathbf F=\mathbf 0\)).</p></details>
+
+<details><summary>7. Is \(\mathbf F=(-y,\,x)\) conservative? What is the work once anticlockwise round the unit circle?</summary>
+<p>\(P_y=-1\ne1=Q_x\), so it is <b>not</b> conservative. With \(\mathbf r=(\cos t,\sin t)\): \(\mathbf F\cdot\mathbf r'=\sin^2t+\cos^2t=1\), so \(W=2\pi\ne0\), consistent with non-conservative.</p></details>
+
+<details><summary>8. \(\mathbf F=\nabla(x^2y)\). Work from \((1,1)\) to \((2,3)\) along any path?</summary>
+<p>\(f(2,3)-f(1,1)=12-1=\boxed{11}\).</p></details>
+
+<details><summary>9. Find a potential for \(\mathbf F=(y+2x,\ x)\).</summary>
+<p>\(f=\int(y+2x)\,dx=xy+x^2+g(y)\), and \(f_y=x+g'=x\Rightarrow g'=0\). So \(f=xy+x^2\).</p></details>
+
+<details><summary>10. Why is the work of a conservative field around any closed loop zero?</summary>
+<p>\(W=f(\text{end})-f(\text{start})\), and on a closed loop the end equals the start, so \(W=0\).</p></details>
+
+<details><summary>11. You find \(g'(y)=2x\) while building a potential. What went wrong?</summary>
+<p>\(g'\) must depend on \(y\) only. Either there is an algebra slip, or \(\mathbf F\) is not conservative (re-check \(P_y=Q_x\)).</p></details>
+
+<details><summary>12. The speed of \((t^2\cos t,\,t^2\sin t,\,16-2t)\) is a perfect square. Of what?</summary>
+<p>\(\|\mathbf r'\|^2=t^4+4t^2+4=(t^2+2)^2\), so the speed is \(t^2+2\) (2024 S1 Q7).</p></details>
+
+<details><summary>13. The path is \(\mathbf r(t)=(t\cos t,\,t\sin t)\), \(0\le t\le\pi/2\). What are its endpoints?</summary>
+<p>\(\mathbf r(0)=(0,0)\) and \(\mathbf r(\pi/2)=(\frac\pi2\cos\frac\pi2,\ \frac\pi2\sin\frac\pi2)=(0,\frac\pi2)\).</p></details>
+
+<details><summary>14. How do you parametrise the upper half of \(x^2+4y^2=1\) from \((1,0)\) to \((-1,0)\)?</summary>
+<p>\((\cos t,\ \frac12\sin t)\), \(0\le t\le\pi\) (exactly 2025 S1 Q8's path).</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>These are fresh questions that are <b>not</b> in Tutorial 11 or any 2020–2025 paper. The style is the same as the exam but the functions and numbers are new, and every number is chosen to work without a calculator. Every answer is verified with SymPy.</p>
+<p class="tip">How to use the arena: read the "📖 Learn from these" pair first (written the way a marker wants to see it). Then cover the solutions and attempt "✏️ Your turn". Reveal a solution only once you have committed your full answer to paper, including the check lines (start point, direction, \(\nabla f=\mathbf F\)).</p>
+
+<!-- ---------- 8.1 PARAMETRISING ---------- -->
+<h3>8.1 · Parametrising curves (lines, segments, circles, ellipses; identifying paths)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — a segment, two ways (unit time and a fixed time window)</summary>
+<p><b>Q.</b> A drone flies in a straight line from \(P=(-1,4)\) to \(Q=(3,-2)\). (a) Parametrise its path with \(0\le t\le1\) and find the midpoint. (b) Parametrise the same flight if it leaves \(P\) at \(t=2\) and arrives at \(Q\) at \(t=5\).</p>
+<p><b>(a)</b> \(Q-P=(4,-6)\), so \(\mathbf r(t)=(-1+4t,\ 4-6t)\), \(0\le t\le1\). The midpoint is \(\mathbf r(\tfrac12)=(1,1)\).</p>
+<p><b>(b)</b> Replace \(t\) by the fraction of the journey completed, \(\frac{t-2}{5-2}\):</p>
+$$\mathbf r(t)=P+\frac{t-2}{3}(Q-P)=\Big(-1+\tfrac43(t-2),\ \ 4-2(t-2)\Big),\qquad 2\le t\le5.$$
+<p>Check: \(\mathbf r(2)=(-1,4)\) ✓ and \(\mathbf r(5)=(-1+4,\,4-6)=(3,-2)\) ✓.</p>
+</details>
+
+<details>
+<summary>Worked B — identifying a path from its parametrisation</summary>
+<p><b>Q.</b> Identify (with start point and direction) the paths (a) \(\mathbf r(t)=(1+2\cos t,\ -3+5\sin t)\), \(0\le t\le2\pi\); (b) \(\mathbf r(t)=(e^t,\ e^{2t})\), \(t\in\mathbb R\).</p>
+<p><b>(a)</b> \(\cos t=\frac{x-1}{2}\) and \(\sin t=\frac{y+3}{5}\), so \(\cos^2t+\sin^2t=1\) gives</p>
+$$\frac{(x-1)^2}{4}+\frac{(y+3)^2}{25}=1,$$
+<p>an ellipse centred at \((1,-3)\) with semi-axes 2 (horizontal) and 5 (vertical). It starts at \(\mathbf r(0)=(3,-3)\), the rightmost point. \(\mathbf r'(0)=(0,5)\) points up, so the motion is anticlockwise, once around.</p>
+<p><b>(b)</b> \(y=e^{2t}=(e^t)^2=x^2\). But \(x=e^t\gt0\), so the path is <b>only the right half</b> of the parabola \(y=x^2\) (excluding the origin), traversed left to right as \(t\) increases.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Write a parametrisation for the line through \((2,0,-1)\) in the direction \((1,4,-2)\). Where does it meet the plane \(z=3\)?</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf r(t)=(2+t,\ 4t,\ -1-2t)\), \(t\in\mathbb R\). Setting \(z=3\): \(-1-2t=3\Rightarrow t=-2\), so the point is \(\mathbf r(-2)=\boxed{(0,-8,3)}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Parametrise the circle of radius 3 centred at \((-1,2)\), traced once <b>clockwise</b> starting from its <b>top</b> point. Verify your start point and direction.</p>
+<details><summary>Solution</summary>
+<p>The top point is \((-1,5)\). Clockwise from the top means moving <b>right</b>. Use</p>
+$$\mathbf r(t)=(-1+3\sin t,\ 2+3\cos t),\qquad 0\le t\le2\pi.$$
+<p>Check: \(\mathbf r(0)=(-1,5)\) is the top ✓. \(\mathbf r(\pi/2)=(2,2)\) is the rightmost point, so top → right is clockwise ✓. \((x+1)^2+(y-2)^2=9\sin^2t+9\cos^2t=9\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> Parametrise the right half of the ellipse \(25x^2+4y^2=100\), traced <b>anticlockwise</b> from \((0,-5)\) to \((0,5)\).</p>
+<details><summary>Solution</summary>
+<p>Standard form \(\frac{x^2}{4}+\frac{y^2}{25}=1\) gives \(a=2\) and \(b=5\). From the bottom, anticlockwise means moving right first:</p>
+$$\mathbf r(t)=(2\sin t,\ -5\cos t),\qquad 0\le t\le\pi.$$
+<p>Check: \(\mathbf r(0)=(0,-5)\), \(\mathbf r(\pi/2)=(2,0)\), \(\mathbf r(\pi)=(0,5)\): bottom → right → top ✓. \(25(4\sin^2t)+4(25\cos^2t)=100\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Consider the conic \(9x^2+18x+y^2-4y+4=0\). (a) Complete the square and identify the curve. (b) Give a parametrisation. (c) Find all points on the curve where the velocity (tangent) vector is parallel to the line \(y=x\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(9(x^2+2x)+(y^2-4y)+4=9(x+1)^2-9+(y-2)^2-4+4=0\), so \(9(x+1)^2+(y-2)^2=9\), i.e.</p>
+$$(x+1)^2+\frac{(y-2)^2}{9}=1:$$
+<p>an ellipse centred at \((-1,2)\) with semi-axes 1 (horizontal) and 3 (vertical).</p>
+<p><b>(b)</b> \(\mathbf r(t)=(-1+\cos t,\ 2+3\sin t)\), \(0\le t\le2\pi\).</p>
+<p><b>(c)</b> \(\mathbf r'(t)=(-\sin t,\ 3\cos t)\). Parallel to \((1,1)\) requires \(-\sin t=3\cos t\), i.e. \(\tan t=-3\). Then \((\cos t,\sin t)=\pm\left(\tfrac1{\sqrt{10}},-\tfrac3{\sqrt{10}}\right)\), giving the two points</p>
+$$\Big(-1+\tfrac{1}{\sqrt{10}},\ 2-\tfrac{9}{\sqrt{10}}\Big)\quad\text{and}\quad\Big(-1-\tfrac{1}{\sqrt{10}},\ 2+\tfrac{9}{\sqrt{10}}\Big).$$
+<p>Check with implicit differentiation: \(\frac{dy}{dx}=-\frac{9(x+1)}{y-2}=-\frac{9/\sqrt{10}}{-9/\sqrt{10}}=1\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q5.</b> A bead moves with \(\mathbf r(t)=(\cos^2t,\ \sin^2t)\), \(0\le t\le\pi\). (a) Show that it stays on a straight line and describe exactly what it does. (b) Find the total distance it travels.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(x+y=\cos^2t+\sin^2t=1\), and \(0\le x\le1\). So the bead is on the segment from \((1,0)\) to \((0,1)\). It starts at \((1,0)\), reaches \((0,1)\) at \(t=\frac\pi2\), and comes back to \((1,0)\) at \(t=\pi\).</p>
+<p><b>(b)</b> \(\mathbf r'=(-2\sin t\cos t,\ 2\sin t\cos t)=(-\sin2t,\ \sin2t)\), so \(\|\mathbf r'\|=\sqrt2\,|\sin2t|\). By symmetry,</p>
+$$L=2\int_0^{\pi/2}\sqrt2\sin2t\,dt=2\sqrt2\Big[-\tfrac12\cos2t\Big]_0^{\pi/2}=2\sqrt2\cdot1=\boxed{2\sqrt2}.$$
+<p>That is twice the segment length \(\sqrt2\), as expected for there and back. (Integrating \(\sqrt2\sin2t\) over \([0,\pi]\) without the absolute value would give 0, which is wrong.)</p>
+</details>
+</div>
+
+<!-- ---------- 8.2 MOTION ---------- -->
+<h3>8.2 · Motion: velocity, acceleration, speed; integrating with initial conditions</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — from acceleration to position (non-constant acceleration)</summary>
+<p><b>Q.</b> A particle has acceleration \(\mathbf a(t)=(6t,\,-2,\,e^t)\), initial velocity \(\mathbf v(0)=(1,4,0)\) and initial position \(\mathbf r(0)=(0,0,1)\). Find \(\mathbf v(t)\) and \(\mathbf r(t)\), and the position when the \(y\)-component of velocity is zero.</p>
+<p>\(\mathbf v(t)=(3t^2+c_1,\ -2t+c_2,\ e^t+c_3)\). From \(\mathbf v(0)=(1,4,0)\): \(c_1=1,\ c_2=4,\ 1+c_3=0\Rightarrow c_3=-1\). So</p>
+$$\mathbf v(t)=(3t^2+1,\ 4-2t,\ e^t-1).$$
+<p>\(\mathbf r(t)=(t^3+t+c_4,\ 4t-t^2+c_5,\ e^t-t+c_6)\). From \(\mathbf r(0)=(0,0,1)\): \(c_4=c_5=0,\ 1+c_6=1\Rightarrow c_6=0\). So</p>
+$$\mathbf r(t)=(t^3+t,\ 4t-t^2,\ e^t-t).$$
+<p>\(v_y=4-2t=0\Rightarrow t=2\), where \(\mathbf r(2)=(10,\ 4,\ e^2-2)\).</p>
+<p class="trap">\(\int e^t\,dt=e^t\), and at \(t=0\) this is 1, <b>not</b> 0. That is why \(c_3=-1\). Forgetting this is the most common slip with exponential components.</p>
+</details>
+
+<details>
+<summary>Worked B — projectile with \(g=9.8\), exact arithmetic</summary>
+<p><b>Q.</b> A ball is kicked from the origin (ground level) with \(\mathbf v_0=(7,0,14.7)\) m/s under \(\mathbf a=(0,0,-9.8)\). Find the time of flight, the range and the maximum height.</p>
+<p>\(\mathbf r(t)=(7t,\ 0,\ 14.7t-4.9t^2)=(7t,\,0,\,4.9t(3-t))\). It lands when \(z=0\) with \(t\gt0\), so \(t=3\) s. The range is \(x(3)=21\) m.</p>
+<p>Maximum height at \(v_z=14.7-9.8t=0\Rightarrow t=1.5\): \(z=4.9(1.5)(1.5)=11.025\) m \(=\frac{441}{40}\) m.</p>
+<p class="tip">Factor out \(4.9\): \(14.7=3\times4.9\). With no calculator, always look for the common factor in the \(z\)-equation before using the quadratic formula.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> For \(\mathbf r(t)=(t^3-3t,\ 3t^2,\ 5)\) find \(\mathbf v(t)\), \(\mathbf a(t)\), and the speed as a simplified function of \(t\). Evaluate all three at \(t=1\).</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf v=(3t^2-3,\ 6t,\ 0)\) and \(\mathbf a=(6t,\ 6,\ 0)\).</p>
+$$\|\mathbf v\|^2=9t^4-18t^2+9+36t^2=9t^4+18t^2+9=9(t^2+1)^2\ \Rightarrow\ \|\mathbf v\|=3(t^2+1).$$
+<p>At \(t=1\): \(\mathbf v=(0,6,0)\), \(\mathbf a=(6,6,0)\), speed \(=6\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> A particle has velocity \(\mathbf v(t)=(4\cos2t,\ -4\sin2t,\ 3)\) and starts at \((1,0,-2)\). (a) Find \(\mathbf r(t)\). (b) Show that the speed is constant. (c) Find \(\mathbf a(t)\) and show \(\mathbf v\cdot\mathbf a=0\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf r=(2\sin2t+c_1,\ 2\cos2t+c_2,\ 3t+c_3)\). At \(t=0\): \((c_1,\ 2+c_2,\ c_3)=(1,0,-2)\), so</p>
+$$\mathbf r(t)=(1+2\sin2t,\ 2\cos2t-2,\ 3t-2).$$
+<p><b>(b)</b> \(\|\mathbf v\|=\sqrt{16\cos^22t+16\sin^22t+9}=\sqrt{25}=5\), which is constant.</p>
+<p><b>(c)</b> \(\mathbf a=(-8\sin2t,\ -8\cos2t,\ 0)\), and \(\mathbf v\cdot\mathbf a=-32\sin2t\cos2t+32\sin2t\cos2t+0=0\). (This is a helix around the vertical line \(x=1,y=-2\).)</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> A stone is thrown from the top of a tower, starting at \((0,0,19.6)\) (metres), with initial velocity \(\mathbf v_0=(5,12,14.7)\) m/s. The acceleration due to gravity is \(\mathbf a=(0,0,-9.8)\).</p>
+<ul><li>(a) <b>(5 marks)</b> Determine the position vector at time \(t\).</li>
+<li>(b) <b>(4 marks)</b> Determine when and where the stone hits the ground \(z=0\).</li>
+<li>(c) <b>(3 marks)</b> Find the maximum height reached, and the speed of the stone at that moment.</li></ul>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf v=(c_1,c_2,-9.8t+c_3)\), and \(\mathbf v(0)\) gives \(\mathbf v=(5,\ 12,\ 14.7-9.8t)\). Then \(\mathbf r=(5t+c_4,\ 12t+c_5,\ 14.7t-4.9t^2+c_6)\), and \(\mathbf r(0)\) gives</p>
+$$\mathbf r(t)=(5t,\ 12t,\ 19.6+14.7t-4.9t^2).$$
+<p><b>(b)</b> \(z=0\iff4.9(4+3t-t^2)=0\iff t^2-3t-4=0\iff(t-4)(t+1)=0\). Since \(t\gt0\), \(t=4\) s, and the stone lands at \(\mathbf r(4)=\boxed{(20,\,48,\,0)}\).</p>
+<p><b>(c)</b> \(v_z=0\) at \(t=1.5\). Then \(z(1.5)=19.6+22.05-11.025=30.625\) m \(=\frac{245}{8}\) m. At the top the vertical velocity is zero, so the speed is \(\|(5,12,0)\|=\boxed{13}\) m/s.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> A particle moves in the plane with \(\mathbf a(t)=(2,\,-6t)\), \(\mathbf v(0)=(-4,3)\), \(\mathbf r(0)=(1,0)\). (a) Find \(\mathbf r(t)\). (b) At what time \(t\gt0\) is it moving horizontally? Give its position and speed then.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf v=(2t-4,\ 3-3t^2)\) and \(\mathbf r=(t^2-4t+1,\ 3t-t^3)\).</p>
+<p><b>(b)</b> Moving horizontally means \(v_y=0\): \(3-3t^2=0\Rightarrow t=1\) (with \(t\gt0\)). At \(t=1\), \(\mathbf r(1)=(-2,\,2)\) and \(\mathbf v(1)=(-2,\,0)\), so the speed is \(2\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q5.</b> Prove that if a particle moves with constant speed, then its velocity and acceleration are perpendicular at every instant.</p>
+<details><summary>Solution</summary>
+<p>If \(\|\mathbf v\|=c\), then \(\mathbf v\cdot\mathbf v=c^2\) for all \(t\). Differentiating with the product rule for dot products gives \(\mathbf v'\cdot\mathbf v+\mathbf v\cdot\mathbf v'=2\,\mathbf v\cdot\mathbf a=0\). So \(\mathbf v\cdot\mathbf a=0\): the vectors are perpendicular (whenever both are nonzero). Q2(c) is an instance.</p>
+</details>
+</div>
+
+<!-- ---------- 8.3 ARC LENGTH ---------- -->
+<h3>8.3 · Arc length (making the square root collapse)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — substitution after the root simplifies</summary>
+<p><b>Q.</b> Find the length of \(\mathbf r(t)=(3t^2,\ 2t^3)\), \(0\le t\le\sqrt3\).</p>
+<p>\(\mathbf r'=(6t,\ 6t^2)\), so \(\|\mathbf r'\|=\sqrt{36t^2+36t^4}=6t\sqrt{1+t^2}\) (using \(t\ge0\)). With \(u=1+t^2\), \(du=2t\,dt\):</p>
+$$L=\int_0^{\sqrt3}6t\sqrt{1+t^2}\,dt=\Big[2(1+t^2)^{3/2}\Big]_0^{\sqrt3}=2\big(4^{3/2}-1\big)=2(8-1)=\boxed{14}.$$
+</details>
+
+<details>
+<summary>Worked B — a graph \(y=g(x)\) with the "\(1+(A-B)^2=(A+B)^2\)" trick</summary>
+<p><b>Q.</b> Find the length of \(y=\dfrac{x^3}{6}+\dfrac{1}{2x}\) for \(1\le x\le2\).</p>
+<p>\(y'=\frac{x^2}{2}-\frac1{2x^2}\). With \(A=\frac{x^2}2\) and \(B=\frac1{2x^2}\), we have \(4AB=1\), so</p>
+$$1+y'^2=1+(A-B)^2=(A+B)^2=\Big(\frac{x^2}{2}+\frac{1}{2x^2}\Big)^2.$$
+$$L=\int_1^2\Big(\frac{x^2}{2}+\frac{1}{2x^2}\Big)dx=\Big[\frac{x^3}{6}-\frac1{2x}\Big]_1^2=\Big(\frac43-\frac14\Big)-\Big(\frac16-\frac12\Big)=\boxed{\frac{17}{12}}.$$
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find the length of the helix \(\mathbf r(t)=(5\cos t,\ 5\sin t,\ 12t)\) for \(0\le t\le\pi\).</p>
+<details><summary>Solution</summary>
+<p>\(\|\mathbf r'\|=\sqrt{25\sin^2t+25\cos^2t+144}=\sqrt{169}=13\), so \(L=13\pi\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Find the length of \(\mathbf r(t)=(2t,\ t^2,\ \ln t)\), \(1\le t\le e\).</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf r'=(2,\ 2t,\ \tfrac1t)\), so \(\|\mathbf r'\|^2=4+4t^2+\frac1{t^2}=\left(2t+\frac1t\right)^2\) (the cross term is \(2\cdot2t\cdot\frac1t=4\)).</p>
+$$L=\int_1^e\Big(2t+\frac1t\Big)dt=\big[t^2+\ln t\big]_1^e=(e^2+1)-(1+0)=\boxed{e^2}.$$
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q3.</b> Consider the helix \(\mathbf r(t)=(3\cos2t,\ 3\sin2t,\ 8t)\), \(0\le t\le a\). Find \(a\) such that the helix has length 30.</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf r'=(-6\sin2t,\ 6\cos2t,\ 8)\), so \(\|\mathbf r'\|=\sqrt{36+64}=10\). Then \(L=\int_0^a10\,dt=10a=30\), giving \(a=3\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 7 marks</span> <b>Q4.</b> The astroid is \(\mathbf r(t)=(\cos^3t,\ \sin^3t)\), \(0\le t\le2\pi\). (a) Show that \(\|\mathbf r'(t)\|=3|\sin t\cos t|\). (b) Find the total length of the astroid.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf r'=(-3\cos^2t\sin t,\ 3\sin^2t\cos t)\), so \(\|\mathbf r'\|^2=9\sin^2t\cos^2t(\cos^2t+\sin^2t)=9\sin^2t\cos^2t\), and \(\|\mathbf r'\|=3|\sin t\cos t|\).</p>
+<p><b>(b)</b> By symmetry the length is 4 times the first-quadrant arc, where \(\sin t\cos t\ge0\):</p>
+$$L=4\int_0^{\pi/2}3\sin t\cos t\,dt=4\cdot\Big[\tfrac32\sin^2t\Big]_0^{\pi/2}=4\cdot\tfrac32=\boxed6.$$
+<p class="trap">\(\int_0^{2\pi}3\sin t\cos t\,dt=0\). Dropping the absolute value gives a "length" of zero.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q5.</b> Find the length of the curve \(y=\dfrac{x^2}{4}-\dfrac{\ln x}{2}\), \(1\le x\le e\).</p>
+<details><summary>Solution</summary>
+<p>\(y'=\frac x2-\frac1{2x}\). Here \(4\cdot\frac x2\cdot\frac1{2x}=1\), so \(1+y'^2=\left(\frac x2+\frac1{2x}\right)^2\).</p>
+$$L=\int_1^e\Big(\frac x2+\frac1{2x}\Big)dx=\Big[\frac{x^2}{4}+\frac{\ln x}{2}\Big]_1^e=\frac{e^2}4+\frac12-\frac14=\boxed{\frac{e^2+1}{4}}.$$
+</details>
+</div>
+
+<!-- ---------- 8.4 DIRECT WORK ---------- -->
+<h3>8.4 · Work by direct computation \(\int\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — same endpoints, two paths, two answers</summary>
+<p><b>Q.</b> \(\mathbf F=(y^2,\ 2x)\). Find the work from \((0,0)\) to \((1,2)\) along (a) the segment \(y=2x\); (b) the parabola \(y=2x^2\).</p>
+<p><b>(a)</b> \(\mathbf r=(t,2t)\), \(\mathbf r'=(1,2)\), \(\mathbf F(\mathbf r)=(4t^2,\ 2t)\). The integrand is \(4t^2+4t\), so \(W=\frac43+2=\boxed{\frac{10}3}\).</p>
+<p><b>(b)</b> \(\mathbf r=(t,2t^2)\), \(\mathbf r'=(1,4t)\), \(\mathbf F(\mathbf r)=(4t^4,\ 2t)\). The integrand is \(4t^4+8t^2\), so \(W=\frac45+\frac83=\boxed{\frac{52}{15}}\).</p>
+<p>The answers differ, so the work is path-dependent. Indeed \(P_y=2y\ne2=Q_x\).</p>
+</details>
+
+<details>
+<summary>Worked B — a 3-D field along a helix (integration by parts)</summary>
+<p><b>Q.</b> \(\mathbf F=(z,\ x,\ y)\) along \(\mathbf r(t)=(\cos t,\sin t,t)\), \(0\le t\le2\pi\).</p>
+<p>\(\mathbf F(\mathbf r)=(t,\ \cos t,\ \sin t)\) and \(\mathbf r'=(-\sin t,\ \cos t,\ 1)\), so \(\mathbf F\cdot\mathbf r'=-t\sin t+\cos^2t+\sin t\).</p>
+<p>By parts, \(\int_0^{2\pi}-t\sin t\,dt=\big[t\cos t\big]_0^{2\pi}-\int_0^{2\pi}\cos t\,dt=2\pi-0=2\pi\). Also \(\int_0^{2\pi}\cos^2t\,dt=\pi\) and \(\int_0^{2\pi}\sin t\,dt=0\). So \(W=\boxed{3\pi}\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> A constant force \(\mathbf F=(3,-1)\) moves a particle along the straight line from \((1,1)\) to \((4,5)\). Find the work (a) by \(W=\mathbf F\cdot\mathbf d\), (b) using a parametrisation.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf d=(3,4)\), so \(W=9-4=5\).</p>
+<p><b>(b)</b> \(\mathbf r=(1+3t,\ 1+4t)\) and \(\mathbf r'=(3,4)\), so \(\mathbf F\cdot\mathbf r'=5\) and \(W=\int_0^15\,dt=5\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Find the work done by \(\mathbf F=(-y,\ x^2)\) along the quarter-circle of radius 2 from \((2,0)\) to \((0,2)\), anticlockwise.</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf r=(2\cos t,2\sin t)\), \(0\le t\le\frac\pi2\), with \(\mathbf r'=(-2\sin t,2\cos t)\) and \(\mathbf F(\mathbf r)=(-2\sin t,\ 4\cos^2t)\).</p>
+$$\mathbf F\cdot\mathbf r'=4\sin^2t+8\cos^3t.$$
+<p>\(\int_0^{\pi/2}4\sin^2t\,dt=4\cdot\frac\pi4=\pi\). For the cube, \(\int_0^{\pi/2}\cos^3t\,dt=\int_0^{\pi/2}(1-\sin^2t)\cos t\,dt=\big[\sin t-\tfrac{\sin^3t}3\big]_0^{\pi/2}=\frac23\). So</p>
+$$W=\pi+8\cdot\tfrac23=\boxed{\pi+\tfrac{16}{3}}.$$
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q3.</b> Find the work done by \(\mathbf F(x,y,z)=(2y,\ z,\ x)\) along the twisted cubic \(\mathbf r(t)=(t,\ t^2,\ t^3)\), \(0\le t\le1\).</p>
+<details><summary>Solution</summary>
+<p>\(\mathbf F(\mathbf r)=(2t^2,\ t^3,\ t)\) and \(\mathbf r'=(1,\ 2t,\ 3t^2)\), so \(\mathbf F\cdot\mathbf r'=2t^2+2t^4+3t^3\).</p>
+$$W=\tfrac23+\tfrac25+\tfrac34=\tfrac{40+24+45}{60}=\boxed{\tfrac{109}{60}}.$$
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Let \(\mathbf F=(y^2,\,-x)\). (a) Determine whether \(\mathbf F\) is conservative. (b) Find the work done along \(\mathbf r(t)=(t^2,\ t^3)\), \(0\le t\le1\). (c) Compare with the work along the straight segment from \((0,0)\) to \((1,1)\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(P_y=2y\) and \(Q_x=-1\). These are not equal, so \(\mathbf F\) is <b>not</b> conservative.</p>
+<p><b>(b)</b> \(\mathbf F(\mathbf r)=(t^6,\ -t^2)\) and \(\mathbf r'=(2t,\ 3t^2)\), so the integrand is \(2t^7-3t^4\) and \(W=\frac14-\frac35=\boxed{-\frac{7}{20}}\).</p>
+<p><b>(c)</b> \(\mathbf r=(t,t)\): the integrand is \(t^2-t\), so \(W=\frac13-\frac12=-\frac16\ne-\frac7{20}\). The work differs between paths, consistent with (a).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 7 marks</span> <b>Q5.</b> \(\mathbf F=(x+y,\ y-x)\). Compute the work done once around the triangle \((0,0)\to(1,0)\to(0,1)\to(0,0)\). What does the answer tell you?</p>
+<details><summary>Solution</summary>
+<p>Three legs, each on \(0\le t\le1\):</p>
+<ul>
+<li>\(C_1\): \(\mathbf r=(t,0)\), \(\mathbf r'=(1,0)\), \(\mathbf F=(t,-t)\). Integrand \(t\), so \(W_1=\frac12\).</li>
+<li>\(C_2\): \(\mathbf r=(1-t,t)\), \(\mathbf r'=(-1,1)\), \(\mathbf F=(1,\ 2t-1)\). Integrand \(-1+2t-1=2t-2\), so \(W_2=1-2=-1\).</li>
+<li>\(C_3\): \(\mathbf r=(0,1-t)\), \(\mathbf r'=(0,-1)\), \(\mathbf F=(1-t,\ 1-t)\). Integrand \(-(1-t)\), so \(W_3=-\frac12\).</li>
+</ul>
+<p>Total \(W=\frac12-1-\frac12=\boxed{-1}\). The loop is closed but \(W\ne0\), so \(\mathbf F\) is not conservative (check: \(P_y=1\ne-1=Q_x\)).</p>
+</details>
+</div>
+
+<!-- ---------- 8.5 CONSERVATIVE TEST & POTENTIALS ---------- -->
+<h3>8.5 · Conservative test &amp; constructing potentials (2-D and 3-D)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — 2-D potential with a nonzero \(g(y)\)</summary>
+<p><b>Q.</b> Show \(\mathbf F=(2xe^y+y,\ x^2e^y+x-2y)\) is conservative and find a potential.</p>
+<p>\(P_y=2xe^y+1\) and \(Q_x=2xe^y+1\). These are equal on \(\mathbb R^2\), so \(\mathbf F\) is conservative.</p>
+<p>\(f=\int(2xe^y+y)\,dx=x^2e^y+xy+g(y)\). Then \(f_y=x^2e^y+x+g'(y)\). Setting this equal to \(x^2e^y+x-2y\) gives \(g'(y)=-2y\), so \(g=-y^2\).</p>
+<p>\(\boxed{f=x^2e^y+xy-y^2}\). Check: \(\nabla f=(2xe^y+y,\ x^2e^y+x-2y)\) ✓.</p>
+</details>
+
+<details>
+<summary>Worked B — a 3-D potential in three rounds</summary>
+<p><b>Q.</b> Show \(\mathbf F=(2xz+y,\ x+z^2,\ x^2+2yz)\) is conservative and find a potential.</p>
+<p><b>Test:</b> \(P_y=1=Q_x\), \(P_z=2x=R_x\), \(Q_z=2z=R_y\). All three pairs agree, so \(\mathbf F\) is conservative.</p>
+<p><b>Round 1:</b> \(f=\int(2xz+y)\,dx=x^2z+xy+g(y,z)\).<br>
+<b>Round 2:</b> \(f_y=x+g_y=x+z^2\Rightarrow g_y=z^2\Rightarrow g=yz^2+h(z)\).<br>
+<b>Round 3:</b> \(f_z=x^2+2yz+h'(z)=x^2+2yz\Rightarrow h'=0\).</p>
+<p>\(\boxed{f=x^2z+xy+yz^2}\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Decide whether each field is conservative. If so, find a potential. (a) \(\mathbf F=(4x^3+y,\ x+\cos y)\). (b) \(\mathbf G=(xy,\ xy)\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(P_y=1=Q_x\), so it is conservative. \(f=x^4+xy+g(y)\), and \(f_y=x+g'=x+\cos y\Rightarrow g=\sin y\). So \(f=x^4+xy+\sin y\).</p>
+<p><b>(b)</b> \(P_y=x\) and \(Q_x=y\). These are not equal (e.g. at \((1,0)\)), so \(\mathbf G\) is <b>not</b> conservative.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> On the half-plane \(y\gt0\), let \(\mathbf F=\left(\ln y+2x,\ \dfrac{x}{y}+3y^2\right)\). Show \(\mathbf F\) is conservative and find a potential.</p>
+<details><summary>Solution</summary>
+<p>\(P_y=\frac1y\) and \(Q_x=\frac1y\). They are equal on \(y\gt0\), a region with no holes, so \(\mathbf F\) is conservative there.</p>
+<p>\(f=\int(\ln y+2x)\,dx=x\ln y+x^2+g(y)\). Then \(f_y=\frac xy+g'(y)=\frac xy+3y^2\Rightarrow g=y^3\). So \(\boxed{f=x\ln y+x^2+y^3}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> Let \(\mathbf F=(6xy^2+Ay^3)\,\mathbf i+(Bx^2y+9xy^2+4y)\,\mathbf j\).</p>
+<ul><li>(a) <b>(5 marks)</b> Determine the values of \(A\) and \(B\) such that \(\mathbf F\) is conservative.</li>
+<li>(b) <b>(5 marks)</b> Using these values, find a potential \(f\) with \(\mathbf F=\nabla f\).</li>
+<li>(c) <b>(2 marks)</b> Find the work done by \(\mathbf F\) along any path from \((0,0)\) to \((1,1)\).</li></ul>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\mathbf F\) is conservative if \(P_y=Q_x\). \(P_y=12xy+3Ay^2\) and \(Q_x=2Bxy+9y^2\). For these to agree for all \(x,y\): \(xy\)-terms give \(12=2B\Rightarrow B=6\), and \(y^2\)-terms give \(3A=9\Rightarrow A=3\).</p>
+<p><b>(b)</b> \(f=\int(6xy^2+3y^3)\,dx=3x^2y^2+3xy^3+g(y)\). Then \(f_y=6x^2y+9xy^2+g'(y)=6x^2y+9xy^2+4y\Rightarrow g=2y^2\). So \(\boxed{f=3x^2y^2+3xy^3+2y^2}\).</p>
+<p><b>(c)</b> \(W=f(1,1)-f(0,0)=3+3+2=\boxed8\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Let \(\mathbf F(x,y,z)=(yz,\ xz+\cos y,\ xy+2z)\). (a) Show \(\mathbf F\) is conservative. (b) Find a potential. (c) Find the work done moving from \((0,0,0)\) to \((1,\frac\pi2,2)\).</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(P_y=z=Q_x\), \(P_z=y=R_x\), \(Q_z=x=R_y\), so \(\mathbf F\) is conservative on \(\mathbb R^3\).</p>
+<p><b>(b)</b> \(f=xyz+g(y,z)\). Then \(f_y=xz+g_y=xz+\cos y\Rightarrow g=\sin y+h(z)\), and \(f_z=xy+h'(z)=xy+2z\Rightarrow h=z^2\). So \(\boxed{f=xyz+\sin y+z^2}\).</p>
+<p><b>(c)</b> \(W=f(1,\tfrac\pi2,2)-f(0,0,0)=\pi+1+4=\boxed{\pi+5}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 3 marks</span> <b>Q5.</b> For \(\mathbf F=(2xy+1,\ x^2+1)\), a student computes \(\int P\,dx+\int Q\,dy=(x^2y+x)+(x^2y+y)\) and claims \(f=2x^2y+x+y\). Show this is wrong and give the correct potential.</p>
+<details><summary>Solution</summary>
+<p>\(\nabla(2x^2y+x+y)=(4xy+1,\ 2x^2+1)\ne\mathbf F\): the shared term \(x^2y\) has been counted twice. The correct method is \(f=x^2y+x+g(y)\), then \(f_y=x^2+g'=x^2+1\Rightarrow g=y\). So \(\boxed{f=x^2y+x+y}\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.6 FTLI ---------- -->
+<h3>8.6 · Fundamental theorem, path independence &amp; closed loops (the 18-mark finale)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — full finale on an unintegrable path</summary>
+<p><b>Q.</b> Let \(\mathbf F(x,y)=(2xy^3+\cos x,\ 3x^2y^2+1)\). (a) <b>(5)</b> Show \(\mathbf F\) is conservative. (b) <b>(7)</b> Find a potential. (c) <b>(6)</b> Find the work along \(x(t)=\frac{\pi t}{2},\ y(t)=t^3+\sin(\pi t)\), \(0\le t\le1\).</p>
+<p><b>(a)</b> With \(P=2xy^3+\cos x\) and \(Q=3x^2y^2+1\), \(\mathbf F\) is conservative if \(P_y=Q_x\). \(P_y=6xy^2\) and \(Q_x=6xy^2\). They are equal on \(\mathbb R^2\), so \(\mathbf F\) is conservative.</p>
+<p><b>(b)</b> \(f=\int(2xy^3+\cos x)\,dx=x^2y^3+\sin x+g(y)\). Then \(f_y=3x^2y^2+g'(y)=3x^2y^2+1\Rightarrow g'(y)=1\Rightarrow g(y)=y\). So \(\boxed{f=x^2y^3+\sin x+y}\). Check \(\nabla f=\mathbf F\) ✓.</p>
+<p><b>(c)</b> Since \(\mathbf F=\nabla f\), \(W=f(\mathbf r(1))-f(\mathbf r(0))\). The endpoints are \(\mathbf r(0)=(0,\,0+\sin0)=(0,0)\) and \(\mathbf r(1)=(\frac\pi2,\,1+\sin\pi)=(\frac\pi2,1)\).</p>
+$$W=\Big(\frac{\pi^2}{4}\cdot1+\sin\frac\pi2+1\Big)-0=\boxed{\frac{\pi^2}{4}+2}.$$
+<p class="tip">The numerical direct integral also gives \(4.4674\ldots=\frac{\pi^2}4+2\) (SymPy-verified), but by hand it is hopeless. That is the point of the question.</p>
+</details>
+
+<details>
+<summary>Worked B — a closed loop, both ways</summary>
+<p><b>Q.</b> \(\mathbf F=(2x+y,\ x+2y)\). Find the work once around the ellipse \(\mathbf r(t)=(3\cos t,\,2\sin t)\), \(0\le t\le2\pi\).</p>
+<p><b>Via the potential.</b> \(P_y=1=Q_x\), so \(\mathbf F\) is conservative with \(f=x^2+xy+y^2\). The curve is closed (\(\mathbf r(0)=\mathbf r(2\pi)=(3,0)\)), so \(W=f(3,0)-f(3,0)=\boxed0\).</p>
+<p><b>Directly (check).</b> \(\mathbf F\cdot\mathbf r'=(6\cos t+2\sin t)(-3\sin t)+(3\cos t+4\sin t)(2\cos t)=-10\sin t\cos t+6\cos^2t-6\sin^2t\). Each term integrates to 0 over \([0,2\pi]\), so \(W=0\) ✓.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 2 marks</span> <b>Q1.</b> \(\mathbf F=\nabla f\) with \(f(x,y)=x^2y\). Find the work done by \(\mathbf F\) along <i>any</i> path from \((1,2)\) to \((3,-1)\).</p>
+<details><summary>Solution</summary>
+<p>\(W=f(3,-1)-f(1,2)=-9-2=\boxed{-11}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Let \(\mathbf F=(y^2+2x,\ 2xy+3)\) and \(C:\ \mathbf r(t)=\big(t\cos(\pi t),\ t^2+t\sin(\pi t)\big)\), \(0\le t\le2\). Find the work done by \(\mathbf F\) along \(C\).</p>
+<details><summary>Solution</summary>
+<p>\(P_y=2y=Q_x\), so \(\mathbf F\) is conservative. \(f=xy^2+x^2+g(y)\), and \(f_y=2xy+g'=2xy+3\Rightarrow g=3y\), giving \(f=xy^2+x^2+3y\).</p>
+<p>Endpoints: \(\mathbf r(0)=(0,0)\) and \(\mathbf r(2)=(2\cos2\pi,\ 4+2\sin2\pi)=(2,4)\).</p>
+<p>\(W=f(2,4)-f(0,0)=32+4+12=\boxed{48}\). (The direct integral agrees, verified.)</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 18 marks</span> <b>Q3.</b> Consider the force field \(\mathbf F(x,y)=(e^y-y\sin x,\ xe^y+\cos x)\).</p>
+<ul><li>(a) <b>(5 marks)</b> Show that \(\mathbf F\) is conservative.</li>
+<li>(b) <b>(7 marks)</b> Determine a potential function \(f:\mathbb R^2\to\mathbb R\) such that \(\mathbf F=\nabla f\).</li>
+<li>(c) <b>(4 marks)</b> Calculate the work done by \(\mathbf F\) moving a particle along \(x(t)=\pi t^2,\ y(t)=t^3+t\sin(\pi t)\), \(0\le t\le1\).</li>
+<li>(d) <b>(2 marks)</b> The particle then returns to the origin along the straight line. What is the total work for the round trip?</li></ul>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(P=e^y-y\sin x\Rightarrow P_y=e^y-\sin x\). \(Q=xe^y+\cos x\Rightarrow Q_x=e^y-\sin x\). These are equal on \(\mathbb R^2\), so \(\mathbf F\) is conservative.</p>
+<p><b>(b)</b> \(f=\int(e^y-y\sin x)\,dx=xe^y+y\cos x+g(y)\). Then \(f_y=xe^y+\cos x+g'(y)=xe^y+\cos x\Rightarrow g'=0\). So \(\boxed{f=xe^y+y\cos x}\).</p>
+<p><b>(c)</b> \(\mathbf r(0)=(0,0)\) and \(\mathbf r(1)=(\pi,\ 1+\sin\pi)=(\pi,1)\). So \(W=f(\pi,1)-f(0,0)=\pi e+\cos\pi-0=\boxed{\pi e-1}\).</p>
+<p><b>(d)</b> The round trip is a closed curve and \(\mathbf F\) is conservative, so the total work is \(\boxed0\). (The return leg alone contributes \(1-\pi e\).)</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q4.</b> Let \(\mathbf F=(y\cos x,\ \sin x+2y)\). (a) Find a potential and use it to compute the work along \(C:\ \mathbf r(t)=\big(\frac\pi2\sin\frac{\pi t}{2},\ 2t^2\big)\), \(0\le t\le1\). (b) Let \(C_1\) be the straight segment from \((0,0)\) to \((\frac\pi2,2)\). Parametrise \(C_1\) and use \(W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) to compute the work along \(C_1\) directly. Comment.</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(P_y=\cos x=Q_x\), so \(\mathbf F\) is conservative. \(f=y\sin x+g(y)\), and \(f_y=\sin x+g'=\sin x+2y\Rightarrow g=y^2\), so \(f=y\sin x+y^2\). \(C\) runs from \(\mathbf r(0)=(0,0)\) to \(\mathbf r(1)=(\frac\pi2,2)\), so \(W=f(\frac\pi2,2)-f(0,0)=2+4=\boxed6\).</p>
+<p><b>(b)</b> \(\mathbf r(t)=(\frac\pi2t,\ 2t)\), \(0\le t\le1\), with \(\mathbf r'=(\frac\pi2,2)\) and \(\mathbf F(\mathbf r)=(2t\cos\frac{\pi t}2,\ \sin\frac{\pi t}2+4t)\).</p>
+$$\mathbf F\cdot\mathbf r'=\pi t\cos\tfrac{\pi t}{2}+2\sin\tfrac{\pi t}{2}+8t.$$
+<p>By parts: \(\int_0^1\pi t\cos\frac{\pi t}2\,dt=\pi\Big[\frac{2t}{\pi}\sin\frac{\pi t}2+\frac4{\pi^2}\cos\frac{\pi t}2\Big]_0^1=\pi\Big(\frac2\pi-\frac4{\pi^2}\Big)=2-\frac4\pi\). Next, \(\int_0^12\sin\frac{\pi t}2\,dt=\frac4\pi\) and \(\int_0^18t\,dt=4\).</p>
+<p>\(W=2-\frac4\pi+\frac4\pi+4=\boxed6\). This is the same as along \(C\), as path independence predicts.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q5.</b> A student claims \(\mathbf F=(x-y,\ x+y)\) is conservative "because it's a nice linear field". Disprove the claim in two independent ways.</p>
+<details><summary>Solution</summary>
+<p><b>Test:</b> \(P_y=-1\ne1=Q_x\).</p>
+<p><b>Closed loop:</b> once anticlockwise around \(x^2+y^2=9\) with \(\mathbf r=(3\cos t,3\sin t)\): \(\mathbf F\cdot\mathbf r'=(3\cos t-3\sin t)(-3\sin t)+(3\cos t+3\sin t)(3\cos t)=9\). So \(W=\int_0^{2\pi}9\,dt=18\pi\ne0\). A conservative field would give 0.</p>
+</details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every Q8-style question, write the same four blocks in the same order: (1) the criterion sentence "conservative iff \(P_y=Q_x\)" plus both partials and the conclusion; (2) the potential via \(+g(y)\), with a one-line check \(\nabla f=\mathbf F\); (3) the endpoints \(\mathbf r(a)\) and \(\mathbf r(b)\) on their own line; (4) \(W=f(\text{end})-f(\text{start})\) with the arithmetic shown. For Q7-style motion questions: constants shown and fixed, positive root chosen, final answer boxed with units.</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 7 Parametrised Curves &amp; Vector Fields · built from the MATH1052 Summary (pp 6–7), Poster B, Tutorial 11 (questions &amp; solutions), and the 2020–2025 final papers with official solutions and marking schemes (2022 S2 MS, 2024 S2 MS, 2025 S1 MS/WC, 2025 S2 sols). Every published derivative, arc length, potential and work integral verified with SymPy (<code>verify/ch07.py</code>, including direct-vs-potential cross-checks).
+<br><a href="index.html">🏠 Hub</a> · <a href="ch06-optimisation.html">← Ch 6</a> · <a href="exam-2025.html">Exams →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

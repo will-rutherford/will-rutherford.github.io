@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Worked Exams 2023 (S1 &amp; S2)</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  button{background:var(--accent);color:#1e1b4b;border:none;padding:7px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12.5px}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;background:var(--panel2);color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"📝 CONCLUSION IN CONTEXT — ";color:var(--gold);font-weight:700}
+  .ans{background:rgba(167,139,250,.12);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:block;overflow-x:auto}
+  .fig{background:var(--panel2);border:1px dashed #3a4656;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:var(--muted)}
+  .fig:before{content:"🖼 FIGURE — ";color:var(--accent2);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>MATH1052 — Fully Worked Exams, 2023</h1>
+  <p><b>Semester 1 &amp; Semester 2, 2023</b> · Multivariate Calculus &amp; Ordinary Differential Equations</p>
+  <p>two papers · each 120 min + 10 min planning · <b>100 marks · 8 questions</b> · "You must justify all answers"</p>
+  <span class="badge gold">Every answer re-computed in SymPy</span>
+  <span class="badge">No calculator · formula sheet on the last page</span>
+  <span class="badge pre">Zero ODE questions this year — all multivariable</span>
+</header>
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2020.html">2020</a>
+  <a href="exam-2021.html">2021</a>
+  <a href="exam-2022.html">2022</a>
+  <a href="exam-2023.html" style="background:var(--accent);color:#1e1b4b">2023 (this)</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="#s1">S1 paper</a>
+  <a href="#s2">S2 paper</a>
+  <a href="#lessons">What 2023 teaches</a>
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+</nav>
+<main>
+
+<p class="tip">Instructions on the day (both papers): <i>"You must justify all answers. Solutions without justification will not receive full marks."</i> No calculator, no notes. The last page is a formula sheet: linear/quadratic approximation, directional derivative \(f_{\mathbf u}=\nabla f\cdot \mathbf u/\|\mathbf u\|\), chain rule, implicit differentiation, Hessian determinant \(D\), Lagrange \(\nabla f=\lambda\nabla g\), work \(\int_a^b \mathbf F(t)\cdot\mathbf r'(t)\,dt\), arc length \(\int_a^b\|\mathbf r'(t)\|\,dt\) (S2 also prints the general conic \(ax^2+by^2+cx+dy+e=0\)). Everything else — differentiation rules, trig values, integration, completing the square — you must know cold.</p>
+
+<h2 id="glance">At a glance — both papers</h2>
+<div class="grid2">
+<div>
+<h3>Semester 1, 2023</h3>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s1-q1">1</a></td><td>Gradient, directional derivative</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>12</td><td>★☆☆</td></tr>
+<tr><td><a href="#s1-q2">2</a></td><td>2-D limit, removable discontinuity</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>12</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q3">3</a></td><td>Contour matching + sketch</td><td><a href="ch03-surfaces-contours.html">Ch 3</a></td><td>12</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q4">4</a></td><td>Chain rule (distance between bugs)</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>12</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q5">5</a></td><td>Critical points, global max?</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>13</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q6">6</a></td><td>Lagrange on a circle</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>12</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q7">7</a></td><td>Velocity/acceleration, Cartesian path</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>13</td><td>★☆☆</td></tr>
+<tr><td><a href="#s1-q8">8</a></td><td>Helix: arc length, work, potential</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>14</td><td>★★☆</td></tr>
+</table>
+</div>
+<div>
+<h3>Semester 2, 2023</h3>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s2-q1">1</a></td><td>Critical points, absolute extrema?</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>12</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q2">2</a></td><td>Lagrange, linear constraint</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>12</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q3">3</a></td><td>Gradient, max increase, \(D_{\mathbf u}\)</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>12</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q4">4</a></td><td>Graph matching + hyperbola contours</td><td><a href="ch03-surfaces-contours.html">Ch 3</a></td><td>12</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q5">5</a></td><td>Arc length in \(\mathbb R^3\)</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q6">6</a></td><td>Sketch path + conservative work</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>14</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q7">7</a></td><td>Reverse-engineer \(a,b,c\) from \(\nabla f\)</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>14</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q8">8</a></td><td>Limit does not exist (curved path)</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>14</td><td>★★★</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ================================================================== -->
+<!-- ========================== SEMESTER 1 ============================= -->
+<!-- ================================================================== -->
+<h2 id="s1" style="margin-top:40px">📘 Semester 1, 2023 paper</h2>
+<p class="tip">Marks: 12 + 12 + 12 + 12 + 13 + 12 + 13 + 14 = 100. Official solutions are handwritten (<i>MATH1052 FINAL 2023S1 solsv3</i>); every answer below matches them after re-computation, and two small slips in them are flagged.</p>
+
+<!-- ============================ S1 Q1 ============================ -->
+<section id="s1-q1">
+<h2>Question 1 — Directional derivatives <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch05-gradient-chain-rule.html">Ch 5</a></span></h2>
+<div class="card q">
+A scientist is studying the growth of a population of bacteria in a petri dish. The population function is given by
+$$P(x,y)=500e^{-(x^2+y^2)/100}$$
+where \((x,y)\) represents the position in the petri dish. Let \(Q=(1,2)\).
+</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Determine the rate of increase of population of bacteria at \(Q\) in the direction \((1,1)\).
+<details><summary>Worked solution</summary>
+<div class="when">"Rate of change in the direction \(\mathbf u\)" = directional derivative \(P_{\mathbf u}=\nabla P\cdot \dfrac{\mathbf u}{\|\mathbf u\|}\) (formula sheet). Compute \(\nabla P\), evaluate at \(Q\), dot with the <b>unit</b> vector.</div>
+<b>Partial derivatives</b> (chain rule on the exponential):
+$$P_x=500e^{-(x^2+y^2)/100}\cdot\left(-\frac{2x}{100}\right)=-10x\,e^{-(x^2+y^2)/100},\qquad P_y=-10y\,e^{-(x^2+y^2)/100}.$$
+<b>At \(Q=(1,2)\)</b>: \(x^2+y^2=5\), so \(e^{-5/100}=e^{-1/20}\):
+$$\nabla P(1,2)=e^{-1/20}\,(-10,\,-20).$$
+<b>Unit direction:</b> \(\mathbf u=(1,1)\), \(\|\mathbf u\|=\sqrt2\).
+$$P_{\mathbf u}(1,2)=e^{-1/20}(-10,-20)\cdot\frac{(1,1)}{\sqrt2}=\frac{-30}{\sqrt2}\,e^{-1/20}=-15\sqrt2\,e^{-1/20}.$$
+<div class="ans">\(P_{\mathbf u}(Q)=-\dfrac{30}{\sqrt2}e^{-1/20}=-15\sqrt2\,e^{-1/20}\) — negative, so the population actually <b>decreases</b> in the direction \((1,1)\).</div>
+<div class="trap">Forgetting to divide by \(\|\mathbf u\|=\sqrt2\) is the #1 lost mark on directional-derivative questions. \((1,1)\) is not a unit vector.</div>
+<div class="tip">Leave \(e^{-1/20}\) exact — no calculator, and the marker wants the exact form. Say in words what the sign means ("population decreasing in that direction").</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(b)</b> Determine the direction in which the population increases most rapidly at \(Q\).
+<details><summary>Worked solution</summary>
+<div class="when">Steepest ascent is always in the direction of \(\nabla P\) at the point.</div>
+$$\nabla P(1,2)=10e^{-1/20}(-1,-2),\qquad 10e^{-1/20}\gt0,$$
+so the direction of \(\nabla P(1,2)\) is that of \((-1,-2)\).
+<div class="ans">Direction \((-1,-2)\), i.e. unit vector \(\dfrac{1}{\sqrt5}(-1,-2)\) — pointing back toward the centre of the dish.</div>
+<div class="tip">You may strip off a <b>positive</b> scalar factor when giving a direction. Never strip a negative one — that flips the direction to steepest <i>descent</i>. Intuition check: \(P\) peaks at the origin, so "uphill" from \((1,2)\) must point toward \((0,0)\). ✓</div>
+</details></div>
+
+<div class="card q"><span class="marks">2 marks</span><b>(c)</b> Determine the maximum rate of increase of the population at \(Q\).
+<details><summary>Worked solution</summary>
+<div class="when">Maximum rate of increase \(=\|\nabla P\|\) at the point.</div>
+$$\|\nabla P(1,2)\|=10e^{-1/20}\,\|(-1,-2)\|=10e^{-1/20}\sqrt{1+4}=10\sqrt5\,e^{-1/20}.$$
+<div class="ans">Maximum rate \(=10\sqrt5\,e^{-1/20}\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(d)</b> In which direction(s) is the population not changing at \(Q\)?
+<details><summary>Worked solution</summary>
+<div class="when">\(P_{\mathbf u}=0\iff \mathbf u\perp\nabla P\). In 2-D there are exactly two such unit directions (tangent to the contour through \(Q\)).</div>
+We need \(\mathbf u=(u_1,u_2)\) with \((-1,-2)\cdot(u_1,u_2)=0\iff u_1=-2u_2\). Taking \(u_2=\mp1\):
+$$\mathbf u=(2,-1)\quad\text{or}\quad \mathbf u=(-2,1).$$
+Check: \((-10,-20)\cdot(2,-1)=-20+20=0\). ✓
+<div class="ans">The directions \((2,-1)\) and \((-2,1)\) (unit: \(\pm\tfrac{1}{\sqrt5}(2,-1)\)).</div>
+<div class="trap">"Direction(s)" — plural. Giving only one of the two opposite vectors typically costs a mark.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q2 ============================ -->
+<section id="s1-q2">
+<h2>Question 2 — Removable discontinuity <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></span></h2>
+<div class="card q"><span class="marks">12 marks</span>
+A function \(f:\mathbb R^2\to\mathbb R\) has a <i>removable discontinuity</i> at \((a,b)\) if \(\displaystyle\lim_{(x,y)\to(a,b)}f(x,y)\) exists but \(f\) is not continuous at \((a,b)\). Let
+$$g(x,y)=\begin{cases}\dfrac{\sin(9x^2+9y^2)}{6x^2+6y^2} & \text{if }(x,y)\ne(0,0)\\[2mm] 0 & \text{if }(x,y)=(0,0)\end{cases}$$
+Does \(g\) have a removable discontinuity at \((0,0)\)? Explain your answer.
+<details><summary>Worked solution</summary>
+<div class="when">The expression depends on \(x,y\) only through \(x^2+y^2\) ⇒ switch to <b>polar</b>: \(r^2=x^2+y^2\), and \((x,y)\to(0,0)\iff r\to0^+\) regardless of \(\theta\). Then use the one-variable standard limit \(\dfrac{\sin u}{u}\to1\).</div>
+<b>Step 1 — compute the limit.</b> With \(x^2+y^2=r^2\):
+$$\lim_{(x,y)\to(0,0)}g(x,y)=\lim_{r\to0^+}\frac{\sin(9r^2)}{6r^2}=\lim_{r\to0^+}\frac{\sin(9r^2)}{9r^2}\cdot\frac{9}{6}=\frac32\lim_{u\to0}\frac{\sin u}{u}=\frac32\cdot1=\frac32,$$
+where \(u=9r^2\to0\). Because the expression has no \(\theta\) in it, the limit is the same along <b>every</b> path — so the two-variable limit genuinely exists and equals \(\tfrac32\).<br>
+<b>Step 2 — compare with the function value.</b> \(g(0,0)=0\ne\tfrac32\), so \(g\) is not continuous at \((0,0)\).<br>
+<b>Step 3 — conclude using the definition given.</b> The limit exists but \(g\) is not continuous there.
+<div class="ans">Yes. \(\displaystyle\lim_{(x,y)\to(0,0)}g=\tfrac32\) exists but \(\tfrac32\ne g(0,0)=0\), so \(g\) has a removable discontinuity at \((0,0)\) (redefining \(g(0,0)=\tfrac32\) would make it continuous).</div>
+<div class="trap">Testing a couple of straight-line paths and getting \(\tfrac32\) each time does <b>not</b> prove the limit exists — paths can only prove non-existence. The polar substitution (no \(\theta\) left) is what proves existence, and it is where most of the 12 marks sit.</div>
+<div class="tip">Write the full structure the marker is looking for: (i) limit value with justification, (ii) \(g(0,0)\), (iii) "limit exists and \(\ne g(0,0)\) ⇒ removable discontinuity" — explicitly quoting the definition in the question.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q3 ============================ -->
+<section id="s1-q3">
+<h2>Question 3 — Contours <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch03-surfaces-contours.html">Ch 3</a></span></h2>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Match each function \(f(x,y)\) in the table below with its contour map (labelled 1, 2, 3). Enter 0 in the table if there is no match. No justification is required.
+<table>
+<tr><th>Function \(f(x,y)=\)</th><th>Enter 0, 1, 2 or 3</th></tr>
+<tr><td>\(y-x\)</td><td></td></tr>
+<tr><td>\((y^2-1)\,x\)</td><td></td></tr>
+<tr><td>\(y^2+x^2-xy\)</td><td></td></tr>
+<tr><td>\(y^2-x\)</td><td></td></tr>
+</table>
+<div class="fig">Map (1): the lines \(x=0\) and \(y=\pm1\) drawn as contours, with hyperbola-like curves in each region between them (bracket shapes opening away from the \(y\)-axis in the middle strip, bunched curves above \(y=1\) and below \(y=-1\)). Map (2): a family of nested parabolas all opening to the right (" ((( " shapes), symmetric about the \(x\)-axis. Map (3): concentric ellipses tilted along the line \(y=x\).</div>
+<details><summary>Worked solution</summary>
+<div class="when">Identify the contour <i>shape</i> of each \(f=k\): linear → parallel lines; \(x=y^2-k\) → parabolas; positive-definite quadratic → ellipses; a product that vanishes on lines → those lines appear as the zero contour.</div>
+<ul>
+<li>\(y-x=k\) → parallel straight lines of slope 1. None of the maps shows parallel lines → <b>0</b>.</li>
+<li>\((y^2-1)x=k\): the \(k=0\) contour is \(x=0\) or \(y=\pm1\) — exactly the three straight lines in map 1 → <b>1</b>.</li>
+<li>\(x^2-xy+y^2=k\): quadratic form with \(\det\begin{pmatrix}1&-\frac12\\-\frac12&1\end{pmatrix}=\tfrac34\gt0\) ⇒ ellipses, tilted because of the \(xy\) term (major axis along \(y=x\)) → <b>3</b>.</li>
+<li>\(y^2-x=k\iff x=y^2-k\) → parabolas opening in the \(+x\) direction → <b>2</b>.</li>
+</ul>
+<div class="ans">\(y-x\to0\); \(\ (y^2-1)x\to1\); \(\ y^2+x^2-xy\to3\); \(\ y^2-x\to2\).</div>
+<div class="tip">Start with the zero contour \(f=0\): it's the fastest fingerprint. \((y^2-1)x=0\) giving three lines is unmistakable.</div>
+</details></div>
+
+<div class="card q"><span class="marks">8 marks</span><b>(b)</b> Consider the function \(f:\mathbb R^2\to\mathbb R\) given by the formula
+$$f(x,y)=x^2y^2+2x^2y+x^2+1.$$
+Sketch the contours \(f(x,y)=1\) and \(f(x,y)=5\).
+<details><summary>Worked solution</summary>
+<div class="when">Set \(f=k\) and <b>factorise</b>. Here \(x^2\) is a common factor and the bracket is a perfect square: \(x^2(y^2+2y+1)=x^2(y+1)^2\).</div>
+<b>Simplify first:</b> \(f(x,y)=x^2(y+1)^2+1\).<br><br>
+<b>Contour \(f=1\):</b>
+$$x^2(y+1)^2=0\iff x=0\ \text{ or }\ y=-1.$$
+Two straight lines: the \(y\)-axis and the horizontal line \(y=-1\).<br><br>
+<b>Contour \(f=5\):</b>
+$$x^2(y+1)^2=4\iff x(y+1)=\pm2\iff y=\frac{2}{x}-1\ \text{ or }\ y=-\frac{2}{x}-1.$$
+These are <b>rectangular hyperbolas</b> with asymptotes \(x=0\) and \(y=-1\) (the \(f=1\) lines). Key points: \(y=\tfrac2x-1\) crosses the \(x\)-axis at \((2,0)\) (branches in the regions \(x\gt0,y\gt-1\) and \(x\lt0,y\lt-1\)); \(y=-\tfrac2x-1\) crosses at \((-2,0)\) (branches in \(x\lt0,y\gt-1\) and \(x\gt0,y\lt-1\)).
+<figure style="margin:10px 0;text-align:center"><svg viewBox="0 0 420 380" style="max-width:100%;width:420px;background:#0a0e14;border:1px solid #2a3340;border-radius:8px" role="img" aria-label="Violet: f = 1 (the lines x = 0 and y = −1). Blue: f = 5 (four branches of the rectangular hyperbolas x(y+1) = ±2), with the f = 1 lines as asymptotes."><line x1="30.0" y1="168.9" x2="400.0" y2="168.9" style="stroke:#9aa7b8;stroke-width:1.2"/><line x1="215.0" y1="355.0" x2="215.0" y2="20.0" style="stroke:#9aa7b8;stroke-width:1.2"/><text x="396.0" y="162.9" fill="#9aa7b8" font-size="13" text-anchor="end">x</text><text x="221.0" y="32.0" fill="#9aa7b8" font-size="13">y</text><line x1="67.0" y1="165.9" x2="67.0" y2="171.9" style="stroke:#9aa7b8"/><text x="67.0" y="183.9" fill="#9aa7b8" font-size="11" text-anchor="middle">-4</text><line x1="141.0" y1="165.9" x2="141.0" y2="171.9" style="stroke:#9aa7b8"/><text x="141.0" y="183.9" fill="#9aa7b8" font-size="11" text-anchor="middle">-2</text><line x1="289.0" y1="165.9" x2="289.0" y2="171.9" style="stroke:#9aa7b8"/><text x="289.0" y="183.9" fill="#9aa7b8" font-size="11" text-anchor="middle">2</text><line x1="363.0" y1="165.9" x2="363.0" y2="171.9" style="stroke:#9aa7b8"/><text x="363.0" y="183.9" fill="#9aa7b8" font-size="11" text-anchor="middle">4</text><line x1="212.0" y1="317.8" x2="218.0" y2="317.8" style="stroke:#9aa7b8"/><text x="209.0" y="321.8" fill="#9aa7b8" font-size="11" text-anchor="end">-4</text><line x1="212.0" y1="243.3" x2="218.0" y2="243.3" style="stroke:#9aa7b8"/><text x="209.0" y="247.3" fill="#9aa7b8" font-size="11" text-anchor="end">-2</text><line x1="212.0" y1="94.4" x2="218.0" y2="94.4" style="stroke:#9aa7b8"/><text x="209.0" y="98.4" fill="#9aa7b8" font-size="11" text-anchor="end">2</text><line x1="215.0" y1="355.0" x2="215.0" y2="20.0" style="stroke:#a78bfa;stroke-width:2.4"/><line x1="30.0" y1="206.1" x2="400.0" y2="206.1" style="stroke:#a78bfa;stroke-width:2.4"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="231,35 233,54 235,70 237,82 239,92 241,101 243,109 245,115 247,121 249,126 251,131 253,135 256,138 258,141 260,144 262,147 264,149 266,152 268,154 270,156 272,158 274,159 276,161 278,162 280,164 282,165 284,166 286,167 288,168 290,169 292,170 294,171 296,172 298,173 300,174 302,175 304,175 306,176 308,177 310,177 312,178 315,178 317,179 319,180 321,180 323,181 325,181 327,181 329,182 331,182 333,183 335,183 337,184 339,184 341,184 343,185 345,185 347,185 349,186 351,186 353,186 355,186 357,187 359,187 361,187 363,188 365,188 367,188 369,188 372,189 374,189 376,189 378,189 380,189 382,190 384,190 386,190 388,190 390,190 392,191 394,191 396,191 398,191 400,191"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="30,221 32,221 34,221 36,222 38,222 40,222 42,222 44,222 46,222 48,223 50,223 52,223 54,223 56,223 58,224 61,224 63,224 65,224 67,225 69,225 71,225 73,225 75,226 77,226 79,226 81,227 83,227 85,227 87,228 89,228 91,228 93,229 95,229 97,229 99,230 101,230 103,231 105,231 107,232 109,232 111,233 113,233 115,234 118,234 120,235 122,236 124,236 126,237 128,238 130,238 132,239 134,240 136,241 138,242 140,243 142,244 144,245 146,246 148,247 150,249 152,250 154,251 156,253 158,255 160,256 162,258 164,260 166,263 168,265 170,268 172,271 174,274 177,278 179,282 181,286 183,291 185,297 187,303 189,311 191,320 193,330 195,343"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="235,343 237,330 239,320 241,311 243,303 245,297 247,291 249,286 251,282 253,278 256,274 258,271 260,268 262,265 264,263 266,260 268,258 270,256 272,255 274,253 276,251 278,250 280,249 282,247 284,246 286,245 288,244 290,243 292,242 294,241 296,240 298,239 300,238 302,238 304,237 306,236 308,236 310,235 312,234 315,234 317,233 319,233 321,232 323,232 325,231 327,231 329,230 331,230 333,229 335,229 337,229 339,228 341,228 343,228 345,227 347,227 349,227 351,226 353,226 355,226 357,225 359,225 361,225 363,225 365,224 367,224 369,224 372,224 374,223 376,223 378,223 380,223 382,223 384,222 386,222 388,222 390,222 392,222 394,222 396,221 398,221 400,221"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="30,191 32,191 34,191 36,191 38,191 40,190 42,190 44,190 46,190 48,190 50,189 52,189 54,189 56,189 58,189 61,188 63,188 65,188 67,188 69,187 71,187 73,187 75,186 77,186 79,186 81,186 83,185 85,185 87,185 89,184 91,184 93,184 95,183 97,183 99,182 101,182 103,181 105,181 107,181 109,180 111,180 113,179 115,178 118,178 120,177 122,177 124,176 126,175 128,175 130,174 132,173 134,172 136,171 138,170 140,169 142,168 144,167 146,166 148,165 150,164 152,162 154,161 156,159 158,158 160,156 162,154 164,152 166,149 168,147 170,144 172,141 174,138 177,135 179,131 181,126 183,121 185,115 187,109 189,101 191,92 193,82 195,70 197,54 199,35"/><circle cx="289.0" cy="168.9" r="3.5" fill="#fbbf24"/><text x="295.0" y="160.9" fill="#fbbf24" font-size="12" text-anchor="start">(2, 0)</text><circle cx="141.0" cy="168.9" r="3.5" fill="#fbbf24"/><text x="135.0" y="160.9" fill="#fbbf24" font-size="12" text-anchor="end">(−2, 0)</text><text x="396.3" y="200.1" fill="#a78bfa" font-size="12" text-anchor="end">y = −1 (f = 1)</text><text x="221.0" y="340.1" fill="#a78bfa" font-size="12">x = 0 (f = 1)</text><text x="296.4" y="79.6" fill="#38bdf8" font-size="12">y = 2/x − 1</text><text x="37.4" y="124.2" fill="#38bdf8" font-size="12">y = −2/x − 1</text></svg><figcaption style="font-size:13px;color:#9aa7b8">Violet: f = 1 (the lines x = 0 and y = −1). Blue: f = 5 (four branches of the rectangular hyperbolas x(y+1) = ±2), with the f = 1 lines as asymptotes.</figcaption></figure>
+<div class="ans">\(f=1\): the lines \(x=0\) and \(y=-1\). \(\ f=5\): the four branches of \(y=\pm\tfrac2x-1\), rectangular hyperbolas asymptotic to those lines, crossing the \(x\)-axis at \((\pm2,0)\).</div>
+<div class="tip">Marker's note on the official solution: <i>"Highlight y-axis and y = −1 on graph for f = 1."</i> Both lines must be clearly drawn and labelled as the \(f=1\) contour — on the same axes as the \(f=5\) curves. Also label the intercepts \((\pm2,0)\) and name the curves ("rectangular hyperbolae").</div>
+<div class="trap">Taking the square root and writing only \(x(y+1)=2\) loses half the \(f=5\) contour. \(x^2(y+1)^2=4\) gives <b>both</b> signs.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q4 ============================ -->
+<section id="s1-q4">
+<h2>Question 4 — Chain rule: distance between two bugs <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch05-gradient-chain-rule.html">Ch 5</a></span></h2>
+<div class="card q"><span class="marks">12 marks</span>
+Atom Ant is travelling on a path given by the parametric equations
+$$x_1=4\cos t,\qquad y_1=2\sin t.$$
+Billy Bug is travelling on a path given by the parametric equations
+$$x_2=2\sin 2t,\qquad y_2=3\cos 2t.$$
+Determine the rate at which the distance between Atom Ant and Billy Bug is changing at \(t=\pi\). Hint: The distance between Atom Ant and Billy Bug at time \(t\) is \(s=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\).
+<details><summary>Worked solution</summary>
+<div class="when">\(s\) depends on four intermediate variables \(x_1,x_2,y_1,y_2\), each a function of \(t\) → multivariable chain rule with a tree diagram: \(\dfrac{ds}{dt}=\sum \dfrac{\partial s}{\partial(\cdot)}\dfrac{d(\cdot)}{dt}\).</div>
+<b>Tree:</b> \(s\to x_1,x_2,y_1,y_2\to t\), so
+$$\frac{ds}{dt}=\frac{\partial s}{\partial x_1}\frac{dx_1}{dt}+\frac{\partial s}{\partial x_2}\frac{dx_2}{dt}+\frac{\partial s}{\partial y_1}\frac{dy_1}{dt}+\frac{\partial s}{\partial y_2}\frac{dy_2}{dt}.$$
+<b>Partial derivatives</b> of \(s\):
+$$\frac{\partial s}{\partial x_1}=\frac{-(x_2-x_1)}{s},\quad \frac{\partial s}{\partial x_2}=\frac{x_2-x_1}{s},\quad \frac{\partial s}{\partial y_1}=\frac{-(y_2-y_1)}{s},\quad \frac{\partial s}{\partial y_2}=\frac{y_2-y_1}{s}.$$
+<b>Positions at \(t=\pi\):</b> \(x_1=4\cos\pi=-4,\ y_1=2\sin\pi=0,\ x_2=2\sin2\pi=0,\ y_2=3\cos2\pi=3\). So \(x_2-x_1=4,\ y_2-y_1=3,\ s=\sqrt{16+9}=5\).
+$$\frac{\partial s}{\partial x_1}=-\frac45,\quad \frac{\partial s}{\partial x_2}=\frac45,\quad \frac{\partial s}{\partial y_1}=-\frac35,\quad \frac{\partial s}{\partial y_2}=\frac35.$$
+<b>Velocities:</b> \(\dfrac{dx_1}{dt}=-4\sin t,\ \dfrac{dx_2}{dt}=4\cos2t,\ \dfrac{dy_1}{dt}=2\cos t,\ \dfrac{dy_2}{dt}=-6\sin 2t\); at \(t=\pi\): \(0,\ 4,\ -2,\ 0\).
+$$\frac{ds}{dt}\Big|_{t=\pi}=\left(-\tfrac45\right)(0)+\left(\tfrac45\right)(4)+\left(-\tfrac35\right)(-2)+\left(\tfrac35\right)(0)=\frac{16}{5}+\frac65=\frac{22}{5}.$$
+<div class="ans">\(\dfrac{ds}{dt}\Big|_{t=\pi}=\dfrac{22}{5}\) — the distance is increasing at \(4.4\) units per unit time.</div>
+<div class="tip">Draw the tree diagram and write the four-term chain rule <i>before</i> differentiating — the official solution does exactly this, and it earns method marks even if an arithmetic slip follows.</div>
+<div class="tip">Shortcut sanity check: \(\dfrac{ds}{dt}=\dfrac{(\mathbf p_2-\mathbf p_1)\cdot(\mathbf v_2-\mathbf v_1)}{s}=\dfrac{(4,3)\cdot\big((4,0)-(0,-2)\big)}{5}=\dfrac{(4,3)\cdot(4,2)}{5}=\dfrac{22}{5}.\) ✓</div>
+<div class="trap">\(\dfrac{d}{dt}\sin2t=2\cos2t\) — don't drop the inner factor 2 (so \(dx_2/dt=4\cos2t\), not \(2\cos2t\)).</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q5 ============================ -->
+<section id="s1-q5">
+<h2>Question 5 — Critical points &amp; global maximum <span style="font-size:14px;color:var(--muted)">[13 marks] · <a href="ch06-optimisation.html">Ch 6</a></span></h2>
+<div class="card q">Let \(f(x,y)=3xe^{y}-x^3-e^{3y}\).</div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Determine all critical points of \(f(x,y)\).
+<details><summary>Worked solution</summary>
+<div class="when">Critical points: solve \(f_x=0\) and \(f_y=0\) simultaneously. Use one equation to eliminate a variable.</div>
+$$f_x=3e^y-3x^2=0\ \Rightarrow\ x^2=e^y\quad(1)\qquad\qquad f_y=3xe^y-3e^{3y}=0\quad(2)$$
+Substitute \(e^y=x^2\) from (1) into (2) (note \(e^{3y}=(e^y)^3=x^6\)):
+$$3x(x^2)-3x^6=0\ \Rightarrow\ 3x^3(1-x^3)=0\ \Rightarrow\ x=0\ \text{or}\ x=1.$$
+<ul>
+<li>\(x=0\): (1) gives \(e^y=0\) — <b>no solution</b> (\(e^y\gt0\) always).</li>
+<li>\(x=1\): \(e^y=1\Rightarrow y=0\).</li>
+</ul>
+<div class="ans">The only critical point is \((1,0)\).</div>
+<div class="trap">Don't list \((0,\,\cdot)\) as a critical point. You must explicitly reject \(x=0\) because \(e^y=0\) is impossible — the marker looks for that sentence.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Classify the critical point(s).
+<details><summary>Worked solution</summary>
+<div class="when">Second-derivative test: \(D=f_{xx}f_{yy}-f_{xy}^2\). \(D\gt0,f_{xx}\lt0\) ⇒ local max; \(D\gt0,f_{xx}\gt0\) ⇒ local min; \(D\lt0\) ⇒ saddle.</div>
+$$f_{xx}=-6x,\qquad f_{xy}=f_{yx}=3e^y,\qquad f_{yy}=3xe^y-9e^{3y}.$$
+$$D(1,0)=\begin{vmatrix}-6&3\\3&3-9\end{vmatrix}=\begin{vmatrix}-6&3\\3&-6\end{vmatrix}=36-9=27\gt0,\qquad f_{xx}(1,0)=-6\lt0.$$
+<div class="ans">\((1,0)\) is a <b>local maximum</b>, with \(f(1,0)=3-1-1=1\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(c)</b> Does \(f\) attain a global maximum? Explain your answer.
+<details><summary>Worked solution</summary>
+<div class="when">To show "no global max", exhibit a path along which \(f\to+\infty\). Freeze one variable to get a one-variable function.</div>
+Set \(y=0\): \(f(x,0)=3x-x^3-1\). As \(x\to-\infty\), the \(-x^3\) term dominates and \(-x^3\to+\infty\), so
+$$\lim_{x\to-\infty}f(x,0)=+\infty.$$
+So \(f\) takes arbitrarily large values and has no global maximum. (Concretely, \(f(-3,0)=-9+27-1=17\gt1=f(1,0)\).)
+<div class="ans">No — \(f(x,0)\to+\infty\) as \(x\to-\infty\), so \(f\) is unbounded above and attains no global maximum. The local max \((1,0)\) is <b>not</b> global.</div>
+<div class="trap">A function with a single critical point that is a local max need <i>not</i> have a global max in two variables (unlike one-variable calculus). This question is built exactly to punish that assumption.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q6 ============================ -->
+<section id="s1-q6">
+<h2>Question 6 — Lagrange multipliers on a circle <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch06-optimisation.html">Ch 6</a></span></h2>
+<div class="card q"><span class="marks">12 marks</span>
+The temperature at a point \((x,y)\) on a metal plate is \(T(x,y)=4x^2-4xy+y^2\). Epsilon, our pet ant, walks on the metal plate along a circle of radius 5 centred at the origin. Use the method of Lagrange multipliers to determine the highest and lowest temperatures encountered by Epsilon.
+<details><summary>Worked solution</summary>
+<div class="when">Optimise \(T\) on a closed curve \(g=0\) → Lagrange: solve \(\nabla T=\lambda\nabla g\) together with \(g=0\), then evaluate \(T\) at every candidate. The circle is closed and bounded, so both extremes exist and are among the candidates.</div>
+<b>Set-up:</b> \(g(x,y)=x^2+y^2-25=0\).
+$$\nabla T=\lambda\nabla g:\quad (8x-4y,\ -4x+2y)=\lambda(2x,\ 2y).$$
+$$8x-4y=2\lambda x\quad(1)\qquad -4x+2y=2\lambda y\quad(2)\qquad x^2+y^2=25\quad(3)$$
+<b>Solve.</b> From (1): \(4x-2y=\lambda x\). But (2) says \(-(4x-2y)=2\lambda y\), so \(-\lambda x=2\lambda y\), i.e.
+$$\lambda(x+2y)=0\ \Rightarrow\ \lambda=0\ \text{ or }\ x=-2y.$$
+<b>Case \(\lambda=0\):</b> (1) gives \(y=2x\). Then (3): \(x^2+4x^2=25\Rightarrow x=\pm\sqrt5\), giving \((\sqrt5,2\sqrt5)\) and \((-\sqrt5,-2\sqrt5)\).<br>
+<b>Case \(x=-2y\):</b> (3): \(4y^2+y^2=25\Rightarrow y=\pm\sqrt5\), giving \((-2\sqrt5,\sqrt5)\) and \((2\sqrt5,-\sqrt5)\) (here \(\lambda=5\)).<br>
+<b>Evaluate</b> — note \(T=(2x-y)^2\):
+<div class="mono">T( √5,  2√5) = 5(4 − 8 + 4)  = 0
+T(−√5, −2√5) = 5(4 − 8 + 4)  = 0
+T( 2√5, −√5) = 5(16 + 8 + 1) = 125
+T(−2√5,  √5) = 5(16 + 8 + 1) = 125</div>
+<div class="ans">Highest temperature \(=125\) (at \(\pm(2\sqrt5,-\sqrt5)\)); lowest temperature \(=0\) (at \(\pm(\sqrt5,2\sqrt5)\)).</div>
+<div class="trap">Never divide by \(\lambda\) or by \(x\)/\(y\) — you lose the \(\lambda=0\) case, which here gives the minimum. Factor instead: \(\lambda(x+2y)=0\).</div>
+<div class="trap">The official solution writes "\(y=\pm5\)" in the \(x=-2y\) case — a slip: \(5y^2=25\) gives \(y=\pm\sqrt5\) (they then use \(\sqrt5(2,-1)\), which is correct). Check each candidate satisfies \(x^2+y^2=25\).</div>
+<div class="tip">State why the extremes exist: \(T\) is continuous and the circle is closed and bounded, so the max and min are attained — and by Lagrange they occur at the candidate points.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q7 ============================ -->
+<section id="s1-q7">
+<h2>Question 7 — Hexbug: motion along a parabola <span style="font-size:14px;color:var(--muted)">[13 marks] · <a href="ch07-curves-vector-fields.html">Ch 7</a></span></h2>
+<div class="card q">A hexbug moves on a table so that its position at time \(t\) is
+$$\mathbf r(t)=16\sin(\pi t)\,\mathbf i+4\cos(2\pi t)\,\mathbf j.$$</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Find the velocity and acceleration of the hexbug at time \(t\).
+<details><summary>Worked solution</summary>
+<div class="when">\(\mathbf v=\mathbf r'(t)\), \(\mathbf a=\mathbf v'(t)\), differentiate component-wise (chain rule brings out \(\pi\), \(2\pi\)).</div>
+$$\mathbf v(t)=16\pi\cos(\pi t)\,\mathbf i-8\pi\sin(2\pi t)\,\mathbf j,$$
+$$\mathbf a(t)=-16\pi^2\sin(\pi t)\,\mathbf i-16\pi^2\cos(2\pi t)\,\mathbf j.$$
+<div class="ans">\(\mathbf v=16\pi\cos(\pi t)\,\mathbf i-8\pi\sin(2\pi t)\,\mathbf j,\quad \mathbf a=-16\pi^2\sin(\pi t)\,\mathbf i-16\pi^2\cos(2\pi t)\,\mathbf j.\)</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Show that the hexbug moves along a parabolic path. Give the cartesian equation of the path. Hint: \(\cos(2\theta)=1-2\sin^2\theta\).
+<details><summary>Worked solution</summary>
+<div class="when">Eliminate \(t\): express \(y\) through \(\sin(\pi t)\) using the double-angle hint, then replace \(\sin(\pi t)=x/16\).</div>
+\(x=16\sin(\pi t)\Rightarrow \sin(\pi t)=\dfrac{x}{16}\). With \(\theta=\pi t\):
+$$y=4\cos(2\pi t)=4\big(1-2\sin^2(\pi t)\big)=4\left(1-2\cdot\frac{x^2}{256}\right)=4-\frac{8x^2}{256}=4-\frac{x^2}{32}.$$
+This is a parabola (quadratic in \(x\)), opening downward with vertex \((0,4)\).
+<div class="ans">\(y=4-\dfrac{x^2}{32}\), traversed for \(-16\le x\le16\) (since \(|16\sin\pi t|\le16\)).</div>
+<div class="tip">Add the domain restriction \(-16\le x\le 16\): the bug only covers the arc from \((-16,-4)\) to \((16,-4)\), sweeping back and forth. It shows the marker you understand the parametrisation, not just the algebra.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(c)</b> Determine when the hexbug first returns to its starting point.
+<details><summary>Worked solution</summary>
+<div class="when">Find \(\mathbf r(0)\), then the smallest \(t\gt0\) with \(\mathbf r(t)=\mathbf r(0)\) — both components must match simultaneously.</div>
+Start: \(\mathbf r(0)=(0,4)\). Need
+$$16\sin(\pi t)=0\ \text{ and }\ 4\cos(2\pi t)=4\iff \sin(\pi t)=0\ \text{ and }\ \cos(2\pi t)=1.$$
+\(\sin(\pi t)=0\iff t\in\mathbb Z\); \(\cos(2\pi t)=1\iff t\in\mathbb Z\). The smallest positive solution is \(t=1\). (Motion: \(0\to\tfrac12\) the bug goes out to \((16,-4)\); \(\tfrac12\to1\) it comes back to \((0,4)\), moving leftward.)
+<div class="ans">The hexbug first returns to its starting point \((0,4)\) at \(t=1\).</div>
+<div class="trap">Solving only one component (e.g. \(x=0\)) isn't enough in general — show both conditions hold at the same \(t\).</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q8 ============================ -->
+<section id="s1-q8">
+<h2>Question 8 — Helix: length, work, potential <span style="font-size:14px;color:var(--muted)">[14 marks] · <a href="ch07-curves-vector-fields.html">Ch 7</a></span></h2>
+<div class="card q">Let \(\mathbf F(x,y,z)=-\tfrac12x\,\mathbf i-\tfrac12y\,\mathbf j+\tfrac14\mathbf k\) be a force field in \(\mathbb R^3\). Let \(C\) be the path parametrised by
+$$\mathbf r(t)=(\cos t,\ \sin t,\ t),\qquad t\in[0,3\pi].$$</div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(a)</b> Determine the length of \(C\).
+<details><summary>Worked solution</summary>
+<div class="when">Arc length \(L=\int_a^b\|\mathbf r'(t)\|\,dt\) (formula sheet).</div>
+$$\mathbf r'(t)=(-\sin t,\ \cos t,\ 1),\qquad \|\mathbf r'(t)\|=\sqrt{\sin^2t+\cos^2t+1}=\sqrt2.$$
+$$L=\int_0^{3\pi}\sqrt2\,dt=3\sqrt2\,\pi.$$
+<div class="ans">\(L=3\sqrt2\,\pi\).</div>
+<div class="tip">\(C\) is a helix of radius 1 above the circle \(x^2+y^2=1\), making \(1\tfrac12\) turns (\(3\pi/2\pi\)). Constant speed \(\sqrt2\) makes the integral trivial.</div>
+</details></div>
+
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Use the work formula \(W=\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\) to determine the work done by \(\mathbf F\) on a particle as it moves along the curve \(C\) from \(t=0\) to \(t=3\pi\).
+<details><summary>Worked solution</summary>
+<div class="when">Substitute the parametrisation into \(\mathbf F\), dot with \(\mathbf r'(t)\), integrate in \(t\).</div>
+On \(C\): \(\mathbf F(t)=\left(-\tfrac12\cos t,\ -\tfrac12\sin t,\ \tfrac14\right)\).
+$$\mathbf F(t)\cdot\mathbf r'(t)=\tfrac12\sin t\cos t-\tfrac12\sin t\cos t+\tfrac14=\tfrac14.$$
+$$W=\int_0^{3\pi}\tfrac14\,dt=\frac{3\pi}{4}.$$
+<div class="ans">\(W=\dfrac{3\pi}{4}\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(c)</b> Determine a potential function for \(\mathbf F(x,y,z)\).
+<details><summary>Worked solution</summary>
+<div class="when">Find \(f\) with \(\nabla f=\mathbf F\): integrate each component and match up.</div>
+\(f_x=-\tfrac12x\Rightarrow f=-\tfrac14x^2+h(y,z)\). \(f_y=h_y=-\tfrac12y\Rightarrow h=-\tfrac14y^2+k(z)\). \(f_z=k'(z)=\tfrac14\Rightarrow k=\tfrac14z+C\).
+$$f(x,y,z)=-\frac{x^2}{4}-\frac{y^2}{4}+\frac{z}{4}\quad(+C).$$
+Check: \(\nabla f=\left(-\tfrac x2,-\tfrac y2,\tfrac14\right)=\mathbf F\). ✓
+<div class="ans">\(f(x,y,z)=-\tfrac14x^2-\tfrac14y^2+\tfrac14z\).</div>
+<div class="tip">The official solution just "guesses" \(f\) — acceptable only if you then <b>verify</b> \(\nabla f=\mathbf F\). Show that check line.</div>
+</details></div>
+
+<div class="card q"><span class="marks">3 marks</span><b>(d)</b> Use (c) to check your answer for (b).
+<details><summary>Worked solution</summary>
+<div class="when">Fundamental theorem for line integrals: \(\int_C\nabla f\cdot d\mathbf r=f(\text{end})-f(\text{start})\).</div>
+Start \(\mathbf r(0)=(1,0,0)\); end \(\mathbf r(3\pi)=(\cos3\pi,\sin3\pi,3\pi)=(-1,0,3\pi)\).
+$$W=f(-1,0,3\pi)-f(1,0,0)=\left(-\tfrac14-0+\tfrac{3\pi}{4}\right)-\left(-\tfrac14\right)=\frac{3\pi}{4}.\ ✓$$
+<div class="ans">\(W=\dfrac{3\pi}{4}\), agreeing with (b).</div>
+<div class="trap">\(\cos3\pi=-1\), not \(1\): the helix ends on the opposite side of the circle. Using \((1,0,3\pi)\) happens to give the same answer here (the \(x^2\) term hides the sign), but you'd lose the mark for the wrong endpoint.</div>
+</details></div>
+</section>
+
+<!-- ================================================================== -->
+<!-- ========================== SEMESTER 2 ============================= -->
+<!-- ================================================================== -->
+<h2 id="s2" style="margin-top:40px">📗 Semester 2, 2023 paper</h2>
+<p class="tip">Marks: 12 + 12 + 12 + 12 + 10 + 14 + 14 + 14 = 100. Official solutions (<i>Semester_Two_Final_Examination_2023_MATH1052 Solutions</i>) are handwritten; all answers below agree with them after SymPy re-computation.</p>
+
+<!-- ============================ S2 Q1 ============================ -->
+<section id="s2-q1">
+<h2>Question 1 — Critical points &amp; absolute extrema <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch06-optimisation.html">Ch 6</a></span></h2>
+<div class="card q">Let \(f:\mathbb R^2\to\mathbb R\) be given by \(f(x,y)=x^3+y^3+3xy\).</div>
+
+<div class="card q"><span class="marks">8 marks</span><b>(a)</b> Find all the critical points of \(f\) and classify them.
+<details><summary>Worked solution</summary>
+<div class="when">Solve \(\nabla f=\mathbf 0\), then classify each point with \(D=f_{xx}f_{yy}-f_{xy}^2\).</div>
+$$f_x=3x^2+3y=0\ \Rightarrow\ y=-x^2\quad(1)\qquad f_y=3y^2+3x=0\quad(2)$$
+Substitute (1) into (2):
+$$3x^4+3x=3x(x^3+1)=0\ \Rightarrow\ x=0\ \text{or}\ x=-1.$$
+\(x=0\Rightarrow y=0\); \(x=-1\Rightarrow y=-(-1)^2=-1\). Critical points: \((0,0)\) and \((-1,-1)\).<br>
+<b>Classify:</b> \(f_{xx}=6x,\ f_{xy}=3,\ f_{yy}=6y\), so
+$$D(x,y)=\begin{vmatrix}6x&3\\3&6y\end{vmatrix}=36xy-9.$$
+<ul>
+<li>\(D(0,0)=-9\lt0\) ⇒ <b>saddle point</b>.</li>
+<li>\(D(-1,-1)=36-9=27\gt0\) and \(f_{xx}(-1,-1)=-6\lt0\) ⇒ <b>local maximum</b>, \(f(-1,-1)=-1-1+3=1\).</li>
+</ul>
+<div class="ans">\((0,0)\): saddle point. \(\ (-1,-1)\): local maximum (value 1).</div>
+<div class="trap">\(x^3+1=0\) has only the real root \(x=-1\) — don't invent \(x=1\). Solving \(x^3=-1\) carelessly as \(x=\pm1\) creates a bogus point \((1,-1)\), which fails \(f_y=0\) (\(3+3=6\ne0\)). Always substitute candidates back.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Does the function \(f\) have an absolute maximum? Does the function \(f\) have an absolute minimum? Justify your answers.
+<details><summary>Worked solution</summary>
+<div class="when">Unbounded domain \(\mathbb R^2\): look for a path along which \(f\to+\infty\) (kills absolute max) and one along which \(f\to-\infty\) (kills absolute min).</div>
+Set \(y=0\): \(f(x,0)=x^3\).
+$$\lim_{x\to\infty}f(x,0)=+\infty,\qquad \lim_{x\to-\infty}f(x,0)=-\infty.$$
+So \(f\) takes arbitrarily large positive and negative values.
+<div class="ans">\(f\) has <b>no absolute maximum and no absolute minimum</b> — along the \(x\)-axis \(f=x^3\) is unbounded above and below. (The local max \(f(-1,-1)=1\) is beaten by, e.g., \(f(2,0)=8\).)</div>
+<div class="tip">Answer <b>both</b> questions explicitly — two separate sentences, one for max and one for min. That's where the 4 marks split.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q2 ============================ -->
+<section id="s2-q2">
+<h2>Question 2 — Lagrange with a linear constraint <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch06-optimisation.html">Ch 6</a></span></h2>
+<div class="card q"><span class="marks">12 marks</span>
+Use the method of Lagrange multipliers to find the minimum value of
+$$f(x,y)=2x^2+8y^2-4x-16y$$
+subject to the constraint \(2x+4y=14\).
+<details><summary>Worked solution</summary>
+<div class="when">One constraint → \(\nabla f=\lambda\nabla g\) plus \(g=0\). The constraint is a line (unbounded), so you must <b>justify</b> that the point found is a minimum.</div>
+<b>Set-up:</b> \(g(x,y)=2x+4y-14=0\).
+$$(4x-4,\ 16y-16)=\lambda(2,\ 4).$$
+$$4x-4=2\lambda\Rightarrow \lambda=2(x-1)\quad(1)\qquad 16y-16=4\lambda\Rightarrow\lambda=4(y-1)\quad(2)\qquad 2x+4y=14\quad(3)$$
+<b>Solve:</b> from (1),(2): \(2(x-1)=4(y-1)\Rightarrow x=2y-1\) (4). Into (3):
+$$2(2y-1)+4y-14=0\Rightarrow 8y=16\Rightarrow y=2,\ x=3\quad(\lambda=4).$$
+<b>Value:</b> \(f(3,2)=18+32-12-32=6\).<br>
+<b>Justify it is a minimum.</b> On the constraint \(x=7-2y\):
+$$f(7-2y,\,y)=16y^2-64y+70=16(y-2)^2+6\ \ge\ 6,$$
+with equality only at \(y=2\). So \(6\) is the minimum.
+<div class="ans">Minimum value \(=6\), attained at \((3,2)\).</div>
+<div class="tip">The official solution justifies "minimum" by comparing with another constraint point: \(f(7,0)=70\gt6\). That's the minimum acceptable argument (there's only one candidate and \(f\) is larger elsewhere, and \(f\to\infty\) along the line). The completed-square line above is airtight and takes one line — use it.</div>
+<div class="trap">Lagrange only produces <i>candidates</i>. On an unbounded constraint, the candidate could be a max, a min, or neither — you must say why it is a minimum.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q3 ============================ -->
+<section id="s2-q3">
+<h2>Question 3 — Direction of maximum increase <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch05-gradient-chain-rule.html">Ch 5</a></span></h2>
+<div class="card q">Consider \(T(x,y)=10+6\cos x\cos y+3\cos2x+4\cos3y\) near the point \(P=(\pi/3,\pi/3)\).</div>
+
+<div class="card q"><span class="marks">8 marks</span><b>(a)</b> Find the direction of the maximum increase and the maximum decrease of the function \(T(x,y)\) at \(P\), in the \(xy\)-plane.
+<details><summary>Worked solution</summary>
+<div class="when">Max increase: direction of \(\nabla T(P)\). Max decrease: direction of \(-\nabla T(P)\). So everything hinges on computing \(\nabla T(P)\) exactly with the unit-circle values.</div>
+$$T_x=-6\sin x\cos y-6\sin2x,\qquad T_y=-6\cos x\sin y-12\sin3y.$$
+At \(P\): \(\sin\tfrac\pi3=\tfrac{\sqrt3}{2},\ \cos\tfrac\pi3=\tfrac12,\ \sin\tfrac{2\pi}{3}=\tfrac{\sqrt3}{2},\ \sin\pi=0\).
+$$T_x(P)=-6\cdot\tfrac{\sqrt3}{2}\cdot\tfrac12-6\cdot\tfrac{\sqrt3}{2}=-\tfrac{3\sqrt3}{2}-3\sqrt3=-\tfrac{9\sqrt3}{2},$$
+$$T_y(P)=-6\cdot\tfrac12\cdot\tfrac{\sqrt3}{2}-12\cdot0=-\tfrac{3\sqrt3}{2}.$$
+$$\nabla T(P)=-\tfrac{3\sqrt3}{2}\,(3,\,1).$$
+<div class="ans">Maximum increase: direction of \(\nabla T(P)\), i.e. \((-3,-1)\) (unit \(-\tfrac{1}{\sqrt{10}}(3,1)\)). Maximum decrease: direction of \(-\nabla T(P)\), i.e. \((3,1)\) (unit \(\tfrac{1}{\sqrt{10}}(3,1)\)). The maximum rate of increase is \(\|\nabla T(P)\|=\tfrac{3\sqrt3}{2}\sqrt{10}=\tfrac{3\sqrt{30}}{2}\).</div>
+<div class="trap">The factor \(-\tfrac{3\sqrt3}{2}\) is <b>negative</b>, so the direction of \(\nabla T(P)\) is \((-3,-1)\), not \((3,1)\). Writing "max increase in direction \((3,1)\)" swaps the two answers.</div>
+<div class="trap">\(\dfrac{d}{dy}4\cos3y=-12\sin3y\) — chain-rule factor 3; and \(\sin(3\cdot\tfrac\pi3)=\sin\pi=0\), so that term vanishes.</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Find the directional derivative of \(T(x,y)\) at \(P\), in the direction \(\mathbf u=(2,-3)\).
+<details><summary>Worked solution</summary>
+<div class="when">\(T_{\mathbf u}(P)=\nabla T(P)\cdot\dfrac{\mathbf u}{\|\mathbf u\|}\), \(\|\mathbf u\|=\sqrt{4+9}=\sqrt{13}\).</div>
+$$T_{\mathbf u}(P)=-\tfrac{3\sqrt3}{2}(3,1)\cdot\frac{(2,-3)}{\sqrt{13}}=-\tfrac{3\sqrt3}{2}\cdot\frac{6-3}{\sqrt{13}}=-\frac{9\sqrt3}{2\sqrt{13}}=-\frac{9\sqrt{39}}{26}.$$
+<div class="ans">\(T_{\mathbf u}(P)=-\dfrac{9\sqrt3}{2\sqrt{13}}\;\left(=-\dfrac{9\sqrt{39}}{26}\right)\).</div>
+<div class="tip">In the official solution the marker has corrected the formula to include \(/\|\mathbf u\|\) — again, the normalisation is the point being tested.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q4 ============================ -->
+<section id="s2-q4">
+<h2>Question 4 — Graphs &amp; hyperbolic contours <span style="font-size:14px;color:var(--muted)">[12 marks] · <a href="ch03-surfaces-contours.html">Ch 3</a></span></h2>
+
+<div class="card q"><span class="marks">3 marks</span><b>(a)</b> Match each function \(f(x,y)\) in the table below with its graph (labelled Figure 1, 2, 3). Enter 0 in the table if there is no match. No justification is required.
+<table>
+<tr><th>\(f(x,y)\)</th><th>0, 1, 2, or 3</th></tr>
+<tr><td>\(x^2+y^2\)</td><td></td></tr>
+<tr><td>\(\exp(x)\,(\cos(y)-1)\)</td><td></td></tr>
+<tr><td>\(x^3\)</td><td></td></tr>
+<tr><td>\(x^2-y^2\)</td><td></td></tr>
+<tr><td>\(\exp(x)\cos(y)\)</td><td></td></tr>
+</table>
+<div class="fig">Figure 1: a surface that oscillates in waves along the \(y\)-direction, with the wave amplitude growing rapidly in one \(x\)-direction (peaks reaching \(z\approx7\), troughs below 0) and flattening to near 0 in the other. Figure 2: an upward-opening bowl (circular paraboloid) with vertex at the origin. Figure 3: a surface constant along \(y\) (a "sheet" of parallel straight rulings) whose cross-section in \(x\) is an S-shaped cubic, rising above and falling below \(z=0\).</div>
+<details><summary>Worked solution</summary>
+<div class="when">Look for fingerprints: no \(y\)-dependence ⇒ a cylinder-type sheet; \(e^x\) ⇒ growth in one \(x\)-direction; \(\cos y\) ⇒ waves in \(y\); sign (can it go positive/negative?) separates look-alikes.</div>
+<ul>
+<li>\(x^2+y^2\): circular paraboloid bowl → <b>2</b>.</li>
+<li>\(e^x(\cos y-1)\): since \(\cos y-1\le0\), this is <b>never positive</b>. Figure 1 goes up to \(z\approx7\) → not it. No match → <b>0</b>.</li>
+<li>\(x^3\): independent of \(y\), cubic cross-section → <b>3</b>.</li>
+<li>\(x^2-y^2\): saddle — no figure is a saddle → <b>0</b>.</li>
+<li>\(e^x\cos y\): waves in \(y\) whose amplitude \(e^x\) grows in \(x\), taking both signs → <b>1</b>.</li>
+</ul>
+<div class="ans">\(x^2+y^2\to2\); \(\ e^x(\cos y-1)\to0\); \(\ x^3\to3\); \(\ x^2-y^2\to0\); \(\ e^x\cos y\to1\).</div>
+<div class="trap">Figure 1 looks like it could be either exponential–cosine function. The deciding test is sign: \(e^x(\cos y-1)\le0\) everywhere, so it can't produce the positive peaks. (In the scanned official solution the \(x^2-y^2\) entry is a hastily written 0 that looks like "9".)</div>
+</details></div>
+
+<div class="card q"><span class="marks">9 marks</span><b>(b)</b> Consider the surface
+$$z=\frac14x^2-\frac19y^2-x+\frac29y+\frac89.$$
+Sketch the contours \(z=1\) and \(z=-4\). In addition, for each contour, describe what kind of curve it is.<br>
+<b>Hint:</b> If \(z=0\), then \(y=(8-3x)/2\) or \(y=(3x-4)/2\).
+<details><summary>Worked solution</summary>
+<div class="when">Opposite-sign squares ⇒ hyperbolas. Complete the square in \(x\) and \(y\) to find the centre, then divide to standard form. The \(z=0\) lines in the hint are the common <b>asymptotes</b>.</div>
+<b>Complete the square.</b> Write \(\tfrac89=1-\tfrac19\):
+$$z=\tfrac14(x^2-4x+4)-\tfrac19(y^2-2y+1)=\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}.$$
+<b>Asymptotes (\(z=0\)):</b> \(\dfrac{x-2}{2}=\pm\dfrac{y-1}{3}\iff y-1=\pm\tfrac32(x-2)\), i.e. \(y=\tfrac{3x-4}{2}\) and \(y=\tfrac{8-3x}{2}\) — exactly the hint. ✓<br><br>
+<b>Contour \(z=1\):</b>
+$$\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}=1.$$
+A <b>horizontal hyperbola</b> (opens left/right) centred at \((2,1)\), \(a=2,\ b=3\), vertices \((0,1)\) and \((4,1)\). (Crosses the \(x\)-axis at \(x=2\pm\tfrac{2\sqrt{10}}{3}\).)<br><br>
+<b>Contour \(z=-4\):</b>
+$$\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}=-4\iff \frac{(y-1)^2}{36}-\frac{(x-2)^2}{16}=1.$$
+A <b>vertical hyperbola</b> (opens up/down) centred at \((2,1)\), semi-axes 6 (in \(y\)) and 4 (in \(x\)), vertices \((2,7)\) and \((2,-5)\). (Crosses the \(y\)-axis at \(y=1\pm3\sqrt5\).) Same asymptotes.
+<figure style="margin:10px 0;text-align:center"><svg viewBox="0 0 420 380" style="max-width:100%;width:420px;background:#0a0e14;border:1px solid #2a3340;border-radius:8px" role="img" aria-label="Violet: z = 1, a horizontal (left–right) hyperbola, vertices (0,1),(4,1). Blue: z = −4, a vertical (up–down) hyperbola, vertices (2,7),(2,−5). Dashed: shared asymptotes y = (3x−4)/2 and y = (8−3x)/2."><line x1="30.0" y1="204.3" x2="400.0" y2="204.3" style="stroke:#9aa7b8;stroke-width:1.2"/><line x1="168.8" y1="355.0" x2="168.8" y2="20.0" style="stroke:#9aa7b8;stroke-width:1.2"/><text x="396.0" y="198.3" fill="#9aa7b8" font-size="13" text-anchor="end">x</text><text x="174.8" y="32.0" fill="#9aa7b8" font-size="13">y</text><line x1="76.2" y1="201.3" x2="76.2" y2="207.3" style="stroke:#9aa7b8"/><text x="76.2" y="219.3" fill="#9aa7b8" font-size="11" text-anchor="middle">-4</text><line x1="215.0" y1="201.3" x2="215.0" y2="207.3" style="stroke:#9aa7b8"/><text x="215.0" y="219.3" fill="#9aa7b8" font-size="11" text-anchor="middle">2</text><line x1="261.2" y1="201.3" x2="261.2" y2="207.3" style="stroke:#9aa7b8"/><text x="261.2" y="219.3" fill="#9aa7b8" font-size="11" text-anchor="middle">4</text><line x1="353.8" y1="201.3" x2="353.8" y2="207.3" style="stroke:#9aa7b8"/><text x="353.8" y="219.3" fill="#9aa7b8" font-size="11" text-anchor="middle">8</text><line x1="165.8" y1="288.0" x2="171.8" y2="288.0" style="stroke:#9aa7b8"/><text x="162.8" y="292.0" fill="#9aa7b8" font-size="11" text-anchor="end">-5</text><line x1="165.8" y1="187.5" x2="171.8" y2="187.5" style="stroke:#9aa7b8"/><text x="162.8" y="191.5" fill="#9aa7b8" font-size="11" text-anchor="end">1</text><line x1="165.8" y1="87.0" x2="171.8" y2="87.0" style="stroke:#9aa7b8"/><text x="162.8" y="91.0" fill="#9aa7b8" font-size="11" text-anchor="end">7</text><polyline fill="none" style="stroke:#9aa7b8;stroke-width:1.2;stroke-dasharray:5 4" points="63,353 67,348 71,344 75,339 79,335 83,330 88,326 92,322 96,317 100,313 104,308 108,304 112,299 116,295 120,290 125,286 129,281 133,277 137,272 141,268 145,263 149,259 153,254 157,250 162,246 166,241 170,237 174,232 178,228 182,223 186,219 190,214 194,210 199,205 203,201 207,196 211,192 215,188 219,183 223,179 227,174 231,170 236,165 240,161 244,156 248,152 252,147 256,143 260,138 264,134 268,129 273,125 277,121 281,116 285,112 289,107 293,103 297,98 301,94 305,89 310,85 314,80 318,76 322,71 326,67 330,62 334,58 338,54 342,49 347,45 351,40 355,36 359,31 363,27 367,22"/><polyline fill="none" style="stroke:#9aa7b8;stroke-width:1.2;stroke-dasharray:5 4" points="63,22 67,27 71,31 75,36 79,40 83,45 88,49 92,54 96,58 100,62 104,67 108,71 112,76 116,80 120,85 125,89 129,94 133,98 137,103 141,107 145,112 149,116 153,120 157,125 162,129 166,134 170,138 174,143 178,147 182,152 186,156 190,161 194,165 199,170 203,174 207,179 211,183 215,188 219,192 223,196 227,201 231,205 236,210 240,214 244,219 248,223 252,228 256,232 260,237 264,241 268,246 273,250 277,254 281,259 285,263 289,268 293,272 297,277 301,281 305,286 310,290 314,295 318,299 322,304 326,308 330,313 334,317 338,322 342,326 347,330 351,335 355,339 359,344 363,348 367,353"/><polyline fill="none" style="stroke:#a78bfa;stroke-width:2.4" points="374,353 367,345 360,337 353,329 347,322 341,315 336,309 330,302 325,296 321,291 316,285 312,280 308,275 304,270 300,265 297,261 294,257 291,253 288,249 285,245 283,241 280,238 278,234 276,231 274,228 273,225 271,222 269,219 268,216 267,213 266,210 265,208 264,205 263,202 263,200 262,197 262,195 261,192 261,190 261,188 261,185 261,183 262,180 262,178 263,175 263,173 264,170 265,167 266,165 267,162 268,159 269,156 271,153 273,150 274,147 276,144 278,141 280,137 283,134 285,130 288,126 291,122 294,118 297,114 300,110 304,105 308,100 312,95 316,90 321,84 325,79 330,73 336,66 341,60 347,53 353,46 360,38 367,30 374,22"/><polyline fill="none" style="stroke:#a78bfa;stroke-width:2.4" points="56,353 63,345 70,337 77,329 83,322 89,315 94,309 100,302 105,296 109,291 114,285 118,280 122,275 126,270 130,265 133,261 136,257 139,253 142,249 145,245 147,241 150,238 152,234 154,231 156,228 157,225 159,222 161,219 162,216 163,213 164,210 165,208 166,205 167,202 167,200 168,197 168,195 169,192 169,190 169,188 169,185 169,183 168,180 168,178 167,175 167,173 166,170 165,167 164,165 163,162 162,159 161,156 159,153 157,150 156,147 154,144 152,141 150,137 147,134 145,130 142,126 139,122 136,118 133,114 130,110 126,105 122,100 118,95 114,90 109,84 105,79 100,73 94,66 89,60 83,53 77,46 70,38 63,30 56,22"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="95,22 100,28 106,32 112,37 117,41 123,46 128,49 133,53 138,57 142,60 147,63 152,66 156,68 160,71 165,73 169,75 173,77 177,79 181,80 185,82 189,83 193,84 196,85 200,86 204,86 208,87 211,87 215,87 219,87 222,87 226,86 230,86 234,85 237,84 241,83 245,82 249,80 253,79 257,77 261,75 265,73 270,71 274,68 278,66 283,63 288,60 292,57 297,53 302,49 307,46 313,41 318,37 324,32 330,28 335,22"/><polyline fill="none" style="stroke:#38bdf8;stroke-width:2.4" points="95,353 100,347 106,343 112,338 117,334 123,329 128,326 133,322 138,318 142,315 147,312 152,309 156,307 160,304 165,302 169,300 173,298 177,296 181,295 185,293 189,292 193,291 196,290 200,289 204,289 208,288 211,288 215,288 219,288 222,288 226,289 230,289 234,290 237,291 241,292 245,293 249,295 253,296 257,298 261,300 265,302 270,304 274,307 278,309 283,312 288,315 292,318 297,322 302,326 307,329 313,334 318,338 324,343 330,347 335,353"/><circle cx="215.0" cy="187.5" r="3.5" fill="#e8edf4"/><text x="223.0" y="191.5" fill="#e8edf4" font-size="12" text-anchor="start">centre (2,1)</text><circle cx="168.8" cy="187.5" r="3.5" fill="#a78bfa"/><text x="162.8" y="181.5" fill="#a78bfa" font-size="12" text-anchor="end">(0,1)</text><circle cx="261.2" cy="187.5" r="3.5" fill="#a78bfa"/><text x="267.2" y="181.5" fill="#a78bfa" font-size="12" text-anchor="start">(4,1)</text><circle cx="215.0" cy="87.0" r="3.5" fill="#38bdf8"/><text x="223.0" y="91.0" fill="#38bdf8" font-size="12" text-anchor="start">(2,7)</text><circle cx="215.0" cy="288.0" r="3.5" fill="#38bdf8"/><text x="223.0" y="292.0" fill="#38bdf8" font-size="12" text-anchor="start">(2,−5)</text><text x="395.4" y="33.4" fill="#9aa7b8" font-size="11" text-anchor="end">asymptotes = z = 0 lines</text><text x="395.4" y="231.1" fill="#a78bfa" font-size="12" text-anchor="end">z = 1</text><text x="34.6" y="33.4" fill="#38bdf8" font-size="12">z = −4</text></svg><figcaption style="font-size:13px;color:#9aa7b8">Violet: z = 1, a horizontal (left–right) hyperbola, vertices (0,1),(4,1). Blue: z = −4, a vertical (up–down) hyperbola, vertices (2,7),(2,−5). Dashed: shared asymptotes y = (3x−4)/2 and y = (8−3x)/2.</figcaption></figure>
+<div class="ans">\(z=1\): horizontal hyperbola \(\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}=1\), centre \((2,1)\), vertices \((0,1),(4,1)\). \(\ z=-4\): vertical hyperbola \(\frac{(y-1)^2}{36}-\frac{(x-2)^2}{16}=1\), centre \((2,1)\), vertices \((2,7),(2,-5)\). Both have asymptotes \(y=\tfrac{3x-4}{2},\ y=\tfrac{8-3x}{2}\).</div>
+<div class="tip">For full sketch marks: draw the dashed asymptotes first (from the hint), mark the centre \((2,1)\) and the vertices, then draw each hyperbola hugging the asymptotes. Label each curve with its \(z\)-value and name it ("hyperbola, opening left–right").</div>
+<div class="trap">Positive vs negative level: \(z\gt0\) gives the hyperbola opening along \(x\) (the positive-square variable), \(z\lt0\) flips it to open along \(y\). Drawing both the same way is the classic error.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q5 ============================ -->
+<section id="s2-q5">
+<h2>Question 5 — Arc length of a conical spiral <span style="font-size:14px;color:var(--muted)">[10 marks] · <a href="ch07-curves-vector-fields.html">Ch 7</a></span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Compute the length of the curve in \(\mathbb R^3\) given by the parametric equations:
+$$x=e^{-t}\cos t,\quad y=e^{-t}\sin t,\quad z=e^{-t},\quad t\in[0,1].$$
+<details><summary>Worked solution</summary>
+<div class="when">Arc length \(L=\int_0^1\|\mathbf r'(t)\|\,dt\). Product rule on each component; factor out \(e^{-t}\) and let \(\sin^2+\cos^2=1\) collapse the square root.</div>
+$$\mathbf r'(t)=\big(-e^{-t}(\cos t+\sin t),\ e^{-t}(\cos t-\sin t),\ -e^{-t}\big).$$
+$$\|\mathbf r'(t)\|^2=e^{-2t}\Big[(\cos t+\sin t)^2+(\cos t-\sin t)^2+1\Big].$$
+Expand: \((\cos t+\sin t)^2+(\cos t-\sin t)^2=2(\cos^2t+\sin^2t)=2\) (the \(\pm2\sin t\cos t\) cancel). So
+$$\|\mathbf r'(t)\|=e^{-t}\sqrt{2+1}=\sqrt3\,e^{-t}.$$
+$$L=\int_0^1\sqrt3\,e^{-t}\,dt=\sqrt3\left[-e^{-t}\right]_0^1=\sqrt3\,(1-e^{-1})=\frac{\sqrt3\,(e-1)}{e}.$$
+<div class="ans">\(L=\sqrt3\left(1-\dfrac1e\right)=\dfrac{\sqrt3(e-1)}{e}\).</div>
+<div class="tip">10 marks for a one-line integral means the marks are in the <b>algebra</b>: show the product-rule derivative, the expansion, and the cancellation of the cross terms explicitly.</div>
+<div class="trap">Sign in the antiderivative: \(\int e^{-t}dt=-e^{-t}\). Getting \(\sqrt3(e^{-1}-1)\lt0\) should immediately alarm you — lengths are positive.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q6 ============================ -->
+<section id="s2-q6">
+<h2>Question 6 — Sketch a path; work by a conservative field <span style="font-size:14px;color:var(--muted)">[14 marks] · <a href="ch07-curves-vector-fields.html">Ch 7</a></span></h2>
+<div class="card q">A field \(\mathbf F(x,y)=(4x^3y,\ x^4)\) moves a particle along the curve given parametrically by
+$$x(t)=-4t^2+8t+1,\qquad y(t)=2t,\qquad t\in[0,2].$$</div>
+
+<div class="card q"><span class="marks">10 marks</span><b>(a)</b> Sketch the path of the particle.
+<details><summary>Worked solution</summary>
+<div class="when">Eliminate \(t\) to get a Cartesian equation, complete the square to find the vertex, then mark the start/end points and direction of travel for \(t\in[0,2]\).</div>
+<b>Eliminate \(t\):</b> \(t=\tfrac y2\), so
+$$x=-4\left(\tfrac y2\right)^2+8\cdot\tfrac y2+1=-y^2+4y+1=-(y^2-4y+4)+5=5-(y-2)^2.$$
+A parabola opening in the \(-x\) direction (left), vertex \((5,2)\), axis \(y=2\).<br>
+<b>Key points:</b> \(t=0\): \((1,0)\) (start). \(t=1\): \((5,2)\) (vertex). \(t=2\): \((1,4)\) (end). Since \(y=2t\) increases, the particle moves <b>upward</b> along the arc. Only \(0\le y\le4\) is travelled (the rest of the parabola, e.g. its \(y\)-intercepts \(2\pm\sqrt5\), is not part of the path).
+<figure style="margin:10px 0;text-align:center"><svg viewBox="0 0 420 380" style="max-width:100%;width:420px;background:#0a0e14;border:1px solid #2a3340;border-radius:8px" role="img" aria-label="The particle travels the arc of the left-opening parabola x = 5 − (y−2)² from (1,0) up through the vertex (5,2) to (1,4); arrows show increasing t."><line x1="30.0" y1="283.2" x2="400.0" y2="283.2" style="stroke:#9aa7b8;stroke-width:1.2"/><line x1="99.4" y1="355.0" x2="99.4" y2="20.0" style="stroke:#9aa7b8;stroke-width:1.2"/><text x="396.0" y="277.2" fill="#9aa7b8" font-size="13" text-anchor="end">x</text><text x="105.4" y="32.0" fill="#9aa7b8" font-size="13">y</text><line x1="145.6" y1="280.2" x2="145.6" y2="286.2" style="stroke:#9aa7b8"/><text x="145.6" y="298.2" fill="#9aa7b8" font-size="11" text-anchor="middle">1</text><line x1="238.1" y1="280.2" x2="238.1" y2="286.2" style="stroke:#9aa7b8"/><text x="238.1" y="298.2" fill="#9aa7b8" font-size="11" text-anchor="middle">3</text><line x1="330.6" y1="280.2" x2="330.6" y2="286.2" style="stroke:#9aa7b8"/><text x="330.6" y="298.2" fill="#9aa7b8" font-size="11" text-anchor="middle">5</text><line x1="96.4" y1="187.5" x2="102.4" y2="187.5" style="stroke:#9aa7b8"/><text x="93.4" y="191.5" fill="#9aa7b8" font-size="11" text-anchor="end">2</text><line x1="96.4" y1="91.8" x2="102.4" y2="91.8" style="stroke:#9aa7b8"/><text x="93.4" y="95.8" fill="#9aa7b8" font-size="11" text-anchor="end">4</text><polyline fill="none" style="stroke:#9aa7b8;stroke-width:1.2;stroke-dasharray:5 4" points="34,309 38,308 42,307 45,306 49,306 53,305 57,304 61,303 64,302 68,302 72,301 75,300 79,299 82,298 86,298 89,297 93,296 96,295 100,294 103,294 107,293 110,292 114,291 117,290 120,290 123,289 127,288 130,287 133,286 136,286 139,285 143,284 146,283"/><polyline fill="none" style="stroke:#9aa7b8;stroke-width:1.2;stroke-dasharray:5 4" points="146,92 143,91 139,90 136,89 133,89 130,88 127,87 123,86 120,85 117,85 114,84 110,83 107,82 103,81 100,81 96,80 93,79 89,78 86,77 82,77 79,76 75,75 72,74 68,73 64,73 61,72 57,71 53,70 49,69 45,69 42,68 38,67 34,66"/><polyline fill="none" style="stroke:#a78bfa;stroke-width:3" points="146,283 154,281 162,279 169,277 177,275 184,273 192,270 199,268 206,266 212,264 219,262 225,260 231,258 237,256 243,253 248,251 254,249 259,247 264,245 269,243 274,241 278,239 282,236 286,234 290,232 294,230 298,228 301,226 304,224 307,222 310,219 313,217 315,215 317,213 320,211 321,209 323,207 325,205 326,202 327,200 328,198 329,196 330,194 330,192 331,190 331,188 331,185 330,183 330,181 329,179 328,177 327,175 326,173 325,170 323,168 321,166 320,164 317,162 315,160 313,158 310,156 307,153 304,151 301,149 298,147 294,145 290,143 286,141 282,139 278,136 274,134 269,132 264,130 259,128 254,126 248,124 243,122 237,119 231,117 225,115 219,113 212,111 206,109 199,107 192,105 184,102 177,100 169,98 162,96 154,94 146,92"/><polygon points="284.4,235.4 271.9,234.9 277.2,245.6" fill="#fbbf24"/><polygon points="284.4,139.6 291.5,149.9 296.9,139.2" fill="#fbbf24"/><circle cx="145.6" cy="283.2" r="3.5" fill="#fbbf24"/><text x="153.6" y="299.2" fill="#fbbf24" font-size="12" text-anchor="start">start t=0: (1,0)</text><circle cx="330.6" cy="187.5" r="3.5" fill="#fbbf24"/><text x="322.6" y="177.5" fill="#fbbf24" font-size="12" text-anchor="end">vertex t=1: (5,2)</text><circle cx="145.6" cy="91.8" r="3.5" fill="#fbbf24"/><text x="153.6" y="83.8" fill="#fbbf24" font-size="12" text-anchor="start">end t=2: (1,4)</text><text x="39.2" y="34.4" fill="#9aa7b8" font-size="11">dashed: rest of x = 5 − (y−2)² (not travelled)</text></svg><figcaption style="font-size:13px;color:#9aa7b8">The particle travels the arc of the left-opening parabola x = 5 − (y−2)² from (1,0) up through the vertex (5,2) to (1,4); arrows show increasing t.</figcaption></figure>
+<div class="ans">Arc of \(x=5-(y-2)^2\) from \((1,0)\) through the vertex \((5,2)\) to \((1,4)\), traversed upward (direction arrows).</div>
+<div class="tip">For 10 marks the sketch must show: Cartesian equation, vertex, both endpoints labelled with their \(t\)-values, direction arrows, and the travelled portion emphasised (official solution highlights it and draws the rest of the parabola faintly).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Determine the work done by the field.
+<details><summary>Worked solution</summary>
+<div class="when">Check conservative first (\(P_y=Q_x\)). If so, find a potential \(\varphi\) and use \(W=\varphi(\text{end})-\varphi(\text{start})\) — avoids a nasty polynomial integral.</div>
+\(P=4x^3y,\ Q=x^4\): \(\ \dfrac{\partial P}{\partial y}=4x^3=\dfrac{\partial Q}{\partial x}\) on all of \(\mathbb R^2\) ⇒ \(\mathbf F\) is conservative.<br>
+<b>Potential:</b> \(\varphi_x=4x^3y\Rightarrow\varphi=x^4y+h(y)\). \(\varphi_y=x^4+h'(y)=x^4\Rightarrow h'=0\). Take \(\varphi(x,y)=x^4y\).
+$$W=\int_C\mathbf F\cdot d\mathbf r=\varphi(1,4)-\varphi(1,0)=1^4\cdot4-0=4.$$
+<div class="ans">\(W=4\).</div>
+<div class="tip">Say "conservative on \(\mathbb R^2\) (simply connected), so path-independent" before using the potential — that sentence is what justifies ignoring the shape of the path you just sketched.</div>
+<div class="trap">Brute force \(\int_0^2\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) involves \((−4t^2+8t+1)^4\) — correct (it also gives 4) but a time sink with high error risk and no calculator.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q7 ============================ -->
+<section id="s2-q7">
+<h2>Question 7 — Reverse-engineering from the gradient <span style="font-size:14px;color:var(--muted)">[14 marks] · <a href="ch05-gradient-chain-rule.html">Ch 5</a></span></h2>
+<div class="card q">Let \(f:\mathbb R^3\to\mathbb R\) be given by
+$$f(x,y,z)=axy^2+byz+cz^2x^3$$
+where \(a,b,c\) are constants, and let \(P\) denote the point \((1,2,-1)\).</div>
+
+<div class="card q"><span class="marks">10 marks</span><b>(a)</b> Suppose the directional derivative at the point \(P\) attains its maximum value of 64 in the direction of the positive \(z\)-axis. Find the values \(a\), \(b\), and \(c\).
+<details><summary>Worked solution</summary>
+<div class="when">Two facts in one sentence: (i) max directional derivative occurs in the direction of \(\nabla f\) ⇒ \(\nabla f(P)\) is a <b>positive</b> multiple of \(\mathbf k=(0,0,1)\); (ii) the max value is \(\|\nabla f(P)\|=64\). Together: \(\nabla f(P)=(0,0,64)\).</div>
+$$\nabla f=\big(ay^2+3cz^2x^2,\ \ 2axy+bz,\ \ by+2czx^3\big).$$
+At \(P=(1,2,-1)\):
+$$\nabla f(P)=(4a+3c,\ \ 4a-b,\ \ 2b-2c).$$
+Set \(\nabla f(P)=(0,0,64)\):
+$$4a+3c=0\quad(1),\qquad 4a-b=0\quad(2),\qquad 2b-2c=64\iff b-c=32\quad(3).$$
+From (2): \(b=4a\); from (3): \(c=b-32=4a-32\). Into (1): \(4a+3(4a-32)=0\Rightarrow16a=96\Rightarrow a=6\). Then \(b=24,\ c=-8\).<br>
+Check: \(\nabla f(P)=(24-24,\ 24-24,\ 48+16)=(0,0,64)\). ✓
+<div class="ans">\(a=6,\ b=24,\ c=-8\), so \(f(x,y,z)=6xy^2+24yz-8z^2x^3\).</div>
+<div class="trap">Using only "\(f_z(P)=64\)" gives one equation (\(b-c=32\)) — not enough. The word <b>maximum</b> is what forces the \(x\)- and \(y\)-components of \(\nabla f(P)\) to be zero. That's where most of the 10 marks are.</div>
+<div class="trap">\(\partial_x(cz^2x^3)=3cz^2x^2\) — at \(P\) this is \(3c(1)(1)=3c\) (the official working briefly writes \(8a+3c\) before correcting to \(4a+3c\); \(ay^2=4a\)).</div>
+</details></div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Let \(f\) denote the function in part (a). Determine the direction(s) in which \(f\) has zero slopes at \(P\).
+<details><summary>Worked solution</summary>
+<div class="when">Zero slope \(\iff f_{\mathbf u}(P)=\nabla f(P)\cdot\mathbf u=0\iff \mathbf u\perp\nabla f(P)\). In 3-D that's a whole <b>plane</b> of directions.</div>
+With \(\mathbf u=(u_1,u_2,u_3)\), \(\|\mathbf u\|=1\):
+$$(0,0,64)\cdot(u_1,u_2,u_3)=64u_3=0\iff u_3=0.$$
+<div class="ans">Every direction parallel to the \(xy\)-plane: \(\mathbf u=(u_1,u_2,0)\) with \(u_1^2+u_2^2=1\), i.e. \(\mathbf u=(\cos\theta,\sin\theta,0)\), \(\theta\in[0,2\pi)\).</div>
+<div class="trap">In 2-D there are two zero-slope directions; in 3-D there are infinitely many (a full circle of unit vectors). Giving just \((1,0,0)\) and \((0,1,0)\) is incomplete.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q8 ============================ -->
+<section id="s2-q8">
+<h2>Question 8 — A limit that fools every straight line <span style="font-size:14px;color:var(--muted)">[14 marks] · <a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></span></h2>
+<div class="card q">Let \(g:\mathbb R^2\setminus\{(x,y)\in\mathbb R^2:\ y=-x^{3/5}\}\to\mathbb R\) be given by
+$$g(x,y)=\frac{2y^3x^2}{y^5+x^3}.$$</div>
+
+<div class="card q"><span class="marks">4 marks</span><b>(a)</b> Find \(\displaystyle\lim_{y\to0}g(\alpha y,y)\), where \(\alpha\in\mathbb R\).
+<details><summary>Worked solution</summary>
+<div class="when">Substitute the line \(x=\alpha y\), cancel powers of \(y\), then let \(y\to0\). Treat \(\alpha=0\) separately.</div>
+$$g(\alpha y,y)=\frac{2y^3\alpha^2y^2}{y^5+\alpha^3y^3}=\frac{2\alpha^2y^5}{y^3(y^2+\alpha^3)}=\frac{2\alpha^2y^2}{y^2+\alpha^3}.$$
+<ul>
+<li>\(\alpha=0\): \(g(0,y)=0\) for \(y\ne0\), so the limit is \(0\).</li>
+<li>\(\alpha\ne0\): as \(y\to0\), numerator \(\to0\) and denominator \(\to\alpha^3\ne0\), so the limit is \(0\).</li>
+</ul>
+<div class="ans">\(\displaystyle\lim_{y\to0}g(\alpha y,y)=0\) for every \(\alpha\in\mathbb R\).</div>
+</details></div>
+
+<div class="card q"><span class="marks">10 marks</span><b>(b)</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)}g(x,y)\) does not exist.
+<details><summary>Worked solution</summary>
+<div class="when">All straight lines give 0 (part a, plus the \(x\)-axis). To show non-existence you need a <b>curved</b> path giving a different value. Aim the path at the "danger curve" \(y=-x^{3/5}\) where the denominator vanishes: hug it closely so the denominator becomes as small as the numerator.</div>
+<b>Path 1 — the \(x\)-axis \(y=0\)</b> (not covered by \(x=\alpha y\)):
+$$\lim_{x\to0}g(x,0)=\lim_{x\to0}\frac{0}{x^3}=0.\qquad(*)$$
+<b>Path 2 — hug the excluded curve.</b> The official solution uses \(y=-x^{3/5}\big(x^{4/5}+1\big)=-x^{3/5}-x^{7/5}\), which lies in the domain and passes through \((0,0)\). Parametrise it cleanly with \(x=t^5\) (\(t\to0^+\)), so \(x^{3/5}=t^3,\ x^{7/5}=t^7\):
+$$x=t^5,\qquad y=-t^3(1+t^4).$$
+Numerator: \(2y^3x^2=2\big(-t^3(1+t^4)\big)^3t^{10}=-2t^{19}(1+t^4)^3.\)<br>
+Denominator: \(y^5+x^3=-t^{15}(1+t^4)^5+t^{15}=-t^{15}\big[(1+t^4)^5-1\big].\)
+$$g=\frac{-2t^{19}(1+t^4)^3}{-t^{15}\big[(1+t^4)^5-1\big]}=2(1+t^4)^3\cdot\frac{t^4}{(1+t^4)^5-1}.$$
+With \(u=t^4\to0\): \(\dfrac{(1+u)^5-1}{u}=5+10u+10u^2+5u^3+u^4\to5\) (binomial expansion). Hence
+$$\lim_{t\to0^+}g=2\cdot1\cdot\frac15=\frac25.\qquad(**)$$
+<b>Conclusion:</b> \((*)\) gives \(0\) and \((**)\) gives \(\tfrac25\). Two paths to \((0,0)\) give different limits, so the limit does not exist.
+<div class="ans">Along \(y=0\): limit \(0\). Along \(y=-x^{3/5}(x^{4/5}+1)\): limit \(\tfrac25\). Since \(0\ne\tfrac25\), \(\displaystyle\lim_{(x,y)\to(0,0)}g(x,y)\) does not exist.</div>
+<div class="tip">The official solution reaches \(\tfrac25\) by L'Hôpital on \(\dfrac{x^{4/5}}{(x^{4/5}+1)^5-1}\). The substitution \(x=t^5\) + binomial expansion above avoids fractional powers entirely — less error-prone under exam pressure.</div>
+<div class="tip">Why this path? The denominator \(y^5+x^3\) vanishes on \(y=-x^{3/5}\). Along \(y=-t^3+kt^7\) (\(x=t^5\)) the denominator shrinks like \(5kt^{19}\), exactly matching the numerator's \(t^{19}\), and the limit comes out as \(-\tfrac{2}{5k}\) — every \(k\ne0\) gives a different value. Official path is \(k=-1\).</div>
+<div class="trap">Part (a) is a deliberate trap: "all lines through the origin give 0" does <b>not</b> mean the limit is 0. The structure of the question (4 marks lines, 10 marks non-existence) is the examiner telling you so.</div>
+</details></div>
+</section>
+
+<!-- ============================ LESSONS ============================ -->
+<section id="lessons">
+<h2>What 2023 teaches</h2>
+<div class="card">
+<h3>1 · The syllabus core is fixed — and it's all multivariable</h3>
+<p>Neither 2023 paper has an ODE question. Both papers hit the same six skills: gradient/directional derivative (S1 Q1, S2 Q3, S2 Q7), 2-D limits (S1 Q2, S2 Q8), contours/graphs (S1 Q3, S2 Q4), critical points + global extrema (S1 Q5, S2 Q1), Lagrange (S1 Q6, S2 Q2) and curves/line integrals (S1 Q7–8, S2 Q5–6). Master these six routines and you've covered ~90% of the marks.</p>
+<h3>2 · Recurring mark-savers</h3>
+<ul>
+<li><b>Normalise \(\mathbf u\)</b> in every directional derivative (S1 Q1a, S2 Q3b).</li>
+<li><b>Watch the sign of the scalar</b> you pull out of \(\nabla f\) — it decides increase vs decrease (S2 Q3a).</li>
+<li><b>Factor, never divide</b> in Lagrange systems: \(\lambda(x+2y)=0\) keeps the \(\lambda=0\) case (S1 Q6).</li>
+<li><b>Justify min/max</b> on unbounded constraints (S2 Q2) and use a one-variable slice to disprove global extrema (S1 Q5c, S2 Q1b).</li>
+<li><b>Paths prove non-existence only;</b> polar with no \(\theta\) proves existence (S1 Q2 vs S2 Q8).</li>
+<li><b>Check conservative first</b> — a potential function turns a 20-minute integral into one subtraction (S1 Q8d, S2 Q6b).</li>
+<li><b>Sketches:</b> complete the square, draw asymptotes/lines, label vertices, intercepts, \(z\)-values, and direction of travel.</li>
+</ul>
+<h3>3 · Time allocation (120 min, 100 marks ⇒ ~1.2 min/mark)</h3>
+<table>
+<tr><th>Type</th><th>Marks</th><th>Budget</th><th>Note</th></tr>
+<tr><td>Gradient / directional derivative</td><td>12</td><td>12 min</td><td>Fast marks — do first</td></tr>
+<tr><td>Lagrange</td><td>12</td><td>14 min</td><td>Algebra; list all cases</td></tr>
+<tr><td>Critical points + global</td><td>12–13</td><td>14 min</td><td>Slice argument for (c)</td></tr>
+<tr><td>Contours / graph match</td><td>12</td><td>15 min</td><td>Matching ≈ 3 min; sketch the rest</td></tr>
+<tr><td>Curves, length, work</td><td>10–14</td><td>13 min each</td><td>Check conservative</td></tr>
+<tr><td>2-D limit</td><td>12–14</td><td>15 min</td><td>Leave the hard curved path to last</td></tr>
+</table>
+<h3>4 · Hardest question of the year</h3>
+<p>S2 Q8(b): finding a curved path that defeats every straight line. The generalisable trick — <i>hug the curve where the denominator vanishes</i>, with a parametrisation like \(x=t^5\) that clears fractional powers — is worth rehearsing in <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a>.</p>
+</div>
+</section>
+
+<p class="tip" style="margin-top:30px">Finished. Cross-check: S1 \(12+12+12+12+13+12+13+14=100\); S2 \(12+12+12+12+10+14+14+14=100\). Every final answer on this page — gradients, limits, contour equations, critical points and Hessians, Lagrange candidates, arc lengths, work integrals, potentials, \(a,b,c\) — was re-computed and asserted in SymPy (<code>verify/exam-2023.py</code>, 74 checks, all passing) before publishing.</p>
+
+</main>
+<footer style="max-width:960px;margin:0 auto;padding:18px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)">
+Sources: <i>Semester_One_Final_Examination_2023_MATH1052</i> + <i>MATH1052 FINAL 2023S1 solsv3</i>; <i>MATH1052-2023-2</i> + <i>Semester_Two_Final_Examination_2023_MATH1052 Solutions</i>. Questions transcribed verbatim; figures described in text. All results verified with SymPy.<br>
+<a href="../index.html">⇄ Switch subject</a> · <a href="index.html">🏠 Hub</a> · <a href="formulas.html">Formula sheet</a> · <a href="exam-2022.html">← 2022</a> · <a href="exam-2024.html">2024 →</a>
+</footer>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

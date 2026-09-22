@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAT1301 — Exam Command Hub</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#34d399;--accent2:#0ea5e9;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#062c22,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#032117;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#032117}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#a7f3d0}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(52,211,153,.1);border:1px solid #1d4a3a;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#a7f3d0;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#a7f3d0}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* ---- hub-specific ---- */
+  .hero-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .stat{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:8px 16px;min-width:90px}
+  .stat b{display:block;font-size:22px;color:var(--accent)}
+  .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .chapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .chapcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.15s;color:var(--ink)}
+  .chapcard:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--panel2)}
+  .chapcard .ct{font-size:11px;color:var(--accent2);font-weight:700;letter-spacing:.5px}
+  .chapcard h3{margin:4px 0 6px;font-size:16px;color:#a7f3d0}
+  .chapcard p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .chapcard .wt{display:inline-block;margin-top:9px;font-size:11px;font-weight:700;background:rgba(52,211,153,.12);color:var(--accent);border:1px solid #1d4a3a;border-radius:6px;padding:2px 8px}
+  .chapcard .wt.hi{background:rgba(251,191,36,.14);color:var(--gold);border-color:#5a4718}
+  .examrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .examrow a{text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px;font-weight:700}
+  .examrow a:hover{background:var(--accent);color:#032117}
+  /* decision tree */
+  .tree{margin:10px 0}
+  .node{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:8px;padding:10px 14px;margin:8px 0}
+  .node>.qn{font-weight:700;color:#a7f3d0}
+  .branch{margin:8px 0 8px 18px;border-left:2px dashed var(--line);padding-left:14px}
+  .opt{font-size:13.5px;margin:6px 0}
+  .opt .lbl{display:inline-block;background:rgba(14,165,233,.15);border:1px solid #1d3a4a;color:#7dd3fc;border-radius:6px;padding:1px 8px;font-weight:700;font-size:12px;margin-right:6px}
+  .leaf{background:var(--code);border:1px solid #245040;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:13.5px}
+  .leaf b{color:var(--accent)}
+  .fs{color:var(--muted);font-size:12px}
+  .trigtag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:5px;background:var(--panel2);border:1px solid var(--line);color:#a7f3d0;white-space:nowrap}
+  .sticky-th th{position:sticky;top:46px;z-index:5}
+  .tablewrap{overflow-x:auto}
+  .conc{background:var(--code);border:1px dashed #245040;border-radius:8px;padding:10px 13px;margin:8px 0;font-size:13.5px}
+  .conc b{color:var(--good)}
+  code{background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <h1>STAT1301 · Exam Command Hub</h1>
+  <p><b>Advanced Analysis of Scientific Data</b> — final exam <b>~November 2026</b></p>
+  <div class="hero-stats">
+    <div class="stat"><b>80</b><span>marks</span></div>
+    <div class="stat"><b>5</b><span>questions</span></div>
+    <div class="stat"><b>120</b><span>minutes</span></div>
+    <div class="stat"><b>+10</b><span>min planning</span></div>
+  </div>
+  <p style="margin-top:12px">
+    <span class="badge gold">Formula sheet + tables PROVIDED</span>
+    <span class="badge">Casio FX82 only</span>
+    <span class="badge">≥ 3 significant figures</span>
+  </p>
+  <p class="fs">You are not memorising formulas — they are given. The exam tests one thing:
+  <b style="color:var(--ink)">can you read a question, recognise the method, and execute it cleanly?</b> This hub trains exactly that.</p>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-02-probability.html">Ch1–2</a>
+  <a href="ch03-multiple-rvs.html">Ch3</a>
+  <a href="ch04-05-data-descriptives.html">Ch4–5</a>
+  <a href="ch06-estimation-cis.html">Ch6</a>
+  <a href="ch07-hypothesis-testing.html">Ch7</a>
+  <a href="ch08-anova.html">Ch8</a>
+  <a href="ch09-10-regression.html">Ch9–10</a>
+  <a href="ch11-chi-squared.html">Ch11</a>
+  <a href="foundations.html">🏛️ Foundations</a>
+  <a href="formulas.html">📄 Formulas</a>
+  <a href="notebook.html">📓 Notebook</a>
+  <a href="exam-2025.html">📝 Exams</a>
+  <a href="#engine">⚙️ Decision Engine</a>
+  <a href="#strategy">⏱️ Strategy</a>
+</nav>
+
+<main>
+
+<!-- ============ CHAPTER DIRECTORY ============ -->
+<section id="chapters">
+  <h2>Chapter directory</h2>
+  <p>Eleven chapters, grouped into eight study pages. Weights are the share of exam marks each area
+  historically attracts (from the 2023–2025 papers). <span class="badge pre">PRE-LECTURE</span> pages
+  (Ch 8–11) were built ahead of 2026 lectures — verify against lecture content when it drops.</p>
+
+  <div class="chapgrid">
+    <a class="chapcard" href="ch01-02-probability.html">
+      <div class="ct">CHAPTERS 1–2</div>
+      <h3>Probability &amp; Distributions</h3>
+      <p>Probability rules, counting, conditional probability &amp; Bayes; discrete/continuous RVs, pdf/cdf,
+      E &amp; Var; Bernoulli, Binomial, Uniform, Normal.</p>
+      <span class="wt hi">≈ 10–15 marks · always Q1</span>
+    </a>
+    <a class="chapcard" href="ch03-multiple-rvs.html">
+      <div class="ct">CHAPTER 3</div>
+      <h3>Multiple Random Variables</h3>
+      <p>Joint pmf/pdf, marginals, independence, covariance &amp; correlation; linear combinations, CLT.
+      Estimator theory (bias, variance) lives here too.</p>
+      <span class="wt hi">≈ 10–16 marks · often Q2</span>
+    </a>
+    <a class="chapcard" href="ch04-05-data-descriptives.html">
+      <div class="ct">CHAPTERS 4–5</div>
+      <h3>Studies, Data &amp; Descriptives</h3>
+      <p>Study design, sampling, bias, ethics, data manipulation terms; descriptive statistics, boxplots,
+      reading summary tables. Underpins every applied question.</p>
+      <span class="wt">≈ 2–6 marks · MCQ + embedded</span>
+    </a>
+    <a class="chapcard" href="ch06-estimation-cis.html">
+      <div class="ct">CHAPTER 6</div>
+      <h3>Estimation &amp; Confidence Intervals</h3>
+      <p>Point estimators, unbiasedness, sampling distributions; 1- &amp; 2-sample CIs for means, proportions,
+      variance; margin of error &amp; sample-size calculations.</p>
+      <span class="wt hi">≈ 12–19 marks · core of Q3</span>
+    </a>
+    <a class="chapcard" href="ch07-hypothesis-testing.html">
+      <div class="ct">CHAPTER 7</div>
+      <h3>Hypothesis Testing</h3>
+      <p>The 7-step test; z/t, one/two-sample, paired, proportions; P-values, Type I/II error, power,
+      one- vs two-sided; conclusions in context.</p>
+      <span class="wt hi">≈ 12–19 marks · core of Q3</span>
+    </a>
+    <a class="chapcard" href="ch08-anova.html">
+      <div class="ct">CHAPTER 8 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>ANOVA</h3>
+      <p>One- &amp; two-way ANOVA, completing the ANOVA table, the F-test, assumptions, interaction plots,
+      post-hoc (Bonferroni) comparisons, R².</p>
+      <span class="wt hi">≈ 17–18 marks · always Q4</span>
+    </a>
+    <a class="chapcard" href="ch09-10-regression.html">
+      <div class="ct">CHAPTERS 9–10 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>Regression &amp; the Linear Model</h3>
+      <p>Simple linear regression, reading <code>lm()</code> output, prediction &amp; residuals, CI for the slope,
+      significance, diagnostic plots, CI vs prediction interval.</p>
+      <span class="wt hi">≈ 15–18 marks · always Q5</span>
+    </a>
+    <a class="chapcard" href="ch11-chi-squared.html">
+      <div class="ct">CHAPTER 11 <span class="badge pre" style="margin:0 0 0 4px">PRE-LECTURE</span></div>
+      <h3>Chi-squared Tests</h3>
+      <p>Tests of association in contingency tables; expected counts, χ² statistic, df = (r−1)(c−1),
+      P-value and conclusion. Usually embedded as a sub-part.</p>
+      <span class="wt">≈ 5–6 marks · embedded part</span>
+    </a>
+  </div>
+
+  <h3>Reference &amp; past papers</h3>
+  <div class="card" style="margin-bottom:10px">
+    <a href="foundations.html" style="font-weight:700">🏛️ foundations.html</a> — <strong>start here if \(t\), \(\chi^2\) or df are fuzzy.</strong>
+    The ground floor: sampling distributions, standard error vs SD, and where the \(t\), \(\chi^2\) and \(F\) reference
+    distributions come from — plus the quantile-notation clinic (\(1-\alpha/2\) vs the misreading).
+  </div>
+  <div class="card" style="margin-bottom:10px">
+    <a href="formulas.html" style="font-weight:700">📄 formulas.html</a> — a guided tour of the provided formula
+    sheet &amp; statistical tables (Normal, t, χ², F). Learn <em>where each formula lives</em> so you can find it in seconds under pressure.
+  </div>
+  <div class="card" style="margin-bottom:10px">
+    <a href="notebook.html" style="font-weight:700">📓 notebook.html</a> — the crib: for each chapter, ONLY the crucial
+    formulas and rules (one line each), tagged 📄 on-the-sheet vs 🧠 must-know-cold. Copy this into your physical notebook.
+  </div>
+  <div class="examrow">
+    <a href="exam-2021.html">2021</a>
+    <a href="exam-2022.html">2022</a>
+    <a href="exam-2023.html">2023</a>
+    <a href="exam-2024.html">2024</a>
+    <a href="exam-2025.html">2025</a>
+  </div>
+</section>
+
+<!-- ============ MASTER DECISION ENGINE ============ -->
+<section id="engine">
+  <h2>⚙️ The Master Decision Engine</h2>
+  <p>The exam never says "use a paired t-test." It describes a situation and asks a question. The single
+  most valuable exam skill is <b>translating wording → method</b>. This is that translator. Use the
+  <b>trigger table</b> to decode individual phrasings, then the <b>decision tree</b> to lock in the exact
+  inference procedure.</p>
+
+  <div class="tip">Read the <em>verb</em> and the <em>data structure</em> first. "Construct / determine / find" = compute.
+  "Perform an appropriate test / is there evidence" = full 7-step test. "Comment / discuss / interpret" = words, in the story's context.
+  "State the assumptions" = list them AND judge each against the given plots/table.</div>
+
+  <h3>A. Wording-trigger table — every phrasing → method → page</h3>
+  <p class="fs">Mined from the 2023, 2024 &amp; 2025 papers (and the formula sheet). Exact exam phrasings are quoted.</p>
+  <div class="tablewrap">
+  <table>
+    <thead class="sticky-th"><tr><th>When the exam says…</th><th>It's asking for…</th><th>Method / formula</th><th>Study</th></tr></thead>
+    <tbody>
+      <!-- PROBABILITY / RV -->
+      <tr><td><em>"Determine the value of \(k\)"</em> for a pdf \(f(x)=kx^3\)</td><td>Normalising constant</td><td>Set \(\int f(x)\,dx=1\) over the support, solve for \(k\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine \(E(X)\)"</em> / <em>"the expected value"</em></td><td>Mean of a distribution</td><td>Discrete \(\sum x f(x)\); continuous \(\int x f(x)\,dx\) (sheet #21–22)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine Var(X)"</em></td><td>Variance</td><td>\(\operatorname{Var}(X)=E(X^2)-(E X)^2\) (sheet #25–26)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the cumulative distribution function"</em></td><td>CDF from pdf</td><td>\(F(x)=\int_{-\infty}^{x} f(t)\,dt\); state it piecewise (0 below, 1 above)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the median of \(X\)"</em></td><td>50th percentile</td><td>Solve \(F(m)=0.5\) for \(m\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine the mode of \(X\)"</em></td><td>Peak of pdf</td><td>Maximise \(f(x)\) on the support (check endpoints for monotone pdf)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+      <tr><td><em>"Determine \(P(X&gt;4)\)"</em>, <em>"\(P(X\lt \tfrac54)\)"</em></td><td>A probability</td><td>Integrate pdf, or \(1-F(x)\) / \(F(b)-F(a)\)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+
+      <!-- ESTIMATORS -->
+      <tr><td><em>"Determine \(E(\hat\theta)\) and whether \(\hat\theta\) is unbiased"</em></td><td>Bias check</td><td>Compute \(E(\hat\theta)\) via linearity; unbiased ⇔ \(E(\hat\theta)=\theta\) (sheet #51)</td><td><a href="ch03-multiple-rvs.html">Ch3</a>·<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Determine Var(\(\hat\theta\))"</em> for an estimator</td><td>Estimator variance</td><td>\(\operatorname{Var}(\sum a_iX_i)=\sum a_i^2\operatorname{Var}(X_i)\), independence (sheet #52)</td><td><a href="ch03-multiple-rvs.html">Ch3</a>·<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"What is the (approximate) distribution of \(\hat\theta\) when \(n\) is large?"</em></td><td>CLT</td><td>\(\hat\theta \stackrel{approx}{\sim} N(\theta,\operatorname{Var}(\hat\theta))\) by the CLT (sheet #57)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Find the pdf of \(X\)"</em> given the cdf \(F(x;\theta)\)</td><td>Differentiate</td><td>\(f(x)=\frac{d}{dx}F(x)\) (sheet #20)</td><td><a href="ch01-02-probability.html">Ch1–2</a></td></tr>
+
+      <!-- MULTIPLE RV -->
+      <tr><td><em>"Find the value of \(p\)"</em> in a joint pmf table</td><td>Probabilities sum to 1</td><td>Set \(\sum\sum f(x,y)=1\), solve the resulting equation</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"What is the marginal pmf of A / of X?"</em></td><td>Marginal distribution</td><td>Sum the joint over the other variable (row/column totals)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Determine the covariance and correlation between A and B"</em></td><td>Cov &amp; ρ</td><td>\(\operatorname{Cov}=E(XY)-E X\,E Y\); \(\rho=\operatorname{Cov}/(\sigma_X\sigma_Y)\) (sheet #48–49)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><em>"Determine the correlation between X and Y"</em></td><td>Correlation coefficient</td><td>Build marginals → \(E X,EY,\operatorname{Var}\) → \(E(XY)\) → \(\rho\)</td><td><a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+
+      <!-- STUDY DESIGN -->
+      <tr><td><em>"This data manipulation best falls under…"</em> (trimming/cooking/fudging)</td><td>Data-integrity term</td><td>Match definition: dropping inconvenient data ≈ <b>trimming</b></td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+      <tr><td><em>"a significant ethical concern about this study"</em></td><td>Research ethics</td><td>Privacy/consent/harm/anonymity — pick the design-fixable concern</td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+      <tr><td><em>"identify the response / explanatory variable / confounder"</em></td><td>Study-design vocabulary</td><td>Response = measured outcome; explanatory = manipulated/grouping</td><td><a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+
+      <!-- CONFIDENCE INTERVALS -->
+      <tr><td><em>"Construct / Calculate a 95% confidence interval for the mean"</em> (one group)</td><td>1-sample CI for μ</td><td>\(\bar X \pm q\,S/\sqrt n\), \(q=t_{n-1,0.975}\) (sheet #62)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for the mean difference"</em> between two independent groups</td><td>2-sample CI for μ₁−μ₂</td><td>Pooled (#65) if SDs ~equal, else Welch (#66); decide via the tree below</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for the mean difference"</em>, one value measured twice per subject</td><td>Paired CI</td><td>Reduce to differences \(d_i\): \(\bar d \pm t_{n-1,0.975}\,s_d/\sqrt n\)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Construct a 95% CI for the standard deviation σ"</em></td><td>CI for variance/SD</td><td>\(\big(\tfrac{(n-1)S^2}{q_2},\tfrac{(n-1)S^2}{q_1}\big)\) with χ²; sqrt for σ (sheet #63)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"CI for a proportion / for p"</em></td><td>1-sample proportion CI</td><td>\(\hat P \pm q\sqrt{\hat P(1-\hat P)/n}\), \(q=z_{0.975}\) (sheet #67)</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"smallest number of subjects… within a margin of error of no more than…"</em></td><td>Sample-size calc</td><td>Set margin \(q\,\sigma/\sqrt n \le E\), solve for \(n\), round <b>up</b></td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><em>"Interpret the interval in the context of the study"</em></td><td>CI interpretation</td><td>"We are 95% confident the true [quantity] lies between … and … [units]"</td><td><a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+
+      <!-- HYPOTHESIS TESTING -->
+      <tr><td><em>"State the null and alternative hypotheses… Explain any notation"</em></td><td>Set up H₀/H₁</td><td>Define parameters in words + symbols; direction from the claim (sheet #69–71)</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Perform an appropriate hypothesis test"</em> / <em>"Perform a relevant test"</em></td><td>Full 7-step test</td><td>Pick statistic via the tree → compute → P-value/critical → conclude in context</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Perform a suitable test to check their claim"</em> (e.g. "at least 2g more")</td><td>One-sided test, μ₀≠0</td><td>Shift the null: \(H_0:\mu_1-\mu_2=2\) vs one-sided \(H_1\); t-statistic</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"Report the P-value and a conclusion in context"</em></td><td>P-value decision</td><td>If \(P\lt\alpha\) reject H₀; then one plain-English sentence in the story</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><em>"report the t-statistic to two significant figures"</em></td><td>Test statistic</td><td>Compute \(T\), round to 2sf <b>only for the reported value</b> (keep full precision mid-calc)</td><td><a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+
+      <!-- ANOVA -->
+      <tr><td><em>"complete the ANOVA table"</em> / <em>"find the missing values"</em></td><td>Fill DF, SS, MS, F</td><td>DF from design; \(MS=SS/DF\); \(F=MSF/MSE\); \(SSE=SST-SSF\) (sheet #80)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"significant difference in mean … between the … groups"</em></td><td>One-way ANOVA F-test</td><td>\(F=MSF/MSE\sim F_{d-1,\,n-d}\); compare to \(F\)-table (sheet #79)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"is there evidence of a significant interaction"</em></td><td>Two-way ANOVA, interaction row</td><td>\(F_{\text{int}}=MS_{\text{int}}/MSE\); df \((d_1-1)(d_2-1)\) (sheet #81)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Using Figure 2 comment on whether there could be an interaction"</em></td><td>Read interaction plot</td><td>Parallel lines ⇒ no interaction; crossing/diverging ⇒ interaction</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"What are the assumptions of the test? … whether they are met"</em></td><td>ANOVA assumptions</td><td>Independence, normality (QQ), equal variance (boxplot spreads) — judge each</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"why … multiple t-tests … is flawed"</em></td><td>Multiple-comparisons concept</td><td>Inflated family-wise Type I error → use ANOVA then post-hoc with correction</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Pairwise comparisons … bonferroni … which treatments are significantly different"</em></td><td>Read post-hoc output</td><td>Adjusted \(P\lt0.05\) ⇒ that pair differs; state in context</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><em>"Calculate the \(R^2\) value and interpret"</em> (ANOVA)</td><td>Proportion of variance</td><td>\(R^2=(SST-SSE)/SST=SSF/SST\) (sheet #82)</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+
+      <!-- REGRESSION -->
+      <tr><td><em>"Write the fitted regression equation… define all notation"</em></td><td>Read lm() coefficients</td><td>\(\hat y=\hat\beta_0+\hat\beta_1 x\) from the Estimate column</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"what is the expected [Y] when [X] is …"</em></td><td>Prediction</td><td>Substitute \(x\) into fitted equation</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"what is the residual for this observation?"</em></td><td>Residual</td><td>\(e=y_{\text{obs}}-\hat y\) at that \(x\)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"Construct a 95% CI for the slope… is the linear relationship significant?"</em></td><td>CI &amp; test for β₁</td><td>\(\hat\beta_1\pm t_{n-2,0.975}\cdot SE(\hat\beta_1)\); significant if 0 ∉ CI (equiv. lm P-value)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"State the assumptions of the model… whether each appears valid"</em> (diagnostics)</td><td>Regression assumptions</td><td>Linearity + independence + equal var (Resid vs Fitted) + normality (QQ)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"What is the sample size?"</em> from lm output</td><td>Recover n</td><td>\(n = \text{residual df} + 2\) (simple linear regression)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><em>"how the width of the CI / prediction interval changes as \(n\) grows large"</em></td><td>CI vs PI concept</td><td>CI for mean → 0; PI → \(2\cdot1.96\,\sigma\) (irreducible noise remains)</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+
+      <!-- CHI-SQUARED -->
+      <tr><td><em>"is there an association between … and …"</em> (a contingency table)</td><td>χ² test of association</td><td>expected \(=\frac{\text{row}\times\text{col}}{\text{total}}\); \(\chi^2=\sum\frac{(O-E)^2}{E}\), df \((r-1)(c-1)\) (sheet #77)</td><td><a href="ch11-chi-squared.html">Ch11</a></td></tr>
+      <tr><td><em>"screen use is associated with sleep quality"</em> — joint frequency table</td><td>χ² test (same)</td><td>Marginal totals → expecteds → χ² → compare to χ²-table → conclude</td><td><a href="ch11-chi-squared.html">Ch11</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>B. Decision tree — which inference procedure?</h3>
+  <p>Once you know it's an <em>inference</em> question (CI or test), walk this tree top-down. Answer each
+  question from the wording and the data given.</p>
+
+  <div class="tree">
+    <div class="node">
+      <div class="qn">① What am I being asked to produce?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Complete a table</span> ANOVA table with blanks → go to <b>ANOVA</b> (⑤).</div>
+        <div class="opt"><span class="lbl">A regression thing</span> slope/prediction/residual/<code>lm()</code> → go to <b>Regression</b> (⑥).</div>
+        <div class="opt"><span class="lbl">An interval</span> "construct/calculate a CI" → build a CI (②, use CI formula for the case).</div>
+        <div class="opt"><span class="lbl">A yes/no on a claim</span> "perform a test / is there evidence / test the claim" → run a test (②, use the matching statistic).</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">② What kind of data / how many samples?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">Counts in a table</span> two categorical variables cross-tabulated → <b>χ² test of association</b> (④).</div>
+        <div class="opt"><span class="lbl">3+ group means</span> comparing means across 3 or more groups → <b>ANOVA</b> (⑤).</div>
+        <div class="opt"><span class="lbl">Proportion(s)</span> "proportion / percentage / p" → proportion z-procedure (③-P).</div>
+        <div class="opt"><span class="lbl">Mean(s), numeric</span> continue to ③.</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">③ Means: how many samples, and are they linked?</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One sample</span> compare one group's mean to a fixed number \(\mu_0\).
+          <div class="leaf">Test: <b>1-sample t</b> \(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\sim t_{n-1}\) (sheet #72). CI: \(\bar X\pm t_{n-1}\,S/\sqrt n\) (#62). <span class="fs">2025 Q3(a).</span></div>
+        </div>
+        <div class="opt"><span class="lbl">Two samples · PAIRED</span> same subject measured twice (before/after, two sites on one person, a "difference" column already given).
+          <div class="leaf">Reduce to differences \(d_i\): <b>1-sample t on the differences</b>, \(T=\dfrac{\bar d-\mu_0}{s_d/\sqrt n}\sim t_{n-1}\). <span class="fs">2024 Q3 (forearm − upper arm, difference SD given = the tell).</span></div>
+        </div>
+        <div class="opt"><span class="lbl">Two samples · INDEPENDENT</span> two separate groups. Now check the SDs:</div>
+        <div class="branch">
+          <div class="opt"><span class="lbl">SDs ≈ equal</span> sample SDs close, or told to assume equal variance.
+            <div class="leaf"><b>Pooled 2-sample t</b>: \(S_p^2=\dfrac{(m-1)S_X^2+(n-1)S_Y^2}{m+n-2}\), \(T=\dfrac{\bar X-\bar Y}{S_p\sqrt{1/m+1/n}}\sim t_{m+n-2}\) (#64,#74). CI: #65. <span class="fs">2023 Q4 (both SD 0.17 → pooled); 2025 Q3.</span></div>
+          </div>
+          <div class="opt"><span class="lbl">SDs clearly unequal</span> one SD much bigger, or told unequal.
+            <div class="leaf"><b>Welch 2-sample t</b>: \(T=\dfrac{\bar X-\bar Y}{\sqrt{S_X^2/m+S_Y^2/n}}\), \(t_{\text{df}}\) via Welch/conservative \(\min(m-1,n-1)\) (#66,#75). CI: #66.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">③-P Proportions</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One proportion</span> \(Z=\dfrac{\hat P-p_0}{\sqrt{p_0(1-p_0)/n}}\sim N(0,1)\) (#73). CI: \(\hat P\pm z\sqrt{\hat P(1-\hat P)/n}\) (#67).</div>
+        <div class="opt"><span class="lbl">Two proportions</span> pooled \(\hat P=\frac{X+Y}{m+n}\), \(Z=\dfrac{\hat P_X-\hat P_Y}{\sqrt{\hat P(1-\hat P)(1/m+1/n)}}\) (#76). CI: #68.</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">④ χ² test of association (categorical × categorical)</div>
+      <div class="leaf">expected \(=\dfrac{\text{row total}\times\text{col total}}{\text{grand total}}\); \(\chi^2=\sum\dfrac{(O-E)^2}{E}\sim\chi^2_{(r-1)(c-1)}\) (#77). Compare to χ²-table. <span class="fs">2023 Q5(e), 2024 Q5(e), 2025 Q2(d).</span></div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑤ ANOVA (means of 3+ groups)</div>
+      <div class="branch">
+        <div class="opt"><span class="lbl">One factor</span> one grouping variable → <b>one-way</b>. df: Factor \(d-1\), Error \(n-d\), Total \(n-1\). \(F=MSF/MSE\sim F_{d-1,\,n-d}\) (#79–80). <span class="fs">2023 Q5, 2024 Q4.</span></div>
+        <div class="opt"><span class="lbl">Two factors</span> two grouping variables (+ interaction) → <b>two-way</b>. Rows: A, B, Interaction, Residuals, Total (#81). <span class="fs">2025 Q4.</span></div>
+      </div>
+    </div>
+
+    <div class="node">
+      <div class="qn">⑥ Regression (relationship between two numeric variables)</div>
+      <div class="leaf">Model \(Y=\beta_0+\beta_1 x+\varepsilon\), \(\varepsilon\sim N(0,\sigma^2)\) (#83). Read <code>lm()</code>: Estimate = coefficients, Std. Error → CI for slope \(\hat\beta_1\pm t_{n-2}\,SE\), Pr(&gt;|t|) = significance of \(\beta_1\), Residual df + 2 = \(n\). <span class="fs">2023 Q6, 2024 Q5, 2025 Q5.</span></div>
+    </div>
+  </div>
+
+  <div class="trap">The <b>paired vs independent</b> fork is the classic mark-loser. Tell-tale signs of <b>paired</b>: the
+  question gives a "difference" column with its own mean and SD, or the two measurements come from the
+  <em>same</em> unit (same person's two arms, before/after). If you'd need <code>1/m+1/n</code> you're doing it wrong — paired uses a single differenced sample.</div>
+  <div class="trap"><b>Pooled vs Welch:</b> in this course, if the two sample SDs are close (or the question says "assuming
+  equal variances") use <b>pooled</b>; if one SD is much larger, use <b>Welch</b> and state your choice. 2023 Q4 gave
+  identical SDs (0.17, 0.17) — a deliberate nudge to pool.</div>
+</section>
+
+<!-- ============ EXAM-DAY STRATEGY ============ -->
+<section id="strategy">
+  <h2>⏱️ Exam-day strategy</h2>
+
+  <h3>The 10-minute planning playbook</h3>
+  <p>You get 10 minutes of <b>perusal</b> before writing. Do not stare — triage.</p>
+  <div class="method">
+    <ol>
+      <li><b>Skim all 5 questions</b> and label each with its area (Q1 probability, Q2 estimator/joint, Q3 two-sample inference, Q4 ANOVA, Q5 regression — that's the usual layout).</li>
+      <li><b>Score each part's difficulty</b> in the margin: ✓ (instant), ~ (routine), ? (need to think). This becomes your running order.</li>
+      <li><b>Spot the method for every "perform a test / construct a CI" part</b> using the decision tree — write the statistic name next to it so you don't re-derive under pressure.</li>
+      <li><b>Locate the formulas</b> you'll need on the sheet (note the numbers, e.g. "#65 pooled CI", "#77 χ²") and the right table (t vs χ² vs F).</li>
+      <li><b>Start with your strongest full question</b> when writing begins — bank marks and confidence early.</li>
+    </ol>
+  </div>
+
+  <h3>Mark-per-minute budgeting</h3>
+  <p><b>80 marks in 120 minutes = exactly 1.5 min per mark.</b> There is no slack built into that, so aim for
+  <b>~1.4 min/mark</b> while working and bank the difference as a checking buffer. Post a marks-to-minutes
+  budget in your head at the start of each question:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Question worth…</th><th>Target time</th><th>Hard stop (move on)</th></tr></thead>
+    <tbody>
+      <tr><td>10 marks</td><td>14 min</td><td>17 min</td></tr>
+      <tr><td>12 marks</td><td>17 min</td><td>20 min</td></tr>
+      <tr><td>16 marks</td><td>22 min</td><td>26 min</td></tr>
+      <tr><td>18 marks</td><td>25 min</td><td>29 min</td></tr>
+      <tr><td>20 marks</td><td>28 min</td><td>32 min</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip">If you hit a part's hard stop, <b>write down the method and move on</b> — an examiner gives method
+  marks even without the final number. A stalled 2-mark part is not worth a rushed 7-mark part elsewhere.</div>
+
+  <h3>"Show your working" conventions</h3>
+  <div class="method">
+    <ul>
+      <li><b>State the formula before numbers.</b> Write \(T=\dfrac{\bar X-\mu_0}{S/\sqrt n}\) then substitute — that line alone earns method marks.</li>
+      <li><b>Define every symbol you introduce.</b> "\(\mu_1\) = true mean protein of 100g sheep pâté" — the exam explicitly asks you to "explain notation."</li>
+      <li><b>State the distribution &amp; df</b> of your test statistic (\(\sim t_{10}\), \(\sim F_{2,87}\), \(\sim\chi^2_2\)) — required and easy marks.</li>
+      <li><b>Quote the table value you used</b> (e.g. "\(t_{10,0.975}=2.23\)", "\(\chi^2_{2,0.95}=5.99\)").</li>
+      <li><b>Every test ends with a decision AND a context sentence.</b> Two separate things — see below.</li>
+    </ul>
+  </div>
+
+  <h3>The 3-significant-figure rule</h3>
+  <div class="trap">Instruction on every paper: <em>"Give at least 3 significant figures."</em> This governs <b>reported</b>
+  answers, not intermediate steps. <b>Keep full precision on your calculator through the whole calculation</b>
+  and round only the final number. Rounding \(S_p\) or a test statistic early and carrying it forward is a
+  guaranteed accuracy-mark loss. Where a part says "to two significant figures" (e.g. report the t-statistic),
+  obey <em>that</em> part's instruction for its reported value only.</div>
+
+  <h3>What a full-marks "conclusion in context" looks like</h3>
+  <p>Almost every inference part ends with "conclusion in context." Full marks = <b>two sentences</b>: the
+  statistical decision, then the plain-English meaning in the story's own words.</p>
+  <div class="conc">
+    <b>Statistical:</b> "Since \(P = 0.003 \lt 0.05\), we reject \(H_0\)." <br>
+    <b>In context:</b> "There is strong evidence that the mean plaque-score difference is not the same across the
+    three toothpastes." <span class="fs">(2023 Q5 style)</span>
+  </div>
+  <div class="conc">
+    <b>From a CI:</b> "We are 95% confident the true mean difference in protein content between 100g sheep and
+    goat pâté lies between <b>1.28 g</b> and <b>1.72 g</b>. As the interval is entirely above 0, sheep pâté has
+    significantly more protein on average." <span class="fs">(2023 Q4(b), verified.)</span>
+  </div>
+  <div class="trap">Losing the context mark is the most common avoidable slip. "Reject \(H_0\)" alone is <b>half</b> the
+  conclusion — you must translate it back into pâté / blood pressure / plaque / tree-age language, using the
+  units and the direction of the effect.</div>
+</section>
+
+<!-- ============ QUESTION → CHAPTER PATTERN ============ -->
+<section id="pattern">
+  <h2>How the 5 questions map to chapters</h2>
+  <p>Across the 2023, 2024 and 2025 papers the structure is <b>strikingly stable</b>. Learn the map — it tells
+  you what's coming before you turn the page. (2023 ran 6 questions; from 2024 the paper settled to 5, which is
+  the format for 2026.)</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Slot</th><th>Reliable theme</th><th>2023</th><th>2024</th><th>2025</th><th>Study</th></tr></thead>
+    <tbody>
+      <tr><td><b>Q1</b></td><td>Probability / a single random variable — pdf → \(k\), \(E\), Var, CDF, median/mode</td><td>Q1 [15] continuous pdf \(kx^3\)</td><td>Q1 [12] joint pmf (tanks)</td><td>Q1 [10] continuous pdf \(cx^a\)</td><td><a href="ch01-02-probability.html">Ch1–2</a>/<a href="ch03-multiple-rvs.html">Ch3</a></td></tr>
+      <tr><td><b>Q2</b></td><td>Estimator theory or joint distributions — unbiasedness, Var, CLT, covariance/correlation</td><td>Q2 [10] estimator \(\hat\theta\)</td><td>Q2 [12] estimator from cdf</td><td>Q2 [16] joint table + χ²</td><td><a href="ch03-multiple-rvs.html">Ch3</a>/<a href="ch06-estimation-cis.html">Ch6</a></td></tr>
+      <tr><td><b>Q3</b></td><td>Two-sample / paired inference — CI + hypothesis test (+ a claim, + assumptions)</td><td>Q4 [18] pooled-t, pâté</td><td>Q3 [20] paired-t, BP</td><td>Q3 [19] two-sample, diet</td><td><a href="ch06-estimation-cis.html">Ch6</a>+<a href="ch07-hypothesis-testing.html">Ch7</a></td></tr>
+      <tr><td><b>Q4</b></td><td>ANOVA — complete the table, F-test, assumptions, post-hoc / R²</td><td>Q5 [18] one-way, toothpaste</td><td>Q4 [18] one-way, pollution</td><td>Q4 [17] two-way, plaque</td><td><a href="ch08-anova.html">Ch8</a></td></tr>
+      <tr><td><b>Q5</b></td><td>Regression — read <code>lm()</code>, prediction/residual, CI for slope, diagnostics</td><td>Q6 [15] tree age~diameter</td><td>Q5 [18] frog call~temp</td><td>Q5 [18] Old Faithful</td><td><a href="ch09-10-regression.html">Ch9–10</a></td></tr>
+      <tr><td><b>+</b></td><td><b>χ² association</b> is not its own question — it rides inside another (usually Q4/Q5/Q2) as a 5–6 mark part; and a short <b>study-design / ethics MCQ</b> can appear (2023 Q3).</td><td>Q5(e) χ², Q3 MCQ</td><td>Q5(e) χ²</td><td>Q2(d) χ²</td><td><a href="ch11-chi-squared.html">Ch11</a>/<a href="ch04-05-data-descriptives.html">Ch4–5</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tip">Translation of the pattern into a study plan: <b>Q1–Q2 are pure technique</b> (probability &amp;
+  estimators) — drill them until they're automatic to bank ~25 marks fast. <b>Q3–Q5 are the applied core</b>
+  (two-sample inference, ANOVA, regression) worth ~55 marks and rewarding clean method + context sentences.
+  Ch 11 (χ²) is small but almost <em>guaranteed</em> somewhere — never skip it.</div>
+
+  <div class="card q">
+    <h3 style="margin-top:0">Surprises worth knowing (from the papers themselves)</h3>
+    <ul style="margin:0">
+      <li><b>The "claim" twist.</b> After a standard test, a part often bolts on a claim with a non-zero null —
+      "at least 2g more" (2023 Q4c), "3mmHg larger" (2024 Q3c). You must shift the null to \(\mu_1-\mu_2=2\)
+      (or 3) and go <b>one-sided</b>. Easy to miss.</li>
+      <li><b>CI for a standard deviation.</b> 2024 Q3(d) asked for a CI for \(\sigma\) — that's the χ² interval
+      (#63), not a t-interval. A different table entirely.</li>
+      <li><b>Conceptual, no-calculation parts.</b> 2024 Q4(e) "why multiple t-tests is flawed", 2025 Q5(e) "how
+      CI vs prediction-interval width behaves as \(n\to\infty\)". Marks for <em>understanding</em>, not arithmetic.</li>
+      <li><b>Two-way ANOVA arrived in 2025</b> (Q4, mouth-rinse × flossing, with an interaction row and interaction
+      plots). Expect it to stay — know how to fill a two-way table and read an interaction plot.</li>
+      <li><b>Everything is applied.</b> Sheep pâté, blood pressure, pollution, geysers, tree frogs — the context
+      changes but the method set is fixed. Don't be thrown by the story; extract \(n,\bar x,s\) and route it.</li>
+    </ul>
+  </div>
+</section>
+
+<p class="fs" style="text-align:center;margin-top:40px">STAT1301 Exam Command Hub · built from the 2023–2025 papers &amp; the provided formula sheet ·
+verify PRE-LECTURE chapters (8–11) against 2026 lectures.</p>
+
+</main>
+</body>
+</html>

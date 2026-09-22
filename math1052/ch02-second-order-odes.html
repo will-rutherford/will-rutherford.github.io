@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 2 Second-order Linear ODEs</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 2 — Second-order Linear ODEs</h1>
+  <p>Characteristic equations, undetermined coefficients, reduction of order, and the spring–mass–damper: one recipe, three cases, and one overlap rule.</p>
+  <div>
+    <span class="badge gold">⭐ Examined 2020 only (2 × 10 marks) · none 2021–2025 · still on the syllabus</span>
+    <span class="badge">Summary p 2–4 (Recipes #3, #4, #5; SHM &amp; damping)</span>
+    <span class="badge pre">Nothing on the sheet — know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch01-first-order-odes.html">← Ch 1 First-order ODEs</a>
+  <a href="ch03-surfaces-contours.html">Ch 3 Surfaces &amp; contours →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2020.html">Exams (2020 = ODE papers)</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">Rusty on the quadratic formula with a negative discriminant, \(i^2=-1\), the product rule, or \(\int x^{k}\,dx\)? Skim <a href="foundations.html#complex">the Ground Floor</a> (complex numbers, differentiation rules) first. Chapter 1's <a href="ch01-first-order-odes.html#formulas">integrating factor</a> is also used inside reduction of order below.</div>
+
+<div class="card">
+<h3>What we are solving</h3>
+<p>A <b>linear second-order ODE</b> (the summary's "L2O") is one that can be written</p>
+$$ y''+p(x)\,y'+q(x)\,y=r(x). $$
+<p>"Linear" means \(y\), \(y'\), \(y''\) appear only to the first power and are never multiplied together or fed into a function like \(\sin y\) or \(e^{y}\). The words you must be able to use precisely:</p>
+<ul>
+<li><b>Homogeneous</b> (HL2O): \(r(x)=0\). Example: \(y''-5y'+4y=0\).</li>
+<li><b>Inhomogeneous / forced</b> (IL2O): \(r(x)\ne0\). Example: \(y''+y'-2y=x^2\). The function \(r\) is the <b>forcing</b> term.</li>
+<li><b>Constant coefficients</b>: \(ay''+by'+cy=r(x)\) with \(a,b,c\) constants. This is the case with a complete recipe; almost every exam and tutorial question is of this type.</li>
+</ul>
+<p>The independent variable may be \(x\) or \(t\) (time, in mechanics questions). Nothing changes except the letter. Dots mean time derivatives: \(\dot y=dy/dt\), \(\ddot y=d^2y/dt^2\) (tutorial 3 Q6–7 use this notation).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Why a second-order ODE has TWO arbitrary constants</h3>
+<p>To undo two derivatives you integrate twice, and each integration costs one constant. The simplest example, \(y''=0\), gives \(y'=A\) and then \(y=Ax+B\). The same holds in general: the general solution of a second-order ODE is a <b>two-parameter family</b>. So:</p>
+<ul>
+<li>"Find the <b>general solution</b>" means keep <b>both</b> constants and state them: "\(y=Ae^{4x}+Be^{x},\ A,B\in\mathbb R\)".</li>
+<li>An <b>initial value problem</b> (IVP) gives <b>two</b> conditions, normally \(y(x_0)\) and \(y'(x_0)\) (position and velocity), which fix both constants.</li>
+</ul>
+<p>Physically: a mass on a spring needs <i>where it starts</i> and <i>how fast it's moving</i>. Knowing only the position isn't enough.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Superposition: why solutions can be added</h3>
+<p>Write \(L[y]=ay''+by'+cy\). Differentiation is linear, so \(L[c_1y_1+c_2y_2]=c_1L[y_1]+c_2L[y_2]\). This one line gives the whole structure of the chapter:</p>
+<ol>
+<li><b>Superposition principle</b> (summary p 2): if \(y_1,y_2\) solve \(L[y]=0\), so does every \(c_1y_1+c_2y_2\).</li>
+<li>If \(y_1,y_2\) are <b>linearly independent</b> (\(y_2\ne k\,y_1\)), then \(c_1y_1+c_2y_2\) is the <i>general</i> homogeneous solution. Two solutions that are multiples of each other (e.g. \(e^{2x}\) and \(5e^{2x}\)) count as one.</li>
+<li><b>Inhomogeneous structure</b>: if \(y_P\) is <i>any one</i> solution of \(L[y]=r\), every solution is
+$$ y=y_H+y_P,\qquad y_H=c_1y_1+c_2y_2 \text{ (the complementary function).} $$
+Why: if \(y\) and \(y_P\) both solve \(L[y]=r\), then \(L[y-y_P]=r-r=0\), so \(y-y_P\) is a homogeneous solution.</li>
+<li><b>Forcing superposition</b>: if \(L[y_{P1}]=r_1\) and \(L[y_{P2}]=r_2\), then \(L[y_{P1}+y_{P2}]=r_1+r_2\). So you can split a sum of forcings (e.g. \(3e^{x}+x\) in T03 Q7(i)) and handle each piece separately.</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>🧭 Why we try \(y=e^{\lambda x}\): the characteristic equation</h3>
+<p>For \(ay''+by'+cy=0\) we need a function whose derivatives are multiples of itself, so that \(ay''\), \(by'\) and \(cy\) can cancel. The exponential is exactly that: \((e^{\lambda x})'=\lambda e^{\lambda x}\), \((e^{\lambda x})''=\lambda^2e^{\lambda x}\). Substituting:</p>
+$$ (a\lambda^2+b\lambda+c)\,e^{\lambda x}=0 \iff a\lambda^2+b\lambda+c=0\quad(\text{since }e^{\lambda x}\ne0). $$
+<p>This quadratic is the <b>characteristic equation</b>. Differential equation → algebra. Read it straight off the ODE: \(y''\to\lambda^2\), \(y'\to\lambda\), \(y\to1\). The discriminant \(\Delta=b^2-4ac\) splits into three cases (summary Recipe #4):</p>
+<table>
+<tr><th>\(\Delta=b^2-4ac\)</th><th>Roots</th><th>General solution \(y_H\)</th></tr>
+<tr><td>\(\Delta\gt0\)</td><td>two real \(\lambda_1\ne\lambda_2\)</td><td>\(c_1e^{\lambda_1x}+c_2e^{\lambda_2x}\)</td></tr>
+<tr><td>\(\Delta=0\)</td><td>one repeated \(\mu=-\dfrac{b}{2a}\)</td><td>\((c_1+c_2x)\,e^{\mu x}\)</td></tr>
+<tr><td>\(\Delta\lt0\)</td><td>complex pair \(\alpha\pm\beta i\), with \(\alpha=-\dfrac{b}{2a},\ \beta=\dfrac{\sqrt{4ac-b^2}}{2a}\)</td><td>\(e^{\alpha x}\big(c_1\cos\beta x+c_2\sin\beta x\big)\)</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>🧭 Why the repeated root gets an extra factor \(x\)</h3>
+<p>If \(\Delta=0\) the exponential trick gives only <i>one</i> solution, \(e^{\mu x}\), but we need two independent ones. The fix is <b>reduction of order</b> (summary Recipe #3): try \(y=u(x)e^{\mu x}\). Substituting into \(ay''+by'+cy=0\) and using \(a\mu^2+b\mu+c=0\) and \(2a\mu+b=0\) (both true for a double root) leaves just \(a\,u''e^{\mu x}=0\), so \(u''=0\), giving \(u=c_1+c_2x\). Hence
+$$ y=(c_1+c_2x)\,e^{\mu x}. $$
+The summary notes this was obtained "using ROO". You'll see the full derivation in <a href="#practice">§8.5 Worked A</a>.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Why complex roots become cos and sin</h3>
+<p>If \(\lambda=\alpha\pm\beta i\), the two exponential solutions are \(e^{(\alpha+\beta i)x}\) and \(e^{(\alpha-\beta i)x}\). By <b>Euler's formula</b> \(e^{i\theta}=\cos\theta+i\sin\theta\):</p>
+$$ e^{(\alpha\pm\beta i)x}=e^{\alpha x}\big(\cos\beta x\pm i\sin\beta x\big). $$
+<p>Adding and subtracting these (superposition) and rescaling gives the two <b>real</b> solutions \(e^{\alpha x}\cos\beta x\) and \(e^{\alpha x}\sin\beta x\). So the answer contains no \(i\) at all:</p>
+$$ \boxed{y=e^{\alpha x}\big(A\cos\beta x+B\sin\beta x\big)} $$
+<p>Read the picture off it: \(\cos/\sin\) means <b>oscillation</b> at angular frequency \(\beta\), and \(e^{\alpha x}\) is the <b>envelope</b>: it decays if \(\alpha\lt0\), grows if \(\alpha\gt0\), and stays constant if \(\alpha=0\) (pure oscillation, e.g. \(y''+3y=0\to A\cos\sqrt3x+B\sin\sqrt3x\), T03 Q2b).</p>
+<p class="tip">Presentation that earns full marks: (1) write \(\lambda=\alpha\pm\beta i\) with the numbers, (2) say "so \(\alpha=\ldots,\ \beta=\ldots\)", (3) write \(y=e^{\alpha x}(A\cos\beta x+B\sin\beta x),\ A,B\in\mathbb R\). Never leave \(e^{(1+2i)x}\) in a final answer, and don't write \(\cos(\alpha\pm\beta i)x\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Undetermined coefficients: the forcing tells you the shape of \(y_P\)</h3>
+<p>To find one particular solution of \(ay''+by'+cy=r(x)\), <b>guess a \(y_P\) with the same shape as \(r\)</b>, leave its coefficients unknown, substitute, and match coefficients (summary Recipe #5). This works because polynomials, exponentials and sin/cos form families that are <b>closed under differentiation</b>: differentiating \(x^2\) gives lower powers, differentiating \(e^{kx}\) gives \(e^{kx}\), and differentiating \(\cos\omega x\) gives \(\sin\omega x\) and back. So \(L[\text{trial}]\) stays in the same family and can be matched against \(r\).</p>
+<ul>
+<li>\(r\) a polynomial of degree \(n\) → trial is a <b>full</b> polynomial of degree \(n\): all lower powers and the constant included.</li>
+<li>\(r=Ce^{kx}\) → trial \(Ae^{kx}\).</li>
+<li>\(r\) contains \(\cos\omega x\) <i>or</i> \(\sin\omega x\) → trial \(A\cos\omega x+B\sin\omega x\) (<b>both</b>, always).</li>
+<li>products (e.g. \(xe^{x}\), \(e^{2x}\cos x\)) → product of the trials: \((ax+b)e^{x}\), \(e^{2x}(A\cos x+B\sin x)\).</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🧭 The overlap (resonance) rule, and why it's needed</h3>
+<p>If your trial is <b>already a solution of the homogeneous equation</b>, then \(L[\text{trial}]=0\) and it can never equal \(r\ne0\). You'll see this as a contradiction like "\(0\cdot A=6\)". The fix:</p>
+<div class="method"><b>Modification rule.</b> If any term of the trial appears in \(y_H\), multiply the <i>whole</i> trial by \(x\). If it still overlaps (this happens with a repeated root), multiply by \(x\) again (\(x^2\)). Never go higher than \(x^2\) for a second-order ODE.</div>
+<p>Why \(x\) works: it's the same mechanism as the repeated root. Substituting \(y_P=u(x)e^{kx}\) when \(k\) is a root makes the \(u\) term cancel, leaving an equation in \(u',u''\) only, whose polynomial solution is one degree higher. This is exactly the Poster B method ("let \(y_{P}=u(x)e^{Bx}\) … hope that the coefficient of \(u\) vanishes"). Tutorial 3 Q9 is the same idea for polynomials: if \(c=0\), the constant \(1=e^{0x}\) is a homogeneous solution, so a polynomial forcing of degree \(n\) needs a trial of degree \(n+1\).</p>
+<p>In mechanics this is <b>resonance</b>: forcing an undamped spring at its natural frequency \(\omega\) gives \(y_P\propto t\cos\omega t\) or \(t\sin\omega t\), an oscillation whose amplitude grows without bound.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Reduction of order: when you're handed one solution</h3>
+<p>For <b>variable</b>-coefficient equations like \(2x^2y''-3xy'-3y=0\) (2020 S2 Q3) there's no characteristic equation. If you are <i>given</i> (or can guess) one solution \(y_1\), set \(y=u\,y_1\). The \(u\)-terms cancel (because \(y_1\) is a solution) and you're left with a <b>first-order</b> linear ODE for \(v=u'\):</p>
+$$ u''+u'\left(p+\frac{2y_1'}{y_1}\right)=0\qquad\text{where the ODE is in standard form } y''+p\,y'+q\,y=0. $$
+<p>That's summary Recipe #3 verbatim ("enlist little sister to find \(y_1\)"). Solve for \(v\) (separable, or by integrating factor), integrate once to get \(u\), and \(y_2=u\,y_1\). Guessing \(y_1=x^n\) for an equation with \(x^2y''\), \(xy'\), \(y\) terms reduces to a quadratic in \(n\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 The spring–mass–damper: the physics behind the three cases</h3>
+<p>Summary p 3 sets it up. A spring of natural length \(L\) is stretched a distance \(s\) by a mass \(m\). Measure \(x\) = displacement <b>below the equilibrium position</b> (positive x-axis pointing down).</p>
+<ul>
+<li><b>Hooke:</b> spring force \(=-k(s+x)\). <b>At equilibrium</b> the spring balances the weight: \(ks=mg\), so \(k=mg/s\). This is how you get \(k\) from "the mass stretches the spring by …".</li>
+<li><b>Newton's 2nd law:</b> \(mx''=mg-k(s+x)-\beta x'=-kx-\beta x'\). The weight cancels against \(ks\), which is why we measure from equilibrium:
+$$ mx''+\beta x'+kx=0\qquad(\beta\ge0\text{ damping constant, N s m}^{-1}). $$</li>
+<li><b>Undamped</b> (\(\beta=0\)): \(x''+\omega^2x=0\), \(\omega=\sqrt{k/m}\), so \(x=c_1\cos\omega t+c_2\sin\omega t=R\cos(\omega t-\phi)\) with amplitude \(R=\sqrt{c_1^2+c_2^2}\). This is <b>simple harmonic motion</b>, period \(2\pi/\omega\).</li>
+</ul>
+<table>
+<tr><th>\(\Delta=\beta^2-4mk\)</th><th>Name</th><th>Motion</th><th>Summary's picture</th></tr>
+<tr><td>\(\gt0\)</td><td><b>Overdamped</b></td><td>\(c_1e^{\lambda_1t}+c_2e^{\lambda_2t}\), both \(\lambda\lt0\): creeps back and crosses equilibrium at most once</td><td>door that takes ages to close</td></tr>
+<tr><td>\(=0\)</td><td><b>Critically damped</b></td><td>\((c_1+c_2t)e^{\mu t}\), \(\mu=-\beta/2m\): fastest return with no oscillation</td><td>door that closes in the shortest time</td></tr>
+<tr><td>\(\lt0\)</td><td><b>Underdamped</b></td><td>\(e^{\alpha t}(c_1\cos\omega_d t+c_2\sin\omega_d t)\), \(\alpha=-\beta/2m\lt0\): oscillation inside a decaying envelope</td><td>chef's swinging doors</td></tr>
+</table>
+<p>With every coefficient positive (\(m,\beta,k\gt0\)), all three cases decay to 0. In every case the real part of each root is negative (tutorial 3 Q6).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Forced oscillations: transient + steady state</h3>
+<p>Add an external force \(F(t)\): \(mx''+\beta x'+kx=F(t)\). The solution is still \(x=x_H+x_P\), but now each piece has a physical name:</p>
+<ul>
+<li>\(x_H\) = <b>transient</b>. With damping (\(\beta\gt0\)) it decays to 0, so the initial conditions are eventually forgotten.</li>
+<li>\(x_P\) = <b>steady state</b>. For \(F=F_0\cos\gamma t\) it is an oscillation <i>at the driving frequency \(\gamma\)</i>, \(x_P=A\cos\gamma t+B\sin\gamma t\), with amplitude \(\sqrt{A^2+B^2}\).</li>
+<li><b>Undamped and driven at \(\gamma=\omega\)</b> → overlap → \(x_P\propto t\sin\omega t\): <b>resonance</b>, where the amplitude grows linearly forever.</li>
+</ul>
+</div>
+
+<div class="trap"><b>Same letter, two meanings.</b> The course summary uses \(\beta\) for <i>both</i> the imaginary part of a complex root (\(\alpha\pm\beta i\)) <i>and</i> the damping constant (\(mx''+\beta x'+kx=0\)). In a spring question, write the roots with numbers (e.g. \(\lambda=-4\pm2i\)) so the two never get confused. The imaginary part in the damped case is \(\omega_d=\sqrt{4mk-\beta^2}/(2m)\), which is not the damping constant.</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">None of this is on the exam formula sheet (the sheet only covers the multivariable topics). Every recipe below must come from memory. They are short, so drill them until they're automatic.</p>
+
+<div class="card">
+<h3>Method 1 · Homogeneous, constant coefficients (Recipe #4)</h3>
+$$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
+<div class="when">Any "solve / find the general solution" with constant coefficients and \(r=0\), and <i>always</i> as step 1 of an inhomogeneous problem (the complementary function).</div>
+<div class="method"><ol>
+<li>Write the characteristic equation (read off: \(y''\to\lambda^2,\ y'\to\lambda,\ y\to1\)).</li>
+<li>Solve: factorise if you can, otherwise \(\lambda=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\).</li>
+<li>Pick the form from \(\Delta\): distinct → \(c_1e^{\lambda_1x}+c_2e^{\lambda_2x}\); repeated → \((c_1+c_2x)e^{\mu x}\); complex → \(e^{\alpha x}(c_1\cos\beta x+c_2\sin\beta x)\).</li>
+<li>State "\(c_1,c_2\in\mathbb R\)".</li>
+</ol></div>
+<p><b>Mini-example.</b> \(y''+6y'+13y=0\): \(\lambda^2+6\lambda+13=0\Rightarrow\lambda=\frac{-6\pm\sqrt{36-52}}{2}=-3\pm2i\Rightarrow y=e^{-3x}(A\cos2x+B\sin2x)\).</p>
+</div>
+
+<div class="card">
+<h3>Method 2 · Initial value problems</h3>
+<div class="when">"Solve the IVP", "given \(y(0)=\ldots,\ y'(0)=\ldots\)", "released from rest", "starts at equilibrium with velocity …".</div>
+<div class="method"><ol>
+<li>Find the <b>full general solution first</b> (\(y_H+y_P\) if forced).</li>
+<li>Differentiate the general solution to get \(y'\) (product rule on \(e^{\alpha x}\cos\beta x\) and \(xe^{\mu x}\)).</li>
+<li>Substitute both conditions → two linear equations in \(c_1,c_2\) → solve.</li>
+<li>Write the final \(y\) with numbers, then <b>check</b> \(y(0)\) quickly.</li>
+</ol></div>
+<p><b>Shortcuts at \(x=0\)</b> (\(y'(0)\) with no product-rule working): distinct: \(y(0)=c_1+c_2,\ y'(0)=\lambda_1c_1+\lambda_2c_2\). Repeated: \(y(0)=c_1,\ y'(0)=\mu c_1+c_2\). Complex: \(y(0)=c_1,\ y'(0)=\alpha c_1+\beta c_2\).</p>
+</div>
+
+<div class="card">
+<h3>Method 3 · Inhomogeneous: undetermined coefficients (Recipe #5)</h3>
+<table>
+<tr><th>Forcing \(r(x)\)</th><th>First trial \(y_P\)</th></tr>
+<tr><td>\(k\) (constant)</td><td>\(A\)</td></tr>
+<tr><td>polynomial degree \(n\), e.g. \(x^2\)</td><td>\(a x^2+bx+c\) (full polynomial of degree \(n\))</td></tr>
+<tr><td>\(Ce^{kx}\)</td><td>\(Ae^{kx}\)</td></tr>
+<tr><td>\(\cos\omega x\) and/or \(\sin\omega x\)</td><td>\(A\cos\omega x+B\sin\omega x\)</td></tr>
+<tr><td>(poly deg \(n\))\(\times e^{kx}\)</td><td>(full poly deg \(n\))\(\times e^{kx}\), e.g. \(xe^{x}\to(ax+b)e^{x}\)</td></tr>
+<tr><td>\(e^{kx}\cos\omega x\) / \(e^{kx}\sin\omega x\)</td><td>\(e^{kx}(A\cos\omega x+B\sin\omega x)\)</td></tr>
+<tr><td>sum \(r_1+r_2\)</td><td>sum of the separate trials (superposition)</td></tr>
+</table>
+<div class="method"><ol>
+<li>Solve the homogeneous equation first → \(y_H\). <b>Compare the trial with \(y_H\)</b> (Method 4).</li>
+<li>Differentiate the trial twice, substitute into the <b>LHS</b>, and collect like terms.</li>
+<li>Match coefficients of each function (\(x^2, x, 1, e^{kx}, \cos, \sin\)) → linear equations → solve.</li>
+<li>\(y=y_H+y_P\).</li>
+</ol></div>
+<p class="tip">For a pure exponential with no overlap there's a one-line shortcut: \(y_P=\dfrac{C}{P(k)}e^{kx}\) where \(P(\lambda)=a\lambda^2+b\lambda+c\). E.g. 2020 S1 Q7: \(P(3)=36-12+5=29\Rightarrow y_P=\tfrac1{29}e^{3x}\). Show the substitution anyway, because the marks are for working.</p>
+</div>
+
+<div class="card">
+<h3>Method 4 · Overlap / resonance modification</h3>
+<div class="when">A term of your trial already appears in \(y_H\): \(r=e^{kx}\) with \(k\) a characteristic root; \(r=\cos\omega x\) with \(\pm\omega i\) roots; \(r\) a polynomial when \(c=0\) (\(\lambda=0\) is a root).</div>
+<table>
+<tr><th>Situation</th><th>Trial</th></tr>
+<tr><td>\(k\) is a <b>simple</b> root</td><td>\(x\cdot(\text{usual trial})\), e.g. \(Axe^{kx}\)</td></tr>
+<tr><td>\(k\) is a <b>double</b> root</td><td>\(x^2\cdot(\text{usual trial})\), e.g. \(Ax^2e^{kx}\)</td></tr>
+<tr><td>\(y''+\omega^2y=F\cos\omega x\) (resonance)</td><td>\(x(A\cos\omega x+B\sin\omega x)\) → \(y_P=\dfrac{F}{2\omega}x\sin\omega x\)</td></tr>
+<tr><td>\(y''+\omega^2y=F\sin\omega x\) (resonance)</td><td>same trial → \(y_P=-\dfrac{F}{2\omega}x\cos\omega x\)</td></tr>
+</table>
+<p><b>Shortcut:</b> if \(k\) is a simple root, \(y_P=\dfrac{C}{P'(k)}xe^{kx}\); if a double root, \(y_P=\dfrac{C}{2a}x^2e^{kx}\). (Both verified against the worked examples below.)</p>
+</div>
+
+<div class="card">
+<h3>Method 5 · Reduction of order (Recipe #3)</h3>
+$$ y=u\,y_1,\qquad u''+u'\Big(p+\frac{2y_1'}{y_1}\Big)=0,\qquad v=u' $$
+<div class="when">"Given that \(y_1=\ldots\) is a solution, find a second linearly independent solution / the general solution", or "use the method of reduction of order". Also any variable-coefficient ODE (e.g. \(x^2y''+\ldots\)) with a trial \(y=x^n\).</div>
+<div class="method"><ol>
+<li>If asked, find \(n\) by substituting \(y=x^n\): \(y'=nx^{n-1}\), \(y''=n(n-1)x^{n-2}\) → quadratic in \(n\).</li>
+<li><b>Divide by the \(y''\) coefficient</b> to reach standard form and read off \(p(x)\).</li>
+<li>Compute \(p+2y_1'/y_1\) and set \(v=u'\): \(v'+v\,(p+2y_1'/y_1)=0\).</li>
+<li>Solve for \(v\) (separable: \(\ln|v|=\ldots\)); take the constant \(=0\) or keep \(A\).</li>
+<li>\(u=\int v\,dx\) → \(y_2=u\,y_1\) → \(y=Ay_1+By_2\).</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Method 6 · Spring–mass–damper models</h3>
+$$ mx''+\beta x'+kx=F(t),\qquad k=\frac{mg}{s},\qquad \Delta=\beta^2-4mk $$
+<div class="when">Any question with a mass on a spring, "damping constant", "released", "overdamped/underdamped/critically damped", "steady state", "resonance".</div>
+<div class="method"><ol>
+<li>Units: SI (kg, m, N, s); take \(g=9.8\) m s\(^{-2}\) unless told otherwise.</li>
+<li>\(k\) from the equilibrium stretch: \(k=mg/s\), where \(s=\) equilibrium length \(-\) natural length.</li>
+<li>Set \(x\) = displacement below equilibrium. ICs: "stretched to length \(\ell\)" means \(x(0)=\ell-(\text{equilibrium length})\). "Released from rest" means \(x'(0)=0\). "Pushed up" means \(x'(0)\lt0\).</li>
+<li>Write \(mx''+\beta x'+kx=0\), divide by \(m\), solve, and classify by \(\Delta\).</li>
+<li>Critical damping constant: \(\beta_c=\sqrt{4mk}=2\sqrt{mk}\).</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Method 7 · Amplitude–phase form</h3>
+$$ c_1\cos\omega t+c_2\sin\omega t=R\cos(\omega t-\phi),\qquad R=\sqrt{c_1^2+c_2^2},\quad \tan\phi=\frac{c_2}{c_1} $$
+<div class="when">"Find the amplitude", "maximum displacement" (undamped), "steady-state amplitude". Choose \(\phi\) in the quadrant of \((c_1,c_2)\).</div>
+<p><b>Mini-example.</b> \(\cos t+\sin t=\sqrt2\cos(t-\pi/4)\): amplitude \(\sqrt2\).</p>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Every solution below was checked with SymPy (<code>dsolve</code> + <code>checkodesol</code>, initial conditions substituted). Each one is written the way a marker wants to read it: method named, characteristic equation shown, constants stated, answer boxed. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Distinct real roots, IVP: \(y''-y'-6y=0,\ y(0)=3,\ y'(0)=4\)</summary>
+<p><b>Q.</b> Solve the initial value problem \(y''-y'-6y=0\), \(y(0)=3\), \(y'(0)=4\). <b>[5 marks]</b></p>
+<p><b>Characteristic equation.</b> Trying \(y=e^{\lambda t}\) gives
+$$\lambda^2-\lambda-6=0\iff(\lambda-3)(\lambda+2)=0\iff\lambda=3\ \text{or}\ \lambda=-2.$$
+Two distinct real roots, so the general solution is
+$$ y=c_1e^{3t}+c_2e^{-2t},\qquad c_1,c_2\in\mathbb R. $$</p>
+<p><b>Apply the ICs.</b> \(y'=3c_1e^{3t}-2c_2e^{-2t}\).
+$$ y(0)=c_1+c_2=3,\qquad y'(0)=3c_1-2c_2=4. $$
+Doubling the first and adding: \(5c_1=10\Rightarrow c_1=2\), then \(c_2=1\).</p>
+$$\boxed{y=2e^{3t}+e^{-2t}}$$
+<p class="tip">Check: \(y(0)=2+1=3\) ✓, \(y'(0)=6-2=4\) ✓. It takes ten seconds and catches most sign slips.</p>
+</details>
+
+<details>
+<summary>Example 2 — Repeated root, IVP: \(y''+6y'+9y=0,\ y(0)=2,\ y'(0)=-1\)</summary>
+<p><b>Q.</b> Solve \(y''+6y'+9y=0\) with \(y(0)=2\), \(y'(0)=-1\). <b>[5 marks]</b></p>
+<p>\(\lambda^2+6\lambda+9=(\lambda+3)^2=0\Rightarrow\lambda=-3\) (repeated, \(\Delta=36-36=0\)). So
+$$ y=(c_1+c_2t)e^{-3t}. $$
+\(y'=c_2e^{-3t}-3(c_1+c_2t)e^{-3t}\) (product rule). Then
+$$ y(0)=c_1=2,\qquad y'(0)=c_2-3c_1=-1\Rightarrow c_2=5. $$</p>
+$$\boxed{y=(2+5t)e^{-3t}}$$
+<p class="trap">Writing \(y=c_1e^{-3t}+c_2e^{-3t}\) is wrong: that is really only one constant \((c_1+c_2)\), so no choice of constants can meet both ICs. The repeated root <b>needs</b> the \(t\).</p>
+</details>
+
+<details>
+<summary>Example 3 — Complex roots, IVP: \(y''-4y'+13y=0,\ y(0)=1,\ y'(0)=8\)</summary>
+<p><b>Q.</b> Solve \(y''-4y'+13y=0\), \(y(0)=1\), \(y'(0)=8\). Describe the long-term behaviour. <b>[6 marks]</b></p>
+<p>\(\lambda^2-4\lambda+13=0\Rightarrow\lambda=\dfrac{4\pm\sqrt{16-52}}{2}=\dfrac{4\pm6i}{2}=2\pm3i\). So \(\alpha=2,\ \beta=3\) and
+$$ y=e^{2t}(A\cos3t+B\sin3t),\qquad A,B\in\mathbb R. $$
+\(y(0)=A=1\). Using the shortcut \(y'(0)=\alpha A+\beta B\): \(2(1)+3B=8\Rightarrow B=2\). (Long way: \(y'=e^{2t}\big[(2A+3B)\cos3t+(2B-3A)\sin3t\big]\), so \(y'(0)=2A+3B\).)</p>
+$$\boxed{y=e^{2t}(\cos3t+2\sin3t)}$$
+<p><b>Behaviour:</b> since \(\alpha=2\gt0\), the solution oscillates with angular frequency 3 inside a growing envelope \(\pm\sqrt5\,e^{2t}\). The oscillations grow without bound.</p>
+</details>
+
+<details>
+<summary>Example 4 — Superposition of forcings: \(y''-2y'-3y=6x+1+3e^{2x}\)</summary>
+<p><b>Q.</b> Find the general solution of \(y''-2y'-3y=6x+1+3e^{2x}\). <b>[8 marks]</b></p>
+<p><b>Step 1 — \(y_H\).</b> \(\lambda^2-2\lambda-3=(\lambda-3)(\lambda+1)=0\Rightarrow\lambda=3,-1\). \(y_H=Ae^{3x}+Be^{-x}\).</p>
+<p><b>Step 2 — trial.</b> The forcing is (degree-1 polynomial) + (exponential with \(k=2\)). Neither overlaps \(y_H\) (the roots are 3 and \(-1\), not 0 or 2), so
+$$ y_P=ax+b+Ce^{2x},\quad y_P'=a+2Ce^{2x},\quad y_P''=4Ce^{2x}. $$</p>
+<p><b>Step 3 — substitute and match.</b>
+$$ 4Ce^{2x}-2(a+2Ce^{2x})-3(ax+b+Ce^{2x})=-3ax+(-2a-3b)+(4-4-3)Ce^{2x}. $$
+Match with \(6x+1+3e^{2x}\):
+$$ x:\ -3a=6\Rightarrow a=-2;\qquad 1:\ -2a-3b=1\Rightarrow 4-3b=1\Rightarrow b=1;\qquad e^{2x}:\ -3C=3\Rightarrow C=-1. $$</p>
+$$\boxed{y=Ae^{3x}+Be^{-x}-2x+1-e^{2x},\quad A,B\in\mathbb R}$$
+<p class="tip">You may split it: solve with \(r_1=6x+1\) and \(r_2=3e^{2x}\) separately and add the \(y_P\)'s. That's the superposition principle, and it keeps the algebra tidy.</p>
+</details>
+
+<details>
+<summary>Example 5 — Trig forcing: \(y''+2y'+5y=10\cos x\)</summary>
+<p><b>Q.</b> Find the general solution of \(y''+2y'+5y=10\cos x\). <b>[7 marks]</b></p>
+<p><b>\(y_H\):</b> \(\lambda^2+2\lambda+5=0\Rightarrow\lambda=-1\pm2i\), so \(y_H=e^{-x}(A\cos2x+B\sin2x)\).</p>
+<p><b>Trial:</b> the forcing has \(\cos x\), so use <b>both</b> \(\cos x\) and \(\sin x\): \(y_P=C\cos x+D\sin x\). No overlap (\(\pm i\) are not roots).
+$$ y_P'=-C\sin x+D\cos x,\qquad y_P''=-C\cos x-D\sin x. $$
+$$ y_P''+2y_P'+5y_P=(-C+2D+5C)\cos x+(-D-2C+5D)\sin x=(4C+2D)\cos x+(4D-2C)\sin x. $$
+Match with \(10\cos x+0\sin x\): \(4C+2D=10\) and \(4D-2C=0\Rightarrow C=2D\Rightarrow 10D=10\Rightarrow D=1,\ C=2\).</p>
+$$\boxed{y=e^{-x}(A\cos2x+B\sin2x)+2\cos x+\sin x}$$
+<p class="trap">Trying only \(y_P=C\cos x\) fails: the \(2y'\) term produces \(\sin x\), and you'd need \(-2C=0\) and \(4C=10\) at the same time. Always include both sin and cos.</p>
+</details>
+
+<details>
+<summary>Example 6 — The overlap rule: \(y''-y'-2y=6e^{2x}\), and the double-overlap version</summary>
+<p><b>Q.</b> (a) Find a particular solution of \(y''-y'-2y=6e^{2x}\). (b) Find a particular solution of \(y''-4y'+4y=6e^{2x}\). <b>[6 marks]</b></p>
+<p><b>(a)</b> \(\lambda^2-\lambda-2=(\lambda-2)(\lambda+1)\Rightarrow\lambda=2,-1\), \(y_H=Ae^{2x}+Be^{-x}\).</p>
+<p><i>Naive trial</i> \(Ce^{2x}\): substituting gives \((4-2-2)Ce^{2x}=0\ne6e^{2x}\). Impossible, because \(e^{2x}\) is already in \(y_H\). <b>Overlap (simple root) → multiply by \(x\):</b>
+$$ y_P=Cxe^{2x},\quad y_P'=C(1+2x)e^{2x},\quad y_P''=C(4+4x)e^{2x}. $$
+$$ y_P''-y_P'-2y_P=C\big[(4+4x)-(1+2x)-2x\big]e^{2x}=3Ce^{2x}=6e^{2x}\Rightarrow C=2. $$
+So \(y_P=2xe^{2x}\) and \(y=Ae^{2x}+Be^{-x}+2xe^{2x}\). (Shortcut check: \(C/P'(2)=6/(2\cdot2-1)=2\) ✓.)</p>
+<p><b>(b)</b> \(\lambda^2-4\lambda+4=(\lambda-2)^2\): \(\lambda=2\) is a <b>double</b> root and \(y_H=(A+Bx)e^{2x}\). Both \(e^{2x}\) and \(xe^{2x}\) are taken, so the trial becomes \(y_P=Cx^2e^{2x}\).
+$$ y_P'=C(2x+2x^2)e^{2x},\quad y_P''=C(2+8x+4x^2)e^{2x}, $$
+$$ y_P''-4y_P'+4y_P=C\big[(2+8x+4x^2)-(8x+8x^2)+4x^2\big]e^{2x}=2Ce^{2x}=6e^{2x}\Rightarrow C=3. $$</p>
+$$\boxed{\text{(a) }y_P=2xe^{2x}\qquad\text{(b) }y_P=3x^2e^{2x}}$$
+<p class="tip">Notice how everything with \(x\) cancels: that's the sign your modification was right. If an \(x\)-term survives, you've made an algebra slip.</p>
+</details>
+
+<details>
+<summary>Example 7 — Reduction of order: \(x^2y''-3xy'+4y=0\), given \(y_1=x^2\)</summary>
+<p><b>Q.</b> Verify that \(y_1=x^2\) solves \(x^2y''-3xy'+4y=0\) for \(x\gt0\), and use reduction of order to find the general solution. <b>[8 marks]</b></p>
+<p><b>Verify:</b> \(x^2(2)-3x(2x)+4x^2=2x^2-6x^2+4x^2=0\) ✓.</p>
+<p><b>Standard form:</b> divide by \(x^2\): \(y''-\dfrac{3}{x}y'+\dfrac{4}{x^2}y=0\), so \(p(x)=-\dfrac3x\).</p>
+<p><b>Reduction of order.</b> Let \(y=u\,x^2\). Then \(u\) satisfies
+$$ u''+u'\Big(p+\frac{2y_1'}{y_1}\Big)=u''+u'\Big(-\frac3x+\frac{2(2x)}{x^2}\Big)=u''+\frac1x\,u'=0. $$
+Let \(v=u'\): \(v'=-\dfrac{v}{x}\). \(v=0\) is an equilibrium solution (it gives nothing new). For \(v\ne0\): \(\dfrac{dv}{v}=-\dfrac{dx}{x}\Rightarrow\ln|v|=-\ln x+C\Rightarrow v=\dfrac{A}{x}\).
+Then \(u=\int v\,dx=A\ln x+B\).</p>
+$$\boxed{y=u\,x^2=Ax^2\ln x+Bx^2,\quad A,B\in\mathbb R,\ x\gt0}$$
+<p class="tip">Taking \(A=1,B=0\) gives the second solution \(y_2=x^2\ln x\). It isn't a constant multiple of \(x^2\), so the two are linearly independent. (Trying \(y=x^n\) here gives \(n^2-4n+4=(n-2)^2=0\), a double root. That's why the second solution isn't another power.)</p>
+</details>
+
+<details>
+<summary>Example 8 — Damped spring from physical data (classification + motion)</summary>
+<p><b>Q.</b> A mass of 2 kg stretches a spring 0.49 m beyond its natural length when hanging at rest. The system is immersed in a fluid with damping constant \(16\) N s m\(^{-1}\). The mass is pulled down 0.1 m below equilibrium and released from rest. Take \(g=9.8\) m s\(^{-2}\). (a) Find \(k\). (b) Find \(x(t)\), the displacement below equilibrium. (c) Classify the damping. (d) What damping constant would make the system critically damped? <b>[10 marks]</b></p>
+<p><b>(a)</b> At equilibrium \(ks=mg\Rightarrow k=\dfrac{2(9.8)}{0.49}=40\) N m\(^{-1}\).</p>
+<p><b>(b)</b> \(mx''+\beta x'+kx=0\Rightarrow 2x''+16x'+40x=0\Rightarrow x''+8x'+20x=0\).
+\(\lambda^2+8\lambda+20=0\Rightarrow\lambda=\dfrac{-8\pm\sqrt{64-80}}{2}=-4\pm2i\).
+$$ x=e^{-4t}(A\cos2t+B\sin2t). $$
+ICs: \(x(0)=0.1\) (down is positive), \(x'(0)=0\) (released from rest). \(x(0)=A=0.1\); \(x'(0)=-4A+2B=0\Rightarrow B=0.2\).
+$$\boxed{x(t)=e^{-4t}\big(0.1\cos2t+0.2\sin2t\big)\ \text{m}}$$</p>
+<p><b>(c)</b> \(\Delta=\beta^2-4mk=256-320=-64\lt0\) → <b>underdamped</b>. The mass oscillates (angular frequency 2) with amplitude decaying like \(e^{-4t}\).</p>
+<p><b>(d)</b> Critical: \(\beta^2=4mk=320\Rightarrow\beta=\sqrt{320}=8\sqrt5\approx17.9\) N s m\(^{-1}\).</p>
+<p class="trap">Don't forget to divide by \(m=2\) before reading off the characteristic equation, or use \(2\lambda^2+16\lambda+40=0\) directly. Both give the same roots. What goes wrong is using \(\lambda^2+16\lambda+40\).</p>
+</details>
+
+<details>
+<summary>Example 9 — Forced + damped: transient and steady state, \(x''+2x'+2x=10\cos2t\)</summary>
+<p><b>Q.</b> A damped oscillator satisfies \(x''+2x'+2x=10\cos2t\). (a) Find the general solution. (b) Identify the transient and steady-state parts. (c) Find the amplitude of the steady-state motion. <b>[9 marks]</b></p>
+<p><b>(a)</b> \(\lambda^2+2\lambda+2=0\Rightarrow\lambda=-1\pm i\): \(x_H=e^{-t}(A\cos t+B\sin t)\).
+Trial \(x_P=C\cos2t+D\sin2t\) (no overlap: \(\pm2i\) are not roots).
+$$ x_P''+2x_P'+2x_P=(-4C+4D+2C)\cos2t+(-4D-4C+2D)\sin2t=(-2C+4D)\cos2t+(-4C-2D)\sin2t. $$
+Match: \(-2C+4D=10\), \(-4C-2D=0\Rightarrow D=-2C\Rightarrow-2C-8C=10\Rightarrow C=-1,\ D=2\).
+$$\boxed{x=e^{-t}(A\cos t+B\sin t)-\cos2t+2\sin2t}$$</p>
+<p><b>(b)</b> Transient: \(e^{-t}(A\cos t+B\sin t)\to0\) as \(t\to\infty\). Steady state: \(-\cos2t+2\sin2t\), which oscillates at the <b>driving</b> frequency 2.</p>
+<p><b>(c)</b> Amplitude \(=\sqrt{(-1)^2+2^2}=\sqrt5\).</p>
+</details>
+
+<details>
+<summary>Example 10 — Undamped resonance: \(x''+9x=12\sin3t,\ x(0)=0,\ x'(0)=0\)</summary>
+<p><b>Q.</b> An undamped spring starting at rest at equilibrium is driven by \(x''+9x=12\sin3t\). Solve for \(x(t)\) and describe the motion. <b>[9 marks]</b></p>
+<p>\(\lambda^2+9=0\Rightarrow\lambda=\pm3i\): \(x_H=A\cos3t+B\sin3t\), natural frequency \(\omega=3\). The forcing frequency is also 3, so the usual trial \(C\cos3t+D\sin3t\) <b>overlaps</b> \(x_H\). Multiply by \(t\):
+$$ x_P=t(C\cos3t+D\sin3t). $$
+$$ x_P''=(6D-9Ct)\cos3t+(-6C-9Dt)\sin3t\ \Rightarrow\ x_P''+9x_P=6D\cos3t-6C\sin3t. $$
+Match \(12\sin3t\): \(6D=0,\ -6C=12\Rightarrow C=-2,\ D=0\). So \(x_P=-2t\cos3t\).
+General: \(x=A\cos3t+B\sin3t-2t\cos3t\). \(x(0)=A=0\). \(x'=3B\cos3t-2\cos3t+6t\sin3t\) (with \(A=0\)), so \(x'(0)=3B-2=0\Rightarrow B=\tfrac23\).</p>
+$$\boxed{x(t)=\tfrac23\sin3t-2t\cos3t}$$
+<p><b>Motion:</b> the \(-2t\cos3t\) term oscillates with amplitude \(2t\), which grows without bound. This is <b>resonance</b>: the driving frequency equals the natural frequency and there's no damping to limit it.</p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<div class="card">
+<p><b>How often does this come up?</b> I searched all twelve papers from 2020 S1 to 2025 S2, including the scanned 2022 S2 marking scheme. Second-order ODEs appear <b>only in 2020</b>, once per semester, and each time as a full <b>10-mark</b> question:</p>
+<table>
+<tr><th>Paper</th><th>Q</th><th>Marks</th><th>Task</th><th>Type</th></tr>
+<tr><td>2020 S1</td><td>Q7</td><td>10</td><td>General solution of \(4y''-4y'+5y=e^{3x}\)</td><td>A</td></tr>
+<tr><td>2020 S2</td><td>Q3</td><td>10</td><td>Find \(n\) with \(y=x^n\) a solution of \(2x^2y''-3xy'-3y=0\), then reduction of order</td><td>B</td></tr>
+<tr><td>2021 S1 – 2025 S2</td><td>—</td><td>0</td><td>No ODE question of any kind (the recent papers are all multivariable)</td><td>—</td></tr>
+</table>
+<p>The topic is still on the syllabus (tutorial 3, summary Recipes #3–5), so the tutorial styles (Types C–E) are included too. <b>Weight your time accordingly</b>: be fast and certain at Types A and B (a clean 10 marks if it appears), and don't over-invest in the rest.</p>
+</div>
+
+<div class="card q">
+<h3>Type A — "Find the general solution" of \(ay''+by'+cy=r(x)\) <span class="marks">2020 S1 Q7 · 10 marks</span></h3>
+<p><b>Looks like:</b> one constant-coefficient ODE with an exponential / polynomial / trig forcing, and the single instruction "find the general solution". Tutorial twins: T03 Q4, Q5, Q7.</p>
+<div class="method"><b>Routine:</b>
+<ol>
+<li>Label "Solve for \(y_H\)". Write the characteristic equation and solve it with the quadratic formula (show \(\Delta\)).</li>
+<li>Write \(y_H\) in the correct case form, with "\(A,B\in\mathbb R\)".</li>
+<li>Label "Find \(y_P\)". State the guess, check it against \(y_H\) for overlap, differentiate twice, substitute, and match coefficients.</li>
+<li>\(y=y_H+y_P\), with constants stated.</li>
+</ol></div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S1 Q7 <span class="marks">[10 marks]</span></b></p>
+<p>Find the general solution \(y(x)\) to the ODE
+$$ 4y''-4y'+5y=e^{3x}. $$</p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S1 Q7 (follows the official solution)</summary>
+<p><b>Solve for \(y_H\).</b> Characteristic equation:
+$$ 4\lambda^2-4\lambda+5=0\ \Rightarrow\ \lambda=\frac{4\pm\sqrt{16-4(4)(5)}}{2(4)}=\frac{4\pm\sqrt{-64}}{8}=\frac{4\pm8i}{8}=\frac12\pm i. $$
+So \(\alpha=\tfrac12,\ \beta=1\) and
+$$ y_H=e^{x/2}\big(A\sin x+B\cos x\big),\qquad A,B\in\mathbb R. $$</p>
+<p><b>Find \(y_P\).</b> Guess \(y_P=ae^{3x}\) (3 is not a root, so there's no overlap). \(y_P'=3ae^{3x}\), \(y_P''=9ae^{3x}\). Substitute:
+$$ 36ae^{3x}-12ae^{3x}+5ae^{3x}=e^{3x}\ \Rightarrow\ 29a=1\ \Rightarrow\ a=\tfrac1{29}. $$</p>
+$$\boxed{y=y_H+y_P=e^{x/2}\big(A\sin x+B\cos x\big)+\frac{e^{3x}}{29},\qquad A,B\in\mathbb R}$$
+<p class="tip">The official solution is laid out exactly as "Solve for \(y_H\)" → "Find \(y_P\)" → "\(y=y_H+y_P\)" and ends with "\(A,B\in\mathbb R\)". Copy that skeleton. The common slip here is forgetting the leading 4: dividing by \(2a=8\), not 2, gives \(\tfrac12\pm i\), not \(2\pm4i\).</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — Find \(n\) for a power solution, then reduction of order <span class="marks">2020 S2 Q3 · 10 marks</span></h3>
+<p><b>Looks like:</b> a variable-coefficient ODE (\(x^2y''\), \(xy'\), \(y\)), "\(y=x^n\) is a solution for some integer \(n\)", then "use reduction of order to find the general solution". Tutorial twin: T03 Q1 (\(xy''-3y'-12y/x=0\), \(y_1=x^6\), answer \(y_2=x^{-2}\)).</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S2 Q3 <span class="marks">[10 marks]</span></b></p>
+<p>For some positive integer \(n\), the function \(y=x^n\) is a solution of the ODE
+$$ 2x^2y''-3xy'-3y=0. $$
+Find the value of \(n\). Use the obtained solution and the method of reduction of order to find the general solution of the ODE, for \(x\gt0\).</p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S2 Q3 (with the marking scheme's point allocation)</summary>
+<p><b>Find \(n\)</b> <span class="marks">[2 + 1]</span>. \(y=x^n\Rightarrow y'=nx^{n-1},\ y''=n(n-1)x^{n-2}\). Substituting:
+$$ \big(2n(n-1)-3n-3\big)x^n=0\ \Rightarrow\ 2n^2-5n-3=0\ \Rightarrow\ (2n+1)(n-3)=0. $$
+\(n\) must be a positive integer, so \(n=3\) and \(y_1=x^3\).</p>
+<p><b>Standard form</b> <span class="marks">[1]</span>. Divide by \(2x^2\):
+$$ y''-\frac{3}{2x}y'-\frac{3}{2x^2}y=0,\qquad p(x)=-\frac{3}{2x}. $$</p>
+<p><b>Reduction of order</b> <span class="marks">[1 + 1]</span>. With \(y=u\,x^3\), \(u\) satisfies \(u''+u'\big(p+\tfrac{2y_1'}{y_1}\big)=0\):
+$$ u''+u'\Big(-\frac{3}{2x}+\frac{2(3x^2)}{x^3}\Big)=u''+u'\Big(-\frac3{2x}+\frac6x\Big)=u''+\frac{9}{2x}u'=0. $$</p>
+<p><b>Solve for \(v=u'\)</b> <span class="marks">[1 + 1]</span>. \(v'+\dfrac{9}{2x}v=0\). \(v=0\) is an equilibrium solution. If \(v\ne0\):
+$$ \frac{v'}{v}=-\frac{9}{2x}\Rightarrow\ln|v|=-\tfrac92\ln|x|+C\Rightarrow v=Ax^{-9/2},\ A\in\mathbb R\quad(x\gt0). $$</p>
+<p><b>Integrate</b> <span class="marks">[1]</span>. \(u=\int v\,dx=-\tfrac27Ax^{-7/2}+B=\tilde A x^{-7/2}+B\).</p>
+<p><b>General solution</b> <span class="marks">[1]</span>.</p>
+$$\boxed{y=u\,x^3=\tilde A x^{-1/2}+Bx^{3},\qquad \tilde A,B\in\mathbb R,\ x\gt0}$$
+<p class="tip">Marking scheme: 2 for substituting \(x^n\) correctly, 1 for \(n=3\), 1 for the standard form (<b>you must divide by \(2x^2\) to get \(p\)</b>), 1 for quoting the ROO equation, 1 for substituting \(p\) and \(y_1\), 1 for noting \(v=0\) is an equilibrium solution, 1 for \(v\), 1 for \(u\), 1 for the general solution. The other root \(n=-\tfrac12\) is a useful check: it's exactly the second solution you derive.</p>
+<p class="trap">The most expensive slip is using \(p=-3x\) (the un-divided coefficient). The whole \(v\) equation is then wrong and you lose every mark after the standard-form mark.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — Homogeneous IVP <span class="marks">poster / tutorial level · ~5–6 marks</span></h3>
+<p><b>Looks like:</b> "Solve the IVP \(y''+by'+cy=0,\ y(0)=\ldots,\ y'(0)=\ldots\)". Instances: Poster B worked example; T03 Q2 (general solutions only).</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Poster B example</b>: Solve the IVP \(y''+2y'+2y=0,\ y(0)=1,\ y'(0)=-1\).</p>
+</div>
+<details>
+<summary>Full worked solution — Poster B IVP</summary>
+<p>\(\lambda^2+2\lambda+2=0\Rightarrow\lambda=-1\pm i\), so \(\alpha=-1,\ \beta=1\) and \(y=e^{-t}(C_1\cos t+C_2\sin t)\).
+\(y(0)=C_1=1\). \(y'(0)=\alpha C_1+\beta C_2=-1+C_2=-1\Rightarrow C_2=0\).</p>
+$$\boxed{y=e^{-t}\cos t}$$
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Spring–mass model from words <span class="marks">tutorial level (T03 Q3) · ~10 marks</span></h3>
+<p><b>Looks like:</b> natural length, equilibrium length, a mass, "stretched to … and released", a damping constant, "is the system over/under/critically damped?"</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Tutorial 3 Q3.</b> A mass of 2 kg is attached to a spring hanging from a fixed support. The natural length of the spring is 0.5 m. The hanging mass causes the spring to have an equilibrium length of 0.7 m. (a) If the spring is stretched to a length of 1 m and then released with initial velocity 0 m s\(^{-1}\), find the position of the mass at any time \(t\). (b) Suppose that the spring and mass system is immersed in a fluid with damping constant 100 N s m\(^{-1}\). Find the position of the mass at any time \(t\) if it starts from the equilibrium position and is given a push to start it with an initial downward velocity of 0.6 m s\(^{-1}\). Is the system overdamped, underdamped or critically-damped?</p>
+</div>
+<details>
+<summary>Full worked solution — T03 Q3</summary>
+<p><b>\(k\):</b> stretch at equilibrium \(s=0.7-0.5=0.2\) m, so \(2g=0.2k\Rightarrow k=\dfrac{2(9.8)}{0.2}=98\) N m\(^{-1}\).</p>
+<p><b>(a)</b> \(x''+\tfrac km x=0\Rightarrow x''+49x=0\Rightarrow\lambda=\pm7i\), \(x=c_1\cos7t+c_2\sin7t\). \(x\) is measured down from <b>equilibrium</b>, so \(x(0)=1-0.7=0.3\) m and \(x'(0)=0\). That gives \(c_1=0.3,\ 7c_2=0\):
+$$\boxed{x(t)=0.3\cos7t}$$</p>
+<p><b>(b)</b> \(2x''+100x'+98x=0\Rightarrow x''+50x'+49x=0\Rightarrow(\lambda+1)(\lambda+49)=0\), \(\lambda=-1,-49\). \(x=c_1e^{-t}+c_2e^{-49t}\).
+\(x(0)=c_1+c_2=0\), \(x'(0)=-c_1-49c_2=0.6\Rightarrow-48c_2=0.6\Rightarrow c_2=-\tfrac1{80},\ c_1=\tfrac1{80}\).
+$$\boxed{x(t)=\tfrac1{80}\big(e^{-t}-e^{-49t}\big)}$$
+Two distinct real roots (\(\Delta=100^2-4(2)(98)=9216\gt0\)) → <b>overdamped</b>.</p>
+<p class="trap">\(x(0)=1\) is wrong: 1 m is the spring's <i>length</i>. The displacement from equilibrium is \(1-0.7=0.3\).</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type E — Qualitative "show that" / structure questions <span class="marks">tutorial level (T03 Q6, Q9)</span></h3>
+<p><b>Looks like:</b> "If \(a,b,c\gt0\), show \(\lim_{t\to\infty}y(t)=0\)" (T03 Q6), or "what goes wrong with the polynomial trial when \(c=0\)?" (T03 Q9).</p>
+<details>
+<summary>Model answers — T03 Q6 and Q9</summary>
+<p><b>Q6.</b> Characteristic equation \(ar^2+br+c=0\) with \(a,b,c\gt0\). Case \(\Delta\gt0\): the roots have product \(c/a\gt0\) (same sign) and sum \(-b/a\lt0\), so both are negative and \(y=c_1e^{r_1t}+c_2e^{r_2t}\to0\). Case \(\Delta=0\): \(r=-b/2a\lt0\) and \(te^{rt}\to0\), so \(y\to0\). Case \(\Delta\lt0\): \(\alpha=-b/2a\lt0\), and \(|e^{\alpha t}(c_1\cos\beta t+c_2\sin\beta t)|\le(|c_1|+|c_2|)e^{\alpha t}\to0\). So \(y\to0\) in every case.</p>
+<p><b>Q9.</b> If \(c=0\): \(a\lambda^2+b\lambda=0\Rightarrow\lambda=0,-b/a\), so \(y_h=c_1+c_2e^{-bx/a}\). A degree-\(n\) polynomial trial fails because its constant term is a homogeneous solution: \(ay''+by'\) of a degree-\(n\) polynomial has degree only \(n-1\). So the trial must be a polynomial of degree \(n+1\) (equivalently \(x\times\) the full degree-\(n\) polynomial), which is the overlap rule with \(\lambda=0\).</p>
+</details>
+</div>
+</section>
+
+<!-- ================= 5. WORDING TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Recognise the phrase and you know the method, the form of the answer, and what the marker is checking for.</p>
+
+<h4>A · Structural triggers — which method?</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"find the general solution of \(ay''+by'+cy=0\)"</td><td>Characteristic equation → case by \(\Delta\). Answer has two arbitrary constants, stated \(\in\mathbb R\).</td></tr>
+<tr><td>"… \(=r(x)\)" with \(r\ne0\) / "forced" / "inhomogeneous"</td><td>\(y=y_H+y_P\): complementary function first, then undetermined coefficients.</td></tr>
+<tr><td>"find the complementary function \(y_H\)"</td><td>Solve the homogeneous version (set RHS \(=0\)).</td></tr>
+<tr><td>"find <b>a</b> particular solution"</td><td>Any one \(y_P\) (no arbitrary constants). Undetermined coefficients.</td></tr>
+<tr><td>"solve the IVP" / "\(y(0)=\ldots,\ y'(0)=\ldots\)"</td><td>General solution first (including \(y_P\)), <i>then</i> apply both conditions.</td></tr>
+<tr><td>"\(y=x^n\) is a solution for some \(n\)" / "given that \(y_1=\ldots\) is a solution"</td><td>Substitute to find \(n\); then <b>reduction of order</b> \(y=u\,y_1\).</td></tr>
+<tr><td>"use the method of reduction of order"</td><td>Standard form (divide!) → \(u''+u'(p+2y_1'/y_1)=0\) → \(v=u'\).</td></tr>
+<tr><td>"find a second linearly independent solution"</td><td>Reduction of order; the answer must not be a multiple of \(y_1\).</td></tr>
+<tr><td>forcing \(e^{kx}\) where \(k\) is a characteristic root</td><td>Overlap: trial \(Axe^{kx}\) (\(Ax^2e^{kx}\) if double root).</td></tr>
+<tr><td>\(y''+\omega^2y=F\cos\omega t\) or \(F\sin\omega t\) (same \(\omega\))</td><td><b>Resonance</b>: trial \(t(A\cos\omega t+B\sin\omega t)\); amplitude grows like \(t\).</td></tr>
+<tr><td>forcing is a polynomial and there's no \(y\) term (\(c=0\))</td><td>Trial polynomial of one degree higher (T03 Q9).</td></tr>
+</table>
+
+<h4>B · Spring / physics triggers</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"a mass \(m\) stretches the spring \(s\) m" / "equilibrium length … natural length …"</td><td>\(k=mg/s\), \(s=\) equilibrium length \(-\) natural length.</td></tr>
+<tr><td>"stretched to a length \(\ell\)" / "pulled down \(d\) below equilibrium"</td><td>\(x(0)=\ell-\text{(equilibrium length)}\) / \(x(0)=d\) (down positive).</td></tr>
+<tr><td>"released from rest" / "starts from equilibrium"</td><td>\(x'(0)=0\) / \(x(0)=0\).</td></tr>
+<tr><td>"given a push downward / upward with speed \(v\)"</td><td>\(x'(0)=+v\) / \(x'(0)=-v\).</td></tr>
+<tr><td>"immersed in a fluid with damping constant \(\beta\)"</td><td>Add \(\beta x'\): \(mx''+\beta x'+kx=0\).</td></tr>
+<tr><td>"overdamped, underdamped or critically damped?"</td><td>Compute \(\Delta=\beta^2-4mk\): \(\gt0\) over, \(=0\) critical, \(\lt0\) under. State \(\Delta\) with its sign.</td></tr>
+<tr><td>"what damping gives critical damping?"</td><td>\(\beta=2\sqrt{mk}\).</td></tr>
+<tr><td>"steady state" / "long-term behaviour" / "transient"</td><td>Steady state \(=x_P\) (the \(x_H\) part decays when \(\beta\gt0\)); transient \(=x_H\).</td></tr>
+<tr><td>"amplitude" (of \(c_1\cos\omega t+c_2\sin\omega t\))</td><td>\(R=\sqrt{c_1^2+c_2^2}\).</td></tr>
+<tr><td>"period" / "frequency" (undamped)</td><td>\(\omega=\sqrt{k/m}\), period \(2\pi/\omega\).</td></tr>
+</table>
+
+<h4>C · Instruction triggers — what the marker wants written</h4>
+<table>
+<tr><th>If the question says…</th><th>Write (for full marks)</th></tr>
+<tr><td>"find the general solution"</td><td>"\(y=\ldots,\ A,B\in\mathbb R\)". Leaving out the constants or their domain costs a mark in the official solutions' style.</td></tr>
+<tr><td>"justify" / "show all working"</td><td>The characteristic equation written out, the discriminant or roots, the trial <i>with a sentence on overlap</i>, derivatives of the trial, and the matched coefficient equations.</td></tr>
+<tr><td>"for \(x\gt0\)"</td><td>That's your permission to drop absolute values: \(\ln|x|=\ln x\), \(|x|^{-9/2}=x^{-9/2}\). Say so.</td></tr>
+<tr><td>"describe the motion"</td><td>Name the case (SHM / over / critical / under / resonance) and say what happens as \(t\to\infty\).</td></tr>
+</table>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Applying the ICs to \(y_H\) alone.</b> For a forced IVP you must apply \(y(0),y'(0)\) to the <b>full</b> \(y=y_H+y_P\). Fitting the constants to \(y_H\) first and then adding \(y_P\) breaks the initial conditions.</div>
+
+<div class="trap"><b>Standard form before reduction of order.</b> The ROO formula uses \(p(x)\) from \(y''+p\,y'+q\,y=0\). In 2020 S2 Q3 the marking scheme gives a separate mark for dividing by \(2x^2\). Using the raw coefficient \(-3x\) wrecks everything after it.</div>
+
+<div class="trap"><b>Missing the overlap.</b> Always compare your trial with \(y_H\) <i>before</i> differentiating. The symptom of a missed overlap is an impossible equation such as \(0=6\). If you see that, don't stop: multiply the trial by \(x\) and redo it.</div>
+
+<div class="trap"><b>Half a trig trial.</b> A forcing of \(10\cos x\) still needs \(A\cos x+B\sin x\). The \(y'\) term turns cos into sin. (The exception is \(y''+cy=\cos\omega x\) with no \(y'\) term, where \(B\) simply comes out 0. Including it costs nothing.)</div>
+
+<div class="trap"><b>Incomplete polynomial trial.</b> \(r=x^2\) needs \(ax^2+bx+c\), not \(ax^2\) (T03 Q4 gives \(y_P=-\tfrac12x^2-\tfrac12x-\tfrac34\), where every coefficient is nonzero). And \(r=xe^{x}\) needs \((ax+b)e^{x}\), not \(axe^{x}\) (T03 Q5c: \(y_P=(\tfrac19x+\tfrac2{27})e^{x}\)).</div>
+
+<div class="trap"><b>Repeated root written as two exponentials.</b> \(c_1e^{4x}+c_2e^{4x}\) is one constant in disguise. Use \((c_1+c_2x)e^{4x}\).</div>
+
+<div class="trap"><b>Complex answer left in \(e^{(\alpha\pm\beta i)x}\) form, or \(\alpha,\beta\) mixed up.</b> For \(\lambda=\tfrac12\pm i\) (2020 S1 Q7) the answer is \(e^{x/2}(A\sin x+B\cos x)\): \(\alpha=\tfrac12\) goes in the exponential and \(\beta=1\) inside the trig functions. Also watch the leading coefficient: \(\alpha=-b/(2a)\), not \(-b/2\).</div>
+
+<div class="trap"><b>Sign slips in the characteristic equation.</b> Even the official T03 solutions contain one: for \(y''-5y'+4y=0\) they print "\(\lambda^2-6\lambda+4=0\)" and then correctly give \(\lambda=1,4\) (the correct equation is \(\lambda^2-5\lambda+4=0\)). Substitute your roots back into the equation you wrote.</div>
+
+<div class="trap"><b>Spring set-up errors.</b> (i) \(x(0)\) is displacement from <b>equilibrium</b>, not the spring length. (ii) \(k\) comes from the equilibrium stretch \(s\), not from the "stretched to" length. (iii) Divide by \(m\) (or keep \(m\lambda^2\)). (iv) Up is negative when down is positive.</div>
+
+<div class="trap"><b>Forgetting the equilibrium / zero case when separating.</b> In ROO, dividing by \(v\) assumes \(v\ne0\). The 2020 S2 marking scheme awarded a mark for noting "\(v=0\) is an equilibrium solution". Say it in one line.</div>
+
+<div class="trap"><b>Resonance sign.</b> For \(y''+\omega^2y=F\sin\omega t\), \(y_P=-\dfrac{F}{2\omega}t\cos\omega t\) (minus sign). For \(F\cos\omega t\), \(y_P=+\dfrac{F}{2\omega}t\sin\omega t\). If unsure, derive it: substitute \(t(A\cos\omega t+B\sin\omega t)\).</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. General solution of \(y''+16y=0\)?</summary>
+<p>\(\lambda^2+16=0\Rightarrow\lambda=\pm4i\) (\(\alpha=0,\beta=4\)): \(y=A\cos4x+B\sin4x\).</p></details>
+
+<details><summary>2. General solution of \(3y''+2y'=0\)?</summary>
+<p>\(3\lambda^2+2\lambda=\lambda(3\lambda+2)=0\Rightarrow\lambda=0,-\tfrac23\): \(y=A+Be^{-2x/3}\). (\(e^{0x}=1\), the constant solution.)</p></details>
+
+<details><summary>3. Roots \(\lambda=-2\pm5i\). Write the general solution.</summary>
+<p>\(y=e^{-2x}(A\cos5x+B\sin5x)\).</p></details>
+
+<details><summary>4. A general solution is \(y=(A+Bx)e^{-x}\). What was the (monic) ODE?</summary>
+<p>Double root \(-1\): \((\lambda+1)^2=\lambda^2+2\lambda+1\Rightarrow y''+2y'+y=0\).</p></details>
+
+<details><summary>5. What trial for \(y''-3y'+2y=5e^{x}\)?</summary>
+<p>Roots \(1,2\). \(e^{x}\) overlaps (simple root) → \(y_P=Axe^{x}\).</p></details>
+
+<details><summary>6. What trial for \(y''+4y=\sin2x\)? For \(y''+4y=\sin x\)?</summary>
+<p>Roots \(\pm2i\). \(\sin2x\) overlaps → \(x(A\cos2x+B\sin2x)\) (resonance). \(\sin x\) doesn't → \(A\cos x+B\sin x\).</p></details>
+
+<details><summary>7. What trial for \(y''-y=e^{-x}\), and what is \(y_P\)?</summary>
+<p>Roots \(\pm1\): overlap → \(Axe^{-x}\). Shortcut \(C/P'(-1)=1/(-2)\): \(y_P=-\tfrac12xe^{-x}\).</p></details>
+
+<details><summary>8. Particular solution of \(y''+y=3\)?</summary>
+<p>Constant trial \(A\): \(A=3\), so \(y_P=3\) (no overlap: \(\lambda=\pm i\)).</p></details>
+
+<details><summary>9. \(2x''+12x'+18x=0\): over, under or critical?</summary>
+<p>\(\Delta=144-4(2)(18)=0\) → <b>critically damped</b>.</p></details>
+
+<details><summary>10. A 0.5 kg mass stretches a spring 9.8 cm. Find \(k\) and \(\omega\) (\(g=9.8\)).</summary>
+<p>\(k=\dfrac{0.5(9.8)}{0.098}=50\) N/m; \(\omega=\sqrt{k/m}=\sqrt{100}=10\) rad/s.</p></details>
+
+<details><summary>11. In reduction of order for \(y''+py'+qy=0\) with \(y=uy_1\), which term vanishes and why?</summary>
+<p>The \(u\) term: its coefficient is \(y_1''+py_1'+qy_1=0\) because \(y_1\) is a solution. That leaves a first-order equation in \(v=u'\).</p></details>
+
+<details><summary>12. Why does the transient die out in a damped forced oscillator?</summary>
+<p>With \(m,\beta,k\gt0\) every characteristic root has negative real part (T03 Q6), so \(x_H\to0\). Only \(x_P\), the steady state at the driving frequency, remains.</p></details>
+
+<details><summary>13. You substitute \(y_P=Ce^{2x}\) and get \(0=6e^{2x}\). What happened and what do you do?</summary>
+<p>\(e^{2x}\) is in \(y_H\) (\(2\) is a root). Multiply by \(x\): \(y_P=Cxe^{2x}\), or by \(x^2\) if 2 is a double root.</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Fresh equations that don't appear in the tutorials, the poster, or any 2020–2025 paper. Same exam <i>style</i>, new numbers, clean arithmetic (no calculator needed). Every answer was verified with SymPy (<code>dsolve</code> + <code>checkodesol</code>, ICs substituted).</p>
+<p class="tip">How to use the arena: read the "📖 Learn from these" pair first, then cover the solutions and attempt "✏️ Your turn" on paper. Before you open a solution, commit to your characteristic equation, your trial (with its overlap check) and your constants.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Characteristic equation &amp; homogeneous general solutions</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — distinct real roots: \(y''+y'-12y=0\)</summary>
+<p>\(\lambda^2+\lambda-12=(\lambda+4)(\lambda-3)=0\Rightarrow\lambda=3,-4\) (\(\Delta=1+48=49\gt0\)).
+$$ y=Ae^{3x}+Be^{-4x},\qquad A,B\in\mathbb R. $$</p>
+<p class="tip">Factorise when you can (look for two numbers with product \(c/a\) and sum \(-b/a\)); use the quadratic formula when you can't.</p>
+</details>
+<details>
+<summary>Worked B — repeated root with a leading coefficient: \(9y''-6y'+y=0\)</summary>
+<p>\(9\lambda^2-6\lambda+1=(3\lambda-1)^2=0\Rightarrow\lambda=\tfrac13\) (double; \(\Delta=36-36=0\)).
+$$ y=(A+Bx)e^{x/3},\qquad A,B\in\mathbb R. $$</p>
+<p class="trap">\(\mu=-b/(2a)=6/18=\tfrac13\), not \(6/2=3\). Keep the leading coefficient.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 2 marks</span> <b>Q1.</b> Find the general solution of \(y''-9y=0\).</p>
+<details><summary>Solution</summary>
+<p>\(\lambda^2-9=0\Rightarrow\lambda=\pm3\). \(y=Ae^{3x}+Be^{-3x},\ A,B\in\mathbb R\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">WARM-UP · 2 marks</span> <b>Q2.</b> Find the general solution of \(y''+10y'+25y=0\).</p>
+<details><summary>Solution</summary>
+<p>\((\lambda+5)^2=0\Rightarrow\lambda=-5\) (double). \(y=(A+Bx)e^{-5x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 3 marks</span> <b>Q3.</b> Find the general solution of \(y''+4y'+20y=0\), stating \(\alpha\) and \(\beta\).</p>
+<details><summary>Solution</summary>
+<p>\(\lambda=\dfrac{-4\pm\sqrt{16-80}}{2}=\dfrac{-4\pm8i}{2}=-2\pm4i\), so \(\alpha=-2,\ \beta=4\).
+\(y=e^{-2x}(A\cos4x+B\sin4x)\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 3 marks</span> <b>Q4.</b> Find the general solution of \(2y''+5y'-3y=0\).</p>
+<details><summary>Solution</summary>
+<p>\(2\lambda^2+5\lambda-3=(2\lambda-1)(\lambda+3)=0\Rightarrow\lambda=\tfrac12,-3\). \(y=Ae^{x/2}+Be^{-3x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q5.</b> (a) Find a constant-coefficient ODE \(y''+by'+cy=0\) whose general solution is \(y=e^{x}(A\cos2x+B\sin2x)\). (b) Find one whose general solution is \(y=A+Be^{6x}\).</p>
+<details><summary>Solution</summary>
+<p>(a) Roots \(1\pm2i\): \((\lambda-1)^2+4=\lambda^2-2\lambda+5\Rightarrow y''-2y'+5y=0\).
+(b) Roots \(0,6\): \(\lambda(\lambda-6)=\lambda^2-6\lambda\Rightarrow y''-6y'=0\).</p>
+<p class="tip">Reverse-engineering: complex roots \(\alpha\pm\beta i\) come from \((\lambda-\alpha)^2+\beta^2=0\).</p></details>
+</div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Initial (and boundary) value problems</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — \(y''-3y'+2y=0,\ y(0)=0,\ y'(0)=2\)</summary>
+<p>\((\lambda-1)(\lambda-2)=0\Rightarrow y=c_1e^{t}+c_2e^{2t}\).
+\(y(0)=c_1+c_2=0\), \(y'(0)=c_1+2c_2=2\). Subtract: \(c_2=2\), \(c_1=-2\).
+$$\boxed{y=2e^{2t}-2e^{t}}$$
+Check: \(y(0)=0\) ✓, \(y'(0)=4-2=2\) ✓.</p>
+</details>
+<details>
+<summary>Worked B — conditions not at 0: \(y''+y=0,\ y(\pi/2)=3,\ y'(\pi/2)=1\)</summary>
+<p>\(\lambda=\pm i\Rightarrow y=A\cos t+B\sin t\), \(y'=-A\sin t+B\cos t\).
+At \(t=\pi/2\): \(\cos=0,\ \sin=1\). So \(y(\pi/2)=B=3\) and \(y'(\pi/2)=-A=1\Rightarrow A=-1\).
+$$\boxed{y=-\cos t+3\sin t}$$</p>
+<p class="tip">When the conditions aren't at 0, the shortcuts don't apply. Differentiate properly and evaluate the trig functions at the given point.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Solve \(y''-4y=0\), \(y(0)=1\), \(y'(0)=6\).</p>
+<details><summary>Solution</summary>
+<p>\(y=c_1e^{2t}+c_2e^{-2t}\). \(c_1+c_2=1\), \(2c_1-2c_2=6\Rightarrow c_1-c_2=3\). So \(c_1=2,\ c_2=-1\): \(y=2e^{2t}-e^{-2t}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Solve \(y''-2y'+y=0\), \(y(0)=3\), \(y'(0)=1\).</p>
+<details><summary>Solution</summary>
+<p>\((\lambda-1)^2=0\): \(y=(c_1+c_2t)e^{t}\). \(y(0)=c_1=3\). \(y'(0)=c_1+c_2=1\Rightarrow c_2=-2\).
+\(y=(3-2t)e^{t}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> Solve \(y''+2y'+10y=0\), \(y(0)=1\), \(y'(0)=2\).</p>
+<details><summary>Solution</summary>
+<p>\(\lambda=-1\pm3i\): \(y=e^{-t}(A\cos3t+B\sin3t)\). \(y(0)=A=1\). \(y'(0)=-A+3B=2\Rightarrow B=1\).
+\(y=e^{-t}(\cos3t+\sin3t)\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q4.</b> Consider \(y''+4y'+4y=0\).
+(a) <span class="marks">[2]</span> Find the general solution.
+(b) <span class="marks">[2]</span> Find the solution with \(y(0)=1\) and \(y(1)=0\).
+(c) <span class="marks">[2]</span> Find the turning point of this solution for \(t\gt0\) and its value.</p>
+<details><summary>Solution</summary>
+<p>(a) \((\lambda+2)^2=0\): \(y=(c_1+c_2t)e^{-2t}\).
+(b) \(y(0)=c_1=1\). \(y(1)=(1+c_2)e^{-2}=0\Rightarrow c_2=-1\): \(y=(1-t)e^{-2t}\).
+(c) \(y'=-e^{-2t}-2(1-t)e^{-2t}=(2t-3)e^{-2t}=0\Rightarrow t=\tfrac32\). \(y(\tfrac32)=-\tfrac12e^{-3}\). (\(y'\lt0\) before and \(\gt0\) after, so it's a minimum.)</p></details>
+</div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Undetermined coefficients (polynomial, exponential, trig, products)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — polynomial forcing: \(y''-y'-2y=4x^2-2\)</summary>
+<p>\(y_H\): \((\lambda-2)(\lambda+1)=0\Rightarrow y_H=Ae^{2x}+Be^{-x}\). No overlap (0 is not a root).
+Trial \(y_P=ax^2+bx+c\), \(y_P'=2ax+b\), \(y_P''=2a\):
+$$ 2a-(2ax+b)-2(ax^2+bx+c)=-2ax^2+(-2a-2b)x+(2a-b-2c). $$
+Match with \(4x^2+0x-2\): \(a=-2\); \(-2a-2b=0\Rightarrow b=2\); \(2a-b-2c=-2\Rightarrow-4-2-2c=-2\Rightarrow c=-2\).
+$$\boxed{y=Ae^{2x}+Be^{-x}-2x^2+2x-2}$$</p>
+</details>
+<details>
+<summary>Worked B — product forcing: \(y''-y=9xe^{2x}\)</summary>
+<p>\(y_H=Ae^{x}+Be^{-x}\). Trial \((ax+b)e^{2x}\) (a full degree-1 polynomial times \(e^{2x}\); no overlap):
+$$ y_P'=(2ax+a+2b)e^{2x},\qquad y_P''=(4ax+4a+4b)e^{2x}. $$
+$$ y_P''-y_P=(3ax+4a+3b)e^{2x}=9xe^{2x}\Rightarrow 3a=9,\ 4a+3b=0\Rightarrow a=3,\ b=-4. $$
+$$\boxed{y=Ae^{x}+Be^{-x}+(3x-4)e^{2x}}$$</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find the general solution of \(y''+4y=8x+4\).</p>
+<details><summary>Solution</summary>
+<p>\(y_H=A\cos2x+B\sin2x\). Trial \(ax+b\): \(4ax+4b=8x+4\Rightarrow a=2,b=1\). \(y=A\cos2x+B\sin2x+2x+1\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Find the general solution of \(y''-3y'+2y=12e^{-x}\).</p>
+<details><summary>Solution</summary>
+<p>Roots \(1,2\): \(y_H=Ae^{x}+Be^{2x}\). Trial \(Ce^{-x}\) (\(-1\) is not a root): \((1+3+2)C=6C=12\Rightarrow C=2\).
+\(y=Ae^{x}+Be^{2x}+2e^{-x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q3.</b> Find the general solution of \(y''+3y'+2y=10\sin x\).</p>
+<details><summary>Solution</summary>
+<p>Roots \(-1,-2\): \(y_H=Ae^{-x}+Be^{-2x}\). Trial \(C\cos x+D\sin x\):
+\(\cos x:\ -C+3D+2C=C+3D=0\); \(\sin x:\ -D-3C+2D=D-3C=10\). \(C=-3D\Rightarrow10D=10\Rightarrow D=1,\ C=-3\).
+\(y=Ae^{-x}+Be^{-2x}-3\cos x+\sin x\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q4.</b> Consider \(y''-2y'+2y=2e^{x}+4x\).
+(a) <span class="marks">[3]</span> Find the complementary function.
+(b) <span class="marks">[4]</span> Find a particular solution.
+(c) <span class="marks">[3]</span> Solve the IVP with \(y(0)=4\), \(y'(0)=5\).</p>
+<details><summary>Solution</summary>
+<p>(a) \(\lambda^2-2\lambda+2=0\Rightarrow\lambda=1\pm i\): \(y_H=e^{x}(C\cos x+D\sin x)\).</p>
+<p>(b) \(e^{x}\) alone is <b>not</b> in \(y_H\) (only \(e^{x}\cos x,\ e^{x}\sin x\) are), so there's no overlap. Split by superposition.
+\(e^{x}\)-part: \(Ae^{x}\Rightarrow(1-2+2)A=A=2\).
+Polynomial part: \(ax+b\Rightarrow-2a+2ax+2b=4x\Rightarrow a=2,\ -4+2b=0\Rightarrow b=2\).
+\(y_P=2e^{x}+2x+2\).</p>
+<p>(c) \(y=e^{x}(C\cos x+D\sin x)+2e^{x}+2x+2\). \(y(0)=C+2+2=4\Rightarrow C=0\).
+\(y'(0)=(C+D)+2+2=5\Rightarrow D=1\).
+$$\boxed{y=e^{x}\sin x+2e^{x}+2x+2}$$</p>
+<p class="trap">The ICs go on the <b>full</b> solution. Fitting them to \(y_H\) alone would give \(C=4,\ D=1\), which is wrong.</p></details>
+</div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Overlap &amp; resonance: the modification rule</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — simple-root overlap: \(y''+y'-6y=10e^{2x}\)</summary>
+<p>\((\lambda-2)(\lambda+3)=0\): \(y_H=Ae^{2x}+Be^{-3x}\). \(e^{2x}\) overlaps, so the trial is \(Cxe^{2x}\).
+\(y_P'=C(1+2x)e^{2x}\), \(y_P''=C(4+4x)e^{2x}\).
+$$ C\big[(4+4x)+(1+2x)-6x\big]e^{2x}=5Ce^{2x}=10e^{2x}\Rightarrow C=2. $$
+$$\boxed{y=Ae^{2x}+Be^{-3x}+2xe^{2x}}$$
+Shortcut check: \(C/P'(2)=10/(2\cdot2+1)=2\) ✓.</p>
+</details>
+<details>
+<summary>Worked B — trig resonance: \(y''+4y=8\cos2x\)</summary>
+<p>\(y_H=A\cos2x+B\sin2x\). The forcing \(\cos2x\) overlaps, so the trial is \(x(C\cos2x+D\sin2x)\).
+\(y_P''=(4D-4Cx)\cos2x+(-4C-4Dx)\sin2x\), so \(y_P''+4y_P=4D\cos2x-4C\sin2x\).
+Match: \(4D=8,\ -4C=0\Rightarrow D=2,\ C=0\).
+$$\boxed{y=A\cos2x+B\sin2x+2x\sin2x}$$
+Formula check: \(\tfrac{F}{2\omega}=\tfrac{8}{4}=2\) ✓.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find a particular solution of \(y''-5y'+6y=2e^{3x}\).</p>
+<details><summary>Solution</summary>
+<p>Roots \(2,3\): \(e^{3x}\) overlaps → \(Cxe^{3x}\). \(C\cdot P'(3)=C(2\cdot3-5)=C=2\). \(y_P=2xe^{3x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Find the general solution of \(y''-6y'+9y=4e^{3x}\).</p>
+<details><summary>Solution</summary>
+<p>Double root 3: \(y_H=(A+Bx)e^{3x}\). Trial \(Cx^2e^{3x}\): substituting gives \(2Ce^{3x}=4e^{3x}\Rightarrow C=2\).
+\(y=(A+Bx)e^{3x}+2x^2e^{3x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> Find the general solution of \(y''+9y=6\sin3x\).</p>
+<details><summary>Solution</summary>
+<p>\(y_H=A\cos3x+B\sin3x\). Resonance → trial \(x(C\cos3x+D\sin3x)\) → \(y_P''+9y_P=6D\cos3x-6C\sin3x=6\sin3x\Rightarrow C=-1,\ D=0\).
+\(y=A\cos3x+B\sin3x-x\cos3x\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Solve the IVP \(y''-y'=6x\), \(y(0)=0\), \(y'(0)=0\).</p>
+<details><summary>Solution</summary>
+<p>\(\lambda^2-\lambda=0\Rightarrow\lambda=0,1\): \(y_H=A+Be^{x}\). The constant function (\(\lambda=0\)) is in \(y_H\), so the polynomial trial is raised one degree: \(y_P=x(ax+b)=ax^2+bx\).
+\(y_P''-y_P'=2a-(2ax+b)=-2ax+(2a-b)=6x\Rightarrow a=-3,\ b=2a=-6\). \(y_P=-3x^2-6x\).
+\(y=A+Be^{x}-3x^2-6x\). \(y(0)=A+B=0\). \(y'(0)=B-6=0\Rightarrow B=6,\ A=-6\).
+$$\boxed{y=6e^{x}-6-3x^2-6x}$$</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 6 marks</span> <b>Q5.</b> The complementary function of \(y''-4y'+4y=r(x)\) is \((A+Bx)e^{2x}\). Write down (<b>don't solve</b>) the correct trial \(y_P\) for each forcing:
+(i) \(x^2\); (ii) \(e^{2x}\); (iii) \(e^{-2x}\); (iv) \(\sin2x\); (v) \(xe^{2x}\); (vi) \(e^{2x}\cos x\).</p>
+<details><summary>Solution</summary>
+<table>
+<tr><th>\(r\)</th><th>Trial</th><th>Why</th></tr>
+<tr><td>\(x^2\)</td><td>\(ax^2+bx+c\)</td><td>0 is not a root</td></tr>
+<tr><td>\(e^{2x}\)</td><td>\(ax^2e^{2x}\)</td><td>2 is a <b>double</b> root</td></tr>
+<tr><td>\(e^{-2x}\)</td><td>\(ae^{-2x}\)</td><td>\(-2\) is not a root</td></tr>
+<tr><td>\(\sin2x\)</td><td>\(a\cos2x+b\sin2x\)</td><td>\(\pm2i\) are not roots</td></tr>
+<tr><td>\(xe^{2x}\)</td><td>\(x^2(ax+b)e^{2x}=(ax^3+bx^2)e^{2x}\)</td><td>usual \((ax+b)e^{2x}\) overlaps twice</td></tr>
+<tr><td>\(e^{2x}\cos x\)</td><td>\(e^{2x}(a\cos x+b\sin x)\)</td><td>\(2\pm i\) are not roots</td></tr>
+</table>
+<p class="tip">SymPy confirms each trial gives a consistent system (e.g. (ii) \(y_P=\tfrac12x^2e^{2x}\), (v) \(y_P=\tfrac16x^3e^{2x}\)).</p></details>
+</div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Reduction of order</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — deriving the repeated-root solution: \(y''-4y'+4y=0\), \(y_1=e^{2x}\)</summary>
+<p>Already in standard form, \(p=-4\). With \(y=u\,e^{2x}\):
+$$ u''+u'\Big(p+\frac{2y_1'}{y_1}\Big)=u''+u'\big(-4+4\big)=u''=0. $$
+So \(u=A+Bx\), and \(y=(A+Bx)e^{2x}\). That's the repeated-root formula, derived rather than memorised.</p>
+</details>
+<details>
+<summary>Worked B — 2020 S2 style: \(x^2y''+2xy'-6y=0\), \(y=x^n\) with \(n\) a positive integer</summary>
+<p><b>Find \(n\).</b> \(\big(n(n-1)+2n-6\big)x^n=0\Rightarrow n^2+n-6=(n+3)(n-2)=0\). \(n\) is a positive integer, so \(n=2\): \(y_1=x^2\).</p>
+<p><b>Standard form:</b> \(y''+\dfrac2xy'-\dfrac6{x^2}y=0\), \(p=\dfrac2x\).</p>
+<p><b>ROO:</b> \(u''+u'\Big(\dfrac2x+\dfrac{2(2x)}{x^2}\Big)=u''+\dfrac6xu'=0\). With \(v=u'\): \(v=0\) is an equilibrium solution; otherwise \(\ln|v|=-6\ln x+C\Rightarrow v=Ax^{-6}\).
+\(u=-\tfrac{A}{5}x^{-5}+B\).</p>
+$$\boxed{y=u\,x^2=\tilde Ax^{-3}+Bx^2,\quad x\gt0}$$
+<p class="tip">Check with the other root: \(n=-3\) gives \(x^{-3}\) ✓. In the exam, still show the ROO steps. The question asks for the method.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Given \(y_1=e^{-x}\) solves \(y''+2y'+y=0\), use reduction of order to find a second solution.</p>
+<details><summary>Solution</summary>
+<p>\(p=2\), \(2y_1'/y_1=-2\): \(u''=0\Rightarrow u=A+Bx\). Second solution \(y_2=xe^{-x}\); general \(y=(A+Bx)e^{-x}\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Given \(y_1=x^2\) solves \(x^2y''-2y=0\) (\(x\gt0\)), find the general solution by reduction of order.</p>
+<details><summary>Solution</summary>
+<p>Standard form \(y''-\tfrac2{x^2}y=0\): \(p=0\). \(u''+u'\cdot\tfrac{4x}{x^2}=u''+\tfrac4xu'=0\). \(v=Ax^{-4}\Rightarrow u=-\tfrac A3x^{-3}+B\).
+\(y=\tilde Ax^{-1}+Bx^2\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> For some positive integer \(n\), \(y=x^n\) solves \(x^2y''-xy'-3y=0\).
+(a) <span class="marks">[3]</span> Find \(n\).
+(b) <span class="marks">[5]</span> Use reduction of order to find the general solution for \(x\gt0\).
+(c) <span class="marks">[2]</span> Find the solution with \(y(1)=0,\ y'(1)=4\).</p>
+<details><summary>Solution</summary>
+<p>(a) \(n(n-1)-n-3=n^2-2n-3=(n-3)(n+1)=0\Rightarrow n=3\) (positive integer).</p>
+<p>(b) Standard form \(y''-\tfrac1xy'-\tfrac3{x^2}y=0\), \(p=-\tfrac1x\). \(u''+u'\big(-\tfrac1x+\tfrac{6x^2}{x^3}\big)=u''+\tfrac5xu'=0\).
+\(v=0\) is an equilibrium solution; otherwise \(v=Ax^{-5}\), \(u=-\tfrac A4x^{-4}+B\). \(y=ux^3=\tilde Ax^{-1}+Bx^3\).</p>
+<p>(c) \(y(1)=\tilde A+B=0\), \(y'(1)=-\tilde A+3B=4\Rightarrow B=1,\ \tilde A=-1\): \(y=x^3-\dfrac1x\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 7 marks</span> <b>Q4.</b> Show that \(y_1=e^{x}\) solves \(xy''-(2x+1)y'+(x+1)y=0\) for \(x\gt0\), and find the general solution.</p>
+<details><summary>Solution</summary>
+<p>Check: \(xe^{x}-(2x+1)e^{x}+(x+1)e^{x}=0\) ✓.
+Standard form: divide by \(x\): \(p=-\dfrac{2x+1}{x}=-2-\dfrac1x\). \(p+\dfrac{2y_1'}{y_1}=-2-\dfrac1x+2=-\dfrac1x\).
+\(u''-\tfrac1xu'=0\Rightarrow v=Ax\Rightarrow u=\tfrac A2x^2+B\).
+\(y=\tilde Ax^2e^{x}+Be^{x}\).</p></details>
+</div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · Springs: free motion &amp; damping classification</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — undamped SHM from physical data</summary>
+<p><b>Q.</b> A 0.5 kg mass stretches a spring 0.098 m at equilibrium (\(g=9.8\)). It is pulled 0.05 m below equilibrium and given an <b>upward</b> velocity of 1 m s\(^{-1}\). There is no damping. Find \(x(t)\), the amplitude, and the period.</p>
+<p>\(k=\dfrac{0.5(9.8)}{0.098}=50\). \(0.5x''+50x=0\Rightarrow x''+100x=0\Rightarrow\lambda=\pm10i\): \(x=c_1\cos10t+c_2\sin10t\).
+\(x(0)=c_1=0.05\). \(x'(0)=10c_2=-1\Rightarrow c_2=-0.1\) (upward is negative).
+$$\boxed{x=0.05\cos10t-0.1\sin10t}$$
+Amplitude \(R=\sqrt{0.05^2+0.1^2}=\sqrt{0.0125}=\tfrac{\sqrt5}{20}\approx0.112\) m. Period \(2\pi/10=\pi/5\) s.</p>
+</details>
+<details>
+<summary>Worked B — classify, then solve the critical case</summary>
+<p><b>Q.</b> A mass of 1 kg on a spring with \(k=25\) N/m has damping constant \(\beta\). Classify the motion for \(\beta=6,\ 10,\ 26\). For the critical case, solve with \(x(0)=1\), \(x'(0)=0\).</p>
+<p>\(\Delta=\beta^2-4mk=\beta^2-100\):
+\(\beta=6\): \(-64\lt0\) <b>underdamped</b>; \(\beta=10\): \(0\) <b>critical</b>; \(\beta=26\): \(576\gt0\) <b>overdamped</b> (roots \(-1,-25\)).</p>
+<p>Critical: \(x''+10x'+25x=0\Rightarrow\lambda=-5\) (double). \(x=(c_1+c_2t)e^{-5t}\). \(c_1=1\); \(x'(0)=-5c_1+c_2=0\Rightarrow c_2=5\).
+$$\boxed{x=(1+5t)e^{-5t}}$$</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 2 marks</span> <b>Q1.</b> Classify \(2x''+12x'+18x=0\) as over-, under- or critically damped.</p>
+<details><summary>Solution</summary>
+<p>\(\Delta=12^2-4(2)(18)=144-144=0\): <b>critically damped</b> (double root \(-3\)).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> A 2 kg mass stretches a spring 0.392 m at equilibrium (\(g=9.8\)). With no damping, the mass is raised 0.1 m <b>above</b> equilibrium and released from rest. Find \(x(t)\) (down positive).</p>
+<details><summary>Solution</summary>
+<p>\(k=\dfrac{2(9.8)}{0.392}=50\). \(x''+25x=0\): \(x=c_1\cos5t+c_2\sin5t\). \(x(0)=-0.1\Rightarrow c_1=-0.1\); \(x'(0)=5c_2=0\).
+\(x=-0.1\cos5t\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> A 1 kg mass on a spring with \(k=5\) N/m moves in a medium with damping constant \(2\) N s/m. It starts at equilibrium with downward velocity 4 m/s.
+(a) <span class="marks">[1]</span> Classify the damping.
+(b) <span class="marks">[4]</span> Find \(x(t)\).
+(c) <span class="marks">[1]</span> When does the mass first return to equilibrium?
+(d) <span class="marks">[2]</span> Which damping constant would give critical damping?</p>
+<details><summary>Solution</summary>
+<p>(a) \(\Delta=4-20=-16\lt0\): underdamped.
+(b) \(x''+2x'+5x=0\Rightarrow\lambda=-1\pm2i\). \(x=e^{-t}(A\cos2t+B\sin2t)\). \(A=0\); \(x'(0)=-A+2B=4\Rightarrow B=2\). \(x=2e^{-t}\sin2t\).
+(c) \(\sin2t=0\Rightarrow t=\pi/2\) s (first \(t\gt0\)).
+(d) \(\beta=2\sqrt{mk}=2\sqrt5\) N s/m.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> The motion of a damped spring satisfies \(x''+5x'+4x=0\), \(x(0)=1\), \(x'(0)=2\).
+(a) <span class="marks">[4]</span> Solve.
+(b) <span class="marks">[2]</span> Show the mass never passes through equilibrium for \(t\gt0\).
+(c) <span class="marks">[2]</span> Find the maximum displacement.</p>
+<details><summary>Solution</summary>
+<p>(a) \((\lambda+1)(\lambda+4)=0\): \(x=c_1e^{-t}+c_2e^{-4t}\). \(c_1+c_2=1\), \(-c_1-4c_2=2\Rightarrow c_2=-1,\ c_1=2\). \(x=2e^{-t}-e^{-4t}\).
+(b) \(x=0\iff2e^{-t}=e^{-4t}\iff e^{3t}=\tfrac12\iff t=-\tfrac13\ln2\lt0\). So there's no zero for \(t\gt0\) (overdamped).
+(c) \(x'=-2e^{-t}+4e^{-4t}=0\iff e^{3t}=2\iff t=\tfrac13\ln2\). \(x_{\max}=2\cdot2^{-1/3}-2^{-4/3}=2^{-1/3}\big(2-\tfrac12\big)=\tfrac32\cdot2^{-1/3}\) m (\(x'(0)=2\gt0\) so it's a maximum).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 4 marks</span> <b>Q5.</b> For \(x''+\beta x'+9x=0\) (\(\beta\ge0\)), find the ranges of \(\beta\) giving each damping type. For \(\beta=2\), write the general solution and the time between successive zeros.</p>
+<details><summary>Solution</summary>
+<p>\(\Delta=\beta^2-36\): under \(0\le\beta\lt6\) (\(\beta=0\) is undamped SHM), critical \(\beta=6\), over \(\beta\gt6\).
+\(\beta=2\): \(\lambda=-1\pm\sqrt{-32}/2=-1\pm2\sqrt2\,i\). \(x=e^{-t}\big(A\cos2\sqrt2t+B\sin2\sqrt2t\big)\). Zeros are half a quasi-period apart: \(\pi/(2\sqrt2)\) s.</p></details>
+</div>
+
+<!-- ---------- 8.7 ---------- -->
+<h3>8.7 · Forced oscillations, steady state &amp; resonance</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — steady-state amplitude: \(x''+4x'+5x=8\cos t\)</summary>
+<p>\(\lambda=-2\pm i\): \(x_H=e^{-2t}(A\cos t+B\sin t)\) (transient). Trial \(C\cos t+D\sin t\):
+\(\cos:\ -C+4D+5C=4C+4D=8\); \(\sin:\ -D-4C+5D=4D-4C=0\Rightarrow C=D=1\).
+$$\boxed{x=e^{-2t}(A\cos t+B\sin t)+\cos t+\sin t}$$
+Steady state \(\cos t+\sin t=\sqrt2\cos(t-\pi/4)\): amplitude \(\sqrt2\), same frequency as the driving force.</p>
+</details>
+<details>
+<summary>Worked B — resonance IVP: \(x''+4x=4\sin2t,\ x(0)=0,\ x'(0)=0\)</summary>
+<p>\(x_H=A\cos2t+B\sin2t\). Resonance: \(x_P=t(C\cos2t+D\sin2t)\) → \(4D\cos2t-4C\sin2t=4\sin2t\Rightarrow C=-1,\ D=0\): \(x_P=-t\cos2t\).
+\(x=A\cos2t+B\sin2t-t\cos2t\). \(x(0)=A=0\). \(x'(0)=2B-1=0\Rightarrow B=\tfrac12\).
+$$\boxed{x=\tfrac12\sin2t-t\cos2t}$$
+Amplitude grows like \(t\): resonance.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q1.</b> Solve \(x''+x=3\cos2t\), \(x(0)=0\), \(x'(0)=0\). Is there resonance?</p>
+<details><summary>Solution</summary>
+<p>\(x_H=A\cos t+B\sin t\). Driving frequency \(2\ne1\), so there's no resonance. Trial \(C\cos2t\): \(-4C+C=-3C=3\Rightarrow C=-1\).
+\(x=A\cos t+B\sin t-\cos2t\). \(x(0)=A-1=0\Rightarrow A=1\); \(x'(0)=B=0\).
+\(x=\cos t-\cos2t\) (bounded).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> For \(x''+2x'+x=25\sin2t\), find the general solution and the steady-state amplitude.</p>
+<details><summary>Solution</summary>
+<p>\(x_H=(A+Bt)e^{-t}\). Trial \(C\cos2t+D\sin2t\): \(\cos:\ -4C+4D+C=-3C+4D=0\); \(\sin:\ -4D-4C+D=-3D-4C=25\).
+\(C=\tfrac43D\Rightarrow-3D-\tfrac{16}3D=25\Rightarrow D=-3,\ C=-4\).
+\(x=(A+Bt)e^{-t}-4\cos2t-3\sin2t\). Amplitude \(\sqrt{16+9}=5\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> For \(x''+16x=8\cos\omega t\), which \(\omega\) gives resonance? For that \(\omega\), find \(x_P\).</p>
+<details><summary>Solution</summary>
+<p>Natural frequency \(\sqrt{16}=4\), so \(\omega=4\). \(x_P=\tfrac{8}{2\cdot4}t\sin4t=t\sin4t\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q4.</b> A damped oscillator satisfies \(x''+4x'+3x=10\sin t\), \(x(0)=0\), \(x'(0)=0\).
+(a) <span class="marks">[6]</span> Solve.
+(b) <span class="marks">[2]</span> Identify the transient and steady-state parts.
+(c) <span class="marks">[2]</span> Give the steady-state amplitude.</p>
+<details><summary>Solution</summary>
+<p>(a) \((\lambda+1)(\lambda+3)=0\): \(x_H=c_1e^{-t}+c_2e^{-3t}\). Trial \(C\cos t+D\sin t\): \(\cos:\ 2C+4D=0\); \(\sin:\ 2D-4C=10\). \(C=-2D\Rightarrow10D=10\Rightarrow D=1,\ C=-2\).
+\(x=c_1e^{-t}+c_2e^{-3t}-2\cos t+\sin t\). \(x(0)=c_1+c_2-2=0\); \(x'(0)=-c_1-3c_2+1=0\). So \(c_2=-\tfrac12,\ c_1=\tfrac52\).
+$$\boxed{x=\tfrac52e^{-t}-\tfrac12e^{-3t}-2\cos t+\sin t}$$</p>
+<p>(b) Transient \(\tfrac52e^{-t}-\tfrac12e^{-3t}\to0\); steady state \(-2\cos t+\sin t\).
+(c) \(\sqrt{4+1}=\sqrt5\).</p></details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every ODE, write the same six lines: (1) characteristic equation and roots, (2) \(y_H\) in the right case form, (3) trial for \(y_P\) with an explicit overlap check, (4) matched coefficients, (5) \(y=y_H+y_P\) with "\(A,B\in\mathbb R\)", (6) ICs applied to the full solution, plus a 10-second substitution check. If you can produce all six cold for the 2020 S1 Q7 and 2020 S2 Q3 types, the ODE question is a guaranteed 10.</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 2 Second-order Linear ODEs · built from the course summary (Recipes #3–#5, SHM &amp; damped oscillations, pp 2–4), Poster B, Tutorial 3 (+ solutions), and every past paper 2020–2025 (second-order questions: 2020 S1 Q7, 2020 S2 Q3 with marking scheme). Every ODE on this page (67 equations) was checked with SymPy (<code>dsolve</code> + <code>checkodesol</code>, ICs substituted); script <code>verify/ch02.py</code> passes.
+<br><a href="../index.html">⇄ Switch subject</a> · <a href="index.html">🏠 Hub</a> · <a href="ch01-first-order-odes.html">← Ch 1</a> · <a href="ch03-surfaces-contours.html">Ch 3 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

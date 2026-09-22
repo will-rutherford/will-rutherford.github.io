@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 6 Optimisation</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 6 — Optimisation</h1>
+  <p>Critical points, the Hessian test, global extrema on closed regions, and Lagrange multipliers — the two most reliable 12-mark questions on the MATH1052 paper.</p>
+  <div>
+    <span class="badge gold">⭐ Highest-yield chapter · ~24 marks every paper</span>
+    <span class="badge">Summary p 7 · Poster B · Tutorial 10</span>
+    <span class="badge">Formula sheet gives the Hessian determinant \(D\) and \(\nabla f=\lambda\nabla g\) — the classification rules you must know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch05-gradient-chain-rule.html">← Ch 5 Gradient &amp; chain rule</a>
+  <a href="ch07-curves-vector-fields.html">Ch 7 Curves &amp; vector fields →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">Rusty on single-variable max/min (set \(f'(x)=0\), use the sign of \(f''\), check the endpoints of a closed interval) or on factorising cubics and solving \(e^{u}=\dots\)? Read <a href="foundations.html">the Ground Floor</a> first. Everything in this chapter is that same idea, done in 2 or 3 variables at once. You also need \(\nabla f\) from <a href="ch05-gradient-chain-rule.html">Chapter 5</a>.</div>
+
+<div class="card">
+<h3>What we are hunting: local max, local min, saddle</h3>
+<p>Let \(z=f(x,y)\) be a surface. A point \((a,b)\) is a</p>
+<ul>
+<li><b>local maximum</b> if \(f(a,b)\ge f(x,y)\) for all \((x,y)\) near \((a,b)\) — a hilltop;</li>
+<li><b>local minimum</b> if \(f(a,b)\le f(x,y)\) for all \((x,y)\) near \((a,b)\) — a valley floor;</li>
+<li><b>saddle point</b> if, however close you look, there are points where \(f\) is <i>higher</i> and points where it is <i>lower</i> than \(f(a,b)\) (Summary p 7: "analogous to a point of inflection in higher dimensions") — a mountain pass: up along one direction, down along another.</li>
+</ul>
+<p>A <b>critical point</b> is a point where either \(\nabla f(a,b)=\mathbf 0\), i.e. \(f_x=f_y=0\), or where \(\nabla f\) is undefined (Summary p 7; Poster B: "like a sharp point, e.g. top of a pyramid"). Every local max/min of a differentiable function is a critical point — but not every critical point is a max or min (saddles!).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Why \(\nabla f=\mathbf 0\)? The tangent plane goes flat</h3>
+<p>At the top of a smooth hill, if you step in <i>any</i> direction \(\mathbf u\), the height is momentarily not changing: the directional derivative \(D_{\mathbf u}f=\nabla f\cdot\mathbf u\) is zero for every \(\mathbf u\). The only vector with zero dot product against every direction is \(\mathbf 0\). So \(\nabla f=\mathbf 0\).</p>
+<p>Equivalently, the tangent plane \(z=f(a,b)+f_x(x-a)+f_y(y-b)\) becomes \(z=f(a,b)\): <b>horizontal</b>. Critical points are exactly where the surface has a horizontal tangent plane — hilltop, valley floor, or the flat middle of a saddle.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Why the Hessian decides: it is just the quadratic approximation</h3>
+<p>At a critical point the linear terms vanish, so the quadratic approximation (Poster B, <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a>) with \(h=x-a,\ k=y-b\) is</p>
+$$ f(a+h,b+k)\approx f(a,b)+\tfrac12\big(A h^2+2Bhk+Ck^2\big),\qquad A=f_{xx},\ B=f_{xy},\ C=f_{yy}\ \text{at }(a,b).$$
+<p>Whether \(f\) goes up or down near the point is the sign of the bracket. Complete the square (when \(A\ne0\)):</p>
+$$ Ah^2+2Bhk+Ck^2 = A\Big(h+\tfrac{B}{A}k\Big)^2+\frac{AC-B^2}{A}\,k^2 .$$
+<p>The number \(AC-B^2\) is exactly the Hessian determinant</p>
+$$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{xy}^2 .$$
+<ul>
+<li>\(D\gt0\): both terms have the sign of \(A\). If \(A\gt0\) the bracket is always positive → <b>local min</b>. If \(A\lt0\) always negative → <b>local max</b>.</li>
+<li>\(D\lt0\): the two terms have opposite signs, so the bracket is positive in some directions and negative in others → <b>saddle</b>.</li>
+<li>\(D=0\): the quadratic part is degenerate (flat in some direction), so the cubic/quartic terms decide → <b>test inconclusive</b>. You must investigate by hand.</li>
+</ul>
+<p>That is the whole second-derivative test. You don't need to reproduce this derivation — but knowing it means you will never mix up the table.</p>
+</div>
+
+<div class="card">
+<h3>The classification table (Summary p 7 / Poster B)</h3>
+<table>
+<tr><th>\(D(a,b)\)</th><th>\(f_{xx}(a,b)\)</th><th>Conclusion</th><th>Picture</th></tr>
+<tr><td>\(\gt0\)</td><td>\(\gt0\)</td><td><b>local minimum</b></td><td>bowl ∪</td></tr>
+<tr><td>\(\gt0\)</td><td>\(\lt0\)</td><td><b>local maximum</b></td><td>dome ∩</td></tr>
+<tr><td>\(\lt0\)</td><td>(irrelevant)</td><td><b>saddle point</b></td><td>pass / Pringle</td></tr>
+<tr><td>\(=0\)</td><td>—</td><td><b>inconclusive</b> — investigate</td><td>?</td></tr>
+</table>
+<p class="tip">When \(D\gt0\), \(f_{xx}\) and \(f_{yy}\) automatically have the same sign (because \(f_{xx}f_{yy}\gt f_{xy}^2\ge0\)), so you may use either one. \(D\gt0\) with \(f_{xx}=0\) is impossible.</p>
+</div>
+
+<div class="trap"><b>The formula sheet gives \(D\) — not the rules.</b> The printed sheet shows the determinant \(\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}\) but <i>not</i> which sign means what. Learn the four rows above cold. Also: \(D=f_{xx}f_{yy}-f_{xy}^2\) — the mixed partial is <b>squared</b> and <b>subtracted</b>.</div>
+
+<div class="card">
+<h3>🧭 Solving \(\nabla f=\mathbf 0\): the marks are lost in the algebra</h3>
+<p>Differentiating is easy; the hard part is solving two (usually non-linear) simultaneous equations and finding <b>all</b> solutions. Examiners award ~half the marks for the critical points alone (2023 S1 Q5: 5 of 13; 2020 S2 Q6: 6 of 10). The disciplined approach:</p>
+<div class="method"><ol>
+<li><b>Factorise each equation fully</b> and write it as a product \(=0\): e.g. \(f_x=2xy=0\), \(f_y=x^2+2y-4=0\).</li>
+<li><b>Branch on the factors</b> of the simplest equation: "\(2xy=0\Rightarrow x=0\) <i>or</i> \(y=0\)". Write each case as a separate line.</li>
+<li><b>Feed each case into the other equation</b> and solve: \(x=0\Rightarrow 2y-4=0\Rightarrow y=2\); \(y=0\Rightarrow x^2=4\Rightarrow x=\pm2\).</li>
+<li><b>List the points</b> as coordinate pairs: \((0,2),(2,0),(-2,0)\).</li>
+<li><b>Sanity-check</b> each pair in <i>both</i> original equations (10 seconds, saves the question).</li>
+</ol></div>
+<p><b>Golden rules.</b> Never divide by an expression that could be zero — split it off as a case instead. \(e^{(\cdot)}\) is never zero, so you <i>may</i> divide by it (2025 S2 Q6). If both equations are linear, it's just simultaneous equations. If they are symmetric (swap \(x\leftrightarrow y\) and the system is unchanged), subtracting them often gives \((x-y)(\dots)=0\).</p>
+</div>
+
+<div class="card">
+<h3>When \(D=0\): settle it by hand</h3>
+<p>The test is silent, but the question is not. Standard moves (2022 S2 Q6(b) gave 3 of 6 marks for exactly this):</p>
+<ul>
+<li><b>Cross-sections / paths.</b> Restrict \(f\) to a line or curve through the point. If \(f-f(a,b)\) takes <b>both signs</b> arbitrarily close to the point → saddle (neither max nor min). E.g. \(f=2x^3+2y^3-3x^2y^2\) at \((0,0)\): along \(y=0\), \(f=2x^3\) is \(\gt0\) for \(x\gt0\) and \(\lt0\) for \(x\lt0\) → saddle.</li>
+<li><b>Sign / square argument.</b> If you can show \(f(x,y)\ge f(a,b)\) for all nearby points (e.g. \(f=x^4+y^2\ge0=f(0,0)\)) → local (even global) min.</li>
+<li><b>Completing the square</b> to rewrite \(f\) as a sum of squares.</li>
+</ul>
+<p class="trap">"\(D=0\) so it is a saddle" and "\(D=0\) so there is no max or min" are both <b>wrong</b> statements. \(D=0\) only means <i>this test</i> can't decide.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Global (absolute) extrema: local is not enough</h3>
+<p>A <b>global maximum</b> is the largest value of \(f\) on the <i>whole</i> domain; local max only compares with neighbours. Two very different situations:</p>
+<p><b>(1) Closed and bounded region \(S\)</b> (a square, triangle, disk — includes its boundary, finite size). The <b>Extreme Value Theorem (EVT)</b>: a continuous function on a closed and bounded set <b>attains</b> a global max and a global min. They can only occur at</p>
+<ul>
+<li>critical points in the <b>interior</b> of \(S\), or</li>
+<li>points on the <b>boundary</b> of \(S\) (including corners).</li>
+</ul>
+<p>So: make a candidate list, evaluate \(f\) at every candidate, and pick the largest and smallest. No Hessian needed (Summary p 7: "compare the values of \(f\) at the critical points … and the extreme values of \(f\) on the boundary").</p>
+<p><b>(2) Unbounded domain</b> (all of \(\mathbb R^2\)). EVT does not apply; a global max may <b>not exist</b>. To prove "no global max", exhibit a path along which \(f\to+\infty\): 2023 S1 Q5(c) used \(f(x,0)=3x-x^3-1\to+\infty\) as \(x\to-\infty\). To prove one does exist, usually rewrite \(f\) cleverly (2024 S2 Q1(b): the denominator \(x^2+2(y-1)^2+1\ge1\), so \(T\le100\)).</p>
+</div>
+
+<div class="card">
+<h3>Boundary work: turning a 2-D problem into 1-D problems</h3>
+<p>On each piece of the boundary, <b>parametrise</b> and you get a single-variable function on a closed interval — the Ground Floor routine (derivative \(=0\) + endpoints):</p>
+<table>
+<tr><th>Boundary piece</th><th>Substitute</th><th>Then</th></tr>
+<tr><td>Vertical edge \(x=c,\ y\in[p,q]\)</td><td>\(g(y)=f(c,y)\)</td><td>solve \(g'(y)=0\) in \((p,q)\); evaluate at \(y=p,q\) too</td></tr>
+<tr><td>Horizontal edge \(y=c,\ x\in[p,q]\)</td><td>\(g(x)=f(x,c)\)</td><td>same</td></tr>
+<tr><td>Slanted edge \(y=mx+c\)</td><td>\(g(x)=f(x,mx+c)\)</td><td>same, \(x\) over the edge's range</td></tr>
+<tr><td>Circle \(x^2+y^2=R^2\)</td><td>\(x=R\cos t,\ y=R\sin t\), or eliminate \(x^2=R^2-y^2\), or Lagrange</td><td>\(t\in[0,2\pi]\) / \(y\in[-R,R]\)</td></tr>
+</table>
+<p class="tip">Corners are the endpoints of the edge intervals — they appear automatically if you always evaluate at the ends of each interval.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Lagrange multipliers: where the contour just touches the constraint</h3>
+<p>Now the problem is: maximise/minimise \(f(x,y)\) <b>subject to</b> \(g(x,y)=0\) (you may only walk along the curve \(g=0\)). Picture the contours \(f=c\) and the constraint curve. As you walk along the curve you cross contours — \(f\) is changing. At a constrained max or min you stop crossing: the curve is <b>tangent</b> to a contour of \(f\) (Summary p 7: "the contour \(g=0\) touches one of the contours of \(f\), so they share a common tangent").</p>
+<p>Gradients are perpendicular to contours (Chapter 5). Two curves tangent at a point have parallel normals, so</p>
+$$ \boxed{\ \nabla f=\lambda\,\nabla g,\qquad g=0\ }$$
+<p>for some number \(\lambda\) (the <b>Lagrange multiplier</b>). In 2-D that is 3 equations in \(x,y,\lambda\); in 3-D, 4 equations in \(x,y,z,\lambda\). It works identically for a surface \(g(x,y,z)=0\).</p>
+<p><b>Which candidate is the max?</b> Lagrange only produces candidates. Evaluate \(f\) at every one: if the constraint is closed and bounded (circle, ellipse, sphere) EVT guarantees the largest is the max and the smallest is the min. If the constraint is unbounded (a line, a plane), compare with another point on the constraint to justify (2023 S2 Q2 official solution: \(f(7,0)=70\gt6=f(3,2)\), "so at \((3,2)\) there is a minimum").</p>
+</div>
+
+<div class="card">
+<h3>The elimination-of-\(\lambda\) technique</h3>
+<p>\(\lambda\) is a helper — you almost never need its value. Kill it early:</p>
+<div class="method"><ol>
+<li>Write the component equations and number them ①②③(④).</li>
+<li><b>Split off the zero cases first.</b> If an equation looks like \(yz^2=\lambda\), ask: what if \(z=0\)? what if \(\lambda=0\)? Handle those cases separately (usually they give \(f=0\) or contradict the constraint).</li>
+<li>In the remaining case (all relevant quantities \(\ne0\)), <b>divide</b> ①÷② or <b>cross-multiply</b> to get a relation like \(y=x\), \(x^2=y^2\), \(z=2x\).</li>
+<li>Substitute the relations into the <b>constraint</b> to get actual numbers.</li>
+<li>Evaluate \(f\) at every candidate; state the max and min <b>with the points</b>.</li>
+</ol></div>
+<p class="tip">Alternative to dividing: rearrange both to "\(\lambda=\dots\)" and equate; or subtract to get a product \(=0\), e.g. \(\lambda(x+2y)=0\) (2023 S1 Q6). A product = 0 gives you the cases for free.</p>
+</div>
+
+<div class="card">
+<h3>What does \(\lambda\) mean? (Tutorial 10 Q8 — background, not exam-core)</h3>
+<p>If the constraint is \(g(x,y)=c\) and \(M(c)\) is the optimal value, then \(\dfrac{dM}{dc}=\lambda\). So \(\lambda\) is the "shadow price": how much the best value improves per unit increase of the budget \(c\). Nice to know; the exam has never asked for it.</p>
+</div>
+
+<div class="card">
+<h3>Which method? A one-glance map of Chapter 6</h3>
+<table>
+<tr><th>The question says…</th><th>Method</th></tr>
+<tr><td>"find and classify (all) the critical points of \(f\)"</td><td>\(\nabla f=\mathbf0\) → Hessian \(D\) at each point → table</td></tr>
+<tr><td>"global/absolute max and min of \(f\) on [closed region]"</td><td>interior critical points + each boundary piece + corners → compare values; quote EVT</td></tr>
+<tr><td>"does \(f\) have a global max?" on \(\mathbb R^2\)</td><td>find a path with \(f\to\pm\infty\) (no), or a bound + attained value (yes)</td></tr>
+<tr><td>"use the method of Lagrange multipliers", "subject to", "on the circle/sphere/plane/curve"</td><td>\(\nabla f=\lambda\nabla g\), \(g=0\) → cases → compare values</td></tr>
+<tr><td>word problem: box, cylinder, cone, distance, fence</td><td>write objective \(f\) and constraint \(g\) from the geometry → Lagrange</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">The sheet prints \(D\) and \(\nabla f=\lambda\nabla g\). Everything else below — the classification signs, EVT, the boundary routine, the case analysis — is yours to bring.</p>
+
+<div class="card">
+<h3>1 · Critical points <span style="color:var(--muted);font-weight:400">(Summary p 7)</span></h3>
+$$ f_x(a,b)=0\quad\text{and}\quad f_y(a,b)=0 \qquad(\text{or }\nabla f\text{ undefined}).$$
+<div class="when">"Find (all) the critical points", "determine the stationary points", or as step one of any classification / global-extremum question.</div>
+<p><b>Mini-example.</b> \(f=x^2+4y^2-2x+8y+1\): \(f_x=2x-2=0,\ f_y=8y+8=0\Rightarrow(1,-1)\).</p>
+</div>
+
+<div class="card">
+<h3>2 · Second-derivative (Hessian) test <span style="color:var(--muted);font-weight:400">(sheet gives \(D\))</span></h3>
+$$ D=f_{xx}f_{yy}-f_{xy}^2\ \text{ at the point:}\quad D\gt0,f_{xx}\gt0\Rightarrow\text{min};\ \ D\gt0,f_{xx}\lt0\Rightarrow\text{max};\ \ D\lt0\Rightarrow\text{saddle};\ \ D=0\Rightarrow ?$$
+<div class="when">"Classify", "determine the nature of", "local max, local min or saddle". Compute the three second partials <b>as functions first</b>, then substitute each point.</div>
+<p><b>Mini-example.</b> Same \(f\): \(f_{xx}=2,f_{yy}=8,f_{xy}=0\Rightarrow D=16\gt0,\ f_{xx}\gt0\) → local min, \(f(1,-1)=-4\).</p>
+</div>
+
+<div class="card">
+<h3>3 · The \(D=0\) fallback</h3>
+<p>Cross-sections through the point (\(y=0\), \(x=0\), \(y=x\), \(y=kx^2\)…) or a sign/square argument.</p>
+<div class="when">Only when the Hessian test gives \(D=0\) at a point you must classify.</div>
+<p><b>Mini-example.</b> \(f=x^2-y^4\) at \((0,0)\): \(D=2\cdot0-0=0\). Along \(y=0\): \(x^2\gt0\); along \(x=0\): \(-y^4\lt0\). Both signs → <b>saddle</b>.</p>
+</div>
+
+<div class="card">
+<h3>4 · Global extrema on a closed bounded region <span style="color:var(--muted);font-weight:400">(EVT)</span></h3>
+<div class="method"><ol>
+<li>State: \(f\) is continuous and \(S\) is closed and bounded, so by the <b>Extreme Value Theorem</b> global max/min exist.</li>
+<li>Interior critical points — <b>discard any outside \(S\) or on its boundary</b>.</li>
+<li>Each boundary piece → 1-variable function → stationary points + endpoints.</li>
+<li>Table of all candidates and values → largest = global max, smallest = global min.</li>
+</ol></div>
+<div class="when">"Determine the global/absolute maximum and minimum of \(f\) on \(S\)" where \(S\) is a square, rectangle, triangle or disk; typically split (a) boundary (b) interior (c) global (2024 S1 Q5, 2025 S1 Q5).</div>
+</div>
+
+<div class="card">
+<h3>5 · Existence of a global max/min on \(\mathbb R^2\)</h3>
+<p><b>No:</b> find a line where \(f\to\pm\infty\), e.g. \(f(x,0)=x^3\to\pm\infty\). <b>Yes:</b> rewrite so a bound is obvious and attained, e.g. \(x^2+2(y-1)^2+1\ge1\) with equality at \((0,1)\).</p>
+<div class="when">"Does \(f\) attain a global/absolute maximum? Explain." (2023 S1 Q5c, 2023 S2 Q1b), "Determine the maximum temperature on the plate" (2024 S2 Q1b).</div>
+</div>
+
+<div class="card">
+<h3>6 · Lagrange multipliers — two variables <span style="color:var(--muted);font-weight:400">(sheet: \(\nabla f=\lambda\nabla g\))</span></h3>
+$$ \begin{cases} f_x=\lambda g_x\\ f_y=\lambda g_y\\ g(x,y)=0\end{cases}$$
+<div class="when">"Use the method of Lagrange multipliers", "subject to the constraint", "on the circle / ellipse / curve", "Epsilon walks along…".</div>
+<p><b>Mini-example.</b> \(f=x+2y\) on \(x^2+y^2=5\): \(1=2\lambda x,\ 2=2\lambda y\Rightarrow y=2x\Rightarrow5x^2=5\Rightarrow(\pm1,\pm2)\). \(f(1,2)=5\) max, \(f(-1,-2)=-5\) min.</p>
+</div>
+
+<div class="card">
+<h3>7 · Lagrange multipliers — three variables</h3>
+$$ \begin{cases} f_x=\lambda g_x\\ f_y=\lambda g_y\\ f_z=\lambda g_z\\ g(x,y,z)=0\end{cases}$$
+<div class="when">Constraint is a sphere \(x^2+y^2+z^2=R^2\) or a plane \(ax+by+cz=d\) (2021 S2 Q6, 2024 S2 Q5, 2025 S1 Q6, 2025 S2 Q5).</div>
+<p><b>Shortcut to check your answer</b> (linear \(f\) on a sphere): \(\max\big(\mathbf a\cdot\mathbf x\big)\) on \(\|\mathbf x\|=R\) is \(R\|\mathbf a\|\), at \(\mathbf x=R\,\mathbf a/\|\mathbf a\|\). E.g. \(x-2y+2z\) on the unit sphere: max \(=\sqrt{1+4+4}=3\). Use it to check, but show the Lagrange working for the marks.</p>
+</div>
+
+<div class="card">
+<h3>8 · Applied optimisation (word problems)</h3>
+<div class="method"><ol>
+<li>Draw it; name the variables (with units).</li>
+<li><b>Objective</b> \(f\) = the thing to max/min (volume, area, cost, distance²).</li>
+<li><b>Constraint</b> \(g=0\) = the fixed quantity (surface area, volume, "lies on the sphere").</li>
+<li>Lagrange; use positivity (\(r,h\gt0\)) to discard cases; answer the question in words with units.</li>
+</ol></div>
+<div class="when">Boxes, cylinders (2024 S1 Q6), cones inscribed in spheres (2022 S2 Q7), distance from a point to a plane/curve (T10 Q5). Minimise distance² instead of distance — same minimiser, no square roots.</div>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Each is written the way a marker wants to read it: derivatives, the factorised system, every case, a table of results, and a sentence of justification per classification. Every value is verified with SymPy. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Find and classify: \(f(x,y)=x^3-3x+y^2-4y\) (warm-up, separable)</summary>
+<p><b>Q.</b> Find and classify all critical points of \(f(x,y)=x^3-3x+y^2-4y\). <b>[8 marks]</b></p>
+<p><b>Critical points.</b> \(f_x=3x^2-3,\quad f_y=2y-4.\)</p>
+$$ f_x=0\iff x^2=1\iff x=\pm1,\qquad f_y=0\iff y=2. $$
+<p>Critical points: \((1,2)\) and \((-1,2)\).</p>
+<p><b>Second partials.</b> \(f_{xx}=6x,\ f_{yy}=2,\ f_{xy}=0\), so \(D=12x\).</p>
+<table>
+<tr><th>Point</th><th>\(f_{xx}\)</th><th>\(D=12x\)</th><th>Nature</th><th>\(f\)</th></tr>
+<tr><td>\((1,2)\)</td><td>\(6\gt0\)</td><td>\(12\gt0\)</td><td>local min</td><td>\(-6\)</td></tr>
+<tr><td>\((-1,2)\)</td><td>\(-6\)</td><td>\(-12\lt0\)</td><td>saddle</td><td>\(-2\)</td></tr>
+</table>
+<p><b>Justification sentences:</b> "At \((1,2)\), \(D=12\gt0\) and \(f_{xx}=6\gt0\), so \((1,2)\) is a local minimum. At \((-1,2)\), \(D=-12\lt0\), so \((-1,2)\) is a saddle point."</p>
+</details>
+
+<details>
+<summary>Example 2 — Case analysis done properly: \(f(x,y)=x^2y+y^2-4y\)</summary>
+<p><b>Q.</b> Find and classify all critical points of \(f(x,y)=x^2y+y^2-4y\). <b>[10 marks]</b></p>
+$$ f_x=2xy,\qquad f_y=x^2+2y-4. $$
+<p>\(f_x=0\iff 2xy=0\iff x=0\ \text{or}\ y=0.\)</p>
+<ul>
+<li><b>Case \(x=0\):</b> \(f_y=0\Rightarrow 2y-4=0\Rightarrow y=2\). Point \((0,2)\).</li>
+<li><b>Case \(y=0\):</b> \(f_y=0\Rightarrow x^2-4=0\Rightarrow x=\pm2\). Points \((2,0),(-2,0)\).</li>
+</ul>
+<p>Check: at \((2,0)\): \(f_x=0\), \(f_y=4+0-4=0\) ✓.</p>
+<p>\(f_{xx}=2y,\ f_{yy}=2,\ f_{xy}=2x\Rightarrow D=4y-4x^2.\)</p>
+<table>
+<tr><th>Point</th><th>\(f_{xx}\)</th><th>\(D\)</th><th>Nature</th><th>\(f\)</th></tr>
+<tr><td>\((0,2)\)</td><td>\(4\)</td><td>\(8\gt0\)</td><td>local min</td><td>\(-4\)</td></tr>
+<tr><td>\((\pm2,0)\)</td><td>\(0\)</td><td>\(-16\lt0\)</td><td>saddle</td><td>\(0\)</td></tr>
+</table>
+<p class="trap">Dividing \(2xy=0\) by \(x\) to get "\(y=0\)" throws away \((0,2)\) — the only local min. Always branch.</p>
+</details>
+
+<details>
+<summary>Example 3 — Exponential factor (2025 S2 style): \(f(x,y)=(x^2+y^2)e^{-x}\)</summary>
+<p><b>Q.</b> Determine and classify all critical points of \(f(x,y)=(x^2+y^2)e^{-x}\). <b>[12 marks]</b></p>
+<p>Product rule in \(x\): \(f_x=2xe^{-x}-(x^2+y^2)e^{-x}=e^{-x}(2x-x^2-y^2)\). And \(f_y=2ye^{-x}\).</p>
+<p>Since \(e^{-x}\ne0\) for all \(x\): \(f_y=0\Rightarrow y=0\). Then \(f_x=0\Rightarrow 2x-x^2=0\Rightarrow x(2-x)=0\Rightarrow x=0\) or \(x=2\).</p>
+<p>Critical points: \((0,0),\ (2,0)\).</p>
+<p>Second partials (differentiate \(f_x=e^{-x}(2x-x^2-y^2)\) again by the product rule):</p>
+$$ f_{xx}=e^{-x}\big(x^2+y^2-4x+2\big),\qquad f_{yy}=2e^{-x},\qquad f_{xy}=-2ye^{-x}. $$
+<table>
+<tr><th>Point</th><th>\(f_{xx}\)</th><th>\(f_{yy}\)</th><th>\(f_{xy}\)</th><th>\(D\)</th><th>Nature</th></tr>
+<tr><td>\((0,0)\)</td><td>\(2\)</td><td>\(2\)</td><td>\(0\)</td><td>\(4\gt0\)</td><td>local min, \(f=0\)</td></tr>
+<tr><td>\((2,0)\)</td><td>\(-2e^{-2}\)</td><td>\(2e^{-2}\)</td><td>\(0\)</td><td>\(-4e^{-4}\lt0\)</td><td>saddle, \(f=4e^{-2}\)</td></tr>
+</table>
+<p class="tip">Leave \(e^{-2}\) exact — you only need its <b>sign</b> (positive). No calculator needed, none allowed.</p>
+</details>
+
+<details>
+<summary>Example 4 — When \(D=0\): \(x^4+y^2\) versus \(x^3+y^2\)</summary>
+<p><b>Q.</b> Show that \((0,0)\) is the only critical point of each function, that the second-derivative test fails there, and classify it anyway. (a) \(f=x^4+y^2\) (b) \(g=x^3+y^2\). <b>[8 marks]</b></p>
+<p><b>(a)</b> \(f_x=4x^3,\ f_y=2y\Rightarrow(0,0)\) only. \(f_{xx}=12x^2=0,\ f_{yy}=2,\ f_{xy}=0\Rightarrow D(0,0)=0\): inconclusive. But \(f(x,y)=x^4+y^2\ge0=f(0,0)\) for all \((x,y)\), so \((0,0)\) is a <b>local (in fact global) minimum</b>.</p>
+<p><b>(b)</b> \(g_x=3x^2,\ g_y=2y\Rightarrow(0,0)\) only. \(g_{xx}=6x=0\Rightarrow D(0,0)=0\): inconclusive. Along the \(x\)-axis \(g(x,0)=x^3\), which is \(\gt0\) for \(x\gt0\) and \(\lt0\) for \(x\lt0\), arbitrarily close to the origin, while \(g(0,0)=0\). So \((0,0)\) is <b>neither a max nor a min — a saddle point</b>.</p>
+<p class="tip">Same \(D=0\), opposite answers. That is exactly why "\(D=0\)" is never a final classification.</p>
+</details>
+
+<details>
+<summary>Example 5 — Global extrema on a disk: \(f=x^2+y^2-2x\) on \(x^2+y^2\le4\)</summary>
+<p><b>Q.</b> Find the global maximum and minimum of \(f(x,y)=x^2+y^2-2x\) on \(S=\{x^2+y^2\le4\}\). <b>[10 marks]</b></p>
+<p>\(f\) is a polynomial (continuous) and \(S\) is closed and bounded, so by the <b>Extreme Value Theorem</b> \(f\) attains a global max and min on \(S\).</p>
+<p><b>Interior.</b> \(f_x=2x-2,\ f_y=2y\Rightarrow(1,0)\); \(1^2+0^2=1\lt4\) so it is inside. \(f(1,0)=-1\).</p>
+<p><b>Boundary</b> \(x^2+y^2=4\): substitute \(x^2+y^2=4\) directly: \(f=4-2x\) with \(x\in[-2,2]\). Linear in \(x\): max \(8\) at \(x=-2\) (point \((-2,0)\)), min \(0\) at \(x=2\) (point \((2,0)\)).</p>
+<table>
+<tr><th>Candidate</th><th>\((1,0)\)</th><th>\((-2,0)\)</th><th>\((2,0)\)</th></tr>
+<tr><td>\(f\)</td><td>\(-1\)</td><td>\(8\)</td><td>\(0\)</td></tr>
+</table>
+<p><b>Global max \(8\) at \((-2,0)\); global min \(-1\) at \((1,0)\).</b></p>
+</details>
+
+<details>
+<summary>Example 6 — Global extrema on a triangle: \(f=x^2-xy+y^2-3x\), \(x,y\ge0,\ x+y\le4\)</summary>
+<p><b>Q.</b> Let \(S\) be the closed triangle with vertices \((0,0),(4,0),(0,4)\). (a) Find the max and min of \(f\) on the boundary of \(S\). (b) Find the critical point(s) of \(f\) in the interior. (c) State the global max and min on \(S\). <b>[13 marks]</b></p>
+<p><b>(a) Boundary — three edges.</b></p>
+<ul>
+<li><b>\(y=0,\ 0\le x\le4\):</b> \(g(x)=x^2-3x\), \(g'(x)=2x-3=0\Rightarrow x=\tfrac32\): \(g=-\tfrac94\). Ends: \(g(0)=0,\ g(4)=4\).</li>
+<li><b>\(x=0,\ 0\le y\le4\):</b> \(g(y)=y^2\), increasing on \([0,4]\): min \(0\) at \((0,0)\), max \(16\) at \((0,4)\).</li>
+<li><b>\(y=4-x,\ 0\le x\le4\):</b> \(g(x)=x^2-x(4-x)+(4-x)^2-3x=3x^2-15x+16\). \(g'(x)=6x-15=0\Rightarrow x=\tfrac52\): \(g=-\tfrac{11}4\) at \((\tfrac52,\tfrac32)\). Ends: \(16\) at \((0,4)\), \(4\) at \((4,0)\).</li>
+</ul>
+<p>On the boundary: <b>max \(16\) at \((0,4)\); min \(-\tfrac{11}{4}\) at \((\tfrac52,\tfrac32)\)</b>.</p>
+<p><b>(b) Interior.</b> \(f_x=2x-y-3=0,\ f_y=-x+2y=0\Rightarrow x=2y\Rightarrow3y=3\Rightarrow(2,1)\). Inside? \(2\gt0,1\gt0,2+1=3\lt4\) ✓. \(f(2,1)=4-2+1-6=-3\). (\(D=4-1=3\gt0,\ f_{xx}=2\gt0\): a local min — not needed for (c), but free.)</p>
+<p><b>(c)</b> By the EVT (continuous \(f\), closed bounded \(S\)), compare: \(16,\ -\tfrac{11}4,\ -\tfrac94,\ 4,\ 0,\ -3\). <b>Global max \(16\) at \((0,4)\); global min \(-3\) at \((2,1)\).</b></p>
+</details>
+
+<details>
+<summary>Example 7 — Lagrange in 2-D: \(f=xy\) on the ellipse \(x^2+4y^2=8\)</summary>
+<p><b>Q.</b> Use Lagrange multipliers to find the max and min of \(f(x,y)=xy\) subject to \(x^2+4y^2=8\). <b>[12 marks]</b></p>
+<p>Let \(g(x,y)=x^2+4y^2-8\). \(\nabla f=(y,x),\ \nabla g=(2x,8y)\). Solve \(\nabla f=\lambda\nabla g,\ g=0\):</p>
+$$ y=2\lambda x\ \ ①,\qquad x=8\lambda y\ \ ②,\qquad x^2+4y^2=8\ \ ③. $$
+<p><b>Zero case.</b> If \(x=0\), ① gives \(y=0\), but \((0,0)\) does not satisfy ③. So \(x\ne0\), and similarly \(y\ne0\).</p>
+<p><b>Main case.</b> Multiply ① and ②: \(xy=16\lambda^2xy\Rightarrow16\lambda^2=1\) (as \(xy\ne0\)) \(\Rightarrow\lambda=\pm\tfrac14\).</p>
+<ul>
+<li>\(\lambda=\tfrac14\): \(y=\tfrac{x}{2}\). ③: \(x^2+x^2=8\Rightarrow x=\pm2\). Points \((2,1),(-2,-1)\), \(f=2\).</li>
+<li>\(\lambda=-\tfrac14\): \(y=-\tfrac x2\). Points \((2,-1),(-2,1)\), \(f=-2\).</li>
+</ul>
+<p>The ellipse is closed and bounded, so the extremes exist and are among these. <b>Max \(2\) at \((2,1),(-2,-1)\); min \(-2\) at \((2,-1),(-2,1)\).</b></p>
+</details>
+
+<details>
+<summary>Example 8 — Lagrange in 3-D: maximise \(xyz\) with \(x+2y+3z=18\), \(x,y,z\gt0\)</summary>
+<p><b>Q.</b> Find the maximum of \(f=xyz\) subject to \(x+2y+3z=18\) with \(x,y,z\gt0\). <b>[10 marks]</b></p>
+$$ yz=\lambda\ ①,\qquad xz=2\lambda\ ②,\qquad xy=3\lambda\ ③,\qquad x+2y+3z=18\ ④. $$
+<p>All variables are positive so \(\lambda=yz\gt0\), and we may divide.</p>
+<p>② ÷ ①: \(\dfrac{x}{y}=2\Rightarrow x=2y\). &nbsp; ③ ÷ ①: \(\dfrac{x}{z}=3\Rightarrow x=3z\).</p>
+<p>④: \(x+x+x=18\Rightarrow x=6,\ y=3,\ z=2\). \(f(6,3,2)=36\).</p>
+<p><b>Why a max:</b> on the closed triangle \(x,y,z\ge0\), \(x+2y+3z=18\), \(f\) is continuous so it has a max (EVT); on the edges \(f=0\), so the max is at the only interior candidate: <b>max \(=36\) at \((6,3,2)\)</b>.</p>
+</details>
+
+<details>
+<summary>Example 9 — Distance to a plane: closest point of \(2x-y+2z=18\) to the origin</summary>
+<p><b>Q.</b> Use Lagrange multipliers to find the point on the plane \(2x-y+2z=18\) closest to the origin, and the distance. <b>[10 marks]</b></p>
+<p>Minimise distance² \(f=x^2+y^2+z^2\) (same minimiser, no roots) subject to \(g=2x-y+2z-18=0\).</p>
+$$ 2x=2\lambda,\qquad 2y=-\lambda,\qquad 2z=2\lambda\ \Rightarrow\ x=\lambda,\ y=-\tfrac{\lambda}{2},\ z=\lambda. $$
+<p>Constraint: \(2\lambda+\tfrac{\lambda}{2}+2\lambda=18\Rightarrow\tfrac92\lambda=18\Rightarrow\lambda=4\). Point \((4,-2,4)\), \(f=16+4+16=36\), <b>distance \(6\)</b>.</p>
+<p><b>Why a min:</b> \(f\) grows without bound on the plane (far-away points), so the single candidate is the minimum. Check with the point-to-plane formula: \(\dfrac{|18|}{\sqrt{4+1+4}}=6\) ✓.</p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>Every MATH1052 paper from 2020 to 2025 has a critical-points question <b>and</b> a Lagrange question; recent papers (2024–2025) often add a closed-region global-extremum question on top. Together this is 20–37 marks per paper.</p>
+
+<div class="card q">
+<h3>Type A — Find and classify critical points <span class="marks">every paper · 10–15 marks</span></h3>
+<p><b>Instances:</b> 2025 S2 Q6 (12) · 2025 S1 Q3(b) (4) · 2023 S2 Q1(a) (8) · 2023 S1 Q5(a)(b) (5+4) · 2022 S2 Q6 (5+6) · 2022 S1 Q7 (5+5) · 2021 S2 Q5 (15) · 2021 S1 Q8 (5+5) · 2020 S2 Q6 (6+4) · 2020 S1 Q3 (5+5) · Tutorial 10 Q1.</p>
+<p><b>Looks like:</b> "Determine and classify all critical points of the function \(h(x,y)=\dots\)". Older papers (2020–2022) sometimes say "classify <i>one</i> of these points".</p>
+<div class="method"><b>Routine:</b>
+<ol>
+<li>\(f_x,f_y\) — simplify and <b>factorise</b> (pull out \(e^{(\cdot)}\)).</li>
+<li>Solve with case analysis; list all points.</li>
+<li>\(f_{xx},f_{yy},f_{xy}\) as functions → \(D(x,y)\).</li>
+<li>Table: point · \(f_{xx}\) · \(D\) · nature. One justification sentence each.</li>
+<li>If \(D=0\): cross-section / sign argument.</li>
+</ol></div>
+<table>
+<tr><th>Paper</th><th>Function</th><th>Answer (verified)</th></tr>
+<tr><td>2025 S2 Q6</td><td>\((y^2+2x-3)e^{-2x}\)</td><td>\((2,0)\) saddle</td></tr>
+<tr><td>2025 S1 Q3(b)</td><td>\(4y^2-x^2+2x\)</td><td>\((1,0)\) saddle, \(D=-16\)</td></tr>
+<tr><td>2023 S2 Q1</td><td>\(x^3+y^3+3xy\)</td><td>\((0,0)\) saddle; \((-1,-1)\) local max, \(f=1\)</td></tr>
+<tr><td>2023 S1 Q5</td><td>\(3xe^y-x^3-e^{3y}\)</td><td>\((1,0)\) local max, \(f=1\) (only critical point!)</td></tr>
+<tr><td>2022 S2 Q6</td><td>\(2x^3+2y^3-3x^2y^2\)</td><td>\((1,1)\) saddle (\(D=-108\)); \((0,0)\): \(D=0\), saddle by cross-section</td></tr>
+<tr><td>2022 S1 Q7</td><td>\(xy-x^3-y^2\)</td><td>\((0,0)\) saddle; \((\tfrac16,\tfrac1{12})\) local max</td></tr>
+<tr><td>2021 S2 Q5</td><td>\(4x+y+\dfrac{2}{xy}\)</td><td>\((\tfrac12,2)\) local min, \(f=6\) (\(D=12,f_{xx}=16\))</td></tr>
+<tr><td>2021 S1 Q8</td><td>\(4xy-\tfrac13(x+y)^3\)</td><td>\((0,0)\) saddle; \((1,1)\) local max</td></tr>
+<tr><td>2020 S2 Q6</td><td>\(x^3+y^2-6xy+6x+3y\)</td><td>\((1,\tfrac32)\) saddle; \((5,\tfrac{27}2)\) local min</td></tr>
+<tr><td>2020 S1 Q3</td><td>\(20+x^2-y^2+xy^2+y^3\)</td><td>\((0,0)\), \((-2,2)\) saddles; \((-\tfrac12,1)\) local min</td></tr>
+</table>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q6 <span class="marks">[12 marks]</span></b></p>
+<p>Determine and classify all critical points of the function</p>
+$$ h(x,y)=(y^2+2x-3)e^{-2x}. $$
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q6</summary>
+<p><b>Critical points.</b> Product rule in \(x\):</p>
+$$ h_x=2e^{-2x}+(y^2+2x-3)(-2)e^{-2x}=e^{-2x}\big(-2y^2-4x+8\big),\qquad h_y=2ye^{-2x}. $$
+<p>Since \(e^{-2x}\ne0\): \(h_y=0\Rightarrow y=0\). Then \(h_x=0\Rightarrow -4x+8=0\Rightarrow x=2\). <b>Only critical point: \((2,0)\).</b></p>
+<p><b>Classification.</b> Differentiate \(h_x=e^{-2x}(-2y^2-4x+8)\) again:</p>
+$$ h_{xx}=-2e^{-2x}(-2y^2-4x+8)+e^{-2x}(-4)=e^{-2x}(4y^2+8x-20),\quad h_{yy}=2e^{-2x},\quad h_{xy}=-4ye^{-2x}. $$
+<p>At \((2,0)\): \(h_{xx}=-4e^{-4},\ h_{yy}=2e^{-4},\ h_{xy}=0\), so</p>
+$$ D(2,0)=(-4e^{-4})(2e^{-4})-0^2=-8e^{-8}\lt0. $$
+<p><b>Since \(D\lt0\), the critical point \((2,0)\) is a saddle point.</b> (\(h(2,0)=e^{-4}\).)</p>
+<p class="tip">Official solution structure exactly: \(\nabla h=(0,0)\) → factor \(e^{-2x}\) → \(y=0\) → \(x=2\) → second partials → \(D\) → sentence. Note how \(e^{-4}\) and \(e^{-8}\) are left exact; only signs matter.</p>
+</details>
+<details>
+<summary>Worked: 2023 S2 Q1 — \(x^3+y^3+3xy\), classify and "absolute max?" <span class="marks">[8+4]</span></summary>
+<p>\(f_x=3x^2+3y=0\Rightarrow y=-x^2\). \(f_y=3y^2+3x=0\Rightarrow x=-y^2=-x^4\Rightarrow x(1+x^3)=0\Rightarrow x=0\) or \(x=-1\). Points \((0,0),(-1,-1)\).</p>
+<p>\(f_{xx}=6x,\ f_{yy}=6y,\ f_{xy}=3\Rightarrow D=36xy-9\).</p>
+<ul><li>\((0,0)\): \(D=-9\lt0\) → saddle.</li><li>\((-1,-1)\): \(D=27\gt0\), \(f_{xx}=-6\lt0\) → local max, \(f=1\).</li></ul>
+<p><b>(b)</b> Along \(y=0\), \(f(x,0)=x^3\to+\infty\) as \(x\to\infty\) and \(\to-\infty\) as \(x\to-\infty\). So \(f\) has <b>no absolute max and no absolute min</b> (the local max \(1\) is beaten by e.g. \(f(2,0)=8\)).</p>
+</details>
+<details>
+<summary>Worked: 2022 S2 Q6 — the "happy function" \(2x^3+2y^3-3x^2y^2\), where \(D=0\) <span class="marks">[5+6]</span></summary>
+<p>\(f_x=6x^2-6xy^2=6x(x-y^2)\), \(f_y=6y^2-6x^2y=6y(y-x^2)\).</p>
+<p>From \(f_x=0\): \(x=0\) or \(x=y^2\). \(x=0\Rightarrow6y^2=0\Rightarrow y=0\). \(x=y^2\Rightarrow 6y(y-y^4)=6y^2(1-y^3)=0\Rightarrow y=0\) or \(y=1\). Points \((0,0),(1,1)\).</p>
+<p>\(f_{xx}=12x-6y^2,\ f_{yy}=12y-6x^2,\ f_{xy}=-12xy\). At \((1,1)\): \(D=6\cdot6-144=-108\lt0\) → <b>saddle</b>. At \((0,0)\): \(D=0\) — inconclusive. Along \(y=0\): \(f(x,0)=2x^3\), positive for \(x\gt0\), negative for \(x\lt0\), and \(f(0,0)=0\) → <b>\((0,0)\) is a saddle</b>.</p>
+<p class="tip">The marking scheme gave 3 of the 6 classification marks to the \(D=0\) analysis. The official solution originally wrote "not a local max/min nor a saddle" and crossed it out to "a saddle point" — neither max nor min <i>is</i> a saddle in this course's definition.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — Global max/min on a closed bounded region <span class="marks">2024 S1, 2025 S1 · 13 marks</span></h3>
+<p><b>Instances:</b> 2025 S1 Q5 (7+4+2, square) · 2024 S1 Q5 (6+4+3, triangle) · 2020 S2 Q7 (10, unit ball via Lagrange on the boundary) · Tutorial 10 Q3 (rectangle), Q6(b) (disk).</p>
+<p><b>Looks like:</b> "Let \(S\) be the closed … region bounded by the lines … (a) Determine the max and min of \(f\) on the boundary of \(S\). (b) Determine the critical point(s) of \(f\) in the interior of \(S\). (c) Determine the global max and min of \(f\) on \(S\)."</p>
+<div class="method"><b>Routine:</b> sketch \(S\) and label the edges (i)–(iv) → each edge as a 1-variable function on a closed interval (stationary points + endpoints) → summary line "on the boundary, max … at …, min … at …" → interior \(\nabla f=\mathbf0\), <b>check the point is strictly inside</b> → EVT sentence + compare.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S1 Q5 <span class="marks">[13 marks]</span></b></p>
+<p>In the plane, let \(S\) be the closed square region bounded by the lines \(x=0,\ x=1,\ y=0,\ y=1\). Consider the function \(f(x,y)=4x^2-3y^2+2xy\).</p>
+<ul>
+<li>(a) <b>(7 marks)</b> Determine the maximum and minimum values of \(f\) on the boundary of \(S\).</li>
+<li>(b) <b>(4 marks)</b> Determine the critical point(s) of \(f\) in the interior of \(S\).</li>
+<li>(c) <b>(2 marks)</b> Determine the global maximum and minimum values of \(f\) on \(S\).</li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S1 Q5 (with the marking scheme)</summary>
+<p><b>(a)</b> Four edges:</p>
+<ul>
+<li>(i) \(x=0,\ y\in[0,1]\): \(f=-3y^2\). Min \(-3\) at \((0,1)\), max \(0\) at \((0,0)\). <i>[1 mark]</i></li>
+<li>(ii) \(x=1,\ y\in[0,1]\): \(g(y)=4-3y^2+2y\), \(g'(y)=-6y+2=0\Rightarrow y=\tfrac13\), \(g(\tfrac13)=\tfrac{13}3\); \(g(0)=4,\ g(1)=3\). Max \(\tfrac{13}3\) at \((1,\tfrac13)\), min \(3\) at \((1,1)\). <i>[2 marks]</i></li>
+<li>(iii) \(y=0,\ x\in[0,1]\): \(f=4x^2\). Max \(4\) at \((1,0)\), min \(0\) at \((0,0)\). <i>[1 mark]</i></li>
+<li>(iv) \(y=1,\ x\in[0,1]\): \(h(x)=4x^2-3+2x\), \(h'(x)=8x+2=0\Rightarrow x=-\tfrac14\notin[0,1]\); \(h(0)=-3,\ h(1)=3\). Max \(3\) at \((1,1)\), min \(-3\) at \((0,1)\). <i>[2 marks]</i></li>
+</ul>
+<p><b>On the boundary of \(S\): max \(\tfrac{13}{3}\) at \((1,\tfrac13)\), min \(-3\) at \((0,1)\).</b> <i>[1 mark for conclusion]</i></p>
+<p><b>(b)</b> \(\nabla f=(8x+2y,\ -6y+2x)\) <i>[1 mark]</i>. Setting to zero: \(4x+y=0\) and \(x=3y\Rightarrow 12y+y=0\Rightarrow y=0,x=0\) <i>[2 marks]</i>. But \((0,0)\) is a corner, <b>not in the interior of \(S\)</b> <i>[1 mark]</i>. So there are no critical points of \(f\) in the interior.</p>
+<p><b>(c)</b> By the Extreme Value Theorem, <b>global max \(\tfrac{13}{3}\)</b> (at \((1,\tfrac13)\)) and <b>global min \(-3\)</b> (at \((0,1)\)). <i>[1 mark for stating EVT; 1 mark for correct values]</i></p>
+</details>
+<details>
+<summary>Worked: 2024 S1 Q5 — \(f=2+2x+2y-x^2-y^2\) on the triangle \(x,y\ge0,\ y\le9-x\) <span class="marks">[6+4+3]</span></summary>
+<p><b>(a)</b> Edge \(x=0\): \(2+2y-y^2\), \(y\in[0,9]\): stationary at \(y=1\) (value \(3\)); ends \(2\) and \(-61\). Edge \(y=0\): by symmetry max \(3\) at \((1,0)\), min \(-61\) at \((9,0)\). Hypotenuse \(y=9-x\): \(f=-61+18x-2x^2\), stationary at \(x=\tfrac92\) (value \(-\tfrac{41}2\)); ends \(-61\). <b>Boundary: max \(3\) at \((0,1),(1,0)\); min \(-61\) at \((0,9),(9,0)\).</b></p>
+<p><b>(b)</b> \(f_x=2-2x=0,\ f_y=2-2y=0\Rightarrow(1,1)\), inside ✓, \(f(1,1)=4\).</p>
+<p><b>(c)</b> EVT: <b>global max \(4\) at \((1,1)\); global min \(-61\) at \((0,9)\) and \((9,0)\)</b>.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — "Does \(f\) attain a global max?" / max on an unbounded domain <span class="marks">~4 marks</span></h3>
+<p><b>Instances:</b> 2023 S1 Q5(c) (4) · 2023 S2 Q1(b) (4) · 2024 S2 Q1(b) (4, "determine the maximum temperature on the metal plate").</p>
+<div class="method"><b>Routine:</b> "No" → exhibit a line along which \(f\to+\infty\) (or \(-\infty\) for min). "Yes" → complete the square / bound, and show the bound is attained.</div>
+<details>
+<summary>Worked: 2023 S1 Q5 — \(f=3xe^y-x^3-e^{3y}\) <span class="marks">[5+4+4]</span></summary>
+<p><b>(a)</b> \(f_x=3e^y-3x^2=0\Rightarrow x^2=e^y\) ①. \(f_y=3xe^y-3e^{3y}=0\) ②. Substitute \(e^y=x^2\): \(3x^3-3x^6=3x^3(1-x^3)=0\Rightarrow x=0\) or \(x=1\). \(x=0\Rightarrow e^y=0\): <b>no solution</b>. \(x=1\Rightarrow e^y=1\Rightarrow y=0\). Only critical point \((1,0)\).</p>
+<p><b>(b)</b> \(f_{xx}=-6x,\ f_{xy}=3e^y,\ f_{yy}=3xe^y-9e^{3y}\). At \((1,0)\): \(D=(-6)(-6)-9=27\gt0\), \(f_{xx}=-6\lt0\) → <b>local max</b>, \(f(1,0)=1\).</p>
+<p><b>(c)</b> No. \(f(x,0)=3x-x^3-1\to+\infty\) as \(x\to-\infty\) (e.g. \(f(-3,0)=17\gt1\)). So \(f\) has <b>no global maximum</b>, even though its only critical point is a local max.</p>
+<p class="tip">This is the famous "one critical point, it's a local max, but not global" example — impossible in 1-D, possible in 2-D.</p>
+</details>
+<details>
+<summary>Worked: 2024 S2 Q1(b) — max of \(T=\dfrac{100}{3+x^2+2y^2-4y}\) <span class="marks">[4]</span></summary>
+<p>\(T\) is largest when the (positive) denominator is smallest <i>[1]</i>. Complete the square: \(3+x^2+2y^2-4y=x^2+2(y-1)^2+1\ge1\), with equality at \((0,1)\) <i>[2]</i>. So the <b>maximum temperature is \(100\)</b>, at \((0,1)\) <i>[1]</i>.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Lagrange multipliers, two variables <span class="marks">10–12 marks</span></h3>
+<p><b>Instances:</b> 2023 S2 Q2 (12, line constraint) · 2023 S1 Q6 (12, circle) · 2022 S1 Q8 (10, ellipse) · 2020 S1 Q8 (10, \(x^4+y^6=2\)) · Tutorial 10 Q6(a).</p>
+<table>
+<tr><th>Paper</th><th>Problem</th><th>Answer (verified)</th></tr>
+<tr><td>2023 S2 Q2</td><td>min \(2x^2+8y^2-4x-16y\) s.t. \(2x+4y=14\)</td><td>min \(6\) at \((3,2)\)</td></tr>
+<tr><td>2023 S1 Q6</td><td>\(T=4x^2-4xy+y^2\) on \(x^2+y^2=25\)</td><td>highest \(125\), lowest \(0\)</td></tr>
+<tr><td>2022 S1 Q8</td><td>lowest point of \(x^2+2y^4\) on \(\tfrac{x^2}4+y^2=1\)</td><td>\((0,\pm1)\), height \(2\)</td></tr>
+<tr><td>2020 S1 Q8</td><td>\(x^2+y^3\) s.t. \(x^4+y^6=2\)</td><td>max \(2\) at \((\pm1,1)\); min \(-\sqrt2\) at \((0,-2^{1/6})\)</td></tr>
+</table>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2023 S1 Q6 <span class="marks">[12 marks]</span></b></p>
+<p>The temperature at a point \((x,y)\) on a metal plate is \(T(x,y)=4x^2-4xy+y^2\). Epsilon, our pet ant, walks on the metal plate along a circle of radius 5 centred at the origin. Use the method of Lagrange multipliers to determine the highest and lowest temperatures encountered by Epsilon.</p>
+</div>
+<details>
+<summary>Full worked solution — 2023 S1 Q6</summary>
+<p>Constraint \(g=x^2+y^2-25=0\). \(\nabla T=\lambda\nabla g\):</p>
+$$ 8x-4y=2\lambda x\ ①,\qquad -4x+2y=2\lambda y\ ②,\qquad x^2+y^2=25\ ③. $$
+<p>From ①: \(4x-2y=\lambda x\). But ② says \(-(4x-2y)=2\lambda y\), so \(-\lambda x=2\lambda y\), i.e. \(\lambda(x+2y)=0\).</p>
+<ul>
+<li><b>\(\lambda=0\):</b> ① gives \(y=2x\). ③: \(5x^2=25\Rightarrow x=\pm\sqrt5\): points \(\pm(\sqrt5,2\sqrt5)\). \(T=(2x-y)^2=0\).</li>
+<li><b>\(x=-2y\):</b> ③: \(5y^2=25\Rightarrow y=\pm\sqrt5\): points \(\pm(-2\sqrt5,\sqrt5)\). \(T=(2x-y)^2=(-5\sqrt5)^2=125\).</li>
+</ul>
+<p>The circle is closed and bounded, so the extremes are among these. <b>Highest temperature \(125\), lowest \(0\).</b></p>
+<p class="tip">Spotting \(T=(2x-y)^2\) makes evaluation instant and shows \(T\ge0\) so \(0\) must be the min. (The official solution has a typo "\(y=\pm5\)" in the second case; it should be \(\pm\sqrt5\) — the values \(125\) and \(0\) are right.)</p>
+</details>
+<details>
+<summary>Worked: 2023 S2 Q2 — a line constraint (one candidate: justify it)</summary>
+<p>\(g=2x+4y-14\). \((4x-4,\ 16y-16)=\lambda(2,4)\Rightarrow 2(x-1)=\lambda=4(y-1)\Rightarrow x=2y-1\). Constraint: \(2(2y-1)+4y=14\Rightarrow y=2,\ x=3\). \(f(3,2)=6\).</p>
+<p><b>Is it a min?</b> The line is unbounded, so EVT doesn't apply. Official solution: pick another point on the constraint, \((7,0)\): \(f(7,0)=70\gt6\). "So at \((3,2)\) there is a minimum." <b>Min value \(6\).</b></p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type E — Lagrange multipliers, three variables <span class="marks">10–12 marks</span></h3>
+<p><b>Instances:</b> 2025 S2 Q5 (12, \(xyz^2\) on \(x+y+z=20\)) · 2025 S1 Q6 (12, \(400xyz^2\) on unit sphere) · 2024 S2 Q5 (12, \(x-2y+2z\) on unit sphere → max \(3\) at \((\tfrac13,-\tfrac23,\tfrac23)\), min \(-3\)) · 2021 S2 Q6 (10, \(x+2y+z\) on \(x^2+y^2+z^2=\tfrac{27}2\) → max \(9\) at \((\tfrac32,3,\tfrac32)\)) · 2020 S2 Q7 (10, \(x+yz\) on the unit ball → max \(1\), min \(-1\)) · Tutorial 10 Q4, Q5.</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S1 Q6 <span class="marks">[12 marks]</span></b></p>
+<p>Epsilon, our pet ant, walks on the unit sphere centred at \((0,0,0)\). The temperature at a point \((x,y,z)\) on the sphere is \(T(x,y,z)=400xyz^2\). Use the method of Lagrange multipliers to determine the highest and lowest temperatures encountered by Epsilon.</p>
+</div>
+<details>
+<summary>Full worked solution — 2025 S1 Q6 (with the marking scheme)</summary>
+<p><b>Formulation</b> <i>[2 marks]</i>: max/min \(T=400xyz^2\) s.t. \(g=x^2+y^2+z^2-1=0\).</p>
+<p><b>Lagrange equations</b> <i>[2 marks]</i>: \(\nabla T=\lambda\nabla g\):</p>
+$$ 400yz^2=2\lambda x\ ①,\qquad 400xz^2=2\lambda y\ ②,\qquad 800xyz=2\lambda z\ ③. $$
+<p><b>Special cases</b> <i>[2 marks]</i>: if \(x\), \(y\) or \(z=0\) then \(T=0\). If \(\lambda=0\) then at least one of \(x,y,z\) is \(0\), so again \(T=0\).</p>
+<p><b>Main case</b> \(\lambda,x,y,z\ne0\) <i>[4 marks]</i>:</p>
+<ul>
+<li>② ÷ ①: \(\dfrac{x}{y}=\dfrac{y}{x}\Rightarrow x^2=y^2\).</li>
+<li>③ ÷ ②: \(\dfrac{2y}{z}=\dfrac{z}{y}\Rightarrow z^2=2y^2\).</li>
+<li>Constraint: \(y^2+y^2+2y^2=1\Rightarrow y^2=\tfrac14\), so \(x=\pm\tfrac12,\ y=\pm\tfrac12,\ z=\pm\tfrac1{\sqrt2}\).</li>
+</ul>
+<p>\(T=400\,xy\cdot\tfrac12=200\,xy\), and \(xy=\pm\tfrac14\).</p>
+<p><b>Highest temperature \(50\)</b> (when \(x,y\) have the same sign) <i>[1 mark]</i>; <b>lowest \(-50\)</b> (opposite signs) <i>[1 mark]</i>. Both beat the special-case value \(0\).</p>
+</details>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q5 <span class="marks">[12 marks]</span></b></p>
+<p>Use the method of Lagrange multipliers to determine the maximum value of the function \(f(x,y,z)=xyz^2\) on the plane defined by \(x+y+z=20\).</p>
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q5</summary>
+<p>\(g=x+y+z-20\). \(\nabla f=(yz^2,\ xz^2,\ 2xyz)=\lambda(1,1,1)\):</p>
+$$ yz^2=\lambda\ ①,\qquad xz^2=\lambda\ ②,\qquad 2xyz=\lambda\ ③,\qquad x+y+z=20\ ④. $$
+<p><b>Case \(z=0\):</b> then \(\lambda=0\) and \(f=0\). <b>Case \(z\ne0\):</b> ①=② gives \(yz^2=xz^2\Rightarrow y=x\). If \(y=0\) then \(x=0\), \(f=0\). Otherwise ①=③: \(yz^2=2xyz\Rightarrow z=2x\). ④: \(x+x+2x=20\Rightarrow x=5\): point \((5,5,10)\), \(f=5\cdot5\cdot100=2500\).</p>
+<p>Comparing candidates (\(2500\) vs \(0\)): <b>maximum value \(2500\) at \((5,5,10)\)</b> — the official answer.</p>
+<p class="trap">Strictly, on the <i>whole</i> plane \(xyz^2\) is unbounded (take \(x=y=t,\ z=20-2t\): \(f=t^2(20-2t)^2\to\infty\)). The intended reading is the octant \(x,y,z\ge0\) (a closed triangle where EVT applies and \(f=0\) on the edges). Write the answer \(2500\); if you have 20 seconds, add "restricting to \(x,y,z\ge0\), where the constraint set is closed and bounded". Never argue with the examiner in the exam, but never be wrong either.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type F — Applied / geometric optimisation with Lagrange <span class="marks">12 marks</span></h3>
+<p><b>Instances:</b> 2024 S1 Q6 (12, closed cylinder with fixed surface area) · 2022 S2 Q7 (12, cone inscribed in the unit sphere → \(h=\tfrac43,\ r=\tfrac{2\sqrt2}3\), \(V=\tfrac{32\pi}{81}\)) · Tutorial 10 Q7 (Cobb–Douglas), Q8(e).</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 S1 Q6 <span class="marks">[12 marks]</span></b></p>
+<p>A closed cylinder has height \(h\) and a circular base of radius \(r\). The cylinder has a fixed surface area, \(A\). Use Lagrange multipliers to show that the volume is maximised by choosing \(r=\sqrt{\dfrac{A}{6\pi}},\ h=\sqrt{\dfrac{2A}{3\pi}}\).</p>
+</div>
+<details>
+<summary>Full worked solution — 2024 S1 Q6</summary>
+<p>Objective \(V(r,h)=\pi r^2h\). Constraint \(g(r,h)=2\pi r^2+2\pi rh-A=0\) (two discs + curved side). \(r,h\gt0\).</p>
+$$ \nabla V=(2\pi rh,\ \pi r^2),\qquad \nabla g=(4\pi r+2\pi h,\ 2\pi r). $$
+$$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
+<p>② with \(r\gt0\): \(\lambda=\tfrac r2\). Into ①: \(2\pi rh=\tfrac r2(4\pi r+2\pi h)=2\pi r^2+\pi rh\Rightarrow\pi rh=2\pi r^2\Rightarrow h=2r\).</p>
+<p>Constraint: \(2\pi r^2+2\pi r(2r)=6\pi r^2=A\Rightarrow r=\sqrt{\dfrac{A}{6\pi}}\), and \(h=2r=2\sqrt{\dfrac{A}{6\pi}}=\sqrt{\dfrac{4A}{6\pi}}=\sqrt{\dfrac{2A}{3\pi}}\) ✓.</p>
+<p><b>Why a max:</b> it is the only candidate with \(r,h\gt0\), and \(V\to0\) at the extremes (\(r\to0\), or \(h\to0\) i.e. \(r\to\sqrt{A/2\pi}\)), so the single interior candidate is the maximum.</p>
+<p class="tip">"Show that" questions give you the answer — so the marks are entirely for the working. Show \(\lambda\) elimination and the \(h=2r\) relation explicitly.</p>
+</details>
+<details>
+<summary>Worked: 2022 S2 Q7 — cone inscribed in the unit sphere</summary>
+<p>With the apex at the top of the sphere and the base a distance \(h-1\) below the centre, the Pythagorean relation is \((h-1)^2+r^2=1\) <i>[2 marks for this constraint]</i>. Maximise \(f=\tfrac13\pi r^2h\).</p>
+<p>\(\tfrac23\pi rh=2\lambda r\) ①, \(\tfrac13\pi r^2=2\lambda(h-1)\) ②. \(\lambda\ne0\) (else \(r=0\)). From ①, \(\lambda=\tfrac{\pi h}{3}\); into ②: \(r^2=2h(h-1)\). Constraint: \((h-1)^2+2h(h-1)=1\Rightarrow3h^2-4h=0\Rightarrow h=\tfrac43\) (\(h=0\) is degenerate). Then \(r^2=\tfrac83\cdot\tfrac13=\tfrac89\Rightarrow r=\tfrac{2\sqrt2}{3}\). <b>\(h=\tfrac43,\ r=\tfrac{2\sqrt2}{3}\)</b> (volume \(\tfrac{32\pi}{81}\)).</p>
+<p class="trap">The question said "Note: you must use the method of Lagrange multipliers." Substituting \(r^2=1-(h-1)^2\) and doing 1-D calculus gets the right numbers but not the method marks.</p>
+</details>
+</div>
+</section>
+
+<!-- ================= 5. TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the verb, pick the routine, write the first line before you think. These mappings are the whole chapter in one table.</p>
+
+<h4>A · Which routine?</h4>
+<table>
+<tr><th>When the exam says…</th><th>It means / do this</th></tr>
+<tr><td>"find/determine (all) the critical points"</td><td>\(f_x=0,\ f_y=0\), factorise, branch, list <b>every</b> pair. No classification needed unless asked.</td></tr>
+<tr><td>"classify", "determine the nature of", "local max, local min or saddle"</td><td>Second partials → \(D=f_{xx}f_{yy}-f_{xy}^2\) at each point → table. One sentence per point.</td></tr>
+<tr><td>"classify <b>one</b> of these critical points" (2020–2022)</td><td>Pick the easiest (often \((0,0)\)); state which one you chose.</td></tr>
+<tr><td>\(D=0\) appears in your working</td><td>Inconclusive — cross-section along \(y=0\), \(x=0\), \(y=x\) or a sign argument. Never stop at "\(D=0\)".</td></tr>
+<tr><td>"global / absolute max and min … on \(S\)", "closed region bounded by the lines…", "the closed disk"</td><td>EVT + interior critical points + boundary edges + corners → compare.</td></tr>
+<tr><td>"on the boundary of \(S\)"</td><td>Only the edges: parametrise each, 1-D calculus on a closed interval (endpoints!).</td></tr>
+<tr><td>"in the interior of \(S\)"</td><td>\(\nabla f=\mathbf0\), then <b>check strictly inside</b>; a point on an edge or corner is not interior.</td></tr>
+<tr><td>"Does \(f\) attain a global maximum? Explain."</td><td>Usually "no": a path with \(f\to\infty\). If "yes": bound + where attained.</td></tr>
+<tr><td>"maximum temperature on the plate" with \(T=\dfrac{c}{\text{quadratic}}\)</td><td>Minimise the denominator by completing the square.</td></tr>
+<tr><td>"use the method of Lagrange multipliers", "subject to the constraint", "on the plane/sphere/circle/ellipse/curve"</td><td>\(\nabla f=\lambda\nabla g\), \(g=0\). Name \(f\) and \(g\) explicitly (formulation marks).</td></tr>
+<tr><td>"Epsilon walks along a circle / on the sphere; highest and lowest temperatures"</td><td>Lagrange; constraint is the path; report both max and min <b>values</b>.</td></tr>
+<tr><td>"find the <b>points</b> where … attains its max/min"</td><td>Answer with coordinates, not just values (2024 S2 Q5 official wording).</td></tr>
+<tr><td>"closest to / farthest from a point", "distance to the plane"</td><td>Minimise <b>distance²</b> \((x-a)^2+(y-b)^2+(z-c)^2\) subject to the surface.</td></tr>
+<tr><td>"fixed surface area", "fixed volume", "inscribed in", "budget"</td><td>That fixed quantity is \(g\); the thing to optimise is \(f\).</td></tr>
+<tr><td>"show that the volume is maximised by choosing…"</td><td>Full Lagrange derivation; the answer is given, the working earns every mark.</td></tr>
+</table>
+
+<h4>B · Algebra triggers inside the \(\nabla f=\mathbf 0\) / Lagrange system</h4>
+<table>
+<tr><th>You see…</th><th>Do this</th></tr>
+<tr><td>A product \(=0\), e.g. \(2xy=0\), \(x(x-y^2)=0\)</td><td>Branch: one case per factor. Feed each into the other equation.</td></tr>
+<tr><td>A factor \(e^{(\cdot)}\)</td><td>Never zero — cancel it (say so).</td></tr>
+<tr><td>\(yz^2=\lambda\), \(xz^2=\lambda\)</td><td>Case \(z=0\) first; then \(z\ne0\Rightarrow y=x\).</td></tr>
+<tr><td>Symmetric system (\(x\leftrightarrow y\) swaps the equations)</td><td>Subtract: \((x-y)(\cdots)=0\), or divide to get \(x^2=y^2\).</td></tr>
+<tr><td>\(x^2=e^{y}\) with a case \(x=0\)</td><td>\(e^y=0\) has no solution — reject that branch explicitly (2023 S1 Q5).</td></tr>
+<tr><td>Linear \(\nabla f\) (quadratic \(f\))</td><td>Plain simultaneous equations — one critical point.</td></tr>
+<tr><td>Lagrange on a sphere with a linear \(f\)</td><td>\(x,y,z\) are proportional to the coefficients; two antipodal answers (max and min).</td></tr>
+<tr><td>Variables must be positive (lengths, amounts)</td><td>Use it to reject \(r=0\), \(h=0\), negative roots — and say so.</td></tr>
+</table>
+
+<h4>C · Classification triggers</h4>
+<table>
+<tr><th>At the point you get…</th><th>Write</th></tr>
+<tr><td>\(D\gt0\), \(f_{xx}\gt0\)</td><td>"Since \(D\gt0\) and \(f_{xx}\gt0\), \((a,b)\) is a local minimum."</td></tr>
+<tr><td>\(D\gt0\), \(f_{xx}\lt0\)</td><td>"Since \(D\gt0\) and \(f_{xx}\lt0\), \((a,b)\) is a local maximum."</td></tr>
+<tr><td>\(D\lt0\)</td><td>"Since \(D\lt0\), \((a,b)\) is a saddle point."</td></tr>
+<tr><td>\(D=0\)</td><td>"The second-derivative test is inconclusive. Along [path], \(f\) … so \((a,b)\) is …"</td></tr>
+</table>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Dividing by something that might be zero.</b> Cancelling \(x\) from \(2xy=0\), or \(z^2\) from \(yz^2=xz^2\), silently deletes critical points / Lagrange candidates. The 2025 S1 Q6 marking scheme gave <b>2 of 12 marks</b> purely for "consideration of these special cases" (\(\lambda=0\); \(x\), \(y\) or \(z=0\)). The 2025 S2 official solution writes "(assuming \(z\ne0\))" every time it divides — copy that habit.</div>
+
+<div class="trap"><b>Missing critical points.</b> A system like \(x^2=e^y,\ xe^y=e^{3y}\) has branches that die (\(e^y=0\)) and branches that live. Write every branch and say which ones fail and why ("\(e^y=0\) has no solution").</div>
+
+<div class="trap"><b>A "critical point in the interior" that isn't.</b> 2025 S1 Q5(b): \(\nabla f=\mathbf0\) gives \((0,0)\), which is a <b>corner</b> of the square — "\((0,0)\) is not in the interior of \(S\)" was worth <b>1 mark</b>. Always test the inequalities of \(S\) strictly.</div>
+
+<div class="trap"><b>Forgetting to quote the EVT.</b> 2025 S1 Q5(c): "<b>1 mark for stating EVT</b>; 1 mark for correct global max and global min". One sentence: "\(f\) is continuous and \(S\) is closed and bounded, so by the Extreme Value Theorem \(f\) attains a global max and min on \(S\)."</div>
+
+<div class="trap"><b>Forgetting the endpoints of an edge.</b> On an edge, a 1-D function on \([p,q]\) can have its extremes at the ends — and often does (2025 S1 Q5 edge (iv): the stationary point \(x=-\tfrac14\) lies outside \([0,1]\), so only the endpoints count). Also: <b>discard stationary points that fall outside the edge's interval</b>.</div>
+
+<div class="trap"><b>Stopping at "\(D=0\)".</b> 2022 S2 Q6(b) gave 3 of 6 marks for the cross-section argument at \((0,0)\). "\(D=0\) so it's a saddle" scores zero for that point; so does "\(D=0\) so there is no extremum".</div>
+
+<div class="trap"><b>Hessian arithmetic.</b> \(D=f_{xx}f_{yy}-f_{xy}^2\) — minus, squared. Compute \(f_{xx},f_{yy},f_{xy}\) as general formulas first (1 mark in 2022 S2), then substitute each point. With exponential factors, differentiate the <i>simplified</i> \(f_x\) (e.g. \(e^{-2x}(-2y^2-4x+8)\)) by the product rule, carefully.</div>
+
+<div class="trap"><b>Using \(f_{xx}\) when \(D\lt0\).</b> A negative \(D\) is a saddle regardless of \(f_{xx}\). And \(D\gt0\) with a negative \(f_{xx}\) is a max, not a min — read the sign twice.</div>
+
+<div class="trap"><b>Lagrange without the comparison.</b> Lagrange gives candidates, not answers. Evaluate \(f\) at <b>every</b> candidate (including the special-case ones) and state which is the max and which the min, <b>with points</b> if asked ("find the points where…", 2024 S2 Q5, 2021 S2 Q6). 2024 S2 Q5 gave 2 marks for the final two lines.</div>
+
+<div class="trap"><b>Formulation marks are real marks.</b> 2024 S2 Q5: "3 marks for formulation of the Lagrange problem" (writing \(f\), \(g\), \(\nabla f\), \(\nabla g\)) + "3 marks for correct Lagrange equations" — that's half the question before any algebra. 2025 S1 Q6: 2 + 2. Write them out even though they feel obvious.</div>
+
+<div class="trap"><b>Unbounded constraint, single candidate.</b> On a line or plane the EVT does not apply. Justify max/min by comparing with another feasible point (2023 S2 Q2 official solution: \(f(7,0)=70\gt6\)), or by an argument that \(f\to\infty\) far away.</div>
+
+<div class="trap"><b>Not using Lagrange when told to.</b> "Use the method of Lagrange multipliers" / "you must use the method of Lagrange multipliers" (2022 S2 Q7). Substituting the constraint to reduce to one variable gives the numbers but not the method marks.</div>
+
+<div class="trap"><b>Domain restrictions.</b> 2021 S2 Q5 defined \(f\) on \(\mathbb R^2\setminus\{x=0\text{ or }y=0\}\). Your cases must respect it: "as \(x\ne0\) and \(y\ne0\), \(xy(4x-y)=0\Rightarrow y=4x\)" (official solution).</div>
+
+<div class="trap"><b>Decimals.</b> No calculator: leave \(e^{-4}\), \(\sqrt5\), \(\tfrac{13}{3}\), \(2^{1/6}\) exact. Classification needs signs only (\(e^{\text{anything}}\gt0\)).</div>
+
+<div class="tip"><b>Marker-pleasing layout.</b> (1) Box the critical points. (2) Table: point · \(f_{xx}\) · \(D\) · nature · value. (3) A final sentence that answers the exact question asked ("the highest temperature is 50 and the lowest is −50").</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. At a critical point \(f_{xx}=-3,\ f_{yy}=-3,\ f_{xy}=1\). Nature?</summary>
+<p>\(D=9-1=8\gt0\), \(f_{xx}\lt0\) → <b>local maximum</b>.</p></details>
+
+<details><summary>2. At a critical point \(f_{xx}=2,\ f_{yy}=8,\ f_{xy}=4\). Nature?</summary>
+<p>\(D=16-16=0\) → <b>test inconclusive</b>; investigate with cross-sections or a sign argument.</p></details>
+
+<details><summary>3. At a critical point \(f_{xx}=5,\ f_{yy}=-1,\ f_{xy}=0\). Does it matter that \(f_{xx}\gt0\)?</summary>
+<p>No: \(D=-5\lt0\) → <b>saddle</b>. \(f_{xx}\) is only consulted when \(D\gt0\).</p></details>
+
+<details><summary>4. Find and classify the critical point of \(f=x^2+xy+y^2-3y\).</summary>
+<p>\(2x+y=0,\ x+2y-3=0\Rightarrow(-1,2)\). \(D=2\cdot2-1=3\gt0,\ f_{xx}=2\gt0\) → <b>local min</b>.</p></details>
+
+<details><summary>5. Solving \(\nabla f=\mathbf0\) you reach \(xy^2=x\). What do you write next?</summary>
+<p>\(x(y^2-1)=0\Rightarrow x=0\) <b>or</b> \(y=\pm1\) — three branches, each fed into the other equation. Never "divide by \(x\)".</p></details>
+
+<details><summary>6. \(f=x^2y-y^3\). Find \(D(x,y)\) and classify the only critical point.</summary>
+<p>\(f_x=2xy,\ f_y=x^2-3y^2\Rightarrow(0,0)\) only. \(f_{xx}=2y,\ f_{yy}=-6y,\ f_{xy}=2x\Rightarrow D=-12y^2-4x^2\), so \(D(0,0)=0\). Along the \(y\)-axis \(f=-y^3\) takes both signs → <b>saddle</b> (a "monkey saddle").</p></details>
+
+<details><summary>7. What does the Extreme Value Theorem say, and when must you quote it?</summary>
+<p>A continuous function on a <b>closed and bounded</b> set attains a global max and a global min. Quote it in every "global max/min on \(S\)" question (1 mark in 2025 S1 Q5), and use it to justify Lagrange answers on circles, ellipses and spheres.</p></details>
+
+<details><summary>8. Region \(S=\{x^2+y^2\le4\}\); \(\nabla f=\mathbf0\) at \((3,1)\) and \((1,1)\). Which are candidates?</summary>
+<p>\((1,1)\) only: \(1+1=2\lt4\) (interior). \((3,1)\) has \(9+1=10\gt4\) — outside \(S\), discard.</p></details>
+
+<details><summary>9. How many boundary pieces and corners does a triangle region have, and what do you do on each?</summary>
+<p>3 edges, 3 corners. On each edge substitute the line, get \(g(t)\) on a closed interval, solve \(g'=0\) inside the interval, evaluate at the ends (the ends are the corners).</p></details>
+
+<details><summary>10. Geometrically, what does \(\nabla f=\lambda\nabla g\) say?</summary>
+<p>At a constrained extremum the level curve (surface) of \(f\) is <b>tangent</b> to the constraint \(g=0\), so their normals \(\nabla f\) and \(\nabla g\) are parallel.</p></details>
+
+<details><summary>11. Lagrange on a line constraint gives a single candidate. How do you know if it's a max or a min?</summary>
+<p>Evaluate \(f\) at any other point on the line: if it's larger, the candidate is the min (2023 S2 Q2: \(f(7,0)=70\gt f(3,2)=6\)).</p></details>
+
+<details><summary>12. Maximise \(3x+4y\) on \(x^2+y^2=25\) in your head.</summary>
+<p>Linear \(f\) on a circle: max \(=R\|\mathbf a\|=5\cdot5=25\) at \(5\cdot\tfrac{(3,4)}5=(3,4)\); min \(-25\) at \((-3,-4)\). (Show the Lagrange working in the exam.)</p></details>
+
+<details><summary>13. Why minimise distance² rather than distance?</summary>
+<p>\(\sqrt{\ }\) is increasing, so both have the same minimiser — but distance² has polynomial derivatives (no square roots, no quotient rule).</p></details>
+
+<details><summary>14. Does \(f=x^3+y^3+3xy\) have an absolute maximum on \(\mathbb R^2\)?</summary>
+<p>No — \(f(x,0)=x^3\to\infty\). Its local max \((-1,-1)\), value \(1\), is not global (2023 S2 Q1(b)).</p></details>
+
+<details><summary>15. You get \(\lambda(x+2y)=0\) in a Lagrange problem. What next?</summary>
+<p>Two cases: \(\lambda=0\) (go back to the original equations with \(\lambda=0\)) and \(x=-2y\) (substitute into the constraint). Both give candidates (2023 S1 Q6).</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Fresh functions and scenarios you have <b>not</b> seen in Tutorial 10 or any 2020–2025 paper — same exam <i>style</i>, clean no-calculator numbers. Every answer below is verified with SymPy.</p>
+<p class="tip">How to use the arena: read the "📖 Learn from these" pair first (they are written exactly as a marker wants to see it), then cover the solutions and attempt "✏️ Your turn". Only reveal a solution once you have your full list of points and your table on paper.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Finding critical points — solving \(\nabla f=\mathbf 0\) cleanly</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — substitution: \(f(x,y)=x^3-6xy+y^2\)</summary>
+<p><b>Q.</b> Find and classify all critical points of \(f(x,y)=x^3-6xy+y^2\). <b>[10 marks]</b></p>
+<p>\(f_x=3x^2-6y=0\Rightarrow y=\tfrac{x^2}{2}\) ①. \(f_y=-6x+2y=0\Rightarrow y=3x\) ②.</p>
+<p>Equate: \(\tfrac{x^2}2=3x\Rightarrow x^2-6x=0\Rightarrow x(x-6)=0\Rightarrow x=0\) or \(x=6\). From ②: \((0,0)\) and \((6,18)\).</p>
+<p>\(f_{xx}=6x,\ f_{yy}=2,\ f_{xy}=-6\Rightarrow D=12x-36\).</p>
+<ul><li>\((0,0)\): \(D=-36\lt0\) → saddle.</li>
+<li>\((6,18)\): \(D=36\gt0,\ f_{xx}=36\gt0\) → local min, \(f=216-648+324=-108\).</li></ul>
+</details>
+<details>
+<summary>Worked B — four critical points by cases: \(f(x,y)=xy(3-x-y)\)</summary>
+<p><b>Q.</b> Find and classify all critical points of \(f(x,y)=3xy-x^2y-xy^2\). <b>[12 marks]</b></p>
+<p>\(f_x=3y-2xy-y^2=y(3-2x-y)\), \(f_y=3x-x^2-2xy=x(3-x-2y)\).</p>
+<p>\(f_x=0\iff y=0\) or \(2x+y=3\).</p>
+<ul>
+<li><b>\(y=0\):</b> \(f_y=x(3-x)=0\Rightarrow x=0\) or \(3\): \((0,0),(3,0)\).</li>
+<li><b>\(2x+y=3\)</b> and \(f_y=0\iff x=0\) or \(x+2y=3\):
+ <ul><li>\(x=0\Rightarrow y=3\): \((0,3)\).</li>
+ <li>\(x+2y=3\) with \(2x+y=3\Rightarrow x=y=1\): \((1,1)\).</li></ul></li>
+</ul>
+<p>\(f_{xx}=-2y,\ f_{yy}=-2x,\ f_{xy}=3-2x-2y\).</p>
+<table>
+<tr><th>Point</th><th>\(f_{xx}\)</th><th>\(f_{yy}\)</th><th>\(f_{xy}\)</th><th>\(D\)</th><th>Nature</th></tr>
+<tr><td>\((0,0)\)</td><td>0</td><td>0</td><td>3</td><td>\(-9\)</td><td>saddle</td></tr>
+<tr><td>\((3,0)\)</td><td>0</td><td>\(-6\)</td><td>\(-3\)</td><td>\(-9\)</td><td>saddle</td></tr>
+<tr><td>\((0,3)\)</td><td>\(-6\)</td><td>0</td><td>\(-3\)</td><td>\(-9\)</td><td>saddle</td></tr>
+<tr><td>\((1,1)\)</td><td>\(-2\)</td><td>\(-2\)</td><td>\(-1\)</td><td>\(3\)</td><td>local max, \(f=1\)</td></tr>
+</table>
+<p class="tip">The case tree (\(y=0\) / \(2x+y=3\), then sub-cases) is what the marker is looking for. Write it as a tree, not a paragraph.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Find and classify the critical point of \(f(x,y)=x^2+2y^2+4x-4y+3\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=2x+4=0\Rightarrow x=-2\); \(f_y=4y-4=0\Rightarrow y=1\). Critical point \((-2,1)\).</p>
+<p>\(f_{xx}=2,\ f_{yy}=4,\ f_{xy}=0\Rightarrow D=8\gt0,\ f_{xx}\gt0\) → <b>local min</b>, \(f(-2,1)=4+2-8-4+3=-3\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Find and classify all critical points of \(f(x,y)=y^3-3y+x^2y\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=2xy=0\Rightarrow x=0\) or \(y=0\). \(f_y=3y^2-3+x^2\).</p>
+<ul><li>\(x=0\): \(3y^2=3\Rightarrow y=\pm1\): \((0,1),(0,-1)\).</li>
+<li>\(y=0\): \(x^2=3\Rightarrow x=\pm\sqrt3\): \((\sqrt3,0),(-\sqrt3,0)\).</li></ul>
+<p>\(f_{xx}=2y,\ f_{yy}=6y,\ f_{xy}=2x\Rightarrow D=12y^2-4x^2\).</p>
+<ul><li>\((0,1)\): \(D=12\gt0,\ f_{xx}=2\gt0\) → local min, \(f=-2\).</li>
+<li>\((0,-1)\): \(D=12\gt0,\ f_{xx}=-2\lt0\) → local max, \(f=2\).</li>
+<li>\((\pm\sqrt3,0)\): \(D=-12\lt0\) → saddles, \(f=0\).</li></ul>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> Determine and classify all critical points of \(h(x,y)=(2x-y^2)e^{x}\).</p>
+<details><summary>Solution</summary>
+<p>\(h_x=2e^x+(2x-y^2)e^x=e^x(2x-y^2+2)\), \(h_y=-2ye^x\).</p>
+<p>\(e^x\ne0\): \(h_y=0\Rightarrow y=0\); then \(2x+2=0\Rightarrow x=-1\). Only critical point \((-1,0)\).</p>
+<p>\(h_{xx}=e^x(2x-y^2+2)+2e^x=e^x(2x-y^2+4)\), \(h_{yy}=-2e^x\), \(h_{xy}=-2ye^x\).</p>
+<p>At \((-1,0)\): \(h_{xx}=2e^{-1},\ h_{yy}=-2e^{-1},\ h_{xy}=0\Rightarrow D=-4e^{-2}\lt0\) → <b>saddle point</b>, \(h(-1,0)=-2e^{-1}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 12 marks</span> <b>Q4.</b> Find and classify all critical points of \(f(x,y)=x^4+y^4-4xy\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=4x^3-4y=0\Rightarrow y=x^3\). \(f_y=4y^3-4x=0\Rightarrow x=y^3=x^9\Rightarrow x(x^8-1)=0\Rightarrow x=0,\pm1\) (real roots of \(x^8=1\) are \(\pm1\)). Points \((0,0),(1,1),(-1,-1)\).</p>
+<p>\(f_{xx}=12x^2,\ f_{yy}=12y^2,\ f_{xy}=-4\Rightarrow D=144x^2y^2-16\).</p>
+<ul><li>\((0,0)\): \(D=-16\lt0\) → saddle.</li>
+<li>\((\pm1,\pm1)\): \(D=128\gt0,\ f_{xx}=12\gt0\) → local minima, \(f=-2\).</li></ul>
+</details>
+</div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Classifying with the Hessian — including \(D=0\)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — three points, two natures: \(f(x,y)=x^4-2x^2+y^2-2y\)</summary>
+<p>\(f_x=4x^3-4x=4x(x-1)(x+1)=0\Rightarrow x=0,\pm1\). \(f_y=2y-2=0\Rightarrow y=1\). Points \((0,1),(1,1),(-1,1)\).</p>
+<p>\(f_{xx}=12x^2-4,\ f_{yy}=2,\ f_{xy}=0\Rightarrow D=2(12x^2-4)\).</p>
+<ul><li>\((0,1)\): \(D=-8\lt0\) → saddle, \(f=-1\).</li>
+<li>\((\pm1,1)\): \(D=16\gt0,\ f_{xx}=8\gt0\) → local minima, \(f=1-2+1-2=-2\).</li></ul>
+<p class="tip">Two minima separated by a saddle — the "double well". Sketching the \(x\)-cross-section \(x^4-2x^2\) confirms it.</p>
+</details>
+<details>
+<summary>Worked B — \(D=0\) twice, different answers: \(x^2+y^4\) and \(x^2-y^4\)</summary>
+<p>Both have \((0,0)\) as the only critical point, with \(f_{xx}=2,\ f_{yy}=\pm12y^2=0,\ f_{xy}=0\Rightarrow D(0,0)=0\): inconclusive.</p>
+<ul><li>\(f=x^2+y^4\ge0=f(0,0)\) everywhere → <b>minimum</b> (local and global).</li>
+<li>\(g=x^2-y^4\): along \(y=0\), \(g=x^2\gt0\); along \(x=0\), \(g=-y^4\lt0\) → <b>saddle</b>.</li></ul>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> At three critical points the second partials are: (a) \(f_{xx}=3,f_{yy}=4,f_{xy}=-2\); (b) \(f_{xx}=-1,f_{yy}=-9,f_{xy}=3\); (c) \(f_{xx}=2,f_{yy}=-1,f_{xy}=0\). Classify each.</p>
+<details><summary>Solution</summary>
+<p>(a) \(D=12-4=8\gt0,\ f_{xx}\gt0\) → local min. (b) \(D=9-9=0\) → inconclusive. (c) \(D=-2\lt0\) → saddle.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Find and classify all critical points of \(f(x,y)=2x^3-6xy+3y^2\).</p>
+<details><summary>Solution</summary>
+<p>\(f_y=-6x+6y=0\Rightarrow y=x\). \(f_x=6x^2-6y=0\Rightarrow x^2=x\Rightarrow x=0\) or \(1\). Points \((0,0),(1,1)\).</p>
+<p>\(f_{xx}=12x,\ f_{yy}=6,\ f_{xy}=-6\Rightarrow D=72x-36\).</p>
+<ul><li>\((0,0)\): \(D=-36\) → saddle.</li><li>\((1,1)\): \(D=36\gt0,\ f_{xx}=12\gt0\) → local min, \(f=2-6+3=-1\).</li></ul>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> Determine and classify all critical points of \(f(x,y)=xye^{-x-y}\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=ye^{-x-y}-xye^{-x-y}=y(1-x)e^{-x-y}\), \(f_y=x(1-y)e^{-x-y}\).</p>
+<p>\(f_x=0\Rightarrow y=0\) or \(x=1\). If \(y=0\): \(f_y=x\,e^{-x}=0\Rightarrow x=0\): \((0,0)\). If \(x=1\): \(f_y=(1-y)e^{-1-y}=0\Rightarrow y=1\): \((1,1)\).</p>
+<p>\(f_{xx}=y(x-2)e^{-x-y},\ f_{yy}=x(y-2)e^{-x-y},\ f_{xy}=(1-x)(1-y)e^{-x-y}\).</p>
+<ul><li>\((0,0)\): \(f_{xx}=f_{yy}=0,\ f_{xy}=1\Rightarrow D=-1\lt0\) → saddle.</li>
+<li>\((1,1)\): \(f_{xx}=f_{yy}=-e^{-2},\ f_{xy}=0\Rightarrow D=e^{-4}\gt0,\ f_{xx}\lt0\) → local max, \(f=e^{-2}\).</li></ul>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q4.</b> Let \(f(x,y)=x^2+kxy+4y^2\) where \(k\) is a constant. (a) Show \((0,0)\) is a critical point for every \(k\). (b) For which \(k\) is \((0,0)\) a local min, and for which a saddle? (c) What happens when \(k=4\)?</p>
+<details><summary>Solution</summary>
+<p>(a) \(f_x=2x+ky,\ f_y=kx+8y\), both \(0\) at \((0,0)\).</p>
+<p>(b) \(f_{xx}=2,\ f_{yy}=8,\ f_{xy}=k\Rightarrow D=16-k^2\). Local min if \(|k|\lt4\) (then \(f_{xx}=2\gt0\)); saddle if \(|k|\gt4\).</p>
+<p>(c) \(D=0\), inconclusive — but \(f=x^2+4xy+4y^2=(x+2y)^2\ge0=f(0,0)\), so \((0,0)\) is a (non-strict) <b>minimum</b>; every point on the line \(x=-2y\) is also a minimum.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 8 marks</span> <b>Q5.</b> Let \(f(x,y)=(y-x^2)(y-3x^2)=y^2-4x^2y+3x^4\). (a) Show \((0,0)\) is the only critical point and \(D(0,0)=0\). (b) Show that along every straight line \(y=mx\) (and along \(x=0\)), \(f\) has a local min at the origin. (c) Show \((0,0)\) is nevertheless <b>not</b> a local minimum.</p>
+<details><summary>Solution</summary>
+<p>(a) \(f_x=-8xy+12x^3=4x(3x^2-2y)\), \(f_y=2y-4x^2\Rightarrow y=2x^2\). Then \(f_x=4x(3x^2-4x^2)=-4x^3=0\Rightarrow x=0,y=0\). \(f_{xx}=36x^2-8y=0,\ f_{yy}=2,\ f_{xy}=-8x=0\Rightarrow D=0\).</p>
+<p>(b) \(f(x,mx)=m^2x^2-4mx^3+3x^4\): for \(m\ne0\) the \(m^2x^2\) term dominates near \(0\), so \(f\gt0\) for small \(x\ne0\); for \(m=0\), \(f=3x^4\gt0\); along \(x=0\), \(f=y^2\gt0\). A min along every line.</p>
+<p>(c) Along the parabola \(y=2x^2\) (between the two parabolas \(y=x^2\), \(y=3x^2\)): \(f=(x^2)(-x^2)=-x^4\lt0=f(0,0)\) arbitrarily close to the origin. So it is <b>not</b> a local min — it is a saddle. Moral: checking straight lines is not enough to prove a minimum.</p>
+</details>
+</div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Global extrema on closed bounded regions</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — rectangle: \(f=x^2+2y^2-2x-4y\) on \(0\le x\le3,\ 0\le y\le2\)</summary>
+<p>EVT applies (polynomial on a closed, bounded rectangle).</p>
+<p><b>Interior:</b> \(f_x=2x-2,\ f_y=4y-4\Rightarrow(1,1)\), inside ✓, \(f=-3\).</p>
+<p><b>Edges:</b></p>
+<ul>
+<li>\(y=0\): \(x^2-2x\) on \([0,3]\): stationary \(x=1\) (\(-1\)); ends \(0\), \(3\).</li>
+<li>\(y=2\): \(x^2-2x+8-8=x^2-2x\): same values: \(-1\) at \((1,2)\), \(0\), \(3\) at \((3,2)\).</li>
+<li>\(x=0\): \(2y^2-4y\) on \([0,2]\): stationary \(y=1\) (\(-2\)); ends \(0\).</li>
+<li>\(x=3\): \(3+2y^2-4y\): stationary \(y=1\) (\(1\)); ends \(3\).</li>
+</ul>
+<p><b>Compare:</b> <b>global max \(3\) at \((3,0)\) and \((3,2)\); global min \(-3\) at \((1,1)\).</b></p>
+</details>
+<details>
+<summary>Worked B — disk: \(f=2x^2+y^2-y\) on \(x^2+y^2\le1\)</summary>
+<p><b>Interior:</b> \(4x=0,\ 2y-1=0\Rightarrow(0,\tfrac12)\), inside, \(f=-\tfrac14\).</p>
+<p><b>Boundary</b> \(x^2=1-y^2\), \(y\in[-1,1]\): \(f=2(1-y^2)+y^2-y=2-y^2-y\). \(\tfrac{d}{dy}=-2y-1=0\Rightarrow y=-\tfrac12\), \(x=\pm\tfrac{\sqrt3}2\): \(f=2-\tfrac14+\tfrac12=\tfrac94\). Ends: \(y=1\): \((0,1)\), \(f=0\); \(y=-1\): \((0,-1)\), \(f=2\).</p>
+<p><b>Global max \(\tfrac94\) at \((\pm\tfrac{\sqrt3}2,-\tfrac12)\); global min \(-\tfrac14\) at \((0,\tfrac12)\).</b></p>
+<p class="tip">Eliminating \(x^2\) is valid because \(f\) only involves \(x^2\). The range of \(y\) on the circle is \([-1,1]\) — its endpoints are genuine candidates.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 6 marks</span> <b>Q1.</b> Find the global max and min of \(f(x,y)=x+y-xy\) on the square \(0\le x\le2,\ 0\le y\le2\).</p>
+<details><summary>Solution</summary>
+<p>Interior: \(f_x=1-y,\ f_y=1-x\Rightarrow(1,1)\), \(f=1\) (a saddle, but still a candidate).</p>
+<p>Edges: \(y=0\): \(f=x\in[0,2]\). \(y=2\): \(f=2-x\in[0,2]\). \(x=0\): \(f=y\). \(x=2\): \(f=2-y\). All linear — extremes at corners: \(f(0,0)=0,\ f(2,0)=2,\ f(0,2)=2,\ f(2,2)=0\).</p>
+<p><b>Global max \(2\) at \((2,0),(0,2)\); global min \(0\) at \((0,0),(2,2)\).</b></p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Find the global max and min of \(f(x,y)=x^2+y^2-4x\) on the disk \(x^2+y^2\le9\).</p>
+<details><summary>Solution</summary>
+<p>EVT applies. Interior: \((2,0)\) (\(4\lt9\) ✓), \(f=-4\).</p>
+<p>Boundary: \(x^2+y^2=9\Rightarrow f=9-4x,\ x\in[-3,3]\): max \(21\) at \((-3,0)\), min \(-3\) at \((3,0)\).</p>
+<p><b>Global max \(21\) at \((-3,0)\); global min \(-4\) at \((2,0)\).</b></p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 13 marks</span> <b>Q3.</b> Let \(S\) be the closed square bounded by \(x=0,\ x=2,\ y=0,\ y=2\), and \(f(x,y)=2x^2-y^2+2xy-4x\). (a) Determine the max and min of \(f\) on the boundary of \(S\). [7] (b) Determine the critical point(s) of \(f\) in the interior of \(S\). [4] (c) Determine the global max and min of \(f\) on \(S\). [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b></p>
+<ul>
+<li>\(y=0\): \(2x^2-4x\), \(x\in[0,2]\): stationary \(x=1\) → \(-2\); ends \(0,0\).</li>
+<li>\(y=2\): \(2x^2-4+4x-4x=2x^2-4\): min \(-4\) at \((0,2)\), max \(4\) at \((2,2)\).</li>
+<li>\(x=0\): \(-y^2\), \(y\in[0,2]\): max \(0\) at \((0,0)\), min \(-4\) at \((0,2)\).</li>
+<li>\(x=2\): \(8-y^2+4y-8=4y-y^2\): stationary at \(y=2\) (an endpoint); values \(0\) at \((2,0)\), \(4\) at \((2,2)\).</li>
+</ul>
+<p>Boundary: <b>max \(4\) at \((2,2)\), min \(-4\) at \((0,2)\)</b>.</p>
+<p><b>(b)</b> \(f_x=4x+2y-4=0,\ f_y=2x-2y=0\Rightarrow x=y,\ 6x=4\Rightarrow(\tfrac23,\tfrac23)\), inside ✓, \(f=-\tfrac43\). (\(D=(4)(-2)-4=-12\lt0\): a saddle.)</p>
+<p><b>(c)</b> By EVT, comparing: <b>global max \(4\) at \((2,2)\); global min \(-4\) at \((0,2)\)</b>.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 10 marks</span> <b>Q4.</b> Find the global max and min of \(f(x,y)=x^2y\) on the disk \(x^2+y^2\le3\).</p>
+<details><summary>Solution</summary>
+<p><b>Interior:</b> \(f_x=2xy=0,\ f_y=x^2=0\Rightarrow x=0\), any \(y\): a whole <b>line of critical points</b> \((0,y)\), all with \(f=0\).</p>
+<p><b>Boundary:</b> \(x^2=3-y^2\), \(y\in[-\sqrt3,\sqrt3]\): \(f=(3-y^2)y=3y-y^3\). Derivative \(3-3y^2=0\Rightarrow y=\pm1\), \(x=\pm\sqrt2\): \(f=2\) at \(y=1\), \(f=-2\) at \(y=-1\). Ends \(y=\pm\sqrt3\) (\(x=0\)): \(f=0\).</p>
+<p><b>Global max \(2\) at \((\pm\sqrt2,1)\); global min \(-2\) at \((\pm\sqrt2,-1)\).</b></p>
+</details>
+</div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Lagrange multipliers — two variables</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — linear \(f\) on a circle: \(f=x+2y\) on \(x^2+y^2=5\)</summary>
+<p>\(g=x^2+y^2-5\). \(\nabla f=(1,2)=\lambda(2x,2y)\): \(1=2\lambda x\) ①, \(2=2\lambda y\) ②.</p>
+<p>① shows \(\lambda\ne0\) and \(x\ne0\). ②÷①: \(\dfrac{y}{x}=2\Rightarrow y=2x\). Constraint: \(5x^2=5\Rightarrow x=\pm1\).</p>
+<p>\(f(1,2)=5\), \(f(-1,-2)=-5\). Circle closed and bounded ⇒ <b>max \(5\) at \((1,2)\), min \(-5\) at \((-1,-2)\)</b>.</p>
+</details>
+<details>
+<summary>Worked B — a zero case that matters: \(f=x^2y\) on \(x^2+2y^2=6\)</summary>
+<p>\(\nabla f=(2xy,\ x^2)=\lambda(2x,\ 4y)\): \(2xy=2\lambda x\) ①, \(x^2=4\lambda y\) ②.</p>
+<p>① \(\Rightarrow 2x(y-\lambda)=0\Rightarrow x=0\) or \(\lambda=y\).</p>
+<ul>
+<li><b>\(x=0\):</b> constraint \(2y^2=6\Rightarrow y=\pm\sqrt3\): \(f=0\).</li>
+<li><b>\(\lambda=y\):</b> ② \(x^2=4y^2\). Constraint: \(4y^2+2y^2=6\Rightarrow y=\pm1,\ x=\pm2\). \(f=x^2y=4y\): \(4\) at \((\pm2,1)\), \(-4\) at \((\pm2,-1)\).</li>
+</ul>
+<p><b>Max \(4\) at \((\pm2,1)\); min \(-4\) at \((\pm2,-1)\).</b> The \(x=0\) candidates (value \(0\)) are neither — but you only know that after comparing.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 6 marks</span> <b>Q1.</b> Use Lagrange multipliers to find the minimum of \(x^2+y^2\) subject to \(3x+4y=25\).</p>
+<details><summary>Solution</summary>
+<p>\(2x=3\lambda,\ 2y=4\lambda\Rightarrow y=\tfrac43x\). Constraint: \(3x+\tfrac{16}3x=25\Rightarrow\tfrac{25}{3}x=25\Rightarrow x=3,\ y=4\). \(f=25\).</p>
+<p>Minimum: far along the line \(x^2+y^2\to\infty\), so the only candidate is the min (or compare: \(f(\tfrac{25}{3},0)=\tfrac{625}{9}\gt25\)). <b>Min \(25\) at \((3,4)\)</b> — i.e. the line is at distance \(5\) from the origin.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 10 marks</span> <b>Q2.</b> Use Lagrange multipliers to find the max and min of \(f(x,y)=x^2-y^2\) on the ellipse \(x^2+4y^2=4\).</p>
+<details><summary>Solution</summary>
+<p>\(2x=2\lambda x\) ①, \(-2y=8\lambda y\) ②. ① \(\Rightarrow x(1-\lambda)=0\).</p>
+<ul><li>\(x=0\): \(4y^2=4\Rightarrow(0,\pm1)\), \(f=-1\).</li>
+<li>\(\lambda=1\): ② \(-2y=8y\Rightarrow y=0\Rightarrow x=\pm2\): \((\pm2,0)\), \(f=4\).</li></ul>
+<p><b>Max \(4\) at \((\pm2,0)\); min \(-1\) at \((0,\pm1)\).</b></p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> The temperature on a plate is \(T(x,y)=2x^2+4xy-y^2\). Epsilon walks on the circle \(x^2+y^2=5\). Use Lagrange multipliers to find the highest and lowest temperatures Epsilon meets, and where.</p>
+<details><summary>Solution</summary>
+<p>\((4x+4y,\ 4x-2y)=\lambda(2x,2y)\Rightarrow 2x+2y=\lambda x\) ①, \(2x-y=\lambda y\) ②.</p>
+<p>If \(x=0\), ① gives \(y=0\) — not on the circle; so \(x\ne0\). Eliminate \(\lambda\) by cross-multiplying ①·\(y\) = ②·\(x\): \((2x+2y)y=(2x-y)x\Rightarrow 2x^2-3xy-2y^2=0\Rightarrow(2x+y)(x-2y)=0\).</p>
+<ul><li>\(x=2y\): \(5y^2=5\Rightarrow(2,1),(-2,-1)\): \(T=8+8-1=15\).</li>
+<li>\(y=-2x\): \(5x^2=5\Rightarrow(1,-2),(-1,2)\): \(T=2-8-4=-10\).</li></ul>
+<p>Circle closed and bounded ⇒ <b>highest \(15\) at \(\pm(2,1)\); lowest \(-10\) at \(\pm(1,-2)\)</b>.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 10 marks</span> <b>Q4.</b> Use Lagrange multipliers to find the points on the curve \(x^2y=16\) closest to the origin, and the minimum distance.</p>
+<details><summary>Solution</summary>
+<p>Minimise \(f=x^2+y^2\) s.t. \(g=x^2y-16=0\): \(2x=2\lambda xy\) ①, \(2y=\lambda x^2\) ②.</p>
+<p>On the curve \(x\ne0\) (else \(0=16\)), so ① gives \(\lambda y=1\). ②: \(2y=\dfrac{x^2}{y}\Rightarrow x^2=2y^2\). Constraint: \(2y^3=16\Rightarrow y=2,\ x^2=8\Rightarrow x=\pm2\sqrt2\).</p>
+<p>\(f=8+4=12\). <b>Closest points \((\pm2\sqrt2,2)\), minimum distance \(\sqrt{12}=2\sqrt3\)</b> (the curve goes off to infinity, so this candidate is the min).</p>
+</details>
+</div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Lagrange multipliers — three variables</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — linear on a sphere: \(f=2x+y-2z\) on \(x^2+y^2+z^2=9\)</summary>
+<p>\((2,1,-2)=\lambda(2x,2y,2z)\Rightarrow x=\tfrac1\lambda,\ y=\tfrac1{2\lambda},\ z=-\tfrac1\lambda\) (\(\lambda\ne0\) since \(2=2\lambda x\)).</p>
+<p>Constraint: \(\tfrac1{\lambda^2}\big(1+\tfrac14+1\big)=9\Rightarrow\lambda^2=\tfrac14\Rightarrow\lambda=\pm\tfrac12\).</p>
+<p>\(\lambda=\tfrac12\): \((2,1,-2)\), \(f=4+1+4=9\). \(\lambda=-\tfrac12\): \((-2,-1,2)\), \(f=-9\).</p>
+<p><b>Max \(9\) at \((2,1,-2)\), min \(-9\) at \((-2,-1,2)\).</b> Check: \(R\|\mathbf a\|=3\cdot3=9\) ✓.</p>
+</details>
+<details>
+<summary>Worked B — product on a plane: maximise \(xy^2z^3\) with \(x+y+z=6\), \(x,y,z\gt0\)</summary>
+<p>\((y^2z^3,\ 2xyz^3,\ 3xy^2z^2)=\lambda(1,1,1)\). All positive, so divide freely:</p>
+<p>② ÷ ①: \(\dfrac{2x}{y}=1\Rightarrow y=2x\). ③ ÷ ①: \(\dfrac{3x}{z}=1\Rightarrow z=3x\). Constraint: \(6x=6\Rightarrow(1,2,3)\).</p>
+<p>\(f=1\cdot4\cdot27=108\). On the edges of the closed triangle \(x,y,z\ge0\) the product is \(0\), so by EVT <b>max \(=108\) at \((1,2,3)\)</b>.</p>
+<p class="tip">Pattern: maximising \(x^ay^bz^c\) on \(x+y+z=S\) splits \(S\) in the ratio \(a:b:c\). Great for checking.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 6 marks</span> <b>Q1.</b> Find the max and min of \(x+y+z\) on the sphere \(x^2+y^2+z^2=12\).</p>
+<details><summary>Solution</summary>
+<p>\(1=2\lambda x=2\lambda y=2\lambda z\Rightarrow x=y=z\) (\(\lambda\ne0\)). \(3x^2=12\Rightarrow x=\pm2\). <b>Max \(6\) at \((2,2,2)\); min \(-6\) at \((-2,-2,-2)\).</b></p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 10 marks</span> <b>Q2.</b> Maximise \(f=xyz\) subject to \(2x+3y+z=18\), with \(x,y,z\gt0\).</p>
+<details><summary>Solution</summary>
+<p>\(yz=2\lambda\) ①, \(xz=3\lambda\) ②, \(xy=\lambda\) ③. ①÷③: \(\tfrac zx=2\Rightarrow z=2x\). ②÷③: \(\tfrac zy=3\Rightarrow z=3y\Rightarrow y=\tfrac{2x}{3}\).</p>
+<p>Constraint: \(2x+2x+2x=18\Rightarrow x=3,\ y=2,\ z=6\). <b>Max \(f=36\) at \((3,2,6)\)</b> (\(f=0\) on the edges of the closed triangle).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> The temperature on the sphere \(x^2+y^2+z^2=8\) is \(T=xy^2z\). Use Lagrange multipliers to find the highest and lowest temperatures.</p>
+<details><summary>Solution</summary>
+<p>\(y^2z=2\lambda x\) ①, \(2xyz=2\lambda y\) ②, \(xy^2=2\lambda z\) ③.</p>
+<p><b>Special cases:</b> if any of \(x,y,z\) is \(0\), \(T=0\); if \(\lambda=0\), ① forces \(y=0\) or \(z=0\), so \(T=0\).</p>
+<p><b>Main case</b> (all non-zero): ①÷③: \(\dfrac zx=\dfrac xz\Rightarrow x^2=z^2\). ② gives \(\lambda=xz\); ①: \(y^2z=2x^2z\Rightarrow y^2=2x^2\). Constraint: \(x^2+2x^2+x^2=8\Rightarrow x^2=2,\ y^2=4,\ z^2=2\).</p>
+<p>\(T=y^2(xz)=4xz\), with \(xz=\pm2\). <b>Highest \(8\)</b> (\(x,z\) same sign, e.g. \((\sqrt2,2,\sqrt2)\)); <b>lowest \(-8\)</b> (opposite signs).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 10 marks</span> <b>Q4.</b> Use Lagrange multipliers to find the points of the sphere \(x^2+y^2+z^2=9\) closest to and farthest from \(P=(4,2,4)\), and the two distances.</p>
+<details><summary>Solution</summary>
+<p>Minimise/maximise \(f=(x-4)^2+(y-2)^2+(z-4)^2\): \(2(x-4)=2\lambda x\Rightarrow x(1-\lambda)=4\), similarly \(y(1-\lambda)=2,\ z(1-\lambda)=4\). So \((x,y,z)=\tfrac{1}{1-\lambda}(4,2,4)\).</p>
+<p>Constraint: \(\dfrac{36}{(1-\lambda)^2}=9\Rightarrow1-\lambda=\pm2\): points \((2,1,2)\) and \((-2,-1,-2)\).</p>
+<p>\(f(2,1,2)=4+1+4=9\) → <b>closest \((2,1,2)\), distance \(3\)</b>. \(f(-2,-1,-2)=36+9+36=81\) → <b>farthest \((-2,-1,-2)\), distance \(9\)</b>. (Check: \(|OP|=6\), radius \(3\): \(6-3=3\), \(6+3=9\) ✓.)</p>
+</details>
+</div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · Applied optimisation word problems</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — open-top box of volume 32 with least material</summary>
+<p><b>Q.</b> An open-top rectangular box must hold \(32\ \text{m}^3\). Use Lagrange multipliers to find the dimensions that minimise the surface area.</p>
+<p>Base \(x\times y\), height \(z\) (all \(\gt0\)). Minimise \(S=xy+2xz+2yz\) s.t. \(xyz=32\).</p>
+$$ y+2z=\lambda yz\ ①,\qquad x+2z=\lambda xz\ ②,\qquad 2x+2y=\lambda xy\ ③. $$
+<p>① \(\times x\) − ② \(\times y\): \(2xz-2yz=0\Rightarrow x=y\). ② \(\times y\) − ③ \(\times z\) with \(x=y\): \(xy+2yz-2xz-2yz=0\Rightarrow x^2=2xz\Rightarrow x=2z\).</p>
+<p>Constraint: \((2z)(2z)z=32\Rightarrow z^3=8\Rightarrow z=2\). <b>Base \(4\times4\), height \(2\); area \(16+16+16=48\ \text{m}^2\).</b></p>
+</details>
+<details>
+<summary>Worked B — largest rectangle in an ellipse</summary>
+<p><b>Q.</b> A rectangle with sides parallel to the axes is inscribed in the ellipse \(\tfrac{x^2}8+\tfrac{y^2}2=1\). Find its largest possible area.</p>
+<p>Corner \((x,y)\) in the first quadrant; area \(A=4xy\). Maximise \(xy\) s.t. \(g=\tfrac{x^2}8+\tfrac{y^2}2-1=0\): \(y=\tfrac{\lambda x}4\), \(x=\lambda y\Rightarrow\) multiply: \(xy=\tfrac{\lambda^2}{4}xy\Rightarrow\lambda=2\) (positive case) \(\Rightarrow x=2y\).</p>
+<p>Constraint: \(\tfrac{4y^2}8+\tfrac{y^2}2=y^2=1\Rightarrow y=1,\ x=2\). <b>Max area \(4\cdot2\cdot1=8\).</b></p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 6 marks</span> <b>Q1.</b> Positive numbers \(x,y\) satisfy \(2x+y=12\). Use Lagrange multipliers to maximise \(x^2y\).</p>
+<details><summary>Solution</summary>
+<p>\(2xy=2\lambda,\ x^2=\lambda\Rightarrow 2xy=2x^2\Rightarrow y=x\) (\(x\gt0\)). \(3x=12\Rightarrow(4,4)\). <b>Max \(64\).</b></p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 10 marks</span> <b>Q2.</b> A closed rectangular box has total surface area \(96\ \text{cm}^2\). Use Lagrange multipliers to find the largest volume.</p>
+<details><summary>Solution</summary>
+<p>Max \(V=xyz\) s.t. \(2(xy+yz+xz)=96\). \(yz=2\lambda(y+z)\), \(xz=2\lambda(x+z)\), \(xy=2\lambda(x+y)\).</p>
+<p>Multiply the first by \(x\), second by \(y\) and subtract: \(0=2\lambda z(x-y)\Rightarrow x=y\) (\(\lambda,z\ne0\)). Similarly \(y=z\). Cube: \(6x^2=96\Rightarrow x=4\). <b>Max volume \(64\ \text{cm}^3\)</b> (a \(4\) cm cube).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> A rectangular box lies in the first octant with three faces on the coordinate planes and the opposite vertex \((x,y,z)\) on the plane \(x+2y+3z=6\). Use Lagrange multipliers to find the maximum volume.</p>
+<details><summary>Solution</summary>
+<p>Max \(V=xyz\) s.t. \(x+2y+3z=6\), \(x,y,z\gt0\): \(yz=\lambda,\ xz=2\lambda,\ xy=3\lambda\Rightarrow x=2y,\ x=3z\). Constraint: \(3x=6\Rightarrow x=2,\ y=1,\ z=\tfrac23\).</p>
+<p><b>Max volume \(2\cdot1\cdot\tfrac23=\tfrac43\)</b> (volume \(\to0\) on the edges of the feasible triangle).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q4.</b> A rectangular paddock of area \(800\ \text{m}^2\) is built along a straight river; no fence is needed along the river. Use Lagrange multipliers to find the least length of fencing.</p>
+<details><summary>Solution</summary>
+<p>Sides \(x\) (perpendicular to the river, two of them) and \(y\) (parallel). Minimise \(L=2x+y\) s.t. \(xy=800\): \(2=\lambda y,\ 1=\lambda x\Rightarrow y=2x\). \(2x^2=800\Rightarrow x=20,\ y=40\). <b>Least fencing \(80\) m</b> (\(L\to\infty\) as \(x\to0\) or \(\infty\), so the candidate is the min).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q5.</b> A closed cylindrical can must have volume \(16\pi\ \text{cm}^3\). Use Lagrange multipliers to find the radius and height minimising the surface area, and the minimum area.</p>
+<details><summary>Solution</summary>
+<p>Minimise \(S=2\pi r^2+2\pi rh\) s.t. \(\pi r^2h=16\pi\): \(4\pi r+2\pi h=2\pi\lambda rh\) ①, \(2\pi r=\pi\lambda r^2\) ②. ② (\(r\gt0\)): \(\lambda=\tfrac2r\). ①: \(4\pi r+2\pi h=4\pi h\Rightarrow h=2r\).</p>
+<p>\(\pi r^2(2r)=16\pi\Rightarrow r^3=8\Rightarrow r=2,\ h=4\). <b>\(S=8\pi+16\pi=24\pi\ \text{cm}^2\)</b>. (Same \(h=2r\) shape as 2024 S1 Q6 — the dual problem.)</p>
+</details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every question produce, on paper, the marker's five beats: (1) derivatives / \(f\), \(g\), \(\nabla f\), \(\nabla g\) written out; (2) the system, numbered, with <b>every case split</b> ("\(x=0\) or …"); (3) the full candidate list, each checked against the region/constraint; (4) a table of values or a \(D\)-table with one justification sentence per point; (5) a final sentence answering exactly what was asked (values <i>and</i> points). If you can do that cold for a Type A and a Type D/E question in 15 minutes each, you have locked in ~24 marks.</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 6 Optimisation · built from the MATH1052 Summary (p 7), Poster B, Tutorial 10 (questions &amp; solutions), and the 2020–2025 final papers with their solutions and marking schemes (2022 S2, 2024 S2, 2025 S1 MS). Every critical point, Hessian classification, boundary extremum and Lagrange extremum on this page verified with SymPy (<code>verify/ch06.py</code>).
+<br><a href="index.html">🏠 Hub</a> · <a href="ch05-gradient-chain-rule.html">← Ch 5</a> · <a href="ch07-curves-vector-fields.html">Ch 7 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — The Notebook</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:#ddd6fe}
+  td.f{white-space:nowrap;font-weight:600}
+  td.m{width:34px;text-align:center;font-size:16px}
+  .gold-card{background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(167,139,250,.06));border:1px solid #5a4a1a;border-radius:12px;padding:16px 20px;margin:12px 0}
+  .gold-card ol{margin:8px 0 0 20px;padding:0}.gold-card li{margin:7px 0}
+  nav a.here{background:var(--accent);color:#1e1b4b;font-weight:700}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--muted);font-size:11px;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:middle}
+  .scroller{overflow-x:auto}
+  td.f{white-space:normal;min-width:230px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📓 The Notebook</h1>
+  <p>Crucial formulas &amp; rules only, one line each. This is what you hand-copy into your "most important notes" book.</p>
+  <span class="badge">100 marks · 8 questions · 120 min</span>
+  <span class="badge gold">Formula sheet PROVIDED (8 items)</span>
+  <span class="badge pre">NO calculator</span>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="foundations.html">🧱 Foundations</a>
+  <a href="formulas.html">🧰 Formula sheet</a>
+  <a href="notebook.html" class="here">📓 Notebook</a>
+  <a href="#ch1">Ch1</a>
+  <a href="#ch2">Ch2</a>
+  <a href="#ch3">Ch3</a>
+  <a href="#ch4">Ch4</a>
+  <a href="#ch5">Ch5</a>
+  <a href="#ch6">Ch6</a>
+  <a href="#ch7">Ch7</a>
+  <a href="#top10">🏆 Top 10</a>
+  <a href="#ritual">✍️ Rituals</a>
+</nav>
+
+<main>
+
+<div class="card">
+  <b>How to read this page.</b> The exam <em>gives</em> you an 8-item formula sheet, so your notebook shouldn't copy the sheet. It should hold what the sheet <em>doesn't</em> do for you.
+  <br>📄 = <b>on the provided sheet</b>. Don't memorise it. Write it down so you <em>recognise it instantly and know when to grab it</em>.
+  <br>🧠 = <b>NOT on the sheet</b>. Know it cold: definitions, tests, classification rules, the ODE toolkit, parametrisations, and how to write each method up.
+  <br><span style="color:var(--muted);font-size:13.5px">The badges next to each chapter show how often that chapter's questions appear across the 11 text papers, 2020 S1–2025 S2.</span>
+</div>
+
+<section id="ch1">
+<h2>Ch 1 · First-order ODEs <span class="badge">2020 papers only</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Separable: \(y'=f(t)g(y)\ \Rightarrow\ \int\frac{dy}{g(y)}=\int f(t)\,dt\)</td><td>List the equilibria \(g(y)=0\) <b>before</b> dividing, or you silently lose solutions.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Linear: \(y'+p y=q\), \(I=e^{\int p\,dt}\), \((Iy)'=Iq\)</td><td>Put it in standard form first. Divide by the coefficient of \(y'\) (2020 S2 Q2).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Equilibria: \(y'=f(y)\), \(f(c)=0\); stable if \(f\gt0\) below, \(f\lt0\) above</td><td>Draw a sign chart of \(f(y)\). Arrows pointing <i>in</i> means stable. A \(t\)-factor like \((t-2)\) never creates an equilibrium (2020 S2 Q1).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Euler: \(y_{n+1}=y_n+h\,f(t_n,y_n)\)</td><td>Tabulate \(n,\ t_n,\ y_n,\ f(t_n,y_n)\). One row per step, exact fractions.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Growth \(P=P_0e^{rt}\); cooling \(T=T_m+(T_0-T_m)e^{-kt}\)</td><td>Two data points give the two unknowns. Take logs of a ratio to find \(k\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Mixing: \(\frac{dA}{dt}=(\text{conc in})(\text{rate in})-\frac{A}{V}(\text{rate out})\)</td><td>Check units: kg/min on both sides.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Substitution \(y=xu\) makes \(y'=F(y/x)\) separable</td><td>\(y'=u+xu'\). This was the whole of 2020 S1 Q5.</td></tr>
+</table></div>
+</section>
+
+<section id="ch2">
+<h2>Ch 2 · Second-order linear ODEs <span class="badge">2020 papers only</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">\(ay''+by'+cy=0\ \to\ a\lambda^2+b\lambda+c=0\)</td><td>The discriminant \(b^2-4ac\) decides which of the three forms to write.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Distinct: \(c_1e^{\lambda_1t}+c_2e^{\lambda_2t}\) · Repeated: \((c_1+c_2t)e^{\lambda t}\)</td><td>Leaving out the \(t\) in the repeated case gives only one solution, so full marks are impossible.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Complex \(\alpha\pm\beta i\): \(e^{\alpha t}(c_1\cos\beta t+c_2\sin\beta t)\)</td><td>\(\beta\) goes inside the trig functions, \(\alpha\) in the exponential. 2020 S1 Q7: \(4\lambda^2-4\lambda+5=0\) gives \(\tfrac12\pm i\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(y=y_H+y_P\); apply the ICs to the full \(y\)</td><td>Applying the ICs to \(y_H\) alone is the most common ODE slip.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Guess \(y_P\): poly → poly · \(e^{kt}\to Ae^{kt}\) · \(\cos/\sin\to A\cos+B\sin\)</td><td>Always include <b>both</b> \(\cos\) and \(\sin\), even if \(r(t)\) has only one of them.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Overlap rule: guess solves the homogeneous equation → multiply by \(t\) (again if needed)</td><td>Compare the guess with \(y_H\) <b>before</b> differentiating.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Reduction of order: \(y_2=u\,y_1\)</td><td>2020 S2 Q3: find \(n\) with \(y=x^n\), then set \(y_2=u\,x^n\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Spring \(mx''+\beta x'+kx=0\): \(\beta^2-4mk\ \gt,=,\lt\ 0\) → over / critical / under</td><td>With no damping, \(\omega=\sqrt{k/m}\) and the motion is \(A\cos(\omega t-\phi)\).</td></tr>
+</table></div>
+</section>
+
+<section id="ch3">
+<h2>Ch 3 · Surfaces, contours &amp; cross-sections <span class="badge">9 of 11 papers</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Contour: set \(f(x,y)=c\), draw in the \(xy\)-plane</td><td>"Contour through \((2,1)\)": first compute \(c=f(2,1)\) (2024 S2 Q1a, 2025 S1 Q3a).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Complete the square: \(x^2+2px=(x+p)^2-p^2\)</td><td>It turns every quadratic contour into a standard conic with a visible centre.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Ellipse \(\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1\) · circle when \(a=b\)</td><td>Semi-axes \(a\) (horizontal) and \(b\) (vertical), centre \((h,k)\).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Hyperbola \(\frac{(x-h)^2}{a^2}-\frac{(y-k)^2}{b^2}=\pm1\), asymptotes \(y-k=\pm\frac ba(x-h)\)</td><td>The sign on the right decides the orientation: \(+1\) opens left-right, \(-1\) opens up-down.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Intercepts: set \(y=0\) for \(x\)-intercepts, \(x=0\) for \(y\)-intercepts, exactly</td><td>"Label all intercepts" is a stated mark. If there are none, write "no \(x\)-intercepts".</td></tr>
+<tr><td class="m">🧠</td><td class="f">Cross-section \(y=k\): plot \(z\) against \(x\), e.g. \(z=\sqrt x+k^2-3\) (2025 S2 Q1b)</td><td>For "show the cross-sections are parabolas", rearrange to \(x=(\ldots)^2\) or \(z=a(\ldots)^2+\ldots\) form.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Quadrics: paraboloid \(z=x^2+y^2\) · saddle \(z=x^2-y^2\) · cone \(z^2=x^2+y^2\) · ellipsoid</td><td>For "match the function to the plot" parts, look at the contours: circles, hyperbolas or lines.</td></tr>
+<tr><td class="m">📄</td><td class="f">General conic \(ax^2+by^2+cx+dy+e=0\) <span class="tag">2023 S2 sheet only</span></td><td>\(ab\gt0\) gives an ellipse or circle (or it degenerates), \(ab\lt0\) a hyperbola, and \(a=0\) or \(b=0\) a parabola.</td></tr>
+</table></div>
+</section>
+
+<section id="ch4">
+<h2>Ch 4 · Limits, partials &amp; approximation <span class="badge">limits 9 / 11 · tangent plane 5 / 11</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">DNE: two paths, two different limits</td><td>Try \(y=mx\) first. If you get the same answer for every \(m\), try \(y=kx^2\) or \(x=ky^2\) (2024 S1 Q2, 2023 S2 Q8).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Exists: squeeze \(|f-L|\le g\to0\), or polar \(r\to0\)</td><td>Agreement along paths <b>never</b> proves a limit exists. You need a bound.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Continuous at \((a,b)\iff\lim f=f(a,b)\)</td><td>Three checks: \(f(a,b)\) is defined, the limit exists, and they are equal. "Removable discontinuity" means the limit exists but differs from \(f(a,b)\) (2023 S1 Q2).</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\)</td><td>Use it for piecewise functions at the origin. The rules don't apply at the join (2025 S2 Q4b, 2025 S1 Q2c).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Clairaut: \(f_{xy}=f_{yx}\)</td><td>A free check on your second partials before you build \(D\) or \(Q\).</td></tr>
+<tr><td class="m">📄</td><td class="f">\(P(x,y)=f+f_x(x-a)+f_y(y-b)\) = tangent plane</td><td>Write the plane as \(z=\dots\). Every coefficient is evaluated at the <b>base</b> point.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(Q=P+\tfrac12f_{xx}(x-a)^2+f_{xy}(x-a)(y-b)+\tfrac12f_{yy}(y-b)^2\)</td><td>There is no \(\tfrac12\) on the mixed term.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(\Delta f\approx f_x\Delta x+f_y\Delta y\); worst case \(|f_x|E_1+|f_y|E_2\)</td><td>"Estimate the change / maximum error" is this line, not \(P\) evaluated at a point.</td></tr>
+</table></div>
+</section>
+
+<section id="ch5">
+<h2>Ch 5 · Gradient, directional derivatives &amp; chain rule <span class="badge">gradient 9 / 11 · chain 8 / 11</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">\(\nabla f=(f_x,f_y,f_z)\), \(\perp\) to level sets</td><td>So the normal to the level curve \(f=c\) at \(P\) is \(\nabla f(P)\).</td></tr>
+<tr><td class="m">📄</td><td class="f">\(D_{\mathbf u}f=\nabla f\cdot\frac{\mathbf u}{\lVert\mathbf u\rVert}\)</td><td>"Towards \(Q\) from \(P\)": \(\mathbf u=Q-P\). Always normalise.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Max increase: direction \(\nabla f\), rate \(\lVert\nabla f\rVert\) · max decrease: \(-\nabla f\)</td><td>Asked in 2025 S2 Q3b, 2024 S2 Q4c, 2024 S1 Q1b–c, 2023 S1 Q1b–c and 2023 S2 Q3a.</td></tr>
+<tr><td class="m">🧠</td><td class="f">No change: \(\mathbf u\perp\nabla f\), i.e. \(\pm(f_y,-f_x)\)</td><td>Give both directions. There are 2 marks for each (2025 S1 Q1c, 2023 S1 Q1d).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Unknown \(\nabla f=(p,q)\): one equation per given directional derivative</td><td>2025 S1 Q1a and 2022 S1 Q6 run the directional-derivative formula backwards.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\frac{dz}{dt}=z_x\frac{dx}{dt}+z_y\frac{dy}{dt}\)</td><td>Draw the tree. There is one product per branch.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Two parameters: \(f_u=f_xx_u+f_yy_u\), \(f_v=f_xx_v+f_yy_v\)</td><td>The sheet shows only \(d/dt\). Answer "in terms of \(u,v\)" by substituting back.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(g=f(ax+by)\): \(g_x=af'\), \(g_y=bf'\) \(\Rightarrow\ a\,g_y=b\,g_x\)</td><td>The "show that" PDE identity: set \(s=ax+by\) and use the chain rule on each (2025 S2 Q3a, 2022 S1 Q4).</td></tr>
+<tr><td class="m">📄</td><td class="f">\(F(x,y)=0\Rightarrow y'=-F_x/F_y\)</td><td>First find the point(s) on the curve. There may be two (2022 S1 Q5).</td></tr>
+</table></div>
+</section>
+
+<section id="ch6">
+<h2>Ch 6 · Optimisation <span class="badge">critical pts 10 / 11 · Lagrange 11 / 11</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Critical point: \(\nabla f=\mathbf 0\) (or \(\nabla f\) undefined)</td><td>Solve by <b>cases</b>, e.g. "\(e^{-2x}\neq0\), so …" (2025 S2 Q6). Never divide by a variable that could be zero.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(D=f_{xx}f_{yy}-f_{xy}^2\) at the point</td><td>Evaluate at <b>each</b> critical point separately.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(D\gt0,f_{xx}\gt0\): min · \(D\gt0,f_{xx}\lt0\): max · \(D\lt0\): saddle · \(D=0\): ?</td><td>The table itself is <b>not</b> on the sheet. \(D=0\) is inconclusive, not a saddle.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Global on closed region: interior crit pts + each edge + corners</td><td>Parametrise each edge, e.g. \(x=0,\ 0\le y\le1\), and do 1-D calculus. Compare every value (2025 S1 Q5, 2024 S1 Q5).</td></tr>
+<tr><td class="m">🧠</td><td class="f">"Does \(f\) attain a global max?": find a path where \(f\to\pm\infty\)</td><td>E.g. \(f(x,0)\to+\infty\) as \(x\to-\infty\) (2023 S1 Q5c, 2023 S2 Q1b).</td></tr>
+<tr><td class="m">📄</td><td class="f">\(\nabla f=\lambda\nabla g\)</td><td>The sheet stops here …</td></tr>
+<tr><td class="m">🧠</td><td class="f">… <b>plus</b> \(g=\text{const}\): 3 (or 4) equations, 3 (or 4) unknowns</td><td>… and the constraint equation is the line students forget.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Closed &amp; bounded constraint \(\Rightarrow\) max &amp; min exist (EVT)</td><td>Circles, ellipses and spheres are closed and bounded. Lines and planes are not.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Distance problems: minimise \(D^2\), not \(D\)</td><td>Same minimiser, and no square roots to differentiate (2021 S1 Q7).</td></tr>
+</table></div>
+</section>
+
+<section id="ch7">
+<h2>Ch 7 · Curves &amp; vector fields <span class="badge">work 11 / 11 · length 9 / 11</span></h2>
+<div class="scroller"><table>
+<tr><th></th><th>Write down</th><th>One-liner</th></tr>
+<tr><td class="m">🧠</td><td class="f">Segment \(A\to B\): \(\mathbf r(t)=A+t(B-A)\), \(0\le t\le1\)</td><td>Asked outright in 2025 S1 Q8e(i).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Circle \((h+r\cos t,\,k+r\sin t)\) · ellipse \((h+a\cos t,\,k+b\sin t)\)</td><td>Increasing \(t\) runs anticlockwise. "Indicate the starting point and direction" is worth marks.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(\mathbf v=\mathbf r'\), \(\mathbf a=\mathbf r''\), speed \(=\lVert\mathbf r'\rVert\)</td><td>Speed is a scalar. Velocity is a vector.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(\mathbf v=\int\mathbf a\,dt+\mathbf v_0\), \(\mathbf r=\int\mathbf v\,dt+\mathbf r_0\)</td><td>Projectiles: the constants come from the initial conditions, component by component (2025 S2 Q7, 2025 S1 Q7a).</td></tr>
+<tr><td class="m">📄</td><td class="f">\(L=\int_a^b\lVert\mathbf r'(t)\rVert\,dt\)</td><td>Expect \(\sin^2+\cos^2\) or a perfect square under the root.</td></tr>
+<tr><td class="m">📄</td><td class="f">\(W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)</td><td>Par it → Diff it → \(\mathbf F\) in \(t\) → Dot it → Int it.</td></tr>
+<tr><td class="m">🧠</td><td class="f">Conservative on \(\mathbb R^2\) \(\iff P_y=Q_x\) (3-D: all three cross-partials match)</td><td>With unknown \(A,B\), match coefficients of \(P_y\) and \(Q_x\) (2024 S2 Q8a).</td></tr>
+<tr><td class="m">🧠</td><td class="f">Potential: \(f=\int P\,dx+h(y)\), then \(f_y=Q\) fixes \(h\)</td><td>Check by computing \(\nabla f\). Constants of integration can be dropped.</td></tr>
+<tr><td class="m">🧠</td><td class="f">\(W=f(\mathbf r(b))-f(\mathbf r(a))\); closed loop \(\Rightarrow W=0\)</td><td>Ugly path plus conservative field means use the potential (2025 S2 Q8c, 2024 S1/S2 Q8).</td></tr>
+</table></div>
+</section>
+
+<section id="top10">
+<h2>🏆 The 10 lines that pay the most rent</h2>
+<p style="color:var(--muted)">These are ranked by the number of the 11 text papers (2020 S1–2025 S2) that need the line, then by marks. The counts come from searching the question papers (with the sheet page removed) for each topic's wording, then checking every hit by hand. 2022 S2 is a scanned solution set and isn't counted.</p>
+<div class="scroller"><table>
+<tr><th>Rank</th><th>Topic</th><th>Papers</th><th>Instances</th></tr>
+<tr><td>1</td><td>Lagrange system</td><td>11 / 11</td><td>2020 S1 Q8 · 2020 S2 Q7 · 2021 S1 Q7 · 2021 S2 Q6 · 2022 S1 Q8 · 2023 S1 Q6 · 2023 S2 Q2 · 2024 S1 Q6 · 2024 S2 Q5 · 2025 S1 Q6 · 2025 S2 Q5 (10–12 marks each)</td></tr>
+<tr><td>2</td><td>Work / line integral (direct or by potential)</td><td>11 / 11</td><td>2020 S1 Q9 · 2020 S2 Q10 · 2021 S1 Q10 · 2021 S2 Q8 · 2022 S1 Q10 · 2023 S1 Q8 · 2023 S2 Q6 · 2024 S1 Q8 · 2024 S2 Q8 · 2025 S1 Q8 · 2025 S2 Q8 (the 18-mark Q8 in 2024–25)</td></tr>
+<tr><td>3</td><td>Critical points + \(D\)-test classification</td><td>10 / 11</td><td>2020 S1 Q3 · 2020 S2 Q6 · 2021 S1 Q8 · 2021 S2 Q5 · 2022 S1 Q7 · 2023 S1 Q5 · 2023 S2 Q1 · 2024 S1 Q5b · 2025 S1 Q3b, Q5b · 2025 S2 Q6</td></tr>
+<tr><td>4</td><td>Conservative test + potential</td><td>8 / 11</td><td>2021 S1 Q10 · 2021 S2 Q8 · 2022 S1 Q10 · 2023 S1 Q8c · 2024 S1 Q8a · 2024 S2 Q8 · 2025 S1 Q8 · 2025 S2 Q8</td></tr>
+<tr><td>5</td><td>Gradient facts (direction, max rate, no-change)</td><td>9 / 11</td><td>2021 S1 Q5 · 2021 S2 Q7 · 2022 S1 Q6 · 2023 S1 Q1 · 2023 S2 Q3, Q7 · 2024 S1 Q1 · 2024 S2 Q4 · 2025 S1 Q1 · 2025 S2 Q3b</td></tr>
+<tr><td>6</td><td>Limits / continuity at the origin</td><td>9 / 11</td><td>2021 S1 Q2 · 2021 S2 Q3 · 2022 S1 Q3 · 2023 S1 Q2 · 2023 S2 Q8 · 2024 S1 Q2 · 2024 S2 Q2 · 2025 S1 Q2 · 2025 S2 Q4</td></tr>
+<tr><td>7</td><td>Contour sketch (complete the square, label intercepts)</td><td>9 / 11</td><td>2021 S1 Q4 · 2021 S2 Q1 · 2022 S1 Q2 · 2023 S1 Q3 · 2023 S2 Q4 · 2024 S1 Q3 · 2024 S2 Q1 · 2025 S1 Q3a · 2025 S2 Q1 (plus conic sketches in 2020 S1 Q2 and 2020 S2 Q8)</td></tr>
+<tr><td>8</td><td>Arc length / speed</td><td>9 / 11</td><td>2020 S1 Q6 · 2020 S2 Q9 · 2021 S1 Q9 · 2021 S2 Q4 · 2022 S1 Q9 · 2023 S1 Q8a · 2023 S2 Q5 · 2024 S1 Q7 · 2024 S2 Q7</td></tr>
+<tr><td>9</td><td>Chain rule (tree, partials, "show that")</td><td>8 / 11</td><td>2021 S1 Q6 · 2021 S2 Q10 · 2022 S1 Q4 · 2023 S1 Q4 · 2024 S1 Q4 · 2024 S2 Q6 · 2025 S1 Q4 · 2025 S2 Q3a</td></tr>
+<tr><td>10</td><td>Tangent plane / linear approximation</td><td>5 / 11</td><td>2020 S2 Q5 · 2021 S1 Q1 · 2021 S2 Q2, Q9 · 2022 S1 Q1 (quadratic) · 2025 S2 Q2</td></tr>
+</table></div>
+<p style="color:var(--muted);font-size:13.5px">Just outside the top 10: implicit tangent lines (3 / 11: 2021 S1 Q3, 2022 S1 Q5, 2024 S2 Q3), closed-region global extrema (2024 S1 Q5, 2025 S1 Q5), integrating \(\mathbf a\to\mathbf v\to\mathbf r\) (2020 S1 Q4, 2025 S1 Q7, 2025 S2 Q7), and ODEs (2 / 11, both 2020).</p>
+<div class="gold-card">
+<ol>
+  <li>🧠 <b>\(\nabla f=\lambda\nabla g\) <u>and</u> \(g=c\), solved by cases, every candidate evaluated</b>. Every paper since 2020, 10–12 marks each time. See the <a href="#rit-lagrange">4-line ritual</a>.</li>
+  <li>📄 <b>\(W=\int\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)</b>: Par it → Diff it → \(\mathbf F\) in \(t\) → Dot it → Int it. Every paper has a work question.</li>
+  <li>🧠 <b>\(\nabla f=\mathbf 0\), then \(D\) with the table</b> (min / max / saddle / inconclusive). 10 of 11 papers. See the <a href="#rit-crit">5-line ritual</a>.</li>
+  <li>🧠 <b>\(P_y=Q_x\), then \(f=\int P\,dx+h(y)\), then \(W=f(B)-f(A)\)</b>. This is the 18-mark Q8 of 2024 S2, 2025 S1 and 2025 S2. See the <a href="#rit-cons">3-line ritual</a>.</li>
+  <li>🧠 <b>Direction \(\nabla f\), rate \(\lVert\nabla f\rVert\), no change \(\perp\nabla f\)</b>, used alongside 📄 \(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\lVert\mathbf u\rVert\).</li>
+  <li>🧠 <b>Two paths to disprove, squeeze to prove</b>. It's the limits/continuity question in 9 of 11 papers. See the <a href="#rit-cont">continuity template</a>.</li>
+  <li>🧠 <b>\(f=c\), complete the square, name the conic, label every intercept</b>. The contour sketch is worth 6–9 marks almost every year.</li>
+  <li>📄 <b>\(L=\int\lVert\mathbf r'\rVert\,dt\)</b>, with the 🧠 \(\sin^2+\cos^2=1\) simplification under the root.</li>
+  <li>📄 <b>\(z_t=z_xx_t+z_yy_t\)</b>, upgraded 🧠 to two parameters \(f_u=f_xx_u+f_yy_u\) for tree-diagram questions.</li>
+  <li>📄 <b>\(z=f(a,b)+f_x(x-a)+f_y(y-b)\)</b>. It is the tangent plane and the linear estimate in one line.</li>
+</ol>
+</div>
+<div class="tip">Six of the ten are 🧠. The sheet gives you the formula for items 2, 8, 9 and 10, but the recognising and the write-up are on you. If a line feels unfamiliar, open the matching chapter page and drill its Practice Arena.</div>
+</section>
+
+<section id="ritual">
+<h2>✍️ Exam-day method rituals</h2>
+<p style="color:var(--muted)">"You must justify all answers." These are the write-ups that collect every method mark. Learn the <b>shape</b> of each one and fill in the numbers on the day. Each worked instance uses fresh numbers (not from any past paper) and is checked with SymPy.</p>
+
+<div class="card" id="rit-crit">
+  <h3>1 · Critical-point classification: the 5-line write-up</h3>
+  <div class="method"><ol>
+    <li><b>Partials:</b> \(f_x=\ldots,\quad f_y=\ldots\)</li>
+    <li><b>Solve \(f_x=f_y=0\) by cases</b>, and list the critical points.</li>
+    <li><b>Second partials:</b> \(f_{xx}, f_{xy}, f_{yy}\), so \(D=f_{xx}f_{yy}-f_{xy}^2\) as a formula.</li>
+    <li><b>Table:</b> one row per point, showing \(D\), the sign of \(f_{xx}\), and the verdict.</li>
+    <li><b>Conclusion sentence</b> naming each point, its type, and \(f\) there if asked.</li>
+  </ol></div>
+  <details><summary>Worked instance: \(f(x,y)=2x^3+6xy+3y^2\)</summary>
+    <ol>
+      <li>\(f_x=6x^2+6y,\quad f_y=6x+6y\).</li>
+      <li>\(f_y=0\Rightarrow y=-x\). Substituting, \(6x^2-6x=0\Rightarrow x=0\) or \(x=1\). The critical points are \((0,0)\) and \((1,-1)\).</li>
+      <li>\(f_{xx}=12x,\ f_{xy}=6,\ f_{yy}=6\), so \(D=72x-36\).</li>
+      <li><div class="scroller"><table style="margin:4px 0"><tr><th>Point</th><th>\(D\)</th><th>\(f_{xx}\)</th><th>Type</th></tr>
+        <tr><td>\((0,0)\)</td><td>\(-36\lt0\)</td><td>0</td><td>saddle</td></tr>
+        <tr><td>\((1,-1)\)</td><td>\(36\gt0\)</td><td>\(12\gt0\)</td><td>local min</td></tr></table></div></li>
+      <li>Therefore \(f\) has a saddle point at \((0,0)\) and a local minimum at \((1,-1)\), where \(f(1,-1)=-1\).</li>
+    </ol>
+  </details>
+  <div class="tip">If a question says "classify one of these" (2021 S1 Q8b, 2022 S1 Q7b), still do the table row properly. If \(D=0\), write "the second-derivative test is inconclusive", then compare \(f\) along a line through the point.</div>
+</div>
+
+<div class="card" id="rit-lagrange">
+  <h3>2 · Lagrange multipliers: the 4-line write-up</h3>
+  <div class="method"><ol>
+    <li><b>Set up:</b> "Maximise/minimise \(f=\ldots\) subject to \(g=\ldots=c\). By Lagrange, \(\nabla f=\lambda\nabla g\)."</li>
+    <li><b>The system</b>, written out in full, <b>including the constraint</b>: \(f_x=\lambda g_x\), \(f_y=\lambda g_y\), (\(f_z=\lambda g_z\)), \(g=c\).</li>
+    <li><b>Solve by cases</b>, e.g. "if \(x=0\) then …; otherwise divide …", and list <b>all</b> candidate points.</li>
+    <li><b>Evaluate \(f\) at every candidate and justify:</b> "The constraint set is closed and bounded, so by the EVT the max is … at … and the min is … at …"</li>
+  </ol></div>
+  <details><summary>Worked instance: extremes of \(f=x^2+y^2\) on the hyperbola \(xy=4\)</summary>
+    <ol>
+      <li>Minimise/maximise \(f=x^2+y^2\) subject to \(g=xy=4\). By Lagrange, \(\nabla f=\lambda\nabla g\).</li>
+      <li>\(2x=\lambda y,\quad 2y=\lambda x,\quad xy=4\).</li>
+      <li>\(xy=4\) means \(x,y\neq0\). Multiplying the first equation by \(x\) and the second by \(y\): \(2x^2=\lambda xy=2y^2\), so \(y=\pm x\). \(y=-x\) would give \(-x^2=4\), which is impossible. So \(y=x\), \(x^2=4\), and the candidates are \((2,2)\) and \((-2,-2)\), with \(\lambda=2\).</li>
+      <li>\(f(2,2)=f(-2,-2)=8\). The hyperbola is <b>unbounded</b> (\(f\to\infty\) along it), so there is <b>no maximum</b>. The <b>minimum is 8</b> at \((\pm2,\pm2)\) (same signs). It exists because \(f\to\infty\) at both ends of each branch.</li>
+    </ol>
+  </details>
+  <div class="trap">Line 4 is where the marks go. Evaluate \(f\) at <b>every</b> candidate, and say <i>why</i> a max or min exists: closed and bounded (EVT), or a growth argument when the constraint is unbounded.</div>
+</div>
+
+<div class="card" id="rit-cons">
+  <h3>3 · Conservative field → potential → work: the 3-line write-up</h3>
+  <div class="method"><ol>
+    <li><b>Test:</b> "\(\mathbf F=(P,Q)\) with \(P_y=\ldots=Q_x\) on all of \(\mathbb R^2\), so \(\mathbf F\) is conservative."</li>
+    <li><b>Potential:</b> "\(f=\int P\,dx=\ldots+h(y)\). Then \(f_y=\ldots=Q\) gives \(h'(y)=\ldots\), so \(f=\ldots\)." Check that \(\nabla f=\mathbf F\).</li>
+    <li><b>Work:</b> "By the fundamental theorem for line integrals, \(W=f(\mathbf r(b))-f(\mathbf r(a))=\ldots\)."</li>
+  </ol></div>
+  <details><summary>Worked instance: \(\mathbf F=(2xy+3,\ x^2-4y)\), from \((0,0)\) to \((1,2)\) along any path</summary>
+    <ol>
+      <li>\(P_y=2x=Q_x\) on \(\mathbb R^2\), so \(\mathbf F\) is conservative.</li>
+      <li>\(f=\int(2xy+3)\,dx=x^2y+3x+h(y)\). Then \(f_y=x^2+h'(y)=x^2-4y\), so \(h=-2y^2\), giving \(f=x^2y+3x-2y^2\).</li>
+      <li>\(W=f(1,2)-f(0,0)=(2+3-8)-0=-3\).</li>
+    </ol>
+  </details>
+  <div class="tip">If \(P_y\neq Q_x\), write "\(P_y\neq Q_x\), so \(\mathbf F\) is not conservative, and the work depends on the path." Then use the sheet's direct formula. 2021 S2 Q8 tests exactly this switch.</div>
+</div>
+
+<div class="card" id="rit-cont">
+  <h3>4 · Continuity at the origin: the argument templates</h3>
+  <div class="method"><b>Template A (NOT continuous, or the limit does not exist):</b>
+    <ol>
+      <li>"Along the path \(y=0\): \(f(x,0)=\ldots\to L_1\)."</li>
+      <li>"Along the path \(y=\ldots\): \(f=\ldots\to L_2\)."</li>
+      <li>"Since \(L_1\neq L_2\), \(\lim_{(x,y)\to(0,0)}f\) does not exist, so \(f\) is not continuous at \((0,0)\)."</li>
+    </ol>
+    <b>Template B (continuous):</b>
+    <ol>
+      <li>"For \((x,y)\neq(0,0)\): \(|f(x,y)-f(0,0)|\le\ldots\)", a bound built from \(|x|\le\sqrt{x^2+y^2}\) and \(\frac{x^2}{x^2+y^2}\le1\).</li>
+      <li>"The bound \(\to0\) as \((x,y)\to(0,0)\), so by the squeeze theorem \(\lim f=f(0,0)\)."</li>
+      <li>"Hence \(f\) is continuous at \((0,0)\)."</li>
+    </ol>
+  </div>
+  <details><summary>Worked instances: \(g=\dfrac{x^2-y^2}{x^2+y^2}\) (A) and \(h=\dfrac{x^2y}{x^2+y^2}\), \(h(0,0)=0\) (B)</summary>
+    <p><b>A.</b> Along \(y=0\): \(g=1\to1\). Along \(x=0\): \(g=-1\to-1\). Since \(1\neq-1\), the limit does not exist, so \(g\) cannot be made continuous at \((0,0)\) by any choice of \(g(0,0)\).</p>
+    <p><b>B.</b> \(|h(x,y)-0|=\dfrac{x^2}{x^2+y^2}\,|y|\le|y|\to0\). By the squeeze theorem \(\lim h=0=h(0,0)\), so \(h\) is continuous at \((0,0)\).</p>
+  </details>
+  <div class="trap">Same limit along several paths proves <b>nothing</b>. Only a bound (Template B) proves the limit exists. For "find \(c\) so \(f\) is continuous" (2021 S2 Q3), use Template B to find the limit, then set \(c\) equal to it.</div>
+</div>
+
+<div class="card">
+  <h3>5 · Two quick rituals worth a line each</h3>
+  <div class="method"><b>Directional derivative (3 lines):</b> \(\nabla f(P)=\ldots\), then \(\hat{\mathbf u}=\mathbf u/\lVert\mathbf u\rVert=\ldots\), then \(D_{\mathbf u}f=\nabla f\cdot\hat{\mathbf u}=\ldots\) "per unit distance".<br>
+  <b>Contour sketch (4 lines):</b> \(c=f(\text{point})\), then complete the square into standard form, then name the curve with its centre and axes (or asymptotes), then list the intercepts and draw with labels.</div>
+</div>
+</section>
+
+<section id="foot">
+  <div class="card" style="text-align:center">
+    <p>Distilled from the MATH1052 chapter pages, <span class="mono">MATH1052 Summary</span>, Posters A &amp; B, and the formula sheet of every paper 2020 S1–2025 S2. The worked ritual instances were checked with <b>SymPy</b> (<span class="mono">verify/formulas-notebook.py</span>, passing).</p>
+    <p style="color:var(--muted);font-size:13px"><a href="ch01-first-order-odes.html">Ch1</a> · <a href="ch02-second-order-odes.html">Ch2</a> · <a href="ch03-surfaces-contours.html">Ch3</a> · <a href="ch04-limits-partials-tangent-planes.html">Ch4</a> · <a href="ch05-gradient-chain-rule.html">Ch5</a> · <a href="ch06-optimisation.html">Ch6</a> · <a href="ch07-curves-vector-fields.html">Ch7</a> · <a href="formulas.html">🧰 Formula sheet</a> · <a href="exam-2025.html">📝 Exams</a></p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

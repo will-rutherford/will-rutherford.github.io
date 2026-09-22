@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 1 First-order ODEs</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 1 — First-order ODEs</h1>
+  <p>Separable, linear (integrating factor), equilibria &amp; stability, Euler's method and the classic models. The foundation for every ODE on the paper.</p>
+  <div>
+    <span class="badge gold">⭐⭐ Medium yield: 2 × 10-mark Qs per 2020 paper · none 2021–2025</span>
+    <span class="badge">Summary pp 1–2 · Poster B · T01 (+ T02 Q1–5)</span>
+    <span class="badge pre">Nothing on the formula sheet — know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch02-second-order-odes.html">Ch 2 Second-order ODEs →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2020.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">Rusty on the single-variable toolkit — substitution, integration by parts, partial fractions, \(\int \tan x\,dx\), log laws? Read <a href="foundations.html#integrals">the Ground Floor — integrals</a> (and <a href="foundations.html#exp-log">exp &amp; log</a>) first. Every method in this chapter ends in "now integrate", and in a no-calculator exam that step is where marks are actually lost.</div>
+
+<div class="card">
+<h3>What an ODE is — the vocabulary markers expect</h3>
+<p>A <b>differential equation (DE)</b> is an equation involving an unknown function <i>and its derivatives</i>. If the unknown depends on one variable only (e.g. \(y(t)\) or \(y(x)\)) it is an <b>ordinary</b> DE (ODE); if it depends on several (e.g. \(u(x,t)\)) it is a <b>partial</b> DE (PDE). MATH1052 only solves ODEs.</p>
+<ul>
+<li><b>Order</b> = the highest derivative that appears. \(y' = y^2\) is first order; \(y''+2y'-y=1\) is second order; \(y^2\,\dfrac{d^3y}{dt^3}+\dfrac{dy}{dt}=t^2\) is third order (T01 Q1). Powers do not matter: \((y')^3=x\) is still first order.</li>
+<li><b>Solution</b> = a function which, when it and its derivatives are substituted in, makes the equation true identically (for every \(x\) in an interval).</li>
+<li><b>General solution</b> = the whole family of solutions, carrying an arbitrary constant (\(C\), \(A\), …). A first-order ODE has <b>one</b> arbitrary constant.</li>
+<li><b>Initial value problem (IVP)</b> = ODE + a condition \(y(t_0)=y_0\). The condition pins down the constant, so the answer has <b>no</b> arbitrary constants left.</li>
+<li><b>Analytical</b> solution = an exact formula; <b>numerical</b> solution = a table of approximate points (e.g. from Euler's method).</li>
+<li>Dot notation: \(\dot y = dy/dt\), \(\ddot y=d^2y/dt^2\) (time derivatives). The 2020 S1 paper writes \(x\dot y\) — treat \(\dot y\) as "derivative of \(y\) with respect to the independent variable".</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🧭 The big idea: an ODE is a rule for the slope</h3>
+<p>Write a first-order ODE as \(y' = f(t,y)\). Read it literally: <b>"at the point \((t,y)\), the solution curve must have slope \(f(t,y)\)."</b> The ODE does not tell you where the curve is — it tells you, at <i>every</i> point of the plane, which direction to move. A solution is any curve that obeys all those local instructions at once.</p>
+<p>Three consequences drive the whole chapter:</p>
+<ol>
+<li><b>Slope fields</b> are just this rule drawn as little line segments. Solution curves thread through them like iron filings following a magnet.</li>
+<li><b>Initial conditions matter</b>: pick a starting point and the rule determines the rest of the curve. Different starting points → different members of the family (the constant \(C\)).</li>
+<li><b>Curves cannot cross</b> (for the nice ODEs in this course): if two solutions met at a point, the same starting point would give two different futures. This <b>uniqueness</b> is exactly why equilibrium lines act as walls (Summary p 1: equilibria "cannot be crossed by other solution curves … partitioning the solution space").</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Checking a solution — always possible, always worth marks</h3>
+<p>To <b>show</b> \(y=\phi(x)\) solves an ODE: differentiate \(\phi\), substitute into the <b>left-hand side</b> and <b>right-hand side separately</b>, and show they agree. Example (T01 Q2 pattern): for \(y=Ae^{-kt}\), \(y' = -kAe^{-kt}\) and \(-ky=-kAe^{-kt}\); equal for all \(t\), so it is a solution.</p>
+<p class="tip">After solving any IVP, spend 30 seconds substituting back. It catches sign slips in the integrating factor, and in a "show that" question it <i>is</i> the answer.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Direct integration — the simplest case</h3>
+<p>If the right side depends only on the independent variable, \(\dfrac{dy}{dx}=f(x)\), then the ODE is literally "find an antiderivative": \(y=\int f(x)\,dx + C\). Newton's second law often lands here: acceleration \(a(t)\) given → integrate once for velocity, again for position, using the initial values each time (Summary p 1; see also <a href="ch07-curves-vector-fields.html">Ch 7 projectiles</a>).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Separable ODEs — why "splitting the \(dx\)" is legitimate</h3>
+<p>A first-order ODE is <b>separable</b> if the right side factors as (function of \(x\)) × (function of \(y\)):</p>
+$$\frac{dy}{dx}=f(x)\,g(y).$$
+<p>The trick "divide by \(g(y)\), multiply by \(dx\), integrate both sides" looks like cheating with differentials, but it is really the chain rule run backwards. If \(G(y)=\int \frac{1}{g(y)}dy\), then \(\frac{d}{dx}G(y(x)) = \frac{1}{g(y)}\frac{dy}{dx} = f(x)\). Integrate in \(x\): \(G(y)=\int f(x)\,dx + C\). That is the separated equation.</p>
+<div class="method"><b>Recipe #1 (Summary p 2)</b>
+<ol>
+<li><b>Step 0 — equilibria first.</b> Solve \(g(y)=0\). Each root \(y=a\) is a constant solution (a "singular solution") — record it <i>before</i> dividing by \(g(y)\), because dividing throws it away.</li>
+<li>For \(g(y)\neq0\): write \(\dfrac{1}{g(y)}\,dy = f(x)\,dx\).</li>
+<li>Integrate both sides; put <b>one</b> constant \(C\) on the \(x\)-side.</li>
+<li>Solve for \(y\) explicitly if you can; otherwise leave an implicit solution.</li>
+<li>Apply the initial condition; choose the correct branch (sign of a square root, etc.) <b>using the initial condition</b>.</li>
+</ol></div>
+<p class="trap">\(e^{C}\) is a positive constant, but after removing absolute values \(|y-a| = e^{C}e^{F(x)}\) becomes \(y-a = Ae^{F(x)}\) with \(A\) <b>any</b> real number — including \(A=0\), which recovers the equilibrium you found in Step 0. Say this sentence; it shows the marker you know where the lost solution went.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Linear first-order ODEs — the integrating factor, from scratch</h3>
+<p>A first-order ODE is <b>linear</b> if \(y\) and \(y'\) appear only to the first power, not multiplied together, not inside functions:</p>
+$$\frac{dy}{dt}+p(t)\,y=q(t)\qquad\text{(standard form — coefficient of } y' \text{ must be } 1\text{)}.$$
+<p><b>Why the integrating factor works.</b> The left side looks almost like a product-rule derivative. Multiply through by a function \(I(t)\):
+\(I y' + I p\,y = I q\). We want the left to equal \((I y)' = I y' + I' y\). That needs \(I' = I p\), i.e. \(I = e^{\int p\,dt}\). With that choice the ODE collapses to</p>
+$$\frac{d}{dt}\big(I\,y\big)=I\,q\quad\Longrightarrow\quad I\,y=\int I\,q\,dt + C\quad\Longrightarrow\quad y=\frac{1}{I}\Big(\int I q\,dt + C\Big).$$
+<div class="method"><b>Recipe #2 (Summary p 2)</b>
+<ol>
+<li>Rewrite in <b>standard form</b> \(y'+p(t)y=q(t)\) — divide by the coefficient of \(y'\) (state where it is nonzero).</li>
+<li>\(I=e^{\int p\,dt}\) — <b>no constant</b> needed here, and simplify \(e^{\ln|\cdot|}\).</li>
+<li>Write \(\dfrac{d}{dt}(Iy)=Iq\) — a marker looks for this line.</li>
+<li>Integrate <b>with</b> \(+C\), then divide by \(I\) (divide the \(C\) too!).</li>
+</ol></div>
+<p class="trap">The most common fatal slip: dividing by \(I\) but forgetting to divide the constant. \(x^2y=x^4+C\) gives \(y=x^2+\dfrac{C}{x^2}\), <b>not</b> \(x^2+C\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Substitution \(y=xu\): turning a stubborn ODE into a separable one</h3>
+<p>If the right side depends only on the <b>ratio</b> \(y/x\) — e.g. \(\dfrac{x+y}{x-y}=\dfrac{1+y/x}{1-y/x}\) — the ODE is called <i>homogeneous</i>. Put \(y=xu(x)\). Product rule: \(y' = u + x u'\). The ODE becomes \(u + x u' = F(u)\), i.e.</p>
+$$x\frac{du}{dx}=F(u)-u\quad\Longrightarrow\quad \frac{du}{F(u)-u}=\frac{dx}{x}\quad\text{— separable.}$$
+<p>This exact routine was a full 10-mark question (2020 S1 Q5). The official solution states the assumption \(x\ne0\), simplifies \(F(u)-u\) to a single fraction, and ends by writing the separated form \(\int \frac{1-u}{1+u^2}du=\int \frac1x dx\) with the word "separable!".</p>
+</div>
+
+<div class="card">
+<h3>Slope fields — reading the picture</h3>
+<p>A <b>slope field</b> for \(y'=f(t,y)\) draws, at grid points \((a,b)\), a short segment of slope \(f(a,b)\). To match an ODE to a field (T01 Q4), hunt for <b>distinguishing features</b>, not individual slopes:</p>
+<ul>
+<li><b>Horizontal lines of zero slope</b> \(y=c\) ⇒ an equilibrium; check \(f(t,c)=0\) for all \(t\).</li>
+<li><b>Isoclines</b>: the curve where \(f=0\) (all segments flat) — e.g. \(y'=y^2+x^2-3\) is flat on the circle \(x^2+y^2=3\); \(y'=(x-y)^2-4\) is flat on the lines \(x-y=\pm2\).</li>
+<li><b>Symmetry</b>: if \(f(-x,y)=f(x,y)\) the field is mirror-symmetric in the \(y\)-axis; if \(f\) is unchanged by \(y\to-y\), symmetric in the \(x\)-axis.</li>
+<li><b>Where slopes are steep/positive/negative</b>: sign of \(f\) in each region.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🧭 Equilibrium solutions and stability — the phase-line picture</h3>
+<p>An <b>equilibrium solution</b> is a <b>constant</b> solution \(y(t)=c\). Since \(y'=0\) for a constant, you find them by solving \(f(t,c)=0\) <b>for all \(t\)</b>. Graphically: a horizontal line in the slope field.</p>
+<p>Stability asks what happens to solutions that <i>start near</i> the equilibrium, as \(t\) increases (Summary p 1):</p>
+<table>
+<tr><th>Type</th><th>Nearby solutions…</th><th>Sign of \(y'\): just below / just above \(c\)</th><th>Arrow picture</th></tr>
+<tr><td><b>Stable</b></td><td>approach \(c\) from both sides</td><td>\(+\) below, \(-\) above</td><td>→ c ←</td></tr>
+<tr><td><b>Unstable</b></td><td>move away on both sides</td><td>\(-\) below, \(+\) above</td><td>← c →</td></tr>
+<tr><td><b>Semi-stable</b> (counts as <b>not stable</b>)</td><td>approach from one side, leave on the other</td><td>same sign on both sides</td><td>→ c → &nbsp;or&nbsp; ← c ←</td></tr>
+</table>
+<p><b>Why only the sign matters.</b> If \(y'\gt0\) the solution is increasing; if \(y'\lt0\) it decreases. Since a solution can never cross an equilibrium line, a solution trapped between two equilibria must run monotonically toward one of them. So the sign of \(f\) between consecutive equilibria is all you need — no solving required.</p>
+<p><b>Squared factors are the semi-stable giveaway.</b> A factor \((y-c)^2\) does not change sign across \(c\), so \(y'\) has the same sign on both sides → semi-stable. Both 2020 papers used exactly this (\((y+4)^2\) in 2020 S2 Q1).</p>
+<p><b>Non-autonomous ODEs.</b> If \(f\) contains \(t\) (e.g. a factor \((t-2)\) or \(e^{t+y}\)), classify for <b>large \(t\)</b> ("as time increases"): fix the sign of every \(t\)-factor for \(t\) beyond some value (e.g. \(t\gt2\)), note positive factors like \(e^{t+y}\gt0\) and \((y+4)^2\ge0\), then do the sign table in \(y\). The official 2020 S2 Q1 solution does exactly this.</p>
+<p class="trap">Poster B: "\(y'=0\) does not always yield an equilibrium solution. This could yield \(y=C\) at a particular time rather than for all \(t\)." E.g. \(y'=t+y\) is zero on the line \(y=-t\), which is not constant — so <b>no</b> equilibrium (T01 Q3b).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Euler's method — follow the tangent line, one small step at a time</h3>
+<p>When no formula is available, walk along the slope field. From \((t_n,y_n)\) take the tangent line (slope \(f(t_n,y_n)\)) for a horizontal distance \(\Delta t = h\):</p>
+$$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n).$$
+<p>This is just the linear approximation \(y(t+h)\approx y(t)+h\,y'(t)\) used repeatedly. Accuracy improves as \(h\to0\) (error roughly proportional to \(h\)).</p>
+<ul>
+<li><b>Over or under?</b> If the true solution is <b>concave up</b> (\(y''\gt0\)) the tangent lies below the curve ⇒ Euler <b>underestimates</b>. Concave down ⇒ <b>overestimates</b>. If the true solution is a straight line, Euler is exact.</li>
+<li><b>Danger near equilibria</b> (Poster B): a big step can jump <i>over</i> an equilibrium line — something the true solution can never do. Use a small \(h\).</li>
+</ul>
+<p class="tip">Always lay out Euler as a table with columns \(n,\ t_n,\ y_n,\ f(t_n,y_n),\ y_{n+1}\). Keep exact fractions — no calculator in the exam, and fractions are easier to check.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Modelling — translating words into an ODE</h3>
+<p>Every model says "<b>rate of change = (something)</b>". Name the quantity, write its derivative on the left, translate the sentence on the right.</p>
+<table>
+<tr><th>Model</th><th>ODE</th><th>Solution</th><th>Equilibrium</th></tr>
+<tr><td>Malthus growth / decay</td><td>\(P'=rP\)</td><td>\(P=P_0e^{rt}\)</td><td>\(P=0\)</td></tr>
+<tr><td>Newton's law of cooling</td><td>\(T'=-k(T-T_m),\ k\gt0\)</td><td>\(T=T_m+(T_0-T_m)e^{-kt}\)</td><td>\(T=T_m\) (stable)</td></tr>
+<tr><td>Logistic (Verhulst)</td><td>\(P'=rP\left(1-\frac{P}{\theta}\right)\)</td><td>\(P=\dfrac{\theta P_0e^{rt}}{\theta-P_0+P_0e^{rt}}\)</td><td>\(0\) unstable, \(\theta\) stable</td></tr>
+<tr><td>Mixing tank</td><td>\(S'=(\text{rate in})-(\text{rate out})\)</td><td>linear ODE</td><td>long-run amount</td></tr>
+<tr><td>Falling with linear drag (Newton 2LM)</td><td>\(m v'=mg-kv\)</td><td>\(v=\frac{mg}{k}(1-e^{-kt/m})\) if \(v(0)=0\)</td><td>terminal velocity \(mg/k\)</td></tr>
+<tr><td>RC circuit (T02 Q5)</td><td>\(RQ'+Q/C=E\)</td><td>linear ODE</td><td>\(Q=CE\)</td></tr>
+</table>
+<p>Summary p 2 facts to know cold: for the logistic model the maximum growth rate occurs at \(P=\theta/2\) (the inflection point of \(P(t)\) when \(P_0\lt\theta\)); \(P=0\) is unstable and \(P=\theta\) (carrying capacity) is stable.</p>
+<p class="tip">"Rate out" in a mixing problem = (outflow rate in L/min) × (concentration = \(S/V\)). If inflow ≠ outflow the volume \(V(t)\) changes and the ODE becomes linear with a non-constant coefficient.</p>
+</div>
+
+<div class="card">
+<h3>Which method? A one-glance map of Chapter 1</h3>
+<table>
+<tr><th>The ODE looks like…</th><th>Method</th><th>Watch out for</th></tr>
+<tr><td>\(y'=f(x)\)</td><td>Direct integration</td><td>one constant per integration</td></tr>
+<tr><td>\(y'=f(x)g(y)\) (RHS factors)</td><td>Separable</td><td>equilibria \(g(y)=0\) lost on division; square-root sign</td></tr>
+<tr><td>\(a(x)y'+b(x)y=c(x)\)</td><td>Linear: integrating factor</td><td>divide by \(a(x)\) first; divide \(C\) by \(I\)</td></tr>
+<tr><td>\(y'=F(y/x)\)</td><td>Substitute \(y=xu\) ⇒ separable</td><td>\(y'=u+xu'\), not \(u'\)</td></tr>
+<tr><td>"find equilibria / stability"</td><td>Set \(y'=0\) for all \(t\); sign table</td><td>squared factors ⇒ semi-stable</td></tr>
+<tr><td>"approximate using step size \(h\)"</td><td>Euler</td><td>use \(f(t_n,y_n)\) at the <i>left</i> end</td></tr>
+</table>
+<p class="tip">Some ODEs are both separable <i>and</i> linear (e.g. \(y'=1-t+y-ty=(1-t)(1+y)\), T02 Q4b). Either method is fine — pick the one with the easier integral.</p>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">None of this is on the formula sheet (the sheet covers only multivariable calculus). Every recipe below must be memorised — and the justification sentences are part of the method.</p>
+
+<div class="card">
+<h3>1 · Direct integration</h3>
+$$\frac{dy}{dx}=f(x)\ \Longrightarrow\ y=\int f(x)\,dx+C$$
+<div class="when">The right side has no \(y\) in it. Also: "given the acceleration, find velocity and position".</div>
+<p><b>Mini-example.</b> \(y'=3x^2+2,\ y(1)=4\): \(y=x^3+2x+C\); \(4=1+2+C\Rightarrow C=1\); \(\boxed{y=x^3+2x+1}\).</p>
+</div>
+
+<div class="card">
+<h3>2 · Separable</h3>
+$$\frac{dy}{dx}=f(x)g(y)\ \Longrightarrow\ \int\frac{dy}{g(y)}=\int f(x)\,dx + C\qquad(\text{plus equilibria } g(y)=0)$$
+<div class="when">The right side <b>factors</b> into an \(x\)-part times a \(y\)-part. Hidden cases: \(e^{x-y}=e^x e^{-y}\); \(y'=1-t+y-ty=(1-t)(1+y)\); \(xy'+y=y^2 \Rightarrow y'=\frac{y^2-y}{x}\).</div>
+<p><b>Mini-example.</b> \(y'=2y,\ y(0)=3\): equilibrium \(y=0\); \(\int\frac{dy}{y}=\int2\,dx\Rightarrow \ln|y|=2x+C\Rightarrow y=Ae^{2x}\); \(A=3\): \(\boxed{y=3e^{2x}}\).</p>
+</div>
+
+<div class="card">
+<h3>3 · Linear — integrating factor</h3>
+$$y'+p(x)y=q(x),\qquad I=e^{\int p\,dx},\qquad (Iy)'=Iq,\qquad y=\frac1I\Big(\int Iq\,dx+C\Big)$$
+<div class="when">\(y\) and \(y'\) appear linearly (no \(y^2\), \(\sin y\), \(yy'\)); the RHS does <b>not</b> factor, so separation fails.</div>
+<p><b>Mini-example.</b> \(y'+y=x\): \(I=e^x\); \((e^xy)'=xe^x\); by parts \(e^xy=(x-1)e^x+C\); \(\boxed{y=x-1+Ce^{-x}}\).</p>
+<table>
+<tr><th>\(p(x)\)</th><th>\(\int p\)</th><th>\(I\)</th></tr>
+<tr><td>\(k\) (constant)</td><td>\(kx\)</td><td>\(e^{kx}\)</td></tr>
+<tr><td>\(n/x\)</td><td>\(n\ln|x|\)</td><td>\(|x|^n\) (use \(x^n\) for \(x\gt0\))</td></tr>
+<tr><td>\(2x\)</td><td>\(x^2\)</td><td>\(e^{x^2}\)</td></tr>
+<tr><td>\(\tan x\)</td><td>\(-\ln|\cos x|\)</td><td>\(\sec x\) on \((-\frac\pi2,\frac\pi2)\)</td></tr>
+<tr><td>\(\cot x\)</td><td>\(\ln|\sin x|\)</td><td>\(\sin x\) on \((0,\pi)\)</td></tr>
+<tr><td>\(\frac{2x}{x^2+1}\)</td><td>\(\ln(x^2+1)\)</td><td>\(x^2+1\)</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>4 · Substitution \(y=xu\) (homogeneous ODEs)</h3>
+$$y'=F\!\left(\tfrac yx\right),\quad y=xu,\quad y'=u+xu'\ \Longrightarrow\ \frac{du}{F(u)-u}=\frac{dx}{x}$$
+<div class="when">Every term in numerator and denominator has the <b>same total degree</b> in \(x,y\) (e.g. \(\frac{x+y}{x-y}\), \(\frac{x^2+y^2}{xy}\)), or the question tells you to use \(y=xu\).</div>
+<p><b>Mini-example.</b> \(y'=\frac{x+y}{x}=1+u\): \(u+xu'=1+u\Rightarrow xu'=1\Rightarrow u=\ln|x|+C\Rightarrow y=x\ln|x|+Cx\).</p>
+</div>
+
+<div class="card">
+<h3>5 · Equilibrium solutions &amp; stability</h3>
+<div class="method"><ol>
+<li>Rearrange to \(y'=f(t,y)\) (move all \(y'\) terms to one side and factor).</li>
+<li>Equilibria: constants \(c\) with \(f(t,c)=0\) <b>for all \(t\)</b>. Check any excluded values (where you divided) directly in the <b>original</b> equation.</li>
+<li>Sign table of \(f\) between consecutive equilibria (fix the sign of \(t\)-factors for large \(t\)).</li>
+<li>Arrows up/down ⇒ stable / unstable / semi-stable. Conclude in words: "\(y=3\) is stable; \(y=-4\) is not stable (semi-stable)".</li>
+</ol></div>
+<div class="when">"Find all equilibrium solutions", "decide which are stable", "long-term behaviour", "what happens as \(t\to\infty\) if \(y(0)=\dots\)".</div>
+</div>
+
+<div class="card">
+<h3>6 · Euler's method</h3>
+$$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n)$$
+<div class="when">"Approximate \(y(\cdot)\) using Euler's method with step size \(h\)", "numerical solution". Compare with the exact solution if one is given; use concavity to say over/under.</div>
+<p><b>Mini-example.</b> \(y'=ty,\ y(1)=2,\ h=0.1\): \(y_1=2+0.1\cdot(1)(2)=2.2\approx y(1.1)\).</p>
+</div>
+
+<div class="card">
+<h3>7 · Standard models (know the solutions)</h3>
+<ul>
+<li>Cooling: \(T'=-k(T-T_m)\Rightarrow T=T_m+(T_0-T_m)e^{-kt}\). Two data points give \(k\); "halves every 10 min" ⇒ \(k=\frac{\ln2}{10}\).</li>
+<li>Growth/decay: \(A'=\pm kA\Rightarrow A=A_0e^{\pm kt}\); half-life \(t_{1/2}=\frac{\ln 2}{k}\).</li>
+<li>Logistic: \(P'=rP(1-P/\theta)\); equilibria \(0\) (unstable), \(\theta\) (stable); fastest growth at \(P=\theta/2\).</li>
+<li>Mixing: \(S'=c_{\text{in}}r_{\text{in}}-r_{\text{out}}\dfrac{S}{V(t)}\), \(V(t)=V_0+(r_{\text{in}}-r_{\text{out}})t\).</li>
+<li>Linear drag: \(v'=g-\frac kmv\); terminal velocity = the stable equilibrium \(v=\frac{mg}{k}\).</li>
+</ul>
+<div class="when">Word problems: "rate proportional to…", "well-stirred tank", "surrounding temperature", "carrying capacity", "air resistance proportional to velocity".</div>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Every solution below was checked with SymPy (<code>checkodesol</code> for ODEs; exact fractions for Euler tables). Click to reveal — but try each first.</p>
+
+<details>
+<summary>Example 1 — Separable IVP with an equilibrium: \(y'=3x^2(y-2),\ y(0)=5\)</summary>
+<p><b>Q.</b> Solve the IVP \(\dfrac{dy}{dx}=3x^2(y-2)\), \(y(0)=5\). <b>[6 marks]</b></p>
+<div class="when">RHS = \(3x^2\) (only \(x\)) × \((y-2)\) (only \(y\)) ⇒ separable.</div>
+<p><b>Equilibria.</b> \(y-2=0\Rightarrow y=2\) is a constant solution. It does not satisfy \(y(0)=5\), so for our IVP \(y\ne2\) and we may divide.</p>
+$$\int\frac{dy}{y-2}=\int3x^2\,dx\ \Longrightarrow\ \ln|y-2|=x^3+C\ \Longrightarrow\ y-2=Ae^{x^3}\quad(A=\pm e^{C};\ A=0\text{ gives the equilibrium}).$$
+<p><b>IC.</b> \(5-2=Ae^0\Rightarrow A=3\).</p>
+$$\boxed{y=2+3e^{x^3}}$$
+<p><b>Check.</b> \(y'=9x^2e^{x^3}\) and \(3x^2(y-2)=3x^2\cdot3e^{x^3}=9x^2e^{x^3}\). ✓</p>
+</details>
+
+<details>
+<summary>Example 2 — Choosing the square-root branch: \(y'=\dfrac{x+1}{y},\ y(0)=-3\)</summary>
+<p><b>Q.</b> Solve \(\dfrac{dy}{dx}=\dfrac{x+1}{y}\), \(y(0)=-3\), giving \(y\) explicitly and stating where the solution is valid. <b>[6 marks]</b></p>
+<div class="when">\(\frac{x+1}{y}=(x+1)\cdot\frac1y\) ⇒ separable. No equilibria (\(1/y\) is never 0).</div>
+$$\int y\,dy=\int(x+1)\,dx\ \Longrightarrow\ \tfrac12y^2=\tfrac12x^2+x+C\ \Longrightarrow\ y^2=x^2+2x+K.$$
+<p><b>IC.</b> \(9=0+0+K\Rightarrow K=9\), so \(y^2=x^2+2x+9\). Two branches \(y=\pm\sqrt{x^2+2x+9}\); the IC has \(y(0)=-3\lt0\), so take the <b>negative</b> root:</p>
+$$\boxed{y=-\sqrt{x^2+2x+9}}$$
+<p><b>Domain.</b> \(x^2+2x+9=(x+1)^2+8\ge8\gt0\) for all \(x\), so the solution is valid on all of \(\mathbb R\) (and never reaches \(y=0\), where the ODE is undefined).</p>
+<p class="tip">Marker's line: "since \(y(0)=-3\lt0\) we take the negative square root". The positive root is a solution of the ODE but not of the IVP.</p>
+</details>
+
+<details>
+<summary>Example 3 — Linear with variable coefficient: \(xy'+2y=4x^2,\ y(1)=3\)</summary>
+<p><b>Q.</b> Solve \(xy'+2y=4x^2\) for \(x\gt0\) with \(y(1)=3\). <b>[7 marks]</b></p>
+<div class="when">\(y\) and \(y'\) appear linearly; RHS does not factor as \(f(x)g(y)\) ⇒ integrating factor.</div>
+<p><b>Standard form</b> (divide by \(x\ne0\)): \(y'+\dfrac2x\,y=4x\).</p>
+<p><b>IF.</b> \(I=e^{\int 2/x\,dx}=e^{2\ln x}=x^2\) (using \(x\gt0\)).</p>
+$$\frac{d}{dx}\big(x^2y\big)=x^2\cdot4x=4x^3\ \Longrightarrow\ x^2y=x^4+C\ \Longrightarrow\ y=x^2+\frac{C}{x^2}.$$
+<p><b>IC.</b> \(3=1+C\Rightarrow C=2\).</p>
+$$\boxed{y=x^2+\frac{2}{x^2},\quad x\gt0}$$
+<p><b>Check.</b> \(y'=2x-4x^{-3}\); \(xy'+2y=2x^2-4x^{-2}+2x^2+4x^{-2}=4x^2\). ✓</p>
+</details>
+
+<details>
+<summary>Example 4 — Linear with exponential forcing: \(y'+2y=6e^{t},\ y(0)=5\)</summary>
+<p><b>Q.</b> Solve the IVP. What does \(y\) look like for large \(t\)? <b>[6 marks]</b></p>
+<p><b>IF.</b> \(I=e^{\int2\,dt}=e^{2t}\).</p>
+$$\big(e^{2t}y\big)'=6e^{3t}\ \Longrightarrow\ e^{2t}y=2e^{3t}+C\ \Longrightarrow\ y=2e^{t}+Ce^{-2t}.$$
+<p><b>IC.</b> \(5=2+C\Rightarrow C=3\): \(\boxed{y=2e^{t}+3e^{-2t}}\).</p>
+<p><b>Large \(t\).</b> \(3e^{-2t}\to0\), so \(y\approx2e^t\): the "transient" dies out and the solution follows the forcing.</p>
+</details>
+
+<details>
+<summary>Example 5 — Trig coefficient (2020 S2 Q2 style): \(y'+y\tan x=\cos^2x\) on \(\left(-\frac\pi2,\frac\pi2\right)\)</summary>
+<p><b>Q.</b> Find the general solution on \(-\frac\pi2\lt x\lt\frac\pi2\), then the solution with \(y(0)=2\). <b>[8 marks]</b></p>
+<p><b>Domain remark</b> (worth a mark in 2020 S2 Q2's scheme): on \(\left(-\frac\pi2,\frac\pi2\right)\), \(\cos x\gt0\), so \(|\cos x|=\cos x\).</p>
+<p><b>IF.</b> \(\int\tan x\,dx=-\ln|\cos x|\), so \(I=e^{-\ln\cos x}=\dfrac1{\cos x}=\sec x\).</p>
+$$\frac{d}{dx}\big(y\sec x\big)=\cos^2x\cdot\sec x=\cos x\ \Longrightarrow\ y\sec x=\sin x+C\ \Longrightarrow\ \boxed{y=\sin x\cos x+C\cos x}.$$
+<p><b>IC.</b> \(y(0)=0+C=2\Rightarrow \boxed{y=\sin x\cos x+2\cos x}\).</p>
+</details>
+
+<details>
+<summary>Example 6 — Equilibria &amp; stability with a squared factor: \(y'=y(y-2)(y+3)^2\)</summary>
+<p><b>Q.</b> Find all equilibrium solutions and classify each as stable, unstable or semi-stable. Describe the long-term behaviour of the solution with \(y(0)=1\). <b>[8 marks]</b></p>
+<p><b>Equilibria.</b> \(y'=0\iff y=0,\ y=2,\ y=-3\) — constant, so all three are equilibrium solutions.</p>
+<table>
+<tr><th>Region</th><th>\(y\)</th><th>\(y-2\)</th><th>\((y+3)^2\)</th><th>\(y'\)</th><th>Motion</th></tr>
+<tr><td>\(y\gt2\)</td><td>+</td><td>+</td><td>+</td><td><b>+</b></td><td>up ↑</td></tr>
+<tr><td>\(0\lt y\lt2\)</td><td>+</td><td>−</td><td>+</td><td><b>−</b></td><td>down ↓</td></tr>
+<tr><td>\(-3\lt y\lt0\)</td><td>−</td><td>−</td><td>+</td><td><b>+</b></td><td>up ↑</td></tr>
+<tr><td>\(y\lt-3\)</td><td>−</td><td>−</td><td>+</td><td><b>+</b></td><td>up ↑</td></tr>
+</table>
+<ul>
+<li>\(y=2\): below moves down, above moves up ⇒ <b>unstable</b>.</li>
+<li>\(y=0\): below (\(-3\lt y\lt0\)) moves up to it, above (\(0\lt y\lt2\)) moves down to it ⇒ <b>stable</b>.</li>
+<li>\(y=-3\): below moves up toward it, above moves up away ⇒ <b>semi-stable</b> (not stable). The squared factor is the reason.</li>
+</ul>
+<p><b>\(y(0)=1\).</b> Starts in \(0\lt y\lt2\) where \(y'\lt0\); it cannot cross \(y=0\), so it decreases and \(y(t)\to0\) as \(t\to\infty\).</p>
+</details>
+
+<details>
+<summary>Example 7 — Euler's method vs the exact solution: \(y'=2x-y,\ y(0)=1\)</summary>
+<p><b>Q.</b> (a) Use Euler's method with \(h=0.5\) to estimate \(y(1.5)\). (b) Verify that \(y=2x-2+3e^{-x}\) is the exact solution and say whether Euler over- or under-estimates. <b>[7 marks]</b></p>
+<table>
+<tr><th>\(n\)</th><th>\(x_n\)</th><th>\(y_n\)</th><th>\(f=2x_n-y_n\)</th><th>\(y_{n+1}=y_n+0.5f\)</th></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>\(-1\)</td><td>\(1-0.5=\tfrac12\)</td></tr>
+<tr><td>1</td><td>0.5</td><td>\(\tfrac12\)</td><td>\(\tfrac12\)</td><td>\(\tfrac12+\tfrac14=\tfrac34\)</td></tr>
+<tr><td>2</td><td>1</td><td>\(\tfrac34\)</td><td>\(\tfrac54\)</td><td>\(\tfrac34+\tfrac58=\tfrac{11}8\)</td></tr>
+</table>
+<p>So \(y(1.5)\approx\boxed{\tfrac{11}{8}=1.375}\).</p>
+<p><b>(b)</b> \(y'=2-3e^{-x}\) and \(2x-y=2x-2x+2-3e^{-x}=2-3e^{-x}\) ✓; \(y(0)=-2+3=1\) ✓. Exact \(y(1.5)=1+3e^{-1.5}\approx1.669\). Since \(y''=3e^{-x}\gt0\) the solution is <b>concave up</b>, tangent lines lie below it, so Euler <b>underestimates</b> — consistent with \(1.375\lt1.669\).</p>
+</details>
+
+<details>
+<summary>Example 8 — Newton's law of cooling (clean logs)</summary>
+<p><b>Q.</b> A cup of coffee at \(90^\circ\)C is left in a \(20^\circ\)C room. After 10 minutes it is \(55^\circ\)C. Assuming Newton's law of cooling, (a) find \(T(t)\); (b) find when it reaches \(37.5^\circ\)C. <b>[7 marks]</b></p>
+<p><b>Model.</b> \(\dfrac{dT}{dt}=-k(T-20)\), \(k\gt0\) ⇒ \(T=20+(90-20)e^{-kt}=20+70e^{-kt}\).</p>
+<p><b>Find \(k\).</b> \(55=20+70e^{-10k}\Rightarrow e^{-10k}=\tfrac12\Rightarrow k=\dfrac{\ln2}{10}\) per minute. So \(\boxed{T=20+70\cdot2^{-t/10}}\).</p>
+<p><b>(b)</b> \(37.5=20+70e^{-kt}\Rightarrow e^{-kt}=\tfrac14=\left(\tfrac12\right)^2\Rightarrow t=\boxed{20\text{ min}}\).</p>
+<p class="tip">Excess temperature \(T-T_m\) halves every 10 minutes: 70 → 35 → 17.5. Spotting the halving pattern avoids any logs.</p>
+</details>
+
+<details>
+<summary>Example 9 — Mixing tank (constant volume)</summary>
+<p><b>Q.</b> A 100 L tank holds brine containing 10 kg of salt. Brine with concentration 0.2 kg/L flows in at 5 L/min; the well-stirred mixture flows out at 5 L/min. Find the salt \(S(t)\) and the time at which the tank holds 15 kg. <b>[8 marks]</b></p>
+<p><b>Rates.</b> In: \(0.2\times5=1\) kg/min. Out: \(5\times\dfrac{S}{100}=\dfrac{S}{20}\) kg/min (volume stays 100 L).</p>
+$$\frac{dS}{dt}=1-\frac{S}{20},\qquad S(0)=10.$$
+<p>Linear: \(I=e^{t/20}\); \((e^{t/20}S)'=e^{t/20}\Rightarrow e^{t/20}S=20e^{t/20}+C\Rightarrow S=20+Ce^{-t/20}\); \(C=-10\):</p>
+$$\boxed{S(t)=20-10e^{-t/20}}\qquad S=15\iff e^{-t/20}=\tfrac12\iff t=\boxed{20\ln2\ \text{min}}.$$
+<p><b>Sense check.</b> Equilibrium \(S=20\) kg \(=0.2\times100\): eventually the tank has the inflow concentration. It is stable.</p>
+</details>
+
+<details>
+<summary>Example 10 — Substitution \(y=xu\): \(y'=\dfrac{x^2+y^2}{xy},\ y(1)=2\)</summary>
+<p><b>Q.</b> Use \(y=xu(x)\) to show the ODE becomes separable, then solve the IVP for \(x\gt0\). <b>[10 marks]</b></p>
+<p>Assume \(x\ne0\). With \(y=xu\): \(y'=u+xu'\) and \(\dfrac{x^2+x^2u^2}{x\cdot xu}=\dfrac{1+u^2}{u}=u+\dfrac1u\).</p>
+$$u+x\frac{du}{dx}=u+\frac1u\ \Longrightarrow\ x\frac{du}{dx}=\frac1u\ \Longrightarrow\ \frac{du}{dx}=\frac1x\cdot\frac1u\quad\text{— separable.}$$
+$$\int u\,du=\int\frac{dx}{x}\ \Longrightarrow\ \tfrac12u^2=\ln x+C.$$
+<p>IC: \(u(1)=y(1)/1=2\Rightarrow 2=0+C\Rightarrow C=2\). So \(u^2=2\ln x+4\), \(u\gt0\) (since \(u(1)=2\gt0\)):</p>
+$$\boxed{y=x\sqrt{2\ln x+4}},\qquad\text{valid for } x\gt e^{-2}.$$
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p><b>Honest yield report.</b> I searched all twelve papers (2020 S1 – 2025 S2). First-order ODEs appear only in the <b>2020</b> papers, which were online, open-workbook exams of 10 questions × 10 marks: <b>2020 S1 Q5, Q10</b> and <b>2020 S2 Q1, Q2</b>. The 2021–2025 papers (including the scanned 2022 S2) have <b>no</b> first-order ODE question. Treat this chapter as the foundation for <a href="ch02-second-order-odes.html">Ch 2</a> and as insurance if ODEs come back: learn Types A–C, which are the ones actually examined.</p>
+
+<div class="card q">
+<h3>Type A — Equilibrium solutions &amp; stability <span class="marks">2020 S2 Q1 [10] · 2020 S1 Q10 [10]</span></h3>
+<p><b>Looks like:</b> "Find all equilibrium solutions of the following ODE … Decide which of these equilibrium solutions are stable. Justify your answer." Sometimes the ODE is given <b>unrearranged</b> (2020 S1 Q10) so you must collect the \(\dot y\) terms first.</p>
+<div class="method"><b>Recipe:</b>
+<ol>
+<li>(Rearrange to \(y'=f(t,y)\) and factor.)</li>
+<li>Set \(y'=0\); keep only <b>constant</b> roots. Check excluded values in the <b>original</b> equation.</li>
+<li>Sign of every factor: exponentials always \(\gt0\); squares \(\ge0\); \((t-2)\gt0\) for \(t\gt2\).</li>
+<li>Sign of \(y'\) in each \(y\)-region ⇒ arrows ⇒ stable / not stable (semi-stable) / unstable.</li>
+</ol></div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S2 Q1 <span class="marks">[10 marks]</span></b></p>
+<p>Find all equilibrium solutions of the following ODE:</p>
+$$\frac{dy}{dt}=e^{t+y}(3-y)(y+4)^2(t-2).$$
+<p>Decide which of these equilibrium solutions are stable. Justify your answer.</p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S2 Q1 (with the official mark allocation)</summary>
+<p><b>Equilibria [2 marks].</b> \(\dot y=0\) for all \(t\) requires \((3-y)(y+4)^2=0\) (since \(e^{t+y}\ne0\), and \(t-2\) is not zero for all \(t\)): \(\boxed{y=3,\ y=-4}\).</p>
+<p><b>Signs of the factors [3 marks].</b> For \(t\gt2\): \(t-2\gt0\); \(e^{t+y}\gt0\) for all \(t,y\); \((y+4)^2\gt0\) for \(y\ne-4\); \(3-y\gt0\iff y\lt3\).</p>
+<p><b>Sign of \(\dot y\) for \(t\gt2\) [3 marks].</b></p>
+<ul>
+<li>\(y\gt3\): \(\dot y\lt0\) (moves down toward 3)</li>
+<li>\(-4\lt y\lt3\): \(\dot y\gt0\) (moves up toward 3, away from \(-4\))</li>
+<li>\(y\lt-4\): \(\dot y\gt0\) (moves up toward \(-4\))</li>
+</ul>
+<p><b>Conclusion [1 + 1 marks].</b> \(\boxed{y=3\text{ is stable}}\); \(\boxed{y=-4\text{ is not stable (semi-stable)}}\).</p>
+<p class="tip">The official solution draws a \(t\)–\(y\) sketch with the two red horizontal lines, green curves approaching 3, and arrows at \(-4\) pointing the same way on both sides. A quick sketch like that is accepted as "equivalent working" for the sign marks.</p>
+</details>
+
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S1 Q10 <span class="marks">[10 marks]</span></b></p>
+<p>(i) (5 marks) Determine all equilibrium solutions to the ODE</p>
+$$x\dot y+x-y=y^2x\dot y+xy-1.$$
+<p>(ii) (5 marks) Determine if each equilibrium solution is stable or not. Justify your answer.</p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S1 Q10</summary>
+<p><b>(i)</b> \(y=c\) is an equilibrium iff it satisfies the ODE with \(\dot y=0\) for all \(x\):</p>
+$$0+x-c=0+xc-1\iff xc+c-1-x=0\iff (c-1)(x+1)=0\ \text{for all }x\iff c=1.$$
+<p>So \(\boxed{y=1}\) is the only equilibrium solution. (Note \(y=-1\) is <i>not</i> one: it gives \(x+1=-x-1\), true only at \(x=-1\).)</p>
+<p><b>(ii)</b> Collect the \(\dot y\) terms: \(\dot y\,(x-y^2x)=xy-1-x+y\), i.e.</p>
+$$\dot y=\frac{(x+1)(y-1)}{x(1-y^2)},\qquad x\ne0,\ y\ne\pm1.$$
+<p>For large \(x\) (\(x\gt0\), so \(x+1\gt0\)):</p>
+<ul>
+<li>\(y\gt1\): numerator \(+\cdot+\), denominator \(+\cdot-\) ⇒ \(\dot y\lt0\) (moves down toward 1).</li>
+<li>\(-1\lt y\lt1\): numerator \(+\cdot-\), denominator \(+\cdot+\) ⇒ \(\dot y\lt0\) (moves down away from 1).</li>
+</ul>
+<p>Same sign on both sides ⇒ \(\boxed{y=1\text{ is semi-stable, i.e. not stable}}\) (official answer: "semi-stable").</p>
+<p class="trap">Cancelling \((y-1)\) gives \(\dot y=-\frac{x+1}{x(1+y)}\), which is non-zero at \(y=1\) — so if you cancel first you "lose" the equilibrium. Find equilibria from the <b>original</b> equation, exactly as the official solution does.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — Linear first-order ODE via integrating factor <span class="marks">2020 S2 Q2 [10]</span></h3>
+<p><b>Looks like:</b> "Find the general solution of the following ODE, assuming \(0\lt x\lt\frac\pi2\)" with trig coefficients in front of \(y'\) and \(y\). The interval is a hint: it fixes the signs of \(\sin x,\cos x\) so the absolute values in \(e^{\ln|\cdot|}\) can be dropped.</p>
+<div class="method"><b>Recipe:</b> divide by the coefficient of \(y'\) → \(I=e^{\int p}\) → \((Iy)'=Iq\) → integrate with \(+C\) → divide by \(I\).</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S2 Q2 <span class="marks">[10 marks]</span></b></p>
+<p>Find the general solution of the following ODE, assuming \(0\lt x\lt\frac\pi2\):</p>
+$$\sin(x)\cos^2(x)\,y'+\cos^3(x)\,y=1.$$
+</div>
+<details>
+<summary>Full worked solution — 2020 S2 Q2 (with the official mark allocation)</summary>
+<p><b>[1 mark]</b> For \(x\in(0,\frac\pi2)\): \(\sin x\gt0,\ \cos x\gt0\) (so we may divide by them).</p>
+<p><b>Standard form:</b> divide by \(\sin x\cos^2x\):</p>
+$$y'+\frac{\cos x}{\sin x}\,y=\frac{1}{\sin x\cos^2x}.$$
+<p><b>IF [3 marks]:</b> \(I=e^{\int\cot x\,dx}=e^{\ln|\sin x|}=|\sin x|=\sin x\) on \((0,\frac\pi2)\).</p>
+<p><b>[2 marks]</b> \(\dfrac{d}{dx}\big(y\sin x\big)=\dfrac{\sin x}{\sin x\cos^2x}=\dfrac1{\cos^2x}\).</p>
+<p><b>[2 marks]</b> \(y\sin x=\displaystyle\int\sec^2x\,dx=\tan x+C\).</p>
+<p><b>[2 marks] General solution:</b></p>
+$$\boxed{y=\frac{1}{\cos x}+\frac{C}{\sin x}=\sec x+C\csc x,\quad C\in\mathbb R.}$$
+<p class="tip">Either form earns the final 2 marks. Writing "\(C\in\mathbb R\)" shows you know it is a family.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — Substitution that makes an ODE separable <span class="marks">2020 S1 Q5 [10]</span></h3>
+<p><b>Looks like:</b> "show that it becomes separable using the substitution \(y(x)=xu(x)\). (You do not need to solve the ODE.)" — the marks are for the substitution algebra, ending in the form \(u'=f(x)g(u)\).</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2020 S1 Q5 <span class="marks">[10 marks]</span></b></p>
+<p>Consider the ODE</p>
+$$\frac{dy}{dx}=\frac{x+y}{x-y},$$
+<p>and show that it becomes separable using the substitution \(y(x)=xu(x)\). (You do <i>not</i> need to solve the ODE.)</p>
+</div>
+<details>
+<summary>Full worked solution — 2020 S1 Q5</summary>
+<p>Let \(y=xu(x)\). By the product rule \(\dfrac{dy}{dx}=u+x\dfrac{du}{dx}\). Substitute, assuming \(x\ne0\):</p>
+$$u+x\frac{du}{dx}=\frac{x+xu}{x-xu}=\frac{x(1+u)}{x(1-u)}=\frac{1+u}{1-u}.$$
+$$x\frac{du}{dx}=\frac{1+u}{1-u}-u=\frac{1+u-u(1-u)}{1-u}=\frac{1+u^2}{1-u}.$$
+$$\frac{du}{dx}=\left(\frac1x\right)\left(\frac{1+u^2}{1-u}\right)=f(x)\,g(u)\quad\text{— separable, with } f(x)=\tfrac1x,\ g(u)=\tfrac{1+u^2}{1-u}.$$
+<p>Equivalently \(\displaystyle\int\frac{1-u}{1+u^2}\,du=\int\frac1x\,dx\) (\(u\ne1\)).</p>
+<p class="tip">Not required, but for completeness: \(\arctan u-\tfrac12\ln(1+u^2)=\ln|x|+C\), with \(u=y/x\).</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Separable / linear IVPs and modelling <span class="marks">tutorial-level: T02 Q1–5</span></h3>
+<p><b>Looks like:</b> "Solve the IVP…", "find the curve through \((0,1)\) whose slope at \((x,y)\) is…", Newton's cooling with two data points, RC circuit. Not on any 2020–2025 paper as a standalone question, but it is the engine inside Types A–C and all of Ch 2. See §3 Examples 1–4, 8, 9 and Practice 8.2, 8.3, 8.6.</p>
+</div>
+
+<div class="card q">
+<h3>Type E — Slope fields, order, "show it's a solution", Euler <span class="marks">tutorial-level: T01 Q1–4; Summary p 1</span></h3>
+<p><b>Looks like:</b> "What is the order…", "Show that \(y=Ae^{-kt}\) is a solution…", "Match the ODE with its slope field and specify the stability of any equilibria", "Use Euler's method with step size…". Low exam frequency, quick marks if they appear. See Practice 8.1, 8.4, 8.5.</p>
+</div>
+</section>
+
+<!-- ================= 5. TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the ODE's <b>shape</b> and the question's <b>verb</b>: together they tell you the method and exactly what the marker wants on the page.</p>
+
+<h4>A · Shape triggers — which method?</h4>
+<table>
+<tr><th>When you see…</th><th>Do this</th></tr>
+<tr><td>\(y'\) = function of \(x\) only</td><td>Integrate directly; one \(+C\).</td></tr>
+<tr><td>RHS <b>factors</b> as \(f(x)g(y)\) (incl. \(e^{x\pm y}\), \(ty+t\), \(\frac{x}{y}\))</td><td>Separable. Equilibria \(g(y)=0\) first.</td></tr>
+<tr><td>\(a(x)y'+b(x)y=c(x)\); "linear first-order"</td><td>Standard form, then \(I=e^{\int p}\).</td></tr>
+<tr><td>LHS already looks like \((\text{something}\cdot y)'\), e.g. \((x^2+1)y'+2xy\)</td><td>It <i>is</i> \(\big((x^2+1)y\big)'\) — integrate straight away (IF = 1 after spotting it).</td></tr>
+<tr><td>"use the substitution \(y=xu\)"; RHS a function of \(y/x\)</td><td>\(y'=u+xu'\); simplify to \(xu'=F(u)-u\); separate.</td></tr>
+<tr><td>"assuming \(0\lt x\lt\frac\pi2\)" / "for \(x\gt0\)"</td><td>Use it to drop absolute values in \(e^{\ln|\cdot|}\) — <b>say so</b> (1 mark in 2020 S2 Q2).</td></tr>
+</table>
+
+<h4>B · Verb triggers — what to write</h4>
+<table>
+<tr><th>When the question says…</th><th>It means / do this</th></tr>
+<tr><td>"general solution"</td><td>Answer contains an arbitrary constant; state \(C\in\mathbb R\).</td></tr>
+<tr><td>"solve the IVP" / "the solution satisfying \(y(a)=b\)"</td><td>No constants left; choose the correct branch; state the interval if relevant.</td></tr>
+<tr><td>"show that … is a solution"</td><td>Differentiate, substitute LHS and RHS separately, show equal.</td></tr>
+<tr><td>"show that it becomes separable"</td><td>End with \(u'=f(x)g(u)\) <b>and name</b> \(f\) and \(g\). No need to integrate.</td></tr>
+<tr><td>"find all equilibrium solutions"</td><td>Constant solutions: \(y'=0\) for <b>all</b> \(t\). Check excluded values in the original equation.</td></tr>
+<tr><td>"decide which are stable… justify"</td><td>Sign of each factor, sign of \(y'\) in each region, arrows, then a verdict for each equilibrium.</td></tr>
+<tr><td>"long-term behaviour" / "as \(t\to\infty\)"</td><td>Which region the IC lies in ⇒ which equilibrium it tends to (or \(\pm\infty\)).</td></tr>
+<tr><td>"Euler's method with step size \(h\)"</td><td>Table \(t_n,y_n,f(t_n,y_n),y_{n+1}\); exact fractions.</td></tr>
+<tr><td>"rate proportional to the difference in temperature"</td><td>\(T'=-k(T-T_m)\), \(k\gt0\).</td></tr>
+<tr><td>"well-stirred", "flows in at … kg/L", "flows out at … L/min"</td><td>\(S'=\text{in}-\text{out}\), out \(=r_{\text{out}}S/V(t)\).</td></tr>
+<tr><td>"carrying capacity"</td><td>Logistic \(P'=rP(1-P/\theta)\).</td></tr>
+<tr><td>"air resistance proportional to velocity"</td><td>\(mv'=mg-kv\); terminal velocity \(mg/k\).</td></tr>
+</table>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Losing equilibria by dividing.</b> Dividing by \(g(y)\) (separable) or cancelling a factor like \((y-1)\) (2020 S1 Q10) silently removes constant solutions. Find equilibria <b>before</b> dividing and state them.</div>
+
+<div class="trap"><b>Semi-stable is "not stable".</b> The 2020 S2 marking scheme awards the mark for "−4 not stable (semi-stable)". Never call a one-sided equilibrium "stable". The trigger is a squared factor \((y-c)^2\).</div>
+
+<div class="trap"><b>"\(y'=0\) at a point" is not an equilibrium.</b> An equilibrium is a constant function. \(y'=t+y\) has no equilibria even though \(y'=0\) along \(y=-t\) (T01 Q3b; Poster B).</div>
+
+<div class="trap"><b>Integrating factor from the wrong form.</b> \(I=e^{\int p}\) only when the coefficient of \(y'\) is 1. In 2020 S2 Q2 you must first divide by \(\sin x\cos^2x\); using \(\cos^3x\) as "\(p\)" is worth zero.</div>
+
+<div class="trap"><b>Forgetting to divide \(C\) by \(I\).</b> \(y\sin x=\tan x+C\Rightarrow y=\sec x+C\csc x\), not \(\sec x+C\).</div>
+
+<div class="trap"><b>Dropping absolute values without justification.</b> \(e^{\ln|\sin x|}=|\sin x|\). You may write \(\sin x\) only because the question restricts \(0\lt x\lt\frac\pi2\) — and the scheme gives a mark for saying so.</div>
+
+<div class="trap"><b>Constant placed in the wrong spot.</b> \(\ln|y|=x^2+C\Rightarrow y=Ae^{x^2}\), <b>not</b> \(e^{x^2}+C\). Exponentiate the whole side, and the constant becomes a multiplier.</div>
+
+<div class="trap"><b>Wrong square-root branch.</b> From \(y^2=\dots\) choose the sign that matches the initial condition, and say why.</div>
+
+<div class="trap"><b>Substitution derivative.</b> With \(y=xu\), \(y'=u+xu'\) — <b>not</b> \(u'\) and not \(xu'\). Product rule.</div>
+
+<div class="trap"><b>Euler uses the slope at the left end.</b> \(y_{n+1}=y_n+hf(t_n,y_n)\): evaluate \(f\) at the point you are <i>at</i>, not the point you are going to. And update \(t\) as well as \(y\).</div>
+
+<div class="trap"><b>Cooling constant sign.</b> Write \(T'=-k(T-T_m)\) with \(k\gt0\). If you write \(+k\) you must get \(k\lt0\), and answers about "\(k\)" become confusing.</div>
+
+<div class="trap"><b>Non-autonomous stability without fixing \(t\).</b> With a factor like \((t-2)\), the sign of \(y'\) flips at \(t=2\). State "for \(t\gt2\)" before the sign table — stability is about \(t\to\infty\).</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. What is the order of \(\left(\dfrac{dy}{dx}\right)^3+y\dfrac{d^2y}{dx^2}=\sin x\)? Is it linear?</summary>
+<p><b>Second order</b> (highest derivative \(y''\)). <b>Nonlinear</b> — \((y')^3\) and the product \(yy''\).</p></details>
+
+<details><summary>2. Solve \(y'=5y,\ y(0)=7\) in one line.</summary>
+<p>\(y=7e^{5x}\) (separable / exponential growth).</p></details>
+
+<details><summary>3. Is \(y'=e^{x+y}\) separable? Linear?</summary>
+<p>Separable: \(e^{x+y}=e^x\cdot e^y\). Not linear (\(e^y\)).</p></details>
+
+<details><summary>4. The integrating factor for \(y'-\dfrac2x\,y=x\) (\(x\gt0\))?</summary>
+<p>\(I=e^{\int-2/x\,dx}=e^{-2\ln x}=x^{-2}\).</p></details>
+
+<details><summary>5. Why do we not need a constant of integration inside the integrating factor?</summary>
+<p>Any constant \(K\) gives \(I=e^{K}e^{\int p}\), a constant multiple; it cancels when you divide by \(I\) at the end (Summary p 2: "ignoring any constants of integration").</p></details>
+
+<details><summary>6. Classify the equilibria of \(y'=y^2-1\).</summary>
+<p>\(y=\pm1\). For \(y\gt1\): \(+\); \(-1\lt y\lt1\): \(-\); \(y\lt-1\): \(+\). So \(y=1\) <b>unstable</b>, \(y=-1\) <b>stable</b>.</p></details>
+
+<details><summary>7. Classify \(y=0\) for \(y'=y^2\).</summary>
+<p>\(y'\gt0\) on both sides ⇒ <b>semi-stable</b> (not stable).</p></details>
+
+<details><summary>8. Does \(y'=t-y\) have an equilibrium solution?</summary>
+<p>No: \(y'=0\) needs \(y=t\), which is not constant.</p></details>
+
+<details><summary>9. One Euler step: \(y'=x+y,\ y(0)=2,\ h=0.25\). Estimate \(y(0.25)\).</summary>
+<p>\(y_1=2+0.25(0+2)=2.5\).</p></details>
+
+<details><summary>10. A solution is concave down. Does Euler over- or under-estimate?</summary>
+<p><b>Overestimates</b> — tangent lines lie above a concave-down curve.</p></details>
+
+<details><summary>11. Can two different solutions of \(y'=y(3-y)\) cross? Why does this matter for stability?</summary>
+<p>No — uniqueness. So a solution starting between 0 and 3 is trapped between those equilibria and must head monotonically to one of them (here to 3, since \(y'\gt0\) there).</p></details>
+
+<details><summary>12. Cooling: the excess temperature halves every 8 min. What is \(k\)?</summary>
+<p>\(e^{-8k}=\tfrac12\Rightarrow k=\dfrac{\ln2}{8}\) per min.</p></details>
+
+<details><summary>13. With \(y=xu\), what does \(y'=\dfrac{y}{x}+\dfrac{x}{y}\) become?</summary>
+<p>\(u+xu'=u+\frac1u\Rightarrow xu'=\frac1u\) — separable: \(u\,du=\frac{dx}{x}\).</p></details>
+
+<details><summary>14. Logistic \(P'=0.3P(1-P/800)\): where is growth fastest? Which equilibrium is stable?</summary>
+<p>Fastest at \(P=400\) (\(=\theta/2\)). \(P=800\) stable, \(P=0\) unstable.</p></details>
+
+<details><summary>15. A tank's volume is 50 L, inflow 3 L/min, outflow 5 L/min. What is \(V(t)\) and when is the model valid?</summary>
+<p>\(V=50-2t\), valid for \(0\le t\lt25\) (tank empties at \(t=25\)).</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>New ODEs you have <b>not</b> seen in the summary, posters, tutorials or any 2020–2025 paper. Same exam style: self-contained, all givens stated, marks shown. Every answer was checked with SymPy (<code>checkodesol</code> for each solution, exact rational arithmetic for each Euler table).</p>
+<p class="tip">How to use the arena: read the two "📖 Learn from these" examples first (they are written the way a marker wants to see them), then cover the solutions and attempt "✏️ Your turn". Only reveal a solution once you have a full answer on paper, including the justification sentences.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Vocabulary, checking solutions &amp; direct integration</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — verify a family, then fit an initial condition</summary>
+<p><b>Q.</b> (a) Show that \(y=(x+C)e^{-x}\) is a solution of \(y'+y=e^{-x}\) for every constant \(C\). (b) Find the solution with \(y(0)=4\). (c) State the order of the ODE and whether it is linear. <b>[5 marks]</b></p>
+<p><b>(a)</b> Product rule: \(y'=e^{-x}-(x+C)e^{-x}\). Then</p>
+$$y'+y=e^{-x}-(x+C)e^{-x}+(x+C)e^{-x}=e^{-x}=\text{RHS}.\ ✓$$
+<p><b>(b)</b> \(y(0)=C=4\Rightarrow \boxed{y=(x+4)e^{-x}}\).</p>
+<p><b>(c)</b> First order (highest derivative \(y'\)); linear (\(y,y'\) to the first power, coefficients depend only on \(x\)).</p>
+</details>
+
+<details>
+<summary>Worked B — direct integration with a log</summary>
+<p><b>Q.</b> Solve \(\dfrac{dy}{dx}=\dfrac{x}{x^2+1}\), \(y(0)=3\). <b>[3 marks]</b></p>
+<p>Substitute \(w=x^2+1\), \(dw=2x\,dx\): \(\displaystyle y=\int\frac{x}{x^2+1}dx=\tfrac12\ln(x^2+1)+C\) (no absolute value needed: \(x^2+1\gt0\)).</p>
+<p>\(y(0)=0+C=3\Rightarrow \boxed{y=\tfrac12\ln(x^2+1)+3}\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> State the order of each ODE and whether it is linear or nonlinear: (a) \(y'''+yy'=x\); (b) \((y')^2+y=0\); (c) \(t^2\ddot y-y=e^t\); (d) \(\dfrac{dy}{dx}=\sin(xy)\).</p>
+<details><summary>Solution</summary>
+<p>(a) Third order, nonlinear (product \(yy'\)). (b) First order, nonlinear (\((y')^2\)). (c) Second order, linear (coefficients \(t^2\), \(-1\) depend on \(t\) only). (d) First order, nonlinear (\(y\) inside \(\sin\)).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> (a) Show that \(y=\dfrac{2}{1+Ce^{-2x}}\) solves \(y'=y(2-y)\) for every constant \(C\). (b) Find \(C\) so that \(y(0)=1\). (c) Which constant solution of the ODE is not of this form?</p>
+<details><summary>Solution</summary>
+<p>(a) \(y=2(1+Ce^{-2x})^{-1}\Rightarrow y'=\dfrac{4Ce^{-2x}}{(1+Ce^{-2x})^2}\). Also \(2-y=\dfrac{2Ce^{-2x}}{1+Ce^{-2x}}\), so \(y(2-y)=\dfrac{2}{1+Ce^{-2x}}\cdot\dfrac{2Ce^{-2x}}{1+Ce^{-2x}}=\dfrac{4Ce^{-2x}}{(1+Ce^{-2x})^2}=y'\). ✓</p>
+<p>(b) \(1=\dfrac{2}{1+C}\Rightarrow C=1\): \(y=\dfrac{2}{1+e^{-2x}}\).</p>
+<p>(c) The equilibria are \(y=0\) and \(y=2\). \(C=0\) gives \(y=2\), but no \(C\) gives \(y=0\), so \(y=0\) is the missing solution.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q3.</b> A particle moves on a line with acceleration \(a(t)=6t-12\) m/s². Its initial velocity is \(9\) m/s and initial position is \(0\) m. (a) Find \(v(t)\) and \(s(t)\). (b) When is the particle at rest? (c) Where is it at \(t=1\) and \(t=3\)?</p>
+<details><summary>Solution</summary>
+<p>(a) \(v=\int(6t-12)\,dt=3t^2-12t+C_1\); \(v(0)=9\Rightarrow C_1=9\): \(v=3t^2-12t+9=3(t-1)(t-3)\). Then \(s=t^3-6t^2+9t+C_2\); \(s(0)=0\Rightarrow C_2=0\): \(\boxed{s=t^3-6t^2+9t}\).</p>
+<p>(b) \(v=0\iff t=1\) or \(t=3\) s.</p>
+<p>(c) \(s(1)=1-6+9=4\) m; \(s(3)=27-54+27=0\) m — back at the start.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 4 marks</span> <b>Q4.</b> Find constants \(a,b\) such that \(y=ax+b\) is a solution of \(y'=2y-4x+1\). Is this an equilibrium solution? Explain.</p>
+<details><summary>Solution</summary>
+<p>\(y'=a\) and \(2(ax+b)-4x+1=(2a-4)x+(2b+1)\). Equate for all \(x\): \(2a-4=0\Rightarrow a=2\); \(2b+1=a=2\Rightarrow b=\tfrac12\). So \(\boxed{y=2x+\tfrac12}\).</p>
+<p>Not an equilibrium: an equilibrium solution must be <b>constant</b>, and this one has slope 2.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 5 marks</span> <b>Q5.</b> (a) Show that \(y=Cx^2\) solves \(xy'=2y\) for every \(C\). (b) Explain why the IVP \(xy'=2y,\ y(0)=0\) has infinitely many solutions while \(xy'=2y,\ y(0)=1\) has none. (c) Why does this not contradict "solution curves never cross"?</p>
+<details><summary>Solution</summary>
+<p>(a) \(y'=2Cx\Rightarrow xy'=2Cx^2=2y\). ✓</p>
+<p>(b) Every parabola \(y=Cx^2\) passes through \((0,0)\), so \(y(0)=0\) is satisfied for every \(C\) ⇒ infinitely many. At \(x=0\) the ODE reads \(0=2y(0)\), forcing \(y(0)=0\), so \(y(0)=1\) is impossible.</p>
+<p>(c) In standard form \(y'=2y/x\) the right side is undefined at \(x=0\); uniqueness (and "no crossing") is only guaranteed where \(f(x,y)\) is well-behaved. All the crossings happen on the bad line \(x=0\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Separable ODEs (and the \(y=xu\) substitution)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — blow-up and the interval of validity: \(y'=xy^2,\ y(0)=\tfrac12\)</summary>
+<p><b>Q.</b> Solve the IVP and state the largest interval containing \(x=0\) on which the solution exists. <b>[6 marks]</b></p>
+<p><b>Equilibrium:</b> \(y=0\) (not our IVP, since \(y(0)=\tfrac12\)).</p>
+$$\int y^{-2}\,dy=\int x\,dx\ \Longrightarrow\ -\frac1y=\frac{x^2}{2}+C.$$
+<p>IC: \(-2=0+C\Rightarrow C=-2\). So \(\dfrac1y=2-\dfrac{x^2}{2}=\dfrac{4-x^2}{2}\):</p>
+$$\boxed{y=\frac{2}{4-x^2},\qquad -2\lt x\lt2.}$$
+<p>The denominator vanishes at \(x=\pm2\) — the solution blows up there, so the interval containing \(0\) is \((-2,2)\).</p>
+</details>
+
+<details>
+<summary>Worked B — hidden separability: \(y'=e^{x-y},\ y(0)=\ln2\)</summary>
+<p><b>Q.</b> Solve the IVP. <b>[5 marks]</b></p>
+<p>\(e^{x-y}=e^x\cdot e^{-y}\) ⇒ separable; no equilibria (\(e^{-y}\gt0\)).</p>
+$$\int e^{y}\,dy=\int e^{x}\,dx\ \Longrightarrow\ e^y=e^x+C.$$
+<p>IC: \(e^{\ln2}=2=1+C\Rightarrow C=1\). So \(e^y=e^x+1\) and \(\boxed{y=\ln(e^x+1)}\), valid for all \(x\) since \(e^x+1\gt0\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Solve \(\dfrac{dy}{dt}=-3t^2y\), \(y(0)=4\).</p>
+<details><summary>Solution</summary>
+<p>Equilibrium \(y=0\). \(\int\frac{dy}{y}=\int-3t^2\,dt\Rightarrow\ln|y|=-t^3+C\Rightarrow y=Ae^{-t^3}\). \(A=4\): \(\boxed{y=4e^{-t^3}}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Solve \(\dfrac{dy}{dx}=(y+1)\sec^2x\), \(y(0)=1\), on \(-\frac\pi2\lt x\lt\frac\pi2\). Identify any equilibrium solution.</p>
+<details><summary>Solution</summary>
+<p>Equilibrium: \(y=-1\). Otherwise \(\int\frac{dy}{y+1}=\int\sec^2x\,dx\Rightarrow\ln|y+1|=\tan x+C\Rightarrow y+1=Ae^{\tan x}\).</p>
+<p>IC: \(2=Ae^0\Rightarrow A=2\): \(\boxed{y=2e^{\tan x}-1}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 7 marks</span> <b>Q3.</b> Solve \(\dfrac{dy}{dx}=\dfrac{x(1+y^2)}{y}\), \(y(0)=-\sqrt3\), giving \(y\) explicitly.</p>
+<details><summary>Solution</summary>
+<p>Separable; \(1+y^2\ne0\), so no equilibria.</p>
+$$\int\frac{y}{1+y^2}dy=\int x\,dx\ \Longrightarrow\ \tfrac12\ln(1+y^2)=\tfrac12x^2+C\ \Longrightarrow\ 1+y^2=Ae^{x^2}.$$
+<p>IC: \(1+3=A\Rightarrow A=4\). So \(y^2=4e^{x^2}-1\); since \(y(0)=-\sqrt3\lt0\) take the negative root:</p>
+$$\boxed{y=-\sqrt{4e^{x^2}-1}}\quad(\text{valid for all }x,\ \text{as }4e^{x^2}-1\ge3).$$
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Consider \(\dfrac{dy}{dt}=4-y^2\). (a) Find the equilibrium solutions and classify them. (b) Solve the IVP with \(y(0)=0\) using partial fractions. (c) Find \(\lim_{t\to\infty}y(t)\) and check it agrees with (a).</p>
+<details><summary>Solution</summary>
+<p>(a) \(4-y^2=(2-y)(2+y)=0\Rightarrow y=\pm2\). Signs: \(y\gt2\): \(-\); \(-2\lt y\lt2\): \(+\); \(y\lt-2\): \(-\). So \(y=2\) <b>stable</b>, \(y=-2\) <b>unstable</b>.</p>
+<p>(b) \(\dfrac{1}{4-y^2}=\dfrac14\left(\dfrac{1}{2+y}+\dfrac{1}{2-y}\right)\), so</p>
+$$\tfrac14\ln\left|\frac{2+y}{2-y}\right|=t+C\ \Longrightarrow\ \frac{2+y}{2-y}=Ae^{4t}.$$
+<p>IC \(y(0)=0\Rightarrow A=1\). Solve: \(2+y=(2-y)e^{4t}\Rightarrow y(1+e^{4t})=2(e^{4t}-1)\):</p>
+$$\boxed{y=\frac{2(e^{4t}-1)}{e^{4t}+1}}.$$
+<p>(c) Divide top and bottom by \(e^{4t}\): \(y\to2\). ✓ The solution starts between the equilibria where \(y'\gt0\) and rises to the stable one.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 10 marks</span> <b>Q5.</b> Consider \(\dfrac{dy}{dx}=\dfrac{x^2+3y^2}{2xy}\) for \(x\gt0\). (a) Show that the substitution \(y=xu(x)\) makes it separable. (b) Solve the IVP with \(y(1)=1\).</p>
+<details><summary>Solution</summary>
+<p>(a) \(y'=u+xu'\); RHS \(=\dfrac{x^2+3x^2u^2}{2x^2u}=\dfrac{1+3u^2}{2u}\). So</p>
+$$xu'=\frac{1+3u^2}{2u}-u=\frac{1+u^2}{2u}\ \Longrightarrow\ \frac{du}{dx}=\frac1x\cdot\frac{1+u^2}{2u}\quad\text{— separable.}$$
+<p>(b) \(\displaystyle\int\frac{2u}{1+u^2}du=\int\frac{dx}{x}\Rightarrow\ln(1+u^2)=\ln x+C\Rightarrow1+u^2=Ax\). IC: \(u(1)=1\Rightarrow A=2\). So \(u^2=2x-1\), \(y^2=x^2u^2=2x^3-x^2\), and with \(y(1)=1\gt0\):</p>
+$$\boxed{y=\sqrt{2x^3-x^2}=x\sqrt{2x-1}},\quad x\gt\tfrac12.$$
+</details>
+</div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Linear first-order ODEs (integrating factor)</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — \(e^{t^2}\) integrating factor: \(y'+2ty=4t,\ y(0)=5\)</summary>
+<p><b>Q.</b> Solve the IVP. <b>[5 marks]</b></p>
+<p>Already standard form, \(p=2t\). \(I=e^{\int2t\,dt}=e^{t^2}\).</p>
+$$\big(e^{t^2}y\big)'=4te^{t^2}\ \Longrightarrow\ e^{t^2}y=2e^{t^2}+C\ \Longrightarrow\ y=2+Ce^{-t^2}.$$
+<p>IC: \(5=2+C\Rightarrow\boxed{y=2+3e^{-t^2}}\).</p>
+<p class="tip">This ODE is also separable (\(y'=2t(2-y)\)). Both methods give the same answer — use whichever you trust more under pressure.</p>
+</details>
+
+<details>
+<summary>Worked B — integration by parts inside: \(xy'-2y=x^4\sin x,\ y(\pi)=\pi^3\)</summary>
+<p><b>Q.</b> Solve for \(x\gt0\). <b>[8 marks]</b></p>
+<p>Standard form (divide by \(x\gt0\)): \(y'-\dfrac2x\,y=x^3\sin x\). IF: \(I=e^{-2\ln x}=x^{-2}\).</p>
+$$\left(\frac{y}{x^2}\right)'=x\sin x\ \Longrightarrow\ \frac{y}{x^2}=\int x\sin x\,dx=-x\cos x+\sin x+C\quad(\text{by parts}).$$
+<p>IC: \(\dfrac{\pi^3}{\pi^2}=\pi=-\pi\cos\pi+\sin\pi+C=\pi+C\Rightarrow C=0\).</p>
+$$\boxed{y=x^2(\sin x-x\cos x)}$$
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Solve \(y'+4y=8\), \(y(0)=5\).</p>
+<details><summary>Solution</summary>
+<p>\(I=e^{4t}\); \((e^{4t}y)'=8e^{4t}\Rightarrow e^{4t}y=2e^{4t}+C\Rightarrow y=2+Ce^{-4t}\); \(C=3\): \(\boxed{y=2+3e^{-4t}}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Solve \(y'-y=e^{2x}\), \(y(0)=3\).</p>
+<details><summary>Solution</summary>
+<p>\(I=e^{-x}\); \((e^{-x}y)'=e^{x}\Rightarrow e^{-x}y=e^x+C\Rightarrow y=e^{2x}+Ce^{x}\). IC: \(3=1+C\Rightarrow \boxed{y=e^{2x}+2e^{x}}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q3.</b> Solve \((x^2+1)y'+2xy=6x^2\), \(y(0)=4\).</p>
+<details><summary>Solution</summary>
+<p>Notice the LHS is exactly \(\dfrac{d}{dx}\big((x^2+1)y\big)\) (product rule). [Equivalently: standard form \(y'+\frac{2x}{x^2+1}y=\frac{6x^2}{x^2+1}\), \(I=x^2+1\).]</p>
+$$(x^2+1)y=\int6x^2\,dx=2x^3+C;\quad y(0)=4\Rightarrow C=4;\quad \boxed{y=\frac{2x^3+4}{x^2+1}}.$$
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Solve \(xy'+3y=\dfrac{e^{x}}{x}\) for \(x\gt0\), with \(y(1)=2\).</p>
+<details><summary>Solution</summary>
+<p>Standard form: \(y'+\dfrac3x\,y=\dfrac{e^x}{x^2}\). \(I=e^{3\ln x}=x^3\) (\(x\gt0\)).</p>
+$$(x^3y)'=xe^x\ \Longrightarrow\ x^3y=(x-1)e^x+C\quad(\text{by parts}).$$
+<p>IC: \(2=0+C\Rightarrow C=2\): \(\boxed{y=\dfrac{(x-1)e^x+2}{x^3}}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 8 marks</span> <b>Q5.</b> Find the general solution of \(y'+y\cot x=2\cos x\) on \(0\lt x\lt\pi\), and the solution with \(y\!\left(\frac\pi2\right)=3\). Justify how you simplify the integrating factor.</p>
+<details><summary>Solution</summary>
+<p>\(\int\cot x\,dx=\ln|\sin x|\), so \(I=|\sin x|=\sin x\) because \(\sin x\gt0\) on \((0,\pi)\).</p>
+$$(y\sin x)'=2\sin x\cos x=\sin 2x\ \Longrightarrow\ y\sin x=\sin^2x+C\ \Longrightarrow\ \boxed{y=\sin x+\frac{C}{\sin x}}.$$
+<p>(Using \(\int2\sin x\cos x\,dx=\sin^2x\); \(-\tfrac12\cos2x\) differs only by a constant.) IC: \(3=1+C\Rightarrow C=2\): \(\boxed{y=\sin x+2\csc x}\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Equilibrium solutions, stability &amp; slope fields</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — autonomous quadratic: \(y'=(y-1)(y-4)\)</summary>
+<p><b>Q.</b> Find and classify the equilibria. Describe the long-term behaviour for \(y(0)=2\) and \(y(0)=5\). <b>[6 marks]</b></p>
+<p>Equilibria \(y=1,\ y=4\). Signs: \(y\gt4\): \((+)(+)=+\); \(1\lt y\lt4\): \((+)(-)=-\); \(y\lt1\): \((-)(-)=+\).</p>
+<ul><li>\(y=1\): up from below, down from above ⇒ <b>stable</b>.</li><li>\(y=4\): away on both sides ⇒ <b>unstable</b>.</li></ul>
+<p>\(y(0)=2\): in \((1,4)\) with \(y'\lt0\), trapped above 1 ⇒ \(y\to1\). \(y(0)=5\): \(y'\gt0\) and increasing ⇒ \(y\) grows without bound (it actually blows up in finite time).</p>
+</details>
+
+<details>
+<summary>Worked B — non-autonomous (2020 S2 style): \(y'=(t-3)e^{y}(y-2)(y+1)^2\)</summary>
+<p><b>Q.</b> Find all equilibrium solutions and decide which are stable. Justify. <b>[10 marks]</b></p>
+<p><b>Equilibria.</b> Need \(y'=0\) for all \(t\): \(e^y\gt0\), \(t-3\) not identically 0, so \((y-2)(y+1)^2=0\): \(\boxed{y=2,\ y=-1}\).</p>
+<p><b>Signs for \(t\gt3\).</b> \(t-3\gt0\); \(e^y\gt0\); \((y+1)^2\gt0\) for \(y\ne-1\). So \(\operatorname{sign}(y')=\operatorname{sign}(y-2)\):</p>
+<ul><li>\(y\gt2\): \(y'\gt0\) (away from 2 upward).</li><li>\(-1\lt y\lt2\): \(y'\lt0\) (away from 2 downward, toward \(-1\)).</li><li>\(y\lt-1\): \(y'\lt0\) (away from \(-1\) downward).</li></ul>
+<p><b>Conclusion.</b> \(y=2\) is <b>unstable</b>; \(y=-1\) is <b>not stable (semi-stable)</b>. Neither is stable.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Find all equilibrium solutions (if any): (a) \(y'=y^2-9\); (b) \(y'=ty-2t\); (c) \(y'=y-\sin t\); (d) \(y'=e^y-1\).</p>
+<details><summary>Solution</summary>
+<p>(a) \(y=\pm3\). (b) \(y'=t(y-2)\Rightarrow y=2\). (c) None: \(y'=0\) needs \(y=\sin t\), not constant (and \(y=\sin t\) doesn't even solve the ODE). (d) \(e^y=1\Rightarrow y=0\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Classify every equilibrium of \(y'=y(y-2)(y-5)\) and state \(\lim_{t\to\infty}y(t)\) when \(y(0)=4\).</p>
+<details><summary>Solution</summary>
+<p>Equilibria 0, 2, 5. Signs: \(y\gt5\): \(+\); \(2\lt y\lt5\): \(-\); \(0\lt y\lt2\): \(+\); \(y\lt0\): \(-\).</p>
+<p>\(y=0\) <b>unstable</b>; \(y=2\) <b>stable</b>; \(y=5\) <b>unstable</b>. With \(y(0)=4\): \(y'\lt0\), trapped above 2 ⇒ \(y\to2\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> Find all equilibrium solutions of \(\dfrac{dy}{dt}=(1+t^2)(y^2-4)(y-1)^2\) and decide which are stable. Justify your answer. Hence find \(\lim_{t\to\infty}y(t)\) if \(y(0)=\tfrac32\).</p>
+<details><summary>Solution</summary>
+<p>\(1+t^2\gt0\) always, so equilibria are \(y=2,\ y=-2,\ y=1\). \((y-1)^2\gt0\) for \(y\ne1\), so \(\operatorname{sign}(y')=\operatorname{sign}\big((y-2)(y+2)\big)\):</p>
+<ul><li>\(y\gt2\): \(+\) · \(1\lt y\lt2\): \(-\) · \(-2\lt y\lt1\): \(-\) · \(y\lt-2\): \(+\).</li></ul>
+<p>\(y=2\) <b>unstable</b>; \(y=1\) <b>semi-stable (not stable)</b> — approached from above, left from below; \(y=-2\) <b>stable</b>.</p>
+<p>\(y(0)=\tfrac32\): \(y'\lt0\) and \(y\) cannot cross \(y=1\) ⇒ \(y(t)\to1\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> (2020 S1 Q10 style.) Consider \(e^{t}\dot y+y^2=3y-2\). (a) Find all equilibrium solutions. (b) Determine whether each is stable. Justify.</p>
+<details><summary>Solution</summary>
+<p>(a) With \(\dot y=0\): \(y^2-3y+2=0\Rightarrow(y-1)(y-2)=0\Rightarrow y=1,\ y=2\).</p>
+<p>(b) \(\dot y=e^{-t}(3y-2-y^2)=-e^{-t}(y-1)(y-2)\). Since \(e^{-t}\gt0\): \(y\gt2\): \(-\); \(1\lt y\lt2\): \(+\); \(y\lt1\): \(-\).</p>
+<p>\(y=2\) <b>stable</b> (approached from both sides); \(y=1\) <b>unstable</b>.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 6 marks</span> <b>Q5.</b> For \(y'=y-x\): (a) where are the slope-field segments horizontal? (b) Show \(y=x+1\) is a solution; is it an equilibrium? (c) Find the general solution and describe what solutions near the line \(y=x+1\) do as \(x\to\infty\).</p>
+<details><summary>Solution</summary>
+<p>(a) Horizontal where \(y-x=0\): along the line \(y=x\) (an isocline, not a solution).</p>
+<p>(b) \(y'=1\) and \(y-x=1\) ✓. Not an equilibrium (not constant).</p>
+<p>(c) Linear: \(y'-y=-x\), \(I=e^{-x}\), \((e^{-x}y)'=-xe^{-x}\Rightarrow e^{-x}y=(x+1)e^{-x}+C\Rightarrow\boxed{y=x+1+Ce^{x}}\). The gap from the line is \(Ce^x\), which grows: nearby solutions peel away (above if \(C\gt0\), below if \(C\lt0\)). The straight-line solution behaves like an unstable one.</p>
+</details>
+</div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Euler's method</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — two steps and compare with exact: \(y'=2y-x,\ y(0)=1,\ h=\tfrac14\)</summary>
+<p><b>Q.</b> (a) Estimate \(y(0.5)\) with Euler's method, \(h=0.25\). (b) The exact solution is \(y=\frac x2+\frac14+\frac34e^{2x}\). Verify this and compare. <b>[7 marks]</b></p>
+<table>
+<tr><th>\(n\)</th><th>\(x_n\)</th><th>\(y_n\)</th><th>\(f=2y_n-x_n\)</th><th>\(y_{n+1}\)</th></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>2</td><td>\(1+\frac14\cdot2=\frac32\)</td></tr>
+<tr><td>1</td><td>\(\frac14\)</td><td>\(\frac32\)</td><td>\(3-\frac14=\frac{11}4\)</td><td>\(\frac32+\frac{11}{16}=\frac{35}{16}\)</td></tr>
+</table>
+<p>\(y(0.5)\approx\boxed{\tfrac{35}{16}=2.1875}\).</p>
+<p>(b) \(y'=\frac12+\frac32e^{2x}\); \(2y-x=x+\frac12+\frac32e^{2x}-x=\frac12+\frac32e^{2x}\) ✓; \(y(0)=\frac14+\frac34=1\) ✓. Exact \(y(0.5)=\frac12+\frac34e\approx2.539\). Euler is low because \(y''=3e^{2x}\gt0\) (concave up).</p>
+</details>
+
+<details>
+<summary>Worked B — a big step jumps over an equilibrium: \(y'=4y(1-y),\ y(0)=\tfrac12\)</summary>
+<p><b>Q.</b> Do two Euler steps with \(h=0.75\), then one step with \(h=0.5\). Comment. <b>[5 marks]</b></p>
+<p>\(h=0.75\): \(y_1=\frac12+\frac34\cdot4\cdot\frac12\cdot\frac12=\frac12+\frac34=\frac54\). \(y_2=\frac54+\frac34\cdot4\cdot\frac54\cdot\left(-\frac14\right)=\frac54-\frac{15}{16}=\frac5{16}\).</p>
+<p>\(h=0.5\): \(y_1=\frac12+\frac12\cdot1=1\), and then \(f=0\) so it stays at 1.</p>
+<p><b>Comment.</b> The true solution starts between the equilibria 0 and 1 and increases toward \(y=1\), never crossing it. With \(h=0.75\) Euler overshoots to \(\frac54\gt1\) — something the real solution can never do — then bounces back to \(\frac5{16}\). This is Poster B's warning: identify equilibria and use a small \(\Delta t\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Use Euler's method with \(h=0.5\) to estimate \(y(1)\) for \(y'=3-y\), \(y(0)=1\). Given the exact solution \(y=3-2e^{-x}\), is Euler high or low? Why?</p>
+<details><summary>Solution</summary>
+<p>\(y_1=1+0.5(2)=2\); \(y_2=2+0.5(1)=\boxed{2.5}\). Exact \(y(1)=3-2e^{-1}\approx2.264\). Euler is <b>high</b>: \(y''=-2e^{-x}\lt0\) (concave down), so tangents lie above the curve.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Estimate \(y(1)\) for \(y'=x-y^2\), \(y(0)=1\), using Euler's method with \(h=\tfrac12\). Show a table.</p>
+<details><summary>Solution</summary>
+<table><tr><th>\(n\)</th><th>\(x_n\)</th><th>\(y_n\)</th><th>\(f=x_n-y_n^2\)</th><th>\(y_{n+1}\)</th></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>\(-1\)</td><td>\(\frac12\)</td></tr>
+<tr><td>1</td><td>\(\frac12\)</td><td>\(\frac12\)</td><td>\(\frac12-\frac14=\frac14\)</td><td>\(\frac12+\frac18=\frac58\)</td></tr></table>
+<p>\(y(1)\approx\boxed{\tfrac58}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q3.</b> (a) Apply Euler's method with \(h=\tfrac12\) to \(y'=\dfrac{y}{1+x}\), \(y(0)=2\), to estimate \(y(1)\). (b) Solve the ODE exactly. (c) Explain why the Euler estimate has zero error.</p>
+<details><summary>Solution</summary>
+<p>(a) \(y_1=2+\frac12\cdot\frac21=3\); \(y_2=3+\frac12\cdot\frac{3}{3/2}=3+1=\boxed{4}\).</p>
+<p>(b) Separable: \(\ln|y|=\ln|1+x|+C\Rightarrow y=A(1+x)\); \(A=2\): \(y=2+2x\), so \(y(1)=4\).</p>
+<p>(c) The exact solution is a straight line, so each tangent line <i>is</i> the solution curve — Euler follows it exactly.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q4.</b> For \(y'=y^2\), \(y(0)=1\): (a) estimate \(y(0.5)\) by Euler with \(h=0.25\); (b) solve exactly and find the error; (c) what happens to the exact solution at \(x=1\)?</p>
+<details><summary>Solution</summary>
+<p>(a) \(y_1=1+\frac14(1)=\frac54\); \(y_2=\frac54+\frac14\cdot\frac{25}{16}=\frac{80+25}{64}=\boxed{\tfrac{105}{64}}\approx1.64\).</p>
+<p>(b) \(\int y^{-2}dy=\int dx\Rightarrow-\frac1y=x+C\), \(C=-1\), \(y=\dfrac{1}{1-x}\); \(y(0.5)=2\). Error \(=2-\frac{105}{64}=\frac{23}{64}\).</p>
+<p>(c) \(y\to\infty\) as \(x\to1^-\) (blow-up) — Euler never "sees" this and always gives finite numbers.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 6 marks</span> <b>Q5.</b> Apply Euler's method with step \(h\) to \(y'=-2y\), \(y(0)=1\). (a) Show \(y_n=(1-2h)^n\). (b) Compute the first few values for \(h=\tfrac14\), \(h=1\), \(h=\tfrac32\). (c) The equilibrium \(y=0\) is stable for the ODE. For which \(h\) does Euler's sequence approach 0?</p>
+<details><summary>Solution</summary>
+<p>(a) \(y_{n+1}=y_n+h(-2y_n)=(1-2h)y_n\), so \(y_n=(1-2h)^n y_0=(1-2h)^n\).</p>
+<p>(b) \(h=\frac14\): \(1,\frac12,\frac14,\frac18,\dots\) (decays, like \(e^{-2x}\)). \(h=1\): \(1,-1,1,-1,\dots\) (oscillates forever). \(h=\frac32\): \(1,-2,4,-8,\dots\) (explodes).</p>
+<p>(c) \((1-2h)^n\to0\iff|1-2h|\lt1\iff0\lt h\lt1\). Too big a step turns a stable equilibrium into numerical nonsense.</p>
+</details>
+</div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · Modelling: cooling, growth, mixing, motion</h3>
+<h4>📖 Learn from these</h4>
+
+<details>
+<summary>Worked A — falling with air resistance (Newton's 2nd law)</summary>
+<p><b>Q.</b> A skydiver's velocity (downward positive, m/s) satisfies \(\dfrac{dv}{dt}=10-2v\) with \(v(0)=0\). (a) Solve for \(v(t)\). (b) Find the terminal velocity and explain it as an equilibrium. (c) When is \(v=4\)? (d) Find the distance fallen \(x(t)\) with \(x(0)=0\). <b>[9 marks]</b></p>
+<p>(a) Linear (or separable): \(I=e^{2t}\), \((e^{2t}v)'=10e^{2t}\Rightarrow e^{2t}v=5e^{2t}+C\), \(C=-5\): \(\boxed{v=5(1-e^{-2t})}\).</p>
+<p>(b) \(v\to5\) m/s. \(v=5\) is the equilibrium of \(v'=10-2v\) (drag balances gravity); \(v'\gt0\) below and \(\lt0\) above ⇒ stable.</p>
+<p>(c) \(4=5-5e^{-2t}\Rightarrow e^{-2t}=\frac15\Rightarrow t=\boxed{\tfrac12\ln5}\) s.</p>
+<p>(d) \(x=\int_0^t5(1-e^{-2s})\,ds=\boxed{5t+\tfrac52\left(e^{-2t}-1\right)}\).</p>
+</details>
+
+<details>
+<summary>Worked B — growth with harvesting: \(P'=0.2P-40\)</summary>
+<p><b>Q.</b> A fish population (\(t\) in years) obeys \(\dfrac{dP}{dt}=0.2P-40\). (a) Find and classify the equilibrium. (b) If \(P(0)=300\), when does \(P\) reach 500? (c) If \(P(0)=150\), when does the population die out? <b>[8 marks]</b></p>
+<p>(a) \(P'=\frac15(P-200)\): equilibrium \(P=200\), \(P'\gt0\) above and \(\lt0\) below ⇒ <b>unstable</b> (a "tipping point").</p>
+<p>Solve: \(P-200=Ae^{t/5}\), so \(P=200+(P_0-200)e^{t/5}\).</p>
+<p>(b) \(P=200+100e^{t/5}=500\Rightarrow e^{t/5}=3\Rightarrow t=\boxed{5\ln3}\) years.</p>
+<p>(c) \(P=200-50e^{t/5}=0\Rightarrow e^{t/5}=4\Rightarrow t=\boxed{5\ln4=10\ln2}\) years.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> A radioactive sample decays according to \(A'=-kA\) with half-life 5 years. Find \(k\) and the fraction remaining after 15 years.</p>
+<details><summary>Solution</summary>
+<p>\(e^{-5k}=\frac12\Rightarrow k=\frac{\ln2}{5}\). After 15 years: \(e^{-15k}=\left(\frac12\right)^3=\boxed{\tfrac18}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Tea at \(85^\circ\)C is placed in a \(25^\circ\)C room; after 5 min it is \(55^\circ\)C. Using Newton's law of cooling, (a) find \(k\); (b) find the temperature after 10 min; (c) find (exactly) when it reaches \(30^\circ\)C.</p>
+<details><summary>Solution</summary>
+<p>\(T=25+60e^{-kt}\). (a) \(55=25+60e^{-5k}\Rightarrow e^{-5k}=\frac12\Rightarrow k=\frac{\ln2}{5}\).</p>
+<p>(b) \(T(10)=25+60\cdot\frac14=\boxed{40^\circ\text{C}}\).</p>
+<p>(c) \(5=60e^{-kt}\Rightarrow e^{-kt}=\frac1{12}\Rightarrow t=\dfrac{\ln12}{k}=\boxed{\dfrac{5\ln12}{\ln2}}\) min \((\approx17.9)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> A population satisfies \(\dfrac{dP}{dt}=\dfrac12P\left(1-\dfrac{P}{1000}\right)\), \(P(0)=100\). (a) Find and classify the equilibria. (b) Verify \(P=\dfrac{1000}{1+9e^{-t/2}}\) solves the IVP. (c) At what population is growth fastest, and when does that happen?</p>
+<details><summary>Solution</summary>
+<p>(a) \(P=0\) (unstable) and \(P=1000\) (stable): \(P'\gt0\) for \(0\lt P\lt1000\), \(P'\lt0\) for \(P\gt1000\), \(P'\lt0\) for \(P\lt0\).</p>
+<p>(b) \(P(0)=\frac{1000}{10}=100\) ✓. \(P'=\dfrac{4500e^{-t/2}}{(1+9e^{-t/2})^2}\); and \(\frac12P\left(1-\frac{P}{1000}\right)=\frac12\cdot\frac{1000}{1+9e^{-t/2}}\cdot\frac{9e^{-t/2}}{1+9e^{-t/2}}\) — equal ✓.</p>
+<p>(c) \(\frac12P-\frac{P^2}{2000}\) is maximised where its derivative \(\frac12-\frac{P}{1000}=0\): \(P=500\) (\(=\theta/2\)). \(500=\dfrac{1000}{1+9e^{-t/2}}\Rightarrow9e^{-t/2}=1\Rightarrow t=2\ln9=\boxed{4\ln3}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q4.</b> A tank initially holds 100 L of pure water. Brine containing 2 kg/L of salt enters at 3 L/min, and the well-stirred mixture leaves at 2 L/min. (a) Show the salt \(S(t)\) (kg) satisfies \(S'=6-\dfrac{2S}{100+t}\). (b) Solve for \(S(t)\). (c) How much salt is in the tank at \(t=100\) min?</p>
+<details><summary>Solution</summary>
+<p>(a) Volume \(V=100+(3-2)t=100+t\). In: \(2\times3=6\) kg/min. Out: \(2\cdot\dfrac{S}{100+t}\). So \(S'=6-\dfrac{2S}{100+t}\).</p>
+<p>(b) Linear: \(I=e^{\int\frac{2}{100+t}dt}=(100+t)^2\). \(\big((100+t)^2S\big)'=6(100+t)^2\Rightarrow(100+t)^2S=2(100+t)^3+C\). \(S(0)=0\Rightarrow C=-2\times10^6\):</p>
+$$\boxed{S(t)=2(100+t)-\frac{2\times10^{6}}{(100+t)^2}}.$$
+<p>(c) \(S(100)=400-\dfrac{2\times10^6}{40\,000}=400-50=\boxed{350\text{ kg}}\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 10 marks</span> <b>Q5.</b> An object falls with quadratic air resistance: \(\dfrac{dv}{dt}=10-\dfrac{v^2}{10}\), \(v(0)=0\). (a) Find the terminal velocity from the ODE alone. (b) Solve for \(v(t)\). (c) When does the object reach half its terminal velocity?</p>
+<details><summary>Solution</summary>
+<p>(a) \(v'=\frac{100-v^2}{10}=0\Rightarrow v=10\) (taking \(v\ge0\)); \(v'\gt0\) for \(0\le v\lt10\) and \(\lt0\) for \(v\gt10\) ⇒ stable, terminal velocity 10 m/s.</p>
+<p>(b) \(\displaystyle\int\frac{dv}{100-v^2}=\int\frac{dt}{10}\); partial fractions \(\frac{1}{100-v^2}=\frac1{20}\left(\frac1{10+v}+\frac1{10-v}\right)\):</p>
+$$\frac1{20}\ln\frac{10+v}{10-v}=\frac{t}{10}+C,\ C=0\ \Longrightarrow\ \frac{10+v}{10-v}=e^{2t}\ \Longrightarrow\ \boxed{v=\frac{10(e^{2t}-1)}{e^{2t}+1}}.$$
+<p>(c) \(v=5\): \(\frac{15}{5}=3=e^{2t}\Rightarrow t=\boxed{\tfrac12\ln3}\) s.</p>
+</details>
+</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 1 First-order ODEs · built from the MATH1052 Summary pp 1–2, Poster B (ODE panels), Problem Sheets T01 (+ T02 Q1–5), and past papers 2020 S1 (Q5, Q10) and 2020 S2 (Q1, Q2) with their marking schemes; 2021 S1 – 2025 S2 checked, no first-order ODE questions. Every ODE solution, constant, stability classification and Euler table verified with SymPy (<code>verify/ch01.py</code>).
+<br><a href="index.html">🏠 Hub</a> · <a href="ch02-second-order-odes.html">Ch 2 →</a> · <a href="formulas.html">Formula sheet</a> · <a href="exam-2020.html">2020 exams</a>
+</footer>
+
+</main>
+</body>
+</html>

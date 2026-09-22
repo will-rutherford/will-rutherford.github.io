@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Worked Exams, 2021 (Semesters 1 &amp; 2)</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  button{background:var(--accent);color:#1e1b4b;border:none;padding:7px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12.5px}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .marks{float:right;background:var(--panel2);color:var(--gold);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 METHOD — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  .concl{background:rgba(251,191,36,.08);border:1px solid #5a4a1a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .concl:before{content:"📝 CONCLUSION IN CONTEXT — ";color:var(--gold);font-weight:700}
+  .ans{background:rgba(167,139,250,.12);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-weight:600}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:auto;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:block;overflow-x:auto}
+  .fig{background:var(--panel2);border:1px dashed #3a4656;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:var(--muted)}
+  .fig:before{content:"🖼 FIGURE — ";color:var(--accent2);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  svg.sk{display:block;margin:10px auto;max-width:100%;height:auto;background:var(--code);border:1px solid var(--line);border-radius:8px}
+</style>
+
+</head>
+<body>
+<header>
+  <h1>MATH1052 — Fully Worked Exams</h1>
+  <p><b>2021 · Semester 1 &amp; Semester 2</b> · Multivariate Calculus &amp; Ordinary Differential Equations</p>
+  <p>two papers · each <b>100 marks · 10 questions</b> · 120 min + 10 min planning (S2 cover page)</p>
+  <span class="badge gold">Every answer verified with SymPy</span>
+  <span class="badge">No calculator · closed book</span>
+  <span class="badge pre">Older format: 10 Qs, no printed formula sheet</span>
+</header>
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="exam-2020.html">2020</a>
+  <a href="exam-2021.html" style="background:var(--accent);color:#1e1b4b">2021 (this)</a>
+  <a href="exam-2022.html">2022</a>
+  <a href="exam-2023.html">2023</a>
+  <a href="exam-2024.html">2024</a>
+  <a href="exam-2025.html">2025</a>
+  <a href="#s1">S1 paper</a>
+  <a href="#s2">S2 paper</a>
+  <a href="#lessons">What 2021 teaches</a>
+  <button onclick="toggleAll()">👁 Toggle all solutions</button>
+</nav>
+<main>
+
+<!-- ============================ FORMAT NOTE ============================ -->
+<section id="format">
+<h2>How 2021 differs from the paper you will sit</h2>
+<div class="card">
+<table>
+<tr><th></th><th>2021 S1</th><th>2021 S2</th><th>Current (2025 S2)</th></tr>
+<tr><td>Questions</td><td>10</td><td>10</td><td>8</td></tr>
+<tr><td>Marks</td><td>100 (every Q = 10)</td><td>100 (5,5,10,10,15,10,15,15,10,5)</td><td>100 (12,12,10,12,12,12,12,18)</td></tr>
+<tr><td>Formula sheet</td><td>not in our copy (no cover page)</td><td>"Materials supplied: None" — <b>no sheet</b></td><td>printed on the last page</td></tr>
+<tr><td>ODE questions</td><td>none</td><td>none</td><td>≈ 0–1 question</td></tr>
+<tr><td>Calculator</td><td>—</td><td>not permitted</td><td>not permitted</td></tr>
+</table>
+<p class="tip">Both 2021 papers are <b>100 % multivariable calculus</b> — no ODEs at all — which makes them excellent rehearsal for the current paper, whose weight is the same. Questions are shorter than today's (5–15 marks, mostly one idea each), so they are perfect <b>timed drills</b>: allow ~1.1 min per mark.</p>
+<p class="trap">In 2021 S2 nothing was supplied, so the linear approximation, directional derivative and chain-rule formulas had to be known cold. Today they are on the sheet — but <b>write them from memory anyway</b> while practising these papers; it is the fastest way to make them automatic.</p>
+</div>
+</section>
+
+<!-- ============================ S1 AT A GLANCE ============================ -->
+<section id="s1">
+<h2>Semester 1, 2021 — at a glance</h2>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s1-q1">1</a></td><td>Two surfaces share a tangent plane</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s1-q2">2</a></td><td>2-D limit does not exist (two-path test)</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>8 + 2</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q3">3</a></td><td>Implicit differentiation → tangent line</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s1-q4">4</a></td><td>Contours are ellipses; sketch one</td><td><a href="ch03-surfaces-contours.html">Ch 3</a></td><td>6 + 4</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q5">5</a></td><td>Directional derivative; steepest descent</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>6 + 4</td><td>★☆☆</td></tr>
+<tr><td><a href="#s1-q6">6</a></td><td>Chain rule with \(x=e^u\cos\theta,\ y=e^u\sin\theta\)</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>5 + 5</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q7">7</a></td><td>Lagrange: closest point on a circular road</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q8">8</a></td><td>Critical points &amp; classification</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>5 + 5</td><td>★★☆</td></tr>
+<tr><td><a href="#s1-q9">9</a></td><td>Arc length of a polar curve (cardioid)</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>5 + 5</td><td>★★★</td></tr>
+<tr><td><a href="#s1-q10">10</a></td><td>Conservative field; line integral</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>5 + 5</td><td>★☆☆</td></tr>
+</table>
+</section>
+
+<!-- ============================ S1 Q1 ============================ -->
+<section id="s1-q1">
+<h2>S1 Question 1 — Common tangent plane <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Show that the surfaces
+$$z_1=\sqrt{x^2+y^2},\qquad z_2=\frac1{10}\left(x^2+y^2\right)+\frac52$$
+intersect at \((x,y)=(3,4)\), and have a common tangent plane at that point.
+<details><summary>Worked solution</summary>
+<div class="when">Two graphs \(z=f(x,y)\) have the <b>same tangent plane</b> at \((a,b)\) iff they have the same height, the same \(x\)-slope and the same \(y\)-slope there — because the tangent plane \(z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\) is built from exactly those three numbers. (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>)</div>
+<b>1. Same height (they intersect):</b>
+$$z_1(3,4)=\sqrt{9+16}=\sqrt{25}=5,\qquad z_2(3,4)=\frac{25}{10}+\frac52=5.$$
+Both surfaces pass through \((3,4,5)\), so they intersect there.<br>
+<b>2. Same \(x\)-slope:</b>
+$$\frac{\partial z_1}{\partial x}=\frac12(x^2+y^2)^{-1/2}(2x)=\frac{x}{\sqrt{x^2+y^2}}\;\Rightarrow\;\frac35,\qquad \frac{\partial z_2}{\partial x}=\frac{2x}{10}=\frac x5\;\Rightarrow\;\frac35.$$
+<b>3. Same \(y\)-slope:</b>
+$$\frac{\partial z_1}{\partial y}=\frac{y}{\sqrt{x^2+y^2}}\;\Rightarrow\;\frac45,\qquad \frac{\partial z_2}{\partial y}=\frac y5\;\Rightarrow\;\frac45.$$
+<b>4. Write the plane</b> (the same for both):
+$$z=5+\tfrac35(x-3)+\tfrac45(y-4)\quad\Longleftrightarrow\quad z=\frac{3x+4y}{5}.$$
+<div class="ans">Both surfaces pass through \((3,4,5)\) with \(f_x=\tfrac35,\ f_y=\tfrac45\), so they share the tangent plane \(z=\dfrac{3x+4y}{5}\) (equivalently \(3x+4y-5z=0\)).</div>
+<div class="tip">The official solution earns the marks with three sentences: "same height", "same \(x\) slope", "same \(y\) slope ⇒ they share a tangent plane". Say each in words — a "show that" question is marked on the explicit comparison, not just the numbers.</div>
+<div class="trap">Checking only the partial derivatives is not enough — if the heights differed you'd get two <i>parallel</i> planes, not a common one. Do the height check first.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q2 ============================ -->
+<section id="s1-q2">
+<h2>S1 Question 2 — Limit that does not exist <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(g:\mathbb R^2\to\mathbb R\) be given by
+$$g(x,y)=\begin{cases}\dfrac{x^2y}{x^4+y^2} & (x,y)\ne(0,0)\\[4pt] c & (x,y)=(0,0)\end{cases}$$
+</div>
+<div class="card q"><span class="marks">8 marks</span><b>(a)</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)} g(x,y)\) does not exist.
+<details><summary>Worked solution</summary>
+<div class="when">To show a 2-D limit <b>does not exist</b>, find two paths into \((0,0)\) along which \(g\) tends to <b>different</b> values (two-path test). The powers \(x^4\) and \(y^2\) are balanced when \(y\sim x^2\), so the "interesting" path is the parabola \(y=x^2\). (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>)</div>
+<b>Path 1 — the \(x\)-axis, \(y=0\) (\(x\ne0\)):</b>
+$$g(x,0)=\frac{x^2\cdot0}{x^4+0}=0\;\Rightarrow\;\lim_{x\to0}g(x,0)=0.$$
+<b>Path 2 — the parabola \(y=x^2\) (\(x\ne0\)):</b>
+$$g(x,x^2)=\frac{x^2\cdot x^2}{x^4+x^4}=\frac{x^4}{2x^4}=\frac12\;\Rightarrow\;\lim_{x\to0}g(x,x^2)=\frac12.$$
+Since \(0\ne\tfrac12\), \(g\) approaches different values along different paths to \((0,0)\).
+<div class="ans">The limit does not exist (\(0\) along \(y=0\), \(\tfrac12\) along \(y=x^2\)).</div>
+<div class="trap">Every <b>straight line</b> \(y=mx\) gives \(g(x,mx)=\dfrac{mx^3}{x^4+m^2x^2}=\dfrac{mx}{x^2+m^2}\to0\). Students who test only lines (or only the axes) wrongly conclude the limit is 0. When the denominator mixes \(x^4\) with \(y^2\), try \(y=kx^2\): \(g=\dfrac{k}{1+k^2}\), which depends on \(k\).</div>
+<div class="tip">For 8 marks write both substitutions in full, state "\(x\ne0\)" on each path, and finish with an explicit sentence: "the limits along two paths differ, so the limit does not exist."</div>
+</details></div>
+<div class="card q"><span class="marks">2 marks</span><b>(b)</b> Is there any value of \(c\) which would make \(g(x,y)\) continuous? Justify your answer.
+<details><summary>Worked solution</summary>
+<div class="when">Continuity at \((0,0)\) needs \(\lim_{(x,y)\to(0,0)}g=g(0,0)\). If the limit doesn't exist, no choice of \(g(0,0)=c\) can fix it.</div>
+<div class="ans">No. Continuity at the origin requires \(\lim_{(x,y)\to(0,0)}g(x,y)\) to exist and equal \(c\); by (a) the limit does not exist, so no value of \(c\) makes \(g\) continuous.</div>
+<div class="tip">(Away from the origin \(g\) is a quotient of polynomials with non-zero denominator, so it is continuous there — the only problem point is \((0,0)\).)</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q3 ============================ -->
+<section id="s1-q3">
+<h2>S1 Question 3 — Implicit tangent line <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Let \(C\) be the curve defined by equation
+$$e^{xy}+ye^{y}=2e,$$
+for \(0\le x\le 2\). Find an equation of the tangent line to the curve \(C\) at \(y=1\).
+<details><summary>Worked solution</summary>
+<div class="when">Curve given implicitly by \(F(x,y)=0\) → implicit differentiation \(\dfrac{dy}{dx}=-\dfrac{F_x}{F_y}\) (on today's formula sheet). First find the missing coordinate of the point. (<a href="ch05-gradient-chain-rule.html">Ch 5</a>)</div>
+<b>1. Find \(x\) when \(y=1\):</b> \(e^{x}+e=2e\Rightarrow e^x=e\Rightarrow x=1\). Point \((1,1)\) (inside \(0\le x\le2\)).<br>
+<b>2. Partial derivatives</b> of \(F(x,y)=e^{xy}+ye^y-2e\):
+$$F_x=ye^{xy},\qquad F_y=xe^{xy}+e^y+ye^y.$$
+<b>3. Slope at \((1,1)\):</b>
+$$\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{1\cdot e}{e+e+e}=-\frac13.$$
+<b>4. Tangent line:</b>
+$$y-1=-\tfrac13(x-1)\quad\Longleftrightarrow\quad y=\frac{4-x}{3}.$$
+<div class="ans">Tangent line at \((1,1)\): \(y=-\tfrac13(x-1)+1=\dfrac{4-x}{3}\).</div>
+<div class="trap">\(F_y\) needs the <b>product rule</b> on \(ye^y\): \(\frac{\partial}{\partial y}(ye^y)=e^y+ye^y\). Dropping the \(e^y\) term gives slope \(-\tfrac12\) — a common lost mark.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q4 ============================ -->
+<section id="s1-q4">
+<h2>S1 Question 4 — Elliptical contours <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider the surface
+$$z=\frac{8y}{x^2+2y^2}.$$
+</div>
+<div class="card q"><span class="marks">6 marks</span><b>(a)</b> Show that all contours \(z=z_0\) (with \(z_0\in\mathbb R\setminus\{0\}\)) are ellipses.
+<details><summary>Worked solution</summary>
+<div class="when">Contour = set \(z=z_0\). Clear the fraction, gather terms, <b>complete the square</b> and divide to reach standard form \(\dfrac{(x-h)^2}{A^2}+\dfrac{(y-k)^2}{B^2}=1\). (<a href="ch03-surfaces-contours.html">Ch 3</a>)</div>
+Set \(z=z_0\ne0\) and rearrange:
+$$x^2+2y^2=\frac{8y}{z_0}\;\Rightarrow\;x^2+2\Big(y^2-\frac{4}{z_0}y\Big)=0.$$
+Complete the square in \(y\): \(y^2-\dfrac4{z_0}y=\Big(y-\dfrac2{z_0}\Big)^2-\dfrac4{z_0^2}\), so
+$$x^2+2\Big(y-\frac2{z_0}\Big)^2=\frac8{z_0^2}\;\Rightarrow\;\frac{x^2}{8/z_0^2}+\frac{\big(y-\frac2{z_0}\big)^2}{4/z_0^2}=1.$$
+Both denominators are positive for every \(z_0\ne0\), so this is an ellipse in standard form, centre \(\big(0,\tfrac2{z_0}\big)\), semi-axes \(\dfrac{2\sqrt2}{|z_0|}\) (in \(x\)) and \(\dfrac{2}{|z_0|}\) (in \(y\)).
+<div class="ans">Every contour \(z=z_0\ne0\) is the ellipse \(\dfrac{x^2}{8/z_0^2}+\dfrac{(y-2/z_0)^2}{4/z_0^2}=1\), centred at \((0,2/z_0)\).</div>
+<div class="trap">Each of these ellipses passes through the origin (put \(x=y=0\): \(0+2\cdot\frac4{z_0^2}=\frac8{z_0^2}\) ✓), but the surface is <b>undefined</b> at \((0,0)\). Strictly, each contour is the ellipse <b>with the origin removed</b> — mark it with an open circle on a sketch. (The official solution doesn't mention this; it is a free "precision" point.)</div>
+<div class="tip">Say where the sign of \(z_0\) goes: \(z_0>0\) ellipses sit above the \(x\)-axis, \(z_0<0\) below; larger \(|z_0|\) → smaller ellipse closer to the origin.</div>
+</details></div>
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> Sketch the contour for \(z_0=2\).
+<details><summary>Worked solution</summary>
+<div class="when">Substitute \(z_0=2\) into the standard form, then read off centre, semi-axes and intercepts — these are what a marker ticks on a sketch.</div>
+$$\frac{x^2}{2}+(y-1)^2=1.$$
+Centre \((0,1)\); semi-axis \(\sqrt2\) horizontally, \(1\) vertically. Key points: \((0,0)\) (open — excluded), \((0,2)\), \((\pm\sqrt2,1)\). The ellipse touches the \(x\)-axis only at the origin.
+<svg class="sk" viewBox="0 0 320 250" width="320" role="img" aria-label="Ellipse x^2/2+(y-1)^2=1">
+<line x1="10" y1="190" x2="310" y2="190" stroke="#9aa7b8"/><line x1="160" y1="240" x2="160" y2="10" stroke="#9aa7b8"/>
+<text x="300" y="184" fill="#9aa7b8" font-size="12">x</text><text x="166" y="20" fill="#9aa7b8" font-size="12">y</text>
+<ellipse cx="160" cy="120" rx="99.0" ry="70" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+<circle cx="160" cy="190" r="4.5" fill="#0a0e14" stroke="#f87171" stroke-width="2"/>
+<circle cx="160" cy="50" r="3" fill="#fbbf24"/><circle cx="160" cy="120" r="3" fill="#38bdf8"/>
+<circle cx="259.0" cy="120" r="3" fill="#fbbf24"/><circle cx="61.0" cy="120" r="3" fill="#fbbf24"/>
+<text x="166" y="44" fill="#e8edf4" font-size="12">(0,2)</text>
+<text x="166" y="124" fill="#38bdf8" font-size="12">centre (0,1)</text>
+<text x="264.0" y="124" fill="#e8edf4" font-size="12">(√2,1)</text>
+<text x="11.0" y="124" fill="#e8edf4" font-size="12">(−√2,1)</text>
+<text x="168" y="206" fill="#f87171" font-size="12">(0,0) excluded</text>
+<text x="12" y="22" fill="#a78bfa" font-size="13">z = 2</text>
+</svg>
+<div class="ans">Ellipse \(\frac{x^2}{2}+(y-1)^2=1\): centre \((0,1)\), \(y\)-intercepts \(0\) and \(2\), widest points \((\pm\sqrt2,1)\); origin hollow.</div>
+<div class="tip">Label the centre, both axis lengths and every intercept. An unlabelled oval scores little even if it's the right shape.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q5 ============================ -->
+<section id="s1-q5">
+<h2>S1 Question 5 — Temperature on a plate <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+The temperature (in degrees Celcius) at a point \((x,y)\) on a metal plate in the \(xy\)-plane is
+$$T(x,y)=\frac{xy}{1+x^2+y^2}.$$
+</div>
+<div class="card q"><span class="marks">6 marks</span><b>(a)</b> Find the rate of change of temperature at \((1,1)\) in the direction of \(2\mathbf i-\mathbf j\).
+<details><summary>Worked solution</summary>
+<div class="when">"Rate of change in the direction of \(\mathbf a\)" = directional derivative \(D_{\mathbf u}T=\nabla T\cdot\dfrac{\mathbf a}{\|\mathbf a\|}\). Normalise first. (<a href="ch05-gradient-chain-rule.html">Ch 5</a>)</div>
+<b>Gradient</b> (quotient rule):
+$$T_x=\frac{y(1+x^2+y^2)-xy(2x)}{(1+x^2+y^2)^2}=\frac{y(1-x^2+y^2)}{(1+x^2+y^2)^2},\qquad T_y=\frac{x(1+x^2-y^2)}{(1+x^2+y^2)^2}.$$
+At \((1,1)\): \(T_x=\dfrac{3-2}{9}=\dfrac19,\ T_y=\dfrac19\), so \(\nabla T(1,1)=\tfrac19(1,1)\).<br>
+<b>Unit direction:</b> \(\mathbf u=\dfrac{(2,-1)}{\sqrt5}\).
+$$D_{\mathbf u}T(1,1)=\frac19(1,1)\cdot\frac{(2,-1)}{\sqrt5}=\frac{2-1}{9\sqrt5}=\frac1{9\sqrt5}.$$
+<div class="ans">\(D_{\mathbf u}T(1,1)=\dfrac1{9\sqrt5}=\dfrac{\sqrt5}{45}\ ^\circ\mathrm C\) per unit distance.</div>
+<div class="trap">Using \((2,-1)\) without dividing by \(\sqrt5\) gives \(\tfrac19\), which is \(\sqrt5\) times too big. Always normalise the direction vector.</div>
+</details></div>
+<div class="card q"><span class="marks">4 marks</span><b>(b)</b> An ant at \((1,1)\) walks in the direction of greatest temperature decrease. Find a vector in that direction.
+<details><summary>Worked solution</summary>
+<div class="when">Temperature increases fastest along \(\nabla T\), so it <b>decreases</b> fastest along \(-\nabla T\).</div>
+$$-\nabla T(1,1)=-\tfrac19(1,1)=\left(-\tfrac19,-\tfrac19\right).$$
+<div class="ans">Direction \(-\nabla T(1,1)=-\tfrac19(\mathbf i+\mathbf j)\), i.e. any positive multiple such as \(-\mathbf i-\mathbf j\) (south-west). The rate of decrease there is \(\|\nabla T\|=\tfrac{\sqrt2}{9}\).</div>
+<div class="tip">The question asks for "a vector", so any positive multiple of \(-\nabla T\) scores; the official answer adds "This is South West" — a nice sanity sentence.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q6 ============================ -->
+<section id="s1-q6">
+<h2>S1 Question 6 — Chain rule, exponential-polar coordinates <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(f(x,y)\) have continuous partial derivatives, and let \(x=e^u\cos\theta\) and \(y=e^u\sin\theta\).
+</div>
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Express \(\dfrac{\partial f}{\partial u}\) and \(\dfrac{\partial f}{\partial\theta}\) in terms of \(\dfrac{\partial f}{\partial x}\) and \(\dfrac{\partial f}{\partial y}\).
+<details><summary>Worked solution</summary>
+<div class="when">\(f\) depends on \((u,\theta)\) only through \(x\) and \(y\) → tree diagram: \(f\to x,y\to u,\theta\). Each partial = sum over the two branches. (<a href="ch05-gradient-chain-rule.html">Ch 5</a>)</div>
+Derivatives of the substitution: \(x_u=e^u\cos\theta,\ y_u=e^u\sin\theta,\ x_\theta=-e^u\sin\theta,\ y_\theta=e^u\cos\theta\).
+$$\frac{\partial f}{\partial u}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial u}=e^u\left(\cos\theta\,\frac{\partial f}{\partial x}+\sin\theta\,\frac{\partial f}{\partial y}\right),$$
+$$\frac{\partial f}{\partial \theta}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial \theta}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial \theta}=e^u\left(-\sin\theta\,\frac{\partial f}{\partial x}+\cos\theta\,\frac{\partial f}{\partial y}\right).$$
+<div class="ans">\(f_u=e^u(\cos\theta\,f_x+\sin\theta\,f_y),\qquad f_\theta=e^u(-\sin\theta\,f_x+\cos\theta\,f_y).\)</div>
+<div class="tip">Draw the tree diagram in your answer — markers give method credit for it even if an algebra slip follows.</div>
+</details></div>
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Use your result from part (a) to show that
+$$\frac{\partial f}{\partial x}=e^{-u}\left(\cos\theta\,\frac{\partial f}{\partial u}-\sin\theta\,\frac{\partial f}{\partial\theta}\right).$$
+<details><summary>Worked solution</summary>
+<div class="when">"Show that" → start from the right-hand side, substitute (a), expand, and simplify with \(\cos^2\theta+\sin^2\theta=1\) until only \(f_x\) remains.</div>
+$$\begin{aligned}
+e^{-u}\big(\cos\theta\,f_u-\sin\theta\,f_\theta\big)
+&=e^{-u}\Big(\cos\theta\,e^u(\cos\theta\,f_x+\sin\theta\,f_y)-\sin\theta\,e^u(-\sin\theta\,f_x+\cos\theta\,f_y)\Big)\\
+&=\cos^2\theta\,f_x+\cos\theta\sin\theta\,f_y+\sin^2\theta\,f_x-\sin\theta\cos\theta\,f_y\\
+&=(\cos^2\theta+\sin^2\theta)\,f_x=\frac{\partial f}{\partial x}.
+\end{aligned}$$
+<div class="ans">RHS \(=f_x\), as required. ∎</div>
+<div class="trap">Don't start from \(f_x\) and "work towards" the RHS by guessing — you can't invert the chain rule directly. Work RHS → LHS and show every expansion line; the \(f_y\) cross-terms cancelling is the step the marker is looking for.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q7 ============================ -->
+<section id="s1-q7">
+<h2>S1 Question 7 — Where to park (Lagrange) <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+You drive along a circular road given by the equation
+$$x^2+y^2=45.$$
+There is a tourist attraction at the point \((-1,-2)\). You plan to leave your car and walk to the attraction. Where should you park to minimise the distance you have to walk? (Your car cannot drive off the road.)<br>
+(Hint: The distance between two points \((a,b)\) and \((c,d)\) is given by the equation \(D=\sqrt{(a-c)^2+(b-d)^2}\).)
+<details><summary>Worked solution</summary>
+<div class="when">Optimise a function subject to an equation constraint ("cannot drive off the road") → <b>Lagrange multipliers</b>, \(\nabla f=\lambda\nabla g\). Minimise \(D^2\) instead of \(D\) — same minimiser, no square roots. (<a href="ch06-optimisation.html">Ch 6</a>)</div>
+Minimise \(f(x,y)=(x+1)^2+(y+2)^2\) subject to \(g(x,y)=x^2+y^2=45\).
+$$\nabla f=\lambda\nabla g:\quad (2(x+1),\,2(y+2))=\lambda(2x,\,2y).$$
+<div class="mono">(1)  x + 1 = λx
+(2)  y + 2 = λy
+(3)  x² + y² = 45</div>
+From (1), \(x\ne0\) (else \(1=0\)), so \(\lambda=\dfrac{x+1}{x}\). Substitute into (2):
+$$y+2=\frac{x+1}{x}\,y=y+\frac yx\;\Rightarrow\;2=\frac yx\;\Rightarrow\;y=2x.$$
+Into (3): \(x^2+4x^2=45\Rightarrow x^2=9\Rightarrow x=\pm3\), giving candidates \((3,6)\) and \((-3,-6)\).<br>
+<b>Compare:</b>
+$$D(3,6)=\sqrt{4^2+8^2}=\sqrt{80}=4\sqrt5,\qquad D(-3,-6)=\sqrt{(-2)^2+(-4)^2}=\sqrt{20}=2\sqrt5.$$
+The circle is closed and bounded, so the continuous \(D\) attains a minimum on it, and it must be at one of the Lagrange candidates.
+<div class="ans">Park at \((-3,-6)\); the walk is \(\sqrt{20}=2\sqrt5\). (The point \((3,6)\) is the farthest point, \(\sqrt{80}\).)</div>
+<div class="tip">Geometric check: the nearest point on a circle centred at the origin lies on the ray from the origin through the attraction: \(\sqrt{45}\cdot\frac{(-1,-2)}{\sqrt5}=3(-1,-2)=(-3,-6)\) ✓.</div>
+<div class="trap">Writing "\((\pm3,\pm6)\)" (as the official solution does) suggests four points; only the <b>same-sign</b> pairs satisfy \(y=2x\). Always list candidates explicitly and evaluate \(f\) at each.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q8 ============================ -->
+<section id="s1-q8">
+<h2>S1 Question 8 — Critical points <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Let \(f(x,y)=4xy-\tfrac13(x+y)^3\).
+</div>
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Find all the critical points of \(f\).
+<details><summary>Worked solution</summary>
+<div class="when">Critical points: solve \(f_x=0\) and \(f_y=0\) simultaneously. Subtracting the equations is the fast route when they share a term. (<a href="ch06-optimisation.html">Ch 6</a>)</div>
+$$f_x=4y-(x+y)^2,\qquad f_y=4x-(x+y)^2.$$
+Setting both to zero: \(4y=(x+y)^2=4x\Rightarrow y=x\). Then
+$$0=4x-(2x)^2=4x(1-x)\;\Rightarrow\;x=0\ \text{or}\ x=1.$$
+<div class="ans">Critical points: \((0,0)\) and \((1,1)\).</div>
+<div class="trap">Chain rule on \(\tfrac13(x+y)^3\): its \(x\)-derivative is \((x+y)^2\cdot1\), not \(\tfrac13\cdot3(x+y)^2\cdot 2\). Keep the inner derivative (=1) honest.</div>
+</details></div>
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Classify one of these critical points.
+<details><summary>Worked solution</summary>
+<div class="when">Second-derivative test: \(D=f_{xx}f_{yy}-f_{xy}^2\). \(D\lt0\) saddle; \(D\gt0\) and \(f_{xx}\lt0\) local max; \(D\gt0,\ f_{xx}\gt0\) local min; \(D=0\) inconclusive.</div>
+$$f_{xx}=-2(x+y),\qquad f_{yy}=-2(x+y),\qquad f_{xy}=4-2(x+y).$$
+$$D(x,y)=4(x+y)^2-\big(4-2(x+y)\big)^2.$$
+<table>
+<tr><th>Point</th><th>\(f_{xx}\)</th><th>\(f_{xy}\)</th><th>\(D\)</th><th>Type</th></tr>
+<tr><td>\((0,0)\)</td><td>0</td><td>4</td><td>\(0-16=-16\lt0\)</td><td>saddle point</td></tr>
+<tr><td>\((1,1)\)</td><td>\(-4\)</td><td>0</td><td>\(16-0=16\gt0\)</td><td>local maximum, \(f(1,1)=\tfrac43\)</td></tr>
+</table>
+<div class="ans">Either: \((0,0)\) is a saddle (\(D=-16\lt0\)), or \((1,1)\) is a local maximum (\(D=16\gt0,\ f_{xx}=-4\lt0\)).</div>
+<div class="tip">The question only asks for <b>one</b>; the official solution does both. Classify both anyway if time allows — it protects you if one has an arithmetic slip. (The official file also carries a stray "Haven't finished this" note — ignore it.)</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q9 ============================ -->
+<section id="s1-q9">
+<h2>S1 Question 9 — Arc length of a polar curve <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q">
+Consider a polar curve parameterised by
+$$\mathbf r(t)=f(t)\cos(t)\,\mathbf i+f(t)\sin(t)\,\mathbf j,\qquad a\le t\le b.$$
+</div>
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Show that the arclength of such a curve is \(\displaystyle l=\int_a^b\sqrt{(f(t))^2+(f'(t))^2}\,dt.\)
+<details><summary>Worked solution</summary>
+<div class="when">Arc length \(=\int_a^b\|\mathbf r'(t)\|\,dt\) (on today's sheet). Differentiate with the product rule, square, and let \(\cos^2+\sin^2=1\) do the work. (<a href="ch07-curves-vector-fields.html">Ch 7</a>)</div>
+$$\mathbf r'(t)=\big(f'\cos t-f\sin t\big)\mathbf i+\big(f'\sin t+f\cos t\big)\mathbf j.$$
+$$\begin{aligned}\|\mathbf r'\|^2&=f'^2\cos^2t-2ff'\sin t\cos t+f^2\sin^2t+f'^2\sin^2t+2ff'\sin t\cos t+f^2\cos^2t\\&=f'^2(\cos^2t+\sin^2t)+f^2(\sin^2t+\cos^2t)=f^2+f'^2.\end{aligned}$$
+Hence \(l=\displaystyle\int_a^b\|\mathbf r'(t)\|\,dt=\int_a^b\sqrt{f(t)^2+f'(t)^2}\,dt\). ∎
+<div class="tip">Show the cross terms \(\mp2ff'\sin t\cos t\) explicitly and say they cancel — that's the "show" in "show that".</div>
+</details></div>
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> Find the arclength for \(f(t)=3(1-\cos t)\), \(a=0\), \(b=2\pi\). (Hint, you may find the formula \(\cos(2x)=1-2\sin^2x\) useful.)
+<details><summary>Worked solution</summary>
+<div class="when">Plug into (a); use the half-angle identity \(1-\cos t=2\sin^2\frac t2\) (the hint with \(x=t/2\)) to turn the square root into something integrable.</div>
+\(f=3(1-\cos t),\ f'=3\sin t\):
+$$f^2+f'^2=9(1-2\cos t+\cos^2t)+9\sin^2t=9(2-2\cos t)=18(1-\cos t)=36\sin^2\tfrac t2.$$
+So \(\sqrt{f^2+f'^2}=6\left|\sin\tfrac t2\right|=6\sin\tfrac t2\) because \(\sin\tfrac t2\ge0\) for \(0\le t\le2\pi\).
+$$l=\int_0^{2\pi}6\sin\tfrac t2\,dt=6\Big[-2\cos\tfrac t2\Big]_0^{2\pi}=-12(\cos\pi-\cos0)=-12(-2)=24.$$
+<div class="ans">\(l=24\) (the cardioid \(r=3(1-\cos t)\) has length \(8\times3\)).</div>
+<div class="trap">\(\sqrt{\sin^2(t/2)}=|\sin(t/2)|\). It happens to be non-negative on \([0,2\pi]\) — <b>say so</b>. On a range like \([0,4\pi]\) ignoring the absolute value would give 0, an obviously impossible length.</div>
+</details></div>
+</section>
+
+<!-- ============================ S1 Q10 ============================ -->
+<section id="s1-q10">
+<h2>S1 Question 10 — Conservative field &amp; line integral <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">5 marks</span><b>(a)</b> Show that the field \(\mathbf F(x,y)=(\cos(x)+y^2)\,\mathbf i+(2xy+1)\,\mathbf j\) is conservative.
+<details><summary>Worked solution</summary>
+<div class="when">2-D field \(\mathbf F=P\mathbf i+Q\mathbf j\) on all of \(\mathbb R^2\): conservative iff \(P_y=Q_x\). (<a href="ch07-curves-vector-fields.html">Ch 7</a>)</div>
+$$\frac{\partial}{\partial y}\big(\cos x+y^2\big)=2y,\qquad \frac{\partial}{\partial x}\big(2xy+1\big)=2y.$$
+<div class="ans">\(P_y=Q_x=2y\) everywhere on \(\mathbb R^2\), so \(\mathbf F\) is conservative.</div>
+<div class="tip">Official comment: equality of the cross-partials implies conservative "from lectures"; the simply-connected-domain subtlety is deferred to MATH2001. Mentioning "\(\mathbf F\) is defined and smooth on all of \(\mathbb R^2\)" is a tidy justification.</div>
+</details></div>
+<div class="card q"><span class="marks">5 marks</span><b>(b)</b> For the field \(\mathbf F\) in part (a) evaluate the line integral \(\displaystyle\int_C\mathbf F\cdot d\mathbf r\), where \(C\) is the path with parametric equation \(\mathbf r(t)=t\,\mathbf i+t^2\,\mathbf j,\ 0\le t\le1\).
+<details><summary>Worked solution</summary>
+<div class="when">Conservative field → find a potential \(\phi\) with \(\nabla\phi=\mathbf F\), then \(\int_C\mathbf F\cdot d\mathbf r=\phi(\text{end})-\phi(\text{start})\). (Parametrising also works — shown as a check.)</div>
+<b>Potential:</b> \(\phi=\int(\cos x+y^2)\,dx=\sin x+xy^2+g(y)\). Then \(\phi_y=2xy+g'(y)=2xy+1\Rightarrow g'(y)=1\Rightarrow g=y\).
+$$\phi(x,y)=\sin x+xy^2+y.$$
+Endpoints: \(t=0\to(0,0)\), \(t=1\to(1,1)\).
+$$\int_C\mathbf F\cdot d\mathbf r=\phi(1,1)-\phi(0,0)=(\sin1+1+1)-0=2+\sin1.$$
+<b>Check by parametrisation:</b> \(\mathbf r'=(1,2t)\), \(\mathbf F(\mathbf r(t))=(\cos t+t^4,\ 2t^3+1)\),
+$$\int_0^1\big(\cos t+t^4+4t^4+2t\big)dt=\Big[\sin t+t^5+t^2\Big]_0^1=2+\sin1.$$ ✓ Both methods agree.
+<div class="ans">\(\displaystyle\int_C\mathbf F\cdot d\mathbf r=2+\sin 1.\)</div>
+<div class="trap">Leave \(\sin1\) exact (1 radian) — no calculator, and "\(\sin 1^\circ\)" is wrong.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 AT A GLANCE ============================ -->
+<section id="s2">
+<h2>Semester 2, 2021 — at a glance</h2>
+<p class="tip">Cover page: 120 min + 10 min reading, closed book, <b>no calculators</b>, "Materials to be supplied: None" — so no formula sheet. Total /100.</p>
+<table>
+<tr><th>Q</th><th>Topic</th><th>Chapter</th><th>Marks</th><th>Difficulty</th></tr>
+<tr><td><a href="#s2-q1">1</a></td><td>Sketch a hyperbolic contour with intercepts</td><td><a href="ch03-surfaces-contours.html">Ch 3</a></td><td>5</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q2">2</a></td><td>Tangent plane ⟂ a given line</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>5</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q3">3</a></td><td>Choose \(c\) for continuity (squeeze)</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>10</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q4">4</a></td><td>Helix of length 20</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q5">5</a></td><td>Critical points &amp; classification</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>15</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q6">6</a></td><td>Lagrange: max of a linear function on a sphere</td><td><a href="ch06-optimisation.html">Ch 6</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q7">7</a></td><td>Directional derivative towards a point</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>15</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q8">8</a></td><td>Non-conservative field; work integral</td><td><a href="ch07-curves-vector-fields.html">Ch 7</a></td><td>15</td><td>★★☆</td></tr>
+<tr><td><a href="#s2-q9">9</a></td><td>Linear approximation</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch 4</a></td><td>10</td><td>★☆☆</td></tr>
+<tr><td><a href="#s2-q10">10</a></td><td>Chain rule \(dz/dt\)</td><td><a href="ch05-gradient-chain-rule.html">Ch 5</a></td><td>5</td><td>★☆☆</td></tr>
+</table>
+</section>
+
+<!-- ============================ S2 Q1 ============================ -->
+<section id="s2-q1">
+<h2>S2 Question 1 — Hyperbolic contour <span style="font-size:14px;color:var(--muted)">[5 marks]</span></h2>
+<div class="card q"><span class="marks">5 marks</span>
+Consider the surface \(z=(x-3)(y+1)\). Sketch the contour \(z=-2\). Indicate all \(x\)-intercepts and \(y\)-intercepts.
+<details><summary>Worked solution</summary>
+<div class="when">\(z=(x-h)(y-k)\) is a saddle; its contours \((x-h)(y-k)=c\) are <b>rectangular hyperbolas</b> with asymptotes \(x=h,\ y=k\). Solve for \(y\), find asymptotes and intercepts, decide which quadrants the branches occupy. (<a href="ch03-surfaces-contours.html">Ch 3</a>)</div>
+$$(x-3)(y+1)=-2\;\Longleftrightarrow\;y=-\frac{2}{x-3}-1.$$
+<b>Asymptotes:</b> \(x=3\) (vertical), \(y=-1\) (horizontal); centre \((3,-1)\).<br>
+<b>\(x\)-intercept</b> (\(y=0\)): \((x-3)(1)=-2\Rightarrow x=1\).<br>
+<b>\(y\)-intercept</b> (\(x=0\)): \((-3)(y+1)=-2\Rightarrow y+1=\tfrac23\Rightarrow y=-\tfrac13\).<br>
+<b>Branches:</b> the product \((x-3)(y+1)\) is negative, so the branches lie where \(x-3\) and \(y+1\) have opposite signs: upper-left (\(x\lt3,\ y\gt-1\), e.g. \((2,1)\)) and lower-right (\(x\gt3,\ y\lt-1\), e.g. \((4,-3)\)).
+<svg class="sk" viewBox="0 0 340 300" width="340" role="img" aria-label="Hyperbola (x-3)(y+1)=-2">
+<line x1="0" y1="125.0" x2="340" y2="125.0" stroke="#9aa7b8"/><line x1="68.0" y1="0" x2="68.0" y2="300" stroke="#9aa7b8"/>
+<text x="328" y="119.0" fill="#9aa7b8" font-size="12">x</text><text x="74.0" y="14" fill="#9aa7b8" font-size="12">y</text>
+<line x1="170.0" y1="0" x2="170.0" y2="300" stroke="#fbbf24" stroke-dasharray="6 5"/>
+<line x1="0" y1="150.0" x2="340" y2="150.0" stroke="#fbbf24" stroke-dasharray="6 5"/>
+<text x="175.0" y="14" fill="#fbbf24" font-size="12">x = 3</text><text x="290" y="144.0" fill="#fbbf24" font-size="12">y = −1</text>
+<polyline fill="none" stroke="#a78bfa" stroke-width="2.5" points="0.0,140.0 0.8,139.9 1.7,139.9 2.5,139.8 3.4,139.8 4.2,139.7 5.1,139.7 5.9,139.6 6.8,139.6 7.6,139.5 8.5,139.5 9.3,139.4 10.2,139.4 11.0,139.3 11.9,139.2 12.7,139.2 13.6,139.1 14.4,139.1 15.3,139.0 16.1,139.0 17.0,138.9 17.8,138.8 18.7,138.8 19.5,138.7 20.4,138.6 21.2,138.6 22.1,138.5 22.9,138.4 23.8,138.4 24.6,138.3 25.5,138.2 26.3,138.2 27.2,138.1 28.0,138.0 28.9,138.0 29.7,137.9 30.6,137.8 31.4,137.7 32.3,137.7 33.1,137.6 34.0,137.5 34.8,137.4 35.7,137.3 36.5,137.3 37.4,137.2 38.2,137.1 39.1,137.0 39.9,136.9 40.8,136.8 41.6,136.8 42.5,136.7 43.3,136.6 44.2,136.5 45.0,136.4 45.9,136.3 46.7,136.2 47.6,136.1 48.4,136.0 49.3,135.9 50.1,135.8 51.0,135.7 51.8,135.6 52.7,135.5 53.5,135.4 54.4,135.3 55.2,135.2 56.1,135.1 56.9,135.0 57.8,134.9 58.6,134.7 59.5,134.6 60.3,134.5 61.2,134.4 62.0,134.3 62.9,134.1 63.7,134.0 64.6,133.9 65.4,133.7 66.3,133.6 67.1,133.5 68.0,133.3 68.8,133.2 69.7,133.1 70.5,132.9 71.4,132.8 72.2,132.6 73.1,132.5 73.9,132.3 74.8,132.1 75.6,132.0 76.5,131.8 77.3,131.7 78.2,131.5 79.0,131.3 79.9,131.1 80.7,131.0 81.6,130.8 82.4,130.6 83.3,130.4 84.1,130.2 85.0,130.0 85.8,129.8 86.7,129.6 87.5,129.4 88.4,129.2 89.2,129.0 90.1,128.7 90.9,128.5 91.8,128.3 92.6,128.0 93.5,127.8 94.3,127.5 95.2,127.3 96.0,127.0 96.9,126.8 97.7,126.5 98.6,126.2 99.4,125.9 100.3,125.6 101.1,125.3 102.0,125.0 102.8,124.7 103.7,124.4 104.5,124.0 105.4,123.7 106.2,123.3 107.1,123.0 107.9,122.6 108.8,122.2 109.6,121.8 110.5,121.4 111.3,121.0 112.2,120.6 113.0,120.2 113.9,119.7 114.7,119.2 115.6,118.8 116.4,118.3 117.3,117.8 118.1,117.2 119.0,116.7 119.8,116.1 120.7,115.5 121.5,114.9 122.4,114.3 123.2,113.7 124.1,113.0 124.9,112.3 125.8,111.6 126.6,110.8 127.5,110.0 128.3,109.2 129.2,108.4 130.0,107.5 130.9,106.6 131.7,105.6 132.6,104.6 133.4,103.5 134.3,102.4 135.1,101.3 136.0,100.0 136.8,98.8 137.7,97.4 138.5,96.0 139.4,94.5 140.2,92.9 141.1,91.2 141.9,89.5 142.8,87.6 143.6,85.6 144.5,83.4 145.3,81.1 146.2,78.7 147.0,76.0 147.9,73.2 148.7,70.1 149.6,66.8 150.4,63.2 151.3,59.2 152.1,54.9 153.0,50.2 153.8,44.9 154.7,39.1 155.5,32.6 156.4,25.3 157.2,17.0 158.1,7.5"/>
+<polyline fill="none" stroke="#a78bfa" stroke-width="2.5" points="181.9,292.5 182.8,283.0 183.6,274.7 184.5,267.4 185.3,260.9 186.2,255.1 187.0,249.8 187.9,245.1 188.7,240.8 189.6,236.8 190.4,233.2 191.3,229.9 192.1,226.8 193.0,224.0 193.8,221.3 194.7,218.9 195.5,216.6 196.4,214.4 197.2,212.4 198.1,210.5 198.9,208.8 199.8,207.1 200.6,205.5 201.5,204.0 202.3,202.6 203.2,201.2 204.0,200.0 204.9,198.7 205.7,197.6 206.6,196.5 207.4,195.4 208.3,194.4 209.1,193.4 210.0,192.5 210.8,191.6 211.7,190.8 212.5,190.0 213.4,189.2 214.2,188.4 215.1,187.7 215.9,187.0 216.8,186.3 217.6,185.7 218.5,185.1 219.3,184.5 220.2,183.9 221.0,183.3 221.9,182.8 222.7,182.2 223.6,181.7 224.4,181.2 225.3,180.8 226.1,180.3 227.0,179.8 227.8,179.4 228.7,179.0 229.5,178.6 230.4,178.2 231.2,177.8 232.1,177.4 232.9,177.0 233.8,176.7 234.6,176.3 235.5,176.0 236.3,175.6 237.2,175.3 238.0,175.0 238.9,174.7 239.7,174.4 240.6,174.1 241.4,173.8 242.3,173.5 243.1,173.2 244.0,173.0 244.8,172.7 245.7,172.5 246.5,172.2 247.4,172.0 248.2,171.7 249.1,171.5 249.9,171.3 250.8,171.0 251.6,170.8 252.5,170.6 253.3,170.4 254.2,170.2 255.0,170.0 255.9,169.8 256.7,169.6 257.6,169.4 258.4,169.2 259.3,169.0 260.1,168.9 261.0,168.7 261.8,168.5 262.7,168.3 263.5,168.2 264.4,168.0 265.2,167.9 266.1,167.7 266.9,167.5 267.8,167.4 268.6,167.2 269.5,167.1 270.3,166.9 271.2,166.8 272.0,166.7 272.9,166.5 273.7,166.4 274.6,166.3 275.4,166.1 276.3,166.0 277.1,165.9 278.0,165.7 278.8,165.6 279.7,165.5 280.5,165.4 281.4,165.3 282.2,165.1 283.1,165.0 283.9,164.9 284.8,164.8 285.6,164.7 286.5,164.6 287.3,164.5 288.2,164.4 289.0,164.3 289.9,164.2 290.7,164.1 291.6,164.0 292.4,163.9 293.3,163.8 294.1,163.7 295.0,163.6 295.8,163.5 296.7,163.4 297.5,163.3 298.4,163.2 299.2,163.2 300.1,163.1 300.9,163.0 301.8,162.9 302.6,162.8 303.5,162.7 304.3,162.7 305.2,162.6 306.0,162.5 306.9,162.4 307.7,162.3 308.6,162.3 309.4,162.2 310.3,162.1 311.1,162.0 312.0,162.0 312.8,161.9 313.7,161.8 314.5,161.8 315.4,161.7 316.2,161.6 317.1,161.6 317.9,161.5 318.8,161.4 319.6,161.4 320.5,161.3 321.3,161.2 322.2,161.2 323.0,161.1 323.9,161.0 324.7,161.0 325.6,160.9 326.4,160.9 327.3,160.8 328.1,160.8 329.0,160.7 329.8,160.6 330.7,160.6 331.5,160.5 332.4,160.5 333.2,160.4 334.1,160.4 334.9,160.3 335.8,160.3 336.6,160.2 337.5,160.2 338.3,160.1 339.2,160.1 340.0,160.0"/>
+<circle cx="102.0" cy="125.0" r="3.5" fill="#38bdf8"/><text x="107.0" y="141.0" fill="#e8edf4" font-size="12">(1, 0)</text>
+<circle cx="68.0" cy="133.3" r="3.5" fill="#38bdf8"/><text x="6.0" y="137.3" fill="#e8edf4" font-size="12">(0, −1/3)</text>
+<text x="10" y="20" fill="#a78bfa" font-size="13">z = −2</text>
+</svg>
+<div class="ans">Hyperbola \(y=-\dfrac2{x-3}-1\), asymptotes \(x=3,\ y=-1\); \(x\)-intercept \((1,0)\), \(y\)-intercept \(\big(0,-\tfrac13\big)\); branches in the upper-left and lower-right of the asymptote cross.</div>
+<div class="trap">The official handwritten solution labels the centre "(3, 1)" — it is \((3,-1)\) (the sketch itself correctly draws \(y=-1\)). Sign slips on the asymptote are the classic lost mark here.</div>
+<div class="tip">Draw the asymptotes dashed and label them, mark both intercepts with their values. The lower-right branch has no intercepts — say so.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q2 ============================ -->
+<section id="s2-q2">
+<h2>S2 Question 2 — Tangent plane perpendicular to a line <span style="font-size:14px;color:var(--muted)">[5 marks]</span></h2>
+<div class="card q"><span class="marks">5 marks</span>
+Find \(a\) and \(b\) such that the plane tangent to the surface \(x^4-y+z=0\) at the point \(P=(a,b,2)\) is perpendicular to the line \(\dfrac{x-3}{32}=-(y-1)=z+4\).
+<details><summary>Worked solution</summary>
+<div class="when">A plane is <b>perpendicular to a line</b> iff the plane's normal is <b>parallel</b> to the line's direction. Normal to \(F(x,y,z)=0\) is \(\nabla F\); direction of a symmetric-form line is read off the denominators. (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>)</div>
+<b>Normal:</b> \(F=x^4-y+z\Rightarrow\nabla F=(4x^3,-1,1)\); at \(P\): \(\mathbf N=(4a^3,-1,1)\).<br>
+<b>Direction of the line:</b> write it as \(\dfrac{x-3}{32}=\dfrac{y-1}{-1}=\dfrac{z+4}{1}\), so \(\mathbf d=(32,-1,1)\).<br>
+<b>Parallel:</b> \((4a^3,-1,1)=\lambda(32,-1,1)\). The \(y\)- and \(z\)-components give \(\lambda=1\); then \(4a^3=32\Rightarrow a^3=8\Rightarrow a=2\).<br>
+<b>\(P\) lies on the surface:</b> \(a^4-b+2=0\Rightarrow16-b+2=0\Rightarrow b=18\).
+<div class="ans">\(a=2,\ b=18\); \(P=(2,18,2)\).</div>
+<div class="trap">Rewriting \(-(y-1)\) as \(\dfrac{y-1}{-1}\) is essential — reading the \(y\)-direction as \(+1\) makes the system inconsistent. Also: perpendicular plane ⇒ normal <i>parallel</i> to the line (not normal·direction = 0, which is the condition for the line to lie <i>along</i> the plane).</div>
+<div class="tip">The official solution goes via the graph \(z=y-x^4\) and \(z-f(a,b)=f_x(x-a)+f_y(y-b)\), reaching the same normal \((4a^3,-1,1)\). Either route is full marks.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q3 ============================ -->
+<section id="s2-q3">
+<h2>S2 Question 3 — Continuity via squeeze <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Let \(f:\mathbb R^2\to\mathbb R\) be given by
+$$f(x,y)=\begin{cases}y\sin\left(\dfrac1{x^2+y^2}\right), & (x,y)\ne(0,0)\\[4pt] c, & (x,y)=(0,0)\end{cases}$$
+where \(c\in\mathbb R\). Find \(c\) such that \(f(x,y)\) is continuous at \((0,0)\).
+<details><summary>Worked solution</summary>
+<div class="when">Bounded oscillating factor × something going to 0 → <b>squeeze theorem</b>. Show the limit exists, then set \(c\) equal to it. (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>)</div>
+Since \(\left|\sin\left(\frac1{x^2+y^2}\right)\right|\le1\) for all \((x,y)\ne(0,0)\),
+$$0\le|f(x,y)|=|y|\left|\sin\tfrac{1}{x^2+y^2}\right|\le|y|.$$
+As \((x,y)\to(0,0)\), \(|y|\to0\), so by the squeeze theorem \(\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)=0\).<br>
+<b>Polar version (as in the official solution):</b> with \(x=r\cos\theta,\ y=r\sin\theta\), \(f=r\sin\theta\,\sin(1/r^2)\) and \(-r\le f\le r\) for all \(\theta\); both bounds \(\to0\) as \(r\to0^+\).<br>
+Continuity requires \(\lim_{(x,y)\to(0,0)}f=f(0,0)=c\).
+<div class="ans">\(c=0\). Then \(\lim_{(x,y)\to(0,0)}f(x,y)=0=f(0,0)\), so \(f\) is continuous at \((0,0)\).</div>
+<div class="trap">"\(\sin(1/(x^2+y^2))\) has no limit, so the limit doesn't exist" is wrong — the factor \(y\to0\) crushes the oscillation. And checking a few paths never <i>proves</i> a limit exists; you need the squeeze bound valid for <b>all</b> directions.</div>
+<div class="tip">For full marks finish with the continuity sentence: "\(\lim f = f(0,0)\), hence continuous." The limit alone is only part of the answer.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q4 ============================ -->
+<section id="s2-q4">
+<h2>S2 Question 4 — Helix of given length <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Consider the helix
+$$x=\cos3t,\quad y=\sin3t,\quad z=1+4t;\qquad 0\le t\le a,$$
+where \(a\in\mathbb R\). Find \(a\) such that the helix has length 20.
+<details><summary>Worked solution</summary>
+<div class="when">Arc length \(=\int_0^a\|\mathbf r'(t)\|\,dt\). A helix has constant speed, so length = speed × time. (<a href="ch07-curves-vector-fields.html">Ch 7</a>)</div>
+$$\mathbf r'(t)=(-3\sin3t,\ 3\cos3t,\ 4),\qquad \|\mathbf r'(t)\|=\sqrt{9\sin^23t+9\cos^23t+16}=\sqrt{25}=5.$$
+$$\text{length}=\int_0^a5\,dt=5a=20\;\Rightarrow\;a=4.$$
+<div class="ans">\(a=4\).</div>
+<div class="trap">Chain rule: \(\frac{d}{dt}\cos3t=-3\sin3t\). Forgetting the 3 gives speed \(\sqrt{17}\) and an ugly \(a\) — in a no-calculator exam an ugly answer is a warning sign.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q5 ============================ -->
+<section id="s2-q5">
+<h2>S2 Question 5 — Critical points on a punctured domain <span style="font-size:14px;color:var(--muted)">[15 marks]</span></h2>
+<div class="card q">
+Let \(f:\mathbb R^2\setminus\{(x,y):x=0\text{ or }y=0\}\to\mathbb R\) be given by \(f(x,y)=4x+y+\dfrac{2}{xy}\).
+</div>
+<div class="card q"><span class="marks">(a)</span><b>(a)</b> Find all critical points of \(f\).
+<details><summary>Worked solution</summary>
+<div class="when">Set \(\nabla f=\mathbf 0\). Clear denominators, then divide/subtract the two equations to get a relation between \(x\) and \(y\); use \(x,y\ne0\) (domain) to cancel. (<a href="ch06-optimisation.html">Ch 6</a>)</div>
+$$f_x=4-\frac{2}{x^2y}=0\;\Rightarrow\;4x^2y=2\quad(1),\qquad f_y=1-\frac{2}{xy^2}=0\;\Rightarrow\;xy^2=2\quad(2).$$
+From (1) and (2): \(4x^2y=xy^2\Rightarrow xy(4x-y)=0\). Since \(x\ne0,\ y\ne0\) on the domain, \(y=4x\).<br>
+Into (1): \(4x^2(4x)=2\Rightarrow16x^3=2\Rightarrow x^3=\tfrac18\Rightarrow x=\tfrac12\), so \(y=2\).
+<div class="ans">The only critical point is \(\left(\tfrac12,\,2\right)\).</div>
+<div class="tip">State why you may divide by \(xy\): "\(x\ne0\) and \(y\ne0\) on the domain." That sentence is exactly what the official solution writes and what markers look for.</div>
+</details></div>
+<div class="card q"><span class="marks">(b)</span><b>(b)</b> Classify all critical points of \(f\). <span style="color:var(--muted)">[(a)+(b) = 15 marks]</span>
+<details><summary>Worked solution</summary>
+<div class="when">Second-derivative (Hessian) test at each critical point.</div>
+$$f_{xx}=\frac{4}{x^3y},\qquad f_{yy}=\frac{4}{xy^3},\qquad f_{xy}=\frac{2}{x^2y^2}.$$
+$$D=f_{xx}f_{yy}-f_{xy}^2=\frac{16}{x^4y^4}-\frac{4}{x^4y^4}=\frac{12}{x^4y^4}.$$
+At \(\left(\tfrac12,2\right)\): \(x^4y^4=\tfrac1{16}\cdot16=1\), so \(D=12\gt0\); \(f_{xx}=\dfrac{4}{\frac18\cdot2}=16\gt0\).
+<div class="ans">\(\left(\tfrac12,2\right)\) is a local minimum, with \(f\left(\tfrac12,2\right)=2+2+2=6\).</div>
+<div class="trap">The official working has a crossed-out first attempt at \(D\) (\(\tfrac{8}{x^5y^3}-\ldots\)) — computing \(D\) symbolically first and simplifying <i>before</i> substituting avoids exactly that mess.</div>
+<div class="tip">It is a local, not global, minimum: e.g. \(f(-1,-1)=-5+2=-3\lt6\). Don't upgrade "local" without justification.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q6 ============================ -->
+<section id="s2-q6">
+<h2>S2 Question 6 — Lagrange on a sphere <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Use a Lagrange multiplier to find the points on the sphere \(x^2+y^2+z^2=\dfrac{27}{2}\) where \(x+2y+z\) attains its maximum value.
+<details><summary>Worked solution</summary>
+<div class="when">Explicit instruction "use a Lagrange multiplier": \(\nabla f=\lambda\nabla g\) plus the constraint. The sphere is closed and bounded, so a max and min exist and occur among the candidates. (<a href="ch06-optimisation.html">Ch 6</a>)</div>
+\(f=x+2y+z,\ g=x^2+y^2+z^2-\tfrac{27}2\). \(\nabla f=(1,2,1),\ \nabla g=(2x,2y,2z)\):
+<div class="mono">1 = 2xλ      2 = 2yλ      1 = 2zλ</div>
+\(\lambda\ne0\) (since \(2x\lambda=1\)), so \(x=\dfrac1{2\lambda},\ y=\dfrac1\lambda,\ z=\dfrac1{2\lambda}\). Into the constraint:
+$$\frac1{\lambda^2}\left(\frac14+1+\frac14\right)=\frac{27}{2}\;\Rightarrow\;\frac{3}{2\lambda^2}=\frac{27}{2}\;\Rightarrow\;\lambda^2=\frac19\;\Rightarrow\;\lambda=\pm\frac13.$$
+<table>
+<tr><th>\(\lambda\)</th><th>Point</th><th>\(f\)</th></tr>
+<tr><td>\(\tfrac13\)</td><td>\(\left(\tfrac32,3,\tfrac32\right)\)</td><td>\(9\)</td></tr>
+<tr><td>\(-\tfrac13\)</td><td>\(\left(-\tfrac32,-3,-\tfrac32\right)\)</td><td>\(-9\)</td></tr>
+</table>
+<div class="ans">Maximum value \(9\), attained at \(\left(\tfrac32,\,3,\,\tfrac32\right)\).</div>
+<div class="tip">Sanity check with Cauchy–Schwarz: \(\max(x+2y+z)=\|(1,2,1)\|\cdot\text{radius}=\sqrt6\cdot\sqrt{27/2}=\sqrt{81}=9\) ✓, and the max point is the radius in the direction \((1,2,1)\).</div>
+<div class="trap">Read the constraint carefully: it is \(\tfrac{27}{2}\), not 27. With 27 you'd get \(\lambda^2=\tfrac1{18}\) and irrational points — another "ugly numbers = re-read the question" signal.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q7 ============================ -->
+<section id="s2-q7">
+<h2>S2 Question 7 — Rate of change toward a point <span style="font-size:14px;color:var(--muted)">[15 marks]</span></h2>
+<div class="card q"><span class="marks">15 marks</span>
+Let the electric potential \(P\) at any point \((r,s)\ne(0,0)\) be \(P(r,s)=\ln\sqrt{r^2+s^2}\). Find the rate of change of \(P\) at \((3,4)\) in the direction toward the point \((1,5)\).
+<details><summary>Worked solution</summary>
+<div class="when">"Rate of change in the direction toward point \(Q\)" → directional derivative with \(\mathbf u=\dfrac{Q-P_0}{\|Q-P_0\|}\). Simplify \(\ln\sqrt{\cdot}=\tfrac12\ln(\cdot)\) first. (<a href="ch05-gradient-chain-rule.html">Ch 5</a>)</div>
+<b>Direction:</b> \((1,5)-(3,4)=(-2,1)\), \(\|(-2,1)\|=\sqrt5\), so \(\mathbf u=\left(-\tfrac2{\sqrt5},\tfrac1{\sqrt5}\right)\).<br>
+<b>Gradient:</b> \(P=\tfrac12\ln(r^2+s^2)\Rightarrow P_r=\dfrac{r}{r^2+s^2},\ P_s=\dfrac{s}{r^2+s^2}\). At \((3,4)\): \(\nabla P=\left(\tfrac3{25},\tfrac4{25}\right)\).
+$$D_{\mathbf u}P(3,4)=\left(\tfrac3{25},\tfrac4{25}\right)\cdot\left(-\tfrac2{\sqrt5},\tfrac1{\sqrt5}\right)=\frac{-6+4}{25\sqrt5}=-\frac{2}{25\sqrt5}.$$
+<div class="ans">\(D_{\mathbf u}P(3,4)=-\dfrac{2}{25\sqrt5}=-\dfrac{2\sqrt5}{125}\) — the potential is decreasing in that direction.</div>
+<div class="trap">Direction "toward \((1,5)\)" is <b>end − start</b> \(=(1,5)-(3,4)\), not the point \((1,5)\) itself, and not \((3,4)-(1,5)\) (that flips the sign).</div>
+<div class="tip">15 marks for a 4-line computation: the marks are in the visible steps — direction vector, its norm, unit vector, general gradient, gradient at the point, dot product. Show each.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q8 ============================ -->
+<section id="s2-q8">
+<h2>S2 Question 8 — Work by a non-conservative force <span style="font-size:14px;color:var(--muted)">[15 marks]</span></h2>
+<div class="card q">
+Let \(\mathbf F(x,y)=-2y^2\,\mathbf i+3xy\,\mathbf j\).
+</div>
+<div class="card q"><span class="marks">(a)</span><b>(a)</b> Determine whether \(\mathbf F\) is a conservative vector field.
+<details><summary>Worked solution</summary>
+<div class="when">Test \(P_y\) vs \(Q_x\). (<a href="ch07-curves-vector-fields.html">Ch 7</a>)</div>
+$$P=-2y^2\Rightarrow P_y=-4y,\qquad Q=3xy\Rightarrow Q_x=3y.$$
+\(-4y\ne3y\) whenever \(y\ne0\).
+<div class="ans">\(P_y\ne Q_x\), so \(\mathbf F\) is <b>not</b> conservative.</div>
+<div class="trap">Consequence for (b): <b>no potential function exists</b>, so you cannot use "\(\phi(\text{end})-\phi(\text{start})\)". You must parametrise and integrate.</div>
+</details></div>
+<div class="card q"><span class="marks">(b)</span><b>(b)</b> Determine the work done by the force \(\mathbf F\) in moving a particle along the path parametrised by \(\mathbf r(t)=(t^3-2t)\,\mathbf i+(t^2-2)\,\mathbf j,\ 0\le t\le1\). <span style="color:var(--muted)">[(a)+(b) = 15 marks]</span>
+<details><summary>Worked solution</summary>
+<div class="when">Work \(=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) — the official 5-step routine: <i>par → diff → subs → dot → int</i>.</div>
+<b>diff:</b> \(\mathbf r'(t)=(3t^2-2,\ 2t)\).<br>
+<b>subs:</b> \(\mathbf F(\mathbf r(t))=\big(-2(t^2-2)^2,\ 3(t^3-2t)(t^2-2)\big)=\big(-2(t^2-2)^2,\ 3t(t^2-2)^2\big)\).<br>
+<b>dot:</b>
+$$\mathbf F\cdot\mathbf r'=-2(t^2-2)^2(3t^2-2)+6t^2(t^2-2)^2=(t^2-2)^2(-6t^2+4+6t^2)=4(t^2-2)^2.$$
+<b>int:</b>
+$$W=4\int_0^1(t^4-4t^2+4)\,dt=4\left[\frac{t^5}5-\frac{4t^3}3+4t\right]_0^1=4\left(\frac15-\frac43+4\right)=4\cdot\frac{43}{15}=\frac{172}{15}.$$
+<div class="ans">\(W=\dfrac{172}{15}\).</div>
+<div class="tip">Spot the common factor: \(t^3-2t=t(t^2-2)\). Factoring \((t^2-2)^2\) out before expanding collapses the integrand to \(4(t^2-2)^2\) — far less algebra than expanding a degree-6 polynomial.</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q9 ============================ -->
+<section id="s2-q9">
+<h2>S2 Question 9 — Linear approximation <span style="font-size:14px;color:var(--muted)">[10 marks]</span></h2>
+<div class="card q"><span class="marks">10 marks</span>
+Let \(f(x,y)=\ln(x^2y)-x\sqrt y\) and \(P=\left(-\tfrac12,4\right)\). Find the linear approximation of \(f\) around \(P\).
+<details><summary>Worked solution</summary>
+<div class="when">\(L(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\) — three numbers to compute. (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>)</div>
+<b>Value:</b> \(f\left(-\tfrac12,4\right)=\ln\!\left(\tfrac14\cdot4\right)-\left(-\tfrac12\right)(2)=\ln1+1=1\).<br>
+<b>Partials:</b>
+$$f_x=\frac{2xy}{x^2y}-\sqrt y=\frac2x-\sqrt y\;\Rightarrow\;f_x(P)=-4-2=-6,$$
+$$f_y=\frac{x^2}{x^2y}-\frac{x}{2\sqrt y}=\frac1y-\frac{x}{2\sqrt y}\;\Rightarrow\;f_y(P)=\frac14+\frac18=\frac38.$$
+$$L(x,y)=1-6\left(x+\tfrac12\right)+\tfrac38(y-4)=-6x+\tfrac38y-\tfrac72.$$
+<div class="ans">\(L(x,y)=1-6\left(x+\tfrac12\right)+\tfrac38(y-4)\).</div>
+<div class="trap">\(x=-\tfrac12\) is negative, so \(-x\sqrt y=+1\) and \(-\dfrac{x}{2\sqrt y}=+\tfrac18\). Sign errors at negative points are the #1 slip on this question. (\(\ln(x^2y)\) is fine at negative \(x\) because \(x^2\gt0\); simplifying to \(2\ln x\) would <b>not</b> be valid there.)</div>
+</details></div>
+</section>
+
+<!-- ============================ S2 Q10 ============================ -->
+<section id="s2-q10">
+<h2>S2 Question 10 — Chain rule \(dz/dt\) <span style="font-size:14px;color:var(--muted)">[5 marks]</span></h2>
+<div class="card q"><span class="marks">5 marks</span>
+Let \(z=xe^{y^2+4}\) where \(x=\dfrac1t\) and \(y=\cos2t\). Determine \(\dfrac{dz}{dt}\) at \(t=\dfrac\pi4\).
+<details><summary>Worked solution</summary>
+<div class="when">One parameter, two intermediate variables → \(\dfrac{dz}{dt}=\dfrac{\partial z}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial z}{\partial y}\dfrac{dy}{dt}\) (tree diagram \(z\to x,y\to t\)). (<a href="ch05-gradient-chain-rule.html">Ch 5</a>)</div>
+$$\frac{\partial z}{\partial x}=e^{y^2+4},\quad \frac{dx}{dt}=-\frac1{t^2},\quad \frac{\partial z}{\partial y}=2xy\,e^{y^2+4},\quad \frac{dy}{dt}=-2\sin2t.$$
+At \(t=\tfrac\pi4\): \(x=\tfrac4\pi,\ y=\cos\tfrac\pi2=0\). The second term contains the factor \(y=0\), so it vanishes:
+$$\frac{dz}{dt}=e^{0+4}\left(-\frac1{(\pi/4)^2}\right)+0=-\frac{16e^4}{\pi^2}.$$
+<div class="ans">\(\dfrac{dz}{dt}\Big|_{t=\pi/4}=-\dfrac{16e^4}{\pi^2}.\)</div>
+<div class="tip">Evaluate \(x,y\) at the given \(t\) <i>before</i> expanding — spotting \(y=0\) kills half the work.</div>
+</details></div>
+</section>
+
+<!-- ============================ LESSONS ============================ -->
+<section id="lessons">
+<h2>What 2021 teaches</h2>
+<div class="card">
+<h3>Patterns</h3>
+<ul>
+<li><b>Zero ODEs.</b> Both papers are pure multivariable calculus, matching the modern weighting — high-value drills.</li>
+<li><b>Every chapter-4-to-7 routine appears at least once per paper:</b> tangent plane / linear approx, 2-D limit (DNE by two paths <i>or</i> exists by squeeze), directional derivative, chain rule, critical points + Hessian, Lagrange, arc length, conservative test + line integral.</li>
+<li><b>The limit question flips between years:</b> S1 = "show it does <b>not</b> exist" (two paths, one of them \(y=x^2\)); S2 = "find \(c\) for continuity" (squeeze, limit exists). Know both directions cold.</li>
+<li><b>The conservative-field question flips too:</b> S1 conservative ⇒ potential shortcut; S2 not conservative ⇒ must parametrise. Always test \(P_y=Q_x\) first — it tells you which route (b) needs.</li>
+<li><b>Lagrange problems have clean answers.</b> \(\lambda\) comes out as \(\pm\tfrac13\), points are integers or halves. If your numbers go ugly, re-check the constraint.</li>
+<li><b>Contour sketches are marked on labels:</b> centre, asymptotes, intercepts, and (S1 Q4) excluded points.</li>
+</ul>
+<h3>Time allocation (120 min, 100 marks)</h3>
+<table>
+<tr><th>Paper</th><th>Plan</th></tr>
+<tr><td>S1 (10 × 10)</td><td>~11 min per question. Bank Q1, Q3, Q5, Q10 fast (≈8 min each), spend the saved time on Q2 (paths), Q6(b) (algebra) and Q9(b) (half-angle).</td></tr>
+<tr><td>S2 (5–15)</td><td>Do the 15-markers (Q5, Q7, Q8) with full working — Q7 is easy marks. Q1, Q2, Q10 are 5-minute questions. Leave 10 min to re-check signs at negative points (Q9) and the constraint (Q6).</td></tr>
+</table>
+<h3>How to use these papers now</h3>
+<p>Sit each under exam conditions with the current <a href="formulas.html">formula sheet</a>, then mark against this page. For every lost mark, go to the linked chapter's §6 Traps and §8 Practice Arena.</p>
+</div>
+</section>
+
+<p class="tip" style="margin-top:30px">Finished. Cross-check: S1 \(10\times10=100\) marks; S2 \(5+5+10+10+15+10+15+15+10+5=100\) marks. Every final answer on this page is recomputed and asserted in <code>verify/exam-2021.py</code> (SymPy) — all checks pass.</p>
+
+</main>
+<footer style="max-width:960px;margin:0 auto;padding:10px 18px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)">
+Sources: <i>math1052_final_S1_exam2021</i> + <i>_soln</i>; <i>Semester_Two_Final_Examinations_2021_MATH1052</i> + <i>MATH1052-2021-2-sols revised</i> (handwritten, read from PDF). Questions transcribed verbatim; worked solutions expanded in marker style, official comments surfaced as tips/traps. All results verified with SymPy.
+· <a href="index.html">🏠 Hub</a> · <a href="exam-2020.html">← 2020</a> · <a href="exam-2022.html">2022 →</a>
+</footer>
+<script>
+let shown=false;
+function toggleAll(){shown=!shown;document.querySelectorAll('details').forEach(d=>d.open=shown);}
+</script>
+</body>
+</html>

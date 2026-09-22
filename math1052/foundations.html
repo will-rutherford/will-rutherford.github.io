@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — The Ground Floor: single-variable &amp; algebra prerequisites</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* tail-diagram (self-contained, no images) */
+  .taildiag{margin:14px 0}
+  .taildiag .bar{display:flex;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--line);font-size:12px;font-weight:700}
+  .taildiag .seg{display:flex;align-items:center;justify-content:center;text-align:center;padding:2px}
+  .taildiag .tail{background:rgba(248,113,113,.28);color:#ffd9d9;flex:0 0 14%}
+  .taildiag .mid{background:rgba(167,139,250,.22);color:#c9ffe9;flex:1 1 auto}
+  .taildiag .ticks{display:flex;justify-content:space-between;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11.5px;color:var(--muted);margin-top:4px}
+  .taildiag .ticks span{flex:0 0 33%;}
+  .taildiag .ticks span:nth-child(2){text-align:center}
+  .taildiag .ticks span:nth-child(3){text-align:right}
+  /* chi-square skew sketch */
+  .skew{display:block;width:100%;max-width:460px;height:auto;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Ground Floor</h1>
+  <p>Derivatives, integrals, trig, exp/log, algebra, vectors and complex roots — made automatic for a no-calculator paper</p>
+  <p>MATH1052 Multivariate Calculus &amp; Ordinary Differential Equations</p>
+  <span class="badge gold">Start here if any single-variable step feels slow</span>
+  <span class="badge">Prerequisite for every chapter</span>
+  <span class="badge pre">No calculator · tiny formula sheet</span>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="formulas.html">📄 Formula sheet</a>
+  <a href="notebook.html">📓 Notebook</a>
+  <a href="#derivs">1 · Derivatives</a>
+  <a href="#integrals">2 · Integrals</a>
+  <a href="#trig">3 · Trig</a>
+  <a href="#exp-log">4 · Exp &amp; log</a>
+  <a href="#algebra">5 · Algebra &amp; systems</a>
+  <a href="#vectors">6 · Vectors</a>
+  <a href="#complex">7 · Complex roots</a>
+  <a href="#quadrics">8 · Lines &amp; planes</a>
+  <a href="#taylor">9 · Taylor</a>
+  <a href="#drills">10 · Drills</a>
+  <a href="#notneeded">11 · Not needed</a>
+</nav>
+
+<main>
+
+<div class="card q">
+<p style="margin:0"><strong>Why this page exists.</strong> The MATH1052 exam is 120 minutes, 100 marks, <strong>no calculator and no notes</strong>. The formula sheet on the last page only has the <em>multivariable</em> formulas (linear/quadratic approximation, directional derivative, chain rule, implicit differentiation, Hessian determinant, Lagrange \(\nabla f=\lambda\nabla g\), work and arc length). It does <strong>not</strong> give you a single derivative, antiderivative, trig value or log law. Nearly every lost mark in the marking schemes is a <em>first-year</em> slip hiding inside a second-year question: a sign dropped integrating \(e^{-2x}\), a solution lost by dividing by \(x\), a \(\tfrac12\) missing from a quadratic approximation. This page makes those steps automatic. Read a section, do its tiny examples, then hammer the <a href="#drills">drills</a> until they take seconds.</p>
+</div>
+
+<!-- ============ 1. DERIVATIVES ============ -->
+<section id="derivs">
+<h2>1 · Derivative rules — the whole toolkit</h2>
+
+<div class="card">
+<h3>The table you must know cold</h3>
+<table>
+<tr><th>\(f(x)\)</th><th>\(f'(x)\)</th><th>\(f(x)\)</th><th>\(f'(x)\)</th></tr>
+<tr><td>\(x^n\)</td><td>\(nx^{n-1}\)</td><td>\(\sin x\)</td><td>\(\cos x\)</td></tr>
+<tr><td>\(e^{ax}\)</td><td>\(ae^{ax}\)</td><td>\(\cos x\)</td><td>\(-\sin x\)</td></tr>
+<tr><td>\(a^{x}\)</td><td>\(a^{x}\ln a\)</td><td>\(\tan x\)</td><td>\(\sec^2 x\)</td></tr>
+<tr><td>\(\ln x\)</td><td>\(\dfrac1x\)</td><td>\(\arcsin x\)</td><td>\(\dfrac{1}{\sqrt{1-x^2}}\)</td></tr>
+<tr><td>\(\ln|g(x)|\)</td><td>\(\dfrac{g'(x)}{g(x)}\)</td><td>\(\arccos x\)</td><td>\(-\dfrac{1}{\sqrt{1-x^2}}\)</td></tr>
+<tr><td>\(\sqrt{x}\)</td><td>\(\dfrac{1}{2\sqrt x}\)</td><td>\(\arctan x\)</td><td>\(\dfrac{1}{1+x^2}\)</td></tr>
+</table>
+<div class="method"><strong>The three combining rules</strong>
+<ul>
+<li><strong>Product:</strong> \((uv)'=u'v+uv'\)</li>
+<li><strong>Quotient:</strong> \(\left(\dfrac uv\right)'=\dfrac{u'v-uv'}{v^2}\) — "low d-high minus high d-low, over low squared".</li>
+<li><strong>Chain:</strong> \(\dfrac{d}{dx}f(g(x))=f'(g(x))\,g'(x)\) — differentiate the outside, keep the inside, multiply by the derivative of the inside.</li>
+</ul></div>
+</div>
+
+<div class="card">
+<h3>Tiny worked examples</h3>
+<p><strong>D1.</strong> \(\dfrac{d}{dx}\big(x^2e^{-3x}\big)=2xe^{-3x}+x^2(-3e^{-3x})=e^{-3x}(2x-3x^2).\) &nbsp;(product + chain)</p>
+<p><strong>D2.</strong> \(\dfrac{d}{dx}\ln(x^2+1)=\dfrac{2x}{x^2+1}.\) &nbsp;(\(g'/g\))</p>
+<p><strong>D3.</strong> \(\dfrac{d}{dx}\dfrac{x}{1+x^2}=\dfrac{1\cdot(1+x^2)-x\cdot 2x}{(1+x^2)^2}=\dfrac{1-x^2}{(1+x^2)^2}.\) &nbsp;(quotient)</p>
+<p><strong>D4.</strong> \(\dfrac{d}{dx}\arctan(2x)=\dfrac{1}{1+(2x)^2}\cdot 2=\dfrac{2}{1+4x^2}.\) &nbsp;(chain — don't forget the inner 2)</p>
+<p><strong>D5.</strong> \(\dfrac{d}{dx}\sin^3(2x)=3\sin^2(2x)\cdot\cos(2x)\cdot 2=6\sin^2(2x)\cos(2x).\) &nbsp;(chain twice: cube, then sine, then \(2x\))</p>
+<p><strong>D6.</strong> \(\dfrac{d}{dx}\big(e^{x}\sin x\big)=e^x\sin x+e^x\cos x=e^x(\sin x+\cos x).\)</p>
+<div class="trap">\(\dfrac{d}{dx}e^{-3x}=-3e^{-3x}\), not \(e^{-3x}\) and not \(-3xe^{-3x}\). The exponent's derivative comes <em>down in front</em>; the exponent itself is unchanged.</div>
+</div>
+
+<div class="card">
+<h3>The multivariable habit: "differentiate treating \(y\) as a constant"</h3>
+<p>A partial derivative \(f_x\) is just an ordinary derivative in \(x\) where every \(y\) is a <strong>frozen number</strong> — treat it exactly like you'd treat a \(5\). Then \(f_y\) freezes \(x\). No new rules at all.</p>
+<p><strong>D7.</strong> \(f(x,y)=x^2y^3+e^{xy}+y\sin x\).</p>
+<p>\[f_x=2xy^3+ye^{xy}+y\cos x,\qquad f_y=3x^2y^2+xe^{xy}+\sin x.\]</p>
+<p>Read \(x^2y^3\) with \(y\) frozen as "\(x^2\) times a constant"; read \(e^{xy}\) as "\(e^{(\text{const})x}\)", whose derivative brings the constant \(y\) down; read \(y\sin x\) as "constant times \(\sin x\)".</p>
+<p><strong>D8.</strong> \(f(x,y)=\ln(x^2+y^2)\): \(\;f_x=\dfrac{2x}{x^2+y^2},\;f_y=\dfrac{2y}{x^2+y^2}.\)</p>
+<p><strong>D9.</strong> \(f(x,y)=\arctan(y/x)\): \(\;f_x=\dfrac{1}{1+y^2/x^2}\cdot\left(-\dfrac{y}{x^2}\right)=-\dfrac{y}{x^2+y^2},\;\; f_y=\dfrac{1}{1+y^2/x^2}\cdot\dfrac1x=\dfrac{x}{x^2+y^2}.\)</p>
+<p><strong>D10.</strong> Second partials of \(f=x^3y-2xy^2\): \(f_x=3x^2y-2y^2\), \(f_{xx}=6xy\), \(f_{xy}=3x^2-4y\); \(f_y=x^3-4xy\), \(f_{yy}=-4x\), \(f_{yx}=3x^2-4y\;(=f_{xy}\), Clairaut ✓).</p>
+<div class="trap">With \(x\) varying and \(y\) frozen, \(\frac{\partial}{\partial x}(y^3)=0\) — not \(3y^2\). And \(\frac{\partial}{\partial x}(e^{xy})=ye^{xy}\), not \(xe^{xy}\): the <em>frozen</em> variable comes down.</div>
+<div class="tip">Always compute \(f_{xy}\) <em>and</em> \(f_{yx}\) once when you have time — they must agree (Clairaut). If they don't, you've made an arithmetic slip before building a Hessian (<a href="ch06-optimisation.html">Ch 6</a>).</div>
+</div>
+</section>
+
+<!-- ============ 2. INTEGRALS ============ -->
+<section id="integrals">
+<h2>2 · Integrals — everything the ODE and work questions need</h2>
+
+<div class="card">
+<h3>The antiderivative table (add \(+C\) to every line)</h3>
+<table>
+<tr><th>\(f(x)\)</th><th>\(\int f\,dx\)</th><th>\(f(x)\)</th><th>\(\int f\,dx\)</th></tr>
+<tr><td>\(x^n\;(n\ne-1)\)</td><td>\(\dfrac{x^{n+1}}{n+1}\)</td><td>\(\sin(ax)\)</td><td>\(-\dfrac1a\cos(ax)\)</td></tr>
+<tr><td>\(\dfrac1x\)</td><td>\(\ln|x|\)</td><td>\(\cos(ax)\)</td><td>\(\dfrac1a\sin(ax)\)</td></tr>
+<tr><td>\(e^{ax}\)</td><td>\(\dfrac1a e^{ax}\)</td><td>\(\sec^2 x\)</td><td>\(\tan x\)</td></tr>
+<tr><td>\(\dfrac{g'(x)}{g(x)}\)</td><td>\(\ln|g(x)|\)</td><td>\(\dfrac{1}{a^2+x^2}\)</td><td>\(\dfrac1a\arctan\dfrac xa\)</td></tr>
+<tr><td>\(\dfrac{1}{ax+b}\)</td><td>\(\dfrac1a\ln|ax+b|\)</td><td>\(\dfrac{1}{\sqrt{a^2-x^2}}\)</td><td>\(\arcsin\dfrac xa\)</td></tr>
+<tr><td>\(\ln x\)</td><td>\(x\ln x-x\)</td><td>\(\tan x\)</td><td>\(-\ln|\cos x|\)</td></tr>
+</table>
+<div class="trap"><strong>The \(e^{-2x}\) slip.</strong> \(\int e^{-2x}\,dx=-\tfrac12e^{-2x}+C\). You <em>divide</em> by the coefficient \(-2\) (the reverse of differentiating, which multiplies). Two classic wrong answers: \(-2e^{-2x}\) (multiplied instead of dividing) and \(+\tfrac12e^{-2x}\) (lost the sign). Check by differentiating your answer — it takes three seconds.</div>
+</div>
+
+<div class="card">
+<h3>Substitution — spot "a function and its derivative"</h3>
+<div class="when">The integrand contains some inner \(g(x)\) <em>and</em> (a constant multiple of) \(g'(x)\). Set \(u=g(x)\).</div>
+<p><strong>I1.</strong> \(\int 2x\cos(x^2)\,dx\): \(u=x^2,\ du=2x\,dx\) ⟹ \(\int\cos u\,du=\sin(x^2)+C.\)</p>
+<p><strong>I2.</strong> \(\int\dfrac{x}{x^2+1}\,dx=\tfrac12\ln(x^2+1)+C\) (\(u=x^2+1\), \(du=2x\,dx\), so \(x\,dx=\tfrac12du\)).</p>
+<p><strong>I3.</strong> \(\int t\sqrt{1+t^2}\,dt=\tfrac12\int u^{1/2}du=\tfrac13(1+t^2)^{3/2}+C.\) (This is exactly the shape arc-length integrals take.)</p>
+<p><strong>I4.</strong> \(\int_0^{\pi/2}\sin^3t\cos t\,dt=\left[\tfrac14\sin^4t\right]_0^{\pi/2}=\tfrac14.\)</p>
+<div class="tip">In a definite integral either change the limits to \(u\)-values, or substitute back to \(x\) before plugging in — never mix (old limits with the new variable).</div>
+</div>
+
+<div class="card">
+<h3>By parts — polynomial × (exp or trig), and anything with \(\ln\)</h3>
+<p>\[\int u\,dv=uv-\int v\,du.\]</p>
+<div class="when">Choose \(u\) = the thing that gets <em>simpler</em> when differentiated (polynomial, \(\ln x\)); \(dv\) = the thing easy to integrate (\(e^{ax}\), \(\sin\), \(\cos\)).</div>
+<p><strong>I5.</strong> \(\int xe^{-x}dx\): \(u=x,\ dv=e^{-x}dx\Rightarrow v=-e^{-x}\). So \(=-xe^{-x}+\int e^{-x}dx=-xe^{-x}-e^{-x}+C=-(x+1)e^{-x}+C.\)</p>
+<p><strong>I6.</strong> \(\int x\cos x\,dx=x\sin x-\int\sin x\,dx=x\sin x+\cos x+C.\)</p>
+<p><strong>I7.</strong> \(\int x^2e^{x}dx\) (by parts twice, or the tabular method: signs \(+,-,+\) down the derivatives \(x^2,2x,2\) against \(e^x,e^x,e^x\)) \(=(x^2-2x+2)e^x+C.\)</p>
+<p><strong>I8.</strong> \(\int\ln x\,dx\): \(u=\ln x,\ dv=dx\) ⟹ \(x\ln x-\int x\cdot\tfrac1x dx=x\ln x-x+C.\) &nbsp;So \(\int_1^e\ln x\,dx=(e-e)-(0-1)=1.\)</p>
+<p><strong>I9.</strong> \(\int_0^1 xe^{x}dx=\big[(x-1)e^x\big]_0^1=0-(-1)=1.\)</p>
+</div>
+
+<div class="card">
+<h3>The \(\int e^{ax}\cos bx\) / \(\int e^{ax}\sin bx\) trick (integrating factors love these)</h3>
+<p>Parts twice returns the original integral; solve for it. The results are worth memorising:</p>
+<p>\[\int e^{ax}\cos bx\,dx=\frac{e^{ax}(a\cos bx+b\sin bx)}{a^2+b^2}+C,\qquad \int e^{ax}\sin bx\,dx=\frac{e^{ax}(a\sin bx-b\cos bx)}{a^2+b^2}+C.\]</p>
+<p><strong>I10.</strong> \(\int e^x\sin x\,dx=\tfrac12e^x(\sin x-\cos x)+C\) (\(a=b=1\)).</p>
+<p><strong>I11.</strong> \(\int e^{2t}\cos t\,dt=\tfrac15e^{2t}(2\cos t+\sin t)+C\) (\(a=2,b=1\), \(a^2+b^2=5\)).</p>
+<div class="tip">Not sure you remembered the signs? Differentiate: \(\frac{d}{dt}\big[\tfrac15e^{2t}(2\cos t+\sin t)\big]=\tfrac15e^{2t}(4\cos t+2\sin t-2\sin t+\cos t)=e^{2t}\cos t\) ✓.</div>
+</div>
+
+<div class="card">
+<h3>Partial fractions (light) — separable ODEs and logistic growth</h3>
+<p><strong>I12.</strong> \(\dfrac{3x+1}{(x-1)(x+1)}=\dfrac{A}{x-1}+\dfrac{B}{x+1}\). Cover-up: \(x=1\Rightarrow 4=2A\Rightarrow A=2\); \(x=-1\Rightarrow -2=-2B\Rightarrow B=1\). So \(\int\dfrac{3x+1}{x^2-1}dx=2\ln|x-1|+\ln|x+1|+C.\)</p>
+<p><strong>I13.</strong> The logistic integral: \(\dfrac{1}{y(1-y)}=\dfrac1y+\dfrac{1}{1-y}\), so \(\int\dfrac{dy}{y(1-y)}=\ln|y|-\ln|1-y|+C=\ln\left|\dfrac{y}{1-y}\right|+C.\)</p>
+<div class="trap">\(\int\frac{dy}{1-y}=-\ln|1-y|\), with a minus sign (the inner derivative is \(-1\)). This sign is the most common error in logistic-equation solutions.</div>
+</div>
+
+<div class="card">
+<h3>Trig powers (arc length and work around circles)</h3>
+<p><strong>I14.</strong> \(\int\sin^2x\,dx=\int\tfrac12(1-\cos2x)\,dx=\tfrac x2-\tfrac14\sin 2x+C\); likewise \(\int\cos^2x\,dx=\tfrac x2+\tfrac14\sin2x+C.\)</p>
+<p><strong>I15.</strong> \(\int_0^{2\pi}\cos^2t\,dt=\pi\) &nbsp;and&nbsp; \(\int_0^{2\pi}\sin t\cos t\,dt=0.\)</p>
+<p><strong>I16.</strong> \(\int\sin x\cos x\,dx=\tfrac12\sin^2x+C\) (\(u=\sin x\)).</p>
+</div>
+
+<div class="card">
+<h3>Definite integrals in the wild — work, arc length, ODEs</h3>
+<p><strong>I17 (work).</strong> \(\mathbf F=\langle y,\,x^2\rangle\) along \(\mathbf r(t)=\langle t,t^2\rangle\), \(0\le t\le1\). Then \(\mathbf F(\mathbf r(t))=\langle t^2,t^2\rangle\), \(\mathbf r'(t)=\langle1,2t\rangle\), so</p>
+<p>\[W=\int_0^1(t^2+2t^3)\,dt=\tfrac13+\tfrac12=\tfrac56.\]</p>
+<p><strong>I18 (arc length).</strong> \(\mathbf r(t)=\langle t^2,\tfrac23t^3\rangle\), \(0\le t\le\sqrt3\). \(\mathbf r'=\langle2t,2t^2\rangle\), \(\|\mathbf r'\|=2t\sqrt{1+t^2}\) (for \(t\ge0\)), so</p>
+<p>\[L=\int_0^{\sqrt3}2t\sqrt{1+t^2}\,dt=\left[\tfrac23(1+t^2)^{3/2}\right]_0^{\sqrt3}=\tfrac23(8-1)=\tfrac{14}{3}.\]</p>
+<p><strong>I19 (helix).</strong> \(\mathbf r=\langle3\cos t,3\sin t,4t\rangle\): \(\|\mathbf r'\|=\sqrt{9\sin^2t+9\cos^2t+16}=5\), so one turn \(0\le t\le2\pi\) has length \(10\pi\).</p>
+<div class="tip">Arc-length questions are <em>designed</em> so \(\|\mathbf r'\|^2\) is a perfect square (or \(\sin^2+\cos^2\) collapses). If your square root won't simplify, re-check \(\mathbf r'\) before grinding.</div>
+<p><strong>I20 (ODE, +C placement).</strong> \(y'+2y=4\). Integrating factor \(e^{2x}\): \((ye^{2x})'=4e^{2x}\Rightarrow ye^{2x}=2e^{2x}+C\Rightarrow y=2+Ce^{-2x}.\)</p>
+<div class="trap"><strong>Forgetting \(+C\) (or adding it too late).</strong> The \(+C\) must appear the moment you integrate, <em>before</em> you divide by \(e^{2x}\). Writing \(ye^{2x}=2e^{2x}\) and adding \(C\) at the end gives \(y=2+C\) — a constant, which loses the whole family of solutions and every mark for the IVP part. A general solution to a first-order ODE <strong>must</strong> contain one arbitrary constant; a second-order one must contain two.</div>
+<p><strong>I21 (separable).</strong> \(\dfrac{dy}{dx}=2xy\): \(\int\frac{dy}{y}=\int2x\,dx\Rightarrow\ln|y|=x^2+C\Rightarrow y=Ae^{x^2}\) (\(A=\pm e^{C}\), and \(A=0\) recovers the equilibrium \(y=0\)).</p>
+</div>
+</section>
+
+<!-- ============ 3. TRIG ============ -->
+<section id="trig">
+<h2>3 · Trigonometry — exact values, identities, equations</h2>
+
+<div class="card">
+<h3>Exact values (no calculator ⇒ these are the only angles you'll meet)</h3>
+<table>
+<tr><th>\(\theta\)</th><th>\(0\)</th><th>\(\pi/6\)</th><th>\(\pi/4\)</th><th>\(\pi/3\)</th><th>\(\pi/2\)</th><th>\(\pi\)</th><th>\(3\pi/2\)</th></tr>
+<tr><td>\(\sin\theta\)</td><td>\(0\)</td><td>\(\tfrac12\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(1\)</td><td>\(0\)</td><td>\(-1\)</td></tr>
+<tr><td>\(\cos\theta\)</td><td>\(1\)</td><td>\(\tfrac{\sqrt3}{2}\)</td><td>\(\tfrac{\sqrt2}{2}\)</td><td>\(\tfrac12\)</td><td>\(0\)</td><td>\(-1\)</td><td>\(0\)</td></tr>
+<tr><td>\(\tan\theta\)</td><td>\(0\)</td><td>\(\tfrac{1}{\sqrt3}\)</td><td>\(1\)</td><td>\(\sqrt3\)</td><td>undef.</td><td>\(0\)</td><td>undef.</td></tr>
+</table>
+<p><strong>Other quadrants:</strong> use the reference angle and the sign rule "All Students Take Calculus" (Q1 all positive, Q2 sin, Q3 tan, Q4 cos). E.g. \(\sin\tfrac{2\pi}{3}=\tfrac{\sqrt3}2\), \(\cos\tfrac{3\pi}{4}=-\tfrac{\sqrt2}2\), \(\cos\tfrac{7\pi}{6}=-\tfrac{\sqrt3}2\), \(\sin\tfrac{5\pi}{3}=-\tfrac{\sqrt3}2\).</p>
+</div>
+
+<div class="card">
+<h3>Identities that actually get used</h3>
+<div class="method"><ul>
+<li>\(\sin^2x+\cos^2x=1\), &nbsp; \(1+\tan^2x=\sec^2x\)</li>
+<li>\(\sin2x=2\sin x\cos x\)</li>
+<li>\(\cos2x=\cos^2x-\sin^2x=2\cos^2x-1=1-2\sin^2x\)</li>
+<li><strong>Power reduction (for integrating):</strong> \(\cos^2x=\tfrac12(1+\cos2x)\), \(\;\sin^2x=\tfrac12(1-\cos2x)\)</li>
+<li>\(\sin(A\pm B)=\sin A\cos B\pm\cos A\sin B\), &nbsp; \(\cos(A\pm B)=\cos A\cos B\mp\sin A\sin B\)</li>
+<li><strong>Amplitude form (springs):</strong> \(a\cos t+b\sin t=R\cos(t-\varphi)\), \(R=\sqrt{a^2+b^2}\), \(\tan\varphi=b/a\).</li>
+</ul></div>
+<p><strong>T1.</strong> \(3\cos t+4\sin t\) has amplitude \(R=\sqrt{9+16}=5\) — so a spring with displacement \(x(t)=e^{-t}(3\cos t+4\sin t)\) oscillates inside the envelope \(\pm5e^{-t}\).</p>
+<p><strong>T2 (the averaging fact).</strong> Over one full period, \(\cos^2\) and \(\sin^2\) each average to \(\tfrac12\) (they add to 1 and are shifts of each other). So \(\int_0^{2\pi}\cos^2t\,dt=\tfrac12\cdot2\pi=\pi\) — instantly.</p>
+<p><strong>T3.</strong> On the circle \(x=\cos t,\ y=\sin t\): \(x^2+2y^2=\cos^2t+2\sin^2t=1+\sin^2t\). Max \(2\) where \(\sin t=\pm1\) (points \((0,\pm1)\)), min \(1\) where \(\sin t=0\) (points \((\pm1,0)\)). This is exactly the boundary step of a closed-region optimisation (<a href="ch06-optimisation.html">Ch 6</a>).</p>
+</div>
+
+<div class="card">
+<h3>Solving trig equations on a domain (critical points!)</h3>
+<div class="method"><ol>
+<li>Move everything to one side and <strong>factorise</strong> — never divide by \(\cos x\) or \(\sin x\) (you delete the solutions where it is zero).</li>
+<li>Solve each factor for its reference angle, then list <strong>every</strong> angle in the stated domain (use the sign rule).</li>
+<li>For \(\sin 2x=c\) on \([0,2\pi]\), \(2x\) ranges over \([0,4\pi]\) — so expect twice as many solutions.</li>
+</ol></div>
+<p><strong>T4.</strong> \(\sin x=\tfrac12\) on \([0,2\pi]\): \(x=\tfrac\pi6,\ \tfrac{5\pi}6.\)</p>
+<p><strong>T5.</strong> \(\cos x=-\tfrac{\sqrt3}2\) on \([0,2\pi]\): \(x=\tfrac{5\pi}6,\ \tfrac{7\pi}6.\)</p>
+<p><strong>T6.</strong> \(2\sin x\cos x=\cos x\) on \([0,2\pi]\): \(\cos x(2\sin x-1)=0\) ⟹ \(\cos x=0\): \(x=\tfrac\pi2,\tfrac{3\pi}2\); or \(\sin x=\tfrac12\): \(x=\tfrac\pi6,\tfrac{5\pi}6\). <strong>Four</strong> solutions.</p>
+<div class="trap">Dividing T6 by \(\cos x\) gives \(2\sin x=1\) and only two solutions — you've silently lost \(x=\tfrac\pi2,\tfrac{3\pi}2\). In a "find all critical points" question that's lost marks for every missing point <em>and</em> its classification.</div>
+<p><strong>T7.</strong> Extremes of \(f(x)=\sin x+\cos x\) on \([0,2\pi]\): \(f'(x)=\cos x-\sin x=0\Rightarrow\tan x=1\Rightarrow x=\tfrac\pi4,\tfrac{5\pi}4\) (safe to divide here because \(\cos x=0\) would force \(\sin x=0\) too — impossible). \(f(\tfrac\pi4)=\sqrt2\) (max), \(f(\tfrac{5\pi}4)=-\sqrt2\) (min); endpoints give \(f(0)=f(2\pi)=1\).</p>
+<p><strong>T8 (two-variable).</strong> \(f(x,y)=\sin x\cos y\) on \(0\lt x\lt\pi,\ 0\lt y\lt\pi\): \(f_x=\cos x\cos y=0\), \(f_y=-\sin x\sin y=0\). In the open square \(\sin x\ne0\) and \(\sin y\ne0\), so \(f_y\ne0\) — <strong>no</strong> interior critical points. Checking "is this factor ever zero on the domain?" is part of the answer.</p>
+</div>
+</section>
+
+<!-- ============ 4. EXP & LOG ============ -->
+<section id="exp-log">
+<h2>4 · Exponentials &amp; logarithms</h2>
+
+<div class="card">
+<h3>Laws</h3>
+<div class="grid2">
+<div class="method"><ul>
+<li>\(e^{a}e^{b}=e^{a+b}\), \(\;(e^a)^b=e^{ab}\), \(\;e^{-a}=1/e^a\)</li>
+<li>\(e^{\ln x}=x\;(x\gt0)\), \(\;\ln(e^x)=x\)</li>
+<li>\(a^x=e^{x\ln a}\)</li>
+</ul></div>
+<div class="method"><ul>
+<li>\(\ln(ab)=\ln a+\ln b\), \(\;\ln(a/b)=\ln a-\ln b\)</li>
+<li>\(\ln(a^r)=r\ln a\), \(\;\ln 1=0\), \(\;\ln(1/a)=-\ln a\)</li>
+<li>\(\ln(a+b)\) does <strong>not</strong> split.</li>
+</ul></div>
+</div>
+<p><strong>L1.</strong> \(e^{2\ln3}=(e^{\ln3})^2=9.\) &nbsp; <strong>L2.</strong> \(\ln 8-\ln 2=\ln4=2\ln2.\) &nbsp; <strong>L3.</strong> \(e^{-\ln 2}=\tfrac12.\)</p>
+<p><strong>L4.</strong> Solve \(10e^{-0.1t}=5\): \(e^{-0.1t}=\tfrac12\Rightarrow -0.1t=-\ln2\Rightarrow t=10\ln2\approx6.93.\)</p>
+<p><strong>L5.</strong> Solve \(e^{2x}-3e^x+2=0\): let \(u=e^x\): \(u^2-3u+2=(u-1)(u-2)=0\), so \(e^x=1\) or \(2\) ⟹ \(x=0\) or \(x=\ln2\).</p>
+<p><strong>L6 (doubling/half-life).</strong> If \(y'=ky\) then \(y=y_0e^{kt}\); it doubles when \(e^{kt}=2\), i.e. \(t=\ln2/k\). For \(k=0.2\): \(t=5\ln2\approx3.47\). Half-life of \(y=y_0e^{-kt}\) is also \(\ln2/k\).</p>
+</div>
+
+<div class="card">
+<h3>Numbers worth knowing (for "give an approximate value")</h3>
+<table>
+<tr><th>quantity</th><th>value</th><th>quantity</th><th>value</th></tr>
+<tr><td>\(\ln2\)</td><td>\(\approx0.6931\)</td><td>\(e\)</td><td>\(\approx2.7183\)</td></tr>
+<tr><td>\(\ln3\)</td><td>\(\approx1.0986\)</td><td>\(e^{-1}\)</td><td>\(\approx0.3679\)</td></tr>
+<tr><td>\(\ln10\)</td><td>\(\approx2.3026\)</td><td>\(e^{2}\)</td><td>\(\approx7.389\)</td></tr>
+<tr><td>\(\sqrt2\)</td><td>\(\approx1.4142\)</td><td>\(\sqrt3\)</td><td>\(\approx1.7321\)</td></tr>
+<tr><td>\(\pi\)</td><td>\(\approx3.1416\)</td><td>\(\ln5=\ln10-\ln2\)</td><td>\(\approx1.6094\)</td></tr>
+</table>
+<div class="tip">Build others from these: \(\ln 4=2\ln2\approx1.386\), \(\ln6=\ln2+\ln3\approx1.792\), \(\ln\tfrac12=-\ln2\approx-0.693\). In a no-calculator exam an <em>exact</em> answer like \(10\ln 2\) is always acceptable — only give the decimal if asked.</div>
+</div>
+
+<div class="card">
+<h3>Series for estimates, and limits for long-term behaviour</h3>
+<p>\[e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots,\qquad \ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots\;(|x|\lt1).\]</p>
+<p><strong>L7.</strong> \(e^{0.1}\approx1+0.1+0.005=1.105\) (true \(1.10517\)). &nbsp; <strong>L8.</strong> \(\ln1.1\approx0.1-0.005=0.095\) (true \(0.0953\)).</p>
+<p><strong>L9 (limits).</strong> As \(t\to\infty\): \(e^{-t}\to0\), \(te^{-t}\to0\), \(t^2e^{-3t}\to0\) — exponential decay beats any power. So \(y=2+Ce^{-2x}\to2\) for <em>every</em> \(C\): the equilibrium \(y=2\) is stable. And \(e^{-t}\cos 2t\to0\) (bounded × decaying), which is why underdamped springs come to rest.</p>
+</div>
+</section>
+
+<!-- ============ 5. ALGEBRA ============ -->
+<section id="algebra">
+<h2>5 · Algebra &amp; nonlinear systems — where critical-point and Lagrange marks are lost</h2>
+
+<div class="card">
+<h3>Completing the square (conics, quadrics, contours)</h3>
+<p>\[x^2+bx=\left(x+\tfrac b2\right)^2-\tfrac{b^2}{4}.\]</p>
+<p><strong>A1.</strong> \(x^2-6x+13=(x-3)^2+4\) — so its minimum is 4, at \(x=3\).</p>
+<p><strong>A2.</strong> \(x^2+y^2-4x+2y=4\) ⟹ \((x-2)^2-4+(y+1)^2-1=4\) ⟹ \((x-2)^2+(y+1)^2=9\): circle, centre \((2,-1)\), radius 3.</p>
+<p><strong>A3.</strong> \(4x^2+8x+y^2-6y=3\) ⟹ \(4(x+1)^2-4+(y-3)^2-9=3\) ⟹ \(4(x+1)^2+(y-3)^2=16\) ⟹ \(\dfrac{(x+1)^2}{4}+\dfrac{(y-3)^2}{16}=1\): ellipse centre \((-1,3)\), semi-axes 2 (in \(x\)) and 4 (in \(y\)).</p>
+<div class="trap">With a leading coefficient, factor it out <em>first</em>: \(4x^2+8x=4(x^2+2x)=4\big((x+1)^2-1\big)=4(x+1)^2-4\). Forgetting to multiply the \(-1\) by 4 moves the whole conic.</div>
+</div>
+
+<div class="card">
+<h3>Factorising polynomials</h3>
+<ul>
+<li><strong>Common factor first:</strong> \(x^3-4x=x(x^2-4)=x(x-2)(x+2)\) ⟹ roots \(0,\pm2\).</li>
+<li><strong>Cubics:</strong> guess an integer root among the divisors of the constant term, then divide. \(x^3-6x^2+11x-6\): \(x=1\) gives \(0\), so \(=(x-1)(x^2-5x+6)=(x-1)(x-2)(x-3)\).</li>
+<li><strong>Quadratic formula:</strong> \(ax^2+bx+c=0\Rightarrow x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\).</li>
+<li><strong>Hidden quadratics:</strong> \(x^4-5x^2+4=(x^2-1)(x^2-4)\Rightarrow x=\pm1,\pm2\).</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>The golden rule for systems: <em>factor, don't divide</em></h3>
+<p>Critical-point systems \(f_x=0,\ f_y=0\) and Lagrange systems are usually nonlinear. The single most expensive habit is cancelling a variable that might be zero.</p>
+<div class="method"><ol>
+<li>If an equation factorises as (something)·(something) \(=0\), split into <strong>cases</strong> and pair each case with the other equation.</li>
+<li>If both equations are simple, solve one for a variable and substitute into the other.</li>
+<li>List every point found, then check each one in <em>both</em> original equations.</li>
+</ol></div>
+
+<p><strong>A4.</strong> \(f=x^3-3x+y^2-4y\): \(f_x=3x^2-3=0\Rightarrow x=\pm1\); \(f_y=2y-4=0\Rightarrow y=2\). Critical points \((1,2)\) and \((-1,2)\). With \(f_{xx}=6x,\ f_{yy}=2,\ f_{xy}=0\): \(D(1,2)=12\gt0,\ f_{xx}\gt0\) ⟹ local min; \(D(-1,2)=-12\lt0\) ⟹ saddle.</p>
+
+<p><strong>A5.</strong> \(f=x^3+y^3-6xy\): \(f_x=3x^2-6y=0\Rightarrow y=\tfrac{x^2}{2}\). Substitute into \(f_y=3y^2-6x=0\): \(\tfrac34x^4=6x\Rightarrow x^4-8x=0\Rightarrow x(x^3-8)=0\Rightarrow x=0\) or \(x=2\). Points \((0,0)\) and \((2,2)\).</p>
+<div class="trap">Dividing \(x^4=8x\) by \(x\) gives only \(x=2\) and loses the saddle at the origin.</div>
+
+<p><strong>A6 (four cases).</strong> \(f=xy(3-x-y)=3xy-x^2y-xy^2\):</p>
+<p>\[f_x=y(3-2x-y)=0,\qquad f_y=x(3-x-2y)=0.\]</p>
+<table>
+<tr><th>from \(f_x\)</th><th>from \(f_y\)</th><th>point</th></tr>
+<tr><td>\(y=0\)</td><td>\(x=0\)</td><td>\((0,0)\)</td></tr>
+<tr><td>\(y=0\)</td><td>\(3-x-2y=0\Rightarrow x=3\)</td><td>\((3,0)\)</td></tr>
+<tr><td>\(3-2x-y=0\)</td><td>\(x=0\Rightarrow y=3\)</td><td>\((0,3)\)</td></tr>
+<tr><td>\(3-2x-y=0\)</td><td>\(3-x-2y=0\)</td><td>\((1,1)\)</td></tr>
+</table>
+<div class="tip">Two factored equations with two factors each ⟹ up to <strong>four</strong> cases. Draw the little table every time; markers look for it.</div>
+
+<p><strong>A7 (Lagrange — eliminate \(\lambda\) by substituting, not dividing).</strong> Extremes of \(f=xy\) on \(x^2+4y^2=8\). \(\nabla f=\lambda\nabla g\) gives \(y=2\lambda x\) and \(x=8\lambda y\). Dividing one equation by the other is unsafe (what if \(x\) or \(y\) is 0?), so substitute the first into the second:</p>
+<p>\[y=2\lambda x\ \text{ and }\ x=8\lambda y\ \Rightarrow\ x=8\lambda(2\lambda x)=16\lambda^2x\ \Rightarrow\ x(1-16\lambda^2)=0.\]</p>
+<p>Case \(x=0\): then \(y=0\), but \((0,0)\) is <strong>not on the constraint</strong> (\(0\ne8\)) — reject, and say so. Case \(\lambda=\tfrac14\): \(y=\tfrac x2\), constraint gives \(x^2+x^2=8\Rightarrow x=\pm2\): points \((2,1),(-2,-1)\) with \(f=2\). Case \(\lambda=-\tfrac14\): \(y=-\tfrac x2\): points \((2,-1),(-2,1)\) with \(f=-2\). Max \(2\), min \(-2\) (constraint is a closed bounded ellipse, so both exist).</p>
+
+<p><strong>A8.</strong> Extremes of \(f=x+2y\) on \(x^2+y^2=5\): \(1=2\lambda x,\ 2=2\lambda y\) (so \(\lambda\ne0\), \(x,y\ne0\) — safe to divide) ⟹ \(y=2x\) ⟹ \(5x^2=5\Rightarrow x=\pm1\). \((1,2)\): \(f=5\) (max); \((-1,-2)\): \(f=-5\) (min).</p>
+
+<p><strong>A9 (linear 2×2 for ODE constants).</strong> \(y=C_1e^{t}+C_2e^{-3t}\), \(y(0)=2\), \(y'(0)=1\): \(C_1+C_2=2\), \(C_1-3C_2=1\). Subtract: \(4C_2=1\Rightarrow C_2=\tfrac14,\ C_1=\tfrac74.\)</p>
+</div>
+</section>
+
+<!-- ============ 6. VECTORS ============ -->
+<section id="vectors">
+<h2>6 · Vectors in \(\mathbb R^2\) and \(\mathbb R^3\)</h2>
+
+<div class="card">
+<h3>Notation, magnitude, unit vectors</h3>
+<p>\(\mathbf v=\langle 2,-1,2\rangle=2\mathbf i-\mathbf j+2\mathbf k\) (the same vector, two notations). Magnitude \(\|\mathbf v\|=\sqrt{4+1+4}=3\). Unit vector in its direction: \(\hat{\mathbf v}=\dfrac{\mathbf v}{\|\mathbf v\|}=\langle\tfrac23,-\tfrac13,\tfrac23\rangle\).</p>
+<p><strong>V1.</strong> \(\mathbf v=\langle3,-4\rangle\): \(\|\mathbf v\|=5\), \(\hat{\mathbf v}=\langle\tfrac35,-\tfrac45\rangle\).</p>
+<div class="trap"><strong>\(\|\mathbf v\|\) vs \(\mathbf v\).</strong> \(\mathbf v\) is a vector (an arrow — answer with components); \(\|\mathbf v\|\) is a non-negative number (its length). "Speed" is \(\|\mathbf r'(t)\|\) (a number); "velocity" is \(\mathbf r'(t)\) (a vector). "Maximum rate of increase" is \(\|\nabla f\|\) (a number); "direction of maximum increase" is \(\nabla f\) or \(\nabla f/\|\nabla f\|\) (a vector). Giving the wrong type is marked wrong even if the numbers are right.</div>
+</div>
+
+<div class="card">
+<h3>Dot product and angles</h3>
+<p>\[\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2+u_3v_3=\|\mathbf u\|\|\mathbf v\|\cos\theta.\]</p>
+<p><strong>V2.</strong> \(\langle1,2,2\rangle\cdot\langle2,-1,2\rangle=2-2+4=4\), so \(\cos\theta=\dfrac{4}{3\cdot3}=\dfrac49\).</p>
+<p><strong>V3.</strong> \(\mathbf u=\langle1,1,0\rangle,\ \mathbf v=\langle1,0,1\rangle\): \(\cos\theta=\dfrac{1}{\sqrt2\sqrt2}=\dfrac12\Rightarrow\theta=\dfrac\pi3\).</p>
+<p><strong>V4.</strong> Perpendicular ⟺ dot product \(0\): \(\langle2,1\rangle\perp\langle-1,2\rangle\). Useful fact: in 2-D, \(\langle a,b\rangle\perp\langle -b,a\rangle\) — this is how you write a tangent direction to a level curve from \(\nabla f\).</p>
+<p><strong>V5 (directional-derivative preview).</strong> \(\nabla f(a,b)=\langle2,1\rangle\), direction \(\mathbf u=\langle3,4\rangle\): \(D_{\mathbf u}f=\langle2,1\rangle\cdot\dfrac{\langle3,4\rangle}{5}=\dfrac{6+4}{5}=2.\)</p>
+<div class="trap">Using \(\mathbf u\) without dividing by \(\|\mathbf u\|\) gives \(10\) instead of \(2\). The formula sheet writes \(\mathbf u/\|\mathbf u\|\) for exactly this reason.</div>
+</div>
+
+<div class="card">
+<h3>Determinants (Hessians, cross products, planes)</h3>
+<p>\[\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc,\qquad \begin{vmatrix}a_1&a_2&a_3\\b_1&b_2&b_3\\c_1&c_2&c_3\end{vmatrix}=a_1\begin{vmatrix}b_2&b_3\\c_2&c_3\end{vmatrix}-a_2\begin{vmatrix}b_1&b_3\\c_1&c_3\end{vmatrix}+a_3\begin{vmatrix}b_1&b_2\\c_1&c_2\end{vmatrix}.\]</p>
+<p><strong>V6.</strong> \(\begin{vmatrix}6&2\\2&1\end{vmatrix}=6-4=2\) (a Hessian with \(D\gt0\), \(f_{xx}\gt0\) ⟹ local min).</p>
+<p><strong>V7.</strong> \(\begin{vmatrix}1&2&0\\3&1&2\\0&1&1\end{vmatrix}=1(1-2)-2(3-0)+0=-7.\) Note the <strong>minus</strong> on the middle term.</p>
+<p><strong>V8 (cross product).</strong> \(\mathbf a\times\mathbf b=\begin{vmatrix}\mathbf i&\mathbf j&\mathbf k\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}\). E.g. \(\langle1,2,3\rangle\times\langle4,5,6\rangle=\langle12-15,\ -(6-12),\ 5-8\rangle=\langle-3,6,-3\rangle\) — perpendicular to both (check: \(-3+12-9=0\) ✓).</p>
+</div>
+</section>
+
+<!-- ============ 7. COMPLEX ============ -->
+<section id="complex">
+<h2>7 · Complex numbers — just enough for characteristic equations</h2>
+
+<div class="card">
+<h3>Negative discriminant ⟹ complex roots</h3>
+<p>\(i^2=-1\), so \(\sqrt{-16}=4i\). For \(ar^2+br+c=0\) with \(b^2-4ac\lt0\): \(r=\dfrac{-b\pm i\sqrt{4ac-b^2}}{2a}=\alpha\pm i\beta\).</p>
+<p><strong>C1.</strong> \(r^2+2r+5=0\): \(r=\dfrac{-2\pm\sqrt{4-20}}{2}=\dfrac{-2\pm4i}{2}=-1\pm2i\). (\(\alpha=-1,\ \beta=2\))</p>
+<p><strong>C2.</strong> \(r^2-4r+13=0\): \(r=2\pm3i\). &nbsp; <strong>C3.</strong> \(r^2+9=0\): \(r=\pm3i\) (\(\alpha=0\)).</p>
+<p>Quick check: the roots \(\alpha\pm i\beta\) of \(r^2+br+c\) satisfy \(2\alpha=-b\) and \(\alpha^2+\beta^2=c\). For C1: \(2(-1)=-2\) ✓, \(1+4=5\) ✓.</p>
+</div>
+
+<div class="card">
+<h3>From \(e^{(\alpha\pm i\beta)t}\) to real solutions</h3>
+<p>Euler's formula \(e^{i\theta}=\cos\theta+i\sin\theta\) gives</p>
+<p>\[e^{(\alpha+i\beta)t}=e^{\alpha t}\big(\cos\beta t+i\sin\beta t\big).\]</p>
+<p>For a real linear ODE, the real and imaginary parts of a complex solution are each real solutions. So complex roots \(\alpha\pm i\beta\) give</p>
+<p>\[y=e^{\alpha t}\big(C_1\cos\beta t+C_2\sin\beta t\big).\]</p>
+<table>
+<tr><th>roots of \(ar^2+br+c=0\)</th><th>general solution of \(ay''+by'+cy=0\)</th></tr>
+<tr><td>real, distinct \(r_1\ne r_2\)</td><td>\(C_1e^{r_1t}+C_2e^{r_2t}\)</td></tr>
+<tr><td>repeated \(r\)</td><td>\((C_1+C_2t)e^{rt}\)</td></tr>
+<tr><td>complex \(\alpha\pm i\beta\)</td><td>\(e^{\alpha t}(C_1\cos\beta t+C_2\sin\beta t)\)</td></tr>
+</table>
+<p><strong>C4.</strong> \(y''-y'-6y=0\): \(r^2-r-6=(r-3)(r+2)\) ⟹ \(y=C_1e^{3t}+C_2e^{-2t}\).</p>
+<p><strong>C5.</strong> \(y''+4y'+4y=0\): \((r+2)^2=0\) ⟹ \(y=(C_1+C_2t)e^{-2t}\).</p>
+<p><strong>C6 (IVP).</strong> \(y''+2y'+5y=0\), \(y(0)=1\), \(y'(0)=1\). From C1, \(y=e^{-t}(C_1\cos2t+C_2\sin2t)\). \(y(0)=C_1=1\). \(y'=e^{-t}\big[(-C_1+2C_2)\cos2t+(-C_2-2C_1)\sin2t\big]\), so \(y'(0)=-1+2C_2=1\Rightarrow C_2=1\). Answer: \(y=e^{-t}(\cos2t+\sin2t)\).</p>
+<div class="trap">Common wrong forms: \(e^{2t}(\ldots\cos t)\) (swapped \(\alpha\) and \(\beta\)); \(\cos(-2t)\) and \(\sin(-2t)\) as "two different" solutions (they're the same pair up to sign — just use \(\beta\gt0\)); forgetting the \(t\) in the repeated-root case. The \(\alpha\) goes in the <strong>exponential</strong>, the \(\beta\) goes <strong>inside the trig</strong>.</div>
+</div>
+</section>
+
+<!-- ============ 8. LINES, PLANES, QUADRICS ============ -->
+<section id="quadrics">
+<h2>8 · Lines, planes — and why a tangent plane is a plane</h2>
+
+<div class="card">
+<h3>Lines</h3>
+<p>In \(\mathbb R^2\): \(y-y_0=m(x-x_0)\). In \(\mathbb R^3\) (or \(\mathbb R^2\)): \(\mathbf r(t)=\mathbf r_0+t\mathbf d\) — a point plus multiples of a direction.</p>
+<p><strong>P1.</strong> Tangent line to \(y=x^3\) at \(x=1\): slope \(3\), point \((1,1)\) ⟹ \(y=3x-2\).</p>
+<p><strong>P2.</strong> Line through \((1,0,2)\) and \((3,1,1)\): \(\mathbf d=\langle2,1,-1\rangle\), \(\mathbf r(t)=\langle1+2t,\ t,\ 2-t\rangle\).</p>
+</div>
+
+<div class="card">
+<h3>Planes: a point and a normal</h3>
+<p>\[\mathbf n\cdot(\mathbf r-\mathbf r_0)=0\iff a(x-x_0)+b(y-y_0)+c(z-z_0)=0,\qquad \mathbf n=\langle a,b,c\rangle.\]</p>
+<p><strong>P3.</strong> Through \((1,2,3)\) with normal \(\langle2,-1,1\rangle\): \(2(x-1)-(y-2)+(z-3)=0\iff 2x-y+z=3.\)</p>
+<p><strong>P4.</strong> Through \((1,0,0),(0,2,0),(0,0,3)\): two edge vectors \(\langle-1,2,0\rangle,\langle-1,0,3\rangle\); their cross product \(\langle6,3,2\rangle\) is a normal ⟹ \(6x+3y+2z=6\) (check all three points ✓).</p>
+</div>
+
+<div class="card">
+<h3>Why the tangent plane is a plane</h3>
+<p>The tangent plane to \(z=f(x,y)\) at \((a,b)\) is the formula-sheet linear approximation \(P(x,y)\) set equal to \(z\):</p>
+<p>\[z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).\]</p>
+<p>Once you plug in \((a,b)\), the numbers \(f(a,b),f_x(a,b),f_y(a,b)\) are <em>constants</em>, so this is <strong>linear</strong> in \(x,y,z\) — exactly the form \(ax+by+cz=d\). Rearranged, \(f_x(x-a)+f_y(y-b)-(z-f(a,b))=0\), so a normal vector is \(\langle f_x,f_y,-1\rangle\).</p>
+<p><strong>P5.</strong> \(f=x^2+y^2\) at \((1,2)\): \(f=5,\ f_x=2,\ f_y=4\) ⟹ \(z=5+2(x-1)+4(y-2)\iff z=2x+4y-5\). Normal \(\langle2,4,-1\rangle\); normal line \(\langle1,2,5\rangle+t\langle2,4,-1\rangle\).</p>
+<p><strong>P6 (level surface).</strong> For \(F(x,y,z)=k\), \(\nabla F\) is normal: sphere \(x^2+y^2+z^2=9\) at \((1,2,2)\): \(\nabla F=\langle2,4,4\rangle\) ⟹ \(2(x-1)+4(y-2)+4(z-2)=0\iff x+2y+2z=9.\)</p>
+<div class="trap">Leaving \(x,y\) inside \(f_x,f_y\) (e.g. writing \(z=5+2x(x-1)+\ldots\)) gives a curved surface, not a plane. Evaluate the partials <strong>at the point</strong> first.</div>
+</div>
+
+<div class="card">
+<h3>Recognising the standard surfaces (details in <a href="ch03-surfaces-contours.html">Ch 3</a>)</h3>
+<table>
+<tr><th>equation</th><th>name</th><th>contours \(z=k\)</th></tr>
+<tr><td>\(ax+by+cz=d\)</td><td>plane</td><td>parallel lines</td></tr>
+<tr><td>\(z=x^2+y^2\)</td><td>paraboloid (bowl)</td><td>circles, spacing shrinking</td></tr>
+<tr><td>\(z=\sqrt{x^2+y^2}\)</td><td>cone (upper half)</td><td>equally spaced circles</td></tr>
+<tr><td>\(z=x^2-y^2\)</td><td>hyperbolic paraboloid (saddle)</td><td>hyperbolas (and two lines at \(k=0\))</td></tr>
+<tr><td>\(\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1\)</td><td>ellipsoid</td><td>ellipses</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ============ 9. TAYLOR ============ -->
+<section id="taylor">
+<h2>9 · 1-D Taylor approximation — the parent of the formula-sheet \(P\) and \(Q\)</h2>
+
+<div class="card">
+<h3>Linear and quadratic approximation in one variable</h3>
+<p>\[f(a+h)\approx\underbrace{f(a)+f'(a)h}_{\text{linear (tangent line)}}+\underbrace{\tfrac12f''(a)h^2}_{\text{quadratic correction}}.\]</p>
+<p><strong>Y1.</strong> \(\sqrt{4.1}\): \(f=\sqrt x,\ a=4,\ h=0.1\); \(f'(4)=\tfrac14\), \(f''(4)=-\tfrac1{32}\). Linear: \(2+0.025=2.025\). Quadratic: \(2.025-\tfrac12\cdot\tfrac1{32}\cdot0.01=2.025-0.00015625=2.02484375\) (true \(2.024846\ldots\)).</p>
+<p><strong>Y2.</strong> \(e^{0.2}\approx1+0.2+\tfrac12(0.04)=1.22\) (true \(1.2214\)). &nbsp; <strong>Y3.</strong> \(\cos(0.1)\approx1-\tfrac12(0.01)=0.995\).</p>
+<p><strong>Y4 (small change).</strong> \(\Delta f\approx f'(a)\,\Delta x\): if \(A=\pi r^2\) and \(r\) grows from 10 to 10.1, \(\Delta A\approx2\pi(10)(0.1)=2\pi\).</p>
+</div>
+
+<div class="card">
+<h3>The 2-D versions are the same idea, one term per variable</h3>
+<p>The sheet's \(P\) is "\(f(a)+f'(a)h\)" with a slope in each direction; the sheet's \(Q\) adds "\(\tfrac12 f''h^2\)" in each direction <em>plus a cross term</em>:</p>
+<p>\[Q=f+f_x\,\Delta x+f_y\,\Delta y+\tfrac12f_{xx}\,\Delta x^2+f_{xy}\,\Delta x\,\Delta y+\tfrac12f_{yy}\,\Delta y^2.\]</p>
+<p><strong>Y5.</strong> \(f=e^x\cos y\) at \((0,0)\): \(f=1,\ f_x=1,\ f_y=0,\ f_{xx}=1,\ f_{xy}=0,\ f_{yy}=-1\). So \(P=1+x\) and \(Q=1+x+\tfrac12x^2-\tfrac12y^2\).</p>
+<p><strong>Y6 (cross term).</strong> \(f=e^{xy}\) at \((1,0)\): \(f=1,\ f_x=ye^{xy}=0,\ f_y=xe^{xy}=1,\ f_{xx}=y^2e^{xy}=0,\ f_{xy}=(1+xy)e^{xy}=1,\ f_{yy}=x^2e^{xy}=1\). So \(Q=1+y+(x-1)y+\tfrac12y^2\).</p>
+<div class="trap"><strong>Dropping the \(\tfrac12\).</strong> The squared terms carry \(\tfrac12\); the cross term \(f_{xy}(x-a)(y-b)\) does <strong>not</strong> (it's two halves of \(\tfrac12(f_{xy}+f_{yx})\) combined). Writing \(f_{xx}(x-a)^2\) without the half, or putting \(\tfrac12\) on the cross term, are the two standard slips — see <a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>.</div>
+</div>
+</section>
+
+<!-- ============ 10. DRILLS ============ -->
+<section id="drills">
+<h2>10 · Rapid no-calculator drills</h2>
+<p>Aim for under 30 seconds each. Say the answer out loud <em>before</em> revealing. Every answer is checked with SymPy.</p>
+
+<h3>Derivatives</h3>
+<details><summary>R1. \(\dfrac{d}{dx}e^{-3x^2}\)</summary><p>\(-6xe^{-3x^2}\)</p></details>
+<details><summary>R2. \(\dfrac{d}{dx}(x\ln x)\)</summary><p>\(\ln x+1\)</p></details>
+<details><summary>R3. \(\dfrac{d}{dx}\tan(3x)\)</summary><p>\(3\sec^2(3x)\)</p></details>
+<details><summary>R4. \(\dfrac{d}{dx}\arcsin(x/2)\)</summary><p>\(\dfrac{1}{2\sqrt{1-x^2/4}}=\dfrac{1}{\sqrt{4-x^2}}\)</p></details>
+<details><summary>R5. \(\dfrac{d}{dx}\dfrac{\cos x}{x}\)</summary><p>\(\dfrac{-x\sin x-\cos x}{x^2}\)</p></details>
+<details><summary>R6. \(\dfrac{\partial}{\partial x}\big(x^2y+\sin(xy)\big)\)</summary><p>\(2xy+y\cos(xy)\)</p></details>
+<details><summary>R7. \(\dfrac{\partial}{\partial y}\big(xe^{2y}\big)\)</summary><p>\(2xe^{2y}\)</p></details>
+<details><summary>R8. \(f_y(1,1)\) for \(f=\ln(x^2+y^2)\)</summary><p>\(f_y=\dfrac{2y}{x^2+y^2}\), so \(f_y(1,1)=1\).</p></details>
+
+<h3>Integrals</h3>
+<details><summary>R9. \(\int e^{-2x}\,dx\)</summary><p>\(-\tfrac12e^{-2x}+C\)</p></details>
+<details><summary>R10. \(\int\dfrac{dx}{2x+1}\)</summary><p>\(\tfrac12\ln|2x+1|+C\)</p></details>
+<details><summary>R11. \(\int\cos(3t)\,dt\)</summary><p>\(\tfrac13\sin3t+C\)</p></details>
+<details><summary>R12. \(\int x\sin x\,dx\)</summary><p>\(-x\cos x+\sin x+C\) (by parts, \(u=x\)).</p></details>
+<details><summary>R13. \(\int_0^1xe^{x^2}dx\)</summary><p>\(\left[\tfrac12e^{x^2}\right]_0^1=\tfrac12(e-1)\)</p></details>
+<details><summary>R14. \(\int_0^\pi\sin^2t\,dt\)</summary><p>\(\tfrac\pi2\) (average \(\tfrac12\) over a length-\(\pi\) interval).</p></details>
+<details><summary>R15. \(\int\dfrac{dx}{4+x^2}\)</summary><p>\(\tfrac12\arctan\tfrac x2+C\)</p></details>
+<details><summary>R16. \(\int_0^1(t^2+2t)\,dt\)</summary><p>\(\tfrac13+1=\tfrac43\)</p></details>
+<details><summary>R17. \(\int\dfrac{2}{x^2-1}\,dx\)</summary><p>\(\dfrac{2}{x^2-1}=\dfrac1{x-1}-\dfrac1{x+1}\), so \(\ln\left|\dfrac{x-1}{x+1}\right|+C\).</p></details>
+<details><summary>R18. \(\int_0^{\ln2}e^{2x}dx\)</summary><p>\(\tfrac12(e^{2\ln2}-1)=\tfrac12(4-1)=\tfrac32\)</p></details>
+<details><summary>R19. \(\int_0^1\dfrac{dx}{1+x^2}\)</summary><p>\(\arctan1=\tfrac\pi4\)</p></details>
+
+<h3>Trig &amp; exp/log</h3>
+<details><summary>R20. \(\sin\tfrac{2\pi}{3}\)</summary><p>\(\tfrac{\sqrt3}{2}\)</p></details>
+<details><summary>R21. \(\cos\tfrac{5\pi}{4}\)</summary><p>\(-\tfrac{\sqrt2}{2}\) (Q3: cos negative)</p></details>
+<details><summary>R22. \(\tan\left(-\tfrac\pi3\right)\)</summary><p>\(-\sqrt3\)</p></details>
+<details><summary>R23. Solve \(\cos x=0\) on \([0,2\pi]\)</summary><p>\(x=\tfrac\pi2,\ \tfrac{3\pi}2\)</p></details>
+<details><summary>R24. Solve \(\sin2x=1\) on \([0,2\pi]\)</summary><p>\(2x=\tfrac\pi2,\tfrac{5\pi}2\Rightarrow x=\tfrac\pi4,\ \tfrac{5\pi}4\)</p></details>
+<details><summary>R25. Write \(\ln8\) in terms of \(\ln2\), and estimate it</summary><p>\(3\ln2\approx2.079\)</p></details>
+<details><summary>R26. \(e^{2\ln3}\)</summary><p>\(9\)</p></details>
+<details><summary>R27. Solve \(e^{-3t}=\tfrac18\)</summary><p>\(-3t=-\ln8=-3\ln2\Rightarrow t=\ln2\approx0.693\)</p></details>
+
+<h3>Algebra, vectors, complex roots</h3>
+<details><summary>R28. Complete the square: \(x^2+4x+7\)</summary><p>\((x+2)^2+3\)</p></details>
+<details><summary>R29. Critical point(s) of \(f=x^2+xy+y^2-3y\)</summary><p>\(f_x=2x+y=0,\ f_y=x+2y-3=0\Rightarrow y=-2x,\ -3x=3\Rightarrow(-1,2)\).</p></details>
+<details><summary>R30. All roots of \(x^3-4x=0\)</summary><p>\(x(x-2)(x+2)=0\Rightarrow x=0,\pm2\) (don't divide by \(x\)!)</p></details>
+<details><summary>R31. \(\|\langle2,-1,2\rangle\|\) and the unit vector</summary><p>\(3\); \(\langle\tfrac23,-\tfrac13,\tfrac23\rangle\)</p></details>
+<details><summary>R32. \(\langle1,-2,3\rangle\cdot\langle4,1,-1\rangle\)</summary><p>\(4-2-3=-1\)</p></details>
+<details><summary>R33. \(\begin{vmatrix}3&-1\\-1&2\end{vmatrix}\)</summary><p>\(6-1=5\)</p></details>
+<details><summary>R34. Angle between \(\langle1,0\rangle\) and \(\langle1,\sqrt3\rangle\)</summary><p>\(\cos\theta=\dfrac{1}{1\cdot2}\Rightarrow\theta=\tfrac\pi3\)</p></details>
+<details><summary>R35. General solution of \(y''+6y'+13y=0\)</summary><p>\(r=-3\pm2i\Rightarrow y=e^{-3t}(C_1\cos2t+C_2\sin2t)\)</p></details>
+<details><summary>R36. General solution of \(y''+16y=0\)</summary><p>\(y=C_1\cos4t+C_2\sin4t\)</p></details>
+<details><summary>R37. General solution of \(y''-2y'+y=0\)</summary><p>\((r-1)^2=0\Rightarrow y=(C_1+C_2t)e^{t}\)</p></details>
+<details><summary>R38. Solve \(y'=-2y,\ y(0)=5\)</summary><p>\(y=5e^{-2t}\)</p></details>
+
+<h3>Lines, planes, approximation</h3>
+<details><summary>R39. Tangent line to \(y=x^3\) at \(x=1\)</summary><p>\(y=3x-2\)</p></details>
+<details><summary>R40. Plane through \((0,1,2)\) with normal \(\langle1,1,1\rangle\)</summary><p>\(x+y+z=3\)</p></details>
+<details><summary>R41. Linear approximation to \(\sqrt{9.2}\)</summary><p>\(3+\tfrac{1}{6}(0.2)=3.0\overline{3}\)</p></details>
+<details><summary>R42. Tangent plane to \(z=xy\) at \((2,3)\)</summary><p>\(z=6+3(x-2)+2(y-3)\iff z=3x+2y-6\)</p></details>
+</section>
+
+<!-- ============ 11. NOT NEEDED ============ -->
+<section id="notneeded">
+<h2>11 · What you do <em>not</em> need to memorise</h2>
+<div class="card">
+<p>The formula sheet on the last page of the paper (checked against the 2023 S2 and 2025 S2 papers) prints these — learn how to <em>use</em> them, not how to recite them:</p>
+<ul>
+<li><strong>Linear and quadratic approximations</strong> \(P(x,y)\) and \(Q(x,y)\) (but you must still differentiate correctly to fill them in).</li>
+<li><strong>Directional derivative</strong> \(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\|\mathbf u\|\).</li>
+<li><strong>Chain rule</strong> \(\dfrac{dz}{dt}=\dfrac{\partial z}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial z}{\partial y}\dfrac{dy}{dt}\).</li>
+<li><strong>Implicit differentiation</strong> \(y'=-F_x/F_y\).</li>
+<li><strong>Hessian determinant</strong> \(D=f_{xx}f_{yy}-f_{xy}^2\) (as a 2×2 determinant).</li>
+<li><strong>Lagrange</strong> \(\nabla f=\lambda\nabla g\).</li>
+<li><strong>Work</strong> \(\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) and <strong>arc length</strong> \(\int_a^b\|\mathbf r'(t)\|\,dt\).</li>
+<li>Some years also print the general conic \(ax^2+by^2+cx+dy+e=0\).</li>
+</ul>
+<p>And these don't show up in the 2020–2025 papers, so don't spend revision time on them: hyperbolic functions (sinh/cosh), trig-substitution integrals, partial fractions with repeated or irreducible-quadratic factors, complex-number arithmetic beyond finding the roots of a characteristic equation, and \(\varepsilon\)–\(\delta\) limit proofs.</p>
+<div class="trap">What is <strong>not</strong> on the sheet and <em>must</em> be known cold: every derivative and antiderivative in §1–2, exact trig values, log laws, the three characteristic-root cases, the integrating-factor method, the second-derivative-test decision rules (\(D\gt0\) and \(f_{xx}\gt0\) ⟹ min, etc.), and the \(P_y=Q_x\) test for conservative fields.</div>
+</div>
+</section>
+
+<p style="color:var(--muted);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:14px">
+Scope: the single-variable calculus, algebra, trig, vector and complex-number prerequisites used in MATH1052 Ch 1–7. Formula-sheet contents are taken from the 2023 S2 and 2025 S2 papers. Every derivative, integral, exact value, critical point, Lagrange extremum, ODE solution and drill answer on this page verified with SymPy (<code>verify/foundations.py</code>, 239 checks passed). Next: <a href="ch01-first-order-odes.html">Ch 1 — First-order ODEs</a> · <a href="index.html">🏠 Hub</a> · <a href="formulas.html">📄 Formula sheet</a> · <a href="notebook.html">📓 Notebook</a>.
+</p>
+
+</main>
+</body>
+</html>

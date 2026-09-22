@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Your Exam Weapon: the Formula Sheet, Decoded</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  nav a.here{background:var(--accent);color:#1e1b4b;font-weight:700}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--muted);font-size:11px;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:middle}
+  .num{color:var(--gold);font-weight:700}
+  .scroller{overflow-x:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Your Exam Weapon: the Formula Sheet, Decoded</h1>
+  <p>The one-page formula sheet printed at the back of every MATH1052 paper, taken apart item by item.</p>
+  <p style="font-size:13.5px;max-width:660px;margin:10px auto 0">The sheet is <b>tiny</b>: eight formulas and no definitions, no ODE methods, no integrals and no classification rules. You also have <b>no calculator</b>. So the sheet only helps you if you already know <b>when each formula applies</b>, <b>what every symbol means</b>, and <b>everything the sheet leaves out</b>. This page covers all three.</p>
+  <span class="badge gold">SHEET COMPANION</span>
+  <span class="badge">1 page · 8 items</span>
+  <span class="badge pre">NO calculator · NO notes</span>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="foundations.html">🧱 Foundations</a>
+  <a href="formulas.html" class="here">🧰 Formula sheet</a>
+  <a href="notebook.html">📓 Notebook</a>
+  <a href="#how">How</a>
+  <a href="#approx">Approx</a>
+  <a href="#dirderiv">Dir. deriv.</a>
+  <a href="#chain">Chain</a>
+  <a href="#implicit">Implicit</a>
+  <a href="#hessian">Hessian</a>
+  <a href="#lagrange">Lagrange</a>
+  <a href="#work">Work</a>
+  <a href="#arc">Arc length</a>
+  <a href="#not">NOT on sheet</a>
+  <a href="#drill">⚡ Drill</a>
+</nav>
+
+<main>
+
+<!-- ============ HOW TO USE ============ -->
+<section id="how">
+  <h2>How to use a tiny sheet in a no-calculator exam</h2>
+  <div class="card">
+    <p>The paper is 120 minutes plus 10 minutes planning, <b>100 marks, 8 questions</b>, with <b>no calculator and no notes</b>. "You must justify all answers." The sheet is the last page, and you may detach it. <b>Anything you write on the sheet is not marked.</b> These are its eight items, in printed order, with the chapter each belongs to:</p>
+    <div class="scroller"><table>
+      <tr><th>#</th><th>Sheet item</th><th>What it does for you</th><th>Chapter</th><th>Past-paper frequency<br><span style="font-weight:400;color:var(--muted)">(of 11 text papers, 2020 S1–2025 S2)</span></th></tr>
+      <tr><td>1</td><td><a href="#approx">Linear &amp; quadratic approximations \(P,\ Q\)</a></td><td>tangent plane, estimates near a point</td><td><a href="ch04-limits-partials-tangent-planes.html">Ch4</a></td><td>5 (tangent plane / linear / quadratic)</td></tr>
+      <tr><td>2</td><td><a href="#dirderiv">Directional derivative</a></td><td>slope in a given direction</td><td><a href="ch05-gradient-chain-rule.html">Ch5</a></td><td>9 (gradient / directional / steepest)</td></tr>
+      <tr><td>3</td><td><a href="#chain">Chain rule</a></td><td>rates along a path, change of variables</td><td><a href="ch05-gradient-chain-rule.html">Ch5</a></td><td>8</td></tr>
+      <tr><td>4</td><td><a href="#implicit">Implicit differentiation</a></td><td>slope of a curve \(F(x,y)=0\)</td><td><a href="ch05-gradient-chain-rule.html">Ch5</a></td><td>3</td></tr>
+      <tr><td>5</td><td><a href="#hessian">Determinant of the Hessian \(D\)</a></td><td>the number in the second-derivative test</td><td><a href="ch06-optimisation.html">Ch6</a></td><td>10</td></tr>
+      <tr><td>6</td><td><a href="#lagrange">Lagrange multipliers</a></td><td>extremes on a constraint</td><td><a href="ch06-optimisation.html">Ch6</a></td><td><b>11 — every paper</b> (named "Lagrange" in 9)</td></tr>
+      <tr><td>7</td><td><a href="#work">Work along a curve</a></td><td>line integral of a force field</td><td><a href="ch07-curves-vector-fields.html">Ch7</a></td><td><b>11 — every paper</b> (conservative / potential part in 8)</td></tr>
+      <tr><td>8</td><td><a href="#arc">Arc length</a></td><td>length of a parametrised path</td><td><a href="ch07-curves-vector-fields.html">Ch7</a></td><td>9 (length / speed)</td></tr>
+    </table></div>
+    <div class="trap">The sheet gives you <b>formulas, never methods</b>. It does not say that critical points need \(\nabla f=\mathbf 0\), what the sign of \(D\) means, that \(\mathbf u\) must be a <i>unit</i> vector (it only hints with \(\mathbf u/\lVert\mathbf u\rVert\)), that a Lagrange system also needs the constraint \(g=0\), or how to test whether a field is conservative. Those decisions carry most of the marks. The <a href="#not">"NOT on the sheet"</a> checklist is where the real marks are.</div>
+  </div>
+
+  <div class="card">
+    <h3>The four weapon rules</h3>
+    <div class="method"><ol>
+      <li><b>Name the item in your answer.</b> Write "By the directional-derivative formula, \(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\lVert\mathbf u\rVert\) …" as the first line. Quoting the formula earns the method mark even if the arithmetic slips later.</li>
+      <li><b>Copy the formula, then substitute symbol by symbol.</b> Write \(f(a,b)\), \(f_x(a,b)\), \(f_y(a,b)\) as a small table first, then plug in. With no calculator, most errors are copying errors.</li>
+      <li><b>Plan with the sheet open.</b> In the 10 planning minutes, tag each question with the sheet item(s) it needs. A question that matches <i>none</i> of the eight items is testing something you must know cold (limits, contours, ODEs, potentials).</li>
+      <li><b>Exact answers only.</b> Leave \(\sqrt{73}\), \(\ln 2\), \(10\pi\) and \(\tfrac{36}{5}\) as they are. Give a decimal only when the question hands you one, as 2025 S2 Q2 did with "\(\ln 2\approx0.6931\)".</li>
+    </ol></div>
+  </div>
+
+  <div class="card">
+    <h3>How the sheet has changed across years</h3>
+    <p>Taken from the last page of every question paper we have. The <b>content</b> of the eight items has been stable since 2022. What changes between years is the <b>notation</b>, and that can throw you if you only drill one year's paper.</p>
+    <div class="scroller"><table>
+      <tr><th>Paper(s)</th><th>Differences from the current 8-item sheet</th></tr>
+      <tr><td>2020 S1</td><td>Only <b>7 items: no arc length</b>. Implicit differentiation is printed as \(y'(a)=\dfrac{-F_x(a,b)}{F_y(a,b)}\). Work is printed as \(W=\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\).</td></tr>
+      <tr><td>2020 S2</td><td>Also <b>no arc length</b>. The chain rule is the <b>three-variable</b> version \(\dfrac{df}{dt}=\dfrac{\partial f}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial f}{\partial y}\dfrac{dy}{dt}+\dfrac{\partial f}{\partial z}\dfrac{dz}{dt}\). Work is printed as \(\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\). (That exam also allowed one handwritten A4 sheet, so its rules differ from today's.)</td></tr>
+      <tr><td>2021 S1, 2021 S2</td><td>Our text copies have no formula-sheet page, and the 2021 S1 file is missing its cover page. Treat these as "unknown" and drill them as if you had the current sheet.</td></tr>
+      <tr><td>2022 S1</td><td>Arc length is added, giving the full modern set of eight. The Hessian is labelled just "Hessian".</td></tr>
+      <tr><td>2023 S1, 2024 S1, 2025 S1</td><td>The current 8 items. The directional derivative is written \(f_{\mathbf u}=\nabla f(a,b)\cdot\frac{\mathbf u}{\lVert\mathbf u\rVert}\). The Hessian has a typo: \(f_{x,y}\) for \(f_{xy}\). Work is \(\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\).</td></tr>
+      <tr><td>2023 S2</td><td>A <b>ninth item</b> appears: the general conic \(ax^2+by^2+cx+dy+e=0\). It helped with the contour question (Q4). Don't count on it in your year.</td></tr>
+      <tr><td>2024 S2</td><td>The same 8 items, with the Hessian printed correctly as \(f_{xy}\). The directional derivative is \(f_{\mathbf u}\), and the work formula still reads \(\mathbf F(t)\).</td></tr>
+      <tr><td><b>2025 S2 (latest)</b></td><td>The notation is tidier. The directional derivative is \(D_{\mathbf u}f(a,b)=\nabla f(a,b)\cdot\frac{\mathbf u}{\lVert\mathbf u\rVert}\). The chain rule is written \(\dfrac{df}{dt}=f_x\dfrac{dx}{dt}+f_y\dfrac{dy}{dt}\). Work is written correctly as \(W=\int_a^b\mathbf F\big(\mathbf r(t)\big)\cdot\mathbf r'(t)\,dt\).</td></tr>
+    </table></div>
+    <div class="tip">\(f_{\mathbf u}\), \(D_{\mathbf u}f\) and \(f_{\mathbf v}\) (2024 S2 Q4) all mean <b>the same thing</b>. So do "\(\mathbf F(t)\)" and "\(\mathbf F(\mathbf r(t))\)": both mean <i>the field evaluated along the curve</i>. Learn the idea behind each item, not one year's notation.</div>
+  </div>
+</section>
+
+<!-- ============ 1. APPROXIMATIONS ============ -->
+<section id="approx">
+  <h2>Item 1 · Linear &amp; quadratic approximations <span class="tag">Ch4</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$P(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$$
+    $$Q(x,y)=P(x,y)+\tfrac12 f_{xx}(a,b)(x-a)^2+f_{xy}(a,b)(x-a)(y-b)+\tfrac12 f_{yy}(a,b)(y-b)^2$$
+    <p style="color:var(--muted);font-size:13.5px">(The sheet writes the first three terms of \(Q\) out in full. Here they are shortened to \(P\).)</p>
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\((a,b)\) is the <b>base point</b>. It is always a point where \(f\) and its derivatives come out as clean exact numbers. \((x,y)\) is the nearby point you want to estimate at.</li>
+      <li>\(f_x(a,b)\) and \(f_y(a,b)\) are the first partials evaluated at the base point. They are <b>numbers</b>, not functions.</li>
+      <li>\(f_{xx},f_{xy},f_{yy}\) are the second partials at \((a,b)\). By Clairaut, \(f_{xy}=f_{yx}\) for the smooth functions in this course.</li>
+      <li>\(P\) <b>is the tangent plane</b>. The surface \(z=P(x,y)\) is the tangent plane to \(z=f(x,y)\) at \((a,b,f(a,b))\).</li>
+    </ul>
+    <div class="when">"tangent plane", "linear approximation / linearisation", "estimate \(f(1.02,\,2.97)\)", "use the quadratic approximation", "approximate change in …".</div>
+    <div class="method"><b>Micro example.</b> \(f(x,y)=x e^{y}\) at \((a,b)=(2,0)\). Estimate \(f(2.2,\,0.1)\).<br>
+      Values at \((2,0)\): \(f=2\), \(f_x=e^y=1\), \(f_y=xe^y=2\); \(f_{xx}=0\), \(f_{xy}=e^y=1\), \(f_{yy}=xe^y=2\).<br>
+      \(P(x,y)=2+(x-2)+2y\), so \(P(2.2,0.1)=2+0.2+0.2=\) <span class="num">2.4</span>.<br>
+      \(Q(x,y)=P+\tfrac12(0)(x-2)^2+(1)(x-2)y+\tfrac12(2)y^2\), so \(Q(2.2,0.1)=2.4+0.02+0.01=\) <span class="num">2.43</span>.<br>
+      (The true value is \(2.2e^{0.1}\approx2.4314\). The quadratic term fixed most of the gap.)</div>
+    <div class="trap"><b>The classic misuse.</b> Halving the mixed term. The \(\tfrac12\) goes <b>only</b> on \(f_{xx}\) and \(f_{yy}\). The mixed term is \(f_{xy}(x-a)(y-b)\), with <b>no</b> half, because \(f_{xy}\) and \(f_{yx}\) each contribute half. A close second: substituting the <i>estimate point</i> into \(f_x\) instead of the base point. Every coefficient is evaluated at \((a,b)\).</div>
+    <div class="tip">For a "tangent plane" question, write the final answer as \(z=\dots\), for example \(z=2+(x-2)+2y\), i.e. \(z=x+2y\). "Estimate \(f(\dots)\)" questions want a number. 2025 S2 Q2 wanted both: the plane in (b) (4 marks), then the estimate in (c) (4 marks).</div>
+  </div>
+</section>
+
+<!-- ============ 2. DIRECTIONAL DERIVATIVE ============ -->
+<section id="dirderiv">
+  <h2>Item 2 · Directional derivative <span class="tag">Ch5</span></h2>
+  <div class="card">
+    <h4>As printed (2025 S2 form)</h4>
+    $$D_{\mathbf u}f(a,b)=\nabla f(a,b)\cdot\frac{\mathbf u}{\lVert\mathbf u\rVert}$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(\nabla f(a,b)=\big(f_x(a,b),\,f_y(a,b)\big)\) is the gradient, or \((f_x,f_y,f_z)\) in 3-D. <b>Its definition is not on the sheet.</b></li>
+      <li>\(\mathbf u\) is the direction you are given, in any length. \(\mathbf u/\lVert\mathbf u\rVert\) is the <b>unit</b> vector in that direction. The sheet makes you normalise.</li>
+      <li>The output is a <b>scalar</b>: the rate of change of \(f\) per unit distance travelled in direction \(\mathbf u\).</li>
+    </ul>
+    <div class="when">"rate of change of \(T\) at \(P\) in the direction of \(\mathbf v\)", "… <b>towards</b> the point \(Q\)" (then \(\mathbf u=Q-P\)), "slope of the surface in direction …".</div>
+    <div class="method"><b>Micro example.</b> \(f(x,y)=x^2+3xy\) at \((1,2)\) in the direction of \(\mathbf u=(3,4)\).<br>
+      \(\nabla f=(2x+3y,\ 3x)\), so \(\nabla f(1,2)=(8,3)\). \(\lVert\mathbf u\rVert=5\).<br>
+      \(D_{\mathbf u}f(1,2)=(8,3)\cdot\tfrac{(3,4)}{5}=\tfrac{24+12}{5}=\) <span class="num">\(\tfrac{36}{5}\)</span>.<br>
+      Bonus (not on the sheet): the maximum rate of change at \((1,2)\) is \(\lVert\nabla f\rVert=\sqrt{73}\), in direction \((8,3)\).</div>
+    <div class="trap"><b>The classic misuse.</b> Forgetting to divide by \(\lVert\mathbf u\rVert\), which here would give 36 instead of \(36/5\). A second misuse is "towards the origin from \(P\)" read as the direction \(P\). It is \(\mathbf 0-P=-P\). A third is reversing the problem: in 2025 S1 Q1 and 2022 S1 Q6 you are <b>given</b> directional derivatives and must solve for \(\nabla f\). Set \(\nabla f=(p,q)\), write one equation per given direction, and solve the linear system.</div>
+    <div class="tip">The three follow-up facts <b>not on the sheet</b>, examined almost every year: the direction of greatest increase is \(\nabla f\), the greatest rate is \(\lVert\nabla f\rVert\), and the directions of no change are \(\perp\nabla f\) (in 2-D, \((f_y,-f_x)\) and \((-f_y,f_x)\)). Greatest <b>decrease</b> is \(-\nabla f\) (2021 S1 Q5b).</div>
+  </div>
+</section>
+
+<!-- ============ 3. CHAIN RULE ============ -->
+<section id="chain">
+  <h2>Item 3 · Chain rule <span class="tag">Ch5</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}\qquad\Big(\text{2025 S2: }\ \frac{df}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}\Big)$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(z=f(x,y)\), where <b>both</b> \(x=x(t)\) and \(y=y(t)\) depend on one parameter \(t\).</li>
+      <li>\(\partial z/\partial x\) and \(\partial z/\partial y\) are computed in \(x,y\), then evaluated at \((x(t),y(t))\).</li>
+      <li>One term per path in the <b>tree diagram</b> \(z\to x\to t\) and \(z\to y\to t\). Multiply along each branch, then add the branches.</li>
+    </ul>
+    <div class="when">"at what rate is … changing", "with the aid of a tree diagram" (2025 S1 Q4), "\(x=u^2,\ y=uv^2\), find \(\partial f/\partial u\)" (2024 S2 Q6), "show that \(a\,g_y=b\,g_x\)" (2025 S2 Q3a), related rates (2024 S1 Q4).</div>
+    <div class="method"><b>Micro example.</b> \(z=x^2y\), \(x=\cos t\), \(y=\sin t\). Find \(\dfrac{dz}{dt}\) at \(t=\pi/4\).<br>
+      \(z_x=2xy,\ z_y=x^2\); \(x'=-\sin t,\ y'=\cos t\). At \(t=\pi/4\): \(x=y=\tfrac{\sqrt2}{2}\), so \(z_x=1,\ z_y=\tfrac12\).<br>
+      \(\dfrac{dz}{dt}=1\cdot\big(-\tfrac{\sqrt2}{2}\big)+\tfrac12\cdot\tfrac{\sqrt2}{2}=\) <span class="num">\(-\tfrac{\sqrt2}{4}\)</span>.<br>
+      Check by direct substitution: \(z=\cos^2t\sin t\), so \(z'=-2\cos t\sin^2t+\cos^3t=-\tfrac{\sqrt2}{2}+\tfrac{\sqrt2}{4}\). ✓</div>
+    <div class="trap"><b>The classic misuse.</b> The sheet only shows the <b>one-parameter</b> version. With two parameters (\(x=x(u,v),\ y=y(u,v)\)) every \(d/dt\) becomes \(\partial/\partial u\): \(\ f_u=f_x\,x_u+f_y\,y_u\). A second misuse is leaving the answer in mixed variables when asked "in terms of \(u\) and \(v\)". Substitute \(x=x(u,v)\) and \(y=y(u,v)\) back into \(f_x,f_y\).</div>
+    <div class="tip">If the question says "check by expressing \(w\) directly" (2025 S1 Q4b), substitute first and differentiate. That is a free confirmation of your tree answer, and the marks are for doing it both ways.</div>
+  </div>
+</section>
+
+<!-- ============ 4. IMPLICIT ============ -->
+<section id="implicit">
+  <h2>Item 4 · Implicit differentiation <span class="tag">Ch5</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$F(x,y)=0\ \Longrightarrow\ y'(a)=-\frac{F_x(a,b)}{F_y(a,b)}$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(F(x,y)=0\) is the curve, with <b>everything moved to one side</b>.</li>
+      <li>\((a,b)\) is a point <b>on</b> the curve, so \(F(a,b)=0\). \(y'(a)\) is the slope \(dy/dx\) of the curve there.</li>
+      <li>You need \(F_y(a,b)\neq0\). If \(F_y(a,b)=0\), the tangent is vertical (or the formula fails).</li>
+    </ul>
+    <div class="when">"tangent line to the curve \(y\ln x+xe^y-e^2=0\) at \(x=1\)" (2024 S2 Q3), "tangent line(s) at \(x=0\)" (2022 S1 Q5), any curve you can't solve for \(y\).</div>
+    <div class="method"><b>Micro example.</b> Find the tangent line to \(x^2+xy+y^3=3\) at \((1,1)\).<br>
+      \(F=x^2+xy+y^3-3\). Check: \(F(1,1)=1+1+1-3=0\) ✓. \(F_x=2x+y=3\), \(F_y=x+3y^2=4\).<br>
+      \(y'(1)=-\tfrac34\), so the tangent line is <span class="num">\(y=1-\tfrac34(x-1)\)</span>, i.e. \(y=\tfrac74-\tfrac34x\).</div>
+    <div class="trap"><b>The classic misuse.</b> Being given only \(x=a\) and not solving for \(b\) first. In 2022 S1 Q5, \(x=0\) gives \(y\cos0=y^2\), so \(y=0\) <b>or</b> \(y=1\): two points, two tangent lines. Also watch for the flipped fraction \(-F_y/F_x\), and a dropped minus sign.</div>
+    <div class="tip">When a tangent line needs a value like \(y=2\) at \(x=1\), <b>state it</b> ("at \(x=1\): \(y\ln1+e^y=e^2\), so \(y=2\)"). Finding the point is its own mark.</div>
+  </div>
+</section>
+
+<!-- ============ 5. HESSIAN ============ -->
+<section id="hessian">
+  <h2>Item 5 · Determinant of the Hessian <span class="tag">Ch6</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$D=\begin{vmatrix}f_{xx}(a,b)&f_{xy}(a,b)\\ f_{yx}(a,b)&f_{yy}(a,b)\end{vmatrix}=f_{xx}f_{yy}-f_{xy}^2$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\((a,b)\) is a <b>critical point</b>: \(\nabla f(a,b)=\mathbf 0\). <i>The sheet doesn't say this.</i></li>
+      <li>Vertical bars mean <b>determinant</b>: \(ad-bc\). With Clairaut, \(f_{xy}=f_{yx}\), so \(D=f_{xx}f_{yy}-f_{xy}^2\).</li>
+      <li>What the sign of \(D\) means is <b>not on the sheet</b>. Memorise the <a href="#not">classification table</a>: \(D\gt0\) with \(f_{xx}\gt0\) is a local min, \(D\gt0\) with \(f_{xx}\lt0\) is a local max, \(D\lt0\) is a saddle, and \(D=0\) is inconclusive.</li>
+    </ul>
+    <div class="when">"find and classify all critical points" (2025 S2 Q6, 2023 S2 Q1, 2023 S1 Q5, 2021 S2 Q5 …), "determine the nature of the stationary point".</div>
+    <div class="method"><b>Micro example.</b> \(f(x,y)=x^3-3x+y^2\).<br>
+      \(f_x=3x^2-3=0\) gives \(x=\pm1\), and \(f_y=2y=0\) gives \(y=0\). Critical points: \((1,0)\) and \((-1,0)\).<br>
+      \(f_{xx}=6x,\ f_{xy}=0,\ f_{yy}=2\), so \(D=12x\).<br>
+      \((1,0)\): \(D=12\gt0\) and \(f_{xx}=6\gt0\), so <span class="num">local min</span>. \((-1,0)\): \(D=-12\lt0\), so <span class="num">saddle point</span>.</div>
+    <div class="trap"><b>The classic misuse.</b> Computing \(D\) as a function and never plugging in the point, or classifying with \(f_{yy}\) when you meant \(f_{xx}\) (it also works when \(D\gt0\), but say which you used). Calling \(D=0\) a saddle is wrong: it is <b>inconclusive</b>, and you must argue directly from \(f\) near the point. You also lose marks for missing critical points. Solve \(f_x=0,\ f_y=0\) by <b>cases</b> ("either \(y=0\) or …"). Never divide by something that could be zero.</div>
+  </div>
+</section>
+
+<!-- ============ 6. LAGRANGE ============ -->
+<section id="lagrange">
+  <h2>Item 6 · Lagrange multipliers <span class="tag">Ch6 · every paper</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$\nabla f=\lambda\nabla g$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(f\) is the <b>objective</b>, the thing to maximise or minimise. \(g\) is the <b>constraint</b>, written as \(g(x,y,z)=\text{const}\), or \(g=0\).</li>
+      <li>\(\lambda\) is the multiplier, an unknown scalar. You rarely need its value, but you need it to link the equations.</li>
+      <li>The vector equation gives 2 or 3 scalar equations. <b>The sheet leaves out the constraint equation itself.</b> You must add \(g=\text{const}\) to get 3 or 4 equations in 3 or 4 unknowns.</li>
+    </ul>
+    <div class="when">"Use the method of Lagrange multipliers" (said outright in 2025 S2 Q5, 2025 S1 Q6, 2024 S2 Q5, 2024 S1 Q6, 2023 S2 Q2, 2023 S1 Q6), or hidden: "on the circle / sphere / plane", "Epsilon walks on …", "where should you park to minimise the distance" (2021 S1 Q7).</div>
+    <div class="method"><b>Micro example.</b> Extremes of \(f=x+2y\) on the circle \(x^2+y^2=5\).<br>
+      \(\nabla f=(1,2)\), \(\nabla g=(2x,2y)\). The system: \(1=2\lambda x\), \(2=2\lambda y\), \(x^2+y^2=5\).<br>
+      \(\lambda\neq0\) (otherwise \(1=0\)), so dividing gives \(y=2x\). Then \(5x^2=5\), so \(x=\pm1\): candidates \((1,2)\) and \((-1,-2)\).<br>
+      \(f(1,2)=5\), \(f(-1,-2)=-5\). The circle is closed and bounded, so the extremes exist: <span class="num">max 5 at (1,2), min −5 at (−1,−2)</span>.</div>
+    <div class="trap"><b>The classic misuse.</b> Solving \(\nabla f=\lambda\nabla g\) alone and forgetting to impose the constraint. Close behind: dividing by \(x\) (or \(\lambda\)) without handling the case where it is 0. In \(f=xyz^2\) problems (2025 S2 Q5), \(x=0\) or \(z=0\) are genuine branches, and you must show they give \(f=0\), not the maximum. Also, "highest <b>and</b> lowest" means evaluate \(f\) at <b>every</b> candidate and name both.</div>
+    <div class="tip">End with one sentence of justification: "Since the constraint set is closed and bounded, \(f\) attains a max and a min on it (Extreme Value Theorem), so they are among these candidates." On an <b>unbounded</b> constraint (a line or plane) that sentence is false, so say what you assume instead. In 2025 S2 Q5 (\(xyz^2\) on \(x+y+z=20\)), \(f\) is unbounded on the whole plane: take \(x=y=t\), \(z=20-2t\), \(t\to\infty\). The Lagrange candidate with \(xyz\neq0\) is \((5,5,10)\), where \(f=2500\). Present it as the maximum for positive \(x,y,z\), and say so.</div>
+  </div>
+</section>
+
+<!-- ============ 7. WORK ============ -->
+<section id="work">
+  <h2>Item 7 · Work along a parametrised curve <span class="tag">Ch7</span></h2>
+  <div class="card">
+    <h4>As printed (2025 S2 form)</h4>
+    $$W=\int_a^b\mathbf F\big(\mathbf r(t)\big)\cdot\mathbf r'(t)\,dt$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(\mathbf r(t)=(x(t),y(t))\) for \(a\le t\le b\) is the <b>path</b>, including its direction: it starts at \(\mathbf r(a)\).</li>
+      <li>\(\mathbf F(\mathbf r(t))\) is the force field with \(x=x(t),\ y=y(t)\) substituted. Older sheets write this as "\(\mathbf F(t)\)", which means the same thing.</li>
+      <li>\(\mathbf r'(t)\) is the velocity vector. The dot product \(\mathbf F\cdot\mathbf r'\) is a <b>scalar function of \(t\)</b>, and you integrate it from \(a\) to \(b\).</li>
+    </ul>
+    <div class="when">"work done by \(\mathbf F\) on a particle moving along \(C\)", "evaluate \(\int_C\mathbf F\cdot d\mathbf r\)", or "use the formula \(W=\int\mathbf F(t)\cdot\mathbf r'(t)\,dt\)" (2025 S1 Q8e, 2023 S1 Q8b), which forces the direct method.</div>
+    <div class="method"><b>Micro example.</b> \(\mathbf F(x,y)=(y,\ x^2)\) along \(\mathbf r(t)=(t,t^2)\), \(0\le t\le1\).<br>
+      Par it: \(x=t,\ y=t^2\). Diff it: \(\mathbf r'=(1,2t)\). \(\mathbf F\) in \(t\): \(\mathbf F(\mathbf r(t))=(t^2,t^2)\).<br>
+      Dot it: \(t^2+2t^3\). Int it: \(\int_0^1(t^2+2t^3)\,dt=\tfrac13+\tfrac12=\) <span class="num">\(\tfrac56\)</span>.</div>
+    <div class="trap"><b>The classic misuse.</b> Grinding through this integral when the field is <b>conservative</b> and the path is ugly, like \(x=t\cos(\pi t),\ y=2t^2\sin(\pi t)\) in 2025 S2 Q8c or \(\mathbf r=(t\cos t,t\sin t)\) in 2024 S1/S2 Q8. There the intended route is \(W=f(\mathbf r(b))-f(\mathbf r(a))\) with a potential \(f\). That route is <b>not on the sheet</b>. The reverse mistake also costs marks: using the potential when the question says "use the formula \(W=\int\ldots\)" (2025 S1 Q8e). Also, writing \(\mathbf F(x,y)\cdot\mathbf r'(t)\) without substituting leaves you integrating \(x\)'s with respect to \(t\).</div>
+    <div class="tip">For a straight segment from \(A\) to \(B\), use \(\mathbf r(t)=A+t(B-A)\), \(0\le t\le1\). This parametrisation is not on the sheet and was asked outright in 2025 S1 Q8e(i).</div>
+  </div>
+</section>
+
+<!-- ============ 8. ARC LENGTH ============ -->
+<section id="arc">
+  <h2>Item 8 · Arc length <span class="tag">Ch7</span></h2>
+  <div class="card">
+    <h4>As printed</h4>
+    $$L=\int_a^b\lVert\mathbf r'(t)\rVert\,dt$$
+    <h4>Every symbol</h4>
+    <ul>
+      <li>\(\mathbf r'(t)\) is the velocity vector. \(\lVert\mathbf r'(t)\rVert=\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}\) is the <b>speed</b>, which is always \(\ge0\).</li>
+      <li>\([a,b]\) is the time interval. Keep the interval exactly as given.</li>
+    </ul>
+    <div class="when">"length of the curve/path" (2024 S2 Q7b, 2023 S2 Q5, 2023 S1 Q8a), "distance travelled" (2024 S1 Q7b), "find \(a\) so the helix has length 20" (2021 S2 Q4, where you solve \(L(a)=20\)).</div>
+    <div class="method"><b>Micro example.</b> The helix \(\mathbf r(t)=(3\cos t,\ 3\sin t,\ 4t)\), \(0\le t\le2\pi\).<br>
+      \(\mathbf r'=(-3\sin t,\ 3\cos t,\ 4)\), so \(\lVert\mathbf r'\rVert=\sqrt{9\sin^2t+9\cos^2t+16}=\sqrt{25}=5\).<br>
+      \(L=\int_0^{2\pi}5\,dt=\) <span class="num">\(10\pi\)</span>.<br>
+      A second one: \(\mathbf r(t)=(e^t\cos t,\ e^t\sin t)\), \(0\le t\le1\). Then \(\lVert\mathbf r'\rVert^2=e^{2t}\big[(\cos t-\sin t)^2+(\sin t+\cos t)^2\big]=2e^{2t}\), so \(L=\sqrt2\int_0^1e^t\,dt=\) <span class="num">\(\sqrt2(e-1)\)</span>.</div>
+    <div class="trap"><b>The classic misuse.</b> Squaring and adding the components but forgetting the square root, or integrating \(\lVert\mathbf r(t)\rVert\) (position) instead of \(\lVert\mathbf r'(t)\rVert\) (velocity). No-calculator papers are designed so the thing under the root simplifies with \(\sin^2+\cos^2=1\) or becomes a perfect square. If it doesn't, recheck your derivatives before integrating.</div>
+    <div class="tip">"Speed at \(t=\pi\)" (2024 S1 Q7a) is just \(\lVert\mathbf r'(\pi)\rVert\), with no integral. "Distance travelled" is the integral. Read the question for which one it wants.</div>
+  </div>
+</section>
+
+<!-- ============ NOT ON THE SHEET ============ -->
+<section id="not">
+  <h2>What is NOT on the sheet: know these cold</h2>
+  <p style="color:var(--muted)">Tick each line only when you can write it from memory in under 20 seconds. Every line below has been needed in at least one past paper, and the sheet gives you none of them.</p>
+
+  <div class="card">
+    <h4>🌀 The whole ODE toolkit (Ch1–2)</h4>
+    <p style="font-size:13.5px;color:var(--muted)">ODE questions appear in the 2020 papers (2020 S1 Q5, Q7, Q10; 2020 S2 Q1–3) but in none of the 2021–2025 papers we have. They are still in the syllabus, and nothing about them is on the sheet.</p>
+    <div class="scroller"><table>
+      <tr><th>☐</th><th>Tool</th><th>The one-line version</th></tr>
+      <tr><td>☐</td><td>Direct integration</td><td>\(y'=f(t)\ \Rightarrow\ y=\int f\,dt+C\). Use the IC to find \(C\).</td></tr>
+      <tr><td>☐</td><td>Separable</td><td>\(y'=f(t)g(y)\): first list the equilibria \(g(y)=0\), then \(\int\frac{dy}{g(y)}=\int f\,dt\).</td></tr>
+      <tr><td>☐</td><td>Linear first-order</td><td>\(y'+p(t)y=q(t)\): \(I=e^{\int p\,dt}\), then \((Iy)'=Iq\), so \(y=\frac1I\big(\int Iq\,dt+C\big)\).</td></tr>
+      <tr><td>☐</td><td>Equilibria &amp; stability</td><td>\(y'=f(y)\): equilibria where \(f(y)=0\). A <b>stable</b> equilibrium has \(f\gt0\) below it and \(f\lt0\) above it. Use a sign chart.</td></tr>
+      <tr><td>☐</td><td>Euler's method</td><td>\(y_{n+1}=y_n+h\,f(t_n,y_n)\), \(t_{n+1}=t_n+h\).</td></tr>
+      <tr><td>☐</td><td>Characteristic equation</td><td>\(ay''+by'+cy=0\ \to\ a\lambda^2+b\lambda+c=0\).</td></tr>
+      <tr><td>☐</td><td>3 root cases</td><td>Real distinct: \(c_1e^{\lambda_1t}+c_2e^{\lambda_2t}\). Repeated: \((c_1+c_2t)e^{\lambda t}\). Complex \(\alpha\pm\beta i\): \(e^{\alpha t}(c_1\cos\beta t+c_2\sin\beta t)\).</td></tr>
+      <tr><td>☐</td><td>Undetermined coefficients</td><td>Polynomial of degree \(n\): try a degree-\(n\) polynomial. \(e^{kt}\): try \(Ae^{kt}\). \(\cos/\sin\,\omega t\): try \(A\cos\omega t+B\sin\omega t\). If the guess overlaps \(y_H\), <b>multiply by \(t\)</b>.</td></tr>
+      <tr><td>☐</td><td>General solution</td><td>\(y=y_H+y_P\). Apply the ICs to the <b>full</b> \(y\), never to \(y_H\) alone.</td></tr>
+      <tr><td>☐</td><td>Springs</td><td>\(mx''+\beta x'+kx=0\), \(\Delta=\beta^2-4mk\): \(\Delta\gt0\) over-damped, \(\Delta=0\) critical, \(\Delta\lt0\) under-damped. With no damping, \(\omega=\sqrt{k/m}\).</td></tr>
+      <tr><td>☐</td><td>Models</td><td>Growth/decay: \(P'=rP\), so \(P=P_0e^{rt}\). Newton cooling: \(T'=-k(T-T_m)\), so \(T=T_m+(T_0-T_m)e^{-kt}\). Mixing: rate in − rate out.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h4>∫ Integrals, trig &amp; exponentials (every question uses these)</h4>
+    <div class="scroller"><table>
+      <tr><th>☐</th><th>Fact</th><th>One line</th></tr>
+      <tr><td>☐</td><td>Standard integrals</td><td>\(\int t^n=\frac{t^{n+1}}{n+1}\), \(\int\frac1t=\ln|t|\), \(\int e^{kt}=\frac1ke^{kt}\), \(\int\cos kt=\frac1k\sin kt\), \(\int\sin kt=-\frac1k\cos kt\), \(\int\sec^2t=\tan t\).</td></tr>
+      <tr><td>☐</td><td>Substitution / by parts</td><td>\(\int f(g)g'=F(g)\). \(\int u\,dv=uv-\int v\,du\): pick \(u\) as the polynomial.</td></tr>
+      <tr><td>☐</td><td>Speed-integral tricks</td><td>\(\sin^2+\cos^2=1\). \(\int\sqrt{1+t^2}\cdot2t\,dt=\tfrac23(1+t^2)^{3/2}\). Aim for a perfect square under the root.</td></tr>
+      <tr><td>☐</td><td>Trig values</td><td>\(\sin,\cos\) at \(0,\frac\pi6,\frac\pi4,\frac\pi3,\frac\pi2,\pi\), as exact surds.</td></tr>
+      <tr><td>☐</td><td>Identities</td><td>\(\cos2\theta=1-2\sin^2\theta=2\cos^2\theta-1\), \(\sin2\theta=2\sin\theta\cos\theta\), \(\sin(a\pm b)\), \(\cos(a\pm b)\). Papers sometimes print one as a hint (2023 S1 Q7, 2025 S1 Q7). Don't rely on that.</td></tr>
+      <tr><td>☐</td><td>Exp / log</td><td>\(e^{a+b}=e^ae^b\), \(\ln(ab)=\ln a+\ln b\), \(\ln1=0\), \(\frac{d}{dx}\ln u=\frac{u'}{u}\).</td></tr>
+      <tr><td>☐</td><td>Limits you need</td><td>\(\lim_{u\to0}\frac{\sin u}{u}=1\), \(\lim_{u\to0}\frac{e^u-1}{u}=1\). These do the work in 2023 S1 Q2 and 2024 S2 Q2b.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h4>∇ Multivariable definitions &amp; tests</h4>
+    <div class="scroller"><table>
+      <tr><th>☐</th><th>Fact</th><th>One line</th></tr>
+      <tr><td>☐</td><td>Gradient</td><td>\(\nabla f=(f_x,f_y)\) or \((f_x,f_y,f_z)\). It is \(\perp\) to level curves and surfaces, and points uphill.</td></tr>
+      <tr><td>☐</td><td>Steepest ascent / descent</td><td>Direction \(\pm\nabla f\), max rate \(\lVert\nabla f\rVert\). Zero change: \(\mathbf u\perp\nabla f\).</td></tr>
+      <tr><td>☐</td><td>Partial derivative from the definition</td><td>\(f_x(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h}\). Needed for piecewise functions at the origin (2025 S2 Q4b, 2025 S1 Q2c).</td></tr>
+      <tr><td>☐</td><td>Limit does not exist</td><td>Two paths with different limits, e.g. \(y=mx\) and \(y=kx^2\) (2024 S1 Q2).</td></tr>
+      <tr><td>☐</td><td>Limit exists</td><td>Squeeze: \(|f-L|\le g\to0\). Or polar: \(x=r\cos\theta\), \(y=r\sin\theta\), with a bound independent of \(\theta\).</td></tr>
+      <tr><td>☐</td><td>Continuity at \((a,b)\)</td><td>\(\lim_{(x,y)\to(a,b)}f=f(a,b)\): the limit exists <b>and</b> equals the value.</td></tr>
+      <tr><td>☐</td><td>Error / small-change estimate</td><td>\(\Delta f\approx f_x\Delta x+f_y\Delta y\). Worst case: \(|\Delta f|\le|f_x|E_1+|f_y|E_2\).</td></tr>
+      <tr><td>☐</td><td>Classification table</td><td>At \(\nabla f=\mathbf 0\): \(D\gt0,f_{xx}\gt0\) is a local min. \(D\gt0,f_{xx}\lt0\) is a local max. \(D\lt0\) is a saddle. \(D=0\) is inconclusive.</td></tr>
+      <tr><td>☐</td><td>Global extrema on a closed region</td><td>Interior critical points, plus each boundary piece (parametrise it and do 1-D calculus), plus the corners. Compare all the values.</td></tr>
+      <tr><td>☐</td><td>Conservative-field test</td><td>\(\mathbf F=(P,Q)\) on \(\mathbb R^2\): conservative \(\iff P_y=Q_x\). In 3-D: \(P_y=Q_x,\ P_z=R_x,\ Q_z=R_y\).</td></tr>
+      <tr><td>☐</td><td>Potential construction</td><td>\(f=\int P\,dx+h(y)\). Differentiate in \(y\), set equal to \(Q\), and solve for \(h'(y)\).</td></tr>
+      <tr><td>☐</td><td>Fundamental theorem for line integrals</td><td>\(\int_C\nabla f\cdot d\mathbf r=f(\text{end})-f(\text{start})\). Path independent, and 0 around any closed loop.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h4>🗺️ Curves, surfaces, motion (Ch3, Ch7)</h4>
+    <div class="scroller"><table>
+      <tr><th>☐</th><th>Fact</th><th>One line</th></tr>
+      <tr><td>☐</td><td>Completing the square</td><td>\(x^2+2px=(x+p)^2-p^2\). This is the first move on every contour sketch.</td></tr>
+      <tr><td>☐</td><td>Conic standard forms</td><td>Circle \((x-h)^2+(y-k)^2=r^2\). Ellipse \(\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1\). Hyperbola \(\frac{(x-h)^2}{a^2}-\frac{(y-k)^2}{b^2}=\pm1\) with asymptotes \(y-k=\pm\frac ba(x-h)\). Parabola \(y=a(x-h)^2+k\).</td></tr>
+      <tr><td>☐</td><td>Contour / cross-section</td><td>A contour is \(f(x,y)=c\), drawn in the \(xy\)-plane. A cross-section fixes \(x=k\) or \(y=k\) and plots \(z\) against the other variable.</td></tr>
+      <tr><td>☐</td><td>Intercepts</td><td>Set \(y=0\) to get the \(x\)-intercepts and \(x=0\) to get the \(y\)-intercepts. "Label all intercepts" is worth marks.</td></tr>
+      <tr><td>☐</td><td>Parametrisations</td><td>Segment: \(A+t(B-A)\), \(t\in[0,1]\). Circle: \((h+r\cos t,\ k+r\sin t)\). Ellipse: \((h+a\cos t,\ k+b\sin t)\).</td></tr>
+      <tr><td>☐</td><td>Motion</td><td>\(\mathbf v=\mathbf r'\), \(\mathbf a=\mathbf r''\), speed \(=\lVert\mathbf v\rVert\). Going backwards: \(\mathbf v=\int\mathbf a\,dt+\mathbf v_0\), \(\mathbf r=\int\mathbf v\,dt+\mathbf r_0\) (2025 S2 Q7, 2025 S1 Q7a).</td></tr>
+    </table></div>
+  </div>
+  <div class="tip">The one-page version of this whole list, organised by chapter and tagged 📄 / 🧠, is in <a href="notebook.html">the Notebook</a>. Its <a href="notebook.html#ritual">rituals section</a> shows how to <i>write up</i> each method.</div>
+</section>
+
+<!-- ============ SPEED DRILL ============ -->
+<section id="drill">
+  <h2>Speed drill · "Which formula?" — 20 rapid prompts</h2>
+  <p style="color:var(--muted)">Cover the answers. For each prompt, name the sheet item (or say "🧠 not on the sheet"), then get the answer. Aim for under 30 seconds to <i>name</i> the tool. All numbers are checked with SymPy.</p>
+
+  <details><summary>1. Estimate \(\sqrt{4.02}\,(0.97)^2\) without a calculator.</summary>
+  📄 <b>Item 1, linear approximation</b>, with \(f=\sqrt x\,y^2\) at \((4,1)\): \(f=2\), \(f_x=\frac{y^2}{2\sqrt x}=\frac14\), \(f_y=2y\sqrt x=4\).<br>
+  \(P=2+\tfrac14(0.02)+4(-0.03)=\) <b>1.885</b>. (True value ≈ 1.8865.)</details>
+
+  <details><summary>2. Rate of change of \(T=x^2y\) at \((1,2)\) in the direction of \((1,1)\).</summary>
+  📄 <b>Item 2, directional derivative.</b> \(\nabla T=(2xy,x^2)=(4,1)\), so \(D=\frac{(4,1)\cdot(1,1)}{\sqrt2}=\) <b>\(\frac{5}{\sqrt2}=\frac{5\sqrt2}{2}\)</b>.</details>
+
+  <details><summary>3. In which direction does \(f=xe^y\) increase fastest at \((1,0)\), and how fast?</summary>
+  🧠 <b>Not on the sheet</b> (gradient facts). The direction is \(\nabla f(1,0)=(e^y,xe^y)=\) <b>\((1,1)\)</b>, and the rate is \(\lVert\nabla f\rVert=\) <b>\(\sqrt2\)</b>.</details>
+
+  <details><summary>4. Find \(dy/dx\) at \((1,2)\) on the curve \(x^2y+y^3=10\).</summary>
+  📄 <b>Item 4, implicit differentiation.</b> \(F=x^2y+y^3-10\), and \(F(1,2)=0\) ✓. \(F_x=2xy=4\), \(F_y=x^2+3y^2=13\), so \(y'=\) <b>\(-\frac{4}{13}\)</b>.</details>
+
+  <details><summary>5. Classify the critical point \((0,0)\) of \(f=x^2+4xy+y^2\).</summary>
+  📄 <b>Item 5, Hessian</b>, plus the 🧠 classification table. \(f_{xx}=2,\ f_{xy}=4,\ f_{yy}=2\), so \(D=4-16=-12\lt0\): a <b>saddle point</b>.</details>
+
+  <details><summary>6. Maximise \(xyz\) subject to \(x+y+z=12\), with \(x,y,z\gt0\).</summary>
+  📄 <b>Item 6, Lagrange.</b> \(yz=xz=xy=\lambda\), so (all positive) \(x=y=z=4\), and the max is <b>64</b>.</details>
+
+  <details><summary>7. Work done by \(\mathbf F=(2x,2y)\) along \(\mathbf r(t)=(\cos t,\sin t)\), \(0\le t\le\pi\).</summary>
+  📄 Item 7 works, but 🧠 the <b>potential</b> is faster: \(\mathbf F=\nabla(x^2+y^2)\), so \(W=f(-1,0)-f(1,0)=1-1=\) <b>0</b>. (Directly: \(\mathbf F\cdot\mathbf r'=-2\cos t\sin t+2\sin t\cos t=0\).)</details>
+
+  <details><summary>8. Length of \(\mathbf r(t)=\big(t^2,\ \tfrac23t^3\big)\) for \(0\le t\le\sqrt3\).</summary>
+  📄 <b>Item 8, arc length.</b> \(\lVert\mathbf r'\rVert=\sqrt{4t^2+4t^4}=2t\sqrt{1+t^2}\), so \(L=\big[\tfrac23(1+t^2)^{3/2}\big]_0^{\sqrt3}=\tfrac23(8-1)=\) <b>\(\frac{14}{3}\)</b>.</details>
+
+  <details><summary>9. \(z=\ln(x^2+y^2)\), \(x=e^t\), \(y=e^{-t}\). Find \(dz/dt\) at \(t=0\).</summary>
+  📄 <b>Item 3, chain rule.</b> At \(t=0\): \((x,y)=(1,1)\), \(z_x=\frac{2x}{x^2+y^2}=1\), \(z_y=1\), \(x'=1\), \(y'=-1\), so \(dz/dt=1-1=\) <b>0</b>.</details>
+
+  <details><summary>10. Tangent plane to \(z=x^2+y^2\) at \((1,2)\).</summary>
+  📄 <b>Item 1, \(P\) is the tangent plane.</b> \(z=5+2(x-1)+4(y-2)\), i.e. <b>\(z=2x+4y-5\)</b>.</details>
+
+  <details><summary>11. Is \(\mathbf F=(y\cos x,\ \sin x+2y)\) conservative? If so, find a potential.</summary>
+  🧠 <b>Not on the sheet.</b> \(P_y=\cos x=Q_x\) ✓, so it is conservative on \(\mathbb R^2\). \(f=\int y\cos x\,dx=y\sin x+h(y)\). Then \(f_y=\sin x+h'(y)=\sin x+2y\), so \(h=y^2\). Potential: <b>\(f=y\sin x+y^2\)</b>.</details>
+
+  <details><summary>12. Euler's method, \(y'=y\), \(y(0)=1\), step \(h=0.5\). Estimate \(y(1)\).</summary>
+  🧠 <b>Not on the sheet.</b> \(y_1=1+0.5(1)=1.5\), \(y_2=1.5+0.5(1.5)=\) <b>2.25</b>. (Exact \(e\approx2.718\). Euler underestimates here because the solution is concave up.)</details>
+
+  <details><summary>13. Solve \(y'+2y=4\), \(y(0)=0\).</summary>
+  🧠 <b>Not on the sheet</b> (integrating factor or separable). \(I=e^{2t}\), \((e^{2t}y)'=4e^{2t}\), so \(y=2+Ce^{-2t}\). The IC gives \(C=-2\): <b>\(y=2-2e^{-2t}\)</b>.</details>
+
+  <details><summary>14. General solution of \(y''-4y'+4y=0\).</summary>
+  🧠 <b>Not on the sheet.</b> \(\lambda^2-4\lambda+4=(\lambda-2)^2\) is a repeated root, so <b>\(y=(c_1+c_2t)e^{2t}\)</b>.</details>
+
+  <details><summary>15. Show \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2y}{x^4+y^2}\) does not exist.</summary>
+  🧠 <b>Not on the sheet</b> (two-path test). Along \(y=mx\): \(\frac{mx^3}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\to0\). Along \(y=x^2\): \(\frac{x^4}{2x^4}=\frac12\). Since \(0\neq\frac12\), <b>the limit DNE</b>.</details>
+
+  <details><summary>16. \(V=\pi r^2h\). Estimate the change in \(V\) when \(r\) goes from 3 to 3.01 and \(h\) from 5 to 4.98.</summary>
+  📄 <b>Item 1</b> (linear approximation, small-change form): \(\Delta V\approx V_r\Delta r+V_h\Delta h=2\pi rh(0.01)+\pi r^2(-0.02)=0.3\pi-0.18\pi=\) <b>\(0.12\pi\)</b>.</details>
+
+  <details><summary>17. Quadratic approximation of \(f=e^x\cos y\) at \((0,0)\).</summary>
+  📄 <b>Item 1, \(Q\).</b> \(f=1,\ f_x=1,\ f_y=0,\ f_{xx}=1,\ f_{xy}=0,\ f_{yy}=-1\), so <b>\(Q=1+x+\tfrac12x^2-\tfrac12y^2\)</b>.</details>
+
+  <details><summary>18. Global max and min of \(f=x^2-y^2\) on the square \([-1,1]\times[-1,1]\).</summary>
+  🧠 <b>Not on the sheet</b> (closed-region method). The only interior critical point is \((0,0)\), where \(f=0\) (a saddle, by item 5). On the boundary, \(x=\pm1\) gives \(1-y^2\in[0,1]\) and \(y=\pm1\) gives \(x^2-1\in[-1,0]\). So the <b>max is 1</b> at \((\pm1,0)\) and the <b>min is −1</b> at \((0,\pm1)\).</details>
+
+  <details><summary>19. \(f_x=x^2y\), \(f_y=x^2\), and \(x=u^2\), \(y=uv^2\). Find \(\partial f/\partial u\).</summary>
+  📄 <b>Item 3, chain rule, upgraded to partials</b> (the 2024 S2 Q6 style, with fresh numbers): \(f_u=f_x x_u+f_y y_u=x^2y(2u)+x^2(v^2)\).<br>
+  Substituting, \(f_u=u^4\cdot uv^2\cdot2u+u^4v^2=\) <b>\(2u^6v^2+u^4v^2\)</b>.</details>
+
+  <details><summary>20. \(\mathbf a=(0,0,-10)\), \(\mathbf v(0)=(1,2,0)\), \(\mathbf r(0)=(0,0,5)\). When does it hit \(z=0\), and where?</summary>
+  🧠 <b>Not on the sheet</b> (integrate twice). \(\mathbf v=(1,2,-10t)\) and \(\mathbf r=(t,\ 2t,\ 5-5t^2)\). \(z=0\) gives \(t=1\), at <b>\((1,2,0)\)</b>.</details>
+
+  <div class="tip">Score yourself: 8 of these 20 are pure 🧠 (3, 11–15, 18, 20), and #7 goes faster with a 🧠 shortcut. That is roughly the share of exam marks the sheet can't help with. If you missed any 🧠 ones, drill the matching <a href="notebook.html">Notebook</a> row tonight.</div>
+</section>
+
+<section id="foot">
+  <div class="card" style="text-align:center">
+    <p>Sheet companion for <a href="index.html">the MATH1052 hub</a>. Every micro example and drill answer on this page was re-derived and asserted with <b>SymPy</b> (<span class="mono">verify/formulas-notebook.py</span>, passing).</p>
+    <p style="color:var(--muted);font-size:13px">Sources: the formula sheet on the last page of every question paper, 2020 S1–2025 S2, compared year by year; <span class="mono">MATH1052 Summary</span>; Posters A &amp; B. Frequencies were counted from the 11 papers with extractable text (2022 S2 is a scanned solution set and is not counted).<br>
+    Chapters: <a href="ch01-first-order-odes.html">Ch1</a> · <a href="ch02-second-order-odes.html">Ch2</a> · <a href="ch03-surfaces-contours.html">Ch3</a> · <a href="ch04-limits-partials-tangent-planes.html">Ch4</a> · <a href="ch05-gradient-chain-rule.html">Ch5</a> · <a href="ch06-optimisation.html">Ch6</a> · <a href="ch07-curves-vector-fields.html">Ch7</a> · Next: <a href="exam-2025.html">the worked 2025 exams</a>, with this sheet open.</p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

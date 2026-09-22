@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 5 Gradient, Directional Derivatives &amp; Chain Rule</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 5 — Gradient, Directional Derivatives &amp; Chain Rule</h1>
+  <p>The "which way is uphill, and how fast?" chapter, plus the chain rule that runs every rate-of-change and "show that" question. Two or three questions on every recent paper.</p>
+  <div>
+    <span class="badge gold">⭐ Very high yield — 20–35 marks per paper (2021–2025)</span>
+    <span class="badge">Summary p 5 (Gradient · Directional derivative · Chain rule &amp; implicit differentiation)</span>
+    <span class="badge">Formula sheet gives \(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\|\mathbf u\|\), \(\frac{dz}{dt}=z_x\frac{dx}{dt}+z_y\frac{dy}{dt}\), \(y'=-F_x/F_y\) — everything else know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch04-limits-partials-tangent-planes.html">← Ch 4 Limits, partials &amp; approximation</a>
+  <a href="ch06-optimisation.html">Ch 6 Optimisation →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">Rusty on the single-variable chain rule \(\frac{d}{dx}f(g(x))=f'(g(x))\,g'(x)\), implicit differentiation of \(x^2+y^2=25\), dot products or unit vectors? Read <a href="foundations.html#derivs">the Ground Floor</a> first. And this chapter leans on partial derivatives from <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a> — if \(f_x\) and \(f_y\) aren't automatic yet, drill those first.</div>
+
+<div class="card">
+<h3>The gradient vector \(\nabla f\) — all the partials in one arrow</h3>
+<p>For \(z=f(x,y)\), the <b>gradient</b> collects the two partial derivatives into a single vector (Summary p 5):</p>
+$$\nabla f(x,y)=\big(f_x(x,y),\,f_y(x,y)\big)=f_x\,\mathbf i+f_y\,\mathbf j,\qquad \nabla f(x,y,z)=\big(f_x,\,f_y,\,f_z\big)\ \text{in 3-D.}$$
+<p>Three facts to lock in straight away:</p>
+<ul>
+<li><b>\(\nabla f\) lives in the domain</b> — the \(xy\)-plane (the "map"), not on the surface. At each point \((a,b)\) you draw a 2-D arrow \(\nabla f(a,b)\). For \(f(x,y,z)\) the gradient is a 3-D arrow in \(xyz\)-space.</li>
+<li><b>\(\nabla f\) is a function of position.</b> \(\nabla f(x,y)\) is a formula; \(\nabla f(a,b)\) is a specific vector of numbers. Questions ask for one or the other — "Determine \(\nabla f(x,y)\)" (2024 S2 Q4a) wants the formula; "Determine \(\nabla f(P_0)\)" (2025 S1 Q1a) wants numbers.</li>
+<li><b>Give it as a vector.</b> \((-9,-3)\) or \(-9\mathbf i-3\mathbf j\). Never as a single number — that would be a <i>rate</i>, which is a different thing.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🧭 Directional derivative — the slope when you walk in <i>any</i> direction</h3>
+<p>\(f_x(a,b)\) is the slope of the surface if you walk due east (direction \(\mathbf i\)); \(f_y(a,b)\) is the slope walking due north (\(\mathbf j\)). But you can walk in <i>any</i> compass direction. The <b>directional derivative</b> in the direction of a <b>unit</b> vector \(\hat{\mathbf u}=(u_1,u_2)\) is</p>
+$$D_{\hat{\mathbf u}}f(a,b)=\lim_{h\to0}\frac{f(a+hu_1,\,b+hu_2)-f(a,b)}{h}.$$
+<p>It measures "change in \(f\) per unit <b>distance</b> travelled in the \(xy\)-plane". That is why \(\hat{\mathbf u}\) must have length 1: if you used \(2\hat{\mathbf u}\) you'd travel two units per step and double the answer.</p>
+<p><b>Why it collapses to a dot product.</b> Walk along the line \(x=a+hu_1,\ y=b+hu_2\) and let \(g(h)=f(a+hu_1,b+hu_2)\). The directional derivative is just \(g'(0)\), and the chain rule (below) gives</p>
+$$g'(0)=f_x\,\frac{dx}{dh}+f_y\,\frac{dy}{dh}=f_x u_1+f_y u_2=\nabla f(a,b)\cdot\hat{\mathbf u}.$$
+<p>So the formula on the sheet, \(D_{\mathbf u}f(a,b)=\nabla f(a,b)\cdot\dfrac{\mathbf u}{\|\mathbf u\|}\), is not a new idea — it is the chain rule applied to a straight-line walk. Notation in papers varies: \(f_{\mathbf u}\), \(f_{\mathbf v}\), \(D_{\mathbf u}f\) all mean the same thing.</p>
+<p class="tip">"Rate of change of \(f\) at \(P\) in the direction of \(\mathbf v\)", "slope in the direction of \(\mathbf v\)", "rate of change with respect to distance" — all mean <b>directional derivative with the unit vector \(\mathbf v/\|\mathbf v\|\)</b>. The answer is a <b>number</b> (a scalar).</p>
+</div>
+
+<div class="card">
+<h3>🧭 The \(\cos\theta\) picture — why \(\nabla f\) points uphill</h3>
+<p>Write the dot product geometrically, with \(\theta\) the angle between \(\nabla f\) and your walking direction \(\hat{\mathbf u}\):</p>
+$$D_{\hat{\mathbf u}}f=\nabla f\cdot\hat{\mathbf u}=\|\nabla f\|\,\|\hat{\mathbf u}\|\cos\theta=\|\nabla f\|\cos\theta .$$
+<p>Everything in this chapter's "direction" questions falls out of this one line. \(\|\nabla f\|\) is fixed at the point; only \(\cos\theta\) changes as you turn, and \(\cos\theta\) ranges over \([-1,1]\):</p>
+<table>
+<tr><th>Walk at angle \(\theta\) to \(\nabla f\)</th><th>\(\cos\theta\)</th><th>Rate \(D_{\hat{\mathbf u}}f\)</th><th>Meaning</th></tr>
+<tr><td>\(\theta=0\) — along \(\nabla f\)</td><td>\(1\)</td><td>\(+\|\nabla f\|\) (the <b>maximum</b>)</td><td>steepest <b>ascent</b> / greatest increase</td></tr>
+<tr><td>\(\theta=\pi\) — along \(-\nabla f\)</td><td>\(-1\)</td><td>\(-\|\nabla f\|\) (the <b>minimum</b>)</td><td>steepest <b>descent</b> / greatest decrease</td></tr>
+<tr><td>\(\theta=\pi/2\) — perpendicular to \(\nabla f\)</td><td>\(0\)</td><td>\(0\)</td><td>\(f\) does <b>not change</b> (you walk along the contour)</td></tr>
+<tr><td>anything else</td><td>strictly between</td><td>strictly between \(-\|\nabla f\|\) and \(\|\nabla f\|\)</td><td>so a rate larger than \(\|\nabla f\|\) is <b>impossible</b></td></tr>
+</table>
+<p>Four exam consequences, each worth marks on its own:</p>
+<ol>
+<li><b>Direction of greatest increase</b> \(=\nabla f(P)\); <b>maximum rate</b> \(=\|\nabla f(P)\|\).</li>
+<li><b>Direction of greatest decrease</b> \(=-\nabla f(P)\); the rate there is \(-\|\nabla f(P)\|\) (i.e. \(f\) <i>drops</i> at \(\|\nabla f(P)\|\) per unit distance).</li>
+<li><b>Directions of no change</b>: the vectors perpendicular to \(\nabla f(P)\). In 2-D, if \(\nabla f=(p,q)\) they are \(\pm(-q,p)\) — <b>two</b> opposite directions. In 3-D there is a whole plane of them.</li>
+<li><b>Reverse problems</b>: if you are told \(D_{\mathbf v}f=-\|\nabla f\|\), then \(\cos\theta=-1\), so \(\nabla f\) points exactly opposite to \(\mathbf v\) (this is 2022 S1 Q6).</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>🧭 Why \(\nabla f\) is perpendicular to the level curves</h3>
+<p>This is the single most useful geometric fact in the chapter (Summary p 5: "\(\nabla f(a,b)\) is perpendicular to the contour line through \((a,b)\) and points in the direction of increasing \(f\)").</p>
+<p><b>Proof in two lines.</b> Let \(\mathbf r(t)=(x(t),y(t))\) trace out the contour \(f(x,y)=c\) through \((a,b)\). Along it \(f(x(t),y(t))=c\) for every \(t\). Differentiate with the chain rule:</p>
+$$f_x\frac{dx}{dt}+f_y\frac{dy}{dt}=0\quad\Longleftrightarrow\quad \nabla f\cdot\mathbf r'(t)=0 .$$
+<p>\(\mathbf r'(t)\) is the tangent vector to the contour, so \(\nabla f\) is perpendicular to the contour's tangent — i.e. <b>normal to the level curve</b>. Intuitively: walking along a contour keeps \(f\) constant, so the rate of change is 0, so by the \(\cos\theta\) picture you must be walking at \(90^\circ\) to \(\nabla f\).</p>
+<svg viewBox="0 0 520 250" width="100%" style="max-width:520px;display:block;margin:10px auto" role="img" aria-label="Concentric elliptical contours with gradient arrows drawn perpendicular to them, pointing outward toward higher values">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a78bfa"/></marker>
+  <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/></marker></defs>
+  <g fill="none" stroke="#9aa7b8" stroke-width="1.3">
+    <ellipse cx="200" cy="125" rx="40" ry="24"/><ellipse cx="200" cy="125" rx="80" ry="48"/><ellipse cx="200" cy="125" rx="120" ry="72"/><ellipse cx="200" cy="125" rx="160" ry="96"/>
+  </g>
+  <g fill="#9aa7b8" font-size="12" font-family="sans-serif"><text x="236" y="112">c=1</text><text x="275" y="90">c=4</text><text x="310" y="68">c=9</text><text x="345" y="45">c=16</text></g>
+  <line x1="280" y1="125" x2="328" y2="125" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="200" y1="77" x2="200" y2="37" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="256.6" y1="159" x2="276" y2="191.6" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#ah)"/>
+  <line x1="200" y1="77" x2="245" y2="77" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ah2)"/>
+  <g font-size="13" font-family="sans-serif"><text x="332" y="129" fill="#a78bfa">∇f</text><text x="207" y="42" fill="#a78bfa">∇f</text><text x="280" y="206" fill="#a78bfa">∇f</text><text x="250" y="72" fill="#fbbf24">tangent: rate 0</text></g>
+  <text x="385" y="150" fill="#e8edf4" font-size="12" font-family="sans-serif">level curves f = c;</text>
+  <text x="385" y="168" fill="#e8edf4" font-size="12" font-family="sans-serif">∇f ⟂ every contour,</text>
+  <text x="385" y="186" fill="#e8edf4" font-size="12" font-family="sans-serif">pointing to higher c (f grows outward)</text>
+</svg>
+<p>Two corollaries the exam uses constantly:</p>
+<ul>
+<li><b>Tangent line to a level curve</b> \(F(x,y)=c\) at \((a,b)\): the normal is \(\nabla F(a,b)\), so the line is
+$$F_x(a,b)(x-a)+F_y(a,b)(y-b)=0.$$</li>
+<li><b>Tangent plane to a level surface</b> \(F(x,y,z)=c\) at \((a,b,c_0)\): exactly the same idea one dimension up,
+$$F_x(x-a)+F_y(y-b)+F_z(z-c_0)=0\quad(\text{partials at the point}).$$
+A graph \(z=f(x,y)\) is the level surface \(F=f(x,y)-z=0\), whose normal is \((f_x,f_y,-1)\) — exactly the tangent-plane normal from <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a> (this is Tutorial 8 Q5).</li>
+</ul>
+<p class="tip">Contours bunched close together = large \(\|\nabla f\|\) = steep. Widely spaced contours = gentle slope. A marker loves the sentence "the gradient is perpendicular to the contour and points towards increasing \(f\)".</p>
+</div>
+
+<div class="card">
+<h3>Steepest ascent on a real hill: slope vs angle</h3>
+<p>If \(h(x,y)\) is the height of a hill, \(\|\nabla h(a,b)\|\) is the steepest <b>slope</b> (rise per unit horizontal distance). The corresponding <b>angle of climb</b> above the horizontal is \(\arctan\|\nabla h(a,b)\|\) (Tutorial 8 Q4). The walking direction is still the 2-D vector \(\nabla h(a,b)\) in the map — you do not add a \(z\)-component.</p>
+</div>
+
+<div class="card">
+<h3>🧭 The multivariable chain rule — why it adds up branches</h3>
+<p>Suppose \(z=f(x,y)\) and both \(x=x(t)\), \(y=y(t)\) depend on time. When \(t\) nudges by \(\Delta t\), \(x\) moves by \(\Delta x\approx x'(t)\Delta t\) and \(y\) by \(\Delta y\approx y'(t)\Delta t\). The linear approximation from Chapter 4 says</p>
+$$\Delta z\approx f_x\,\Delta x+f_y\,\Delta y\quad\Longrightarrow\quad \frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}.$$
+<p>Each term is one <b>route</b> by which \(t\) influences \(z\): "\(t\) changes \(x\), which changes \(z\)" plus "\(t\) changes \(y\), which changes \(z\)". The total effect is the sum of the effects along every route.</p>
+<h4>Tree diagrams — the marker-approved bookkeeping</h4>
+<p>The Summary says: draw a tree for \(z=f(\dots)\) with a branch for every intermediate variable, <b>multiply the derivatives along each path, then add over all paths</b> from the top variable down to the one you are differentiating with respect to. 2025 S1 Q4 gave <b>2 marks just for the tree</b>.</p>
+<div class="grid2">
+<div class="method"><b>Case 1 — one final variable</b> (\(z=f(x,y)\), \(x(t),y(t)\))
+<div class="mono">        z
+   ∂z/∂x  ∂z/∂y
+     x      y
+   dx/dt  dy/dt
+     t      t</div>
+$$\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}$$
+</div>
+<div class="method"><b>Case 2 — two final variables</b> (\(z=f(x,y)\), \(x(s,t),y(s,t)\))
+<div class="mono">          z
+     ∂z/∂x   ∂z/∂y
+       x        y
+    ∂/∂s ∂/∂t ∂/∂s ∂/∂t
+     s    t    s    t</div>
+$$\frac{\partial z}{\partial s}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial s}$$
+(follow only the paths ending in \(s\)).
+</div>
+</div>
+<p><b>Leibniz notation rule (markers check this):</b> use a straight \(d\) when the thing on top depends on <b>one</b> variable only (\(\frac{dx}{dt}\) when \(x=x(t)\); \(\frac{dz}{dt}\) when ultimately \(z\) is a function of \(t\) alone), and a curly \(\partial\) when it depends on <b>several</b> (\(\frac{\partial z}{\partial x}\) because \(z\) depends on \(x\) and \(y\); \(\frac{\partial x}{\partial s}\) because \(x\) depends on \(s\) and \(t\)).</p>
+<p><b>Three intermediate variables</b> (e.g. \(w=f(x,y,z)\) with \(x,y,z\) functions of \(r,\varphi,\theta\) — 2025 S1 Q4) just means three branches and three terms per derivative:
+$$\frac{\partial w}{\partial r}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial r}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial r}.$$</p>
+<p class="tip">Always finish by <b>substituting back</b> so the answer is in the final variables only (\(t\), or \(s,t\)), then evaluate at the given point if one is asked. An answer that still contains \(x\) and \(y\) when the question is about \(r\) and \(\theta\) is incomplete.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Functions of a single combined variable: \(g(x,y)=f(ax+by)\)</h3>
+<p>A favourite "show that" set-up: \(f\) is an unknown one-variable function and \(g\) feeds it a combination of \(x\) and \(y\). You can't differentiate \(f\) explicitly — you don't know it — so you name the inside \(u=ax+by\) and use the tree</p>
+<div class="mono">      g
+      | dg/du = f'(u)
+      u
+  ∂u/∂x  ∂u/∂y
+    x      y</div>
+$$\frac{\partial g}{\partial x}=f'(u)\frac{\partial u}{\partial x}=a\,f'(u),\qquad \frac{\partial g}{\partial y}=f'(u)\frac{\partial u}{\partial y}=b\,f'(u).$$
+<p>Consequences:</p>
+<ul>
+<li><b>Identity:</b> \(a\,g_y=ab\,f'(u)=b\,g_x\). This is 2025 S2 Q3(a) exactly.</li>
+<li><b>Gradient direction:</b> \(\nabla g=f'(u)\,(a,b)\). So \(\nabla g\) is always parallel to the fixed vector \((a,b)\): the greatest change is along \(\pm(a,b)\) at every point where \(f'(u)\ne0\) — \(+(a,b)\) for greatest increase where \(f'(u)\gt0\), \(-(a,b)\) where \(f'(u)\lt0\). This is 2025 S2 Q3(b).</li>
+<li><b>Why geometrically:</b> the level curves of \(g\) are the lines \(ax+by=\text{const}\) (constant \(u\) ⇒ constant \(g\)), and \(\nabla g\) must be normal to those lines — the normal to \(ax+by=k\) is \((a,b)\).</li>
+</ul>
+<p>The same routine works for any inside: \(f(x^2-y^2)\) (2022 S1 Q4), \(f(x^2+y^2)\), \(f(y/x)\), \(x\,f(xy)\), \(f(x-ct)+g(x+ct)\)… Name the inside \(u\), compute \(\partial u/\partial x\), \(\partial u/\partial y\), multiply by \(f'(u)\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Implicit differentiation — the chain rule on a level curve</h3>
+<p>A curve like \(y\ln x+xe^y-e^2=0\) (2024 S2 Q3) can't be solved for \(y\). But it <i>is</i> a level curve \(F(x,y)=0\). Along it, treat \(y=y(x)\) and differentiate \(F(x,y(x))=0\) with the chain rule:</p>
+$$F_x\frac{dx}{dx}+F_y\frac{dy}{dx}=0\quad\Longrightarrow\quad \frac{dy}{dx}=-\frac{F_x}{F_y}\quad(F_y\ne0).$$
+<p>That is the formula on the sheet, \(y'(a)=-F_x(a,b)/F_y(a,b)\). It's the same fact as "\(\nabla F\perp\) level curve": the tangent direction \((1,y')\) must be perpendicular to \((F_x,F_y)\).</p>
+<p><b>Surfaces</b> \(F(x,y,z)=0\) defining \(z=z(x,y)\) implicitly (NOT on the sheet — know it): hold \(y\) fixed and differentiate in \(x\), then vice versa:</p>
+$$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\qquad \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}\qquad(F_z\ne0).$$
+<div class="method"><b>Tangent line to an implicit curve at \(x=a\) — the 12-mark routine</b> (2024 S2 Q3 marking scheme)
+<ol>
+<li><b>Find the point</b>: substitute \(x=a\) into the curve and solve for \(y\). [2 marks] If there are several \(y\)-values, there are several tangent lines (2022 S1 Q5).</li>
+<li><b>Set up</b> \(F(x,y)=0\) and write \(\frac{dy}{dx}=-F_x/F_y\). [2 marks]</li>
+<li><b>Compute</b> \(F_x,F_y\) and evaluate at the point. [5 marks]</li>
+<li><b>Write the line</b> \(y-b=m(x-a)\) and rearrange to the requested form. [3 marks]</li>
+</ol></div>
+</div>
+
+<div class="card">
+<h3>Which tool? A one-glance map of Chapter 5</h3>
+<table>
+<tr><th>You are given…</th><th>…and asked for</th><th>Tool</th></tr>
+<tr><td>\(f\), a point, a direction vector or a target point</td><td>"rate of change / slope in the direction of…"</td><td>\(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\|\mathbf u\|\)</td></tr>
+<tr><td>\(f\) and a point</td><td>"direction of greatest increase/decrease", "maximum rate"</td><td>\(\pm\nabla f(P)\), \(\pm\|\nabla f(P)\|\)</td></tr>
+<tr><td>\(f\) and a point</td><td>"direction(s) where \(f\) does not change / zero slope"</td><td>vectors \(\perp\nabla f(P)\)</td></tr>
+<tr><td>two directional derivatives (or one + \(\|\nabla f\|\))</td><td>\(\nabla f(P)\) or unknown constants</td><td>set up linear equations in the components</td></tr>
+<tr><td>\(z=f(x,y)\) with \(x,y\) depending on \(t\) (or \(s,t\))</td><td>\(dz/dt\), \(\partial z/\partial s\), "how fast is … changing"</td><td>chain rule + tree diagram</td></tr>
+<tr><td>\(g=f(\text{combination})\), \(f\) unknown</td><td>"show that [PDE identity]"</td><td>let \(u=\) inside, \(g_x=f'(u)u_x\), \(g_y=f'(u)u_y\)</td></tr>
+<tr><td>an equation \(F(x,y)=0\) you can't solve for \(y\)</td><td>\(dy/dx\), tangent line</td><td>\(y'=-F_x/F_y\)</td></tr>
+<tr><td>a level surface \(F(x,y,z)=c\)</td><td>tangent plane / normal line</td><td>normal \(\nabla F(P)\)</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">The formula sheet prints the directional derivative, the two-variable chain rule and 2-D implicit differentiation. It does <b>not</b> print: "max rate \(=\|\nabla f\|\)", "no change \(\perp\nabla f\)", the tangent line/plane to a level set, the 3-D implicit formulas, or the partial-derivative (\(s,t\)) chain rule. Those are yours to carry in.</p>
+
+<div class="card">
+<h3>Gradient <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+$$\nabla f=(f_x,f_y)\quad\text{or}\quad(f_x,f_y,f_z)$$
+<div class="when">Any question containing "gradient", "\(\nabla f\)", "direction of greatest…", or as step 1 of a directional derivative.</div>
+<p><b>Recipe:</b> differentiate partially in each variable, write as a vector, then (if asked) substitute the point. <b>Mini-example:</b> \(f=x^2y+yz^3\Rightarrow\nabla f=(2xy,\ x^2+z^3,\ 3yz^2)\); at \((1,2,-1)\): \((4,0,6)\).</p>
+</div>
+
+<div class="card">
+<h3>Directional derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+$$D_{\mathbf u}f(P)=\nabla f(P)\cdot\frac{\mathbf u}{\|\mathbf u\|}=\|\nabla f(P)\|\cos\theta$$
+<div class="when">"Rate of change of \(f\) at \(P\) in the direction of \(\mathbf v\)", "slope in direction…", "rate of change with respect to distance … towards \(Q\)".</div>
+<div class="method"><ol>
+<li>Direction vector: given \(\mathbf v\), or \(\overrightarrow{PQ}=Q-P\) for "towards \(Q\)" (towards the origin: \(-P\)).</li>
+<li>Normalise: \(\hat{\mathbf u}=\mathbf v/\|\mathbf v\|\).</li>
+<li>\(\nabla f(P)\) (numbers).</li>
+<li>Dot product → a number. Leave surds exact (\(-21/\sqrt5\) is fine).</li>
+</ol></div>
+<p><b>Mini-example:</b> \(\nabla f(P)=(4,0,6)\), \(\mathbf v=(2,-1,2)\), \(\|\mathbf v\|=3\): \(D=(8+0+12)/3=20/3\).</p>
+</div>
+
+<div class="card">
+<h3>Greatest increase / decrease / no change <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<table>
+<tr><th>Asked</th><th>Answer</th></tr>
+<tr><td>direction of greatest increase (steepest ascent)</td><td>\(\nabla f(P)\) (any positive multiple, e.g. simplified or unit)</td></tr>
+<tr><td>maximum rate of change</td><td>\(\|\nabla f(P)\|\)</td></tr>
+<tr><td>direction of greatest decrease (steepest descent)</td><td>\(-\nabla f(P)\)</td></tr>
+<tr><td>rate in that direction</td><td>\(-\|\nabla f(P)\|\) ("drops at \(\|\nabla f(P)\|\)")</td></tr>
+<tr><td>direction(s) of zero change, 2-D, \(\nabla f=(p,q)\)</td><td>\((-q,p)\) and \((q,-p)\)</td></tr>
+<tr><td>direction(s) of zero change, 3-D</td><td>every \(\mathbf u\) with \(\nabla f(P)\cdot\mathbf u=0\) (a plane of directions)</td></tr>
+<tr><td>"unit vector in this direction"</td><td>\(\nabla f(P)/\|\nabla f(P)\|\)</td></tr>
+</table>
+<div class="when">"Greatest/maximum/most rapid increase/decrease", "steepest", "does not change", "zero slope", "which way should the ant walk".</div>
+</div>
+
+<div class="card">
+<h3>Tangent line / tangent plane to a level set <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+$$\text{curve }F(x,y)=c:\ \ F_x(P)(x-a)+F_y(P)(y-b)=0\qquad\text{surface }F(x,y,z)=c:\ \ \nabla F(P)\cdot(x-a,\,y-b,\,z-c_0)=0$$
+<div class="when">"Tangent line to the contour/level curve through…", "tangent plane to the surface \(x^2+\dots=k\)", "normal to the surface", "show that \(\nabla F\) is normal to…".</div>
+<p><b>Normal line</b> to the surface: \(\mathbf r(t)=P+t\,\nabla F(P)\). <b>Mini-example:</b> \(x^2+2y^2+3z^2=6\) at \((1,1,1)\): \(\nabla F=(2,4,6)\Rightarrow x+2y+3z=6\).</p>
+</div>
+
+<div class="card">
+<h3>Chain rule — total derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+$$\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}\ \Big(+\frac{\partial z}{\partial w}\frac{dw}{dt}\ \text{for a third variable}\Big)$$
+<div class="when">One final variable (time \(t\)): "how fast is … changing", "rate of change experienced by the particle/bird", "determine \(dz/dt\) at \(t=\dots\)", related rates with given \(dx/dt\), \(dy/dt\).</div>
+<p><b>Recipe:</b> tree → partials of the top function → ordinary derivatives of each branch → multiply along paths, add → substitute the instant's values. <b>Mini-example:</b> \(V=\pi r^2h\), \(r=3\), \(h=4\), \(\dot r=\tfrac12\), \(\dot h=-1\): \(\dot V=2\pi rh\,\dot r+\pi r^2\dot h=12\pi-9\pi=3\pi\).</p>
+</div>
+
+<div class="card">
+<h3>Chain rule — partial derivatives <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+$$\frac{\partial z}{\partial s}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial s},\qquad \frac{\partial z}{\partial t}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial t}$$
+<div class="when">Intermediate variables depend on two or more final variables: polar \((r,\theta)\), spherical \((r,\varphi,\theta)\), \(x=e^u\cos\theta\)…, "with the aid of a tree diagram".</div>
+<p class="tip">"Check your answer by expressing \(w\) directly" (2025 S1 Q4b) = substitute first, then differentiate. Both routes must agree — a free self-check you should do even when not asked.</p>
+</div>
+
+<div class="card">
+<h3>Combined-variable identities <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+$$g=f(u),\ u=u(x,y):\qquad g_x=f'(u)\,u_x,\quad g_y=f'(u)\,u_y,\quad \nabla g=f'(u)\,\nabla u$$
+<div class="when">"Let \(f\) be a differentiable function… show that…", \(f\) never given explicitly.</div>
+<p><b>Mini-example:</b> \(z=f(y/x)\): \(u_x=-y/x^2\), \(u_y=1/x\), so \(xz_x+yz_y=f'(u)\big(-\tfrac yx+\tfrac yx\big)=0\).</p>
+</div>
+
+<div class="card">
+<h3>Implicit differentiation <span style="color:var(--muted);font-weight:400">(2-D on the sheet; 3-D know cold)</span></h3>
+$$F(x,y)=0\Rightarrow \frac{dy}{dx}=-\frac{F_x}{F_y};\qquad F(x,y,z)=0\Rightarrow \frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\ \ \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}$$
+<div class="when">A relation you can't (or needn't) solve: "curve defined by the equation", "find \(y'(x)\)", "tangent line at \(x=a\)", "\(z\) defined implicitly by…".</div>
+<p class="trap">Move <b>everything to one side first</b> so the equation reads \(F=0\) (or \(F=\) const). The minus sign in \(-F_x/F_y\) is the most-dropped symbol in this chapter.</p>
+</div>
+
+<div class="card">
+<h3>Reverse-engineering \(\nabla f\) <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<div class="when">You're told the <i>values</i> of directional derivatives (and/or \(\|\nabla f\|\), or "max rate is … in direction …") and asked for \(\nabla f\) or constants in \(f\).</div>
+<div class="method"><ol>
+<li>Write \(\nabla f(P)=(a,b)\) (or \((a,b,c)\)).</li>
+<li>Each given rate gives one linear equation \((a,b)\cdot\hat{\mathbf u}_i=\text{value}\).</li>
+<li>"Max rate \(M\) in direction \(\mathbf d\)" means \(\nabla f(P)=M\,\mathbf d/\|\mathbf d\|\) directly.</li>
+<li>"\(D_{\mathbf v}f=-\|\nabla f\|\)" means \(\nabla f\) is anti-parallel to \(\mathbf v\).</li>
+<li>Solve; check by substituting back.</li>
+</ol></div>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Each is written the way a marker wants to read it — method named, formula stated, then numbers. Every value is verified with SymPy (<code>verify/ch05.py</code>). Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Gradient &amp; directional derivative in 3-D</summary>
+<p><b>Q.</b> Let \(f(x,y,z)=x^2y+yz^3\) and \(P=(1,2,-1)\). (a) Find \(\nabla f(P)\). [2] (b) Find the rate of change of \(f\) at \(P\) in the direction of \(\mathbf v=2\mathbf i-\mathbf j+2\mathbf k\). [3] (c) What is the maximum rate of change of \(f\) at \(P\), and in which direction does it occur? [2]</p>
+<p><b>(a)</b> \(f_x=2xy,\ f_y=x^2+z^3,\ f_z=3yz^2\). At \(P\): \(f_x=4,\ f_y=1+(-1)=0,\ f_z=3(2)(1)=6\).
+$$\nabla f(1,2,-1)=(4,\,0,\,6).$$</p>
+<p><b>(b)</b> \(\|\mathbf v\|=\sqrt{4+1+4}=3\), so \(\hat{\mathbf u}=\tfrac13(2,-1,2)\).
+$$D_{\mathbf v}f(P)=\nabla f(P)\cdot\hat{\mathbf u}=\tfrac13\big(4\cdot2+0\cdot(-1)+6\cdot2\big)=\frac{20}{3}.$$</p>
+<p><b>(c)</b> Max rate \(=\|\nabla f(P)\|=\sqrt{16+0+36}=\sqrt{52}=2\sqrt{13}\), in the direction of \(\nabla f(P)=(4,0,6)\), i.e. of \((2,0,3)\).</p>
+<p class="tip">Sanity check: \(20/3\approx6.67\lt2\sqrt{13}\approx7.21\). A directional derivative can never exceed \(\|\nabla f\|\) — if yours does, you forgot to normalise.</p>
+</details>
+
+<details>
+<summary>Example 2 — Steepest ascent, descent and level walking on a hill</summary>
+<p><b>Q.</b> The height of a hill is \(h(x,y)=20-x^2-2y^2\). A hiker stands at \((2,1)\). (a) In which direction should she walk to climb most steeply, and what is the slope? (b) In which directions does her height not change? (c) What is the rate of change of height if she walks towards the point \((5,5)\)?</p>
+<p>\(\nabla h=(-2x,\,-4y)\), so \(\nabla h(2,1)=(-4,-4)\).</p>
+<p><b>(a)</b> Steepest ascent is along \(\nabla h(2,1)=(-4,-4)\), i.e. the direction \((-1,-1)\) (towards the summit at the origin). The slope is \(\|\nabla h(2,1)\|=\sqrt{32}=4\sqrt2\).</p>
+<p><b>(b)</b> Zero rate ⇔ \(\hat{\mathbf u}\perp\nabla h(2,1)\). \((-4,-4)\cdot(u_1,u_2)=0\Rightarrow u_2=-u_1\): the directions \((1,-1)\) and \((-1,1)\) — along the contour through \((2,1)\).</p>
+<p><b>(c)</b> Direction \((5,5)-(2,1)=(3,4)\), \(\|\cdot\|=5\).
+$$D_{\mathbf u}h=(-4,-4)\cdot\tfrac15(3,4)=\frac{-12-16}{5}=-\frac{28}{5}.$$
+Her height <b>decreases</b> at \(28/5\) per unit distance (she is walking away from the summit).</p>
+</details>
+
+<details>
+<summary>Example 3 — Reverse problem: recover \(\nabla f\) from two rates</summary>
+<p><b>Q.</b> At \(P=(2,1)\), the rate of change of \(f\) in the direction towards \(Q=(5,5)\) is \(2\), and in the direction towards \(R=(0,1)\) is \(-2\). (a) Find \(\nabla f(P)\). (b) Find the rate of change of \(f\) at \(P\) towards the origin. (c) Find the direction(s) in which \(f\) does not change at \(P\).</p>
+<p><b>(a)</b> Let \(\nabla f(P)=(a,b)\). \(\overrightarrow{PQ}=(3,4)\), unit \(\tfrac15(3,4)\); \(\overrightarrow{PR}=(-2,0)\), unit \((-1,0)\).
+$$\tfrac15(3a+4b)=2\ \Rightarrow\ 3a+4b=10,\qquad -a=-2\ \Rightarrow\ a=2.$$
+Then \(4b=4\Rightarrow b=1\). \(\boxed{\nabla f(P)=(2,1)}\). Check: \(\tfrac15(6+4)=2\) ✓, \(-2\) ✓.</p>
+<p><b>(b)</b> Towards the origin: \((0,0)-(2,1)=(-2,-1)\), unit \(\tfrac1{\sqrt5}(-2,-1)\). \(D=\tfrac1{\sqrt5}(-4-1)=-\tfrac5{\sqrt5}=-\sqrt5\).</p>
+<p><b>(c)</b> Perpendicular to \((2,1)\): \((1,-2)\) and \((-1,2)\).</p>
+<p class="tip">This is exactly the shape of 2025 S1 Q1 (12 marks). The marking scheme gave <b>1 mark just for stating</b> "the direction of no change is perpendicular to \(\nabla f\)" — write that sentence.</p>
+</details>
+
+<details>
+<summary>Example 4 — Tangent line to a level curve; tangent plane to a level surface</summary>
+<p><b>Q.</b> (a) Find the tangent line to the curve \(x^2+xy+y^2=7\) at \((1,2)\). (b) Find the tangent plane and normal line to the ellipsoid \(x^2+2y^2+3z^2=6\) at \((1,1,1)\).</p>
+<p><b>(a)</b> Check the point: \(1+2+4=7\) ✓. The curve is the level curve \(F=7\) of \(F(x,y)=x^2+xy+y^2\). \(\nabla F=(2x+y,\ x+2y)\), \(\nabla F(1,2)=(4,5)\), which is <b>normal</b> to the curve. Tangent line:
+$$4(x-1)+5(y-2)=0\iff 4x+5y=14.$$
+(Same as implicit differentiation: \(y'=-4/5\).)</p>
+<p><b>(b)</b> Check: \(1+2+3=6\) ✓. \(F=x^2+2y^2+3z^2\), \(\nabla F=(2x,4y,6z)\), \(\nabla F(1,1,1)=(2,4,6)\propto(1,2,3)\).
+$$\text{Tangent plane: }(x-1)+2(y-1)+3(z-1)=0\iff x+2y+3z=6.$$
+$$\text{Normal line: }\mathbf r(t)=(1,1,1)+t(1,2,3).$$</p>
+</details>
+
+<details>
+<summary>Example 5 — Related rates with the chain rule (cylinder)</summary>
+<p><b>Q.</b> The radius of a cylinder is \(3\) cm and increasing at \(0.5\) cm/s, while its height is \(4\) cm and decreasing at \(1\) cm/s. How fast is the volume changing? Is it increasing or decreasing?</p>
+<div class="mono">      V
+  ∂V/∂r  ∂V/∂h
+    r       h
+  dr/dt   dh/dt
+    t       t</div>
+<p>\(V=\pi r^2h\), so \(\dfrac{\partial V}{\partial r}=2\pi rh\), \(\dfrac{\partial V}{\partial h}=\pi r^2\). Chain rule:
+$$\frac{dV}{dt}=\frac{\partial V}{\partial r}\frac{dr}{dt}+\frac{\partial V}{\partial h}\frac{dh}{dt}=2\pi(3)(4)(0.5)+\pi(9)(-1)=12\pi-9\pi=3\pi\ \text{cm}^3/\text{s}.$$
+Since \(dV/dt=3\pi\gt0\), the volume is <b>increasing</b> at that instant.</p>
+<p class="tip">"Decreasing at 1 cm/s" means \(dh/dt=-1\). Sign errors here cost the final mark on every related-rates question. Always give units and answer the "increasing or decreasing?" part in words (2022 S2 Q5(b): 1 mark).</p>
+</details>
+
+<details>
+<summary>Example 6 — Chain rule for partial derivatives (tree with two final variables)</summary>
+<p><b>Q.</b> Let \(z=x^2y\) where \(x=s+t\), \(y=st\). Use the chain rule to find \(\dfrac{\partial z}{\partial s}\) and \(\dfrac{\partial z}{\partial t}\) at \((s,t)=(1,2)\). Check by direct substitution.</p>
+<div class="mono">            z
+     ∂z/∂x      ∂z/∂y
+       x          y
+  ∂x/∂s ∂x/∂t  ∂y/∂s ∂y/∂t
+     s     t      s     t</div>
+<p>\(\dfrac{\partial z}{\partial x}=2xy,\ \dfrac{\partial z}{\partial y}=x^2;\quad \dfrac{\partial x}{\partial s}=1,\ \dfrac{\partial x}{\partial t}=1;\quad \dfrac{\partial y}{\partial s}=t,\ \dfrac{\partial y}{\partial t}=s.\)</p>
+<p>At \((s,t)=(1,2)\): \(x=3,\ y=2\).
+$$\frac{\partial z}{\partial s}=2xy\cdot1+x^2\cdot t=12+9\cdot2=30,\qquad \frac{\partial z}{\partial t}=2xy\cdot1+x^2\cdot s=12+9=21.$$</p>
+<p><b>Check:</b> \(z=(s+t)^2st\). \(z_s=2(s+t)st+(s+t)^2t=12+18=30\) ✓; \(z_t=2(s+t)st+(s+t)^2s=12+9=21\) ✓.</p>
+</details>
+
+<details>
+<summary>Example 7 — "Show that" with an unknown function: \(z=f(y/x)\)</summary>
+<p><b>Q.</b> Let \(f:\mathbb R\to\mathbb R\) be differentiable and \(z=f(y/x)\) for \(x\ne0\). Show that \(x\dfrac{\partial z}{\partial x}+y\dfrac{\partial z}{\partial y}=0\).</p>
+<p>Let \(u=\dfrac yx\), so \(z=f(u)\). Then \(\dfrac{\partial u}{\partial x}=-\dfrac{y}{x^2}\) and \(\dfrac{\partial u}{\partial y}=\dfrac1x\). By the chain rule,
+$$\frac{\partial z}{\partial x}=\frac{dz}{du}\frac{\partial u}{\partial x}=-\frac{y}{x^2}f'(u),\qquad \frac{\partial z}{\partial y}=\frac{dz}{du}\frac{\partial u}{\partial y}=\frac1x f'(u).$$
+Hence
+$$x\frac{\partial z}{\partial x}+y\frac{\partial z}{\partial y}=-\frac yx f'(u)+\frac yx f'(u)=0,$$
+as required. \(\blacksquare\)</p>
+<p class="tip">Note \(\frac{dz}{du}\) with a straight \(d\): \(z=f(u)\) depends on one variable \(u\). But \(\frac{\partial u}{\partial x}\) is curly: \(u\) depends on \(x\) and \(y\). Finish with "as required" — a "show that" is marked on the logical chain, not on a final number.</p>
+</details>
+
+<details>
+<summary>Example 8 — Implicit differentiation and the tangent line at \(x=1\)</summary>
+<p><b>Q.</b> Let \(C\) be the curve \(x^2y+y^3=10\). Find the equation of the tangent line to \(C\) at the point where \(x=1\).</p>
+<p><b>Find the point.</b> \(x=1\): \(y+y^3=10\Rightarrow y^3+y-10=0\Rightarrow(y-2)(y^2+2y+5)=0\). The quadratic has discriminant \(4-20\lt0\), so \(y=2\) is the only point: \((1,2)\).</p>
+<p><b>Slope.</b> Write \(F(x,y)=x^2y+y^3-10=0\). \(F_x=2xy\), \(F_y=x^2+3y^2\). At \((1,2)\): \(F_x=4\), \(F_y=13\).
+$$\frac{dy}{dx}\Big|_{(1,2)}=-\frac{F_x(1,2)}{F_y(1,2)}=-\frac{4}{13}.$$</p>
+<p><b>Line.</b> \(y-2=-\tfrac4{13}(x-1)\iff y=-\tfrac4{13}x+\tfrac{30}{13}\).</p>
+</details>
+
+<details>
+<summary>Example 9 — Implicit partial derivatives on a surface, and its tangent plane</summary>
+<p><b>Q.</b> The equation \(xyz+z^3=10\) defines \(z\) implicitly as a function of \(x,y\) near \((1,1,2)\). Find \(\dfrac{\partial z}{\partial x}\) and \(\dfrac{\partial z}{\partial y}\) there, and the tangent plane.</p>
+<p>Check: \(2+8=10\) ✓. \(F=xyz+z^3-10\): \(F_x=yz=2,\ F_y=xz=2,\ F_z=xy+3z^2=1+12=13\).
+$$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac2{13},\qquad \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}=-\frac2{13}.$$
+Tangent plane (normal \(\nabla F=(2,2,13)\)): \(2(x-1)+2(y-1)+13(z-2)=0\iff 2x+2y+13z=30\).</p>
+<p class="tip">Two routes, one answer: the plane \(z=2-\tfrac2{13}(x-1)-\tfrac2{13}(y-1)\) (the Chapter 4 linearisation with the implicit partials) rearranges to the same \(2x+2y+13z=30\).</p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>Every paper from 2021 to 2025 has at least one gradient/directional-derivative question <b>and</b> at least one chain-rule or implicit-differentiation question. Typical total: 20–35 of the 100 marks. Below are the six styles that actually appear, with every instance found.</p>
+
+<div class="card q">
+<h3>Type A — Gradient, directional derivative &amp; steepest direction for a given \(f\) <span class="marks">~10–15 marks</span></h3>
+<p><b>Instances:</b> 2024 S2 Q4 (12 marks) · 2023 S2 Q3 (12) · 2024 S1 Q1 (12, 3-D temperature) · 2022 S2 Q3 (10) · 2021 S1 Q5 (10) · 2021 S2 Q7 (15) · Tutorial 8 Q1–4.</p>
+<p><b>Looks like:</b> "Consider \(f(x,y)=\dots\) (a) Determine \(\nabla f\). (b) Determine the directional derivative \(f_{\mathbf v}(P)\) where \(\mathbf v=\dots\) (c) Determine the direction of greatest increase/decrease." Often a temperature \(T\) and an ant/panda walking.</p>
+<div class="method"><b>Routine:</b>
+<ol>
+<li>General \(\nabla f(x,y)\) — both partials, simplified. (1 mark for writing \(\nabla f=(f_x,f_y)\).)</li>
+<li>Evaluate at \(P\) — exact trig values, surds.</li>
+<li>Normalise the direction; dot product. (1 mark for the formula.)</li>
+<li>Greatest increase: \(\nabla f(P)\); decrease: \(-\nabla f(P)\); max rate \(\|\nabla f(P)\|\).</li>
+</ol></div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 S2 Q4 <span class="marks">[12 marks]</span></b></p>
+<p>Consider the function \(f:\mathbb R^2\to\mathbb R\) given by \(f(x,y)=10+6\cos x\cos y+3\cos 2x+4\cos 4y.\)</p>
+<ul>
+<li>(a) Determine \(\nabla f(x,y)\). <b>[3 marks]</b></li>
+<li>(b) Determine the directional derivative \(f_{\mathbf v}(\pi/4,\pi/4)\), where \(\mathbf v=2\mathbf i+\mathbf j\). <b>[6 marks]</b></li>
+<li>(c) Determine the direction of greatest increase of \(f\) at the point \((\pi/4,\pi/4)\). <b>[3 marks]</b></li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2024 S2 Q4(a)–(c)</summary>
+<p><b>(a)</b> \(\nabla f=(f_x,f_y)\) [1 mark for the formula], with
+$$f_x=-6\sin x\cos y-6\sin 2x,\qquad f_y=-6\cos x\sin y-16\sin 4y.$$
+So \(\nabla f(x,y)=\big(-6\sin x\cos y-6\sin2x,\ -6\cos x\sin y-16\sin4y\big)\). [2 marks for correct working]</p>
+<p><b>(b)</b> \(f_{\mathbf v}(P)=\nabla f(P)\cdot\dfrac{\mathbf v}{\|\mathbf v\|}\) [1 mark], \(\|\mathbf v\|=\sqrt5\). At \(P=(\pi/4,\pi/4)\): \(\sin\frac\pi4=\cos\frac\pi4=\frac{\sqrt2}2\), \(\sin\frac\pi2=1\), \(\sin\pi=0\):
+$$f_x=-6\cdot\tfrac12-6\cdot1=-9,\qquad f_y=-6\cdot\tfrac12-16\cdot0=-3\quad[3\text{ marks}]$$
+$$f_{\mathbf v}(P)=(-9,-3)\cdot\frac{(2,1)}{\sqrt5}=\frac{-18-3}{\sqrt5}=-\frac{21}{\sqrt5}.\quad[2\text{ marks}]$$</p>
+<p><b>(c)</b> The direction of greatest increase is the direction of the gradient: \(\nabla f(\pi/4,\pi/4)=(-9,-3)\), equivalently \((-3,-1)\). [3 marks]</p>
+<p class="tip">Marking scheme (2024 S2 MS): marks are split formula / partials / evaluation / final value. Even if a partial is wrong, writing \(f_{\mathbf v}=\nabla f\cdot\mathbf v/\|\mathbf v\|\) and normalising correctly banks marks.</p>
+</details>
+<details>
+<summary>Answers to the other Type A instances (verified)</summary>
+<ul>
+<li><b>2023 S2 Q3</b> \(T=10+6\cos x\cos y+3\cos2x+4\cos3y\) at \((\pi/3,\pi/3)\): \(\nabla T=\big(-\tfrac{9\sqrt3}2,-\tfrac{3\sqrt3}2\big)\propto(-3,-1)\). Max increase along \((-3,-1)\), max decrease along \((3,1)\). (b) \(\mathbf u=(2,-3)\): \(D_{\mathbf u}T=-\dfrac{9\sqrt3}{2\sqrt{13}}\).</li>
+<li><b>2024 S1 Q1</b> \(T=\dfrac{xyz}{1+x^2+y^2+z^2}\) at \((1,1,1)\): \(\nabla T=\tfrac18(1,1,1)\). Towards the origin: \(-\sqrt3/8\). Unit vector of max increase \(\tfrac1{\sqrt3}(1,1,1)\); rate \(\sqrt3/8\).</li>
+<li><b>2021 S1 Q5 / 2022 S2 Q3</b> \(T=\dfrac{xy}{1+x^2+y^2}\) at \((1,1)\): \(\nabla T=(\tfrac19,\tfrac19)\). Direction \(2\mathbf i-\mathbf j\): \(\dfrac1{9\sqrt5}\). Most rapid drop along \((-1,-1)\) at rate \(-\tfrac{\sqrt2}9\) (MS: 2 marks for \(-\nabla T\), 1 for the direction, 2 for the rate).</li>
+<li><b>2021 S2 Q7</b> \(P=\ln\sqrt{r^2+s^2}\) at \((3,4)\) towards \((1,5)\): direction \((-2,1)\), \(\nabla P=(\tfrac3{25},\tfrac4{25})\), rate \(-\dfrac{2}{25\sqrt5}\).</li>
+</ul>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — Reverse problems: find \(\nabla f\) (or constants) from rates <span class="marks">~10–14 marks</span></h3>
+<p><b>Instances:</b> 2025 S1 Q1 (12 marks) · 2022 S1 Q6 (10) · 2023 S2 Q7 (14).</p>
+<p><b>Looks like:</b> "The rate of change of \(f\) at \(P_0\) towards \(P_1\) is …, towards \(P_2\) is … Determine \(\nabla f(P_0)\)." Or "the directional derivative attains its maximum value of 64 in the direction of the positive \(z\)-axis. Find \(a,b,c\)."</p>
+<div class="method"><b>Routine:</b> unknown gradient \((a,b)\) → one linear equation per given rate → solve → then use it (new direction / zero-change directions). For "max value \(M\) in direction \(\mathbf d\)": \(\nabla f(P)=M\hat{\mathbf d}\) componentwise.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S1 Q1 <span class="marks">[12 marks]</span></b></p>
+<p>The rate of change of a given function \(f(x,y)\) at the point \(P_0=(1,2)\) in the direction towards \(P_1=(2,3)\) is \(2\sqrt2\). The rate of change of \(f(x,y)\) at the point \(P_0\) in the direction towards \(P_2=(1,0)\) is \(-3\).</p>
+<ul>
+<li>(a) Determine \(\nabla f(P_0)\). <b>[6 marks]</b></li>
+<li>(b) Determine the rate of change of \(f\) at \(P_0\) towards the origin \((0,0)\). <b>[3 marks]</b></li>
+<li>(c) Determine the direction(s) where \(f\) does not change. <b>[3 marks]</b></li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S1 Q1(a)–(c)</summary>
+<p><b>(a)</b> \(\overrightarrow{P_0P_1}=(1,1)\), unit \(\tfrac1{\sqrt2}(1,1)\); \(\overrightarrow{P_0P_2}=(0,-2)\), unit \((0,-1)\). Let \(\nabla f(P_0)=(a,b)\).
+$$(a,b)\cdot\tfrac1{\sqrt2}(1,1)=2\sqrt2\Rightarrow a+b=4;\qquad (a,b)\cdot(0,-1)=-3\Rightarrow b=3.$$
+[2 marks each equation] So \(a=1\): \(\boxed{\nabla f(P_0)=(1,3)}\). [2 marks]</p>
+<p><b>(b)</b> Towards the origin: \(\mathbf u=(0,0)-(1,2)=(-1,-2)\) [1 mark], \(\|\mathbf u\|=\sqrt5\).
+$$f_{\mathbf u}(P_0)=(1,3)\cdot\frac{(-1,-2)}{\sqrt5}=\frac{-1-6}{\sqrt5}=-\frac7{\sqrt5}.\ [2]$$</p>
+<p><b>(c)</b> \(f\) does not change in directions perpendicular to \(\nabla f(P_0)=(1,3)\) [1 mark]: \((-3,1)\) or \((3,-1)\). [2 marks]</p>
+<p class="trap">Use the <b>vector from \(P_0\) to the target point</b>, not the target point itself. Here "towards \(P_1=(2,3)\)" is the direction \((1,1)\), not \((2,3)\).</p>
+</details>
+<details>
+<summary>2022 S1 Q6 and 2023 S2 Q7 (worked answers)</summary>
+<p><b>2022 S1 Q6 [10]:</b> \(D_{\mathbf v}f(3,-2,1)=-5\) with \(\mathbf v=(2,1,-2)\), and \(\|\nabla f\|=5\). Since \(D_{\mathbf v}f=\|\nabla f\|\cos\theta\): \(-5=5\cos\theta\Rightarrow\theta=\pi\). So \(\nabla f\) is opposite to \(\mathbf v\) with length 5:
+$$\nabla f(3,-2,1)=-5\,\frac{(2,1,-2)}{3}=\Big(-\frac{10}3,-\frac53,\frac{10}3\Big).$$</p>
+<p class="trap">The official 2022 S1 solution sheet writes the unit vector as \((2\mathbf i-\mathbf j-2\mathbf k)/3\) — a sign typo (\(\mathbf v=(2,1,-2)\) has \(+\mathbf j\)). The correct answer is \(-\tfrac53(2,1,-2)\); check: \(\big(-\tfrac{10}3,-\tfrac53,\tfrac{10}3\big)\cdot\tfrac13(2,1,-2)=\tfrac19(-20-5-20)=-5\) ✓.</p>
+<p><b>2023 S2 Q7 [10+4]:</b> \(f=axy^2+byz+cz^2x^3\), \(P=(1,2,-1)\). \(\nabla f=(ay^2+3cz^2x^2,\ 2axy+bz,\ by+2czx^3)\), so \(\nabla f(P)=(4a+3c,\ 4a-b,\ 2b-2c)\). "Maximum 64 in the direction of the positive \(z\)-axis" ⇒ \(\nabla f(P)=(0,0,64)\):
+$$4a+3c=0,\quad 4a-b=0,\quad 2b-2c=64\ \Rightarrow\ a=6,\ b=24,\ c=-8.$$
+(b) Zero slope ⇔ \(\mathbf u\perp(0,0,64)\): every horizontal direction \((u_1,u_2,0)\).</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — Chain rule with a tree diagram (evaluate / verify) <span class="marks">~5–12 marks</span></h3>
+<p><b>Instances:</b> 2025 S1 Q4 (12, spherical coordinates) · 2021 S1 Q6 (10, \(x=e^u\cos\theta\)) · 2022 S2 Q5 (10, channel capacity) · 2021 S2 Q10 (5) · 2020 S1 Q6(ii) (5, voltage along a circle) · 2020 S2 Q9(iii) (3, temperature along a flight path) · Tutorial 9 Q1, 2, 5, 6.</p>
+<div class="method"><b>Routine:</b> draw the tree [2 marks in 2025 S1] → write the chain-rule sum with correct \(d\)/\(\partial\) [1 mark] → compute each factor → substitute back to the final variables → simplify (trig identities!) → evaluate if a point is given.</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S1 Q4 <span class="marks">[12 marks]</span></b></p>
+<p>Suppose that \(w=x^2+y^2-z^2\) and \(x=r\sin\varphi\cos\theta,\ y=r\sin\varphi\sin\theta,\ z=r\cos\varphi.\)</p>
+<ul>
+<li>(a) With the aid of a tree diagram, use the chain rule to evaluate \(\dfrac{\partial w}{\partial r}\) and \(\dfrac{\partial w}{\partial\theta}\). <b>[8 marks]</b></li>
+<li>(b) Check your answers in (a) by first expressing \(w\) directly in terms of \(r,\varphi\) and \(\theta\), and then evaluating the partial derivatives. <b>[4 marks]</b></li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S1 Q4</summary>
+<div class="mono">                     w
+        ∂w/∂x      ∂w/∂y      ∂w/∂z
+          x          y          z
+        / | \      / | \      / | \
+       r  φ  θ    r  φ  θ    r  φ  θ</div>
+<p>[2 marks for the tree.] \(w_x=2x,\ w_y=2y,\ w_z=-2z\).</p>
+<p><b>(a)</b>
+$$\frac{\partial w}{\partial r}=\frac{\partial w}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial w}{\partial y}\frac{\partial y}{\partial r}+\frac{\partial w}{\partial z}\frac{\partial z}{\partial r}=2x\sin\varphi\cos\theta+2y\sin\varphi\sin\theta-2z\cos\varphi$$
+$$=2r\big(\sin^2\varphi\cos^2\theta+\sin^2\varphi\sin^2\theta-\cos^2\varphi\big)=2r(\sin^2\varphi-\cos^2\varphi)=-2r\cos2\varphi.$$
+$$\frac{\partial w}{\partial\theta}=2x(-r\sin\varphi\sin\theta)+2y(r\sin\varphi\cos\theta)+(-2z)(0)=2r^2\sin^2\varphi(-\cos\theta\sin\theta+\sin\theta\cos\theta)=0.$$</p>
+<p><b>(b)</b> Directly: \(w=r^2\sin^2\varphi(\cos^2\theta+\sin^2\theta)-r^2\cos^2\varphi=r^2(\sin^2\varphi-\cos^2\varphi)=-r^2\cos2\varphi\). So \(w_r=-2r\cos2\varphi\) ✓ and \(w_\theta=0\) ✓ (\(w\) has no \(\theta\) in it).</p>
+<p class="tip">Note \(\partial z/\partial\theta=0\) — the \(z\)-branch still appears in the tree, it just contributes zero. Say so; don't silently drop it.</p>
+</details>
+<details>
+<summary>Answers to the other Type C instances (verified)</summary>
+<ul>
+<li><b>2021 S1 Q6</b> \(x=e^u\cos\theta,\ y=e^u\sin\theta\): (a) \(f_u=e^u\cos\theta\,f_x+e^u\sin\theta\,f_y\), \(f_\theta=-e^u\sin\theta\,f_x+e^u\cos\theta\,f_y\). (b) \(\cos\theta f_u-\sin\theta f_\theta=e^u(\cos^2\theta+\sin^2\theta)f_x=e^uf_x\), so \(f_x=e^{-u}(\cos\theta f_u-\sin\theta f_\theta)\). (Same idea as Tutorial 9 Q5 with polar coordinates.)</li>
+<li><b>2022 S2 Q5</b> \(C=k\ln(1+S/N)\), \(S=4+\cos4\pi t\), \(N=2+\sin2\pi t\): at \(t=1\), \(S=5,N=2,\ S'=0,\ N'=2\pi\): \(\dfrac{dC}{dt}=\dfrac{k}{1+S/N}\Big(-\dfrac{S}{N^2}\Big)N'=-\dfrac{5k\pi}{7}\) — decreasing. (MS: 1 mark tree/formula, 3 + 3 for the two branch terms, 2 for evaluation, 1 for "decreasing".)</li>
+<li><b>2021 S2 Q10</b> \(z=xe^{y^2+4}\), \(x=1/t\), \(y=\cos2t\): at \(t=\pi/4\), \(y=0\), so \(\dfrac{dz}{dt}=e^{y^2+4}\Big(-\dfrac1{t^2}\Big)+2xye^{y^2+4}(-2\sin2t)=-\dfrac{16e^4}{\pi^2}\).</li>
+<li><b>2020 S1 Q6(ii)</b> \(V=xy+x^2+y^3+3\) on \(\mathbf r(t)=(R\cos\omega t,R\sin\omega t)\): \(\dfrac{dV}{dt}=(y+2x)(-R\omega\sin\omega t)+(x+3y^2)(R\omega\cos\omega t)\) with \(x,y\) substituted.</li>
+<li><b>2020 S2 Q9(iii)</b> \(T=25-z/100\), \(z=\tfrac{\sqrt2}2t^2\): \(\dfrac{dT}{dt}=-\dfrac1{100}\dfrac{dz}{dt}=-\dfrac{\sqrt2\,t}{100}\ ^\circ\)C/s.</li>
+</ul>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Related rates word problems <span class="marks">~10–12 marks</span></h3>
+<p><b>Instances:</b> 2023 S1 Q4 (12, distance between two moving bugs) · 2024 S1 Q4 (12, triangle area &amp; perimeter) · 2022 S2 Q5 (10) · Tutorial 9 Q6 (parallel resistors).</p>
+<p><b>Looks like:</b> "At a certain instant … lengths … increasing at … How fast is … changing?" or two parametrised paths and "the rate at which the distance between them is changing at \(t=\pi\)".</p>
+<div class="method"><b>Routine:</b> name the quantity as a function of the changing variables → tree → partials → plug in the <b>instant's values</b> and the given rates (with signs) → units + "increasing/decreasing".</div>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2023 S1 Q4 <span class="marks">[12 marks]</span></b></p>
+<p>Atom Ant is travelling on a path given by the parametric equations \(x_1=4\cos t,\ y_1=2\sin t\). Billy Bug is travelling on a path given by the parametric equations \(x_2=2\sin2t,\ y_2=3\cos2t\). Determine the rate at which the distance between Atom Ant and Billy Bug is changing at \(t=\pi\). <i>Hint: The distance between Atom Ant and Billy Bug at time \(t\) is \(s=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\).</i></p>
+</div>
+<details>
+<summary>Full worked solution — 2023 S1 Q4</summary>
+<p>\(s\) depends on \(x_1,y_1,x_2,y_2\), each a function of \(t\):
+$$\frac{ds}{dt}=\frac{\partial s}{\partial x_1}\frac{dx_1}{dt}+\frac{\partial s}{\partial y_1}\frac{dy_1}{dt}+\frac{\partial s}{\partial x_2}\frac{dx_2}{dt}+\frac{\partial s}{\partial y_2}\frac{dy_2}{dt}=\frac{(x_2-x_1)(x_2'-x_1')+(y_2-y_1)(y_2'-y_1')}{s}.$$
+At \(t=\pi\): \(x_1=-4,\ y_1=0,\ x_2=0,\ y_2=3\), so \(s=\sqrt{16+9}=5\).<br>
+Derivatives: \(x_1'=-4\sin t=0,\ y_1'=2\cos t=-2,\ x_2'=4\cos2t=4,\ y_2'=-6\sin2t=0\).
+$$\frac{ds}{dt}\Big|_{t=\pi}=\frac{(4)(4-0)+(3)(0-(-2))}{5}=\frac{16+6}{5}=\frac{22}{5}.$$
+The distance is <b>increasing</b> at \(22/5\) units per unit time.</p>
+</details>
+<details>
+<summary>2024 S1 Q4 (worked answer)</summary>
+<p>Legs \(x=2,\ y=4\) cm, \(\dot x=1,\ \dot y=2\) cm/s. (a) \(A=\tfrac12xy\): \(\dot A=\tfrac12(y\dot x+x\dot y)=\tfrac12(4+4)=4\) cm²/s. (b) \(P=x+y+\sqrt{x^2+y^2}\): \(\dot P=\dot x+\dot y+\dfrac{x\dot x+y\dot y}{\sqrt{x^2+y^2}}=3+\dfrac{2+8}{\sqrt{20}}=3+\sqrt5\) cm/s.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type E — "Show that" identities for \(f(\text{combination})\), and directions for such \(g\) <span class="marks">~5–10 marks</span></h3>
+<p><b>Instances:</b> 2025 S2 Q3 (10: the paper prints (a) 5 + (b) 5; the solutions file prints 7 + 3) · 2022 S1 Q4 (10) · 2021 S1 Q6(b) (5) · Tutorial 9 Q5, Q7.</p>
+<p><b>Looks like:</b> "Let \(f\) be a differentiable function… \(g(x,y)=f(ax+by)\). Show that \(a\,g_y=b\,g_x\)." / "\(z=f(x^2-y^2)\). Show that \(xz_y+yz_x=0\)."</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2025 S2 Q3 <span class="marks">[10 marks]</span></b></p>
+<ul>
+<li>(a) Let \(f:\mathbb R\to\mathbb R\) be a differentiable function, and let \(g:\mathbb R^2\to\mathbb R\) be given by \(g(x,y)=f(ax+by)\), for some \(a,b\in\mathbb R\). Show that \(a\Big(\dfrac{\partial g}{\partial y}\Big)=b\Big(\dfrac{\partial g}{\partial x}\Big).\) <b>[5 marks]</b></li>
+<li>(b) Determine the directions of greatest change of the function \(g(x,y)=e^{5x+y}\cos\big((5x+y)^2\big)\) at any point in the \(x\)-\(y\) plane. <b>[5 marks]</b></li>
+</ul>
+</div>
+<details>
+<summary>Full worked solution — 2025 S2 Q3(a)–(b)</summary>
+<p><b>(a)</b> Set \(u=ax+by\), so \(g(x,y)=f(u)\). By the chain rule,
+$$\frac{\partial g}{\partial x}=\frac{df}{du}\frac{\partial u}{\partial x}=a\,f'(u),\qquad \frac{\partial g}{\partial y}=\frac{df}{du}\frac{\partial u}{\partial y}=b\,f'(u).$$
+Therefore \(a\dfrac{\partial g}{\partial y}=ab\,f'(u)=b\big(a f'(u)\big)=b\dfrac{\partial g}{\partial x}\), as required. \(\blacksquare\)</p>
+<p><b>(b)</b> This \(g\) has the form of (a) with \(a=5,\ b=1\) and \(f(u)=e^u\cos(u^2)\). From (a) (or directly), \(g_x=5f'(u)\), \(g_y=f'(u)\), so
+$$\nabla g=f'(u)\,(5,1),\qquad f'(u)=e^{u}\big(\cos u^2-2u\sin u^2\big),\ u=5x+y.$$
+The gradient is always parallel to \((5,1)\). Hence the directions of greatest change are \(\pm(5,1)\): greatest <b>increase</b> along \((5,1)\) where \(f'(u)\gt0\) and along \(-(5,1)\) where \(f'(u)\lt0\); greatest decrease is the opposite one. (Where \(f'(u)=0\), \(\nabla g=\mathbf 0\) and \(g\) has zero rate of change in every direction.)</p>
+<p class="tip">The official solution uses (a) with \(a=5,b=1\): "\(5g_y=g_x\), so \(\nabla g=g_y(5,1)\) ⇒ directions \(\pm(5,1)\)". Recognising that (b) is (a) in disguise is the whole point — no need to differentiate \(\cos\big((5x+y)^2\big)\) at all to get the direction.</p>
+</details>
+<details>
+<summary>2022 S1 Q4 (worked answer)</summary>
+<p>\(z=f(u)\), \(u=x^2-y^2\): \(z_x=2x\,f'(u)\), \(z_y=-2y\,f'(u)\). So \(xz_y+yz_x=-2xy\,f'(u)+2xy\,f'(u)=0\), as required.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type F — Implicit differentiation → tangent line <span class="marks">~10–12 marks</span></h3>
+<p><b>Instances:</b> 2024 S2 Q3 (12) · 2022 S1 Q5 (10, two tangent lines) · 2021 S1 Q3 (10) · Tutorial 9 Q3–4. (Related: 2021 S2 Q2 (5) — tangent plane to the level surface \(x^4-y+z=0\) via its normal \((4x^3,-1,1)\); see <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a>.)</p>
+<div class="card" style="background:var(--panel2)">
+<p><b>📄 Real exam question — 2024 S2 Q3 <span class="marks">[12 marks]</span></b></p>
+<p>Let \(C\) be the curve defined by the equation \(y\ln x+xe^y-e^2=0,\ \) and \(x\gt0.\) Show that the equation of the tangent line to the curve \(C\) at the point \(x=1\) is
+$$y=-\Big(1+\frac2{e^2}\Big)x+3+\frac2{e^2}.$$</p>
+</div>
+<details>
+<summary>Full worked solution — 2024 S2 Q3 (with the marking scheme)</summary>
+<p><b>Point</b> [2 marks]: at \(x=1\), \(y\ln1+e^y-e^2=0\Rightarrow e^y=e^2\Rightarrow y=2\). The point is \((1,2)\).</p>
+<p><b>Set-up</b> [2 marks]: \(F(x,y)=y\ln x+xe^y-e^2=0\), so \(\dfrac{dy}{dx}(1,2)=-\dfrac{F_x(1,2)}{F_y(1,2)}\).</p>
+<p><b>Working</b> [5 marks]: \(F_x=\dfrac yx+e^y\Rightarrow F_x(1,2)=2+e^2\); \(F_y=\ln x+xe^y\Rightarrow F_y(1,2)=e^2\).
+$$\frac{dy}{dx}(1,2)=-\frac{2+e^2}{e^2}=-\Big(1+\frac2{e^2}\Big).$$</p>
+<p><b>Tangent line</b> [3 marks]: \(y-2=-\Big(1+\dfrac2{e^2}\Big)(x-1)\Rightarrow y=-\Big(1+\dfrac2{e^2}\Big)x+1+\dfrac2{e^2}+2=-\Big(1+\dfrac2{e^2}\Big)x+3+\dfrac2{e^2}\), as required.</p>
+</details>
+<details>
+<summary>2022 S1 Q5 and 2021 S1 Q3 (worked answers)</summary>
+<p><b>2022 S1 Q5</b> \(y\cos x=x^2+y^2\) at \(x=0\): \(y=y^2\Rightarrow y=0\) or \(y=1\) — <b>two points, two tangent lines</b>. \(F=y\cos x-x^2-y^2\), \(y'=\dfrac{y\sin x+2x}{\cos x-2y}\), which is \(0\) at both \((0,0)\) and \((0,1)\). Tangent lines: \(y=0\) and \(y=1\).</p>
+<p><b>2021 S1 Q3</b> \(e^{xy}+ye^y=2e\) at \(y=1\): \(e^x+e=2e\Rightarrow x=1\). \(F_x=ye^{xy}=e\), \(F_y=xe^{xy}+e^y+ye^y=3e\), so \(y'=-\tfrac13\): tangent \(y-1=-\tfrac13(x-1)\).</p>
+</details>
+</div>
+</section>
+
+<!-- ================= 5. TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the verb, know the tool. These mappings are the difference between a 2-minute and a 10-minute answer.</p>
+
+<h4>A · Direction &amp; rate triggers</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"Determine \(\nabla f(x,y)\)"</td><td>General formula vector \((f_x,f_y)\) — no point substituted.</td></tr>
+<tr><td>"rate of change of \(f\) at \(P\) in the direction of \(\mathbf v\)" / "slope in direction" / "\(f_{\mathbf v}(P)\)"</td><td>\(\nabla f(P)\cdot\mathbf v/\|\mathbf v\|\) — a <b>number</b>. Normalise!</td></tr>
+<tr><td>"… in the direction <b>towards</b> the point \(Q\)" / "towards the origin"</td><td>Direction \(=Q-P\) (origin: \(-P\)), then normalise.</td></tr>
+<tr><td>"with respect to distance"</td><td>Directional derivative with a <b>unit</b> vector (not a time rate).</td></tr>
+<tr><td>"direction of greatest / maximum increase", "steepest ascent", "climb most steeply"</td><td>\(\nabla f(P)\) — a <b>vector</b>.</td></tr>
+<tr><td>"direction of greatest decrease", "drop most rapidly", "ant finding it too hot", "water flows"</td><td>\(-\nabla f(P)\).</td></tr>
+<tr><td>"maximum rate of change" / "at what rate is it rising in that direction"</td><td>\(\|\nabla f(P)\|\) (for decrease: \(-\|\nabla f(P)\|\)).</td></tr>
+<tr><td>"directions of greatest <b>change</b>" (no "increase")</td><td>Both \(\pm\nabla f\) (2025 S2 Q3b).</td></tr>
+<tr><td>"direction(s) where \(f\) does not change" / "zero slope" / "walks along the contour"</td><td>\(\mathbf u\perp\nabla f(P)\): 2-D \(\pm(-q,p)\); 3-D a whole plane.</td></tr>
+<tr><td>"the unit vector in this direction"</td><td>\(\nabla f(P)/\|\nabla f(P)\|\) — normalise the answer.</td></tr>
+<tr><td>"at what angle above the horizontal"</td><td>\(\arctan\|\nabla h(P)\|\).</td></tr>
+<tr><td>"attains its maximum value of \(M\) in the direction of …"</td><td>\(\nabla f(P)=M\times\) (unit vector of that direction).</td></tr>
+<tr><td>"the rates towards \(P_1\) and \(P_2\) are …; determine \(\nabla f\)"</td><td>Two linear equations in \((a,b)\).</td></tr>
+</table>
+
+<h4>B · Chain-rule triggers</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"with the aid of a tree diagram"</td><td>Draw it — it carries marks (2 in 2025 S1 Q4).</td></tr>
+<tr><td>"\(z=f(x,y)\), \(x=x(t)\), \(y=y(t)\), find \(dz/dt\)"</td><td>Total-derivative chain rule (on the sheet).</td></tr>
+<tr><td>"\(x=x(s,t)\), \(y=y(s,t)\), find \(\partial z/\partial s\)"</td><td>Partial chain rule, paths ending in \(s\) only.</td></tr>
+<tr><td>"check by expressing \(w\) directly in terms of…"</td><td>Substitute first, differentiate second — must agree.</td></tr>
+<tr><td>"at a certain instant … increasing at … decreasing at … how fast"</td><td>Related rates; decreasing ⇒ negative derivative.</td></tr>
+<tr><td>"rate of change experienced by the particle/bird at time \(t\)"</td><td>\(\dfrac{d}{dt}T(\mathbf r(t))=\nabla T\cdot\mathbf r'(t)\).</td></tr>
+<tr><td>"is it increasing or decreasing at that instant?"</td><td>Sign of the derivative, stated in words (1 mark).</td></tr>
+<tr><td>"let \(f\) be a differentiable function … \(g=f(ax+by)\) … show that"</td><td>\(u=\) inside, \(g_x=f'(u)u_x\), \(g_y=f'(u)u_y\), combine.</td></tr>
+<tr><td>"express \(\partial f/\partial u\) in terms of \(\partial f/\partial x\) and \(\partial f/\partial y\)"</td><td>Chain rule, leave \(f_x,f_y\) symbolic.</td></tr>
+</table>
+
+<h4>C · Implicit / level-set triggers</h4>
+<table>
+<tr><th>If the question says…</th><th>It means / do this</th></tr>
+<tr><td>"curve defined by the equation …", "find \(y'(x)\)"</td><td>\(F=0\), \(y'=-F_x/F_y\).</td></tr>
+<tr><td>"tangent line to the curve at the point \(x=a\)"</td><td>First solve for \(y\) (maybe several!), then slope, then line.</td></tr>
+<tr><td>"\(z\) is defined implicitly by…", "find \(\partial z/\partial x\)"</td><td>\(-F_x/F_z\), \(-F_y/F_z\).</td></tr>
+<tr><td>"tangent plane to the surface \(F(x,y,z)=k\)", "normal to the surface"</td><td>\(\nabla F(P)\) is the normal.</td></tr>
+<tr><td>"show that \(\nabla F\) is normal to…"</td><td>Show \(\nabla F\) matches the tangent-plane normal (Tutorial 8 Q5), or use \(\nabla F\cdot\mathbf r'=0\).</td></tr>
+<tr><td>"horizontal tangent" / "vertical tangent"</td><td>\(F_x=0\) (with \(F_y\ne0\)) / \(F_y=0\) (with \(F_x\ne0\)), together with the curve equation.</td></tr>
+</table>
+
+<h4>Full-marks template for a Type A question (copy this shape)</h4>
+<div class="mono">(a) ∇f = (f_x, f_y) = ( … , … ).                               [formula + partials]
+(b) Direction v = (…), ‖v‖ = …, so û = v/‖v‖.
+    ∇f(P) = ( … , … ).                                              [evaluate]
+    f_v(P) = ∇f(P)·û = ( … )/‖v‖ = … .                             [exact value]
+(c) The direction of greatest increase is ∇f(P) = ( … ) (∝ …),
+    and the maximum rate is ‖∇f(P)‖ = … .
+    [decrease: −∇f(P), rate −‖∇f(P)‖;  no change: vectors ⟂ ∇f(P)]</div>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Forgetting to normalise.</b> \(\nabla f\cdot\mathbf v\) with \(\|\mathbf v\|\ne1\) gives the wrong number. The sheet writes \(\mathbf u/\|\mathbf u\|\) for a reason. Check: \(|D_{\mathbf u}f|\le\|\nabla f\|\) always.</div>
+
+<div class="trap"><b>"Towards \(Q\)" ≠ "in the direction of \(Q\)".</b> Towards \(Q\) from \(P\) is \(Q-P\). Using \(Q\) as the direction vector is the most common error in 2025 S1 Q1-type questions.</div>
+
+<div class="trap"><b>Direction vs rate.</b> "Direction" wants a <b>vector</b>; "rate" wants a <b>number</b>. Giving \(\|\nabla f\|\) when asked for a direction, or \(\nabla f\) when asked for the rate, scores zero for that part. 2024 S1 Q1 asks for both in (b) and (c) — keep them separate.</div>
+
+<div class="trap"><b>Steepest descent rate is negative.</b> In the direction \(-\nabla f\), \(D_{\mathbf u}f=-\|\nabla f\|\). The 2022 S2 marking scheme writes "rate at which the temperature is dropping most rapidly is \(-\|\nabla T(1,1)\|=-\tfrac19\sqrt2\)". If you say "drops at the rate \(\tfrac{\sqrt2}9\)", the words carry the sign — be explicit either way.</div>
+
+<div class="trap"><b>Zero-change directions come in pairs.</b> In 2-D there are <b>two</b>: \((-q,p)\) and \((q,-p)\). The 2025 S1 MS awarded 2 marks for "\((-3,1)\) or \((3,-1)\)". In 3-D, give the condition \(\nabla f\cdot\mathbf u=0\) (a plane of directions), not a single vector.</div>
+
+<div class="trap"><b>"Directions of greatest change" of \(f(ax+by)\) — the sign flips.</b> \(\nabla g=f'(u)(a,b)\); where \(f'(u)\lt0\) the gradient points along \(-(a,b)\). Say "\(\pm(a,b)\)" and explain which is increase — and that there's no preferred direction where \(\nabla g=\mathbf 0\).</div>
+
+<div class="trap"><b>Dropping a branch of the tree.</b> With three intermediate variables you need three terms, even if one is zero (\(\partial z/\partial\theta=0\) in 2025 S1 Q4). Missing a whole branch usually loses the "correct working" marks for that derivative.</div>
+
+<div class="trap"><b>\(d\) vs \(\partial\).</b> \(\frac{dz}{dt}\) only when \(z\) is ultimately a function of \(t\) alone; \(\frac{\partial z}{\partial s}\) when it depends on \(s\) and \(t\). Writing \(\frac{dz}{dx}\) for a two-variable \(z\) is marked as a notation error.</div>
+
+<div class="trap"><b>Not substituting back.</b> "Find \(\partial w/\partial r\)" means in terms of \(r,\varphi,\theta\). Leaving \(2x\sin\varphi\cos\theta+\dots\) is unfinished; simplify with \(\sin^2+\cos^2=1\), double angles, etc.</div>
+
+<div class="trap"><b>Sign of a "decreasing" rate.</b> "Decreasing at 0.1 Ohm/s" ⇒ \(dR_2/dt=-0.1\) (Tutorial 9 Q6). Put the minus sign in <i>before</i> you multiply.</div>
+
+<div class="trap"><b>Implicit: forgetting to find \(y\) first.</b> "Tangent line at \(x=1\)" gives only \(x\). The 2024 S2 MS awarded <b>2 marks</b> for finding \(y=2\). If the equation gives several \(y\)-values, there are several tangent lines (2022 S1 Q5: \(y=0\) and \(y=1\)).</div>
+
+<div class="trap"><b>Implicit: the minus sign and the arrangement.</b> \(y'=-F_x/F_y\) requires the equation written as \(F(x,y)=0\) (or \(=\) const). If you define \(F\) with the terms on the wrong sides, still fine — as long as <i>all</i> terms are on one side. Dropping the minus sign flips the tangent line.</div>
+
+<div class="trap"><b>Using \(\nabla f\) of the surface \(z=f(x,y)\) as the 3-D normal.</b> \(\nabla f=(f_x,f_y)\) is a 2-D vector, normal to the <i>contours</i> in the \(xy\)-plane. The normal to the <i>surface</i> is \(\nabla F=(f_x,f_y,-1)\) with \(F=f(x,y)-z\).</div>
+
+<div class="trap"><b>Trusting a solution sheet blindly.</b> The 2022 S1 Q6 official solution has a sign slip in the unit vector (see Type B). Always check your \(\nabla f\) against the given data before moving on — it takes 20 seconds.</div>
+
+<div class="tip">What the markers reward (from the 2022 S2, 2024 S2 and 2025 S1 marking schemes): (1) the formula written before numbers, (2) correct general partials, (3) correct values at the point, (4) a final answer in the form asked (vector / number / line equation) with a sentence of interpretation ("the temperature is decreasing", "the capacity is decreasing at that instant", "\(f\) does not change in directions perpendicular to \(\nabla f\)").</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. What is the maximum possible value of a directional derivative of \(f\) at \(P\), and in which direction?</summary>
+<p>\(\|\nabla f(P)\|\), attained in the direction of \(\nabla f(P)\) (because \(D_{\hat{\mathbf u}}f=\|\nabla f\|\cos\theta\) and \(\cos\theta\le1\)).</p></details>
+
+<details><summary>2. \(\|\nabla f(P)\|=10\). What is the rate of change of \(f\) in a direction making \(60^\circ\) with \(\nabla f(P)\)?</summary>
+<p>\(10\cos60^\circ=5\).</p></details>
+
+<details><summary>3. \(\nabla f(P)=(3,-4)\). Give the directions of zero change.</summary>
+<p>\((4,3)\) and \((-4,-3)\) (both perpendicular to \((3,-4)\)).</p></details>
+
+<details><summary>4. Can the rate of change of \(f\) at \(P\) be \(7\) if \(\nabla f(P)=(4,5)\)?</summary>
+<p>No: \(\|\nabla f(P)\|=\sqrt{41}\approx6.4\lt7\), and no directional derivative exceeds \(\|\nabla f\|\).</p></details>
+
+<details><summary>5. Why is \(\nabla f\) perpendicular to the contour through \(P\)?</summary>
+<p>Along the contour \(f(\mathbf r(t))=c\); differentiating gives \(\nabla f\cdot\mathbf r'(t)=0\), and \(\mathbf r'\) is tangent to the contour.</p></details>
+
+<details><summary>6. You are at \(P=(1,2)\) and asked for the rate "towards the origin". What direction vector do you use?</summary>
+<p>\((0,0)-(1,2)=(-1,-2)\), normalised to \(\tfrac1{\sqrt5}(-1,-2)\).</p></details>
+
+<details><summary>7. Write the chain rule for \(\partial z/\partial t\) when \(z=f(x,y)\), \(x=x(s,t)\), \(y=y(s,t)\).</summary>
+<p>\(\dfrac{\partial z}{\partial t}=\dfrac{\partial z}{\partial x}\dfrac{\partial x}{\partial t}+\dfrac{\partial z}{\partial y}\dfrac{\partial y}{\partial t}\).</p></details>
+
+<details><summary>8. \(g(x,y)=f(2x-7y)\). Find \(\nabla g\) in terms of \(f'\), and the identity linking \(g_x\) and \(g_y\).</summary>
+<p>\(\nabla g=f'(2x-7y)\,(2,-7)\). Identity: \(2g_y=-7g_x\), i.e. \(7g_x+2g_y=0\).</p></details>
+
+<details><summary>9. State \(dy/dx\) for the curve \(F(x,y)=0\) and \(\partial z/\partial y\) for the surface \(F(x,y,z)=0\).</summary>
+<p>\(dy/dx=-F_x/F_y\); \(\partial z/\partial y=-F_y/F_z\).</p></details>
+
+<details><summary>10. Normal vector to the surface \(z=x^2+y^2\) at \((x_0,y_0,z_0)\)?</summary>
+<p>Write \(F=x^2+y^2-z\): \(\nabla F=(2x_0,2y_0,-1)\) (Tutorial 8 Q5).</p></details>
+
+<details><summary>11. The height of a hill has \(\|\nabla h(P)\|=1\). At what angle to the horizontal is the steepest climb?</summary>
+<p>\(\arctan1=\pi/4\) (45°).</p></details>
+
+<details><summary>12. "The radius is 5 cm and decreasing at 2 cm/s." What value do you substitute for \(dr/dt\)?</summary>
+<p>\(dr/dt=-2\) cm/s.</p></details>
+
+<details><summary>13. In a tree diagram for \(w=f(x,y,z)\), \(x,y,z\) functions of \((r,\theta)\), how many terms are in \(\partial w/\partial\theta\)?</summary>
+<p>Three — one per path from \(w\) down to \(\theta\) (through \(x\), \(y\) and \(z\)), even if some factors are 0.</p></details>
+
+<details><summary>14. \(D_{\mathbf v}f(P)=-\|\nabla f(P)\|\). What can you say about \(\nabla f(P)\)?</summary>
+<p>It points exactly opposite to \(\mathbf v\): \(\nabla f(P)=-\|\nabla f(P)\|\,\mathbf v/\|\mathbf v\|\) (2022 S1 Q6).</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Fresh functions and numbers you have <b>not</b> seen in the Summary, Tutorials 8–9 or any 2020–2025 paper — same exam <i>style</i>, clean no-calculator numbers. Every answer below is verified with SymPy (<code>verify/ch05.py</code>).</p>
+<p class="tip">How to use the arena: read the "📖 Learn from these" pair first (written exactly as a marker wants to see it), then cover the solutions and attempt "✏️ Your turn" on paper. Only reveal a solution once you've committed to a formula, a vector/number and a sentence.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Gradient &amp; directional derivatives</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — 2-D, direction given as a vector</summary>
+<p><b>Q.</b> Let \(f(x,y)=xe^y+y^2\). Find the rate of change of \(f\) at \((2,0)\) in the direction of \(\mathbf v=3\mathbf i-4\mathbf j\).</p>
+<p>\(f_x=e^y,\ f_y=xe^y+2y\). At \((2,0)\): \(\nabla f(2,0)=(1,2)\).<br>
+\(\|\mathbf v\|=5\), \(\hat{\mathbf u}=\tfrac15(3,-4)\).
+$$D_{\mathbf v}f(2,0)=(1,2)\cdot\tfrac15(3,-4)=\frac{3-8}{5}=-1.$$
+\(f\) is <b>decreasing</b> at rate 1 per unit distance in that direction.</p>
+</details>
+<details>
+<summary>Worked B — 3-D, and a direction tangent to the level surface</summary>
+<p><b>Q.</b> Let \(f(x,y,z)=\ln(x^2+y^2+z^2)\), \(P=(1,2,2)\). (a) Find \(D_{\mathbf v}f(P)\) for \(\mathbf v=(0,3,4)\). (b) Show that \(f\) does not change at \(P\) in the direction \(\mathbf w=(2,-2,1)\) and explain geometrically.</p>
+<p>\(\nabla f=\dfrac{(2x,2y,2z)}{x^2+y^2+z^2}\), and \(x^2+y^2+z^2=9\) at \(P\), so \(\nabla f(P)=\tfrac29(1,2,2)\).</p>
+<p><b>(a)</b> \(\|\mathbf v\|=5\): \(D_{\mathbf v}f(P)=\tfrac29\cdot\tfrac15(0+6+8)=\dfrac{28}{45}\).</p>
+<p><b>(b)</b> \(\nabla f(P)\cdot\mathbf w=\tfrac29(2-4+2)=0\), so \(D_{\mathbf w}f(P)=0\). Geometrically: the level surfaces of \(f\) are spheres centred at the origin; \(\mathbf w\perp(1,2,2)\) is tangent to the sphere of radius 3 at \(P\), and moving along a level surface doesn't change \(f\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Let \(f(x,y)=x^3y-2xy^2+5\). Determine \(\nabla f(x,y)\) and \(\nabla f(1,-1)\).</p>
+<details><summary>Solution</summary>
+<p>\(\nabla f=(3x^2y-2y^2,\ x^3-4xy)\). At \((1,-1)\): \((-3-2,\ 1+4)=(-5,5)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Let \(f(x,y)=\sin(\pi xy)+x^2\). (a) Find \(\nabla f(1,\tfrac12)\). [3] (b) Find the directional derivative of \(f\) at \((1,\tfrac12)\) in the direction of \(\mathbf v=\mathbf i+\sqrt3\,\mathbf j\). [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f_x=\pi y\cos(\pi xy)+2x\), \(f_y=\pi x\cos(\pi xy)\). At \((1,\tfrac12)\): \(\cos\tfrac\pi2=0\), so \(\nabla f=(2,0)\).</p>
+<p><b>(b)</b> \(\|\mathbf v\|=2\): \(D_{\mathbf v}f=(2,0)\cdot\tfrac12(1,\sqrt3)=1\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q3.</b> The concentration of a chemical is \(C(x,y,z)=xy+yz+zx\). Find the rate of change of \(C\) with respect to distance at \(P=(1,2,3)\) in the direction towards the point \(Q=(3,3,5)\).</p>
+<details><summary>Solution</summary>
+<p>\(\nabla C=(y+z,\ x+z,\ x+y)\), \(\nabla C(P)=(5,4,3)\). Direction \(Q-P=(2,1,2)\), length 3.
+$$D_{\mathbf u}C(P)=\tfrac13(10+4+6)=\frac{20}{3}.$$</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> Let \(f(x,y)=x^2-xy+y^2\) and \(\hat{\mathbf u}=(\cos\theta,\sin\theta)\). (a) Show that \(D_{\hat{\mathbf u}}f(1,1)=\cos\theta+\sin\theta\). [3] (b) Find all \(\theta\in[0,2\pi)\) for which \(D_{\hat{\mathbf u}}f(1,1)=1\). [3] (c) Find the maximum value of \(D_{\hat{\mathbf u}}f(1,1)\) and the \(\theta\) at which it occurs. [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\nabla f=(2x-y,\ 2y-x)\), \(\nabla f(1,1)=(1,1)\), so \(D_{\hat{\mathbf u}}f=\cos\theta+\sin\theta\).</p>
+<p><b>(b)</b> \(\cos\theta+\sin\theta=\sqrt2\sin(\theta+\tfrac\pi4)=1\Rightarrow\sin(\theta+\tfrac\pi4)=\tfrac1{\sqrt2}\Rightarrow\theta+\tfrac\pi4=\tfrac\pi4\) or \(\tfrac{3\pi}4\): \(\theta=0\) or \(\theta=\tfrac\pi2\).</p>
+<p><b>(c)</b> Max \(=\|\nabla f(1,1)\|=\sqrt2\), when \(\hat{\mathbf u}\) is along \((1,1)\): \(\theta=\tfrac\pi4\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Greatest increase, decrease &amp; zero change</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — a bug on a hot plate</summary>
+<p><b>Q.</b> The temperature on a plate is \(T(x,y)=100-x^2-3y^2\). A bug at \((2,1)\) wants to cool down as fast as possible. In which direction should it move, and at what rate does the temperature drop?</p>
+<p>\(\nabla T=(-2x,-6y)\), \(\nabla T(2,1)=(-4,-6)\). Fastest cooling is along \(-\nabla T(2,1)=(4,6)\), i.e. direction \((2,3)\). The rate of change there is \(-\|\nabla T(2,1)\|=-\sqrt{52}=-2\sqrt{13}\): the temperature drops at \(2\sqrt{13}\) degrees per unit distance.</p>
+</details>
+<details>
+<summary>Worked B — 3-D: a whole plane of level directions</summary>
+<p><b>Q.</b> Let \(f(x,y,z)=x^2yz\) and \(P=(1,-1,2)\). Find (a) the direction and value of the maximum rate of increase, (b) the direction of most rapid decrease, (c) all directions in which \(f\) does not change, giving two independent examples.</p>
+<p>\(\nabla f=(2xyz,\ x^2z,\ x^2y)\), \(\nabla f(P)=(-4,2,-1)\), \(\|\nabla f(P)\|=\sqrt{21}\).</p>
+<p><b>(a)</b> Direction \((-4,2,-1)\), max rate \(\sqrt{21}\). <b>(b)</b> \((4,-2,1)\) (rate \(-\sqrt{21}\)).</p>
+<p><b>(c)</b> All \(\mathbf u=(u_1,u_2,u_3)\) with \(-4u_1+2u_2-u_3=0\) — a plane of directions. E.g. \((1,2,0)\) and \((0,1,2)\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find the maximum rate of change of \(f(x,y)=xe^{xy}\) at \((1,0)\) and the direction in which it occurs.</p>
+<details><summary>Solution</summary>
+<p>\(f_x=e^{xy}+xye^{xy}\), \(f_y=x^2e^{xy}\). \(\nabla f(1,0)=(1,1)\). Max rate \(\sqrt2\), direction \((1,1)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> The height of a hill (metres) is \(h(x,y)=200-\tfrac12x^2-y^2\). A walker is at \((6,4)\). (a) In which direction should she walk to ascend most steeply? [2] (b) What is the slope in that direction, and the angle of climb above the horizontal? [2] (c) In which directions can she walk without changing height? [2]</p>
+<details><summary>Solution</summary>
+<p>\(\nabla h=(-x,-2y)\), \(\nabla h(6,4)=(-6,-8)\).</p>
+<p><b>(a)</b> Direction \((-6,-8)\), i.e. \((-3,-4)\). <b>(b)</b> Slope \(\|\nabla h\|=10\); angle \(\arctan10\). <b>(c)</b> \(\perp(-3,-4)\): \((4,-3)\) and \((-4,3)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q3.</b> Let \(f(x,y)=\ln(x^2+y^2)\). At \((3,4)\), find the direction of greatest decrease, the rate of change in that direction, and the directions of zero change.</p>
+<details><summary>Solution</summary>
+<p>\(\nabla f=\dfrac{(2x,2y)}{x^2+y^2}\), \(\nabla f(3,4)=\tfrac1{25}(6,8)\). Greatest decrease along \(-(6,8)\propto(-3,-4)\), rate \(-\|\nabla f\|=-\tfrac{10}{25}=-\tfrac25\). Zero change: \((4,-3)\) and \((-4,3)\) (tangent to the circle \(x^2+y^2=25\)).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 8 marks</span> <b>Q4.</b> Let \(f(x,y)=x^2y+\tfrac13y^3\) and \(P=(1,2)\). (a) Is there a direction in which the rate of change of \(f\) at \(P\) is \(7\)? Justify. [3] (b) Find all unit vectors \(\hat{\mathbf u}\) for which \(D_{\hat{\mathbf u}}f(P)=5\). [5]</p>
+<details><summary>Solution</summary>
+<p>\(\nabla f=(2xy,\ x^2+y^2)\), \(\nabla f(1,2)=(4,5)\), \(\|\nabla f(P)\|=\sqrt{41}\).</p>
+<p><b>(a)</b> No: every directional derivative lies in \([-\sqrt{41},\sqrt{41}]\), and \(\sqrt{41}\lt\sqrt{49}=7\).</p>
+<p><b>(b)</b> Let \(\hat{\mathbf u}=(p,q)\), \(p^2+q^2=1\), \(4p+5q=5\). Then \(p=\tfrac54(1-q)\), so \(\tfrac{25}{16}(1-q)^2+q^2=1\Rightarrow41q^2-50q+9=0\Rightarrow(q-1)(41q-9)=0\).<br>
+\(q=1\Rightarrow p=0\): \(\hat{\mathbf u}=(0,1)\). \(q=\tfrac9{41}\Rightarrow p=\tfrac{40}{41}\): \(\hat{\mathbf u}=\big(\tfrac{40}{41},\tfrac9{41}\big)\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Reverse problems — recovering \(\nabla f\) and constants</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — one rate is zero</summary>
+<p><b>Q.</b> At \(P\), the rate of change of \(f\) in the direction \(\mathbf i\) is \(3\), and in the direction \(4\mathbf i+3\mathbf j\) it is \(0\). Find \(\nabla f(P)\) and the maximum rate of change at \(P\).</p>
+<p>Let \(\nabla f(P)=(a,b)\). Direction \(\mathbf i\): \(a=3\). Direction \((4,3)/5\): \(\tfrac15(4a+3b)=0\Rightarrow12+3b=0\Rightarrow b=-4\).
+\(\nabla f(P)=(3,-4)\); max rate \(\|\nabla f(P)\|=5\) in direction \((3,-4)\). (Check: \((3,-4)\perp(4,3)\) ✓ — a zero rate means perpendicular.)</p>
+</details>
+<details>
+<summary>Worked B — find the constants from "maximum value in a direction"</summary>
+<p><b>Q.</b> Let \(f(x,y,z)=ax^2+byz+cz^2\). At \(P=(1,1,1)\) the directional derivative attains its maximum value of \(6\) in the direction of \(\mathbf d=(2,2,-1)\). Find \(a,b,c\).</p>
+<p>Max value \(6\) in direction \(\mathbf d\) ⇒ \(\nabla f(P)=6\,\dfrac{\mathbf d}{\|\mathbf d\|}=6\cdot\tfrac13(2,2,-1)=(4,4,-2)\).<br>
+\(\nabla f=(2ax,\ bz,\ by+2cz)\), \(\nabla f(P)=(2a,\ b,\ b+2c)\). So \(2a=4,\ b=4,\ 4+2c=-2\):
+$$a=2,\quad b=4,\quad c=-3.$$</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q1.</b> At a point \(P\), the rate of change of \(f(x,y)\) in the direction of \(\mathbf i+\mathbf j\) is \(3\sqrt2\), and in the direction of \(\mathbf i-\mathbf j\) is \(\sqrt2\). (a) Find \(\nabla f(P)\). [3] (b) Find the maximum rate of change at \(P\). [1] (c) Find the directions of zero change. [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\tfrac1{\sqrt2}(a+b)=3\sqrt2\Rightarrow a+b=6\); \(\tfrac1{\sqrt2}(a-b)=\sqrt2\Rightarrow a-b=2\). So \(\nabla f(P)=(4,2)\).</p>
+<p><b>(b)</b> \(\sqrt{20}=2\sqrt5\). <b>(c)</b> \((1,-2)\) and \((-1,2)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q2.</b> The directional derivative of \(f(x,y,z)\) at \(P\) in the direction of \(\mathbf v=(1,2,2)\) is \(6\), and \(\|\nabla f(P)\|=6\). (a) Find \(\nabla f(P)\). [4] (b) Find the rate of change of \(f\) at \(P\) in the direction \((2,-2,1)\). [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(D_{\mathbf v}f=\|\nabla f\|\cos\theta\Rightarrow6=6\cos\theta\Rightarrow\theta=0\): \(\nabla f\) is parallel to \(\mathbf v\) with length 6, so \(\nabla f(P)=6\cdot\tfrac13(1,2,2)=(2,4,4)\).</p>
+<p><b>(b)</b> \((2,4,4)\cdot\tfrac13(2,-2,1)=\tfrac13(4-8+4)=0\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Let \(f(x,y)=ax^2+bxy\). At \(P=(1,2)\), the maximum rate of change of \(f\) is \(10\), attained in the direction of \(3\mathbf i+4\mathbf j\). (a) Find \(a\) and \(b\). [5] (b) Find the directions in which \(f\) does not change at \(P\). [3]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\nabla f(P)=10\cdot\tfrac15(3,4)=(6,8)\). \(\nabla f=(2ax+by,\ bx)\), at \(P\): \((2a+2b,\ b)\). So \(b=8\), \(2a+16=6\Rightarrow a=-5\).</p>
+<p><b>(b)</b> \(\perp(6,8)\): \((4,-3)\) and \((-4,3)\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Tangent lines &amp; planes to level sets via \(\nabla F\)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — tangent line to a contour</summary>
+<p><b>Q.</b> Let \(f(x,y)=x^2+4y^2\). Find the contour through \((2,1)\), the gradient there, and the tangent line to the contour at \((2,1)\).</p>
+<p>\(f(2,1)=8\): the contour is the ellipse \(x^2+4y^2=8\). \(\nabla f=(2x,8y)\), \(\nabla f(2,1)=(4,8)\propto(1,2)\) — normal to the ellipse. Tangent line: \((x-2)+2(y-1)=0\iff x+2y=4\).</p>
+</details>
+<details>
+<summary>Worked B — tangent plane to a level surface</summary>
+<p><b>Q.</b> Find the tangent plane to \(xy+yz+zx=11\) at \((1,2,3)\).</p>
+<p>Check: \(2+6+3=11\) ✓. \(\nabla F=(y+z,\ x+z,\ x+y)\), \(\nabla F(1,2,3)=(5,4,3)\).
+Plane: \(5(x-1)+4(y-2)+3(z-3)=0\iff5x+4y+3z=22\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find the tangent line to the curve \(x^2+3xy-y^2=3\) at \((1,1)\).</p>
+<details><summary>Solution</summary>
+<p>Check \(1+3-1=3\) ✓. \(\nabla F=(2x+3y,\ 3x-2y)=(5,1)\). Line: \(5(x-1)+(y-1)=0\iff5x+y=6\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Find the tangent plane and normal line to the surface \(x^2+2y^2+z^2=7\) at \((1,-1,2)\).</p>
+<details><summary>Solution</summary>
+<p>Check \(1+2+4=7\) ✓. \(\nabla F=(2x,4y,2z)=(2,-4,4)\propto(1,-2,2)\).
+Plane: \((x-1)-2(y+1)+2(z-2)=0\iff x-2y+2z=7\). Normal line: \(\mathbf r(t)=(1,-1,2)+t(1,-2,2)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Find all points on the ellipsoid \(x^2+2y^2+3z^2=66\) at which the tangent plane is parallel to the plane \(x+y+z=0\), and give the equations of those tangent planes.</p>
+<details><summary>Solution</summary>
+<p>Parallel planes ⇔ parallel normals: \(\nabla F=(2x,4y,6z)=\lambda(1,1,1)\), so \(x=\tfrac\lambda2,\ y=\tfrac\lambda4,\ z=\tfrac\lambda6\). Substitute:
+$$\lambda^2\Big(\tfrac14+\tfrac18+\tfrac1{12}\Big)=\frac{11\lambda^2}{24}=66\Rightarrow\lambda^2=144\Rightarrow\lambda=\pm12.$$
+Points \((6,3,2)\) and \((-6,-3,-2)\). Tangent planes: \(x+y+z=11\) and \(x+y+z=-11\).</p>
+</details>
+</div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Chain rule with tree diagrams</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — three intermediate variables, one final variable</summary>
+<p><b>Q.</b> Let \(w=xy+z^2\), \(x=\cos t\), \(y=\sin t\), \(z=t\). Find \(\dfrac{dw}{dt}\) and its value at \(t=\pi\).</p>
+<div class="mono">          w
+  ∂w/∂x ∂w/∂y ∂w/∂z
+    x     y     z
+    |     |     |
+    t     t     t</div>
+<p>$$\frac{dw}{dt}=\frac{\partial w}{\partial x}\frac{dx}{dt}+\frac{\partial w}{\partial y}\frac{dy}{dt}+\frac{\partial w}{\partial z}\frac{dz}{dt}=y(-\sin t)+x\cos t+2z=\cos^2t-\sin^2t+2t=\cos2t+2t.$$
+At \(t=\pi\): \(1+2\pi\). (Check: \(w=\tfrac12\sin2t+t^2\), \(w'=\cos2t+2t\) ✓.)</p>
+</details>
+<details>
+<summary>Worked B — two final variables</summary>
+<p><b>Q.</b> Let \(z=\ln(x^2+y^2)\) with \(x=s+t\), \(y=s-t\). Find \(\dfrac{\partial z}{\partial s}\) and \(\dfrac{\partial z}{\partial t}\) in terms of \(s,t\).</p>
+<p>\(z_x=\dfrac{2x}{x^2+y^2}\), \(z_y=\dfrac{2y}{x^2+y^2}\); \(x_s=1,\ x_t=1,\ y_s=1,\ y_t=-1\); \(x^2+y^2=2s^2+2t^2\).
+$$\frac{\partial z}{\partial s}=\frac{2x+2y}{x^2+y^2}=\frac{4s}{2(s^2+t^2)}=\frac{2s}{s^2+t^2},\qquad \frac{\partial z}{\partial t}=\frac{2x-2y}{x^2+y^2}=\frac{2t}{s^2+t^2}.$$</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Let \(z=x^2y\), \(x=e^t\), \(y=t^2\). Use the chain rule to find \(\dfrac{dz}{dt}\), and evaluate it at \(t=1\).</p>
+<details><summary>Solution</summary>
+<p>\(\dfrac{dz}{dt}=2xy\,e^t+x^2\cdot2t=2t^2e^{2t}+2te^{2t}=2t(t+1)e^{2t}\). At \(t=1\): \(4e^2\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Let \(w=xyz\), \(x=s+t\), \(y=s-t\), \(z=st\). With a tree diagram, find \(\dfrac{\partial w}{\partial s}\) and \(\dfrac{\partial w}{\partial t}\) at \((s,t)=(2,1)\).</p>
+<details><summary>Solution</summary>
+<p>At \((2,1)\): \(x=3,\ y=1,\ z=2\); \(w_x=yz=2,\ w_y=xz=6,\ w_z=xy=3\).
+$$\frac{\partial w}{\partial s}=2(1)+6(1)+3(t)=2+6+3=11,\qquad\frac{\partial w}{\partial t}=2(1)+6(-1)+3(s)=2-6+6=2.$$
+Check: \(w=s^3t-st^3\): \(w_s=3s^2t-t^3=11\) ✓, \(w_t=s^3-3st^2=2\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Let \(w=x^2+y^2-2z^2\) with \(x=r\cos\theta,\ y=r\sin\theta,\ z=r\). (a) With the aid of a tree diagram, find \(\dfrac{\partial w}{\partial r}\) and \(\dfrac{\partial w}{\partial\theta}\). [6] (b) Check by writing \(w\) in terms of \(r,\theta\). [2]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(w_x=2x,\ w_y=2y,\ w_z=-4z\).
+$$\frac{\partial w}{\partial r}=2x\cos\theta+2y\sin\theta-4z\cdot1=2r(\cos^2\theta+\sin^2\theta)-4r=-2r.$$
+$$\frac{\partial w}{\partial\theta}=2x(-r\sin\theta)+2y(r\cos\theta)-4z\cdot0=-2r^2\cos\theta\sin\theta+2r^2\sin\theta\cos\theta=0.$$</p>
+<p><b>(b)</b> \(w=r^2-2r^2=-r^2\): \(w_r=-2r\) ✓, \(w_\theta=0\) ✓.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 6 marks</span> <b>Q4.</b> Let \(f(x,y)\) have continuous partial derivatives and put \(x=u+v\), \(y=u-v\). Show that \(\dfrac{\partial f}{\partial u}\dfrac{\partial f}{\partial v}=\Big(\dfrac{\partial f}{\partial x}\Big)^2-\Big(\dfrac{\partial f}{\partial y}\Big)^2.\)</p>
+<details><summary>Solution</summary>
+<p>\(\dfrac{\partial f}{\partial u}=f_x\dfrac{\partial x}{\partial u}+f_y\dfrac{\partial y}{\partial u}=f_x+f_y\); \(\dfrac{\partial f}{\partial v}=f_x\dfrac{\partial x}{\partial v}+f_y\dfrac{\partial y}{\partial v}=f_x-f_y\).
+Product: \((f_x+f_y)(f_x-f_y)=f_x^2-f_y^2\), as required.</p>
+</details>
+</div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · Related rates</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — a growing box</summary>
+<p><b>Q.</b> A box has dimensions \(x=2,\ y=3,\ z=4\) cm at some instant, with \(x\) increasing at 1 cm/s, \(y\) decreasing at 1 cm/s and \(z\) increasing at 2 cm/s. How fast are (a) the volume and (b) the surface area changing?</p>
+<p><b>(a)</b> \(V=xyz\): \(\dot V=yz\,\dot x+xz\,\dot y+xy\,\dot z=12(1)+8(-1)+6(2)=16\) cm³/s (increasing).</p>
+<p><b>(b)</b> \(S=2(xy+yz+zx)\): \(\dot S=2\big[(y+z)\dot x+(x+z)\dot y+(x+y)\dot z\big]=2[7-6+10]=22\) cm²/s (increasing).</p>
+</details>
+<details>
+<summary>Worked B — two ships</summary>
+<p><b>Q.</b> Ship A is 6 km east of a port, sailing east at 3 km/h. Ship B is 8 km north of the port, sailing north at 4 km/h. How fast is the distance between the ships changing?</p>
+<p>\(D=\sqrt{x^2+y^2}\) with \(x=6,\ y=8,\ D=10\), \(\dot x=3,\ \dot y=4\).
+$$\frac{dD}{dt}=\frac{\partial D}{\partial x}\frac{dx}{dt}+\frac{\partial D}{\partial y}\frac{dy}{dt}=\frac{x\dot x+y\dot y}{D}=\frac{18+32}{10}=5\ \text{km/h}.$$
+The distance is increasing at 5 km/h.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q1.</b> A cone has radius \(r=3\) cm increasing at 2 cm/s and height \(h=6\) cm decreasing at 3 cm/s. Given \(V=\tfrac13\pi r^2h\), how fast is the volume changing? Is it increasing or decreasing?</p>
+<details><summary>Solution</summary>
+<p>\(\dot V=\tfrac23\pi rh\,\dot r+\tfrac13\pi r^2\dot h=\tfrac23\pi(18)(2)+\tfrac13\pi(9)(-3)=24\pi-9\pi=15\pi\) cm³/s — increasing.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> A rectangle has sides \(x=5\) cm (increasing at 2 cm/s) and \(y=12\) cm (decreasing at 1 cm/s). How fast are (a) its area and (b) its diagonal changing?</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(\dot A=y\dot x+x\dot y=24-5=19\) cm²/s. <b>(b)</b> \(D=\sqrt{x^2+y^2}=13\); \(\dot D=\dfrac{x\dot x+y\dot y}{D}=\dfrac{10-12}{13}=-\dfrac2{13}\) cm/s (decreasing).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Particle A moves on \(\mathbf r_A(t)=(3\cos t,\ 3\sin t)\) and particle B on \(\mathbf r_B(t)=(2t,\ 4+t^2)\). Determine the rate at which the distance between them is changing at \(t=0\). Are they approaching or separating?</p>
+<details><summary>Solution</summary>
+<p>At \(t=0\): A \(=(3,0)\), B \(=(0,4)\), \(s=5\). \(\mathbf r_A'=(-3\sin t,3\cos t)=(0,3)\), \(\mathbf r_B'=(2,2t)=(2,0)\).
+$$\frac{ds}{dt}=\frac{(x_B-x_A)(x_B'-x_A')+(y_B-y_A)(y_B'-y_A')}{s}=\frac{(-3)(2)+(4)(-3)}{5}=-\frac{18}{5}.$$
+Negative ⇒ they are approaching, at \(18/5\) units per unit time.</p>
+</details>
+</div>
+
+<!-- ---------- 8.7 ---------- -->
+<h3>8.7 · "Show that" identities with an unknown \(f\)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — \(z=f(3x-2y)\): identity and directions of greatest change</summary>
+<p><b>Q.</b> (a) Let \(f\) be differentiable and \(z=f(3x-2y)\). Show that \(2z_x+3z_y=0\). (b) Hence find the directions of greatest change of \(g(x,y)=(3x-2y)e^{3x-2y}\).</p>
+<p><b>(a)</b> \(u=3x-2y\): \(z_x=3f'(u)\), \(z_y=-2f'(u)\). So \(2z_x+3z_y=6f'(u)-6f'(u)=0\). \(\blacksquare\)</p>
+<p><b>(b)</b> \(g=F(u)\) with \(F(u)=ue^u\), \(F'(u)=(1+u)e^u\). \(\nabla g=(1+u)e^u\,(3,-2)\), always parallel to \((3,-2)\). Directions of greatest change: \(\pm(3,-2)\). Greatest increase along \((3,-2)\) where \(3x-2y\gt-1\), along \((-3,2)\) where \(3x-2y\lt-1\); on the line \(3x-2y=-1\), \(\nabla g=\mathbf 0\).</p>
+</details>
+<details>
+<summary>Worked B — a product with an unknown function</summary>
+<p><b>Q.</b> Let \(z=x\,f(xy)\), \(f\) differentiable. Show that \(x\,z_x-y\,z_y=z\).</p>
+<p>\(u=xy\). Product rule + chain rule: \(z_x=f(u)+x f'(u)\,y\); \(z_y=x f'(u)\,x=x^2f'(u)\).
+$$xz_x-yz_y=xf(u)+x^2yf'(u)-x^2yf'(u)=xf(u)=z,$$ as required.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Let \(z=f(x+4y)\) with \(f\) differentiable. Show that \(\dfrac{\partial z}{\partial y}=4\dfrac{\partial z}{\partial x}\).</p>
+<details><summary>Solution</summary>
+<p>\(u=x+4y\): \(z_x=f'(u)\cdot1\), \(z_y=f'(u)\cdot4\). So \(z_y=4f'(u)=4z_x\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Let \(z=f(x^2+y^2)\). Show that \(y\dfrac{\partial z}{\partial x}-x\dfrac{\partial z}{\partial y}=0\), and explain what this says about \(\nabla z\) and the circles \(x^2+y^2=c\).</p>
+<details><summary>Solution</summary>
+<p>\(u=x^2+y^2\): \(z_x=2xf'(u)\), \(z_y=2yf'(u)\); \(yz_x-xz_y=2xyf'-2xyf'=0\). Meaning: \(\nabla z=2f'(u)(x,y)\) is radial, i.e. perpendicular to the circles \(x^2+y^2=c\), which are the level curves of \(z\). Equivalently the rate of change of \(z\) in the tangential direction \((-y,x)\) is zero.</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 5 marks</span> <b>Q3.</b> Determine the directions of greatest change of \(g(x,y)=\ln\!\big(1+(2x-y)^2\big)\) at any point in the plane.</p>
+<details><summary>Solution</summary>
+<p>\(g=F(u)\), \(u=2x-y\), \(F(u)=\ln(1+u^2)\), \(F'(u)=\dfrac{2u}{1+u^2}\). \(\nabla g=\dfrac{2u}{1+u^2}(2,-1)\), always parallel to \((2,-1)\): directions of greatest change \(\pm(2,-1)\). Greatest increase along \((2,-1)\) where \(2x-y\gt0\), along \((-2,1)\) where \(2x-y\lt0\); on the line \(y=2x\), \(\nabla g=\mathbf0\) (no direction of change — these are minimum points of \(g\)).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 8 marks</span> <b>Q4.</b> Let \(f,g\) be twice differentiable, \(c\) a constant, and \(z(x,t)=f(x-ct)+g(x+ct)\). Show that \(\dfrac{\partial^2z}{\partial t^2}=c^2\dfrac{\partial^2z}{\partial x^2}\) (the wave equation).</p>
+<details><summary>Solution</summary>
+<p>Let \(u=x-ct\), \(v=x+ct\). Then \(z_x=f'(u)+g'(v)\), \(z_{xx}=f''(u)+g''(v)\).
+\(z_t=-cf'(u)+cg'(v)\), \(z_{tt}=c^2f''(u)+c^2g''(v)=c^2z_{xx}\), as required.</p>
+</details>
+</div>
+
+<!-- ---------- 8.8 ---------- -->
+<h3>8.8 · Implicit differentiation</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — two points, two tangent lines</summary>
+<p><b>Q.</b> Find the equation(s) of the tangent line(s) to \(x^2+xy+y^2=3\) at \(x=1\).</p>
+<p>\(x=1\): \(y^2+y-2=0\Rightarrow y=1\) or \(y=-2\). Two points: \((1,1)\), \((1,-2)\).<br>
+\(F=x^2+xy+y^2-3\): \(y'=-\dfrac{2x+y}{x+2y}\).<br>
+At \((1,1)\): \(y'=-\tfrac33=-1\) ⇒ \(y=-x+2\).<br>
+At \((1,-2)\): \(y'=-\tfrac{0}{-3}=0\) ⇒ \(y=-2\) (horizontal tangent).</p>
+</details>
+<details>
+<summary>Worked B — implicit partials on a surface</summary>
+<p><b>Q.</b> The equation \(xz+yz^2+x^2y=5\) defines \(z=z(x,y)\) near \((1,2,1)\). Find \(z_x\), \(z_y\) there and the linear approximation to \(z\).</p>
+<p>(At \((1,2)\): \(2z^2+z-3=0\Rightarrow z=1\) or \(-\tfrac32\); we're on the \(z=1\) branch.) \(F=xz+yz^2+x^2y-5\): \(F_x=z+2xy=5,\ F_y=z^2+x^2=2,\ F_z=x+2yz=5\).
+$$z_x=-\frac{F_x}{F_z}=-1,\qquad z_y=-\frac{F_y}{F_z}=-\frac25,\qquad z\approx1-(x-1)-\tfrac25(y-2).$$</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Find \(\dfrac{dy}{dx}\) at \((1,0)\) for the curve \(xe^y+y=1\).</p>
+<details><summary>Solution</summary>
+<p>\(F=xe^y+y-1\): \(F_x=e^y=1\), \(F_y=xe^y+1=2\). \(y'=-\tfrac12\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> Show that the curve \(y^3+xy-x^2=1\) passes through exactly one point with \(x=1\), and find the tangent line there.</p>
+<details><summary>Solution</summary>
+<p>\(x=1\): \(y^3+y-2=0=(y-1)(y^2+y+2)\); the quadratic has discriminant \(-7\lt0\), so the only point is \((1,1)\).
+\(F_x=y-2x=-1\), \(F_y=3y^2+x=4\): \(y'=\tfrac14\). Tangent: \(y-1=\tfrac14(x-1)\iff y=\tfrac14x+\tfrac34\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> For the curve \(x^2-xy+y^2=3\): (a) find \(dy/dx\); [2] (b) find all points where the tangent is horizontal; [3] (c) find all points where the tangent is vertical. [3]</p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(y'=-\dfrac{2x-y}{2y-x}\).</p>
+<p><b>(b)</b> Horizontal: \(F_x=0\Rightarrow y=2x\). Substitute: \(x^2-2x^2+4x^2=3\Rightarrow x=\pm1\): \((1,2)\), \((-1,-2)\) (there \(F_y=3\ne0\), resp. \(-3\)).</p>
+<p><b>(c)</b> Vertical: \(F_y=0\Rightarrow x=2y\): \(4y^2-2y^2+y^2=3\Rightarrow y=\pm1\): \((2,1)\), \((-2,-1)\).</p>
+</details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q4.</b> The surface \(x^2y+yz^2+zx=7\) passes through \((2,1,1)\). Find \(\dfrac{\partial z}{\partial x}\) and \(\dfrac{\partial z}{\partial y}\) there, and the tangent plane.</p>
+<details><summary>Solution</summary>
+<p>Check \(4+1+2=7\) ✓. \(F_x=2xy+z=5\), \(F_y=x^2+z^2=5\), \(F_z=2yz+x=4\).
+\(z_x=-\tfrac54\), \(z_y=-\tfrac54\). Plane: \(5(x-2)+5(y-1)+4(z-1)=0\iff5x+5y+4z=19\).</p>
+</details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every Chapter 5 answer, a marker wants: (1) the formula written first (\(\nabla f=(f_x,f_y)\), \(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\|\mathbf u\|\), the chain-rule sum, \(y'=-F_x/F_y\)); (2) a tree diagram whenever the chain rule is used; (3) correct partials, evaluated exactly; (4) the answer in the form asked — vector for a direction, number for a rate, equation for a line/plane; (5) a sentence: "increasing/decreasing", "perpendicular to \(\nabla f\)", "as required". Drill until each of those is automatic.</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 5 Gradient, Directional Derivatives &amp; Chain Rule · built from the MATH1052 Summary (p 5), Posters A/B, Tutorials 8–9 (with solutions), and the 2020–2025 final papers and marking schemes (2021 S1 Q3, Q5, Q6 · 2021 S2 Q7, Q10 · 2022 S1 Q4–6 · 2022 S2 Q3, Q5 · 2023 S1 Q4 · 2023 S2 Q3, Q7 · 2024 S1 Q1, Q4 · 2024 S2 Q3, Q4 · 2025 S1 Q1, Q4 · 2025 S2 Q3). Every published result verified with SymPy (<code>verify/ch05.py</code>).
+<br><a href="index.html">🏠 Hub</a> · <a href="ch04-limits-partials-tangent-planes.html">← Ch 4</a> · <a href="ch06-optimisation.html">Ch 6 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>

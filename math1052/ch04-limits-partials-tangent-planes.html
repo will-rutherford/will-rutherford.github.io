@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH1052 — Ch 4 Limits, Partial Derivatives &amp; Approximation</title>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+  :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+    --accent:#a78bfa;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  header{background:linear-gradient(135deg,#1e1b4b,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+  header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+  .badge{display:inline-block;background:var(--accent);color:#1e1b4b;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+  .badge.gold{background:var(--gold);color:#3a2a00}
+  .badge.pre{background:var(--bad);color:#2a0505}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+  nav a:hover{background:var(--accent);color:#1e1b4b}
+  main{max-width:960px;margin:0 auto;padding:22px 18px 80px}
+  section{margin:34px 0;scroll-margin-top:58px}
+  h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:17px;color:#ddd6fe}
+  h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+  .q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+  .when{background:rgba(167,139,250,.1);border:1px solid #3b2f80;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:14px}
+  .when:before{content:"🎯 WHEN TO USE — ";color:var(--accent);font-weight:700}
+  .method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+  .method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+  .trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+  .tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+  .tip:before{content:"✓ ";color:var(--good);font-weight:700}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+  details[open]{padding-bottom:12px}
+  summary{cursor:pointer;padding:13px 0;font-weight:600;color:#ddd6fe;list-style:none}
+  summary:before{content:"▸ ";color:var(--accent)}
+  details[open] summary:before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--panel2);color:#ddd6fe}
+  .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chapter 4 — Limits, Partial Derivatives &amp; Approximation</h1>
+  <p>Two-variable limits and continuity, partial derivatives (by rule and from the limit definition), tangent planes, and linear/quadratic approximation. Examined in every paper 2021–2025, as one or two full questions.</p>
+  <div>
+    <span class="badge gold">⭐ High-yield: 12–24 of 100 marks in every paper 2021–2025</span>
+    <span class="badge">Summary p 5 (Partial Derivatives &amp; Tangent Planes) · Poster A/B</span>
+    <span class="badge">Formula sheet gives P(x,y) &amp; Q(x,y) only; limits, continuity &amp; partial-derivative definitions: know cold</span>
+  </div>
+</header>
+
+<nav>
+  <a href="../index.html">⇄ Switch subject</a>
+  <a href="index.html">🏠 Hub</a>
+  <a href="ch03-surfaces-contours.html">← Ch 3 Surfaces &amp; contours</a>
+  <a href="ch05-gradient-chain-rule.html">Ch 5 Gradient &amp; chain rule →</a>
+  <a href="formulas.html">Formula sheet</a>
+  <a href="exam-2025.html">Exams</a>
+  <a href="#concepts">Concepts</a>
+  <a href="#formulas">Key methods</a>
+  <a href="#worked">Worked</a>
+  <a href="#types">Q types</a>
+  <a href="#triggers">Triggers</a>
+  <a href="#traps">Traps</a>
+  <a href="#selfcheck">Self-check</a>
+  <a href="#practice">🏋️ Practice</a>
+</nav>
+
+<main>
+
+<!-- ================= 1. CONCEPTS ================= -->
+<section id="concepts">
+<h2>§1 · Concepts in depth</h2>
+
+<div class="tip">Rusty on one-variable limits, L'Hôpital, or the chain rule? Read <a href="foundations.html#derivs">the Ground Floor</a> first. This chapter reuses the standard limits \(\lim_{u\to0}\frac{\sin u}{u}=1\), \(\lim_{u\to0}\frac{e^u-1}{u}=1\), \(\lim_{u\to0}\frac{1-\cos u}{u^2}=\tfrac12\) and \(\lim_{u\to 0}\frac{\ln(1+u)}{u}=1\) all the time.</div>
+
+<div class="card">
+<h3>🧭 Why two-variable limits are harder than one-variable ones</h3>
+<p>In one variable, \(x\to a\) can only happen from two directions: the left and the right. If the left-hand and right-hand limits agree, the limit exists. That's all there is to check.</p>
+<p>In two variables, \((x,y)\to(a,b)\) can happen from <b>infinitely many directions, along infinitely many curves</b>: along the \(x\)-axis, along a line \(y=mx\), along a parabola \(y=x^2\), spiralling in, and so on. The definition says:</p>
+$$\lim_{(x,y)\to(a,b)} f(x,y)=L \iff f(x,y)\text{ gets arbitrarily close to }L\text{ whenever }(x,y)\text{ is close enough to }(a,b)\text{, by ANY route.}$$
+<p>Every path has to give the same \(L\). That one fact produces the whole chapter's logic:</p>
+<ul>
+<li><b>To show a limit does NOT exist</b>, you need only <b>two paths that give different answers</b> (a counter-example). This is easy: <i>two-path test</i>.</li>
+<li><b>To show a limit DOES exist</b>, checking paths is <b>never enough</b>. You'd need infinitely many. Instead you must <b>bound</b> \(|f-L|\) by something that goes to 0 however you approach, usually with <i>polar coordinates + the squeeze theorem</i>, or by rewriting in terms of \(u=x^2+y^2\) and using a one-variable limit.</li>
+</ul>
+<p>The summary puts it in one line: <i>"the limit does not exist if \(f(x,y)\) approaches two different limits \(L_1\neq L_2\) along two different paths \(C_1,C_2\in D\) (the domain of \(f\))"</i> (Summary p 5).</p>
+</div>
+
+<div class="card">
+<h3>Step zero: is it just continuous? Then substitute.</h3>
+<p>Polynomials, \(e^u\), \(\sin u\), \(\cos u\), \(\ln u\) (for \(u&gt;0\)), \(\sqrt u\) (for \(u&gt;0\)), and every sum, product, quotient (with nonzero denominator) and composition of these are <b>continuous wherever they are defined</b>. At such a point the limit is just the value:</p>
+$$\lim_{(x,y)\to(1,2)}\big(x^2y+3y-1\big)=1\cdot2+6-1=7.$$
+<p>The whole difficulty of the chapter lives at points where substitution gives <b>\(\tfrac00\)</b>. For exam questions that's nearly always \((0,0)\), the one point excluded from the domain or the point where a piecewise function switches formula.</p>
+<p class="tip">Before anything else, try to <b>cancel</b>: \(\dfrac{x^2-y^2}{x-y}=x+y\) for \(x\ne y\), so \(\lim_{(x,y)\to(2,2)}\dfrac{x^2-y^2}{x-y}=4\). Likewise \(\dfrac{x^4-y^4}{x^2+y^2}=x^2-y^2\to0\). A factorisation can make the whole problem go away.</p>
+</div>
+
+<div class="card">
+<h3>🧭 The two-path test: proof by counter-example</h3>
+<p>If the limit existed and equalled \(L\), then <i>every</i> path into \((a,b)\) would have to give \(L\). So if you find</p>
+$$\lim_{\text{along }C_1} f = L_1 \quad\text{and}\quad \lim_{\text{along }C_2} f = L_2 \quad\text{with } L_1\ne L_2,$$
+<p>the limit cannot exist. Along a path, \(f\) becomes a function of <b>one</b> variable, so each path limit is an ordinary Calc-I limit.</p>
+<div class="method"><b>How to pick the paths (in this order)</b>
+<ol>
+<li><b>The axes.</b> \(y=0\) (so \(f(x,0)\), \(x\to0\)) and \(x=0\) (so \(f(0,y)\), \(y\to0\)). Quick, and often enough for "nice" rational functions like \(\frac{x^2-3y^2}{2x^2+y^2}\) (gives \(\tfrac12\) vs \(-3\)).</li>
+<li><b>Straight lines \(y=mx\).</b> If the answer depends on \(m\), you're done: two different \(m\) give two different limits. E.g. \(\frac{xy}{x^2+y^2}\) on \(y=mx\) gives \(\frac{m}{1+m^2}\): \(0\) for \(m=0\) and \(\tfrac12\) for \(m=1\).</li>
+<li><b>Curves that "balance the degrees".</b> If all lines give the same value (often 0), look for a curve that makes the terms in the denominator the <b>same size</b>. For \(\frac{x^2y}{x^4+y^2}\): \(x^4\) and \(y^2\) balance when \(y=x^2\). Along it, \(\frac{x^4}{2x^4}=\tfrac12\ne0\).</li>
+<li><b>Curves that kill a bracket.</b> If the denominator contains something like \((x^2-y)^2\), choose \(y=x^2\) to make it vanish. (2025 S2 Q4: \(\frac{x^6}{(x^2-y)^2+x^6}\) along \(y=x^2\) is identically 1.)</li>
+</ol></div>
+<p class="tip"><b>Degree-balancing rule of thumb.</b> For \(\dfrac{x^a y^b}{x^{p}+y^{q}}\), try \(y=x^{p/q}\): it makes \(x^p\) and \(y^q\) equal. For \(\frac{x^3y}{2x^6+y^2}\) (2024 S1 Q2), \(p/q=6/2=3\), so try \(y=x^3\). For \(\frac{3x^4y}{x^8+y^2}\), try \(y=x^4\). If the numerator then has the same total power as the denominator, you get a nonzero constant.</p>
+<div class="trap">A path must lie <b>in the domain</b> of \(f\) and must actually pass <b>through</b> the point. "Along \(y=x+1\)" doesn't approach \((0,0)\). And for a function whose domain excludes a curve (2023 S2 Q8 excludes \(y=-x^{3/5}\)), a path that runs along that curve isn't allowed. The summary's "\(C_1,C_2\in D\)" is there for a reason.</div>
+</div>
+
+<div class="card">
+<h3>🧭 Why "all straight lines agree" proves nothing</h3>
+<p>Take \(f(x,y)=\dfrac{x^2y}{x^4+y^2}\). On every line \(y=mx\):</p>
+$$f(x,mx)=\frac{mx^3}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\to0\quad(m\neq0),$$
+<p>and on both axes \(f=0\). So every straight line gives 0. But on the parabola \(y=x^2\), \(f=\frac{x^4}{2x^4}=\tfrac12\). The limit <b>does not exist</b>. The surface has a ridge of height \(\tfrac12\) that runs along the parabola into the origin, and every straight line crosses that ridge instead of following it.</p>
+<p>This is exactly why exam questions like 2024 S1 Q2 ask you <i>first</i> for lines, <i>then</i> parabolas, <i>then</i> "does the limit exist?". The first two parts are a trap: they both give 0, and the answer is still "no".</p>
+</div>
+
+<div class="card">
+<h3>🧭 Proving a limit EXISTS: polar coordinates + squeeze</h3>
+<p>Put \(x=r\cos\theta,\ y=r\sin\theta\). Then \(r=\sqrt{x^2+y^2}\) is the distance to the origin, and \((x,y)\to(0,0)\iff r\to0\), <b>whatever \(\theta\) does</b>. The key identity is \(x^2+y^2=r^2\).</p>
+<div class="method"><b>Recipe (limit at the origin)</b>
+<ol>
+<li>Guess \(L\) (usually the common value along the axes/lines).</li>
+<li>Substitute \(x=r\cos\theta,\ y=r\sin\theta\) and simplify. \(x^2+y^2\to r^2\).</li>
+<li>Bound \(|f-L|\le g(r)\) with <b>\(g\) independent of \(\theta\)</b>, using \(|\cos\theta|\le1,\ |\sin\theta|\le1\) (and \(|\sin(\text{anything})|\le1\)).</li>
+<li>Since \(g(r)\to0\), the <b>squeeze theorem</b> gives \(f\to L\).</li>
+</ol></div>
+<p><b>Example.</b> \(\dfrac{x^3+y^3}{x^2+y^2}=\dfrac{r^3(\cos^3\theta+\sin^3\theta)}{r^2}=r(\cos^3\theta+\sin^3\theta)\), so \(\left|f\right|\le 2r\to0\). The limit is 0.</p>
+<p><b>Radial functions shortcut.</b> If \(f\) depends only on \(x^2+y^2\) (like \(\frac{\sin(x^2+y^2)}{x^2+y^2}\) or \(\frac{e^{x^2+y^2}-1}{x^2+y^2}\)), set \(u=x^2+y^2=r^2\to0^+\). You're left with a one-variable limit, which you finish with a standard limit or L'Hôpital. No \(\theta\) appears at all (2024 S2 Q2(b), 2023 S1 Q2).</p>
+<div class="trap"><b>Polar coordinates are not magic.</b> "For each fixed \(\theta\), \(\lim_{r\to0}=0\)" only checks <b>straight lines</b> through the origin (a fixed \(\theta\) <i>is</i> a line). For \(\frac{x^2y}{x^4+y^2}\), every fixed \(\theta\) gives 0, yet the limit DNE. The polar argument is only valid when you have a bound \(|f-L|\le g(r)\) that holds <b>for all \(\theta\) at once</b>. If \(\theta\) survives in a denominator (e.g. \(\frac{\cos^2\theta\sin\theta}{r^2\cos^4\theta+\sin^2\theta}\)), you have no such bound. Go looking for a path.</div>
+<p class="tip">If the polar form simplifies to something depending on \(\theta\) but <b>not</b> on \(r\) (e.g. \(\frac{xy}{x^2+y^2}=\cos\theta\sin\theta\)), the limit <b>does not exist</b>: different directions give different constants. Back it up with two explicit paths.</p>
+</div>
+
+<div class="card">
+<h3>Continuity: three conditions, one sentence</h3>
+<p>\(f\) is <b>continuous at \((a,b)\)</b> if</p>
+$$\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b).$$
+<p>Hidden inside are three checks: (i) \(f(a,b)\) is defined; (ii) the limit exists; (iii) they are equal. A continuity question at a piecewise point is therefore always:</p>
+<ol>
+<li>State the definition (a mark on the 2025 S1 marking scheme is literally "1 mark for definition of continuity").</li>
+<li>Decide whether the limit exists: two-path test (if no) or polar/squeeze (if yes).</li>
+<li>If it exists, compare with the given value \(f(a,b)\) (or \(c\)).</li>
+<li>Conclude in words: "Hence \(f\) is / is not continuous at \((0,0)\)."</li>
+</ol>
+<p><b>Removable discontinuity</b> (2023 S1 Q2): the limit exists but \(\ne f(a,b)\). You could "remove" it by redefining the single value \(f(a,b)\). "Find \(c\) so \(f\) is continuous" means "compute the limit and set \(c\) equal to it" (2021 S2 Q3). If the limit doesn't exist, <b>no</b> \(c\) works (2021 S1 Q2(b)).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Partial derivatives: slopes of cross-sections</h3>
+<p>Freeze \(y=b\) and you're left with a curve \(z=f(x,b)\): the vertical cross-section of the surface in the \(x\)-direction. Its slope at \(x=a\) is the <b>partial derivative</b></p>
+$$f_x(a,b)=\frac{\partial f}{\partial x}(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h},\qquad f_y(a,b)=\lim_{h\to0}\frac{f(a,b+h)-f(a,b)}{h}.$$
+<p><b>In practice:</b> differentiate as usual with respect to one variable, treating the other(s) as <b>constants</b>. For \(f=x^2\sin(3y)+ye^{2x}\): \(f_x=2x\sin 3y+2ye^{2x}\) (the \(\sin3y\) and \(y\) are constant coefficients), \(f_y=3x^2\cos3y+e^{2x}\). The same idea works for any number of variables: \(f_z\) means "only \(z\) moves".</p>
+<p><b>When you MUST use the limit definition:</b> at a point where \(f\) is defined by a <b>separate formula</b> (a piecewise point like \((0,0)\)). The rule-based derivative of the "\((x,y)\ne(0,0)\)" formula says nothing about the value at the origin, where \(f\) is defined differently. So you compute</p>
+$$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h},$$
+<p>using the <b>top formula for \(f(h,0)\)</b> (since \((h,0)\ne(0,0)\)) and the <b>given value for \(f(0,0)\)</b>. Only the axes matter here: \(f_x(0,0)\) only ever looks at points \((h,0)\), and \(f_y(0,0)\) only at \((0,h)\).</p>
+</div>
+
+<div class="card">
+<h3>🧭 The big surprise: partials can exist where \(f\) isn't even continuous</h3>
+<p>Because \(f_x(0,0)\) and \(f_y(0,0)\) only probe the two <b>axes</b>, they are blind to everything else. In 2025 S2 Q4, \(f=\frac{x^6}{(x^2-y)^2+x^6}\) is identically 0 on the \(y\)-axis and equals \(\frac{h^2}{1+h^2}\) on the \(x\)-axis, so both partials exist (both are 0). But along \(y=x^2\), \(f\equiv1\), so \(f\) isn't continuous at the origin.</p>
+<p>The logical hierarchy (memorise this direction of arrows):</p>
+$$f_x,\ f_y\ \text{exist and are continuous near }(a,b)\ \Longrightarrow\ f\ \text{differentiable (smooth) at }(a,b)\ \Longrightarrow\ f\ \text{continuous at }(a,b).$$
+<p>None of the arrows reverse, and "partials merely exist" implies <b>nothing</b>. The summary's "smoothness (differentiability)" means \(f,f_x,f_y\) are all continuous at \((a,b)\): then, zoomed in close enough, the surface looks like a plane, and the tangent plane is a good approximation.</p>
+<p class="trap">The reverse can happen too: \(f\) can be continuous at a point while a partial <b>fails</b> to exist (e.g. \(\sqrt{x^2+y^2}\) at the origin: a cone's tip, where \(\frac{|h|}{h}\) has no limit). And a function can be discontinuous with one partial existing and the other not (see Example 5).</p>
+</div>
+
+<div class="card">
+<h3>Higher-order partials &amp; Clairaut's theorem</h3>
+<p>Differentiate again: \(f_{xx}=\frac{\partial^2 f}{\partial x^2}\), \(f_{yy}=\frac{\partial^2 f}{\partial y^2}\), and the <b>mixed</b> partials \(f_{xy}=(f_x)_y=\frac{\partial^2 f}{\partial y\,\partial x}\), \(f_{yx}=(f_y)_x=\frac{\partial^2 f}{\partial x\,\partial y}\). Subscripts are read <b>left to right</b> (differentiate by \(x\) first, then \(y\)). The \(\partial\) notation reads <b>right to left</b>.</p>
+<p><b>Clairaut's theorem:</b> if \(f_{xy}\) and \(f_{yx}\) are continuous (true for every "formula" function you meet away from bad points), then \(f_{xy}=f_{yx}\). Use it as a <b>built-in error check</b>: compute both. If they disagree, you've made an algebra slip.</p>
+<p>These second partials feed the quadratic approximation (below) and the Hessian test in <a href="ch06-optimisation.html">Ch 6</a>.</p>
+</div>
+
+<div class="card">
+<h3>🧭 Tangent plane = the two tangent lines, glued together</h3>
+<p>At \((a,b)\), the \(x\)-cross-section has tangent line with slope \(f_x(a,b)\), and the \(y\)-cross-section has slope \(f_y(a,b)\). There is exactly one plane containing both lines:</p>
+$$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).$$
+<p>It's the 2-D version of \(y=f(a)+f'(a)(x-a)\). Rearranged as \(f_x(a,b)(x-a)+f_y(a,b)(y-b)-(z-f(a,b))=0\), it shows a <b>normal vector</b> \(\mathbf n=\langle f_x(a,b),\,f_y(a,b),\,-1\rangle\) (2020 S2 Q5(ii) asks for exactly this).</p>
+<p>Two surfaces have a <b>common tangent plane</b> at a point if they have the same height there and the same \(f_x\) and \(f_y\) (2021 S1 Q1).</p>
+</div>
+
+<div class="card">
+<h3>🧭 Linear approximation, small changes and error</h3>
+<p>Near \((a,b)\), a smooth surface is almost its tangent plane, so</p>
+$$f(x,y)\approx P(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).$$
+<p>(\(P\) is the formula sheet's name; the summary also calls it \(L\).) Writing \(\Delta x=x-a\), \(\Delta y=y-b\), \(\Delta z=f(x,y)-f(a,b)\), you get the <b>small-change formula</b></p>
+$$\Delta z\approx f_x(a,b)\,\Delta x+f_y(a,b)\,\Delta y.$$
+<p>If \(x\) and \(y\) are measured with errors at most \(E_1,E_2\) (signs unknown), the worst case is when every term pushes the same way. That gives the <b>maximum-error estimate</b> (Summary p 5):</p>
+$$|E|\approx|f_x(a,b)|E_1+|f_y(a,b)|E_2.$$
+<p>Everything extends to 3 variables with an extra \(f_z(c)(z-c)\) term (2022 S2 Q1).</p>
+<p class="tip"><b>Relative / percentage error shortcut</b> for products of powers: if \(f=Cx^py^q\), then \(\frac{|E|}{|f|}\approx |p|\frac{E_1}{x}+|q|\frac{E_2}{y}\). So 1% error in \(x\) and 2% in \(y\) give at most \(2(1\%)+3(2\%)=8\%\) in \(x^2y^3\).</p>
+</div>
+
+<div class="card">
+<h3>Quadratic approximation: add the curvature</h3>
+<p>The tangent plane captures slope only. Adding the second-order Taylor terms captures <b>curvature</b> (formula sheet):</p>
+$$Q(x,y)=P(x,y)+\tfrac12 f_{xx}(a,b)(x-a)^2+f_{xy}(a,b)(x-a)(y-b)+\tfrac12 f_{yy}(a,b)(y-b)^2.$$
+<p>Note the <b>mixed term has no \(\tfrac12\)</b>. That's because \(f_{xy}\) and \(f_{yx}\) each contribute \(\tfrac12\), and they're equal by Clairaut. \(Q\) is more accurate than \(P\) close to \((a,b)\): in 2022 S1 Q1, \(Q(1.1,1)=0.305\) vs the true \(0.305310\ldots\), while \(P\) gives \(0.3\).</p>
+</div>
+</section>
+
+<!-- ================= 2. KEY METHODS ================= -->
+<section id="formulas">
+<h2>§2 · Key methods &amp; when to use them</h2>
+<p class="tip">The formula sheet prints \(P(x,y)\) and \(Q(x,y)\), and nothing else from this chapter. The limit definitions of \(f_x,f_y\), the definition of continuity, the two-path test and the polar method must be known cold. Marks are given for <b>writing the definition down</b>.</p>
+
+<div class="card">
+<h3>M1 · Direct substitution / cancel first</h3>
+$$\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b)\quad\text{if } f \text{ is continuous at }(a,b).$$
+<div class="when">The point isn't a "bad" point: no zero denominator, log of 0, etc. Or the \(\frac00\) disappears after factorising/cancelling.</div>
+<p><b>Mini-example.</b> \(\lim_{(x,y)\to(1,2)}(x^2y+3y-1)=7\) (polynomial, so substitute). Always <b>say why</b>: "\(f\) is a polynomial, hence continuous".</p>
+</div>
+
+<div class="card">
+<h3>M2 · Two-path test (limit does NOT exist)</h3>
+$$\lim_{C_1}f=L_1\ne L_2=\lim_{C_2}f\ \Longrightarrow\ \lim_{(x,y)\to(a,b)}f(x,y)\ \text{does not exist.}$$
+<div class="when">Substitution gives \(\frac00\), and different directions seem to give different values. Classic signal: numerator and denominator of the <b>same "weighted degree"</b> (\(\frac{xy}{x^2+y^2}\), \(\frac{x^3y}{x^6+y^2}\), \(\frac{x^6}{(x^2-y)^2+x^6}\)).</div>
+<div class="method"><b>Recipe:</b> axes → lines \(y=mx\) → degree-balancing curve \(y=kx^n\) (or a curve that kills a bracket). Evaluate each as a 1-variable limit. State "\(L_1\ne L_2\), so the limit does not exist."</div>
+</div>
+
+<div class="card">
+<h3>M3 · Polar coordinates + squeeze (limit DOES exist)</h3>
+$$x=r\cos\theta,\ y=r\sin\theta,\quad |f(x,y)-L|\le g(r)\to0 \ \Longrightarrow\ \lim f=L.$$
+<div class="when">The numerator has <b>higher</b> total degree than the denominator (\(\frac{x^3+y^3}{x^2+y^2}\), \(\frac{3xy^2}{x^2+y^2}\)), or there's a bounded oscillating factor (\(y\sin\frac1{x^2+y^2}\), 2021 S2 Q3).</div>
+<p><b>Mini-example.</b> \(\frac{3xy^2}{x^2+y^2}=3r\cos\theta\sin^2\theta\), so \(|f|\le 3r\to0\).</p>
+</div>
+
+<div class="card">
+<h3>M4 · Radial substitution \(u=x^2+y^2\)</h3>
+$$\lim_{(x,y)\to(0,0)} F(x^2+y^2)=\lim_{u\to0^+}F(u).$$
+<div class="when">\(x,y\) appear <b>only</b> through \(x^2+y^2\): \(\frac{\sin(9x^2+9y^2)}{6x^2+6y^2}\) (2023 S1 Q2), \(\frac{e^{x^2+y^2}-1}{x^2+y^2}\) (2024 S2 Q2(b)).</div>
+<p><b>Mini-example.</b> \(\frac{\sin 9u}{6u}=\frac{9}{6}\cdot\frac{\sin 9u}{9u}\to\frac32\). Or use L'Hôpital in \(u\) (or in \(r\)), as the official 2024 S2 solution does.</p>
+</div>
+
+<div class="card">
+<h3>M5 · Continuity at a piecewise point / "find \(c\)"</h3>
+$$f \text{ continuous at }(a,b)\iff \lim_{(x,y)\to(a,b)}f(x,y)=f(a,b).$$
+<div class="when">"Is \(f\) continuous at \((0,0)\)?", "Does \(g\) have a removable discontinuity?", "Find \(c\) such that \(f\) is continuous".</div>
+<div class="method"><ol><li>Write the definition.</li><li>Limit: DNE (M2) ⇒ not continuous, for <i>any</i> value of \(f(0,0)\). Exists (M3/M4) ⇒ compare with \(f(0,0)\).</li><li>Conclude in words.</li></ol></div>
+</div>
+
+<div class="card">
+<h3>M6 · Partial derivative from the definition</h3>
+$$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h},\qquad f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}.$$
+<div class="when">"Use the definition of the partial derivative", or any "do \(f_x(0,0)\), \(f_y(0,0)\) exist?" for a piecewise \(f\). Also when the rule-based formula is undefined at the point.</div>
+<p><b>Mini-example.</b> \(f=\frac{2x^3+y^3}{x^2+y^2}\), \(f(0,0)=0\): \(f(h,0)=2h\), so \(f_x(0,0)=\lim\frac{2h-0}{h}=2\). \(f(0,h)=h\), so \(f_y(0,0)=1\).</p>
+<p class="trap">Use the <b>given</b> \(f(0,0)\) (it may be 4, or 1, or \(c\)), not 0 by habit. In 2025 S1 Q2, \(f(0,0)=1\) and \(f(h,0)=1\), so the quotient is \(\frac{1-1}{h}=0\).</p>
+</div>
+
+<div class="card">
+<h3>M7 · Partial derivatives by rules; Clairaut check</h3>
+$$f_{xy}=f_{yx}\quad\text{(Clairaut, when both are continuous)}.$$
+<div class="when">Any "find \(f_x\), \(f_y\)" or "evaluate \(f_z(2,1,0)\)". Also the first step of every tangent-plane, approximation, gradient and optimisation question.</div>
+<p><b>Mini-example.</b> \(f=x^3y^2+\sin(xy)\): \(f_x=3x^2y^2+y\cos(xy)\), \(f_{xy}=6x^2y+\cos(xy)-xy\sin(xy)\). The same answer comes from \(f_y=2x^3y+x\cos(xy)\) differentiated by \(x\). ✓</p>
+</div>
+
+<div class="card">
+<h3>M8 · Tangent plane (and normal vector)</h3>
+$$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b),\qquad \mathbf n=\langle f_x(a,b),f_y(a,b),-1\rangle.$$
+<div class="when">"Equation of the tangent plane to \(z=f(x,y)\) at \((a,b)\)", "normal vector to the plane", "common tangent plane".</div>
+<p><b>Mini-example.</b> \(f=x^2+3xy\) at \((1,2)\): \(f=7\), \(f_x=2x+3y=8\), \(f_y=3x=3\), so \(z=7+8(x-1)+3(y-2)\), i.e. \(z=8x+3y-7\).</p>
+</div>
+
+<div class="card">
+<h3>M9 · Linear approximation / small change</h3>
+$$f(a+\Delta x,b+\Delta y)\approx f(a,b)+f_x(a,b)\Delta x+f_y(a,b)\Delta y.$$
+<div class="when">"Use the linear approximation (tangent plane) to estimate \(f(-0.95,0.95)\)", "estimate \(\sqrt{(3.02)^2+(1.97)^2+(5.99)^2}\)", "approximate change in \(V\) when \(r\) increases by… and \(h\) decreases by…".</div>
+<div class="method"><b>Recipe:</b> choose a nearby base point where \(f\) is exact (integers, \(\ln 1\), \(\sqrt{49}\)) → compute \(f,f_x,f_y\) there → plug in \(\Delta x,\Delta y\) <b>with their signs</b> → simplify exactly, then use the given decimal hint (e.g. \(\ln2\approx0.6931\)).</div>
+</div>
+
+<div class="card">
+<h3>M10 · Worst-case (maximum) error</h3>
+$$|E|\approx|f_x(a,b)|\,E_1+|f_y(a,b)|\,E_2\ (+\,|f_z|E_3).$$
+<div class="when">"Measured with an error of at most…", "estimate the maximum error in the calculated…". If errors are given as percentages, convert: \(0.5\%\) of 40 is \(0.2\).</div>
+<p><b>Mini-example.</b> \(A=xy\), \(x=10\), \(y=5\), each error \(\le0.1\): \(|E|\approx5(0.1)+10(0.1)=1.5\).</p>
+</div>
+
+<div class="card">
+<h3>M11 · Quadratic approximation</h3>
+$$Q=P+\tfrac12f_{xx}(x-a)^2+f_{xy}(x-a)(y-b)+\tfrac12f_{yy}(y-b)^2.$$
+<div class="when">"Find the quadratic (second-order) approximation", "use it to estimate…". It's on the formula sheet, so the marks are for correct second partials and clean substitution.</div>
+<p><b>Mini-example.</b> \(e^x\cos y\) at \((0,0)\): \(Q=1+x+\tfrac12x^2-\tfrac12y^2\).</p>
+</div>
+</section>
+
+<!-- ================= 3. WORKED EXAMPLES ================= -->
+<section id="worked">
+<h2>§3 · Worked examples</h2>
+<p>Every limit, derivative and numeric value below is verified with SymPy (<code>verify/ch04.py</code>). Each is written the way a marker wants it, justification sentences included. Click to reveal.</p>
+
+<details>
+<summary>Example 1 — Limit DNE using the axes: \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2-3y^2}{2x^2+y^2}\)</summary>
+<p><b>Q.</b> Determine whether the limit exists. <b>[5 marks]</b></p>
+<p><b>Path 1: the \(x\)-axis (\(y=0\), \(x\ne0\)).</b></p>
+$$f(x,0)=\frac{x^2}{2x^2}=\frac12\ \Longrightarrow\ \lim_{x\to0}f(x,0)=\frac12=L_1.$$
+<p><b>Path 2: the \(y\)-axis (\(x=0\), \(y\ne0\)).</b></p>
+$$f(0,y)=\frac{-3y^2}{y^2}=-3\ \Longrightarrow\ \lim_{y\to0}f(0,y)=-3=L_2.$$
+<p><b>Conclusion.</b> Since \(L_1=\tfrac12\ne-3=L_2\), \(f\) approaches different values along two different paths, so \(\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)\) <b>does not exist</b>.</p>
+<p class="tip">Along \(y=mx\) you get \(\frac{1-3m^2}{2+m^2}\), which varies with \(m\). That also works, but the axes are quicker. The marking scheme gives ~2 marks per path + 1 for the conclusion (2025 S1 Q2), so <b>show both computations and write the conclusion sentence</b>.</p>
+</details>
+
+<details>
+<summary>Example 2 — Lines all agree, a curve doesn't: \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^4y}{x^8+y^2}\)</summary>
+<p><b>Q.</b> (a) Find the limit along every line \(y=mx\) and along \(x=0\). (b) Show the limit does not exist. <b>[4 + 5 marks]</b></p>
+<p><b>(a)</b> Along \(y=mx\) (\(x\ne0\)):</p>
+$$f(x,mx)=\frac{3mx^5}{x^8+m^2x^2}=\frac{3mx^3}{x^6+m^2}\ \xrightarrow[x\to0]{}\ \frac{0}{m^2}=0\quad(m\ne0),$$
+<p>and for \(m=0\), \(f(x,0)=0\). Along \(x=0\), \(f(0,y)=0\). So every straight line through the origin gives 0.</p>
+<p><b>(b)</b> Balance the denominator: \(x^8\) and \(y^2\) are equal when \(y=x^4\). Along \(y=kx^4\):</p>
+$$f(x,kx^4)=\frac{3kx^8}{x^8+k^2x^8}=\frac{3k}{1+k^2}.$$
+<p>With \(k=1\) (the path \(y=x^4\)): \(f\equiv\tfrac32\), so the limit along it is \(\tfrac32\). Along the \(x\)-axis the limit is 0. Since \(\tfrac32\ne0\), the limit <b>does not exist</b>.</p>
+<p class="trap">Part (a) gives the same value on every line, and that is <b>not</b> evidence the limit exists. Straight lines are only a tiny family of paths.</p>
+</details>
+
+<details>
+<summary>Example 3 — Proving a limit exists (polar + squeeze): \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^3+y^3}{x^2+y^2}\)</summary>
+<p><b>Q.</b> Evaluate the limit, if it exists. <b>[6 marks]</b></p>
+<p><b>Guess.</b> Along the axes: \(f(x,0)=x\to0\), \(f(0,y)=y\to0\). Candidate \(L=0\).</p>
+<p><b>Polar coordinates.</b> Let \(x=r\cos\theta\), \(y=r\sin\theta\), so \((x,y)\to(0,0)\iff r\to0^+\) for any \(\theta\):</p>
+$$f=\frac{r^3(\cos^3\theta+\sin^3\theta)}{r^2}=r(\cos^3\theta+\sin^3\theta).$$
+<p><b>Bound independent of \(\theta\).</b> Since \(|\cos\theta|\le1\) and \(|\sin\theta|\le1\),</p>
+$$0\le|f(x,y)-0|=r\,|\cos^3\theta+\sin^3\theta|\le 2r.$$
+<p>As \(r\to0\), \(2r\to0\), so by the <b>squeeze theorem</b> \(|f|\to0\) regardless of the path. Hence \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^3+y^3}{x^2+y^2}=0\).</p>
+<p class="tip">The phrase that earns the mark: "the bound \(2r\) does not depend on \(\theta\), so the convergence holds along every path".</p>
+</details>
+
+<details>
+<summary>Example 4 — Find \(c\) for continuity (radial function)</summary>
+<p><b>Q.</b> Let \(f(x,y)=\begin{cases}\dfrac{1-\cos(x^2+y^2)}{(x^2+y^2)^2}, &amp;(x,y)\ne(0,0)\\ c, &amp;(x,y)=(0,0)\end{cases}\). Find \(c\) such that \(f\) is continuous at \((0,0)\). <b>[8 marks]</b></p>
+<p>\(f\) is continuous at \((0,0)\) iff \(\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)=c\). So compute the limit.</p>
+<p>\(f\) depends only on \(u=x^2+y^2\), and \((x,y)\to(0,0)\iff u\to0^+\):</p>
+$$\lim_{(x,y)\to(0,0)}f=\lim_{u\to0^+}\frac{1-\cos u}{u^2}\overset{\text{L'H}}{=}\lim_{u\to0^+}\frac{\sin u}{2u}=\frac12.$$
+<p>(L'Hôpital applies since it is \(\frac00\). Alternatively, \(1-\cos u=2\sin^2\frac u2\) gives \(\frac{2\sin^2(u/2)}{u^2}=\frac12\big(\frac{\sin(u/2)}{u/2}\big)^2\to\frac12\).)</p>
+<p><b>Conclusion.</b> The limit exists and equals \(\tfrac12\), so \(f\) is continuous at \((0,0)\) exactly when \(\boxed{c=\tfrac12}\). For any other \(c\), the discontinuity is removable.</p>
+</details>
+
+<details>
+<summary>Example 5 — The full piecewise question: continuity + partials from the definition</summary>
+<p><b>Q.</b> Let \(f(x,y)=\begin{cases}\dfrac{x^4}{(x^2-y)^2+x^4}, &amp;(x,y)\ne(0,0)\\ 0, &amp;(x,y)=(0,0).\end{cases}\)</p>
+<p>(a) Is \(f\) continuous at \((0,0)\)? Justify. <b>[7 marks]</b> (b) Determine whether \(f_x(0,0)\) and \(f_y(0,0)\) exist. <b>[5 marks]</b></p>
+<p><b>(a)</b> \(f\) is continuous at \((0,0)\) iff \(\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)=0\).</p>
+<p>Along \(x=0\) (\(y\ne0\)): \(f(0,y)=\frac{0}{y^2}=0\), so the limit along this path is \(L_1=0\).</p>
+<p>Along \(y=x^2\) (\(x\ne0\)), which kills the bracket: \(f(x,x^2)=\frac{x^4}{0+x^4}=1\), so \(L_2=1\).</p>
+<p>\(L_1\ne L_2\), so \(\lim_{(x,y)\to(0,0)}f\) <b>does not exist</b>. Hence \(f\) is <b>not continuous</b> at \((0,0)\).</p>
+<p><b>(b)</b> \((0,0)\) is a piecewise point, so use the definition.</p>
+$$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\frac{\frac{h^4}{h^4+h^4}-0}{h}=\lim_{h\to0}\frac{1/2}{h},$$
+<p>which does not exist (\(\to+\infty\) as \(h\to0^+\), \(-\infty\) as \(h\to0^-\)). So <b>\(f_x(0,0)\) does not exist</b>.</p>
+$$f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\frac{\frac{0}{h^2}-0}{h}=\lim_{h\to0}0=0.$$
+<p>So <b>\(f_y(0,0)\) exists and equals 0</b>.</p>
+<p class="tip">Compare with the real 2025 S2 Q4 (§4 Type C), where <b>both</b> partials exist and \(f\) is still discontinuous. The partials only see the axes. Here \(f(h,0)=\tfrac12\ne f(0,0)\), so \(f\) even jumps along the \(x\)-axis.</p>
+</details>
+
+<details>
+<summary>Example 6 — Partials by rules, second partials, Clairaut check</summary>
+<p><b>Q.</b> For \(f(x,y)=x^2\sin(3y)+ye^{2x}\), find all first- and second-order partial derivatives, verify Clairaut's theorem, and evaluate \(f_{xy}(0,0)\). <b>[6 marks]</b></p>
+$$f_x=2x\sin3y+2ye^{2x},\qquad f_y=3x^2\cos3y+e^{2x}.$$
+$$f_{xx}=2\sin3y+4ye^{2x},\qquad f_{yy}=-9x^2\sin3y.$$
+$$f_{xy}=(f_x)_y=6x\cos3y+2e^{2x},\qquad f_{yx}=(f_y)_x=6x\cos3y+2e^{2x}.$$
+<p>So \(f_{xy}=f_{yx}\), as Clairaut's theorem guarantees (all second partials are continuous on \(\mathbb R^2\)). And \(f_{xy}(0,0)=0+2=2\).</p>
+</details>
+
+<details>
+<summary>Example 7 — Tangent plane, normal vector, linear approximation</summary>
+<p><b>Q.</b> Let \(f(x,y)=\sqrt{x^2+3y}\). (a) Find the tangent plane to \(z=f(x,y)\) at \((1,1)\). (b) Give a normal vector to it. (c) Use the linear approximation to estimate \(f(1.04,\,0.96)\). <b>[4 + 2 + 4 marks]</b></p>
+<p><b>(a)</b> \(f(1,1)=\sqrt4=2\).</p>
+$$f_x=\frac{x}{\sqrt{x^2+3y}}\Rightarrow f_x(1,1)=\frac12,\qquad f_y=\frac{3}{2\sqrt{x^2+3y}}\Rightarrow f_y(1,1)=\frac34.$$
+$$z=2+\tfrac12(x-1)+\tfrac34(y-1)\quad\Longleftrightarrow\quad z=\tfrac12x+\tfrac34y+\tfrac34.$$
+<p><b>(b)</b> \(\mathbf n=\langle f_x,f_y,-1\rangle=\langle\tfrac12,\tfrac34,-1\rangle\), or any multiple such as \(\langle2,3,-4\rangle\).</p>
+<p><b>(c)</b> \(\Delta x=0.04\), \(\Delta y=-0.04\):</p>
+$$f(1.04,0.96)\approx2+\tfrac12(0.04)+\tfrac34(-0.04)=2+0.02-0.03=1.99.$$
+<p>(True value \(\sqrt{3.9616}=1.99037\ldots\). The approximation is excellent because \((1.04,0.96)\) is close to \((1,1)\).)</p>
+</details>
+
+<details>
+<summary>Example 8 — Maximum error in a computed quantity</summary>
+<p><b>Q.</b> The radius and height of a cylinder are measured as \(r=3\) cm and \(h=10\) cm, with errors of at most \(0.05\) cm and \(0.1\) cm respectively. Estimate the maximum error in the computed volume \(V=\pi r^2h\), and the maximum relative error. <b>[6 marks]</b></p>
+$$V_r=2\pi rh=60\pi,\qquad V_h=\pi r^2=9\pi\quad(\text{at }r=3,\ h=10).$$
+$$|E|\approx|V_r|E_r+|V_h|E_h=60\pi(0.05)+9\pi(0.1)=3\pi+0.9\pi=3.9\pi\ \text{cm}^3\ (\approx12.25\ \text{cm}^3).$$
+<p>Relative error: \(\dfrac{3.9\pi}{V}=\dfrac{3.9\pi}{90\pi}=\dfrac{13}{300}\approx4.3\%\).</p>
+<p class="tip">Check with the percentage shortcut: \(V\propto r^2h\), so relative error \(\approx2\cdot\frac{0.05}{3}+\frac{0.1}{10}=\frac1{30}+\frac1{100}=\frac{13}{300}\). ✓</p>
+</details>
+
+<details>
+<summary>Example 9 — Quadratic approximation beats linear</summary>
+<p><b>Q.</b> Let \(f(x,y)=\ln(x+2y)\). (a) Find the quadratic approximation \(Q(x,y)\) at \((1,0)\). (b) Use \(P\) and \(Q\) to estimate \(f(1.1,-0.1)\). <b>[6 + 4 marks]</b></p>
+<p><b>(a)</b> At \((1,0)\): \(x+2y=1\).</p>
+<table>
+<tr><th>Quantity</th><th>Formula</th><th>Value at \((1,0)\)</th></tr>
+<tr><td>\(f\)</td><td>\(\ln(x+2y)\)</td><td>0</td></tr>
+<tr><td>\(f_x\)</td><td>\(\frac1{x+2y}\)</td><td>1</td></tr>
+<tr><td>\(f_y\)</td><td>\(\frac2{x+2y}\)</td><td>2</td></tr>
+<tr><td>\(f_{xx}\)</td><td>\(-\frac1{(x+2y)^2}\)</td><td>\(-1\)</td></tr>
+<tr><td>\(f_{xy}\)</td><td>\(-\frac2{(x+2y)^2}\)</td><td>\(-2\)</td></tr>
+<tr><td>\(f_{yy}\)</td><td>\(-\frac4{(x+2y)^2}\)</td><td>\(-4\)</td></tr>
+</table>
+$$Q(x,y)=(x-1)+2y-\tfrac12(x-1)^2-2(x-1)y-2y^2.$$
+<p><b>(b)</b> \(x-1=0.1\), \(y=-0.1\):</p>
+$$P=0.1-0.2=-0.1,\qquad Q=-0.1-\tfrac12(0.01)-2(0.1)(-0.1)-2(0.01)=-0.1-0.005+0.02-0.02=-0.105.$$
+<p>The true value is \(\ln0.9=-0.10536\ldots\), so \(Q\) is much closer than \(P\).</p>
+</details>
+</section>
+
+<!-- ================= 4. EXAM QUESTION TYPES ================= -->
+<section id="types">
+<h2>§4 · Exam question types (mined from past papers)</h2>
+<p>This chapter is examined in <b>every</b> paper from 2021 to 2025, typically for <b>12–24 of the 100 marks</b>. The limit/continuity question and the tangent-plane/approximation question are the two recurring ones. Here is every instance found:</p>
+<table>
+<tr><th>Paper</th><th>Q</th><th>Marks</th><th>What was asked</th><th>Type</th></tr>
+<tr><td>2025 S2</td><td>Q2</td><td>12 (4+4+4)</td><td>\(f=\ln(1+x^2y)\): partials, tangent plane at \((-1,1)\), estimate \(f(-0.95,0.95)\)</td><td>D</td></tr>
+<tr><td>2025 S2</td><td>Q4</td><td>12 (7+5)</td><td>\(\frac{x^6}{(x^2-y)^2+x^6}\): continuous at \((0,0)\)? do \(f_x(0,0),f_y(0,0)\) exist?</td><td>C</td></tr>
+<tr><td>2025 S1</td><td>Q2</td><td>12 (5+2+5)</td><td>\(f=1\) if \(xy=0\), 0 otherwise: limit, continuity, \(f_x(0,0)\) from the definition</td><td>C</td></tr>
+<tr><td>2024 S2</td><td>Q2</td><td>12 (6+6)</td><td>(a) \(\lim_{(1,0)}\frac{(x-1)^2\ln(y+2)}{(x-1)^2+y^2}\) (b) \(\lim_{(0,0)}\frac{e^{x^2+y^2}-1}{x^2+y^2}\)</td><td>A, B</td></tr>
+<tr><td>2024 S1</td><td>Q2</td><td>12 (4+4+4)</td><td>\(\frac{x^3y}{2x^6+y^2}\): along \(y=mx\), along \(y=kx^2\), does the limit exist?</td><td>A</td></tr>
+<tr><td>2023 S2</td><td>Q8</td><td>14 (4+10)</td><td>\(\frac{2y^3x^2}{y^5+x^3}\): \(\lim g(\alpha y,y)\); show the limit DNE</td><td>A</td></tr>
+<tr><td>2023 S1</td><td>Q2</td><td>12</td><td>\(\frac{\sin(9x^2+9y^2)}{6x^2+6y^2}\), value 0 at origin: removable discontinuity?</td><td>B</td></tr>
+<tr><td>2022 S2</td><td>Q1</td><td>10 (6+4)</td><td>\(\sqrt{x^2+y^2+z^2}\): linear approx. at \((3,2,6)\); show \(\sqrt{3.02^2+1.97^2+5.99^2}\approx7-\frac{0.06}{7}\)</td><td>D</td></tr>
+<tr><td>2022 S2</td><td>Q2</td><td>12 (5+7)</td><td>\(\frac{xy}{x^2+y^2}\), 0 at origin: \(f_x(0,0)\); continuity</td><td>C</td></tr>
+<tr><td>2022 S1</td><td>Q1</td><td>10 (5+5)</td><td>\(x^2y-y^3+\ln x\): quadratic approx. at \((1,1)\); estimate \(f(1.1,1)\)</td><td>E</td></tr>
+<tr><td>2022 S1</td><td>Q3</td><td>10</td><td>\(\frac{x^3y}{x^6+y^2}\), value 4 at origin: continuous?</td><td>A</td></tr>
+<tr><td>2021 S2</td><td>Q3</td><td>10</td><td>\(y\sin\frac1{x^2+y^2}\), value \(c\): find \(c\) for continuity</td><td>B</td></tr>
+<tr><td>2021 S2</td><td>Q9</td><td>10</td><td>\(\ln(x^2y)-x\sqrt y\): linear approximation at \((-\tfrac12,4)\)</td><td>D</td></tr>
+<tr><td>2021 S1</td><td>Q1</td><td>10</td><td>\(\sqrt{x^2+y^2}\) and \(\frac1{10}(x^2+y^2)+\frac52\) share a tangent plane at \((3,4)\)</td><td>D</td></tr>
+<tr><td>2021 S1</td><td>Q2</td><td>10 (8+2)</td><td>\(\frac{x^2y}{x^4+y^2}\), value \(c\): limit DNE; any \(c\) for continuity?</td><td>A</td></tr>
+<tr><td>2020 S2</td><td>Q5</td><td>10 (7+3)</td><td>tangent plane to \(z=x^2+y^2+e^{xy}\) at \((3,2)\); normal vector</td><td>D</td></tr>
+</table>
+<p class="tip">Error estimation (\(|E|\approx|f_x|E_1+|f_y|E_2\)) appears in Tutorial 7 (Q4, Q5) and the summary, but in <b>no</b> 2020–2025 paper found. Learn it (it's one line), but weight your time towards Types A–D.</p>
+
+<div class="card q">
+<h3>Type A — "Show the limit does not exist" (two-path test) <span class="marks">~10–14 marks</span></h3>
+<p><b>Looks like:</b> a rational function with \(\frac00\) at the origin, often with scaffolding: "find the limit along \(y=mx\)… along \(y=kx^2\)… does the limit exist?" (2024 S1 Q2), or "find \(\lim_{y\to0}g(\alpha y,y)\)… show the limit does not exist" (2023 S2 Q8).</p>
+<div class="method"><b>Routine:</b>
+<ol>
+<li>Name each path explicitly ("Along \(y=x^3\), \(x\ne0\)…") and substitute to get a one-variable function.</li>
+<li>Simplify and take the one-variable limit. Keep the parameter (\(m\), \(k\)) and handle the special case \(m=0\)/\(k=0\) separately.</li>
+<li>If the scaffolded families all agree, <b>balance degrees</b> to find a new path.</li>
+<li>Conclude: "\(L_1\ne L_2\), so the limit does not exist. Hence \(f\) is not continuous at \((0,0)\)" (if continuity is asked).</li>
+</ol></div>
+<details><summary>Worked past-paper example — 2024 S1 Q2 (12 marks)</summary>
+<p><b>Q.</b> Consider \(f(x,y)=\dfrac{x^3y}{2x^6+y^2}\) on \(\mathbb R^2\setminus\{(0,0)\}\). (a) What value does \(f\) approach as \((x,y)\to(0,0)\) along \(y=mx\)? <b>[4]</b> (b) … along \(y=kx^2\)? <b>[4]</b> (c) Does \(\lim_{(x,y)\to(0,0)}f(x,y)\) exist? Explain. <b>[4]</b></p>
+<p><b>(a)</b> \(f(x,mx)=\dfrac{mx^4}{2x^6+m^2x^2}=\dfrac{mx^2}{2x^4+m^2}\to0\) as \(x\to0\) (for \(m\ne0\). For \(m=0\), \(f\equiv0\)). <b>Answer: 0.</b></p>
+<p><b>(b)</b> \(f(x,kx^2)=\dfrac{kx^5}{2x^6+k^2x^4}=\dfrac{kx}{2x^2+k^2}\to0\) (\(k\ne0\). For \(k=0\), \(f\equiv0\)). <b>Answer: 0.</b></p>
+<p><b>(c)</b> Balance \(x^6\) with \(y^2\): take \(y=x^3\). Then \(f(x,x^3)=\dfrac{x^6}{2x^6+x^6}=\dfrac13\to\dfrac13\). Along \(y=mx\) the limit is 0, but along \(y=x^3\) it is \(\tfrac13\). Different limits along two paths, so <b>the limit does not exist</b>.</p>
+<p class="trap">Parts (a) and (b) are bait. Answering "(c) yes, 0" loses all 4 marks. In general \(y=kx^3\) gives \(\frac{k}{2+k^2}\), which depends on \(k\).</p>
+</details>
+<details><summary>Also: 2023 S2 Q8 (14 marks), a domain-aware path</summary>
+<p>\(g(x,y)=\dfrac{2y^3x^2}{y^5+x^3}\) on \(\mathbb R^2\setminus\{y=-x^{3/5}\}\). (a) \(g(\alpha y,y)=\dfrac{2\alpha^2y^5}{y^3(y^2+\alpha^3)}=\dfrac{2\alpha^2y^2}{y^2+\alpha^3}\to0\) for every \(\alpha\) (and \(g(0,y)=0\)). (b) Along \(y=0\): \(g=0\to0\). The official solution then hugs the excluded curve: along \(y=-x^{3/5}(x^{4/5}+1)\) (which stays in the domain for small \(x&gt;0\)), the limit is \(\tfrac25\). Since \(0\ne\tfrac25\), the limit does not exist. <i>Lesson:</i> when the denominator can vanish near the origin, a path that runs <b>close to</b> the zero set of the denominator makes \(g\) do anything you like.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type B — "Evaluate the limit / find \(c\) / removable discontinuity" (limit EXISTS) <span class="marks">~6–12 marks</span></h3>
+<p><b>Looks like:</b> a function of \(x^2+y^2\) only, or a bounded factor times something that vanishes. Wording: "evaluate the limit, if it exists", "find \(c\) such that \(f\) is continuous", "does \(g\) have a removable discontinuity?"</p>
+<div class="method"><b>Routine:</b> polar coordinates (or \(u=x^2+y^2\)) → reduce to \(r\to0\) → standard limit / L'Hôpital / squeeze with a \(\theta\)-free bound → compare with \(f(0,0)\) → conclude.</div>
+<details><summary>Worked past-paper example — 2023 S1 Q2 (12 marks)</summary>
+<p><b>Q.</b> A function has a <i>removable discontinuity</i> at \((a,b)\) if \(\lim_{(x,y)\to(a,b)}f\) exists but \(f\) is not continuous at \((a,b)\). Let \(g(x,y)=\dfrac{\sin(9x^2+9y^2)}{6x^2+6y^2}\) for \((x,y)\ne(0,0)\), \(g(0,0)=0\). Does \(g\) have a removable discontinuity at \((0,0)\)?</p>
+<p>Use polar coordinates: \(x^2+y^2=r^2\), and \((x,y)\to(0,0)\iff r\to0\).</p>
+$$\lim_{(x,y)\to(0,0)}g=\lim_{r\to0}\frac{\sin(9r^2)}{6r^2}=\frac96\lim_{r\to0}\frac{\sin(9r^2)}{9r^2}=\frac32\cdot1=\frac32.$$
+<p>So the limit <b>exists</b> and equals \(\tfrac32\), but \(g(0,0)=0\ne\tfrac32\). Hence \(g\) is not continuous at \((0,0)\), and <b>yes, the discontinuity is removable</b> (redefining \(g(0,0)=\tfrac32\) would fix it).</p>
+</details>
+<details><summary>Also: 2021 S2 Q3 (10 marks) and 2024 S2 Q2(b) (6 marks)</summary>
+<p><b>2021 S2 Q3:</b> \(f=y\sin\frac1{x^2+y^2}\), \(f(0,0)=c\). Polar: \(f=r\sin\theta\sin\frac1{r^2}\), and \(-r\le r\sin\theta\sin\frac1{r^2}\le r\) for all \(\theta\). Squeeze gives limit 0, so <b>\(c=0\)</b> makes \(f\) continuous.</p>
+<p><b>2024 S2 Q2(b):</b> \(\lim\frac{e^{x^2+y^2}-1}{x^2+y^2}=\lim_{r\to0}\frac{e^{r^2}-1}{r^2}\overset{\text{L'H}}{=}\lim\frac{2re^{r^2}}{2r}=1\). Marking scheme: <b>3 marks for setting up polar coordinates</b>, 3 for correct working + conclusion.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type C — Piecewise function: continuity + partial derivatives at the origin <span class="marks">12 marks</span></h3>
+<p><b>Looks like:</b> "Let \(f(x,y)=\begin{cases}\ldots&amp;(x,y)\ne(0,0)\\ \ldots&amp;(x,y)=(0,0)\end{cases}\). (a) Is \(f\) continuous at \((0,0)\)? (b) Do \(f_x(0,0)\), \(f_y(0,0)\) exist?" This is the flagship of 2025 S2, 2025 S1 and 2022 S2.</p>
+<div class="method"><b>Routine:</b>
+<ol>
+<li>(a) Definition of continuity → Type A or B on the limit → compare with \(f(0,0)\) → conclude.</li>
+<li>(b) Write \(f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\) <b>in full</b> (2–3 marks for the definition alone) → evaluate \(f(h,0)\) from the top formula → simplify → state "exists and equals …" or "does not exist because …". Repeat for \(f_y\) with \(f(0,h)\).</li>
+</ol></div>
+<details><summary>Worked past-paper example — 2025 S2 Q4 (12 marks)</summary>
+<p><b>Q.</b> Let \(f(x,y)=\dfrac{x^6}{(x^2-y)^2+x^6}\) if \((x,y)\ne(0,0)\), and \(f(0,0)=0\). (a) Is \(f\) continuous at \((0,0)\)? Justify. <b>[7]</b> (b) Determine whether \(f_x(0,0)\) and \(f_y(0,0)\) exist. Justify. <b>[5]</b></p>
+<p><b>(a)</b> \(f\) is continuous at \((0,0)\) iff \(\lim_{(x,y)\to(0,0)}f(x,y)=f(0,0)=0\).</p>
+<p>Along \(x=0\) (\(y\ne0\)): \(f(0,y)=\frac{0}{y^2}=0\Rightarrow L_1=0\).</p>
+<p>Along \(y=x^2\) (\(x\ne0\)): \(f(x,x^2)=\frac{x^6}{(x^2-x^2)^2+x^6}=\frac{x^6}{x^6}=1\Rightarrow L_2=1\).</p>
+<p>\(L_1\ne L_2\), so the limit does not exist, and therefore <b>\(f\) is not continuous at \((0,0)\)</b>.</p>
+<p><b>(b)</b></p>
+$$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\frac{1}{h}\cdot\frac{h^6}{h^4+h^6}=\lim_{h\to0}\frac{h^6}{h^5(1+h^2)}=\lim_{h\to0}\frac{h}{1+h^2}=0.$$
+$$f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\frac{0-0}{h}=0.$$
+<p><b>Both partial derivatives exist and equal 0</b>, even though \(f\) is not continuous at \((0,0)\).</p>
+<p class="tip">Why a curve was essential: every straight line \(y=mx\) gives \(\frac{x^6}{x^2(x-m)^2+x^6}\to0\) too. Only the path that makes \((x^2-y)\) vanish exposes the discontinuity.</p>
+<p class="trap"><b>Source note:</b> the question paper shows marks (a) 7, (b) 5, while the posted solutions file shows (a) 8, (b) 2. Also, the solutions file lists Q2 as 4/5/4 while the paper says 4/4/4. We quote the question paper.</p>
+</details>
+<details><summary>Also: 2025 S1 Q2 and 2022 S2 Q2 (with the marking scheme)</summary>
+<p><b>2025 S1 Q2:</b> \(f=0\) if \(xy\ne0\), \(f=1\) if \(xy=0\). (a) Along \(x=0\), \(f\equiv1\). Along \(y=x\) (\(x\ne0\)), \(f\equiv0\). So the limit DNE. <i>MS: 2 marks per path, 1 for the conclusion.</i> (b) Limit DNE, so not continuous. <i>MS: 1 mark for the definition of continuity, 1 for the conclusion.</i> (c) \(f_x(0,0)=\lim\frac{f(h,0)-f(0,0)}{h}=\lim\frac{1-1}{h}=0\). It exists. <i>MS: 2 marks for the definition, 3 for working + answer.</i></p>
+<p><b>2022 S2 Q2:</b> \(f=\frac{xy}{x^2+y^2}\), \(f(0,0)=0\). (a) \(f_x(0,0)=\lim\frac{f(h,0)-0}{h}=\lim\frac{0-0}{h}=0\). <i>MS: 3 for the definition, 1 + 1 for the steps.</i> (b) Along \(x=0\): 0. Along \(y=x\): \(\frac{x^2}{2x^2}=\frac12\). So the limit DNE and \(f\) is not continuous. <i>MS: 3 + 3 for the paths, 1 for the conclusion.</i></p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type D — Tangent plane + linear approximation <span class="marks">~10–12 marks</span></h3>
+<p><b>Looks like:</b> "Determine the partial derivatives… the equation of the tangent plane at… use the linear approximation to estimate \(f(\text{nearby point})\)". Variants: 3 variables (2022 S2 Q1), a normal vector (2020 S2 Q5), a common tangent plane of two surfaces (2021 S1 Q1).</p>
+<div class="method"><b>Routine:</b> \(f(a,b)\) exactly → \(f_x,f_y\) as formulas (marks!) → evaluate at \((a,b)\) → plane \(z=f(a,b)+f_x(x-a)+f_y(y-b)\) → substitute the nearby point, keep things exact as long as possible → use the given decimal hint at the very end.</div>
+<details><summary>Worked past-paper example — 2025 S2 Q2 (12 marks)</summary>
+<p><b>Q.</b> Let \(f(x,y)=\ln(1+x^2y)\), domain \(D=\{(x,y)\in\mathbb R^2: y\ge0\}\). (a) Determine \(f_x\) and \(f_y\). <b>[4]</b> (b) Determine the tangent plane to \(z=f(x,y)\) at \((-1,1)\). <b>[4]</b> (c) Use the linear approximation to estimate \(f(-0.95,0.95)\). Hint: \(\ln2\approx0.6931\). <b>[4]</b></p>
+<p><b>(a)</b> Chain rule on \(\ln(\cdot)\):</p>
+$$f_x=\frac{2xy}{1+x^2y},\qquad f_y=\frac{x^2}{1+x^2y}.$$
+<p><b>(b)</b> \(f(-1,1)=\ln2\), \(f_x(-1,1)=\frac{-2}{2}=-1\), \(f_y(-1,1)=\frac12\).</p>
+$$z=\ln2-(x+1)+\tfrac12(y-1).$$
+<p><b>(c)</b> \(x+1=0.05\), \(y-1=-0.05\):</p>
+$$f(-0.95,0.95)\approx\ln2-0.05+\tfrac12(-0.05)=\ln2-0.075\approx0.6931-0.075=0.6181.$$
+<p>(True value \(\ln(1.857375)=0.6192\ldots\).)</p>
+<p class="trap">Sign trap: \(x-a=-0.95-(-1)=+0.05\), not \(-0.05\). Write \(x-a\) out in full before substituting.</p>
+</details>
+<details><summary>Also: 2022 S2 Q1, 2021 S2 Q9, 2021 S1 Q1, 2020 S2 Q5</summary>
+<p><b>2022 S2 Q1 (3 variables):</b> \(f=\sqrt{x^2+y^2+z^2}\), \(f(3,2,6)=7\), \(f_x=\frac x f\), etc., giving \(\frac37,\frac27,\frac67\). \(L=7+\frac37(x-3)+\frac27(y-2)+\frac67(z-6)\). At \((3.02,1.97,5.99)\): \(7+\frac{0.06}7-\frac{0.06}7-\frac{0.06}7=7-\frac{0.06}7\). <i>MS: 1 for the formula, 1 for \(f(3,2,6)\), 3 for the partials, 1 for \(L\). (b) 2 for the substitution, 2 for the simplification.</i></p>
+<p><b>2021 S2 Q9:</b> \(f=\ln(x^2y)-x\sqrt y\), \(P=(-\tfrac12,4)\): \(f(P)=\ln1+1=1\), \(f_x=\frac2x-\sqrt y=-6\), \(f_y=\frac1y-\frac{x}{2\sqrt y}=\frac14+\frac18=\frac38\). \(L=1-6(x+\tfrac12)+\tfrac38(y-4)=-6x+\tfrac38y-\tfrac72\).</p>
+<p><b>2021 S1 Q1:</b> both surfaces have height 5 at \((3,4)\), and both have \(z_x=\frac35\), \(z_y=\frac45\) there, so they share the tangent plane \(z=5+\frac35(x-3)+\frac45(y-4)=\frac35x+\frac45y\).</p>
+<p><b>2020 S2 Q5:</b> \(z=x^2+y^2+e^{xy}\) at \((3,2)\): \(z=13+e^6\), \(z_x=2x+ye^{xy}=6+2e^6\), \(z_y=2y+xe^{xy}=4+3e^6\). Plane: \(z=13+e^6+(6+2e^6)(x-3)+(4+3e^6)(y-2)\). Normal: \(\langle 6+2e^6,\,4+3e^6,\,-1\rangle\). Leave \(e^6\) exact, since there's no calculator.</p>
+</details>
+</div>
+
+<div class="card q">
+<h3>Type E — Quadratic approximation <span class="marks">~10 marks</span></h3>
+<p><b>Looks like:</b> "Find the quadratic approximation for \(f\) at \((a,b)\). Using it, derive an approximate value for \(f(\ldots)\)." (2022 S1 Q1). The formula is on the sheet, so the marks are for six correct numbers.</p>
+<details><summary>Worked past-paper example — 2022 S1 Q1 (10 marks)</summary>
+<p><b>Q.</b> \(f(x,y)=x^2y-y^3+\ln x\). (a) Find the quadratic approximation at \((1,1)\). <b>[5]</b> (b) Use it to approximate \(f(1.1,1)\). <b>[5]</b></p>
+<p><b>(a)</b> \(f(1,1)=0\). \(f_x=2xy+\frac1x\Rightarrow3\). \(f_y=x^2-3y^2\Rightarrow-2\). \(f_{xx}=2y-\frac1{x^2}\Rightarrow1\). \(f_{xy}=2x\Rightarrow2\). \(f_{yy}=-6y\Rightarrow-6\).</p>
+$$Q=3(x-1)-2(y-1)+\tfrac12(x-1)^2+2(x-1)(y-1)-3(y-1)^2.$$
+<p><b>(b)</b> \(x-1=0.1,\ y-1=0\): \(Q=0.3+\tfrac12(0.01)=0.305\). (Actual \(0.305310\ldots\).)</p>
+<p class="trap">The official solution writes \(f_{xx}=2-\frac1{x^2}\), which is correct at \(y=1\) but not as a formula: \(f_{xx}=2y-\frac1{x^2}\). The value 1 is right either way. Write the general formula before substituting.</p>
+</details>
+</div>
+</section>
+
+<!-- ================= 5. TRIGGERS ================= -->
+<section id="triggers">
+<h2>§5 · Wording triggers — the money table</h2>
+<p class="tip">Read the verb, and look at the <b>degrees</b> in the fraction. Between them they tell you whether you are proving existence or non-existence, before you write a single line.</p>
+
+<h4>A · Limits &amp; continuity</h4>
+<table>
+<tr><th>When the exam says / shows…</th><th>It means / do this</th></tr>
+<tr><td>"Show that \(\lim\) … does not exist"</td><td>Two-path test. Two explicit paths, two different values, conclusion sentence.</td></tr>
+<tr><td>"Evaluate the limit, <b>if it exists</b>. If not, explain why"</td><td>Decide first: same weighted degree top and bottom ⇒ probably DNE (paths). Numerator of higher degree, or a function of \(x^2+y^2\) only ⇒ probably exists (polar/\(u\)).</td></tr>
+<tr><td>"along \(y=mx\)… along \(y=kx^2\)… does the limit exist?"</td><td>Scaffolding. If both give 0, find a third path (degree-balancing) that doesn't. Almost always the answer is "no".</td></tr>
+<tr><td>"Find \(\lim_{y\to0}g(\alpha y,y)\)"</td><td>That's the line \(x=\alpha y\). Substitute \(x=\alpha y\), simplify, and let \(y\to0\) with \(\alpha\) a constant.</td></tr>
+<tr><td>A denominator like \((x^2-y)^2+\ldots\) or \((y^2-x)^2+\ldots\)</td><td>Path that kills the bracket: \(y=x^2\) (resp. \(x=y^2\)).</td></tr>
+<tr><td>\(x^2+y^2\) appears everywhere; \(\sin(\cdot)\), \(e^{(\cdot)}-1\), \(1-\cos(\cdot)\) of it</td><td>Polar / \(u=x^2+y^2\), then a standard limit or L'Hôpital. The limit exists.</td></tr>
+<tr><td>A factor like \(\sin\frac1{x^2+y^2}\) or \(\cos\frac1{xy}\)</td><td>It's bounded by 1. Squeeze: \(|y\sin(\ldots)|\le|y|\le r\to0\).</td></tr>
+<tr><td>"Is \(f\) continuous at \((0,0)\)?"</td><td>Write \(\lim f=f(0,0)\)? Then: limit DNE ⇒ no. Limit exists ⇒ compare with the given value.</td></tr>
+<tr><td>"Find \(c\) such that \(f\) is continuous"</td><td>\(c=\) the limit. If the limit DNE: "no value of \(c\) works".</td></tr>
+<tr><td>"Removable discontinuity"</td><td>Limit exists but \(\ne f(a,b)\). Show both facts.</td></tr>
+</table>
+
+<h4>B · Partial derivatives</h4>
+<table>
+<tr><th>When the exam says…</th><th>Do this</th></tr>
+<tr><td>"Use the <b>definition</b> of the partial derivative", or "do \(f_x(0,0)\), \(f_y(0,0)\) exist?" for a piecewise \(f\)</td><td>\(\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\) and \(\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}\). Top formula for \(f(h,0)\), given value for \(f(0,0)\).</td></tr>
+<tr><td>"Find \(f_x\), \(f_y\)" / "evaluate \(f_z(2,1,0)\)"</td><td>Rules: hold the other variables constant. Simplify <b>before</b> substituting.</td></tr>
+<tr><td>"Find all second-order partial derivatives"</td><td>Four of them: \(f_{xx},f_{xy},f_{yx},f_{yy}\). Check \(f_{xy}=f_{yx}\) (Clairaut).</td></tr>
+<tr><td>"Show that \(u\) satisfies \(u_t=ku_{xx}\)" (a PDE)</td><td>Compute each side separately and show they're equal.</td></tr>
+</table>
+
+<h4>C · Tangent planes &amp; approximation</h4>
+<table>
+<tr><th>When the exam says…</th><th>Do this</th></tr>
+<tr><td>"Equation of the tangent plane to \(z=f(x,y)\) at \((a,b)\)"</td><td>\(z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)\). Give the final answer as an equation in \(x,y,z\).</td></tr>
+<tr><td>"A normal vector to the tangent plane"</td><td>\(\langle f_x(a,b),f_y(a,b),-1\rangle\).</td></tr>
+<tr><td>"Common tangent plane" / "the surfaces touch at…"</td><td>Same \(z\), same \(f_x\), same \(f_y\) at the point.</td></tr>
+<tr><td>"Use the linear approximation (at …) to estimate \(f(\text{near point})\)"</td><td>\(P(x,y)\) at the given/obvious base point. Watch the signs of \(\Delta x,\Delta y\).</td></tr>
+<tr><td>"Approximate \(\sqrt{(3.02)^2+\ldots}\)" (no function given)</td><td>Invent \(f\) (here \(\sqrt{x^2+y^2+z^2}\)) and a base point with an exact value (here \((3,2,6)\), \(f=7\)).</td></tr>
+<tr><td>"Estimate the (approximate) <b>change</b> in \(V\)…"</td><td>\(\Delta V\approx V_x\Delta x+V_y\Delta y\), <b>with</b> signs.</td></tr>
+<tr><td>"Measured with an error of <b>at most</b>…", "maximum error"</td><td>\(|E|\approx|f_x|E_1+|f_y|E_2\), with absolute values: worst case.</td></tr>
+<tr><td>"… % error in each measurement"</td><td>Convert to absolute errors (\(0.5\%\times40=0.2\)), or use relative errors for power products.</td></tr>
+<tr><td>"Quadratic / second-order approximation"</td><td>\(Q\) from the formula sheet: six numbers \(f,f_x,f_y,f_{xx},f_{xy},f_{yy}\). The mixed term has no \(\tfrac12\).</td></tr>
+</table>
+
+<h4>Full-marks template for a continuity + partials question (copy this shape)</h4>
+<div class="method mono">(a) f is continuous at (0,0) iff  lim_{(x,y)→(0,0)} f(x,y) = f(0,0) = [value].
+    Path 1: along [x = 0], (y ≠ 0):  f(0,y) = … = …  →  L₁ = …
+    Path 2: along [y = x²], (x ≠ 0): f(x,x²) = … = … →  L₂ = …
+    Since L₁ ≠ L₂, lim_{(x,y)→(0,0)} f(x,y) does not exist.
+    Hence f is NOT continuous at (0,0).
+       [or: polar x = r cosθ, y = r sinθ … |f − L| ≤ g(r) → 0 for all θ,
+        so lim = L by the squeeze theorem; compare L with f(0,0); conclude.]
+
+(b) f_x(0,0) = lim_{h→0} [f(0+h,0) − f(0,0)] / h = lim_{h→0} [ … − … ] / h = …
+    ⇒ f_x(0,0) exists and equals …   /   does not exist because …
+    f_y(0,0) = lim_{h→0} [f(0,0+h) − f(0,0)] / h = … </div>
+</section>
+
+<!-- ================= 6. TRAPS ================= -->
+<section id="traps">
+<h2>§6 · Traps &amp; marks lost</h2>
+
+<div class="trap"><b>Using paths to "prove" a limit exists.</b> "Along the axes and along \(y=mx\) the limit is 0, so the limit is 0" scores nothing. Agreement along any number of paths proves nothing. Existence needs a \(\theta\)-free bound (polar + squeeze) or a reduction to one variable (\(u=x^2+y^2\)).</div>
+
+<div class="trap"><b>Polar with \(\theta\) left in the denominator.</b> Writing \(\lim_{r\to0}\frac{r\cos^2\theta\sin\theta}{r^2\cos^4\theta+\sin^2\theta}=0\) "for each \(\theta\)" is only the straight-line check in disguise. It fails near \(\sin\theta=0\), where the denominator is tiny. Only accept polar when you can bound by \(g(r)\) alone.</div>
+
+<div class="trap"><b>Stopping after the scaffolded paths.</b> 2024 S1 Q2 asks for lines, then parabolas \(y=kx^2\) (both give 0), then "does the limit exist?". The answer is <b>no</b> (use \(y=x^3\) to get \(\tfrac13\)). If the question pointedly asks "does it exist?" after two agreeing families, be suspicious.</div>
+
+<div class="trap"><b>Missing the conclusion sentences.</b> The 2025 S1 and 2022 S2 marking schemes award a separate mark for "\(L_1\ne L_2\) so the limit does not exist" <i>and</i> another for "hence \(f\) is not continuous". State the definition of continuity (1 mark) and say the words.</div>
+
+<div class="trap"><b>Differentiating the top formula to get \(f_x(0,0)\).</b> The formula for \((x,y)\ne(0,0)\) says nothing about the origin, where \(f\) is defined separately. Often the derivative formula is \(\frac00\) there anyway. You <b>must</b> use \(\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}\). Writing the definition is 2–3 marks on its own (2025 S1 MS: 2 marks; 2022 S2 MS: 3 marks).</div>
+
+<div class="trap"><b>Using \(f(0,0)=0\) when it isn't.</b> 2022 S1 Q3 sets \(f(0,0)=4\). 2025 S1 Q2 has \(f(0,0)=1\). Read the bottom line of the piecewise definition and use that value in the difference quotient.</div>
+
+<div class="trap"><b>"Partials exist ⇒ continuous".</b> False (2025 S2 Q4: both partials are 0, but \(f\) is discontinuous). And "not continuous ⇒ partials don't exist" is also false. Answer the two parts <b>independently</b>.</div>
+
+<div class="trap"><b>Paths outside the domain or not through the point.</b> A path must pass through \((a,b)\) and lie in \(D\). For 2024 S2 Q2(a), the limit is at \((1,0)\), so the paths are \(x=1\) and \(y=0\), <b>not</b> the axes through the origin. For 2023 S2 Q8 the curve \(y=-x^{3/5}\) is excluded.</div>
+
+<div class="trap"><b>Sign of \(\Delta x\) with negative base points.</b> 2025 S2 Q2(c): \(x-a=-0.95-(-1)=+0.05\). A wrong sign flips the whole estimate. (The official solution even contains the typo "\(f(-0.95,1.95)\)". Copy the point from the question, not from memory.)</div>
+
+<div class="trap"><b>Rounding too early.</b> No calculator. Keep \(\ln 2\), \(e^6\), \(\pi\), \(\frac{0.06}{7}\) exact until the last line, then use the given hint (\(\ln2\approx0.6931\)). Marks are for the method and a clean exact form.</div>
+
+<div class="trap"><b>Forgetting the absolute values in the maximum error.</b> The errors can have either sign, so the worst case adds <b>magnitudes</b>: \(|f_x|E_1+|f_y|E_2\). A negative partial must be made positive. (Contrast: "estimate the <i>change</i>" keeps signs.)</div>
+
+<div class="trap"><b>Quadratic approximation: \(\tfrac12\) on the mixed term.</b> The formula sheet has \(\tfrac12f_{xx}\), \(f_{xy}\) (no half), \(\tfrac12f_{yy}\). Putting \(\tfrac12\) on \(f_{xy}\) is the classic slip.</div>
+
+<div class="trap"><b>Tangent plane not written as a plane.</b> Leave the answer as \(z=\ldots\) in terms of \(x\) and \(y\) (expanded or point form). Don't stop at listing \(f_x\) and \(f_y\). And the normal vector's third component is \(-1\), not \(+1\) or \(f(a,b)\).</div>
+</section>
+
+<!-- ================= 7. SELF-CHECK ================= -->
+<section id="selfcheck">
+<h2>§7 · Self-check</h2>
+
+<details><summary>1. Why can the two-path test prove a limit does NOT exist, but never that it DOES?</summary>
+<p>If the limit existed, <i>every</i> path would give it. So one disagreement is a counter-example. Existence is a claim about <i>all</i> (infinitely many) paths, and finitely many checks can't cover them.</p></details>
+
+<details><summary>2. \(f=\dfrac{xy}{x^2+y^2}\). Limit along \(y=x\)? Along the \(x\)-axis? Conclusion?</summary>
+<p>\(y=x\): \(\frac{x^2}{2x^2}=\frac12\). \(x\)-axis: 0. Different, so the limit DNE (2022 S2 Q2(b)).</p></details>
+
+<details><summary>3. Which path would you try for \(\dfrac{x^2y}{x^4+y^2}\)? For \(\dfrac{xy^3}{x^2+y^6}\)?</summary>
+<p>Balance the denominator: \(y=x^2\) (gives \(\tfrac12\)). For the second, \(x=y^3\) (gives \(\tfrac12\)). Lines give 0 in both cases.</p></details>
+
+<details><summary>4. Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{\sin\big(2(x^2+y^2)\big)}{x^2+y^2}\).</summary>
+<p>\(u=x^2+y^2\to0^+\): \(\frac{\sin2u}{u}=2\cdot\frac{\sin2u}{2u}\to2\).</p></details>
+
+<details><summary>5. In polar form, \(\frac{x^2y^2}{x^2+y^2}=\)? What's the limit?</summary>
+<p>\(r^2\cos^2\theta\sin^2\theta\), with \(|\cdot|\le r^2\to0\). So the limit is 0.</p></details>
+
+<details><summary>6. State the three conditions hidden in "\(f\) is continuous at \((a,b)\)".</summary>
+<p>\(f(a,b)\) is defined. \(\lim_{(x,y)\to(a,b)}f\) exists. The two are equal.</p></details>
+
+<details><summary>7. Write the limit definition of \(f_y(0,0)\). Which points does it look at?</summary>
+<p>\(f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}\). Only points \((0,h)\) on the \(y\)-axis.</p></details>
+
+<details><summary>8. True or false: if \(f_x(0,0)\) and \(f_y(0,0)\) both exist, then \(f\) is continuous at \((0,0)\).</summary>
+<p><b>False.</b> 2025 S2 Q4 is a counter-example: both partials are 0, but the limit along \(y=x^2\) is 1 while \(f(0,0)=0\).</p></details>
+
+<details><summary>9. What does Clairaut's theorem say, and how do you use it in an exam?</summary>
+<p>If \(f_{xy},f_{yx}\) are continuous, then \(f_{xy}=f_{yx}\). Use it as a free error check: compute both mixed partials and confirm they match.</p></details>
+
+<details><summary>10. Tangent plane to \(z=xe^y\) at \((2,0)\)?</summary>
+<p>\(f=2\), \(f_x=e^y=1\), \(f_y=xe^y=2\). So \(z=2+(x-2)+2y=x+2y\).</p></details>
+
+<details><summary>11. A normal vector to the tangent plane of \(z=f(x,y)\) at \((a,b)\)?</summary>
+<p>\(\langle f_x(a,b),\,f_y(a,b),\,-1\rangle\).</p></details>
+
+<details><summary>12. "Estimate the change" vs "estimate the maximum error": what's the difference in the formula?</summary>
+<p>Change: \(\Delta z\approx f_x\Delta x+f_y\Delta y\) with actual signed increments. Maximum error: \(|f_x|E_1+|f_y|E_2\). All terms are positive (worst case).</p></details>
+
+<details><summary>13. 1% error in \(x\), 2% in \(y\). Max % error in \(x^2y^3\)?</summary>
+<p>\(2(1\%)+3(2\%)=8\%\).</p></details>
+
+<details><summary>14. Which coefficient in the quadratic approximation has no \(\tfrac12\)?</summary>
+<p>The mixed term \(f_{xy}(a,b)(x-a)(y-b)\).</p></details>
+
+<details><summary>15. Can a function be continuous at a point where \(f_x\) doesn't exist?</summary>
+<p>Yes. \(\sqrt{x^2+y^2}\) at the origin (a cone's tip) is continuous, but \(\frac{f(h,0)-f(0,0)}{h}=\frac{|h|}{h}\) has no limit.</p></details>
+</section>
+
+<!-- ================= 8. PRACTICE ARENA ================= -->
+<section id="practice">
+<h2>§8 · Practice Arena</h2>
+<p>Fresh functions and numbers you haven't seen in the tutorials or any 2020–2025 paper, in the same exam <i>style</i>: self-contained, lettered parts, marks shown, no calculator needed. Every answer is verified with SymPy (<code>verify/ch04.py</code>).</p>
+<p class="tip">How to use the arena: read the two "📖 Learn from these" first (written exactly as a marker wants it), then cover the solutions and attempt "✏️ Your turn" on paper. Only reveal a solution once you've written the definition, the paths or the bound, and the conclusion sentence.</p>
+
+<!-- ---------- 8.1 ---------- -->
+<h3>8.1 · Limits by substitution, cancelling &amp; standard limits</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — cancel the \(\tfrac00\)</summary>
+<p><b>Q.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(2,2)}\frac{x^2-y^2}{x-y}\).</p>
+<p>Direct substitution gives \(\frac00\). But for \(x\ne y\) (the domain), \(\dfrac{x^2-y^2}{x-y}=\dfrac{(x-y)(x+y)}{x-y}=x+y\). This is a polynomial, hence continuous, so</p>
+$$\lim_{(x,y)\to(2,2)}\frac{x^2-y^2}{x-y}=\lim_{(x,y)\to(2,2)}(x+y)=4.$$
+</details>
+<details>
+<summary>Worked B — a function of one combination</summary>
+<p><b>Q.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{\sin(x^2+3y^2)}{x^2+3y^2}\).</p>
+<p>Let \(u=x^2+3y^2\). As \((x,y)\to(0,0)\), \(u\to0^+\) (and \(u\ne0\) for \((x,y)\ne(0,0)\)). So the limit is \(\displaystyle\lim_{u\to0^+}\frac{\sin u}{u}=1\).</p>
+<p class="tip">This works because \(f\) depends on \((x,y)\) <b>only through \(u\)</b>, and \(u\to0\) along every path.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 2 marks</span> <b>Q1.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(2,-1)}\frac{x^3y+4}{x-y}\), justifying the method.</p>
+<details><summary>Solution</summary>
+<p>A rational function with nonzero denominator at \((2,-1)\) (\(2-(-1)=3\)), so it's continuous there and we substitute: \(\dfrac{8(-1)+4}{3}=-\dfrac43\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q2.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(1,1)}\frac{x^2-2xy+y^2}{x-y}\).</p>
+<details><summary>Solution</summary>
+<p>\(\frac00\) on substitution. For \(x\ne y\): \(\frac{(x-y)^2}{x-y}=x-y\to0\). The limit is <b>0</b>.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{e^{2x^2+2y^2}-1}{x^2+y^2}\).</p>
+<details><summary>Solution</summary>
+<p>Polar / \(u=x^2+y^2=r^2\to0^+\): \(\displaystyle\lim_{u\to0^+}\frac{e^{2u}-1}{u}\overset{\text{L'H}}{=}\lim_{u\to0^+}\frac{2e^{2u}}{1}=2\). (Or \(2\cdot\frac{e^{2u}-1}{2u}\to2\cdot1\).) The limit is <b>2</b>.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q4.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{1-\cos\sqrt{x^2+y^2}}{x^2+y^2}\).</p>
+<details><summary>Solution</summary>
+<p>In polar form, \(\sqrt{x^2+y^2}=r\): \(\displaystyle\lim_{r\to0^+}\frac{1-\cos r}{r^2}\overset{\text{L'H}}{=}\lim\frac{\sin r}{2r}=\frac12\). The limit is <b>\(\tfrac12\)</b>, independent of \(\theta\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 5 marks</span> <b>Q5.</b> Let \(g(x,y)=\dfrac{\ln(1+x^2+y^2)}{x^2+y^2}\) for \((x,y)\ne(0,0)\) and \(g(0,0)=1\). Is \(g\) continuous at \((0,0)\)? Justify.</p>
+<details><summary>Solution</summary>
+<p>\(g\) is continuous at \((0,0)\) iff \(\lim g=g(0,0)=1\). With \(u=x^2+y^2\to0^+\): \(\lim_{u\to0^+}\frac{\ln(1+u)}{u}\overset{\text{L'H}}{=}\lim\frac{1/(1+u)}{1}=1\). The limit exists and equals \(1=g(0,0)\), so <b>\(g\) is continuous at \((0,0)\)</b>.</p></details>
+</div>
+
+<!-- ---------- 8.2 ---------- -->
+<h3>8.2 · Showing a limit does not exist (two-path test)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — axes suffice</summary>
+<p><b>Q.</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2+3xy}{x^2+y^2}\) does not exist.</p>
+<p>Along \(y=0\) (\(x\ne0\)): \(f(x,0)=\frac{x^2}{x^2}=1\to1\).</p>
+<p>Along \(x=0\) (\(y\ne0\)): \(f(0,y)=\frac0{y^2}=0\to0\).</p>
+<p>\(1\ne0\), so the limit does not exist. (More generally, \(y=mx\) gives \(\frac{1+3m}{1+m^2}\), which depends on \(m\).)</p>
+</details>
+<details>
+<summary>Worked B — lines fail, so balance the degrees</summary>
+<p><b>Q.</b> (a) Find the limit of \(f(x,y)=\dfrac{xy^3}{x^2+y^6}\) along every line \(y=mx\). (b) Show \(\lim_{(x,y)\to(0,0)}f\) does not exist.</p>
+<p><b>(a)</b> \(f(x,mx)=\dfrac{m^3x^4}{x^2+m^6x^6}=\dfrac{m^3x^2}{1+m^6x^4}\to0\) (also for \(m=0\)). Along \(x=0\): \(f\equiv0\).</p>
+<p><b>(b)</b> Balance \(x^2\) with \(y^6\): take \(x=y^3\). Then \(f(y^3,y)=\dfrac{y^6}{y^6+y^6}=\dfrac12\to\dfrac12\). Along lines, 0. Along \(x=y^3\), \(\frac12\). So the limit does not exist.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{3x^2-2y^2}{x^2+4y^2}\) does not exist.</p>
+<details><summary>Solution</summary>
+<p>\(y=0\): \(\frac{3x^2}{x^2}=3\to3\). \(x=0\): \(\frac{-2y^2}{4y^2}=-\frac12\to-\frac12\). \(3\ne-\frac12\), so the limit DNE.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q2.</b> Let \(f(x,y)=\dfrac{xy}{4x^2+y^2}\). (a) Find the limit of \(f\) along \(y=mx\) as \(x\to0\). <b>[3]</b> (b) Hence show \(\lim_{(x,y)\to(0,0)}f\) does not exist. <b>[2]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f(x,mx)=\dfrac{mx^2}{4x^2+m^2x^2}=\dfrac{m}{4+m^2}\) (constant), so the limit is \(\dfrac{m}{4+m^2}\).</p>
+<p><b>(b)</b> \(m=0\) gives 0. \(m=2\) gives \(\frac28=\frac14\). Different paths, different limits, so the limit DNE.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q3.</b> Let \(f(x,y)=\dfrac{x^4y^2}{x^8+y^4}\) for \((x,y)\ne(0,0)\). (a) Show \(f\to0\) along both axes and along every line \(y=mx\). <b>[4]</b> (b) Show that \(\lim_{(x,y)\to(0,0)}f\) does not exist. <b>[4]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f(x,0)=0\), \(f(0,y)=0\). For \(m\ne0\): \(f(x,mx)=\dfrac{m^2x^6}{x^8+m^4x^4}=\dfrac{m^2x^2}{x^4+m^4}\to\dfrac0{m^4}=0\).</p>
+<p><b>(b)</b> Balance \(x^8\) with \(y^4\): \(y=x^2\). Then \(f(x,x^2)=\dfrac{x^8}{x^8+x^8}=\dfrac12\to\dfrac12\ne0\). Two paths give different limits, so the limit DNE.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 8 marks</span> <b>Q4.</b> Let \(g(x,y)=\dfrac{xy}{x+y}\), defined on \(\{(x,y): x+y\ne0\}\). (a) Show \(g\to0\) along both axes and along every line \(y=mx\) with \(m\ne-1\). <b>[3]</b> (b) By approaching along the curve \(y=-x+x^2\) (which lies in the domain for \(x\ne0\)), show that \(\lim_{(x,y)\to(0,0)}g\) does not exist. <b>[5]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Axes: \(g=0\). Line \(y=mx\), \(m\ne-1\): \(g=\dfrac{mx^2}{(1+m)x}=\dfrac{m}{1+m}x\to0\).</p>
+<p><b>(b)</b> On \(y=-x+x^2\): \(x+y=x^2\ne0\), so the curve is in the domain, and \(xy=-x^2+x^3\). So</p>
+$$g=\frac{-x^2+x^3}{x^2}=x-1\to-1.$$
+<p>Along the axes the limit is 0, along this curve it is \(-1\), so the limit DNE. (Same idea as the official 2023 S2 Q8 solution: hug the curve where the denominator vanishes.)</p></details>
+</div>
+
+<!-- ---------- 8.3 ---------- -->
+<h3>8.3 · Proving a limit exists (polar coordinates + squeeze)</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — a bound independent of \(\theta\)</summary>
+<p><b>Q.</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{3xy^2}{x^2+y^2}=0\).</p>
+<p>Let \(x=r\cos\theta\), \(y=r\sin\theta\). Then \((x,y)\to(0,0)\iff r\to0^+\), and</p>
+$$\frac{3xy^2}{x^2+y^2}=\frac{3r^3\cos\theta\sin^2\theta}{r^2}=3r\cos\theta\sin^2\theta.$$
+<p>So \(0\le|f|\le3r\) for every \(\theta\). Since \(3r\to0\), the squeeze theorem gives \(\lim f=0\).</p>
+</details>
+<details>
+<summary>Worked B — \(u\ln u\) via L'Hôpital</summary>
+<p><b>Q.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}(x^2+y^2)\ln(x^2+y^2)\).</p>
+<p>With \(u=x^2+y^2\to0^+\): \(\displaystyle\lim_{u\to0^+}u\ln u=\lim_{u\to0^+}\frac{\ln u}{1/u}\overset{\text{L'H}}{=}\lim_{u\to0^+}\frac{1/u}{-1/u^2}=\lim_{u\to0^+}(-u)=0.\)</p>
+<p>The limit is <b>0</b>. (It's a \(0\cdot(-\infty)\) form. Rewrite it as \(\frac{-\infty}{\infty}\) before using L'Hôpital.)</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^4-y^4}{x^2+y^2}\).</p>
+<details><summary>Solution</summary>
+<p>Factor: \(x^4-y^4=(x^2-y^2)(x^2+y^2)\), so \(f=x^2-y^2\) for \((x,y)\ne(0,0)\). A polynomial, so the limit is \(0-0=\mathbf 0\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> Show that \(\displaystyle\lim_{(x,y)\to(0,0)}xy\cos\!\Big(\frac1{x^2+y^2}\Big)=0\).</p>
+<details><summary>Solution</summary>
+<p>\(|\cos(\cdot)|\le1\), so \(0\le|f|\le|xy|=r^2|\cos\theta\sin\theta|\le r^2\). Since \(r^2\to0\), squeeze gives \(f\to0\). (The cosine oscillates wildly but is bounded, and it gets multiplied by something that goes to 0.)</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q3.</b> Evaluate \(\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^3-xy^2}{x^2+y^2}\).</p>
+<details><summary>Solution</summary>
+<p>Polar: \(\dfrac{r^3\cos\theta(\cos^2\theta-\sin^2\theta)}{r^2}=r\cos\theta\cos2\theta\), so \(|f|\le r\to0\). The limit is <b>0</b> by the squeeze theorem.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 6 marks</span> <b>Q4.</b> Let \(f(x,y)=\dfrac{\sqrt{1+x^2+y^2}-1}{x^2+y^2}\) for \((x,y)\ne(0,0)\) and \(f(0,0)=c\). Find the value of \(c\) that makes \(f\) continuous at \((0,0)\).</p>
+<details><summary>Solution</summary>
+<p>\(f\) is continuous at \((0,0)\) iff \(c=\lim f\). With \(u=x^2+y^2\), rationalise:</p>
+$$\frac{\sqrt{1+u}-1}{u}\cdot\frac{\sqrt{1+u}+1}{\sqrt{1+u}+1}=\frac{u}{u(\sqrt{1+u}+1)}=\frac1{\sqrt{1+u}+1}\ \xrightarrow[u\to0^+]{}\ \frac12.$$
+<p>So <b>\(c=\tfrac12\)</b>.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 6 marks</span> <b>Q5.</b> Let \(f(x,y)=\dfrac{x^2y}{2x^4+y^2}\). (a) Show that in polar coordinates, \(\lim_{r\to0^+}f(r\cos\theta,r\sin\theta)=0\) for every fixed \(\theta\). <b>[3]</b> (b) Explain why this does not prove that \(\lim_{(x,y)\to(0,0)}f=0\), and show the limit in fact does not exist. <b>[3]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f=\dfrac{r^3\cos^2\theta\sin\theta}{2r^4\cos^4\theta+r^2\sin^2\theta}=\dfrac{r\cos^2\theta\sin\theta}{2r^2\cos^4\theta+\sin^2\theta}\). If \(\sin\theta\ne0\): the limit is \(\frac{0}{\sin^2\theta}=0\). If \(\sin\theta=0\): \(f\equiv0\). So the limit is 0 for every fixed \(\theta\).</p>
+<p><b>(b)</b> A fixed \(\theta\) is a straight line, so (a) only checks lines. There's no bound \(|f|\le g(r)\) uniform in \(\theta\): the denominator gets small when \(\sin\theta\approx0\). Along \(y=x^2\): \(f=\frac{x^4}{2x^4+x^4}=\frac13\). Lines give 0 and this parabola gives \(\frac13\), so the limit DNE.</p></details>
+</div>
+
+<!-- ---------- 8.4 ---------- -->
+<h3>8.4 · Continuity &amp; partial derivatives at a piecewise point</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — continuous, and both partials exist</summary>
+<p><b>Q.</b> \(f(x,y)=\dfrac{2x^3+y^3}{x^2+y^2}\) for \((x,y)\ne(0,0)\), \(f(0,0)=0\). (a) Is \(f\) continuous at \((0,0)\)? (b) Find \(f_x(0,0)\) and \(f_y(0,0)\) if they exist.</p>
+<p><b>(a)</b> Polar: \(f=r(2\cos^3\theta+\sin^3\theta)\), so \(|f-0|\le3r\to0\). So \(\lim f=0=f(0,0)\), and <b>\(f\) is continuous at \((0,0)\)</b>.</p>
+<p><b>(b)</b> \(f_x(0,0)=\lim_{h\to0}\dfrac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}\dfrac{2h^3/h^2-0}{h}=\lim_{h\to0}2=2\).</p>
+<p>\(f_y(0,0)=\lim_{h\to0}\dfrac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\dfrac{h^3/h^2}{h}=1\). Both exist: \(f_x(0,0)=2\), \(f_y(0,0)=1\).</p>
+</details>
+<details>
+<summary>Worked B — the value at the origin changes everything</summary>
+<p><b>Q.</b> \(f(x,y)=\dfrac{x^2-y^2}{x^2+y^2}\) for \((x,y)\ne(0,0)\), \(f(0,0)=1\). (a) Is \(f\) continuous at \((0,0)\)? (b) Do \(f_x(0,0)\), \(f_y(0,0)\) exist?</p>
+<p><b>(a)</b> Along \(y=0\): \(f=1\to1\). Along \(x=0\): \(f=-1\to-1\). The limit DNE, so \(f\) is <b>not continuous</b> at \((0,0)\), whatever \(f(0,0)\) is.</p>
+<p><b>(b)</b> \(f_x(0,0)=\lim\dfrac{f(h,0)-f(0,0)}{h}=\lim\dfrac{1-1}{h}=\lim0=0\). It <b>exists</b>.</p>
+<p>\(f_y(0,0)=\lim\dfrac{f(0,h)-f(0,0)}{h}=\lim\dfrac{-1-1}{h}=\lim\dfrac{-2}{h}\), which is unbounded, so <b>\(f_y(0,0)\) does not exist</b>.</p>
+<p class="tip">Had \(f(0,0)\) been \(-1\), it would be the other way round. The given value at the point is part of the difference quotient.</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 5 marks</span> <b>Q1.</b> \(f(x,y)=\dfrac{xy^2}{x^2+y^2}\) for \((x,y)\ne(0,0)\), \(f(0,0)=0\). (a) Show \(f\) is continuous at \((0,0)\). <b>[3]</b> (b) Find \(f_x(0,0)\) and \(f_y(0,0)\). <b>[2]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Polar: \(f=r\cos\theta\sin^2\theta\), \(|f|\le r\to0=f(0,0)\). Continuous.</p>
+<p><b>(b)</b> \(f(h,0)=0\) and \(f(0,h)=0\), so both quotients are \(\frac{0-0}{h}=0\): \(f_x(0,0)=f_y(0,0)=0\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> \(f(x,y)=\dfrac{x^3-4y^3}{x^2+y^2}\) for \((x,y)\ne(0,0)\), \(f(0,0)=c\). (a) Find \(c\) so that \(f\) is continuous at \((0,0)\). <b>[4]</b> (b) With this \(c\), find \(f_x(0,0)\) and \(f_y(0,0)\) from the definition. <b>[4]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Polar: \(f=r(\cos^3\theta-4\sin^3\theta)\), \(|f|\le5r\to0\). The limit is 0, so <b>\(c=0\)</b>.</p>
+<p><b>(b)</b> \(f_x(0,0)=\lim\frac{h^3/h^2-0}{h}=1\). \(f_y(0,0)=\lim\frac{-4h^3/h^2-0}{h}=-4\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 12 marks</span> <b>Q3.</b> Let \(f(x,y)=\begin{cases}\dfrac{y^4}{(y^2-x)^2+y^4}, &amp;(x,y)\ne(0,0)\\ 0,&amp;(x,y)=(0,0).\end{cases}\) (a) Is \(f\) continuous at \((0,0)\)? Justify. <b>[7]</b> (b) Determine whether \(f_x(0,0)\) and \(f_y(0,0)\) exist. Justify. <b>[5]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Continuous iff \(\lim f=f(0,0)=0\). Along \(y=0\) (\(x\ne0\)): \(f=\frac0{x^2}=0\to0\). Along \(x=y^2\) (\(y\ne0\)): \(f=\frac{y^4}{0+y^4}=1\to1\). \(0\ne1\), so the limit DNE and \(f\) is <b>not continuous</b> at \((0,0)\).</p>
+<p><b>(b)</b> \(f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-0}{h}=\lim\frac{0}{h}=0\): <b>exists</b>. \(f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-0}{h}=\lim_{h\to0}\frac{1}{h}\cdot\frac{h^4}{h^4+h^4}=\lim\frac{1/2}{h}\): unbounded, so <b>\(f_y(0,0)\) does not exist</b>.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STRETCH · 12 marks</span> <b>Q4.</b> Let \(f(x,y)=1\) if \(y=x^2\), and \(f(x,y)=0\) otherwise. (a) Determine \(\lim_{(x,y)\to(0,0)}f\), if it exists. <b>[5]</b> (b) Is \(f\) continuous at \((0,0)\)? <b>[2]</b> (c) Use the definition to determine whether \(f_x(0,0)\) and \(f_y(0,0)\) exist. <b>[5]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> Along \(y=x^2\): \(f\equiv1\to1\). Along \(y=0\), \(x\ne0\) (not on the parabola, since \(0\ne x^2\)): \(f\equiv0\to0\). Different, so the limit DNE.</p>
+<p><b>(b)</b> Continuity needs \(\lim f=f(0,0)\). The limit doesn't exist, so \(f\) is <b>not continuous</b> at \((0,0)\).</p>
+<p><b>(c)</b> Note \(f(0,0)=1\) since \(0=0^2\). \(f_x(0,0)=\lim\frac{f(h,0)-1}{h}=\lim\frac{0-1}{h}=\lim\frac{-1}{h}\): DNE. \(f_y(0,0)=\lim\frac{f(0,h)-1}{h}\), and \((0,h)\) is on \(y=x^2\) only if \(h=0\), so again \(\frac{-1}{h}\): DNE. <b>Neither partial exists.</b> (Contrast 2025 S1 Q2, where \(f\) equals 1 on the whole \(x\)-axis, so \(f_x(0,0)=0\).)</p></details>
+</div>
+
+<!-- ---------- 8.5 ---------- -->
+<h3>8.5 · Partial derivatives by rules, higher order &amp; Clairaut</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — first and mixed partials</summary>
+<p><b>Q.</b> \(f(x,y)=x^2y^3-\dfrac{4x}{y}\). Find \(f_x,f_y\), evaluate them at \((1,2)\), and verify \(f_{xy}=f_{yx}\).</p>
+<p>\(f_x=2xy^3-\dfrac4y\Rightarrow f_x(1,2)=16-2=14\).</p>
+<p>\(f_y=3x^2y^2+\dfrac{4x}{y^2}\Rightarrow f_y(1,2)=12+1=13\).</p>
+<p>\(f_{xy}=\partial_y(2xy^3-4y^{-1})=6xy^2+\dfrac4{y^2}\). \(f_{yx}=\partial_x(3x^2y^2+4xy^{-2})=6xy^2+\dfrac4{y^2}\). Equal ✓.</p>
+</details>
+<details>
+<summary>Worked B — three variables</summary>
+<p><b>Q.</b> \(f(x,y,z)=xe^{yz}+z\ln x\). Evaluate \(f_x,f_y,f_z\) at \((1,0,2)\).</p>
+<p>\(f_x=e^{yz}+\dfrac zx\Rightarrow1+2=3\). \(f_y=xze^{yz}\Rightarrow1\cdot2\cdot1=2\). \(f_z=xye^{yz}+\ln x\Rightarrow0+0=0\).</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> \(f(x,y)=\sin(2x-3y)\). Find \(f_x(\tfrac\pi3,0)\) and \(f_y(\tfrac\pi3,0)\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=2\cos(2x-3y)\), \(f_y=-3\cos(2x-3y)\). At \((\frac\pi3,0)\): \(\cos\frac{2\pi}3=-\frac12\). So \(f_x=-1\), \(f_y=\frac32\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> \(f(x,y)=\dfrac{x}{x^2+y^2}\). Find \(f_x\) and \(f_y\), and evaluate at \((1,1)\).</p>
+<details><summary>Solution</summary>
+<p>Quotient rule: \(f_x=\dfrac{(x^2+y^2)-x(2x)}{(x^2+y^2)^2}=\dfrac{y^2-x^2}{(x^2+y^2)^2}\). \(f_y=\dfrac{-2xy}{(x^2+y^2)^2}\). At \((1,1)\): \(f_x=0\), \(f_y=-\frac24=-\frac12\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q3.</b> Verify Clairaut's theorem for \(f(x,y)=x^4y^2-3xy^5+\cos(xy)\).</p>
+<details><summary>Solution</summary>
+<p>\(f_x=4x^3y^2-3y^5-y\sin(xy)\Rightarrow f_{xy}=8x^3y-15y^4-\sin(xy)-xy\cos(xy)\).</p>
+<p>\(f_y=2x^4y-15xy^4-x\sin(xy)\Rightarrow f_{yx}=8x^3y-15y^4-\sin(xy)-xy\cos(xy)\). Equal ✓.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 4 marks</span> <b>Q4.</b> Show that \(u(x,t)=e^{-8t}\sin(2x)\) satisfies the heat equation \(u_t=2u_{xx}\).</p>
+<details><summary>Solution</summary>
+<p>\(u_t=-8e^{-8t}\sin2x\). \(u_x=2e^{-8t}\cos2x\), \(u_{xx}=-4e^{-8t}\sin2x\), so \(2u_{xx}=-8e^{-8t}\sin2x=u_t\) ✓.</p></details>
+</div>
+
+<!-- ---------- 8.6 ---------- -->
+<h3>8.6 · Tangent planes &amp; linear approximation</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — plane + estimate</summary>
+<p><b>Q.</b> \(f(x,y)=xe^{xy}\). (a) Find the tangent plane at \((2,0)\). (b) Estimate \(f(2.1,-0.05)\).</p>
+<p><b>(a)</b> \(f(2,0)=2\). \(f_x=e^{xy}+xye^{xy}\Rightarrow1\). \(f_y=x^2e^{xy}\Rightarrow4\). So \(z=2+(x-2)+4y\), i.e. \(z=x+4y\).</p>
+<p><b>(b)</b> \(f(2.1,-0.05)\approx2.1+4(-0.05)=2.1-0.2=1.9\). (True \(1.8906\ldots\).)</p>
+</details>
+<details>
+<summary>Worked B — three variables, invent the base point</summary>
+<p><b>Q.</b> Use a linear approximation to estimate \((1.01)(1.98)^2(3.02)\).</p>
+<p>Let \(f=xy^2z\), base point \((1,2,3)\), \(f=12\). \(f_x=y^2z=12\), \(f_y=2xyz=12\), \(f_z=xy^2=4\).</p>
+$$f\approx12+12(0.01)+12(-0.02)+4(0.02)=12+0.12-0.24+0.08=11.96.$$
+<p>(True \(11.958\ldots\).)</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 4 marks</span> <b>Q1.</b> Find the tangent plane to \(z=x^2y-3xy^2\) at \((2,1)\).</p>
+<details><summary>Solution</summary>
+<p>\(f(2,1)=4-6=-2\). \(f_x=2xy-3y^2=1\). \(f_y=x^2-6xy=-8\). \(z=-2+(x-2)-8(y-1)\), i.e. <b>\(z=x-8y+4\)</b>.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 8 marks</span> <b>Q2.</b> Let \(f(x,y)=\ln(x^2+y^2-4)\). (a) Find the tangent plane at \((2,1)\). <b>[5]</b> (b) Use it to estimate \(f(2.02,0.97)\). <b>[3]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f(2,1)=\ln1=0\). \(f_x=\frac{2x}{x^2+y^2-4}=4\). \(f_y=\frac{2y}{x^2+y^2-4}=2\). \(z=4(x-2)+2(y-1)\).</p>
+<p><b>(b)</b> \(\approx4(0.02)+2(-0.03)=0.08-0.06=0.02\). (True \(0.0211\).)</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q3.</b> Let \(f(x,y)=x^2+xy+y^2-3x\). (a) Give a normal vector to the tangent plane of \(z=f(x,y)\) at \((1,1)\). <b>[2]</b> (b) Find the point on the surface where the tangent plane is horizontal, and write that plane. <b>[4]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f_x=2x+y-3\), \(f_y=x+2y\). At \((1,1)\): \(f_x=0\), \(f_y=3\), so \(\mathbf n=\langle0,3,-1\rangle\).</p>
+<p><b>(b)</b> Horizontal means \(f_x=f_y=0\): \(2x+y=3\), \(x+2y=0\), giving \(x=2\), \(y=-1\). \(f(2,-1)=4-2+1-6=-3\). Point \((2,-1,-3)\), plane \(z=-3\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q4.</b> Show that the surfaces \(z_1=x^2+y^2\) and \(z_2=-x^2-y^2+8x+4y-10\) meet at \((x,y)=(2,1)\) and have a common tangent plane there. Find that plane.</p>
+<details><summary>Solution</summary>
+<p>Heights: \(z_1(2,1)=5\), \(z_2(2,1)=-4-1+16+4-10=5\). Same point \((2,1,5)\).</p>
+<p>Slopes: \(z_{1,x}=2x=4\), \(z_{1,y}=2y=2\). \(z_{2,x}=-2x+8=4\), \(z_{2,y}=-2y+4=2\). Same \(x\)- and \(y\)-slopes, so the same tangent plane:</p>
+$$z=5+4(x-2)+2(y-1)=4x+2y-5.$$
+<p>(In fact \(z_1-(4x+2y-5)=(x-2)^2+(y-1)^2\ge0\) and \(z_2\) lies below by the same amount: an upward and a downward paraboloid kissing at one point.)</p></details>
+</div>
+
+<!-- ---------- 8.7 ---------- -->
+<h3>8.7 · Small changes &amp; maximum error</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — signed change</summary>
+<p><b>Q.</b> A cone has \(r=3\) cm, \(h=12\) cm, so \(V=\frac13\pi r^2h=36\pi\). Estimate the change in \(V\) if \(r\) increases by \(0.1\) cm and \(h\) decreases by \(0.2\) cm.</p>
+<p>\(V_r=\frac23\pi rh=24\pi\), \(V_h=\frac13\pi r^2=3\pi\).</p>
+$$\Delta V\approx24\pi(0.1)+3\pi(-0.2)=2.4\pi-0.6\pi=1.8\pi\ \text{cm}^3\ (\text{an increase}).$$
+</details>
+<details>
+<summary>Worked B — percentage error</summary>
+<p><b>Q.</b> \(Q=x^2y^3\), where \(x\) is measured with at most 1% error and \(y\) with at most 2%. Estimate the maximum percentage error in \(Q\).</p>
+<p>\(|E_Q|\approx|2xy^3|E_x+|3x^2y^2|E_y\). Divide by \(Q=x^2y^3\):</p>
+$$\frac{|E_Q|}{Q}\approx2\frac{E_x}{x}+3\frac{E_y}{y}=2(0.01)+3(0.02)=0.08=8\%.$$
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">WARM-UP · 3 marks</span> <b>Q1.</b> \(z=x^2y\). Estimate \(\Delta z\) when \((x,y)\) moves from \((3,2)\) to \((3.01,1.98)\).</p>
+<details><summary>Solution</summary>
+<p>\(z_x=2xy=12\), \(z_y=x^2=9\). \(\Delta z\approx12(0.01)+9(-0.02)=0.12-0.18=-0.06\).</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 4 marks</span> <b>Q2.</b> The sides of a rectangle are measured as 6 m and 8 m, each with error at most 0.05 m. Estimate the maximum error in the computed length of the diagonal.</p>
+<details><summary>Solution</summary>
+<p>\(D=\sqrt{x^2+y^2}=10\). \(D_x=\frac xD=0.6\), \(D_y=\frac yD=0.8\). \(|E|\approx0.6(0.05)+0.8(0.05)=0.07\) m.</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 5 marks</span> <b>Q3.</b> The pressure of a gas is \(P=\dfrac{8T}{V}\). \(T=300\) and \(V=50\) are measured with errors at most \(1.5\) and \(0.25\) respectively. Estimate the maximum error in \(P\), and express it as a percentage of \(P\).</p>
+<details><summary>Solution</summary>
+<p>\(P=48\). \(P_T=\frac8V=0.16\), \(P_V=-\frac{8T}{V^2}=-0.96\). \(|E|\approx0.16(1.5)+|-0.96|(0.25)=0.24+0.24=0.48\), which is \(\frac{0.48}{48}=1\%\). (Check: relative errors \(\frac{1.5}{300}+\frac{0.25}{50}=0.5\%+0.5\%\).)</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 8 marks</span> <b>Q4.</b> The area of a triangle is \(A=\tfrac12ab\sin C\). Measurements give \(a=4\), \(b=6\), \(C=\frac\pi6\), with maximum errors \(0.02\), \(0.03\) and \(0.01\) (radians). Estimate the maximum error in \(A\), leaving surds exact.</p>
+<details><summary>Solution</summary>
+<p>\(A=\frac12(24)(\frac12)=6\). \(A_a=\frac12b\sin C=\frac32\), \(A_b=\frac12a\sin C=1\), \(A_C=\frac12ab\cos C=12\cdot\frac{\sqrt3}2=6\sqrt3\).</p>
+$$|E|\approx\tfrac32(0.02)+1(0.03)+6\sqrt3(0.01)=0.06+0.06\sqrt3\ (\approx0.164).$$</details>
+</div>
+
+<!-- ---------- 8.8 ---------- -->
+<h3>8.8 · Quadratic approximation</h3>
+<h4>📖 Learn from these</h4>
+<details>
+<summary>Worked A — at the origin</summary>
+<p><b>Q.</b> \(f(x,y)=e^x\cos y\). Find \(Q(x,y)\) at \((0,0)\) and estimate \(f(0.1,0.2)\) with \(P\) and \(Q\).</p>
+<p>\(f=1\). \(f_x=e^x\cos y=1\). \(f_y=-e^x\sin y=0\). \(f_{xx}=1\). \(f_{xy}=-e^x\sin y=0\). \(f_{yy}=-e^x\cos y=-1\).</p>
+$$Q=1+x+\tfrac12x^2-\tfrac12y^2.$$
+<p>\(P(0.1,0.2)=1.1\). \(Q(0.1,0.2)=1+0.1+0.005-0.02=1.085\). (True \(1.08314\ldots\).)</p>
+</details>
+<details>
+<summary>Worked B — a cubic</summary>
+<p><b>Q.</b> \(f(x,y)=x^3+xy^2-2y\). Find \(Q\) at \((1,1)\) and estimate \(f(1.1,0.9)\).</p>
+<p>\(f(1,1)=0\). \(f_x=3x^2+y^2=4\). \(f_y=2xy-2=0\). \(f_{xx}=6x=6\). \(f_{xy}=2y=2\). \(f_{yy}=2x=2\).</p>
+$$Q=4(x-1)+3(x-1)^2+2(x-1)(y-1)+(y-1)^2.$$
+<p>At \((1.1,0.9)\): \(0.4+0.03-0.02+0.01=0.42\). (True \(0.422\). The error is only the cubic terms.)</p>
+</details>
+
+<h4>✏️ Your turn</h4>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q1.</b> \(f(x,y)=\sqrt{x+y}\). Find \(Q\) at \((3,1)\) and use it to estimate \(f(3.2,1.2)\).</p>
+<details><summary>Solution</summary>
+<p>\(f=2\). \(f_x=f_y=\frac1{2\sqrt{x+y}}=\frac14\). \(f_{xx}=f_{xy}=f_{yy}=-\frac1{4(x+y)^{3/2}}=-\frac1{32}\).</p>
+$$Q=2+\tfrac14(x-3)+\tfrac14(y-1)-\tfrac1{64}(x-3)^2-\tfrac1{32}(x-3)(y-1)-\tfrac1{64}(y-1)^2.$$
+<p>At \((3.2,1.2)\): \(2+0.05+0.05-\frac{0.04+0.08+0.04}{64}=2.1-0.0025=2.0975\). (True \(\sqrt{4.4}=2.09762\).)</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">STANDARD · 6 marks</span> <b>Q2.</b> \(f(x,y)=xe^y+y^2\). Find \(P\) and \(Q\) at \((1,0)\), and estimate \(f(0.9,0.1)\) with each.</p>
+<details><summary>Solution</summary>
+<p>\(f=1\). \(f_x=e^y=1\). \(f_y=xe^y+2y=1\). \(f_{xx}=0\). \(f_{xy}=e^y=1\). \(f_{yy}=xe^y+2=3\).</p>
+<p>\(P=1+(x-1)+y\). \(Q=P+(x-1)y+\tfrac32y^2\).</p>
+<p>At \((0.9,0.1)\): \(P=1-0.1+0.1=1\). \(Q=1+(-0.1)(0.1)+1.5(0.01)=1.005\). (True \(1.00465\).)</p></details>
+</div>
+<div class="card q">
+<p><span class="marks">EXAM-LEVEL · 10 marks</span> <b>Q3.</b> Let \(f(x,y)=x^2\ln y+y\). (a) Find the quadratic approximation at \((2,1)\). <b>[6]</b> (b) Use it to approximate \(f(2.1,1.1)\), and compare with the linear approximation. <b>[4]</b></p>
+<details><summary>Solution</summary>
+<p><b>(a)</b> \(f(2,1)=0+1=1\). \(f_x=2x\ln y=0\). \(f_y=\frac{x^2}{y}+1=5\). \(f_{xx}=2\ln y=0\). \(f_{xy}=\frac{2x}{y}=4\). \(f_{yy}=-\frac{x^2}{y^2}=-4\).</p>
+$$Q=1+5(y-1)+4(x-2)(y-1)-2(y-1)^2.$$
+<p><b>(b)</b> \(x-2=y-1=0.1\): \(Q=1+0.5+0.04-0.02=1.52\). Linear: \(P=1+0.5=1.5\). (True \(1.52032\ldots\), so \(Q\) is far better.)</p></details>
+</div>
+
+<div class="tip"><b>Using the arena for a 7/7.</b> For every limit question, write the path or the bound <b>and</b> the conclusion sentence. For every piecewise-point question, write the definition of continuity and the limit definition of \(f_x(0,0)\) in full before touching the algebra. For approximations, keep everything exact until the last line. Those habits are exactly where the marking schemes put their marks.</div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);padding:28px;border-top:1px solid var(--line);font-size:13px">
+MATH1052 · Chapter 4 Limits, Partial Derivatives &amp; Approximation · built from the MATH1052 Summary (p 5), Posters A/B, Tutorial 7 (with solutions), and past papers 2020 S2 – 2025 S2 (incl. marking schemes 2022 S2, 2024 S2, 2025 S1). Every published limit, derivative, plane and numeric value verified with SymPy (<code>verify/ch04.py</code>, 171 checks passed).
+<br><a href="../index.html">⇄ Switch subject</a> · <a href="index.html">🏠 Hub</a> · <a href="ch03-surfaces-contours.html">← Ch 3</a> · <a href="ch05-gradient-chain-rule.html">Ch 5 →</a> · <a href="formulas.html">Formula sheet</a>
+</footer>
+
+</main>
+</body>
+</html>
