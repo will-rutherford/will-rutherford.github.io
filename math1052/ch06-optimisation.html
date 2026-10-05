@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 6 — Optimisation</h1>
+  <p class="wbline">📘 Workbook Ch 4 · §4.2–4.3</p>
   <p>Critical points, the Hessian test, global extrema on closed regions, and Lagrange multipliers — the two most reliable 12-mark questions on the MATH1052 paper.</p>
   <div>
     <span class="badge gold">⭐ Highest-yield chapter · ~24 marks every paper</span>
@@ -86,7 +89,7 @@
 <div class="tip">Rusty on single-variable max/min (set \(f'(x)=0\), use the sign of \(f''\), check the endpoints of a closed interval) or on factorising cubics and solving \(e^{u}=\dots\)? Read <a href="foundations.html">the Ground Floor</a> first. Everything in this chapter is that same idea, done in 2 or 3 variables at once. You also need \(\nabla f\) from <a href="ch05-gradient-chain-rule.html">Chapter 5</a>.</div>
 
 <div class="card">
-<h3>What we are hunting: local max, local min, saddle</h3>
+<h3>What we are hunting: local max, local min, saddle<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2</span></h3>
 <p>Let \(z=f(x,y)\) be a surface. A point \((a,b)\) is a</p>
 <ul>
 <li><b>local maximum</b> if \(f(a,b)\ge f(x,y)\) for all \((x,y)\) near \((a,b)\) — a hilltop;</li>
@@ -97,13 +100,13 @@
 </div>
 
 <div class="card">
-<h3>🧭 Why \(\nabla f=\mathbf 0\)? The tangent plane goes flat</h3>
+<h3>🧭 Why \(\nabla f=\mathbf 0\)? The tangent plane goes flat<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <p>At the top of a smooth hill, if you step in <i>any</i> direction \(\mathbf u\), the height is momentarily not changing: the directional derivative \(D_{\mathbf u}f=\nabla f\cdot\mathbf u\) is zero for every \(\mathbf u\). The only vector with zero dot product against every direction is \(\mathbf 0\). So \(\nabla f=\mathbf 0\).</p>
 <p>Equivalently, the tangent plane \(z=f(a,b)+f_x(x-a)+f_y(y-b)\) becomes \(z=f(a,b)\): <b>horizontal</b>. Critical points are exactly where the surface has a horizontal tangent plane — hilltop, valley floor, or the flat middle of a saddle.</p>
 </div>
 
 <div class="card">
-<h3>🧭 Why the Hessian decides: it is just the quadratic approximation</h3>
+<h3>🧭 Why the Hessian decides: it is just the quadratic approximation<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.1–4.2</span></h3>
 <p>At a critical point the linear terms vanish, so the quadratic approximation (Poster B, <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a>) with \(h=x-a,\ k=y-b\) is</p>
 $$ f(a+h,b+k)\approx f(a,b)+\tfrac12\big(A h^2+2Bhk+Ck^2\big),\qquad A=f_{xx},\ B=f_{xy},\ C=f_{yy}\ \text{at }(a,b).$$
 <p>Whether \(f\) goes up or down near the point is the sign of the bracket. Complete the square (when \(A\ne0\)):</p>
@@ -119,7 +122,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 </div>
 
 <div class="card">
-<h3>The classification table (Summary p 7 / Poster B)</h3>
+<h3>The classification table (Summary p 7 / Poster B)<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <table>
 <tr><th>\(D(a,b)\)</th><th>\(f_{xx}(a,b)\)</th><th>Conclusion</th><th>Picture</th></tr>
 <tr><td>\(\gt0\)</td><td>\(\gt0\)</td><td><b>local minimum</b></td><td>bowl ∪</td></tr>
@@ -133,7 +136,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 <div class="trap"><b>The formula sheet gives \(D\) — not the rules.</b> The printed sheet shows the determinant \(\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}\) but <i>not</i> which sign means what. Learn the four rows above cold. Also: \(D=f_{xx}f_{yy}-f_{xy}^2\) — the mixed partial is <b>squared</b> and <b>subtracted</b>.</div>
 
 <div class="card">
-<h3>🧭 Solving \(\nabla f=\mathbf 0\): the marks are lost in the algebra</h3>
+<h3>🧭 Solving \(\nabla f=\mathbf 0\): the marks are lost in the algebra<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <p>Differentiating is easy; the hard part is solving two (usually non-linear) simultaneous equations and finding <b>all</b> solutions. Examiners award ~half the marks for the critical points alone (2023 S1 Q5: 5 of 13; 2020 S2 Q6: 6 of 10). The disciplined approach:</p>
 <div class="method"><ol>
 <li><b>Factorise each equation fully</b> and write it as a product \(=0\): e.g. \(f_x=2xy=0\), \(f_y=x^2+2y-4=0\).</li>
@@ -146,7 +149,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 </div>
 
 <div class="card">
-<h3>When \(D=0\): settle it by hand</h3>
+<h3>When \(D=0\): settle it by hand<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <p>The test is silent, but the question is not. Standard moves (2022 S2 Q6(b) gave 3 of 6 marks for exactly this):</p>
 <ul>
 <li><b>Cross-sections / paths.</b> Restrict \(f\) to a line or curve through the point. If \(f-f(a,b)\) takes <b>both signs</b> arbitrarily close to the point → saddle (neither max nor min). E.g. \(f=2x^3+2y^3-3x^2y^2\) at \((0,0)\): along \(y=0\), \(f=2x^3\) is \(\gt0\) for \(x\gt0\) and \(\lt0\) for \(x\lt0\) → saddle.</li>
@@ -157,7 +160,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 </div>
 
 <div class="card">
-<h3>🧭 Global (absolute) extrema: local is not enough</h3>
+<h3>🧭 Global (absolute) extrema: local is not enough<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span></h3>
 <p>A <b>global maximum</b> is the largest value of \(f\) on the <i>whole</i> domain; local max only compares with neighbours. Two very different situations:</p>
 <p><b>(1) Closed and bounded region \(S\)</b> (a square, triangle, disk — includes its boundary, finite size). The <b>Extreme Value Theorem (EVT)</b>: a continuous function on a closed and bounded set <b>attains</b> a global max and a global min. They can only occur at</p>
 <ul>
@@ -169,7 +172,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 </div>
 
 <div class="card">
-<h3>Boundary work: turning a 2-D problem into 1-D problems</h3>
+<h3>Boundary work: turning a 2-D problem into 1-D problems<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span></h3>
 <p>On each piece of the boundary, <b>parametrise</b> and you get a single-variable function on a closed interval — the Ground Floor routine (derivative \(=0\) + endpoints):</p>
 <table>
 <tr><th>Boundary piece</th><th>Substitute</th><th>Then</th></tr>
@@ -182,7 +185,7 @@ $$ D=\begin{vmatrix} f_{xx}&f_{xy}\\ f_{yx}&f_{yy}\end{vmatrix}=f_{xx}f_{yy}-f_{
 </div>
 
 <div class="card">
-<h3>🧭 Lagrange multipliers: where the contour just touches the constraint</h3>
+<h3>🧭 Lagrange multipliers: where the contour just touches the constraint<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 <p>Now the problem is: maximise/minimise \(f(x,y)\) <b>subject to</b> \(g(x,y)=0\) (you may only walk along the curve \(g=0\)). Picture the contours \(f=c\) and the constraint curve. As you walk along the curve you cross contours — \(f\) is changing. At a constrained max or min you stop crossing: the curve is <b>tangent</b> to a contour of \(f\) (Summary p 7: "the contour \(g=0\) touches one of the contours of \(f\), so they share a common tangent").</p>
 <p>Gradients are perpendicular to contours (Chapter 5). Two curves tangent at a point have parallel normals, so</p>
 $$ \boxed{\ \nabla f=\lambda\,\nabla g,\qquad g=0\ }$$
@@ -191,7 +194,7 @@ $$ \boxed{\ \nabla f=\lambda\,\nabla g,\qquad g=0\ }$$
 </div>
 
 <div class="card">
-<h3>The elimination-of-\(\lambda\) technique</h3>
+<h3>The elimination-of-\(\lambda\) technique<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 <p>\(\lambda\) is a helper — you almost never need its value. Kill it early:</p>
 <div class="method"><ol>
 <li>Write the component equations and number them ①②③(④).</li>
@@ -204,12 +207,12 @@ $$ \boxed{\ \nabla f=\lambda\,\nabla g,\qquad g=0\ }$$
 </div>
 
 <div class="card">
-<h3>What does \(\lambda\) mean? (Tutorial 10 Q8 — background, not exam-core)</h3>
+<h3>What does \(\lambda\) mean? (Tutorial 10 Q8 — background, not exam-core)<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 <p>If the constraint is \(g(x,y)=c\) and \(M(c)\) is the optimal value, then \(\dfrac{dM}{dc}=\lambda\). So \(\lambda\) is the "shadow price": how much the best value improves per unit increase of the budget \(c\). Nice to know; the exam has never asked for it.</p>
 </div>
 
 <div class="card">
-<h3>Which method? A one-glance map of Chapter 6</h3>
+<h3>Which method? A one-glance map of Chapter 6<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2–4.3</span></h3>
 <table>
 <tr><th>The question says…</th><th>Method</th></tr>
 <tr><td>"find and classify (all) the critical points of \(f\)"</td><td>\(\nabla f=\mathbf0\) → Hessian \(D\) at each point → table</td></tr>
@@ -227,28 +230,28 @@ $$ \boxed{\ \nabla f=\lambda\,\nabla g,\qquad g=0\ }$$
 <p class="tip">The sheet prints \(D\) and \(\nabla f=\lambda\nabla g\). Everything else below — the classification signs, EVT, the boundary routine, the case analysis — is yours to bring.</p>
 
 <div class="card">
-<h3>1 · Critical points <span style="color:var(--muted);font-weight:400">(Summary p 7)</span></h3>
+<h3>1 · Critical points <span style="color:var(--muted);font-weight:400">(Summary p 7)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 $$ f_x(a,b)=0\quad\text{and}\quad f_y(a,b)=0 \qquad(\text{or }\nabla f\text{ undefined}).$$
 <div class="when">"Find (all) the critical points", "determine the stationary points", or as step one of any classification / global-extremum question.</div>
 <p><b>Mini-example.</b> \(f=x^2+4y^2-2x+8y+1\): \(f_x=2x-2=0,\ f_y=8y+8=0\Rightarrow(1,-1)\).</p>
 </div>
 
 <div class="card">
-<h3>2 · Second-derivative (Hessian) test <span style="color:var(--muted);font-weight:400">(sheet gives \(D\))</span></h3>
+<h3>2 · Second-derivative (Hessian) test <span style="color:var(--muted);font-weight:400">(sheet gives \(D\))</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 $$ D=f_{xx}f_{yy}-f_{xy}^2\ \text{ at the point:}\quad D\gt0,f_{xx}\gt0\Rightarrow\text{min};\ \ D\gt0,f_{xx}\lt0\Rightarrow\text{max};\ \ D\lt0\Rightarrow\text{saddle};\ \ D=0\Rightarrow ?$$
 <div class="when">"Classify", "determine the nature of", "local max, local min or saddle". Compute the three second partials <b>as functions first</b>, then substitute each point.</div>
 <p><b>Mini-example.</b> Same \(f\): \(f_{xx}=2,f_{yy}=8,f_{xy}=0\Rightarrow D=16\gt0,\ f_{xx}\gt0\) → local min, \(f(1,-1)=-4\).</p>
 </div>
 
 <div class="card">
-<h3>3 · The \(D=0\) fallback</h3>
+<h3>3 · The \(D=0\) fallback<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <p>Cross-sections through the point (\(y=0\), \(x=0\), \(y=x\), \(y=kx^2\)…) or a sign/square argument.</p>
 <div class="when">Only when the Hessian test gives \(D=0\) at a point you must classify.</div>
 <p><b>Mini-example.</b> \(f=x^2-y^4\) at \((0,0)\): \(D=2\cdot0-0=0\). Along \(y=0\): \(x^2\gt0\); along \(x=0\): \(-y^4\lt0\). Both signs → <b>saddle</b>.</p>
 </div>
 
 <div class="card">
-<h3>4 · Global extrema on a closed bounded region <span style="color:var(--muted);font-weight:400">(EVT)</span></h3>
+<h3>4 · Global extrema on a closed bounded region <span style="color:var(--muted);font-weight:400">(EVT)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span></h3>
 <div class="method"><ol>
 <li>State: \(f\) is continuous and \(S\) is closed and bounded, so by the <b>Extreme Value Theorem</b> global max/min exist.</li>
 <li>Interior critical points — <b>discard any outside \(S\) or on its boundary</b>.</li>
@@ -259,27 +262,27 @@ $$ D=f_{xx}f_{yy}-f_{xy}^2\ \text{ at the point:}\quad D\gt0,f_{xx}\gt0\Rightarr
 </div>
 
 <div class="card">
-<h3>5 · Existence of a global max/min on \(\mathbb R^2\)</h3>
+<h3>5 · Existence of a global max/min on \(\mathbb R^2\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span></h3>
 <p><b>No:</b> find a line where \(f\to\pm\infty\), e.g. \(f(x,0)=x^3\to\pm\infty\). <b>Yes:</b> rewrite so a bound is obvious and attained, e.g. \(x^2+2(y-1)^2+1\ge1\) with equality at \((0,1)\).</p>
 <div class="when">"Does \(f\) attain a global/absolute maximum? Explain." (2023 S1 Q5c, 2023 S2 Q1b), "Determine the maximum temperature on the plate" (2024 S2 Q1b).</div>
 </div>
 
 <div class="card">
-<h3>6 · Lagrange multipliers — two variables <span style="color:var(--muted);font-weight:400">(sheet: \(\nabla f=\lambda\nabla g\))</span></h3>
+<h3>6 · Lagrange multipliers — two variables <span style="color:var(--muted);font-weight:400">(sheet: \(\nabla f=\lambda\nabla g\))</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 $$ \begin{cases} f_x=\lambda g_x\\ f_y=\lambda g_y\\ g(x,y)=0\end{cases}$$
 <div class="when">"Use the method of Lagrange multipliers", "subject to the constraint", "on the circle / ellipse / curve", "Epsilon walks along…".</div>
 <p><b>Mini-example.</b> \(f=x+2y\) on \(x^2+y^2=5\): \(1=2\lambda x,\ 2=2\lambda y\Rightarrow y=2x\Rightarrow5x^2=5\Rightarrow(\pm1,\pm2)\). \(f(1,2)=5\) max, \(f(-1,-2)=-5\) min.</p>
 </div>
 
 <div class="card">
-<h3>7 · Lagrange multipliers — three variables</h3>
+<h3>7 · Lagrange multipliers — three variables<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 $$ \begin{cases} f_x=\lambda g_x\\ f_y=\lambda g_y\\ f_z=\lambda g_z\\ g(x,y,z)=0\end{cases}$$
 <div class="when">Constraint is a sphere \(x^2+y^2+z^2=R^2\) or a plane \(ax+by+cz=d\) (2021 S2 Q6, 2024 S2 Q5, 2025 S1 Q6, 2025 S2 Q5).</div>
 <p><b>Shortcut to check your answer</b> (linear \(f\) on a sphere): \(\max\big(\mathbf a\cdot\mathbf x\big)\) on \(\|\mathbf x\|=R\) is \(R\|\mathbf a\|\), at \(\mathbf x=R\,\mathbf a/\|\mathbf a\|\). E.g. \(x-2y+2z\) on the unit sphere: max \(=\sqrt{1+4+4}=3\). Use it to check, but show the Lagrange working for the marks.</p>
 </div>
 
 <div class="card">
-<h3>8 · Applied optimisation (word problems)</h3>
+<h3>8 · Applied optimisation (word problems)<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2–4.3</span></h3>
 <div class="method"><ol>
 <li>Draw it; name the variables (with units).</li>
 <li><b>Objective</b> \(f\) = the thing to max/min (volume, area, cost, distance²).</li>
@@ -420,7 +423,7 @@ $$ 2x=2\lambda,\qquad 2y=-\lambda,\qquad 2z=2\lambda\ \Rightarrow\ x=\lambda,\ y
 <p>Every MATH1052 paper from 2020 to 2025 has a critical-points question <b>and</b> a Lagrange question; recent papers (2024–2025) often add a closed-region global-extremum question on top. Together this is 20–37 marks per paper.</p>
 
 <div class="card q">
-<h3>Type A — Find and classify critical points <span class="marks">every paper · 10–15 marks</span></h3>
+<h3>Type A — Find and classify critical points <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span><span class="marks">every paper · 10–15 marks</span></h3>
 <p><b>Instances:</b> 2025 S2 Q6 (12) · 2025 S1 Q3(b) (4) · 2023 S2 Q1(a) (8) · 2023 S1 Q5(a)(b) (5+4) · 2022 S2 Q6 (5+6) · 2022 S1 Q7 (5+5) · 2021 S2 Q5 (15) · 2021 S1 Q8 (5+5) · 2020 S2 Q6 (6+4) · 2020 S1 Q3 (5+5) · Tutorial 10 Q1.</p>
 <p><b>Looks like:</b> "Determine and classify all critical points of the function \(h(x,y)=\dots\)". Older papers (2020–2022) sometimes say "classify <i>one</i> of these points".</p>
 <div class="method"><b>Routine:</b>
@@ -478,7 +481,7 @@ $$ D(2,0)=(-4e^{-4})(2e^{-4})-0^2=-8e^{-8}\lt0. $$
 </div>
 
 <div class="card q">
-<h3>Type B — Global max/min on a closed bounded region <span class="marks">2024 S1, 2025 S1 · 13 marks</span></h3>
+<h3>Type B — Global max/min on a closed bounded region <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span><span class="marks">2024 S1, 2025 S1 · 13 marks</span></h3>
 <p><b>Instances:</b> 2025 S1 Q5 (7+4+2, square) · 2024 S1 Q5 (6+4+3, triangle) · 2020 S2 Q7 (10, unit ball via Lagrange on the boundary) · Tutorial 10 Q3 (rectangle), Q6(b) (disk).</p>
 <p><b>Looks like:</b> "Let \(S\) be the closed … region bounded by the lines … (a) Determine the max and min of \(f\) on the boundary of \(S\). (b) Determine the critical point(s) of \(f\) in the interior of \(S\). (c) Determine the global max and min of \(f\) on \(S\)."</p>
 <div class="method"><b>Routine:</b> sketch \(S\) and label the edges (i)–(iv) → each edge as a 1-variable function on a closed interval (stationary points + endpoints) → summary line "on the boundary, max … at …, min … at …" → interior \(\nabla f=\mathbf0\), <b>check the point is strictly inside</b> → EVT sentence + compare.</div>
@@ -513,7 +516,7 @@ $$ D(2,0)=(-4e^{-4})(2e^{-4})-0^2=-8e^{-8}\lt0. $$
 </div>
 
 <div class="card q">
-<h3>Type C — "Does \(f\) attain a global max?" / max on an unbounded domain <span class="marks">~4 marks</span></h3>
+<h3>Type C — "Does \(f\) attain a global max?" / max on an unbounded domain <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span><span class="marks">~4 marks</span></h3>
 <p><b>Instances:</b> 2023 S1 Q5(c) (4) · 2023 S2 Q1(b) (4) · 2024 S2 Q1(b) (4, "determine the maximum temperature on the metal plate").</p>
 <div class="method"><b>Routine:</b> "No" → exhibit a line along which \(f\to+\infty\) (or \(-\infty\) for min). "Yes" → complete the square / bound, and show the bound is attained.</div>
 <details>
@@ -530,7 +533,7 @@ $$ D(2,0)=(-4e^{-4})(2e^{-4})-0^2=-8e^{-8}\lt0. $$
 </div>
 
 <div class="card q">
-<h3>Type D — Lagrange multipliers, two variables <span class="marks">10–12 marks</span></h3>
+<h3>Type D — Lagrange multipliers, two variables <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span><span class="marks">10–12 marks</span></h3>
 <p><b>Instances:</b> 2023 S2 Q2 (12, line constraint) · 2023 S1 Q6 (12, circle) · 2022 S1 Q8 (10, ellipse) · 2020 S1 Q8 (10, \(x^4+y^6=2\)) · Tutorial 10 Q6(a).</p>
 <table>
 <tr><th>Paper</th><th>Problem</th><th>Answer (verified)</th></tr>
@@ -563,7 +566,7 @@ $$ 8x-4y=2\lambda x\ ①,\qquad -4x+2y=2\lambda y\ ②,\qquad x^2+y^2=25\ ③. $
 </div>
 
 <div class="card q">
-<h3>Type E — Lagrange multipliers, three variables <span class="marks">10–12 marks</span></h3>
+<h3>Type E — Lagrange multipliers, three variables <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span><span class="marks">10–12 marks</span></h3>
 <p><b>Instances:</b> 2025 S2 Q5 (12, \(xyz^2\) on \(x+y+z=20\)) · 2025 S1 Q6 (12, \(400xyz^2\) on unit sphere) · 2024 S2 Q5 (12, \(x-2y+2z\) on unit sphere → max \(3\) at \((\tfrac13,-\tfrac23,\tfrac23)\), min \(-3\)) · 2021 S2 Q6 (10, \(x+2y+z\) on \(x^2+y^2+z^2=\tfrac{27}2\) → max \(9\) at \((\tfrac32,3,\tfrac32)\)) · 2020 S2 Q7 (10, \(x+yz\) on the unit ball → max \(1\), min \(-1\)) · Tutorial 10 Q4, Q5.</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2025 S1 Q6 <span class="marks">[12 marks]</span></b></p>
@@ -599,7 +602,7 @@ $$ yz^2=\lambda\ ①,\qquad xz^2=\lambda\ ②,\qquad 2xyz=\lambda\ ③,\qquad x+
 </div>
 
 <div class="card q">
-<h3>Type F — Applied / geometric optimisation with Lagrange <span class="marks">12 marks</span></h3>
+<h3>Type F — Applied / geometric optimisation with Lagrange <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span><span class="marks">12 marks</span></h3>
 <p><b>Instances:</b> 2024 S1 Q6 (12, closed cylinder with fixed surface area) · 2022 S2 Q7 (12, cone inscribed in the unit sphere → \(h=\tfrac43,\ r=\tfrac{2\sqrt2}3\), \(V=\tfrac{32\pi}{81}\)) · Tutorial 10 Q7 (Cobb–Douglas), Q8(e).</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2024 S1 Q6 <span class="marks">[12 marks]</span></b></p>
@@ -764,7 +767,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 <p class="tip">How to use the arena: read the "📖 Learn from these" pair first (they are written exactly as a marker wants to see it), then cover the solutions and attempt "✏️ Your turn". Only reveal a solution once you have your full list of points and your table on paper.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Finding critical points — solving \(\nabla f=\mathbf 0\) cleanly</h3>
+<h3>8.1 · Finding critical points — solving \(\nabla f=\mathbf 0\) cleanly<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — substitution: \(f(x,y)=x^3-6xy+y^2\)</summary>
@@ -837,7 +840,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 </div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Classifying with the Hessian — including \(D=0\)</h3>
+<h3>8.2 · Classifying with the Hessian — including \(D=0\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — three points, two natures: \(f(x,y)=x^4-2x^2+y^2-2y\)</summary>
@@ -897,7 +900,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 </div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Global extrema on closed bounded regions</h3>
+<h3>8.3 · Global extrema on closed bounded regions<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — rectangle: \(f=x^2+2y^2-2x-4y\) on \(0\le x\le3,\ 0\le y\le2\)</summary>
@@ -962,7 +965,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 </div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Lagrange multipliers — two variables</h3>
+<h3>8.4 · Lagrange multipliers — two variables<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — linear \(f\) on a circle: \(f=x+2y\) on \(x^2+y^2=5\)</summary>
@@ -1018,7 +1021,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 </div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Lagrange multipliers — three variables</h3>
+<h3>8.5 · Lagrange multipliers — three variables<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — linear on a sphere: \(f=2x+y-2z\) on \(x^2+y^2+z^2=9\)</summary>
@@ -1068,7 +1071,7 @@ $$ 2\pi rh=\lambda(4\pi r+2\pi h)\ ①,\qquad \pi r^2=2\pi\lambda r\ ②. $$
 </div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · Applied optimisation word problems</h3>
+<h3>8.6 · Applied optimisation word problems<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.2–4.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — open-top box of volume 32 with least material</summary>

@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 4 — Limits, Partial Derivatives &amp; Approximation</h1>
+  <p class="wbline">📘 Workbook Ch 3 · §3.1–3.4 (+ §4.1 quadratic approx.)</p>
   <p>Two-variable limits and continuity, partial derivatives (by rule and from the limit definition), tangent planes, and linear/quadratic approximation. Examined in every paper 2021–2025, as one or two full questions.</p>
   <div>
     <span class="badge gold">⭐ High-yield: 12–24 of 100 marks in every paper 2021–2025</span>
@@ -86,7 +89,7 @@
 <div class="tip">Rusty on one-variable limits, L'Hôpital, or the chain rule? Read <a href="foundations.html#derivs">the Ground Floor</a> first. This chapter reuses the standard limits \(\lim_{u\to0}\frac{\sin u}{u}=1\), \(\lim_{u\to0}\frac{e^u-1}{u}=1\), \(\lim_{u\to0}\frac{1-\cos u}{u^2}=\tfrac12\) and \(\lim_{u\to 0}\frac{\ln(1+u)}{u}=1\) all the time.</div>
 
 <div class="card">
-<h3>🧭 Why two-variable limits are harder than one-variable ones</h3>
+<h3>🧭 Why two-variable limits are harder than one-variable ones<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <p>In one variable, \(x\to a\) can only happen from two directions: the left and the right. If the left-hand and right-hand limits agree, the limit exists. That's all there is to check.</p>
 <p>In two variables, \((x,y)\to(a,b)\) can happen from <b>infinitely many directions, along infinitely many curves</b>: along the \(x\)-axis, along a line \(y=mx\), along a parabola \(y=x^2\), spiralling in, and so on. The definition says:</p>
 $$\lim_{(x,y)\to(a,b)} f(x,y)=L \iff f(x,y)\text{ gets arbitrarily close to }L\text{ whenever }(x,y)\text{ is close enough to }(a,b)\text{, by ANY route.}$$
@@ -99,7 +102,7 @@ $$\lim_{(x,y)\to(a,b)} f(x,y)=L \iff f(x,y)\text{ gets arbitrarily close to }L\t
 </div>
 
 <div class="card">
-<h3>Step zero: is it just continuous? Then substitute.</h3>
+<h3>Step zero: is it just continuous? Then substitute.<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <p>Polynomials, \(e^u\), \(\sin u\), \(\cos u\), \(\ln u\) (for \(u&gt;0\)), \(\sqrt u\) (for \(u&gt;0\)), and every sum, product, quotient (with nonzero denominator) and composition of these are <b>continuous wherever they are defined</b>. At such a point the limit is just the value:</p>
 $$\lim_{(x,y)\to(1,2)}\big(x^2y+3y-1\big)=1\cdot2+6-1=7.$$
 <p>The whole difficulty of the chapter lives at points where substitution gives <b>\(\tfrac00\)</b>. For exam questions that's nearly always \((0,0)\), the one point excluded from the domain or the point where a piecewise function switches formula.</p>
@@ -107,7 +110,7 @@ $$\lim_{(x,y)\to(1,2)}\big(x^2y+3y-1\big)=1\cdot2+6-1=7.$$
 </div>
 
 <div class="card">
-<h3>🧭 The two-path test: proof by counter-example</h3>
+<h3>🧭 The two-path test: proof by counter-example<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <p>If the limit existed and equalled \(L\), then <i>every</i> path into \((a,b)\) would have to give \(L\). So if you find</p>
 $$\lim_{\text{along }C_1} f = L_1 \quad\text{and}\quad \lim_{\text{along }C_2} f = L_2 \quad\text{with } L_1\ne L_2,$$
 <p>the limit cannot exist. Along a path, \(f\) becomes a function of <b>one</b> variable, so each path limit is an ordinary Calc-I limit.</p>
@@ -123,7 +126,7 @@ $$\lim_{\text{along }C_1} f = L_1 \quad\text{and}\quad \lim_{\text{along }C_2} f
 </div>
 
 <div class="card">
-<h3>🧭 Why "all straight lines agree" proves nothing</h3>
+<h3>🧭 Why "all straight lines agree" proves nothing<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <p>Take \(f(x,y)=\dfrac{x^2y}{x^4+y^2}\). On every line \(y=mx\):</p>
 $$f(x,mx)=\frac{mx^3}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\to0\quad(m\neq0),$$
 <p>and on both axes \(f=0\). So every straight line gives 0. But on the parabola \(y=x^2\), \(f=\frac{x^4}{2x^4}=\tfrac12\). The limit <b>does not exist</b>. The surface has a ridge of height \(\tfrac12\) that runs along the parabola into the origin, and every straight line crosses that ridge instead of following it.</p>
@@ -131,7 +134,7 @@ $$f(x,mx)=\frac{mx^3}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\to0\quad(m\neq0),$$
 </div>
 
 <div class="card">
-<h3>🧭 Proving a limit EXISTS: polar coordinates + squeeze</h3>
+<h3>🧭 Proving a limit EXISTS: polar coordinates + squeeze<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <p>Put \(x=r\cos\theta,\ y=r\sin\theta\). Then \(r=\sqrt{x^2+y^2}\) is the distance to the origin, and \((x,y)\to(0,0)\iff r\to0\), <b>whatever \(\theta\) does</b>. The key identity is \(x^2+y^2=r^2\).</p>
 <div class="method"><b>Recipe (limit at the origin)</b>
 <ol>
@@ -147,7 +150,7 @@ $$f(x,mx)=\frac{mx^3}{x^4+m^2x^2}=\frac{mx}{x^2+m^2}\to0\quad(m\neq0),$$
 </div>
 
 <div class="card">
-<h3>Continuity: three conditions, one sentence</h3>
+<h3>Continuity: three conditions, one sentence<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.3</span></h3>
 <p>\(f\) is <b>continuous at \((a,b)\)</b> if</p>
 $$\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b).$$
 <p>Hidden inside are three checks: (i) \(f(a,b)\) is defined; (ii) the limit exists; (iii) they are equal. A continuity question at a piecewise point is therefore always:</p>
@@ -161,7 +164,7 @@ $$\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b).$$
 </div>
 
 <div class="card">
-<h3>🧭 Partial derivatives: slopes of cross-sections</h3>
+<h3>🧭 Partial derivatives: slopes of cross-sections<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2</span></h3>
 <p>Freeze \(y=b\) and you're left with a curve \(z=f(x,b)\): the vertical cross-section of the surface in the \(x\)-direction. Its slope at \(x=a\) is the <b>partial derivative</b></p>
 $$f_x(a,b)=\frac{\partial f}{\partial x}(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h},\qquad f_y(a,b)=\lim_{h\to0}\frac{f(a,b+h)-f(a,b)}{h}.$$
 <p><b>In practice:</b> differentiate as usual with respect to one variable, treating the other(s) as <b>constants</b>. For \(f=x^2\sin(3y)+ye^{2x}\): \(f_x=2x\sin 3y+2ye^{2x}\) (the \(\sin3y\) and \(y\) are constant coefficients), \(f_y=3x^2\cos3y+e^{2x}\). The same idea works for any number of variables: \(f_z\) means "only \(z\) moves".</p>
@@ -171,7 +174,7 @@ $$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h},$$
 </div>
 
 <div class="card">
-<h3>🧭 The big surprise: partials can exist where \(f\) isn't even continuous</h3>
+<h3>🧭 The big surprise: partials can exist where \(f\) isn't even continuous<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2</span></h3>
 <p>Because \(f_x(0,0)\) and \(f_y(0,0)\) only probe the two <b>axes</b>, they are blind to everything else. In 2025 S2 Q4, \(f=\frac{x^6}{(x^2-y)^2+x^6}\) is identically 0 on the \(y\)-axis and equals \(\frac{h^2}{1+h^2}\) on the \(x\)-axis, so both partials exist (both are 0). But along \(y=x^2\), \(f\equiv1\), so \(f\) isn't continuous at the origin.</p>
 <p>The logical hierarchy (memorise this direction of arrows):</p>
 $$f_x,\ f_y\ \text{exist and are continuous near }(a,b)\ \Longrightarrow\ f\ \text{differentiable (smooth) at }(a,b)\ \Longrightarrow\ f\ \text{continuous at }(a,b).$$
@@ -180,14 +183,14 @@ $$f_x,\ f_y\ \text{exist and are continuous near }(a,b)\ \Longrightarrow\ f\ \te
 </div>
 
 <div class="card">
-<h3>Higher-order partials &amp; Clairaut's theorem</h3>
+<h3>Higher-order partials &amp; Clairaut's theorem<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2.4</span></h3>
 <p>Differentiate again: \(f_{xx}=\frac{\partial^2 f}{\partial x^2}\), \(f_{yy}=\frac{\partial^2 f}{\partial y^2}\), and the <b>mixed</b> partials \(f_{xy}=(f_x)_y=\frac{\partial^2 f}{\partial y\,\partial x}\), \(f_{yx}=(f_y)_x=\frac{\partial^2 f}{\partial x\,\partial y}\). Subscripts are read <b>left to right</b> (differentiate by \(x\) first, then \(y\)). The \(\partial\) notation reads <b>right to left</b>.</p>
 <p><b>Clairaut's theorem:</b> if \(f_{xy}\) and \(f_{yx}\) are continuous (true for every "formula" function you meet away from bad points), then \(f_{xy}=f_{yx}\). Use it as a <b>built-in error check</b>: compute both. If they disagree, you've made an algebra slip.</p>
 <p>These second partials feed the quadratic approximation (below) and the Hessian test in <a href="ch06-optimisation.html">Ch 6</a>.</p>
 </div>
 
 <div class="card">
-<h3>🧭 Tangent plane = the two tangent lines, glued together</h3>
+<h3>🧭 Tangent plane = the two tangent lines, glued together<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.3</span></h3>
 <p>At \((a,b)\), the \(x\)-cross-section has tangent line with slope \(f_x(a,b)\), and the \(y\)-cross-section has slope \(f_y(a,b)\). There is exactly one plane containing both lines:</p>
 $$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).$$
 <p>It's the 2-D version of \(y=f(a)+f'(a)(x-a)\). Rearranged as \(f_x(a,b)(x-a)+f_y(a,b)(y-b)-(z-f(a,b))=0\), it shows a <b>normal vector</b> \(\mathbf n=\langle f_x(a,b),\,f_y(a,b),\,-1\rangle\) (2020 S2 Q5(ii) asks for exactly this).</p>
@@ -195,7 +198,7 @@ $$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).$$
 </div>
 
 <div class="card">
-<h3>🧭 Linear approximation, small changes and error</h3>
+<h3>🧭 Linear approximation, small changes and error<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.4</span></h3>
 <p>Near \((a,b)\), a smooth surface is almost its tangent plane, so</p>
 $$f(x,y)\approx P(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).$$
 <p>(\(P\) is the formula sheet's name; the summary also calls it \(L\).) Writing \(\Delta x=x-a\), \(\Delta y=y-b\), \(\Delta z=f(x,y)-f(a,b)\), you get the <b>small-change formula</b></p>
@@ -207,7 +210,7 @@ $$|E|\approx|f_x(a,b)|E_1+|f_y(a,b)|E_2.$$
 </div>
 
 <div class="card">
-<h3>Quadratic approximation: add the curvature</h3>
+<h3>Quadratic approximation: add the curvature<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.1</span></h3>
 <p>The tangent plane captures slope only. Adding the second-order Taylor terms captures <b>curvature</b> (formula sheet):</p>
 $$Q(x,y)=P(x,y)+\tfrac12 f_{xx}(a,b)(x-a)^2+f_{xy}(a,b)(x-a)(y-b)+\tfrac12 f_{yy}(a,b)(y-b)^2.$$
 <p>Note the <b>mixed term has no \(\tfrac12\)</b>. That's because \(f_{xy}\) and \(f_{yx}\) each contribute \(\tfrac12\), and they're equal by Clairaut. \(Q\) is more accurate than \(P\) close to \((a,b)\): in 2022 S1 Q1, \(Q(1.1,1)=0.305\) vs the true \(0.305310\ldots\), while \(P\) gives \(0.3\).</p>
@@ -220,42 +223,42 @@ $$Q(x,y)=P(x,y)+\tfrac12 f_{xx}(a,b)(x-a)^2+f_{xy}(a,b)(x-a)(y-b)+\tfrac12 f_{yy
 <p class="tip">The formula sheet prints \(P(x,y)\) and \(Q(x,y)\), and nothing else from this chapter. The limit definitions of \(f_x,f_y\), the definition of continuity, the two-path test and the polar method must be known cold. Marks are given for <b>writing the definition down</b>.</p>
 
 <div class="card">
-<h3>M1 · Direct substitution / cancel first</h3>
+<h3>M1 · Direct substitution / cancel first<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 $$\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b)\quad\text{if } f \text{ is continuous at }(a,b).$$
 <div class="when">The point isn't a "bad" point: no zero denominator, log of 0, etc. Or the \(\frac00\) disappears after factorising/cancelling.</div>
 <p><b>Mini-example.</b> \(\lim_{(x,y)\to(1,2)}(x^2y+3y-1)=7\) (polynomial, so substitute). Always <b>say why</b>: "\(f\) is a polynomial, hence continuous".</p>
 </div>
 
 <div class="card">
-<h3>M2 · Two-path test (limit does NOT exist)</h3>
+<h3>M2 · Two-path test (limit does NOT exist)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 $$\lim_{C_1}f=L_1\ne L_2=\lim_{C_2}f\ \Longrightarrow\ \lim_{(x,y)\to(a,b)}f(x,y)\ \text{does not exist.}$$
 <div class="when">Substitution gives \(\frac00\), and different directions seem to give different values. Classic signal: numerator and denominator of the <b>same "weighted degree"</b> (\(\frac{xy}{x^2+y^2}\), \(\frac{x^3y}{x^6+y^2}\), \(\frac{x^6}{(x^2-y)^2+x^6}\)).</div>
 <div class="method"><b>Recipe:</b> axes → lines \(y=mx\) → degree-balancing curve \(y=kx^n\) (or a curve that kills a bracket). Evaluate each as a 1-variable limit. State "\(L_1\ne L_2\), so the limit does not exist."</div>
 </div>
 
 <div class="card">
-<h3>M3 · Polar coordinates + squeeze (limit DOES exist)</h3>
+<h3>M3 · Polar coordinates + squeeze (limit DOES exist)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 $$x=r\cos\theta,\ y=r\sin\theta,\quad |f(x,y)-L|\le g(r)\to0 \ \Longrightarrow\ \lim f=L.$$
 <div class="when">The numerator has <b>higher</b> total degree than the denominator (\(\frac{x^3+y^3}{x^2+y^2}\), \(\frac{3xy^2}{x^2+y^2}\)), or there's a bounded oscillating factor (\(y\sin\frac1{x^2+y^2}\), 2021 S2 Q3).</div>
 <p><b>Mini-example.</b> \(\frac{3xy^2}{x^2+y^2}=3r\cos\theta\sin^2\theta\), so \(|f|\le 3r\to0\).</p>
 </div>
 
 <div class="card">
-<h3>M4 · Radial substitution \(u=x^2+y^2\)</h3>
+<h3>M4 · Radial substitution \(u=x^2+y^2\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 $$\lim_{(x,y)\to(0,0)} F(x^2+y^2)=\lim_{u\to0^+}F(u).$$
 <div class="when">\(x,y\) appear <b>only</b> through \(x^2+y^2\): \(\frac{\sin(9x^2+9y^2)}{6x^2+6y^2}\) (2023 S1 Q2), \(\frac{e^{x^2+y^2}-1}{x^2+y^2}\) (2024 S2 Q2(b)).</div>
 <p><b>Mini-example.</b> \(\frac{\sin 9u}{6u}=\frac{9}{6}\cdot\frac{\sin 9u}{9u}\to\frac32\). Or use L'Hôpital in \(u\) (or in \(r\)), as the official 2024 S2 solution does.</p>
 </div>
 
 <div class="card">
-<h3>M5 · Continuity at a piecewise point / "find \(c\)"</h3>
+<h3>M5 · Continuity at a piecewise point / "find \(c\)"<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.3</span></h3>
 $$f \text{ continuous at }(a,b)\iff \lim_{(x,y)\to(a,b)}f(x,y)=f(a,b).$$
 <div class="when">"Is \(f\) continuous at \((0,0)\)?", "Does \(g\) have a removable discontinuity?", "Find \(c\) such that \(f\) is continuous".</div>
 <div class="method"><ol><li>Write the definition.</li><li>Limit: DNE (M2) ⇒ not continuous, for <i>any</i> value of \(f(0,0)\). Exists (M3/M4) ⇒ compare with \(f(0,0)\).</li><li>Conclude in words.</li></ol></div>
 </div>
 
 <div class="card">
-<h3>M6 · Partial derivative from the definition</h3>
+<h3>M6 · Partial derivative from the definition<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2</span></h3>
 $$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h},\qquad f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}.$$
 <div class="when">"Use the definition of the partial derivative", or any "do \(f_x(0,0)\), \(f_y(0,0)\) exist?" for a piecewise \(f\). Also when the rule-based formula is undefined at the point.</div>
 <p><b>Mini-example.</b> \(f=\frac{2x^3+y^3}{x^2+y^2}\), \(f(0,0)=0\): \(f(h,0)=2h\), so \(f_x(0,0)=\lim\frac{2h-0}{h}=2\). \(f(0,h)=h\), so \(f_y(0,0)=1\).</p>
@@ -263,35 +266,35 @@ $$f_x(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h},\qquad f_y(0,0)=\lim_{h\to0}\frac
 </div>
 
 <div class="card">
-<h3>M7 · Partial derivatives by rules; Clairaut check</h3>
+<h3>M7 · Partial derivatives by rules; Clairaut check<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2.4</span></h3>
 $$f_{xy}=f_{yx}\quad\text{(Clairaut, when both are continuous)}.$$
 <div class="when">Any "find \(f_x\), \(f_y\)" or "evaluate \(f_z(2,1,0)\)". Also the first step of every tangent-plane, approximation, gradient and optimisation question.</div>
 <p><b>Mini-example.</b> \(f=x^3y^2+\sin(xy)\): \(f_x=3x^2y^2+y\cos(xy)\), \(f_{xy}=6x^2y+\cos(xy)-xy\sin(xy)\). The same answer comes from \(f_y=2x^3y+x\cos(xy)\) differentiated by \(x\). ✓</p>
 </div>
 
 <div class="card">
-<h3>M8 · Tangent plane (and normal vector)</h3>
+<h3>M8 · Tangent plane (and normal vector)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.3</span></h3>
 $$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b),\qquad \mathbf n=\langle f_x(a,b),f_y(a,b),-1\rangle.$$
 <div class="when">"Equation of the tangent plane to \(z=f(x,y)\) at \((a,b)\)", "normal vector to the plane", "common tangent plane".</div>
 <p><b>Mini-example.</b> \(f=x^2+3xy\) at \((1,2)\): \(f=7\), \(f_x=2x+3y=8\), \(f_y=3x=3\), so \(z=7+8(x-1)+3(y-2)\), i.e. \(z=8x+3y-7\).</p>
 </div>
 
 <div class="card">
-<h3>M9 · Linear approximation / small change</h3>
+<h3>M9 · Linear approximation / small change<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.4.2–3.4.3</span></h3>
 $$f(a+\Delta x,b+\Delta y)\approx f(a,b)+f_x(a,b)\Delta x+f_y(a,b)\Delta y.$$
 <div class="when">"Use the linear approximation (tangent plane) to estimate \(f(-0.95,0.95)\)", "estimate \(\sqrt{(3.02)^2+(1.97)^2+(5.99)^2}\)", "approximate change in \(V\) when \(r\) increases by… and \(h\) decreases by…".</div>
 <div class="method"><b>Recipe:</b> choose a nearby base point where \(f\) is exact (integers, \(\ln 1\), \(\sqrt{49}\)) → compute \(f,f_x,f_y\) there → plug in \(\Delta x,\Delta y\) <b>with their signs</b> → simplify exactly, then use the given decimal hint (e.g. \(\ln2\approx0.6931\)).</div>
 </div>
 
 <div class="card">
-<h3>M10 · Worst-case (maximum) error</h3>
+<h3>M10 · Worst-case (maximum) error<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.4.4</span></h3>
 $$|E|\approx|f_x(a,b)|\,E_1+|f_y(a,b)|\,E_2\ (+\,|f_z|E_3).$$
 <div class="when">"Measured with an error of at most…", "estimate the maximum error in the calculated…". If errors are given as percentages, convert: \(0.5\%\) of 40 is \(0.2\).</div>
 <p><b>Mini-example.</b> \(A=xy\), \(x=10\), \(y=5\), each error \(\le0.1\): \(|E|\approx5(0.1)+10(0.1)=1.5\).</p>
 </div>
 
 <div class="card">
-<h3>M11 · Quadratic approximation</h3>
+<h3>M11 · Quadratic approximation<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.1</span></h3>
 $$Q=P+\tfrac12f_{xx}(x-a)^2+f_{xy}(x-a)(y-b)+\tfrac12f_{yy}(y-b)^2.$$
 <div class="when">"Find the quadratic (second-order) approximation", "use it to estimate…". It's on the formula sheet, so the marks are for correct second partials and clean substitution.</div>
 <p><b>Mini-example.</b> \(e^x\cos y\) at \((0,0)\): \(Q=1+x+\tfrac12x^2-\tfrac12y^2\).</p>
@@ -440,7 +443,7 @@ $$P=0.1-0.2=-0.1,\qquad Q=-0.1-\tfrac12(0.01)-2(0.1)(-0.1)-2(0.01)=-0.1-0.005+0.
 <p class="tip">Error estimation (\(|E|\approx|f_x|E_1+|f_y|E_2\)) appears in Tutorial 7 (Q4, Q5) and the summary, but in <b>no</b> 2020–2025 paper found. Learn it (it's one line), but weight your time towards Types A–D.</p>
 
 <div class="card q">
-<h3>Type A — "Show the limit does not exist" (two-path test) <span class="marks">~10–14 marks</span></h3>
+<h3>Type A — "Show the limit does not exist" (two-path test) <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span><span class="marks">~10–14 marks</span></h3>
 <p><b>Looks like:</b> a rational function with \(\frac00\) at the origin, often with scaffolding: "find the limit along \(y=mx\)… along \(y=kx^2\)… does the limit exist?" (2024 S1 Q2), or "find \(\lim_{y\to0}g(\alpha y,y)\)… show the limit does not exist" (2023 S2 Q8).</p>
 <div class="method"><b>Routine:</b>
 <ol>
@@ -462,7 +465,7 @@ $$P=0.1-0.2=-0.1,\qquad Q=-0.1-\tfrac12(0.01)-2(0.1)(-0.1)-2(0.01)=-0.1-0.005+0.
 </div>
 
 <div class="card q">
-<h3>Type B — "Evaluate the limit / find \(c\) / removable discontinuity" (limit EXISTS) <span class="marks">~6–12 marks</span></h3>
+<h3>Type B — "Evaluate the limit / find \(c\) / removable discontinuity" (limit EXISTS) <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1</span><span class="marks">~6–12 marks</span></h3>
 <p><b>Looks like:</b> a function of \(x^2+y^2\) only, or a bounded factor times something that vanishes. Wording: "evaluate the limit, if it exists", "find \(c\) such that \(f\) is continuous", "does \(g\) have a removable discontinuity?"</p>
 <div class="method"><b>Routine:</b> polar coordinates (or \(u=x^2+y^2\)) → reduce to \(r\to0\) → standard limit / L'Hôpital / squeeze with a \(\theta\)-free bound → compare with \(f(0,0)\) → conclude.</div>
 <details><summary>Worked past-paper example — 2023 S1 Q2 (12 marks)</summary>
@@ -478,7 +481,7 @@ $$\lim_{(x,y)\to(0,0)}g=\lim_{r\to0}\frac{\sin(9r^2)}{6r^2}=\frac96\lim_{r\to0}\
 </div>
 
 <div class="card q">
-<h3>Type C — Piecewise function: continuity + partial derivatives at the origin <span class="marks">12 marks</span></h3>
+<h3>Type C — Piecewise function: continuity + partial derivatives at the origin <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.3, 3.2</span><span class="marks">12 marks</span></h3>
 <p><b>Looks like:</b> "Let \(f(x,y)=\begin{cases}\ldots&amp;(x,y)\ne(0,0)\\ \ldots&amp;(x,y)=(0,0)\end{cases}\). (a) Is \(f\) continuous at \((0,0)\)? (b) Do \(f_x(0,0)\), \(f_y(0,0)\) exist?" This is the flagship of 2025 S2, 2025 S1 and 2022 S2.</p>
 <div class="method"><b>Routine:</b>
 <ol>
@@ -505,7 +508,7 @@ $$f_y(0,0)=\lim_{h\to0}\frac{f(0,h)-f(0,0)}{h}=\lim_{h\to0}\frac{0-0}{h}=0.$$
 </div>
 
 <div class="card q">
-<h3>Type D — Tangent plane + linear approximation <span class="marks">~10–12 marks</span></h3>
+<h3>Type D — Tangent plane + linear approximation <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.3–3.4</span><span class="marks">~10–12 marks</span></h3>
 <p><b>Looks like:</b> "Determine the partial derivatives… the equation of the tangent plane at… use the linear approximation to estimate \(f(\text{nearby point})\)". Variants: 3 variables (2022 S2 Q1), a normal vector (2020 S2 Q5), a common tangent plane of two surfaces (2021 S1 Q1).</p>
 <div class="method"><b>Routine:</b> \(f(a,b)\) exactly → \(f_x,f_y\) as formulas (marks!) → evaluate at \((a,b)\) → plane \(z=f(a,b)+f_x(x-a)+f_y(y-b)\) → substitute the nearby point, keep things exact as long as possible → use the given decimal hint at the very end.</div>
 <details><summary>Worked past-paper example — 2025 S2 Q2 (12 marks)</summary>
@@ -528,7 +531,7 @@ $$f(-0.95,0.95)\approx\ln2-0.05+\tfrac12(-0.05)=\ln2-0.075\approx0.6931-0.075=0.
 </div>
 
 <div class="card q">
-<h3>Type E — Quadratic approximation <span class="marks">~10 marks</span></h3>
+<h3>Type E — Quadratic approximation <span class="wb" title="Where this is in the course workbook">📘 Workbook §4.1</span><span class="marks">~10 marks</span></h3>
 <p><b>Looks like:</b> "Find the quadratic approximation for \(f\) at \((a,b)\). Using it, derive an approximate value for \(f(\ldots)\)." (2022 S1 Q1). The formula is on the sheet, so the marks are for six correct numbers.</p>
 <details><summary>Worked past-paper example — 2022 S1 Q1 (10 marks)</summary>
 <p><b>Q.</b> \(f(x,y)=x^2y-y^3+\ln x\). (a) Find the quadratic approximation at \((1,1)\). <b>[5]</b> (b) Use it to approximate \(f(1.1,1)\). <b>[5]</b></p>
@@ -685,7 +688,7 @@ $$Q=3(x-1)-2(y-1)+\tfrac12(x-1)^2+2(x-1)(y-1)-3(y-1)^2.$$
 <p class="tip">How to use the arena: read the two "📖 Learn from these" first (written exactly as a marker wants it), then cover the solutions and attempt "✏️ Your turn" on paper. Only reveal a solution once you've written the definition, the paths or the bound, and the conclusion sentence.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Limits by substitution, cancelling &amp; standard limits</h3>
+<h3>8.1 · Limits by substitution, cancelling &amp; standard limits<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — cancel the \(\tfrac00\)</summary>
@@ -728,7 +731,7 @@ $$\lim_{(x,y)\to(2,2)}\frac{x^2-y^2}{x-y}=\lim_{(x,y)\to(2,2)}(x+y)=4.$$
 </div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Showing a limit does not exist (two-path test)</h3>
+<h3>8.2 · Showing a limit does not exist (two-path test)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — axes suffice</summary>
@@ -772,7 +775,7 @@ $$g=\frac{-x^2+x^3}{x^2}=x-1\to-1.$$
 </div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Proving a limit exists (polar coordinates + squeeze)</h3>
+<h3>8.3 · Proving a limit exists (polar coordinates + squeeze)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — a bound independent of \(\theta\)</summary>
@@ -819,7 +822,7 @@ $$\frac{\sqrt{1+u}-1}{u}\cdot\frac{\sqrt{1+u}+1}{\sqrt{1+u}+1}=\frac{u}{u(\sqrt{
 </div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Continuity &amp; partial derivatives at a piecewise point</h3>
+<h3>8.4 · Continuity &amp; partial derivatives at a piecewise point<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.1.3, 3.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — continuous, and both partials exist</summary>
@@ -865,7 +868,7 @@ $$\frac{\sqrt{1+u}-1}{u}\cdot\frac{\sqrt{1+u}+1}{\sqrt{1+u}+1}=\frac{u}{u(\sqrt{
 </div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Partial derivatives by rules, higher order &amp; Clairaut</h3>
+<h3>8.5 · Partial derivatives by rules, higher order &amp; Clairaut<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — first and mixed partials</summary>
@@ -904,7 +907,7 @@ $$\frac{\sqrt{1+u}-1}{u}\cdot\frac{\sqrt{1+u}+1}{\sqrt{1+u}+1}=\frac{u}{u(\sqrt{
 </div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · Tangent planes &amp; linear approximation</h3>
+<h3>8.6 · Tangent planes &amp; linear approximation<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.3–3.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — plane + estimate</summary>
@@ -948,7 +951,7 @@ $$z=5+4(x-2)+2(y-1)=4x+2y-5.$$
 </div>
 
 <!-- ---------- 8.7 ---------- -->
-<h3>8.7 · Small changes &amp; maximum error</h3>
+<h3>8.7 · Small changes &amp; maximum error<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.4.3–3.4.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — signed change</summary>
@@ -987,7 +990,7 @@ $$|E|\approx\tfrac32(0.02)+1(0.03)+6\sqrt3(0.01)=0.06+0.06\sqrt3\ (\approx0.164)
 </div>
 
 <!-- ---------- 8.8 ---------- -->
-<h3>8.8 · Quadratic approximation</h3>
+<h3>8.8 · Quadratic approximation<span class="wb" title="Where this is in the course workbook">📘 Workbook §4.1</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — at the origin</summary>

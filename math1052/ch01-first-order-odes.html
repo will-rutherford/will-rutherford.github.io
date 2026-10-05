@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 1 — First-order ODEs</h1>
+  <p class="wbline">📘 Workbook Ch 1 · §1.1–1.6</p>
   <p>Separable, linear (integrating factor), equilibria &amp; stability, Euler's method and the classic models. The foundation for every ODE on the paper.</p>
   <div>
     <span class="badge gold">⭐⭐ Medium yield: 2 × 10-mark Qs per 2020 paper · none 2021–2025</span>
@@ -85,7 +88,7 @@
 <div class="tip">Rusty on the single-variable toolkit — substitution, integration by parts, partial fractions, \(\int \tan x\,dx\), log laws? Read <a href="foundations.html#integrals">the Ground Floor — integrals</a> (and <a href="foundations.html#exp-log">exp &amp; log</a>) first. Every method in this chapter ends in "now integrate", and in a no-calculator exam that step is where marks are actually lost.</div>
 
 <div class="card">
-<h3>What an ODE is — the vocabulary markers expect</h3>
+<h3>What an ODE is — the vocabulary markers expect<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1</span></h3>
 <p>A <b>differential equation (DE)</b> is an equation involving an unknown function <i>and its derivatives</i>. If the unknown depends on one variable only (e.g. \(y(t)\) or \(y(x)\)) it is an <b>ordinary</b> DE (ODE); if it depends on several (e.g. \(u(x,t)\)) it is a <b>partial</b> DE (PDE). MATH1052 only solves ODEs.</p>
 <ul>
 <li><b>Order</b> = the highest derivative that appears. \(y' = y^2\) is first order; \(y''+2y'-y=1\) is second order; \(y^2\,\dfrac{d^3y}{dt^3}+\dfrac{dy}{dt}=t^2\) is third order (T01 Q1). Powers do not matter: \((y')^3=x\) is still first order.</li>
@@ -98,7 +101,7 @@
 </div>
 
 <div class="card">
-<h3>🧭 The big idea: an ODE is a rule for the slope</h3>
+<h3>🧭 The big idea: an ODE is a rule for the slope<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2</span></h3>
 <p>Write a first-order ODE as \(y' = f(t,y)\). Read it literally: <b>"at the point \((t,y)\), the solution curve must have slope \(f(t,y)\)."</b> The ODE does not tell you where the curve is — it tells you, at <i>every</i> point of the plane, which direction to move. A solution is any curve that obeys all those local instructions at once.</p>
 <p>Three consequences drive the whole chapter:</p>
 <ol>
@@ -109,18 +112,18 @@
 </div>
 
 <div class="card">
-<h3>Checking a solution — always possible, always worth marks</h3>
+<h3>Checking a solution — always possible, always worth marks<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1.3</span></h3>
 <p>To <b>show</b> \(y=\phi(x)\) solves an ODE: differentiate \(\phi\), substitute into the <b>left-hand side</b> and <b>right-hand side separately</b>, and show they agree. Example (T01 Q2 pattern): for \(y=Ae^{-kt}\), \(y' = -kAe^{-kt}\) and \(-ky=-kAe^{-kt}\); equal for all \(t\), so it is a solution.</p>
 <p class="tip">After solving any IVP, spend 30 seconds substituting back. It catches sign slips in the integrating factor, and in a "show that" question it <i>is</i> the answer.</p>
 </div>
 
 <div class="card">
-<h3>🧭 Direct integration — the simplest case</h3>
+<h3>🧭 Direct integration — the simplest case<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1</span></h3>
 <p>If the right side depends only on the independent variable, \(\dfrac{dy}{dx}=f(x)\), then the ODE is literally "find an antiderivative": \(y=\int f(x)\,dx + C\). Newton's second law often lands here: acceleration \(a(t)\) given → integrate once for velocity, again for position, using the initial values each time (Summary p 1; see also <a href="ch07-curves-vector-fields.html">Ch 7 projectiles</a>).</p>
 </div>
 
 <div class="card">
-<h3>🧭 Separable ODEs — why "splitting the \(dx\)" is legitimate</h3>
+<h3>🧭 Separable ODEs — why "splitting the \(dx\)" is legitimate<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.4</span></h3>
 <p>A first-order ODE is <b>separable</b> if the right side factors as (function of \(x\)) × (function of \(y\)):</p>
 $$\frac{dy}{dx}=f(x)\,g(y).$$
 <p>The trick "divide by \(g(y)\), multiply by \(dx\), integrate both sides" looks like cheating with differentials, but it is really the chain rule run backwards. If \(G(y)=\int \frac{1}{g(y)}dy\), then \(\frac{d}{dx}G(y(x)) = \frac{1}{g(y)}\frac{dy}{dx} = f(x)\). Integrate in \(x\): \(G(y)=\int f(x)\,dx + C\). That is the separated equation.</p>
@@ -136,7 +139,7 @@ $$\frac{dy}{dx}=f(x)\,g(y).$$
 </div>
 
 <div class="card">
-<h3>🧭 Linear first-order ODEs — the integrating factor, from scratch</h3>
+<h3>🧭 Linear first-order ODEs — the integrating factor, from scratch<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.6</span></h3>
 <p>A first-order ODE is <b>linear</b> if \(y\) and \(y'\) appear only to the first power, not multiplied together, not inside functions:</p>
 $$\frac{dy}{dt}+p(t)\,y=q(t)\qquad\text{(standard form — coefficient of } y' \text{ must be } 1\text{)}.$$
 <p><b>Why the integrating factor works.</b> The left side looks almost like a product-rule derivative. Multiply through by a function \(I(t)\):
@@ -153,14 +156,14 @@ $$\frac{d}{dt}\big(I\,y\big)=I\,q\quad\Longrightarrow\quad I\,y=\int I\,q\,dt + 
 </div>
 
 <div class="card">
-<h3>🧭 Substitution \(y=xu\): turning a stubborn ODE into a separable one</h3>
+<h3>🧭 Substitution \(y=xu\): turning a stubborn ODE into a separable one<span class="wb" title="Where this is in the course workbook">📘 Past papers · not in workbook</span></h3>
 <p>If the right side depends only on the <b>ratio</b> \(y/x\) — e.g. \(\dfrac{x+y}{x-y}=\dfrac{1+y/x}{1-y/x}\) — the ODE is called <i>homogeneous</i>. Put \(y=xu(x)\). Product rule: \(y' = u + x u'\). The ODE becomes \(u + x u' = F(u)\), i.e.</p>
 $$x\frac{du}{dx}=F(u)-u\quad\Longrightarrow\quad \frac{du}{F(u)-u}=\frac{dx}{x}\quad\text{— separable.}$$
 <p>This exact routine was a full 10-mark question (2020 S1 Q5). The official solution states the assumption \(x\ne0\), simplifies \(F(u)-u\) to a single fraction, and ends by writing the separated form \(\int \frac{1-u}{1+u^2}du=\int \frac1x dx\) with the word "separable!".</p>
 </div>
 
 <div class="card">
-<h3>Slope fields — reading the picture</h3>
+<h3>Slope fields — reading the picture<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2</span></h3>
 <p>A <b>slope field</b> for \(y'=f(t,y)\) draws, at grid points \((a,b)\), a short segment of slope \(f(a,b)\). To match an ODE to a field (T01 Q4), hunt for <b>distinguishing features</b>, not individual slopes:</p>
 <ul>
 <li><b>Horizontal lines of zero slope</b> \(y=c\) ⇒ an equilibrium; check \(f(t,c)=0\) for all \(t\).</li>
@@ -171,7 +174,7 @@ $$x\frac{du}{dx}=F(u)-u\quad\Longrightarrow\quad \frac{du}{F(u)-u}=\frac{dx}{x}\
 </div>
 
 <div class="card">
-<h3>🧭 Equilibrium solutions and stability — the phase-line picture</h3>
+<h3>🧭 Equilibrium solutions and stability — the phase-line picture<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2.2–1.2.4</span></h3>
 <p>An <b>equilibrium solution</b> is a <b>constant</b> solution \(y(t)=c\). Since \(y'=0\) for a constant, you find them by solving \(f(t,c)=0\) <b>for all \(t\)</b>. Graphically: a horizontal line in the slope field.</p>
 <p>Stability asks what happens to solutions that <i>start near</i> the equilibrium, as \(t\) increases (Summary p 1):</p>
 <table>
@@ -187,7 +190,7 @@ $$x\frac{du}{dx}=F(u)-u\quad\Longrightarrow\quad \frac{du}{F(u)-u}=\frac{dx}{x}\
 </div>
 
 <div class="card">
-<h3>🧭 Euler's method — follow the tangent line, one small step at a time</h3>
+<h3>🧭 Euler's method — follow the tangent line, one small step at a time<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.3</span></h3>
 <p>When no formula is available, walk along the slope field. From \((t_n,y_n)\) take the tangent line (slope \(f(t_n,y_n)\)) for a horizontal distance \(\Delta t = h\):</p>
 $$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n).$$
 <p>This is just the linear approximation \(y(t+h)\approx y(t)+h\,y'(t)\) used repeatedly. Accuracy improves as \(h\to0\) (error roughly proportional to \(h\)).</p>
@@ -199,7 +202,7 @@ $$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n).$$
 </div>
 
 <div class="card">
-<h3>🧭 Modelling — translating words into an ODE</h3>
+<h3>🧭 Modelling — translating words into an ODE<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.5</span></h3>
 <p>Every model says "<b>rate of change = (something)</b>". Name the quantity, write its derivative on the left, translate the sentence on the right.</p>
 <table>
 <tr><th>Model</th><th>ODE</th><th>Solution</th><th>Equilibrium</th></tr>
@@ -215,7 +218,7 @@ $$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n).$$
 </div>
 
 <div class="card">
-<h3>Which method? A one-glance map of Chapter 1</h3>
+<h3>Which method? A one-glance map of Chapter 1<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1–1.6</span></h3>
 <table>
 <tr><th>The ODE looks like…</th><th>Method</th><th>Watch out for</th></tr>
 <tr><td>\(y'=f(x)\)</td><td>Direct integration</td><td>one constant per integration</td></tr>
@@ -235,21 +238,21 @@ $$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n).$$
 <p class="tip">None of this is on the formula sheet (the sheet covers only multivariable calculus). Every recipe below must be memorised — and the justification sentences are part of the method.</p>
 
 <div class="card">
-<h3>1 · Direct integration</h3>
+<h3>1 · Direct integration<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1</span></h3>
 $$\frac{dy}{dx}=f(x)\ \Longrightarrow\ y=\int f(x)\,dx+C$$
 <div class="when">The right side has no \(y\) in it. Also: "given the acceleration, find velocity and position".</div>
 <p><b>Mini-example.</b> \(y'=3x^2+2,\ y(1)=4\): \(y=x^3+2x+C\); \(4=1+2+C\Rightarrow C=1\); \(\boxed{y=x^3+2x+1}\).</p>
 </div>
 
 <div class="card">
-<h3>2 · Separable</h3>
+<h3>2 · Separable<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.4</span></h3>
 $$\frac{dy}{dx}=f(x)g(y)\ \Longrightarrow\ \int\frac{dy}{g(y)}=\int f(x)\,dx + C\qquad(\text{plus equilibria } g(y)=0)$$
 <div class="when">The right side <b>factors</b> into an \(x\)-part times a \(y\)-part. Hidden cases: \(e^{x-y}=e^x e^{-y}\); \(y'=1-t+y-ty=(1-t)(1+y)\); \(xy'+y=y^2 \Rightarrow y'=\frac{y^2-y}{x}\).</div>
 <p><b>Mini-example.</b> \(y'=2y,\ y(0)=3\): equilibrium \(y=0\); \(\int\frac{dy}{y}=\int2\,dx\Rightarrow \ln|y|=2x+C\Rightarrow y=Ae^{2x}\); \(A=3\): \(\boxed{y=3e^{2x}}\).</p>
 </div>
 
 <div class="card">
-<h3>3 · Linear — integrating factor</h3>
+<h3>3 · Linear — integrating factor<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.6</span></h3>
 $$y'+p(x)y=q(x),\qquad I=e^{\int p\,dx},\qquad (Iy)'=Iq,\qquad y=\frac1I\Big(\int Iq\,dx+C\Big)$$
 <div class="when">\(y\) and \(y'\) appear linearly (no \(y^2\), \(\sin y\), \(yy'\)); the RHS does <b>not</b> factor, so separation fails.</div>
 <p><b>Mini-example.</b> \(y'+y=x\): \(I=e^x\); \((e^xy)'=xe^x\); by parts \(e^xy=(x-1)e^x+C\); \(\boxed{y=x-1+Ce^{-x}}\).</p>
@@ -265,14 +268,14 @@ $$y'+p(x)y=q(x),\qquad I=e^{\int p\,dx},\qquad (Iy)'=Iq,\qquad y=\frac1I\Big(\in
 </div>
 
 <div class="card">
-<h3>4 · Substitution \(y=xu\) (homogeneous ODEs)</h3>
+<h3>4 · Substitution \(y=xu\) (homogeneous ODEs)<span class="wb" title="Where this is in the course workbook">📘 Past papers · not in workbook</span></h3>
 $$y'=F\!\left(\tfrac yx\right),\quad y=xu,\quad y'=u+xu'\ \Longrightarrow\ \frac{du}{F(u)-u}=\frac{dx}{x}$$
 <div class="when">Every term in numerator and denominator has the <b>same total degree</b> in \(x,y\) (e.g. \(\frac{x+y}{x-y}\), \(\frac{x^2+y^2}{xy}\)), or the question tells you to use \(y=xu\).</div>
 <p><b>Mini-example.</b> \(y'=\frac{x+y}{x}=1+u\): \(u+xu'=1+u\Rightarrow xu'=1\Rightarrow u=\ln|x|+C\Rightarrow y=x\ln|x|+Cx\).</p>
 </div>
 
 <div class="card">
-<h3>5 · Equilibrium solutions &amp; stability</h3>
+<h3>5 · Equilibrium solutions &amp; stability<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2</span></h3>
 <div class="method"><ol>
 <li>Rearrange to \(y'=f(t,y)\) (move all \(y'\) terms to one side and factor).</li>
 <li>Equilibria: constants \(c\) with \(f(t,c)=0\) <b>for all \(t\)</b>. Check any excluded values (where you divided) directly in the <b>original</b> equation.</li>
@@ -283,14 +286,14 @@ $$y'=F\!\left(\tfrac yx\right),\quad y=xu,\quad y'=u+xu'\ \Longrightarrow\ \frac
 </div>
 
 <div class="card">
-<h3>6 · Euler's method</h3>
+<h3>6 · Euler's method<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.3</span></h3>
 $$t_{n+1}=t_n+h,\qquad y_{n+1}=y_n+h\,f(t_n,y_n)$$
 <div class="when">"Approximate \(y(\cdot)\) using Euler's method with step size \(h\)", "numerical solution". Compare with the exact solution if one is given; use concavity to say over/under.</div>
 <p><b>Mini-example.</b> \(y'=ty,\ y(1)=2,\ h=0.1\): \(y_1=2+0.1\cdot(1)(2)=2.2\approx y(1.1)\).</p>
 </div>
 
 <div class="card">
-<h3>7 · Standard models (know the solutions)</h3>
+<h3>7 · Standard models (know the solutions)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.5</span></h3>
 <ul>
 <li>Cooling: \(T'=-k(T-T_m)\Rightarrow T=T_m+(T_0-T_m)e^{-kt}\). Two data points give \(k\); "halves every 10 min" ⇒ \(k=\frac{\ln2}{10}\).</li>
 <li>Growth/decay: \(A'=\pm kA\Rightarrow A=A_0e^{\pm kt}\); half-life \(t_{1/2}=\frac{\ln 2}{k}\).</li>
@@ -427,7 +430,7 @@ $$\boxed{y=x\sqrt{2\ln x+4}},\qquad\text{valid for } x\gt e^{-2}.$$
 <p><b>Honest yield report.</b> I searched all twelve papers (2020 S1 – 2025 S2). First-order ODEs appear only in the <b>2020</b> papers, which were online, open-workbook exams of 10 questions × 10 marks: <b>2020 S1 Q5, Q10</b> and <b>2020 S2 Q1, Q2</b>. The 2021–2025 papers (including the scanned 2022 S2) have <b>no</b> first-order ODE question. Treat this chapter as the foundation for <a href="ch02-second-order-odes.html">Ch 2</a> and as insurance if ODEs come back: learn Types A–C, which are the ones actually examined.</p>
 
 <div class="card q">
-<h3>Type A — Equilibrium solutions &amp; stability <span class="marks">2020 S2 Q1 [10] · 2020 S1 Q10 [10]</span></h3>
+<h3>Type A — Equilibrium solutions &amp; stability <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2</span><span class="marks">2020 S2 Q1 [10] · 2020 S1 Q10 [10]</span></h3>
 <p><b>Looks like:</b> "Find all equilibrium solutions of the following ODE … Decide which of these equilibrium solutions are stable. Justify your answer." Sometimes the ODE is given <b>unrearranged</b> (2020 S1 Q10) so you must collect the \(\dot y\) terms first.</p>
 <div class="method"><b>Recipe:</b>
 <ol>
@@ -480,7 +483,7 @@ $$\dot y=\frac{(x+1)(y-1)}{x(1-y^2)},\qquad x\ne0,\ y\ne\pm1.$$
 </div>
 
 <div class="card q">
-<h3>Type B — Linear first-order ODE via integrating factor <span class="marks">2020 S2 Q2 [10]</span></h3>
+<h3>Type B — Linear first-order ODE via integrating factor <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.6</span><span class="marks">2020 S2 Q2 [10]</span></h3>
 <p><b>Looks like:</b> "Find the general solution of the following ODE, assuming \(0\lt x\lt\frac\pi2\)" with trig coefficients in front of \(y'\) and \(y\). The interval is a hint: it fixes the signs of \(\sin x,\cos x\) so the absolute values in \(e^{\ln|\cdot|}\) can be dropped.</p>
 <div class="method"><b>Recipe:</b> divide by the coefficient of \(y'\) → \(I=e^{\int p}\) → \((Iy)'=Iq\) → integrate with \(+C\) → divide by \(I\).</div>
 <div class="card" style="background:var(--panel2)">
@@ -503,7 +506,7 @@ $$\boxed{y=\frac{1}{\cos x}+\frac{C}{\sin x}=\sec x+C\csc x,\quad C\in\mathbb R.
 </div>
 
 <div class="card q">
-<h3>Type C — Substitution that makes an ODE separable <span class="marks">2020 S1 Q5 [10]</span></h3>
+<h3>Type C — Substitution that makes an ODE separable <span class="wb" title="Where this is in the course workbook">📘 Past papers · not in workbook</span><span class="marks">2020 S1 Q5 [10]</span></h3>
 <p><b>Looks like:</b> "show that it becomes separable using the substitution \(y(x)=xu(x)\). (You do not need to solve the ODE.)" — the marks are for the substitution algebra, ending in the form \(u'=f(x)g(u)\).</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2020 S1 Q5 <span class="marks">[10 marks]</span></b></p>
@@ -523,12 +526,12 @@ $$\frac{du}{dx}=\left(\frac1x\right)\left(\frac{1+u^2}{1-u}\right)=f(x)\,g(u)\qu
 </div>
 
 <div class="card q">
-<h3>Type D — Separable / linear IVPs and modelling <span class="marks">tutorial-level: T02 Q1–5</span></h3>
+<h3>Type D — Separable / linear IVPs and modelling <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.4–1.6</span><span class="marks">tutorial-level: T02 Q1–5</span></h3>
 <p><b>Looks like:</b> "Solve the IVP…", "find the curve through \((0,1)\) whose slope at \((x,y)\) is…", Newton's cooling with two data points, RC circuit. Not on any 2020–2025 paper as a standalone question, but it is the engine inside Types A–C and all of Ch 2. See §3 Examples 1–4, 8, 9 and Practice 8.2, 8.3, 8.6.</p>
 </div>
 
 <div class="card q">
-<h3>Type E — Slope fields, order, "show it's a solution", Euler <span class="marks">tutorial-level: T01 Q1–4; Summary p 1</span></h3>
+<h3>Type E — Slope fields, order, "show it's a solution", Euler <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1–1.3</span><span class="marks">tutorial-level: T01 Q1–4; Summary p 1</span></h3>
 <p><b>Looks like:</b> "What is the order…", "Show that \(y=Ae^{-kt}\) is a solution…", "Match the ODE with its slope field and specify the stability of any equilibria", "Use Euler's method with step size…". Low exam frequency, quick marks if they appear. See Practice 8.1, 8.4, 8.5.</p>
 </div>
 </section>
@@ -653,7 +656,7 @@ $$\frac{du}{dx}=\left(\frac1x\right)\left(\frac{1+u^2}{1-u}\right)=f(x)\,g(u)\qu
 <p class="tip">How to use the arena: read the two "📖 Learn from these" examples first (they are written the way a marker wants to see them), then cover the solutions and attempt "✏️ Your turn". Only reveal a solution once you have a full answer on paper, including the justification sentences.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Vocabulary, checking solutions &amp; direct integration</h3>
+<h3>8.1 · Vocabulary, checking solutions &amp; direct integration<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.1</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -712,7 +715,7 @@ $$y'+y=e^{-x}-(x+C)e^{-x}+(x+C)e^{-x}=e^{-x}=\text{RHS}.\ ✓$$
 </div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Separable ODEs (and the \(y=xu\) substitution)</h3>
+<h3>8.2 · Separable ODEs (and the \(y=xu\) substitution)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.4 · y=xu: past papers</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -778,7 +781,7 @@ $$\boxed{y=\sqrt{2x^3-x^2}=x\sqrt{2x-1}},\quad x\gt\tfrac12.$$
 </div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Linear first-order ODEs (integrating factor)</h3>
+<h3>8.3 · Linear first-order ODEs (integrating factor)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.6</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -837,7 +840,7 @@ $$(y\sin x)'=2\sin x\cos x=\sin 2x\ \Longrightarrow\ y\sin x=\sin^2x+C\ \Longrig
 </div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Equilibrium solutions, stability &amp; slope fields</h3>
+<h3>8.4 · Equilibrium solutions, stability &amp; slope fields<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.2</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -898,7 +901,7 @@ $$(y\sin x)'=2\sin x\cos x=\sin 2x\ \Longrightarrow\ y\sin x=\sin^2x+C\ \Longrig
 </div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Euler's method</h3>
+<h3>8.5 · Euler's method<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.3</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -963,7 +966,7 @@ $$(y\sin x)'=2\sin x\cos x=\sin 2x\ \Longrightarrow\ y\sin x=\sin^2x+C\ \Longrig
 </div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · Modelling: cooling, growth, mixing, motion</h3>
+<h3>8.6 · Modelling: cooling, growth, mixing, motion<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.5</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>

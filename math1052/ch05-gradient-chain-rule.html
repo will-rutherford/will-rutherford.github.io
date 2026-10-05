@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 5 — Gradient, Directional Derivatives &amp; Chain Rule</h1>
+  <p class="wbline">📘 Workbook Ch 3 · §3.5–3.6</p>
   <p>The "which way is uphill, and how fast?" chapter, plus the chain rule that runs every rate-of-change and "show that" question. Two or three questions on every recent paper.</p>
   <div>
     <span class="badge gold">⭐ Very high yield — 20–35 marks per paper (2021–2025)</span>
@@ -86,7 +89,7 @@
 <div class="tip">Rusty on the single-variable chain rule \(\frac{d}{dx}f(g(x))=f'(g(x))\,g'(x)\), implicit differentiation of \(x^2+y^2=25\), dot products or unit vectors? Read <a href="foundations.html#derivs">the Ground Floor</a> first. And this chapter leans on partial derivatives from <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a> — if \(f_x\) and \(f_y\) aren't automatic yet, drill those first.</div>
 
 <div class="card">
-<h3>The gradient vector \(\nabla f\) — all the partials in one arrow</h3>
+<h3>The gradient vector \(\nabla f\) — all the partials in one arrow<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.2</span></h3>
 <p>For \(z=f(x,y)\), the <b>gradient</b> collects the two partial derivatives into a single vector (Summary p 5):</p>
 $$\nabla f(x,y)=\big(f_x(x,y),\,f_y(x,y)\big)=f_x\,\mathbf i+f_y\,\mathbf j,\qquad \nabla f(x,y,z)=\big(f_x,\,f_y,\,f_z\big)\ \text{in 3-D.}$$
 <p>Three facts to lock in straight away:</p>
@@ -98,7 +101,7 @@ $$\nabla f(x,y)=\big(f_x(x,y),\,f_y(x,y)\big)=f_x\,\mathbf i+f_y\,\mathbf j,\qqu
 </div>
 
 <div class="card">
-<h3>🧭 Directional derivative — the slope when you walk in <i>any</i> direction</h3>
+<h3>🧭 Directional derivative — the slope when you walk in <i>any</i> direction<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.1</span></h3>
 <p>\(f_x(a,b)\) is the slope of the surface if you walk due east (direction \(\mathbf i\)); \(f_y(a,b)\) is the slope walking due north (\(\mathbf j\)). But you can walk in <i>any</i> compass direction. The <b>directional derivative</b> in the direction of a <b>unit</b> vector \(\hat{\mathbf u}=(u_1,u_2)\) is</p>
 $$D_{\hat{\mathbf u}}f(a,b)=\lim_{h\to0}\frac{f(a+hu_1,\,b+hu_2)-f(a,b)}{h}.$$
 <p>It measures "change in \(f\) per unit <b>distance</b> travelled in the \(xy\)-plane". That is why \(\hat{\mathbf u}\) must have length 1: if you used \(2\hat{\mathbf u}\) you'd travel two units per step and double the answer.</p>
@@ -109,7 +112,7 @@ $$g'(0)=f_x\,\frac{dx}{dh}+f_y\,\frac{dy}{dh}=f_x u_1+f_y u_2=\nabla f(a,b)\cdot
 </div>
 
 <div class="card">
-<h3>🧭 The \(\cos\theta\) picture — why \(\nabla f\) points uphill</h3>
+<h3>🧭 The \(\cos\theta\) picture — why \(\nabla f\) points uphill<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <p>Write the dot product geometrically, with \(\theta\) the angle between \(\nabla f\) and your walking direction \(\hat{\mathbf u}\):</p>
 $$D_{\hat{\mathbf u}}f=\nabla f\cdot\hat{\mathbf u}=\|\nabla f\|\,\|\hat{\mathbf u}\|\cos\theta=\|\nabla f\|\cos\theta .$$
 <p>Everything in this chapter's "direction" questions falls out of this one line. \(\|\nabla f\|\) is fixed at the point; only \(\cos\theta\) changes as you turn, and \(\cos\theta\) ranges over \([-1,1]\):</p>
@@ -130,7 +133,7 @@ $$D_{\hat{\mathbf u}}f=\nabla f\cdot\hat{\mathbf u}=\|\nabla f\|\,\|\hat{\mathbf
 </div>
 
 <div class="card">
-<h3>🧭 Why \(\nabla f\) is perpendicular to the level curves</h3>
+<h3>🧭 Why \(\nabla f\) is perpendicular to the level curves<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <p>This is the single most useful geometric fact in the chapter (Summary p 5: "\(\nabla f(a,b)\) is perpendicular to the contour line through \((a,b)\) and points in the direction of increasing \(f\)").</p>
 <p><b>Proof in two lines.</b> Let \(\mathbf r(t)=(x(t),y(t))\) trace out the contour \(f(x,y)=c\) through \((a,b)\). Along it \(f(x(t),y(t))=c\) for every \(t\). Differentiate with the chain rule:</p>
 $$f_x\frac{dx}{dt}+f_y\frac{dy}{dt}=0\quad\Longleftrightarrow\quad \nabla f\cdot\mathbf r'(t)=0 .$$
@@ -163,12 +166,12 @@ A graph \(z=f(x,y)\) is the level surface \(F=f(x,y)-z=0\), whose normal is \((f
 </div>
 
 <div class="card">
-<h3>Steepest ascent on a real hill: slope vs angle</h3>
+<h3>Steepest ascent on a real hill: slope vs angle<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <p>If \(h(x,y)\) is the height of a hill, \(\|\nabla h(a,b)\|\) is the steepest <b>slope</b> (rise per unit horizontal distance). The corresponding <b>angle of climb</b> above the horizontal is \(\arctan\|\nabla h(a,b)\|\) (Tutorial 8 Q4). The walking direction is still the 2-D vector \(\nabla h(a,b)\) in the map — you do not add a \(z\)-component.</p>
 </div>
 
 <div class="card">
-<h3>🧭 The multivariable chain rule — why it adds up branches</h3>
+<h3>🧭 The multivariable chain rule — why it adds up branches<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.2–3.6.3</span></h3>
 <p>Suppose \(z=f(x,y)\) and both \(x=x(t)\), \(y=y(t)\) depend on time. When \(t\) nudges by \(\Delta t\), \(x\) moves by \(\Delta x\approx x'(t)\Delta t\) and \(y\) by \(\Delta y\approx y'(t)\Delta t\). The linear approximation from Chapter 4 says</p>
 $$\Delta z\approx f_x\,\Delta x+f_y\,\Delta y\quad\Longrightarrow\quad \frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}.$$
 <p>Each term is one <b>route</b> by which \(t\) influences \(z\): "\(t\) changes \(x\), which changes \(z\)" plus "\(t\) changes \(y\), which changes \(z\)". The total effect is the sum of the effects along every route.</p>
@@ -200,7 +203,7 @@ $$\frac{\partial w}{\partial r}=\frac{\partial w}{\partial x}\frac{\partial x}{\
 </div>
 
 <div class="card">
-<h3>🧭 Functions of a single combined variable: \(g(x,y)=f(ax+by)\)</h3>
+<h3>🧭 Functions of a single combined variable: \(g(x,y)=f(ax+by)\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span></h3>
 <p>A favourite "show that" set-up: \(f\) is an unknown one-variable function and \(g\) feeds it a combination of \(x\) and \(y\). You can't differentiate \(f\) explicitly — you don't know it — so you name the inside \(u=ax+by\) and use the tree</p>
 <div class="mono">      g
       | dg/du = f'(u)
@@ -218,7 +221,7 @@ $$\frac{\partial g}{\partial x}=f'(u)\frac{\partial u}{\partial x}=a\,f'(u),\qqu
 </div>
 
 <div class="card">
-<h3>🧭 Implicit differentiation — the chain rule on a level curve</h3>
+<h3>🧭 Implicit differentiation — the chain rule on a level curve<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.4</span></h3>
 <p>A curve like \(y\ln x+xe^y-e^2=0\) (2024 S2 Q3) can't be solved for \(y\). But it <i>is</i> a level curve \(F(x,y)=0\). Along it, treat \(y=y(x)\) and differentiate \(F(x,y(x))=0\) with the chain rule:</p>
 $$F_x\frac{dx}{dx}+F_y\frac{dy}{dx}=0\quad\Longrightarrow\quad \frac{dy}{dx}=-\frac{F_x}{F_y}\quad(F_y\ne0).$$
 <p>That is the formula on the sheet, \(y'(a)=-F_x(a,b)/F_y(a,b)\). It's the same fact as "\(\nabla F\perp\) level curve": the tangent direction \((1,y')\) must be perpendicular to \((F_x,F_y)\).</p>
@@ -234,7 +237,7 @@ $$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\qquad \frac{\partial z}{\parti
 </div>
 
 <div class="card">
-<h3>Which tool? A one-glance map of Chapter 5</h3>
+<h3>Which tool? A one-glance map of Chapter 5<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5–3.6</span></h3>
 <table>
 <tr><th>You are given…</th><th>…and asked for</th><th>Tool</th></tr>
 <tr><td>\(f\), a point, a direction vector or a target point</td><td>"rate of change / slope in the direction of…"</td><td>\(D_{\mathbf u}f=\nabla f\cdot\mathbf u/\|\mathbf u\|\)</td></tr>
@@ -255,14 +258,14 @@ $$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\qquad \frac{\partial z}{\parti
 <p class="tip">The formula sheet prints the directional derivative, the two-variable chain rule and 2-D implicit differentiation. It does <b>not</b> print: "max rate \(=\|\nabla f\|\)", "no change \(\perp\nabla f\)", the tangent line/plane to a level set, the 3-D implicit formulas, or the partial-derivative (\(s,t\)) chain rule. Those are yours to carry in.</p>
 
 <div class="card">
-<h3>Gradient <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Gradient <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.2</span></h3>
 $$\nabla f=(f_x,f_y)\quad\text{or}\quad(f_x,f_y,f_z)$$
 <div class="when">Any question containing "gradient", "\(\nabla f\)", "direction of greatest…", or as step 1 of a directional derivative.</div>
 <p><b>Recipe:</b> differentiate partially in each variable, write as a vector, then (if asked) substitute the point. <b>Mini-example:</b> \(f=x^2y+yz^3\Rightarrow\nabla f=(2xy,\ x^2+z^3,\ 3yz^2)\); at \((1,2,-1)\): \((4,0,6)\).</p>
 </div>
 
 <div class="card">
-<h3>Directional derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+<h3>Directional derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.1</span></h3>
 $$D_{\mathbf u}f(P)=\nabla f(P)\cdot\frac{\mathbf u}{\|\mathbf u\|}=\|\nabla f(P)\|\cos\theta$$
 <div class="when">"Rate of change of \(f\) at \(P\) in the direction of \(\mathbf v\)", "slope in direction…", "rate of change with respect to distance … towards \(Q\)".</div>
 <div class="method"><ol>
@@ -275,7 +278,7 @@ $$D_{\mathbf u}f(P)=\nabla f(P)\cdot\frac{\mathbf u}{\|\mathbf u\|}=\|\nabla f(P
 </div>
 
 <div class="card">
-<h3>Greatest increase / decrease / no change <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Greatest increase / decrease / no change <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <table>
 <tr><th>Asked</th><th>Answer</th></tr>
 <tr><td>direction of greatest increase (steepest ascent)</td><td>\(\nabla f(P)\) (any positive multiple, e.g. simplified or unit)</td></tr>
@@ -290,42 +293,42 @@ $$D_{\mathbf u}f(P)=\nabla f(P)\cdot\frac{\mathbf u}{\|\mathbf u\|}=\|\nabla f(P
 </div>
 
 <div class="card">
-<h3>Tangent line / tangent plane to a level set <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Tangent line / tangent plane to a level set <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 $$\text{curve }F(x,y)=c:\ \ F_x(P)(x-a)+F_y(P)(y-b)=0\qquad\text{surface }F(x,y,z)=c:\ \ \nabla F(P)\cdot(x-a,\,y-b,\,z-c_0)=0$$
 <div class="when">"Tangent line to the contour/level curve through…", "tangent plane to the surface \(x^2+\dots=k\)", "normal to the surface", "show that \(\nabla F\) is normal to…".</div>
 <p><b>Normal line</b> to the surface: \(\mathbf r(t)=P+t\,\nabla F(P)\). <b>Mini-example:</b> \(x^2+2y^2+3z^2=6\) at \((1,1,1)\): \(\nabla F=(2,4,6)\Rightarrow x+2y+3z=6\).</p>
 </div>
 
 <div class="card">
-<h3>Chain rule — total derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+<h3>Chain rule — total derivative <span style="color:var(--muted);font-weight:400">(on the sheet)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.2</span></h3>
 $$\frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+\frac{\partial z}{\partial y}\frac{dy}{dt}\ \Big(+\frac{\partial z}{\partial w}\frac{dw}{dt}\ \text{for a third variable}\Big)$$
 <div class="when">One final variable (time \(t\)): "how fast is … changing", "rate of change experienced by the particle/bird", "determine \(dz/dt\) at \(t=\dots\)", related rates with given \(dx/dt\), \(dy/dt\).</div>
 <p><b>Recipe:</b> tree → partials of the top function → ordinary derivatives of each branch → multiply along paths, add → substitute the instant's values. <b>Mini-example:</b> \(V=\pi r^2h\), \(r=3\), \(h=4\), \(\dot r=\tfrac12\), \(\dot h=-1\): \(\dot V=2\pi rh\,\dot r+\pi r^2\dot h=12\pi-9\pi=3\pi\).</p>
 </div>
 
 <div class="card">
-<h3>Chain rule — partial derivatives <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Chain rule — partial derivatives <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.3</span></h3>
 $$\frac{\partial z}{\partial s}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial s}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial s},\qquad \frac{\partial z}{\partial t}=\frac{\partial z}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial z}{\partial y}\frac{\partial y}{\partial t}$$
 <div class="when">Intermediate variables depend on two or more final variables: polar \((r,\theta)\), spherical \((r,\varphi,\theta)\), \(x=e^u\cos\theta\)…, "with the aid of a tree diagram".</div>
 <p class="tip">"Check your answer by expressing \(w\) directly" (2025 S1 Q4b) = substitute first, then differentiate. Both routes must agree — a free self-check you should do even when not asked.</p>
 </div>
 
 <div class="card">
-<h3>Combined-variable identities <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Combined-variable identities <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span></h3>
 $$g=f(u),\ u=u(x,y):\qquad g_x=f'(u)\,u_x,\quad g_y=f'(u)\,u_y,\quad \nabla g=f'(u)\,\nabla u$$
 <div class="when">"Let \(f\) be a differentiable function… show that…", \(f\) never given explicitly.</div>
 <p><b>Mini-example:</b> \(z=f(y/x)\): \(u_x=-y/x^2\), \(u_y=1/x\), so \(xz_x+yz_y=f'(u)\big(-\tfrac yx+\tfrac yx\big)=0\).</p>
 </div>
 
 <div class="card">
-<h3>Implicit differentiation <span style="color:var(--muted);font-weight:400">(2-D on the sheet; 3-D know cold)</span></h3>
+<h3>Implicit differentiation <span style="color:var(--muted);font-weight:400">(2-D on the sheet; 3-D know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.4</span></h3>
 $$F(x,y)=0\Rightarrow \frac{dy}{dx}=-\frac{F_x}{F_y};\qquad F(x,y,z)=0\Rightarrow \frac{\partial z}{\partial x}=-\frac{F_x}{F_z},\ \ \frac{\partial z}{\partial y}=-\frac{F_y}{F_z}$$
 <div class="when">A relation you can't (or needn't) solve: "curve defined by the equation", "find \(y'(x)\)", "tangent line at \(x=a\)", "\(z\) defined implicitly by…".</div>
 <p class="trap">Move <b>everything to one side first</b> so the equation reads \(F=0\) (or \(F=\) const). The minus sign in \(-F_x/F_y\) is the most-dropped symbol in this chapter.</p>
 </div>
 
 <div class="card">
-<h3>Reverse-engineering \(\nabla f\) <span style="color:var(--muted);font-weight:400">(know cold)</span></h3>
+<h3>Reverse-engineering \(\nabla f\) <span style="color:var(--muted);font-weight:400">(know cold)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5</span></h3>
 <div class="when">You're told the <i>values</i> of directional derivatives (and/or \(\|\nabla f\|\), or "max rate is … in direction …") and asked for \(\nabla f\) or constants in \(f\).</div>
 <div class="method"><ol>
 <li>Write \(\nabla f(P)=(a,b)\) (or \((a,b,c)\)).</li>
@@ -450,7 +453,7 @@ Tangent plane (normal \(\nabla F=(2,2,13)\)): \(2(x-1)+2(y-1)+13(z-2)=0\iff 2x+2
 <p>Every paper from 2021 to 2025 has at least one gradient/directional-derivative question <b>and</b> at least one chain-rule or implicit-differentiation question. Typical total: 20–35 of the 100 marks. Below are the six styles that actually appear, with every instance found.</p>
 
 <div class="card q">
-<h3>Type A — Gradient, directional derivative &amp; steepest direction for a given \(f\) <span class="marks">~10–15 marks</span></h3>
+<h3>Type A — Gradient, directional derivative &amp; steepest direction for a given \(f\) <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5</span><span class="marks">~10–15 marks</span></h3>
 <p><b>Instances:</b> 2024 S2 Q4 (12 marks) · 2023 S2 Q3 (12) · 2024 S1 Q1 (12, 3-D temperature) · 2022 S2 Q3 (10) · 2021 S1 Q5 (10) · 2021 S2 Q7 (15) · Tutorial 8 Q1–4.</p>
 <p><b>Looks like:</b> "Consider \(f(x,y)=\dots\) (a) Determine \(\nabla f\). (b) Determine the directional derivative \(f_{\mathbf v}(P)\) where \(\mathbf v=\dots\) (c) Determine the direction of greatest increase/decrease." Often a temperature \(T\) and an ant/panda walking.</p>
 <div class="method"><b>Routine:</b>
@@ -492,7 +495,7 @@ $$f_{\mathbf v}(P)=(-9,-3)\cdot\frac{(2,1)}{\sqrt5}=\frac{-18-3}{\sqrt5}=-\frac{
 </div>
 
 <div class="card q">
-<h3>Type B — Reverse problems: find \(\nabla f\) (or constants) from rates <span class="marks">~10–14 marks</span></h3>
+<h3>Type B — Reverse problems: find \(\nabla f\) (or constants) from rates <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5</span><span class="marks">~10–14 marks</span></h3>
 <p><b>Instances:</b> 2025 S1 Q1 (12 marks) · 2022 S1 Q6 (10) · 2023 S2 Q7 (14).</p>
 <p><b>Looks like:</b> "The rate of change of \(f\) at \(P_0\) towards \(P_1\) is …, towards \(P_2\) is … Determine \(\nabla f(P_0)\)." Or "the directional derivative attains its maximum value of 64 in the direction of the positive \(z\)-axis. Find \(a,b,c\)."</p>
 <div class="method"><b>Routine:</b> unknown gradient \((a,b)\) → one linear equation per given rate → solve → then use it (new direction / zero-change directions). For "max value \(M\) in direction \(\mathbf d\)": \(\nabla f(P)=M\hat{\mathbf d}\) componentwise.</div>
@@ -527,7 +530,7 @@ $$4a+3c=0,\quad 4a-b=0,\quad 2b-2c=64\ \Rightarrow\ a=6,\ b=24,\ c=-8.$$
 </div>
 
 <div class="card q">
-<h3>Type C — Chain rule with a tree diagram (evaluate / verify) <span class="marks">~5–12 marks</span></h3>
+<h3>Type C — Chain rule with a tree diagram (evaluate / verify) <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span><span class="marks">~5–12 marks</span></h3>
 <p><b>Instances:</b> 2025 S1 Q4 (12, spherical coordinates) · 2021 S1 Q6 (10, \(x=e^u\cos\theta\)) · 2022 S2 Q5 (10, channel capacity) · 2021 S2 Q10 (5) · 2020 S1 Q6(ii) (5, voltage along a circle) · 2020 S2 Q9(iii) (3, temperature along a flight path) · Tutorial 9 Q1, 2, 5, 6.</p>
 <div class="method"><b>Routine:</b> draw the tree [2 marks in 2025 S1] → write the chain-rule sum with correct \(d\)/\(\partial\) [1 mark] → compute each factor → substitute back to the final variables → simplify (trig identities!) → evaluate if a point is given.</div>
 <div class="card" style="background:var(--panel2)">
@@ -566,7 +569,7 @@ $$\frac{\partial w}{\partial\theta}=2x(-r\sin\varphi\sin\theta)+2y(r\sin\varphi\
 </div>
 
 <div class="card q">
-<h3>Type D — Related rates word problems <span class="marks">~10–12 marks</span></h3>
+<h3>Type D — Related rates word problems <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span><span class="marks">~10–12 marks</span></h3>
 <p><b>Instances:</b> 2023 S1 Q4 (12, distance between two moving bugs) · 2024 S1 Q4 (12, triangle area &amp; perimeter) · 2022 S2 Q5 (10) · Tutorial 9 Q6 (parallel resistors).</p>
 <p><b>Looks like:</b> "At a certain instant … lengths … increasing at … How fast is … changing?" or two parametrised paths and "the rate at which the distance between them is changing at \(t=\pi\)".</p>
 <div class="method"><b>Routine:</b> name the quantity as a function of the changing variables → tree → partials → plug in the <b>instant's values</b> and the given rates (with signs) → units + "increasing/decreasing".</div>
@@ -590,7 +593,7 @@ The distance is <b>increasing</b> at \(22/5\) units per unit time.</p>
 </div>
 
 <div class="card q">
-<h3>Type E — "Show that" identities for \(f(\text{combination})\), and directions for such \(g\) <span class="marks">~5–10 marks</span></h3>
+<h3>Type E — "Show that" identities for \(f(\text{combination})\), and directions for such \(g\) <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span><span class="marks">~5–10 marks</span></h3>
 <p><b>Instances:</b> 2025 S2 Q3 (10: the paper prints (a) 5 + (b) 5; the solutions file prints 7 + 3) · 2022 S1 Q4 (10) · 2021 S1 Q6(b) (5) · Tutorial 9 Q5, Q7.</p>
 <p><b>Looks like:</b> "Let \(f\) be a differentiable function… \(g(x,y)=f(ax+by)\). Show that \(a\,g_y=b\,g_x\)." / "\(z=f(x^2-y^2)\). Show that \(xz_y+yz_x=0\)."</p>
 <div class="card" style="background:var(--panel2)">
@@ -617,7 +620,7 @@ The gradient is always parallel to \((5,1)\). Hence the directions of greatest c
 </div>
 
 <div class="card q">
-<h3>Type F — Implicit differentiation → tangent line <span class="marks">~10–12 marks</span></h3>
+<h3>Type F — Implicit differentiation → tangent line <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.4</span><span class="marks">~10–12 marks</span></h3>
 <p><b>Instances:</b> 2024 S2 Q3 (12) · 2022 S1 Q5 (10, two tangent lines) · 2021 S1 Q3 (10) · Tutorial 9 Q3–4. (Related: 2021 S2 Q2 (5) — tangent plane to the level surface \(x^4-y+z=0\) via its normal \((4x^3,-1,1)\); see <a href="ch04-limits-partials-tangent-planes.html">Chapter 4</a>.)</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2024 S2 Q3 <span class="marks">[12 marks]</span></b></p>
@@ -787,7 +790,7 @@ $$\frac{dy}{dx}(1,2)=-\frac{2+e^2}{e^2}=-\Big(1+\frac2{e^2}\Big).$$</p>
 <p class="tip">How to use the arena: read the "📖 Learn from these" pair first (written exactly as a marker wants to see it), then cover the solutions and attempt "✏️ Your turn" on paper. Only reveal a solution once you've committed to a formula, a vector/number and a sentence.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Gradient &amp; directional derivatives</h3>
+<h3>8.1 · Gradient &amp; directional derivatives<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.1–3.5.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — 2-D, direction given as a vector</summary>
@@ -836,7 +839,7 @@ $$D_{\mathbf u}C(P)=\tfrac13(10+4+6)=\frac{20}{3}.$$</p>
 </div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Greatest increase, decrease &amp; zero change</h3>
+<h3>8.2 · Greatest increase, decrease &amp; zero change<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — a bug on a hot plate</summary>
@@ -882,7 +885,7 @@ $$D_{\mathbf u}C(P)=\tfrac13(10+4+6)=\frac{20}{3}.$$</p>
 </div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Reverse problems — recovering \(\nabla f\) and constants</h3>
+<h3>8.3 · Reverse problems — recovering \(\nabla f\) and constants<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — one rate is zero</summary>
@@ -922,7 +925,7 @@ $$a=2,\quad b=4,\quad c=-3.$$</p>
 </div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Tangent lines &amp; planes to level sets via \(\nabla F\)</h3>
+<h3>8.4 · Tangent lines &amp; planes to level sets via \(\nabla F\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.5.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — tangent line to a contour</summary>
@@ -960,7 +963,7 @@ Points \((6,3,2)\) and \((-6,-3,-2)\). Tangent planes: \(x+y+z=11\) and \(x+y+z=
 </div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Chain rule with tree diagrams</h3>
+<h3>8.5 · Chain rule with tree diagrams<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — three intermediate variables, one final variable</summary>
@@ -1013,7 +1016,7 @@ Product: \((f_x+f_y)(f_x-f_y)=f_x^2-f_y^2\), as required.</p>
 </div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · Related rates</h3>
+<h3>8.6 · Related rates<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — a growing box</summary>
@@ -1052,7 +1055,7 @@ Negative ⇒ they are approaching, at \(18/5\) units per unit time.</p>
 </div>
 
 <!-- ---------- 8.7 ---------- -->
-<h3>8.7 · "Show that" identities with an unknown \(f\)</h3>
+<h3>8.7 · "Show that" identities with an unknown \(f\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — \(z=f(3x-2y)\): identity and directions of greatest change</summary>
@@ -1095,7 +1098,7 @@ $$xz_x-yz_y=xf(u)+x^2yf'(u)-x^2yf'(u)=xf(u)=z,$$ as required.</p>
 </div>
 
 <!-- ---------- 8.8 ---------- -->
-<h3>8.8 · Implicit differentiation</h3>
+<h3>8.8 · Implicit differentiation<span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — two points, two tangent lines</summary>

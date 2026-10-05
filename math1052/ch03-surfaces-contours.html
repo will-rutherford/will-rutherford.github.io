@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 3 — Surfaces, Contours &amp; Cross-sections</h1>
+  <p class="wbline">📘 Workbook Ch 2 · §2.1–2.4</p>
   <p>Turn a surface \(z=f(x,y)\) into flat conics, then sketch and <b>label</b> them. The opening question on most recent papers.</p>
   <div>
     <span class="badge gold">⭐ On 11 of 12 papers 2020–2025 · 5–12 marks</span>
@@ -86,7 +89,7 @@
 <div class="tip">This chapter needs one algebra skill above all: <b>completing the square</b>. If \(2x^2-12x = 2(x-3)^2-18\) doesn't feel automatic, do the drill in <a href="foundations.html#algebra">the Ground Floor</a> first. Everything else here is built on it.</div>
 
 <div class="card">
-<h3>🧭 A surface is a landscape; a contour map is its topographic map</h3>
+<h3>🧭 A surface is a landscape; a contour map is its topographic map<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.1, 2.3</span></h3>
 <p>A function of two variables \(z=f(x,y)\) gives a height \(z\) above every point \((x,y)\) of the floor. Put all the points \((x,y,f(x,y))\) together and you get a <b>surface</b> in 3-D: a hill, a bowl, a saddle, a ridge.</p>
 <p>You can't draw 3-D surfaces reliably by hand, especially in an exam. So you <b>slice</b> the surface with flat planes and draw the 2-D curves you get:</p>
 <ul>
@@ -97,7 +100,7 @@
 </div>
 
 <div class="card">
-<h3>🧭 Why every slice in this course is a conic</h3>
+<h3>🧭 Why every slice in this course is a conic<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 <p>Almost every surface you meet in MATH1052 is <b>quadratic</b>: the variables appear at most squared (\(x^2, y^2, xy, x, y\)). Set \(z=c\) and you're left with a degree-2 equation in \(x\) and \(y\). Every degree-2 curve in the plane is a <b>conic</b>: a circle, ellipse, parabola or hyperbola, or a degenerate version (a point, two lines, or nothing at all).</p>
 <p>So the whole chapter comes down to one skill used over and over:</p>
 <div class="method"><b>The master routine</b>
@@ -113,7 +116,7 @@
 </div>
 
 <div class="card">
-<h3>The conic zoo — what each standard form tells you</h3>
+<h3>The conic zoo — what each standard form tells you<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 <table>
 <tr><th>Standard form</th><th>Curve</th><th>Read off</th></tr>
 <tr><td>\((x-h)^2+(y-k)^2=r^2\)</td><td>Circle</td><td>centre \((h,k)\), radius \(r\)</td></tr>
@@ -200,7 +203,7 @@
 </div>
 
 <div class="card">
-<h3>🧭 Identify the conic by eye, before any algebra</h3>
+<h3>🧭 Identify the conic by eye, before any algebra<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 <p>Look only at the <b>squared terms</b> (T04 Q1 is this drill). Move everything to one side, then:</p>
 <table>
 <tr><th>Squared terms</th><th>Conic</th><th>Example</th></tr>
@@ -214,7 +217,7 @@
 </div>
 
 <div class="card">
-<h3>Completing the square — the only algebra you need</h3>
+<h3>Completing the square — the only algebra you need<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2.1</span></h3>
 <div class="method"><b>Recipe</b> (for \(Ax^2+Bx\)):
 <ol>
 <li><b>Factor out the coefficient of \(x^2\) first</b>: \(Ax^2+Bx = A\left(x^2+\frac BAx\right)\).</li>
@@ -226,7 +229,7 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>🧭 Hyperbolas: which way do they open, and where are the asymptotes?</h3>
+<h3>🧭 Hyperbolas: which way do they open, and where are the asymptotes?<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2.4</span></h3>
 <p>Get the equation into the form “\(\text{(positive square)} - \text{(negative square)} = 1\)”, with a \(+1\) on the right. <b>The variable in the positive term is the direction the hyperbola opens.</b></p>
 <ul>
 <li>\(\frac{(x-1)^2}{4}-\frac{(y+2)^2}{9}=1\): the \(x\) term is positive, so it's an <b>\(x\)-hyperbola</b>. It opens left and right, with vertices at \((1\pm2,\,-2)\).</li>
@@ -236,7 +239,7 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>Rectangular hyperbolas \((x-h)(y-k)=c\)</h3>
+<h3>Rectangular hyperbolas \((x-h)(y-k)=c\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2.4</span></h3>
 <p>When the surface has an \(xy\) term and no \(x^2\) or \(y^2\) (like \(z=(x-3)(y+1)\), 2021 S2 Q1), <b>factor</b> instead of completing the square. For example, \(xy-2x+y = (x+1)(y-2)+2\). Then the contour \(z=c\) is \((x+1)(y-2)=c-2\), which gives \(y=2+\frac{c-2}{x+1}\). That's the familiar \(1/x\) curve shifted, with a vertical asymptote at \(x=-1\) and a horizontal asymptote at \(y=2\). If the constant on the right is positive, the branches sit top-right and bottom-left of the centre. If it's negative, they sit in the other two quadrants.</p>
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0"><figure style="margin:0;text-align:center"><svg viewBox="0 0 270 236" width="270" height="236" role="img" aria-label="Rectangular hyperbola (x-h)(y-k)=c with asymptotes x=h and y=k" style="max-width:100%;height:auto;background:#0a0e14;border:1px solid #2a3340;border-radius:8px;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif">
 <line x1="135.0" y1="8" x2="135.0" y2="228" stroke="#9aa7b8" stroke-width="1"/>
@@ -257,7 +260,7 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>🧭 Contour <i>diagrams</i>: the spacing is information</h3>
+<h3>🧭 Contour <i>diagrams</i>: the spacing is information<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <p>A contour diagram shows several level curves, usually at equally spaced heights like \(z=1,2,3,\dots\), on one set of axes. The spacing tells you about the slope:</p>
 <ul>
 <li><b>Close together</b> means the height changes fast, so the surface is <b>steep</b>. Far apart means it's <b>flat</b>.</li>
@@ -320,7 +323,7 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>Quadric surfaces — name them from the equation</h3>
+<h3>Quadric surfaces — name them from the equation<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.1, 2.4</span></h3>
 <p>These are the 3-D “conics”. Recognise them by (i) how many variables are squared, (ii) the signs, and (iii) which variable, if any, appears only to the first power.</p>
 <table>
 <tr><th>Equation (centred at origin)</th><th>Surface</th><th>Contours \(z=c\)</th><th>Cross-sections \(x=k\) / \(y=k\)</th></tr>
@@ -336,7 +339,7 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>Cross-sections: label the right axes, keep the right half</h3>
+<h3>Cross-sections: label the right axes, keep the right half<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.4</span></h3>
 <div class="method"><ol>
 <li>Substitute the fixed value: \(y=k\) leaves \(z\) as a function of \(x\). Draw it on axes <b>labelled \(x\) (horizontal) and \(z\) (vertical)</b>. For \(x=k\), use \(y\) and \(z\).</li>
 <li>Identify the conic exactly as for contours. The only difference is that one of the variables is now \(z\).</li>
@@ -346,13 +349,13 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 </div>
 
 <div class="card">
-<h3>🧭 Rational surfaces: “show all contours are circles/ellipses/hyperbolas”</h3>
+<h3>🧭 Rational surfaces: “show all contours are circles/ellipses/hyperbolas”<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <p>For \(z=\dfrac{8y}{x^2+2y^2}\) (2021 S1 Q4) or \(z=\dfrac{2x}{x^2-y^2}\) (2022 S1 Q2), set \(z=z_0\), <b>multiply by the denominator</b>, and complete the square with \(z_0\) kept as a letter. The centre and size then depend on \(z_0\). For example, \(\frac{x^2}{8/z_0^2}+\frac{(y-2/z_0)^2}{4/z_0^2}=1\) is an ellipse <b>for every</b> \(z_0\ne0\), and that is exactly what the question asks you to show.</p>
 <p class="trap">Multiplying by the denominator can quietly add points where the denominator is zero. Those points are <b>not</b> in the domain. In both exam examples every contour passes through the origin, which is excluded. Mark it with an <b>open circle</b> and write “\((0,0)\) excluded”. The official solutions skip this, but it is a correct and cheap extra line.</p>
 </div>
 
 <div class="card">
-<h3>Matching functions ↔ contour maps / graphs</h3>
+<h3>Matching functions ↔ contour maps / graphs<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.1, 2.3</span></h3>
 <p>Two recent papers (2023 S1 Q3(a), 2023 S2 Q4(a)) had a quick “enter 0, 1, 2 or 3” matching table. Use <b>fingerprints</b>, not algebra:</p>
 <table>
 <tr><th>Function feature</th><th>Contour fingerprint</th><th>Graph fingerprint</th></tr>
@@ -373,59 +376,59 @@ $$ 4y^2-8y = 4(y^2-2y) = 4\big[(y-1)^2-1\big] = 4(y-1)^2-4, \qquad -x^2+2x = -(x
 <p class="tip">None of this is on the formula sheet. The exam skill is <b>fast, clean algebra</b> plus a <b>fully labelled</b> sketch. Every method below ends in something you draw.</p>
 
 <div class="card">
-<h3>M1 · Contour through a given point</h3>
+<h3>M1 · Contour through a given point<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 $$ c = f(x_0,y_0), \qquad \text{contour: } f(x,y)=c$$
 <div class="when">“Sketch the contour which passes through \((x_0,y_0)\)” (2024 S1 Q3, 2024 S2 Q1, 2025 S1 Q3). <b>First line of your answer = evaluate \(f\) at the point.</b> That line is worth 1 mark by itself (2024 S2 marking scheme).</div>
 <p><b>Mini-example.</b> \(f=x^2+4y^2-2x\) through \((3,1)\): \(c=9+4-6=7\), so the contour is \((x-1)^2+4y^2=8\), i.e. \(\frac{(x-1)^2}{8}+\frac{y^2}{2}=1\).</p>
 </div>
 
 <div class="card">
-<h3>M2 · Standard form by completing the square</h3>
+<h3>M2 · Standard form by completing the square<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 $$ A x^2 + Bx + Cy^2 + Dy + E = 0 \;\Longrightarrow\; A\Big(x+\tfrac{B}{2A}\Big)^2 + C\Big(y+\tfrac{D}{2C}\Big)^2 = \tfrac{B^2}{4A}+\tfrac{D^2}{4C}-E $$
 <div class="when">Any quadratic with \(x^2\) and/or \(y^2\) terms. Then divide by the right-hand side to get “\(=1\)”.</div>
 <p><b>Mini-example.</b> \(x^2-6x+4y^2+8y+9=0\) becomes \((x-3)^2-9+4(y+1)^2-4+9=0\), so \((x-3)^2+4(y+1)^2=4\), i.e. \(\frac{(x-3)^2}{4}+(y+1)^2=1\).</p>
 </div>
 
 <div class="card">
-<h3>M3 · Intercepts (the marks are literally for these)</h3>
+<h3>M3 · Intercepts (the marks are literally for these)<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 $$ x\text{-intercepts: set } y=0;\qquad y\text{-intercepts: set } x=0 $$
 <div class="when">Every sketch question says “label all \(x\)- and \(y\)-intercepts”. Solve each resulting one-variable quadratic. A negative square means <b>no intercept</b>. Write “no \(x\)-intercepts” explicitly (worth 1 mark in 2025 S1). A zero discriminant means the curve <b>touches</b> the axis at one point.</div>
 <p><b>Mini-example.</b> For \(\frac{(x-3)^2}{4}+(y+1)^2=1\), setting \(y=0\) gives \((x-3)^2=0\), so the curve <b>touches</b> the \(x\)-axis at \((3,0)\). Setting \(x=0\) gives \((y+1)^2=1-\frac94\lt0\), so there are <b>no \(y\)-intercepts</b>.</p>
 </div>
 
 <div class="card">
-<h3>M4 · Hyperbola asymptotes</h3>
+<h3>M4 · Hyperbola asymptotes<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2.4</span></h3>
 $$ \frac{(x-h)^2}{a^2}-\frac{(y-k)^2}{b^2}=\pm1 \;\Longrightarrow\; \text{asymptotes } y-k=\pm\frac{b}{a}(x-h)$$
 <div class="when">Any hyperbola, whenever the question says “asymptotes”, or even when it doesn't (2025 S1 gave 1 mark for them). Draw them <b>dashed</b> through the centre, then draw the branches hugging them.</div>
 <p><b>Mini-example.</b> \(y^2-\frac{(x-1)^2}{4}=1\): setting the right side to 0 gives \(y^2=\frac{(x-1)^2}{4}\), so \(y=\pm\frac{x-1}{2}\).</p>
 </div>
 
 <div class="card">
-<h3>M5 · Several contours on one set of axes</h3>
+<h3>M5 · Several contours on one set of axes<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <div class="when">“Sketch the contours \(z=-2,0,1\) on the same set of axes” (2025 S2 Q1), “contours \(z=1\) and \(z=-4\)” (2023 S2 Q4). Complete the square <b>once</b> with a general \(c\), then substitute each level. Check the range first: some levels may be impossible (empty) or degenerate.</div>
 <p><b>Mini-example.</b> \(z=4x^2-y^2\). Level \(4\): \(x^2-\frac{y^2}{4}=1\). Level \(0\): the lines \(y=\pm2x\). Level \(-4\): \(\frac{y^2}{4}-x^2=1\). All three share the asymptotes \(y=\pm2x\).</p>
 </div>
 
 <div class="card">
-<h3>M6 · Vertical cross-sections</h3>
+<h3>M6 · Vertical cross-sections<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.4</span></h3>
 $$ y=k:\; z=f(x,k)\ \text{drawn in the } xz\text{-plane};\qquad x=k:\; z=f(k,y)\ \text{drawn in the } yz\text{-plane}$$
 <div class="when">“Show that the cross-sections for \(y=k\) are parabolas” (2025 S2 Q1(b)), or “use contours and/or cross-sections to sketch the surface” (T06 Q4). Keep \(k\) general, then specialise.</div>
 <p><b>Mini-example.</b> For \(z=x^2-y^2+2y\) and \(x=k\): \(z=-(y-1)^2+1+k^2\). This is a down-parabola in the \(yz\)-plane with vertex \((y,z)=(1,\,1+k^2)\), for every \(k\).</p>
 </div>
 
 <div class="card">
-<h3>M7 · “Show all contours are …” for a rational \(f\)</h3>
+<h3>M7 · “Show all contours are …” for a rational \(f\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <div class="when">\(z=\dfrac{\text{linear}}{\text{quadratic}}\) (2021 S1 Q4, 2022 S1 Q2). Set \(z=z_0\ne0\), multiply out, complete the square with \(z_0\) as a letter, and divide to reach “\(=1\)”. Name the family and give the centre in terms of \(z_0\). Mention the excluded point(s).</div>
 <p><b>Mini-example.</b> \(z=\frac{4x}{x^2+y^2}\): \(z_0(x^2+y^2)=4x\) gives \(\left(x-\frac2{z_0}\right)^2+y^2=\frac4{z_0^2}\). These are circles with centre \(\left(\frac2{z_0},0\right)\) and radius \(\frac2{|z_0|}\), all through the excluded origin.</p>
 </div>
 
 <div class="card">
-<h3>M8 · Max/min of a quadratic surface by completing the square</h3>
+<h3>M8 · Max/min of a quadratic surface by completing the square<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2–2.3</span></h3>
 <div class="when">A follow-up part like “find the minimum value of \(z\)” (2024 S1 Q3(b)) or “determine the maximum temperature” (2024 S2 Q1(b)). The completed square you already have <b>is</b> the answer: \((x+1)^2+4(y-1)^2+1\ge1\), so the minimum is \(1\), at \((-1,1)\). For \(T=\frac{100}{D}\), \(T\) is largest where the positive denominator \(D\) is smallest. Ch 6 does this with derivatives, but this is faster.</div>
 </div>
 
 <div class="card">
-<h3>M9 · The sketch-labelling checklist (use it on every sketch)</h3>
+<h3>M9 · The sketch-labelling checklist (use it on every sketch)<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2–2.4</span></h3>
 <div class="method"><ol>
 <li>Axes drawn and <b>named</b> (\(x,y\) for contours; \(x,z\) or \(y,z\) for cross-sections).</li>
 <li>Each curve tagged with its level, e.g. “\(z=1\)”.</li>
@@ -573,7 +576,7 @@ $$\Big(x-\frac2c\Big)^2+y^2=\frac{4}{c^2}.$$
 
 <!-- Type A -->
 <div class="card q">
-<h3>Type A — Contour through a given point (+ a quick max/min) <span class="marks">flagship · 8 + 4 marks</span></h3>
+<h3>Type A — Contour through a given point (+ a quick max/min) <span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span><span class="marks">flagship · 8 + 4 marks</span></h3>
 <p><b>Looks like:</b> “Sketch the contour which passes through \((x_0,y_0)\). Label all \(x\)-intercepts and \(y\)-intercepts [and asymptotes].” Then a 4-mark follow-up: min/max value or classify the critical point. <b>Instances:</b> 2024 S2 Q1, 2024 S1 Q3, 2025 S1 Q3, 2021 S2 Q1 (level given directly).</p>
 <div class="method"><b>Routine</b> (2024 S2 marking scheme: 1 mark value · 3 marks working to standard form · 2 marks intercepts · 2 marks graph):
 <ol><li>\(c=f(x_0,y_0)\). Write it down.</li><li>\(f=c\), complete the square, reach “\(=1\)”.</li><li>Name the curve with its centre (and asymptotes for a hyperbola).</li><li>Intercepts, or “none”.</li><li>Sketch with every label. Make sure the given point lies on your curve.</li></ol></div>
@@ -668,7 +671,7 @@ $$ y^2-\frac{(x-1)^2}{4}=1. \qquad\textit{[3 marks: working + standard form]}$$
 
 <!-- Type B -->
 <div class="card q">
-<h3>Type B — Several contours on one set of axes (+ a cross-section) <span class="marks">~8–12 marks</span></h3>
+<h3>Type B — Several contours on one set of axes (+ a cross-section) <span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3–2.4</span><span class="marks">~8–12 marks</span></h3>
 <p><b>Looks like:</b> “Sketch the contour curves for \(z=\dots\) on the same set of axes. Clearly label all intercepts”; “for each contour, describe what kind of curve it is”; “show that the cross-sections for \(y=k\) are parabolas”. <b>Instances:</b> 2025 S2 Q1, 2023 S2 Q4(b), 2023 S1 Q3(b).</p>
 <div class="method"><b>Routine:</b> (1) find the range of \(z\), since some levels may be impossible; (2) complete the square once with general \(c\); (3) substitute each level and name each curve; (4) intercepts per curve; (5) one sketch with every curve tagged.</div>
 
@@ -769,7 +772,7 @@ $$z=\tfrac14(x^2-4x+4)-\tfrac19(y^2-2y+1)=\frac{(x-2)^2}{4}-\frac{(y-1)^2}{9}.$$
 
 <!-- Type C -->
 <div class="card q">
-<h3>Type C — “Show that all contours are ellipses / hyperbolas” (rational \(f\)) <span class="marks">10 marks</span></h3>
+<h3>Type C — “Show that all contours are ellipses / hyperbolas” (rational \(f\)) <span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span><span class="marks">10 marks</span></h3>
 <p><b>Looks like:</b> \(z=\dfrac{\text{linear}}{\text{quadratic}}\); “for any \(z_0\ne0\) show that the contours \(z=z_0\) are …”, then “sketch the contour for \(z_0=\dots\)”. <b>Instances:</b> 2022 S1 Q2, 2021 S1 Q4.</p>
 <div class="method"><b>Routine:</b> multiply by the denominator, gather terms, complete the square carrying \(z_0\), divide by the right-hand side (a positive expression in \(z_0\)) to reach “\(=1\)”, then name it: “ellipse centred \((0,2/z_0)\) for every \(z_0\ne0\)”.</div>
 <div class="card" style="background:var(--panel2)">
@@ -804,7 +807,7 @@ $$z_0^2\Big(x-\frac1{z_0}\Big)^2-z_0^2y^2=1 \quad\Longleftrightarrow\quad \frac{
 
 <!-- Type D -->
 <div class="card q">
-<h3>Type D — Classify and sketch a conic (centre, foci, asymptotes) <span class="marks">10 marks · older papers</span></h3>
+<h3>Type D — Classify and sketch a conic (centre, foci, asymptotes) <span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span><span class="marks">10 marks · older papers</span></h3>
 <p><b>Looks like:</b> a bare conic equation; “determine the type”, “sketch, identifying the centre, foci or asymptotes”, sometimes followed by a parametrisation (links to Ch 7). <b>Instances:</b> 2020 S1 Q2, 2020 S2 Q8.</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2020 S1 Q2 <span class="marks">[10 marks]</span></b></p>
@@ -831,7 +834,7 @@ $$4\Big(x+\tfrac12\Big)^2-(y+3)^2=-12 \;\Longleftrightarrow\; \frac{(y+3)^2}{12}
 
 <!-- Type E -->
 <div class="card q">
-<h3>Type E — Match functions with contour maps / graphs <span class="marks">3–4 marks, no working</span></h3>
+<h3>Type E — Match functions with contour maps / graphs <span class="wb" title="Where this is in the course workbook">📘 Workbook §2.1, 2.3</span><span class="marks">3–4 marks, no working</span></h3>
 <p><b>Looks like:</b> a table of functions and three pictures; “Enter 0 if there is no match. No justification is required.” <b>Instances:</b> 2023 S1 Q3(a) (contour maps), 2023 S2 Q4(a) (3-D graphs).</p>
 <details>
 <summary>How the official answers were reached (both papers)</summary>
@@ -906,7 +909,7 @@ $$4\Big(x+\tfrac12\Big)^2-(y+3)^2=-12 \;\Longleftrightarrow\; \frac{(y+3)^2}{12}
 <p class="tip">All questions are new (none are past-paper or tutorial questions), written in exam style, and verified with SymPy. Do each one on paper with a <b>real sketch</b> before opening the solution, then tick off the labelling checklist.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Completing the square &amp; identifying conics</h3>
+<h3>8.1 · Completing the square &amp; identifying conics<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Identify by eye, then confirm a hyperbola</summary>
@@ -963,7 +966,7 @@ y-int (x=0): 9 − 4(y+2)² = 36  ⇒  (y+2)² < 0  ⇒  none.</div>
 </details></div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Ellipse contours of bowls &amp; temperature plates</h3>
+<h3>8.2 · Ellipse contours of bowls &amp; temperature plates<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Contour through a point (full exam write-up)</summary>
@@ -1025,7 +1028,7 @@ y-int (x=0):  y² − 6y = 0   ⇒  y = 0, 6.
 </details></div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Hyperbolas, saddles &amp; rectangular hyperbolas</h3>
+<h3>8.3 · Hyperbolas, saddles &amp; rectangular hyperbolas<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.2.4, 2.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — A saddle's contour family including the degenerate level</summary>
@@ -1083,7 +1086,7 @@ Asymptotes (RHS → 0): (y+1)² = (x−1)²/4 ⇒ y = −1 ± (x−1)/2  — ind
 </details></div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Contour diagrams: several levels, spacing, reading a map</h3>
+<h3>8.4 · Contour diagrams: several levels, spacing, reading a map<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Cone vs paraboloid from their contour spacing</summary>
@@ -1142,7 +1145,7 @@ paraboloid, NOT a cone (a cone would have equal z-steps for equal radius steps).
 </details></div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Vertical cross-sections &amp; square-root surfaces</h3>
+<h3>8.5 · Vertical cross-sections &amp; square-root surfaces<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Both families of cross-sections of a saddle</summary>
@@ -1203,7 +1206,7 @@ Upper cone (z ≥ 0): only the TOP branch of each hyperbola, and z = |x| (a V) a
 </details></div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · “Show that every contour is …” — rational surfaces</h3>
+<h3>8.6 · “Show that every contour is …” — rational surfaces<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Circles with a moving centre</summary>
@@ -1261,7 +1264,7 @@ z₀ = 0 would need x² + y² = 0 ⇒ (0,0), which is outside the domain ⇒ no 
 </details></div>
 
 <!-- ---------- 8.7 ---------- -->
-<h3>8.7 · Quadric surfaces &amp; matching</h3>
+<h3>8.7 · Quadric surfaces &amp; matching<span class="wb" title="Where this is in the course workbook">📘 Workbook §2.1, 2.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — Name seven surfaces in one minute</summary>

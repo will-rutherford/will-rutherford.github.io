@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 2 — Second-order Linear ODEs</h1>
+  <p class="wbline">📘 Workbook Ch 1 · §1.7–1.9</p>
   <p>Characteristic equations, undetermined coefficients, reduction of order, and the spring–mass–damper: one recipe, three cases, and one overlap rule.</p>
   <div>
     <span class="badge gold">⭐ Examined 2020 only (2 × 10 marks) · none 2021–2025 · still on the syllabus</span>
@@ -86,7 +89,7 @@
 <div class="tip">Rusty on the quadratic formula with a negative discriminant, \(i^2=-1\), the product rule, or \(\int x^{k}\,dx\)? Skim <a href="foundations.html#complex">the Ground Floor</a> (complex numbers, differentiation rules) first. Chapter 1's <a href="ch01-first-order-odes.html#formulas">integrating factor</a> is also used inside reduction of order below.</div>
 
 <div class="card">
-<h3>What we are solving</h3>
+<h3>What we are solving<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.1</span></h3>
 <p>A <b>linear second-order ODE</b> (the summary's "L2O") is one that can be written</p>
 $$ y''+p(x)\,y'+q(x)\,y=r(x). $$
 <p>"Linear" means \(y\), \(y'\), \(y''\) appear only to the first power and are never multiplied together or fed into a function like \(\sin y\) or \(e^{y}\). The words you must be able to use precisely:</p>
@@ -99,7 +102,7 @@ $$ y''+p(x)\,y'+q(x)\,y=r(x). $$
 </div>
 
 <div class="card">
-<h3>🧭 Why a second-order ODE has TWO arbitrary constants</h3>
+<h3>🧭 Why a second-order ODE has TWO arbitrary constants<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7</span></h3>
 <p>To undo two derivatives you integrate twice, and each integration costs one constant. The simplest example, \(y''=0\), gives \(y'=A\) and then \(y=Ax+B\). The same holds in general: the general solution of a second-order ODE is a <b>two-parameter family</b>. So:</p>
 <ul>
 <li>"Find the <b>general solution</b>" means keep <b>both</b> constants and state them: "\(y=Ae^{4x}+Be^{x},\ A,B\in\mathbb R\)".</li>
@@ -109,7 +112,7 @@ $$ y''+p(x)\,y'+q(x)\,y=r(x). $$
 </div>
 
 <div class="card">
-<h3>🧭 Superposition: why solutions can be added</h3>
+<h3>🧭 Superposition: why solutions can be added<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.2</span></h3>
 <p>Write \(L[y]=ay''+by'+cy\). Differentiation is linear, so \(L[c_1y_1+c_2y_2]=c_1L[y_1]+c_2L[y_2]\). This one line gives the whole structure of the chapter:</p>
 <ol>
 <li><b>Superposition principle</b> (summary p 2): if \(y_1,y_2\) solve \(L[y]=0\), so does every \(c_1y_1+c_2y_2\).</li>
@@ -122,7 +125,7 @@ Why: if \(y\) and \(y_P\) both solve \(L[y]=r\), then \(L[y-y_P]=r-r=0\), so \(y
 </div>
 
 <div class="card">
-<h3>🧭 Why we try \(y=e^{\lambda x}\): the characteristic equation</h3>
+<h3>🧭 Why we try \(y=e^{\lambda x}\): the characteristic equation<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <p>For \(ay''+by'+cy=0\) we need a function whose derivatives are multiples of itself, so that \(ay''\), \(by'\) and \(cy\) can cancel. The exponential is exactly that: \((e^{\lambda x})'=\lambda e^{\lambda x}\), \((e^{\lambda x})''=\lambda^2e^{\lambda x}\). Substituting:</p>
 $$ (a\lambda^2+b\lambda+c)\,e^{\lambda x}=0 \iff a\lambda^2+b\lambda+c=0\quad(\text{since }e^{\lambda x}\ne0). $$
 <p>This quadratic is the <b>characteristic equation</b>. Differential equation → algebra. Read it straight off the ODE: \(y''\to\lambda^2\), \(y'\to\lambda\), \(y\to1\). The discriminant \(\Delta=b^2-4ac\) splits into three cases (summary Recipe #4):</p>
@@ -135,14 +138,14 @@ $$ (a\lambda^2+b\lambda+c)\,e^{\lambda x}=0 \iff a\lambda^2+b\lambda+c=0\quad(\t
 </div>
 
 <div class="card">
-<h3>🧭 Why the repeated root gets an extra factor \(x\)</h3>
+<h3>🧭 Why the repeated root gets an extra factor \(x\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <p>If \(\Delta=0\) the exponential trick gives only <i>one</i> solution, \(e^{\mu x}\), but we need two independent ones. The fix is <b>reduction of order</b> (summary Recipe #3): try \(y=u(x)e^{\mu x}\). Substituting into \(ay''+by'+cy=0\) and using \(a\mu^2+b\mu+c=0\) and \(2a\mu+b=0\) (both true for a double root) leaves just \(a\,u''e^{\mu x}=0\), so \(u''=0\), giving \(u=c_1+c_2x\). Hence
 $$ y=(c_1+c_2x)\,e^{\mu x}. $$
 The summary notes this was obtained "using ROO". You'll see the full derivation in <a href="#practice">§8.5 Worked A</a>.</p>
 </div>
 
 <div class="card">
-<h3>🧭 Why complex roots become cos and sin</h3>
+<h3>🧭 Why complex roots become cos and sin<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <p>If \(\lambda=\alpha\pm\beta i\), the two exponential solutions are \(e^{(\alpha+\beta i)x}\) and \(e^{(\alpha-\beta i)x}\). By <b>Euler's formula</b> \(e^{i\theta}=\cos\theta+i\sin\theta\):</p>
 $$ e^{(\alpha\pm\beta i)x}=e^{\alpha x}\big(\cos\beta x\pm i\sin\beta x\big). $$
 <p>Adding and subtracting these (superposition) and rescaling gives the two <b>real</b> solutions \(e^{\alpha x}\cos\beta x\) and \(e^{\alpha x}\sin\beta x\). So the answer contains no \(i\) at all:</p>
@@ -152,7 +155,7 @@ $$ \boxed{y=e^{\alpha x}\big(A\cos\beta x+B\sin\beta x\big)} $$
 </div>
 
 <div class="card">
-<h3>🧭 Undetermined coefficients: the forcing tells you the shape of \(y_P\)</h3>
+<h3>🧭 Undetermined coefficients: the forcing tells you the shape of \(y_P\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9.2</span></h3>
 <p>To find one particular solution of \(ay''+by'+cy=r(x)\), <b>guess a \(y_P\) with the same shape as \(r\)</b>, leave its coefficients unknown, substitute, and match coefficients (summary Recipe #5). This works because polynomials, exponentials and sin/cos form families that are <b>closed under differentiation</b>: differentiating \(x^2\) gives lower powers, differentiating \(e^{kx}\) gives \(e^{kx}\), and differentiating \(\cos\omega x\) gives \(\sin\omega x\) and back. So \(L[\text{trial}]\) stays in the same family and can be matched against \(r\).</p>
 <ul>
 <li>\(r\) a polynomial of degree \(n\) → trial is a <b>full</b> polynomial of degree \(n\): all lower powers and the constant included.</li>
@@ -163,7 +166,7 @@ $$ \boxed{y=e^{\alpha x}\big(A\cos\beta x+B\sin\beta x\big)} $$
 </div>
 
 <div class="card">
-<h3>🧭 The overlap (resonance) rule, and why it's needed</h3>
+<h3>🧭 The overlap (resonance) rule, and why it's needed<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9</span></h3>
 <p>If your trial is <b>already a solution of the homogeneous equation</b>, then \(L[\text{trial}]=0\) and it can never equal \(r\ne0\). You'll see this as a contradiction like "\(0\cdot A=6\)". The fix:</p>
 <div class="method"><b>Modification rule.</b> If any term of the trial appears in \(y_H\), multiply the <i>whole</i> trial by \(x\). If it still overlaps (this happens with a repeated root), multiply by \(x\) again (\(x^2\)). Never go higher than \(x^2\) for a second-order ODE.</div>
 <p>Why \(x\) works: it's the same mechanism as the repeated root. Substituting \(y_P=u(x)e^{kx}\) when \(k\) is a root makes the \(u\) term cancel, leaving an equation in \(u',u''\) only, whose polynomial solution is one degree higher. This is exactly the Poster B method ("let \(y_{P}=u(x)e^{Bx}\) … hope that the coefficient of \(u\) vanishes"). Tutorial 3 Q9 is the same idea for polynomials: if \(c=0\), the constant \(1=e^{0x}\) is a homogeneous solution, so a polynomial forcing of degree \(n\) needs a trial of degree \(n+1\).</p>
@@ -171,14 +174,14 @@ $$ \boxed{y=e^{\alpha x}\big(A\cos\beta x+B\sin\beta x\big)} $$
 </div>
 
 <div class="card">
-<h3>🧭 Reduction of order: when you're handed one solution</h3>
+<h3>🧭 Reduction of order: when you're handed one solution<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.3</span></h3>
 <p>For <b>variable</b>-coefficient equations like \(2x^2y''-3xy'-3y=0\) (2020 S2 Q3) there's no characteristic equation. If you are <i>given</i> (or can guess) one solution \(y_1\), set \(y=u\,y_1\). The \(u\)-terms cancel (because \(y_1\) is a solution) and you're left with a <b>first-order</b> linear ODE for \(v=u'\):</p>
 $$ u''+u'\left(p+\frac{2y_1'}{y_1}\right)=0\qquad\text{where the ODE is in standard form } y''+p\,y'+q\,y=0. $$
 <p>That's summary Recipe #3 verbatim ("enlist little sister to find \(y_1\)"). Solve for \(v\) (separable, or by integrating factor), integrate once to get \(u\), and \(y_2=u\,y_1\). Guessing \(y_1=x^n\) for an equation with \(x^2y''\), \(xy'\), \(y\) terms reduces to a quadratic in \(n\).</p>
 </div>
 
 <div class="card">
-<h3>🧭 The spring–mass–damper: the physics behind the three cases</h3>
+<h3>🧭 The spring–mass–damper: the physics behind the three cases<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8</span></h3>
 <p>Summary p 3 sets it up. A spring of natural length \(L\) is stretched a distance \(s\) by a mass \(m\). Measure \(x\) = displacement <b>below the equilibrium position</b> (positive x-axis pointing down).</p>
 <ul>
 <li><b>Hooke:</b> spring force \(=-k(s+x)\). <b>At equilibrium</b> the spring balances the weight: \(ks=mg\), so \(k=mg/s\). This is how you get \(k\) from "the mass stretches the spring by …".</li>
@@ -196,7 +199,7 @@ $$ mx''+\beta x'+kx=0\qquad(\beta\ge0\text{ damping constant, N s m}^{-1}). $$</
 </div>
 
 <div class="card">
-<h3>🧭 Forced oscillations: transient + steady state</h3>
+<h3>🧭 Forced oscillations: transient + steady state<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8–1.9</span></h3>
 <p>Add an external force \(F(t)\): \(mx''+\beta x'+kx=F(t)\). The solution is still \(x=x_H+x_P\), but now each piece has a physical name:</p>
 <ul>
 <li>\(x_H\) = <b>transient</b>. With damping (\(\beta\gt0\)) it decays to 0, so the initial conditions are eventually forgotten.</li>
@@ -214,7 +217,7 @@ $$ mx''+\beta x'+kx=0\qquad(\beta\ge0\text{ damping constant, N s m}^{-1}). $$</
 <p class="tip">None of this is on the exam formula sheet (the sheet only covers the multivariable topics). Every recipe below must come from memory. They are short, so drill them until they're automatic.</p>
 
 <div class="card">
-<h3>Method 1 · Homogeneous, constant coefficients (Recipe #4)</h3>
+<h3>Method 1 · Homogeneous, constant coefficients (Recipe #4)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 $$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
 <div class="when">Any "solve / find the general solution" with constant coefficients and \(r=0\), and <i>always</i> as step 1 of an inhomogeneous problem (the complementary function).</div>
 <div class="method"><ol>
@@ -227,7 +230,7 @@ $$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
 </div>
 
 <div class="card">
-<h3>Method 2 · Initial value problems</h3>
+<h3>Method 2 · Initial value problems<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <div class="when">"Solve the IVP", "given \(y(0)=\ldots,\ y'(0)=\ldots\)", "released from rest", "starts at equilibrium with velocity …".</div>
 <div class="method"><ol>
 <li>Find the <b>full general solution first</b> (\(y_H+y_P\) if forced).</li>
@@ -239,7 +242,7 @@ $$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
 </div>
 
 <div class="card">
-<h3>Method 3 · Inhomogeneous: undetermined coefficients (Recipe #5)</h3>
+<h3>Method 3 · Inhomogeneous: undetermined coefficients (Recipe #5)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9</span></h3>
 <table>
 <tr><th>Forcing \(r(x)\)</th><th>First trial \(y_P\)</th></tr>
 <tr><td>\(k\) (constant)</td><td>\(A\)</td></tr>
@@ -260,7 +263,7 @@ $$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
 </div>
 
 <div class="card">
-<h3>Method 4 · Overlap / resonance modification</h3>
+<h3>Method 4 · Overlap / resonance modification<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9</span></h3>
 <div class="when">A term of your trial already appears in \(y_H\): \(r=e^{kx}\) with \(k\) a characteristic root; \(r=\cos\omega x\) with \(\pm\omega i\) roots; \(r\) a polynomial when \(c=0\) (\(\lambda=0\) is a root).</div>
 <table>
 <tr><th>Situation</th><th>Trial</th></tr>
@@ -273,7 +276,7 @@ $$ ay''+by'+cy=0\ \longrightarrow\ a\lambda^2+b\lambda+c=0 $$
 </div>
 
 <div class="card">
-<h3>Method 5 · Reduction of order (Recipe #3)</h3>
+<h3>Method 5 · Reduction of order (Recipe #3)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.3</span></h3>
 $$ y=u\,y_1,\qquad u''+u'\Big(p+\frac{2y_1'}{y_1}\Big)=0,\qquad v=u' $$
 <div class="when">"Given that \(y_1=\ldots\) is a solution, find a second linearly independent solution / the general solution", or "use the method of reduction of order". Also any variable-coefficient ODE (e.g. \(x^2y''+\ldots\)) with a trial \(y=x^n\).</div>
 <div class="method"><ol>
@@ -286,7 +289,7 @@ $$ y=u\,y_1,\qquad u''+u'\Big(p+\frac{2y_1'}{y_1}\Big)=0,\qquad v=u' $$
 </div>
 
 <div class="card">
-<h3>Method 6 · Spring–mass–damper models</h3>
+<h3>Method 6 · Spring–mass–damper models<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8</span></h3>
 $$ mx''+\beta x'+kx=F(t),\qquad k=\frac{mg}{s},\qquad \Delta=\beta^2-4mk $$
 <div class="when">Any question with a mass on a spring, "damping constant", "released", "overdamped/underdamped/critically damped", "steady state", "resonance".</div>
 <div class="method"><ol>
@@ -299,7 +302,7 @@ $$ mx''+\beta x'+kx=F(t),\qquad k=\frac{mg}{s},\qquad \Delta=\beta^2-4mk $$
 </div>
 
 <div class="card">
-<h3>Method 7 · Amplitude–phase form</h3>
+<h3>Method 7 · Amplitude–phase form<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8.1</span></h3>
 $$ c_1\cos\omega t+c_2\sin\omega t=R\cos(\omega t-\phi),\qquad R=\sqrt{c_1^2+c_2^2},\quad \tan\phi=\frac{c_2}{c_1} $$
 <div class="when">"Find the amplitude", "maximum displacement" (undamped), "steady-state amplitude". Choose \(\phi\) in the quadrant of \((c_1,c_2)\).</div>
 <p><b>Mini-example.</b> \(\cos t+\sin t=\sqrt2\cos(t-\pi/4)\): amplitude \(\sqrt2\).</p>
@@ -454,7 +457,7 @@ $$\boxed{x(t)=\tfrac23\sin3t-2t\cos3t}$$
 </div>
 
 <div class="card q">
-<h3>Type A — "Find the general solution" of \(ay''+by'+cy=r(x)\) <span class="marks">2020 S1 Q7 · 10 marks</span></h3>
+<h3>Type A — "Find the general solution" of \(ay''+by'+cy=r(x)\) <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4, 1.9</span><span class="marks">2020 S1 Q7 · 10 marks</span></h3>
 <p><b>Looks like:</b> one constant-coefficient ODE with an exponential / polynomial / trig forcing, and the single instruction "find the general solution". Tutorial twins: T03 Q4, Q5, Q7.</p>
 <div class="method"><b>Routine:</b>
 <ol>
@@ -482,7 +485,7 @@ $$\boxed{y=y_H+y_P=e^{x/2}\big(A\sin x+B\cos x\big)+\frac{e^{3x}}{29},\qquad A,B
 </div>
 
 <div class="card q">
-<h3>Type B — Find \(n\) for a power solution, then reduction of order <span class="marks">2020 S2 Q3 · 10 marks</span></h3>
+<h3>Type B — Find \(n\) for a power solution, then reduction of order <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.3</span><span class="marks">2020 S2 Q3 · 10 marks</span></h3>
 <p><b>Looks like:</b> a variable-coefficient ODE (\(x^2y''\), \(xy'\), \(y\)), "\(y=x^n\) is a solution for some integer \(n\)", then "use reduction of order to find the general solution". Tutorial twin: T03 Q1 (\(xy''-3y'-12y/x=0\), \(y_1=x^6\), answer \(y_2=x^{-2}\)).</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2020 S2 Q3 <span class="marks">[10 marks]</span></b></p>
@@ -510,7 +513,7 @@ $$\boxed{y=u\,x^3=\tilde A x^{-1/2}+Bx^{3},\qquad \tilde A,B\in\mathbb R,\ x\gt0
 </div>
 
 <div class="card q">
-<h3>Type C — Homogeneous IVP <span class="marks">poster / tutorial level · ~5–6 marks</span></h3>
+<h3>Type C — Homogeneous IVP <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span><span class="marks">poster / tutorial level · ~5–6 marks</span></h3>
 <p><b>Looks like:</b> "Solve the IVP \(y''+by'+cy=0,\ y(0)=\ldots,\ y'(0)=\ldots\)". Instances: Poster B worked example; T03 Q2 (general solutions only).</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Poster B example</b>: Solve the IVP \(y''+2y'+2y=0,\ y(0)=1,\ y'(0)=-1\).</p>
@@ -524,7 +527,7 @@ $$\boxed{y=e^{-t}\cos t}$$
 </div>
 
 <div class="card q">
-<h3>Type D — Spring–mass model from words <span class="marks">tutorial level (T03 Q3) · ~10 marks</span></h3>
+<h3>Type D — Spring–mass model from words <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8</span><span class="marks">tutorial level (T03 Q3) · ~10 marks</span></h3>
 <p><b>Looks like:</b> natural length, equilibrium length, a mass, "stretched to … and released", a damping constant, "is the system over/under/critically damped?"</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Tutorial 3 Q3.</b> A mass of 2 kg is attached to a spring hanging from a fixed support. The natural length of the spring is 0.5 m. The hanging mass causes the spring to have an equilibrium length of 0.7 m. (a) If the spring is stretched to a length of 1 m and then released with initial velocity 0 m s\(^{-1}\), find the position of the mass at any time \(t\). (b) Suppose that the spring and mass system is immersed in a fluid with damping constant 100 N s m\(^{-1}\). Find the position of the mass at any time \(t\) if it starts from the equilibrium position and is given a push to start it with an initial downward velocity of 0.6 m s\(^{-1}\). Is the system overdamped, underdamped or critically-damped?</p>
@@ -543,7 +546,7 @@ Two distinct real roots (\(\Delta=100^2-4(2)(98)=9216\gt0\)) → <b>overdamped</
 </div>
 
 <div class="card q">
-<h3>Type E — Qualitative "show that" / structure questions <span class="marks">tutorial level (T03 Q6, Q9)</span></h3>
+<h3>Type E — Qualitative "show that" / structure questions <span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7</span><span class="marks">tutorial level (T03 Q6, Q9)</span></h3>
 <p><b>Looks like:</b> "If \(a,b,c\gt0\), show \(\lim_{t\to\infty}y(t)=0\)" (T03 Q6), or "what goes wrong with the polynomial trial when \(c=0\)?" (T03 Q9).</p>
 <details>
 <summary>Model answers — T03 Q6 and Q9</summary>
@@ -677,7 +680,7 @@ Two distinct real roots (\(\Delta=100^2-4(2)(98)=9216\gt0\)) → <b>overdamped</
 <p class="tip">How to use the arena: read the "📖 Learn from these" pair first, then cover the solutions and attempt "✏️ Your turn" on paper. Before you open a solution, commit to your characteristic equation, your trial (with its overlap check) and your constants.</p>
 
 <!-- ---------- 8.1 ---------- -->
-<h3>8.1 · Characteristic equation &amp; homogeneous general solutions</h3>
+<h3>8.1 · Characteristic equation &amp; homogeneous general solutions<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — distinct real roots: \(y''+y'-12y=0\)</summary>
@@ -723,7 +726,7 @@ $$ y=(A+Bx)e^{x/3},\qquad A,B\in\mathbb R. $$</p>
 </div>
 
 <!-- ---------- 8.2 ---------- -->
-<h3>8.2 · Initial (and boundary) value problems</h3>
+<h3>8.2 · Initial (and boundary) value problems<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.4</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — \(y''-3y'+2y=0,\ y(0)=0,\ y'(0)=2\)</summary>
@@ -770,7 +773,7 @@ $$\boxed{y=-\cos t+3\sin t}$$</p>
 </div>
 
 <!-- ---------- 8.3 ---------- -->
-<h3>8.3 · Undetermined coefficients (polynomial, exponential, trig, products)</h3>
+<h3>8.3 · Undetermined coefficients (polynomial, exponential, trig, products)<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — polynomial forcing: \(y''-y'-2y=4x^2-2\)</summary>
@@ -825,7 +828,7 @@ $$\boxed{y=e^{x}\sin x+2e^{x}+2x+2}$$</p>
 </div>
 
 <!-- ---------- 8.4 ---------- -->
-<h3>8.4 · Overlap &amp; resonance: the modification rule</h3>
+<h3>8.4 · Overlap &amp; resonance: the modification rule<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.9</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — simple-root overlap: \(y''+y'-6y=10e^{2x}\)</summary>
@@ -887,7 +890,7 @@ $$\boxed{y=6e^{x}-6-3x^2-6x}$$</p></details>
 </div>
 
 <!-- ---------- 8.5 ---------- -->
-<h3>8.5 · Reduction of order</h3>
+<h3>8.5 · Reduction of order<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.7.3</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — deriving the repeated-root solution: \(y''-4y'+4y=0\), \(y_1=e^{2x}\)</summary>
@@ -938,7 +941,7 @@ Standard form: divide by \(x\): \(p=-\dfrac{2x+1}{x}=-2-\dfrac1x\). \(p+\dfrac{2
 </div>
 
 <!-- ---------- 8.6 ---------- -->
-<h3>8.6 · Springs: free motion &amp; damping classification</h3>
+<h3>8.6 · Springs: free motion &amp; damping classification<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — undamped SHM from physical data</summary>
@@ -999,7 +1002,7 @@ $$\boxed{x=(1+5t)e^{-5t}}$$</p>
 </div>
 
 <!-- ---------- 8.7 ---------- -->
-<h3>8.7 · Forced oscillations, steady state &amp; resonance</h3>
+<h3>8.7 · Forced oscillations, steady state &amp; resonance<span class="wb" title="Where this is in the course workbook">📘 Workbook §1.8–1.9</span></h3>
 <h4>📖 Learn from these</h4>
 <details>
 <summary>Worked A — steady-state amplitude: \(x''+4x'+5x=8\cos t\)</summary>

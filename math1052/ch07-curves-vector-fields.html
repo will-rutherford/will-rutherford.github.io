@@ -46,12 +46,15 @@
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.wb{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:500;vertical-align:middle;color:#ddd6fe;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.4);white-space:nowrap}
+  .wbline{color:var(--muted);font-size:14px;margin:4px 0 0}
   .marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
 </style>
 </head>
 <body>
 <header>
   <h1>Chapter 7 — Parametrised Curves &amp; Vector Fields</h1>
+  <p class="wbline">📘 Workbook Ch 5 · §5.1–5.6</p>
   <p>The last two questions of every recent paper. Motion along curves, arc length, work, and the conservative-field finale worth up to 18 marks.</p>
   <div>
     <span class="badge gold">⭐ Highest-yield chapter · ~22–30 marks per paper</span>
@@ -85,7 +88,7 @@
 <div class="tip">This chapter leans on single-variable integration (substitution, integration by parts, \(\int\sec t\,dt\)), trig identities (\(\sin^2+\cos^2=1\), double angles) and dot products. If any of those feel shaky, do <a href="foundations.html#integrals">Ground Floor · integrals</a>, <a href="foundations.html#trig">· trig</a> and <a href="foundations.html#vectors">· vectors</a> first.</div>
 
 <div class="card">
-<h3>🧭 The big picture: a curve is a movie, not a picture</h3>
+<h3>🧭 The big picture: a curve is a movie, not a picture<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1</span></h3>
 <p>Until now a curve was a <i>picture</i>: a set of points satisfying an equation like \(x^2+y^2=4\). A <b>parametrisation</b> turns the picture into a <b>movie</b>. It tells you <i>where</i> a particle is at each instant \(t\):</p>
 $$\mathbf r(t)=\big(x(t),\,y(t),\,z(t)\big),\qquad a\le t\le b .$$
 <p>The movie carries information the picture doesn't:</p>
@@ -99,7 +102,7 @@ $$\mathbf r(t)=\big(x(t),\,y(t),\,z(t)\big),\qquad a\le t\le b .$$
 </div>
 
 <div class="card">
-<h3>🧭 The standard curves you must be able to write down instantly</h3>
+<h3>🧭 The standard curves you must be able to write down instantly<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1.2, 5.2.2</span></h3>
 <table>
 <tr><th>Curve</th><th>Parametrisation</th><th>Notes</th></tr>
 <tr><td>Line through \(\mathbf r_0\) in direction \(\mathbf v\)</td><td>\(\mathbf r(t)=\mathbf r_0+t\mathbf v,\ t\in\mathbb R\)</td><td>Works in 2-D and 3-D.</td></tr>
@@ -117,7 +120,7 @@ $$\mathbf r(t)=\big(x(t),\,y(t),\,z(t)\big),\qquad a\le t\le b .$$
 <div class="trap"><b>The course summary's direction rule is back-to-front.</b> The MATH1052 summary (p 6) says \(x=r\cos(\omega t+\phi)+h,\ y=r\sin(\omega t+\phi)+k\) is "clockwise if \(\omega\gt0\)". That is wrong. With \(\omega\gt0\), at \(t=0,\phi=0\) the particle is at the rightmost point \((h+r,k)\) with velocity \((0,r\omega)\), i.e. moving <b>up</b>, so the motion is <b>anticlockwise</b>. (Tutorial 11 Q2(a) agrees: clockwise needs \(\cos(-t),\sin(-t)\).) Don't memorise a rule. Check with \(t=0\) and \(t=\pi/2\).</div>
 
 <div class="card">
-<h3>🧭 Going backwards: eliminating the parameter</h3>
+<h3>🧭 Going backwards: eliminating the parameter<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1.1</span></h3>
 <p>Exams often hand you \(\mathbf r(t)\) and ask "what path is this?" or "sketch the path". The trick is to find a relation between \(x\) and \(y\) with no \(t\) in it:</p>
 <ul>
 <li><b>Trig pairs</b>: isolate \(\cos t\) and \(\sin t\), then use \(\cos^2t+\sin^2t=1\). \(x=1+2\cos t,\ y=-3+5\sin t \Rightarrow \frac{(x-1)^2}{4}+\frac{(y+3)^2}{25}=1\).</li>
@@ -129,7 +132,7 @@ $$\mathbf r(t)=\big(x(t),\,y(t),\,z(t)\big),\qquad a\le t\le b .$$
 </div>
 
 <div class="card">
-<h3>🧭 Position → velocity → acceleration (and back)</h3>
+<h3>🧭 Position → velocity → acceleration (and back)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2</span></h3>
 <p>Differentiate component by component:</p>
 $$\mathbf v(t)=\mathbf r'(t)=\big(x'(t),y'(t),z'(t)\big),\qquad \mathbf a(t)=\mathbf v'(t)=\mathbf r''(t).$$
 <ul>
@@ -145,7 +148,7 @@ $$\mathbf r(t)=\mathbf r_0+\mathbf v_0\,t+\tfrac12\mathbf a\,t^2=\big(x_0+u_1t,\
 </div>
 
 <div class="card">
-<h3>🧭 Arc length: add up speed × time</h3>
+<h3>🧭 Arc length: add up speed × time<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.1</span></h3>
 <p>Distance = speed × time when speed is constant. When it varies, chop time into tiny pieces and add: \(\Delta s\approx\|\mathbf r'(t)\|\Delta t\). In the limit:</p>
 $$L=\int_a^b\|\mathbf r'(t)\|\,dt=\int_a^b\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}\;dt\qquad(\text{on the formula sheet}).$$
 <p>For a graph \(y=g(x)\) (put \(x=t\)) this becomes \(L=\int_a^b\sqrt{1+g'(x)^2}\,dx\).</p>
@@ -161,7 +164,7 @@ $$L=\int_a^b\|\mathbf r'(t)\|\,dt=\int_a^b\sqrt{x'(t)^2+y'(t)^2+z'(t)^2}\;dt\qqu
 </div>
 
 <div class="card">
-<h3>🧭 Vector fields and work</h3>
+<h3>🧭 Vector fields and work<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.3</span></h3>
 <p>A <b>vector field</b> \(\mathbf F(x,y)=\big(P(x,y),Q(x,y)\big)\) attaches an arrow to every point: a force, a wind or a current. When a particle moves along \(C\), the field pushes it. The <b>work done</b> adds up "force component along the direction of motion × distance":</p>
 $$W=\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F\big(\mathbf r(t)\big)\cdot\mathbf r'(t)\,dt\qquad(\text{on the formula sheet}).$$
 <p>Why the dot product? Only the part of the force <i>along</i> the motion does work. A force perpendicular to the path (like the string's pull on a ball on a string) does none. For a constant force along a straight segment this reduces to the school formula \(W=\mathbf F\cdot\mathbf d\).</p>
@@ -177,7 +180,7 @@ $$W=\int_C\mathbf F\cdot d\mathbf r=\int_a^b\mathbf F\big(\mathbf r(t)\big)\cdot
 </div>
 
 <div class="card">
-<h3>🧭 Conservative fields: when the path doesn't matter</h3>
+<h3>🧭 Conservative fields: when the path doesn't matter<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span></h3>
 <p>Some fields are the <b>gradient of a scalar function</b>: \(\mathbf F=\nabla f=(f_x,f_y)\). Then \(f\) is called a <b>potential</b>, and \(\mathbf F\) is <b>conservative</b> (also called a <b>gradient field</b>). For these fields, work behaves like height change on a hill: only the start and end points matter.</p>
 <p><b>Fundamental theorem for line integrals.</b> If \(\mathbf F=\nabla f\) and \(C\) runs from \(A\) to \(B\), then</p>
 $$\int_C\mathbf F\cdot d\mathbf r=f(B)-f(A).$$
@@ -191,7 +194,7 @@ $$\int_C\mathbf F\cdot d\mathbf r=f(B)-f(A).$$
 </div>
 
 <div class="card">
-<h3>🧭 The test: \(P_y=Q_x\) (and curl in 3-D)</h3>
+<h3>🧭 The test: \(P_y=Q_x\) (and curl in 3-D)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5.1</span></h3>
 <p>If \(\mathbf F=(P,Q)=(f_x,f_y)\), then \(P_y=f_{xy}\) and \(Q_x=f_{yx}\). By Clairaut (<a href="ch04-limits-partials-tangent-planes.html">Ch 4</a>) these are equal. So:</p>
 $$\mathbf F=(P,Q)\ \text{conservative}\ \Longrightarrow\ \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}.$$
 <p>MATH1052 uses the converse too: if \(P_y=Q_x\) everywhere on \(\mathbb R^2\) (or any region with no holes), then \(\mathbf F\) is conservative. This is the "show that \(\mathbf F\) is conservative" routine in every paper. (The 2021 S1 solutions note there is a "simply connected domain" subtlety, but that is MATH2001 material, not tested here.)</p>
@@ -200,7 +203,7 @@ $$P_y=Q_x,\qquad P_z=R_x,\qquad Q_z=R_y\qquad(\text{i.e. }\nabla\times\mathbf F=
 </div>
 
 <div class="card">
-<h3>🧭 Building the potential: partial integration</h3>
+<h3>🧭 Building the potential: partial integration<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span></h3>
 <div class="method">
 <ol>
 <li>Integrate \(P\) with respect to \(x\), treating \(y\) as a constant: \(f=\int P\,dx+g(y)\). The "constant" is an <b>unknown function of \(y\)</b>.</li>
@@ -213,7 +216,7 @@ In 3-D, add one more round: \(f=\int P\,dx+g(y,z)\). Match \(f_y=Q\) to find \(g
 </div>
 
 <div class="card">
-<h3>Which method? A one-glance map of Chapter 7</h3>
+<h3>Which method? A one-glance map of Chapter 7<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1–5.6</span></h3>
 <table>
 <tr><th>Question gives / asks</th><th>Method</th><th>Sheet?</th></tr>
 <tr><td>"Write a parametrisation" of a line, circle, ellipse or segment</td><td>Standard templates + check \(t=0\) and a quarter-turn</td><td>✗ know cold</td></tr>
@@ -235,56 +238,56 @@ In 3-D, add one more round: \(f=\int P\,dx+g(y,z)\). Match \(f_y=Q\) to find \(g
 <p class="tip">The 2022–2025 formula sheets print only \(W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\) and \(L=\int_a^b\|\mathbf r'(t)\|\,dt\). Everything else on this page (templates, the \(P_y=Q_x\) test, partial integration, the fundamental theorem) you must bring in your head.</p>
 
 <div class="card">
-<h3>M1 · Parametrising a segment or line <span style="color:var(--muted);font-weight:400">(not on sheet)</span></h3>
+<h3>M1 · Parametrising a segment or line <span style="color:var(--muted);font-weight:400">(not on sheet)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2.2</span></h3>
 $$\mathbf r(t)=P+t\,(Q-P),\quad 0\le t\le 1\qquad\text{or}\qquad \mathbf r(t)=\mathbf r_0+t\mathbf v,\ t\in\mathbb R.$$
 <div class="when">"Straight line from \(A\) to \(B\)", "line through … in the direction of …", or the straight-line leg of a composite path (2025 S1 Q8(e): the straight line from \((1,0)\) to \((-1,0)\)).</div>
 <p><b>Mini-example.</b> From \((1,0)\) to \((-1,0)\): \(\mathbf r(t)=(1,0)+t(-2,0)=(1-2t,\,0)\), \(0\le t\le1\). Check: \(\mathbf r(0)=(1,0)\) ✓ and \(\mathbf r(1)=(-1,0)\) ✓.</p>
 </div>
 
 <div class="card">
-<h3>M2 · Parametrising circles and ellipses with a given start and direction</h3>
+<h3>M2 · Parametrising circles and ellipses with a given start and direction<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1.2</span></h3>
 $$\text{anticlockwise from the right: }(h+a\cos t,\ k+b\sin t);\qquad\text{clockwise from the right: }(h+a\cos t,\ k-b\sin t).$$
 <div class="when">"Circle of radius … centred at … traced clockwise starting from …", "ellipse crossing the axes at …", "half of the ellipse", "one revolution".</div>
 <p><b>Recipe:</b> (1) put the curve in standard form, completing the square if needed (<a href="ch03-surfaces-contours.html">Ch 3</a>); (2) read off \(h,k,a,b\); (3) choose \(\sin\)/\(\cos\) and signs so that \(t=0\) is the required start; (4) check the direction at \(t=\pi/2\); (5) state the \(t\)-range (\(2\pi\) for one lap, \(\pi\) for half).</p>
 </div>
 
 <div class="card">
-<h3>M3 · Velocity, acceleration, speed</h3>
+<h3>M3 · Velocity, acceleration, speed<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2.3–5.2.4</span></h3>
 $$\mathbf v=\mathbf r',\qquad \mathbf a=\mathbf r'',\qquad \text{speed}=\|\mathbf r'\|.$$
 <div class="when">"Find the velocity / acceleration / speed at time \(t\) (or at \(t=\dots\))", "show the speed is constant", "velocity parallel to the line …" (then \(\mathbf v=k\,\mathbf d\)).</div>
 <p><b>Mini-example</b> (2024 S2 Q7). \(\mathbf r=(\cos\frac{\pi t}4-1,\ \sin\frac{\pi t}4)\), so \(\mathbf v=\left(-\frac\pi4\sin\frac{\pi t}4,\ \frac\pi4\cos\frac{\pi t}4\right)\) and the speed is \(\frac\pi4\).</p>
 </div>
 
 <div class="card">
-<h3>M4 · Integrating acceleration with initial conditions</h3>
+<h3>M4 · Integrating acceleration with initial conditions<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2</span></h3>
 $$\mathbf v(t)=\int\mathbf a\,dt+\mathbf c_1,\ \ \mathbf c_1\text{ from }\mathbf v(0);\qquad \mathbf r(t)=\int\mathbf v\,dt+\mathbf c_2,\ \ \mathbf c_2\text{ from }\mathbf r(0).$$
 <div class="when">"A diver/ball/stone … initial velocity … acceleration due to gravity is …", "a particle has velocity \(\mathbf v(t)=\dots\) and starts at …". Follow-ups: "when does it hit the ground" (set \(z=0\), take the positive root), "where does it land" (substitute that time), "maximum height" (set \(v_z=0\)).</div>
 <p><b>Mini-example.</b> \(\mathbf a=(0,0,-10)\), \(\mathbf v_0=(4,3,10)\), \(\mathbf r_0=(0,0,15)\) gives \(\mathbf r=(4t,\,3t,\,15+10t-5t^2)\). It lands when \(5t^2-10t-15=0\iff(t-3)(t+1)=0\), so \(t=3\).</p>
 </div>
 
 <div class="card">
-<h3>M5 · Arc length <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+<h3>M5 · Arc length <span style="color:var(--muted);font-weight:400">(on the sheet)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.1</span></h3>
 $$L=\int_a^b\|\mathbf r'(t)\|\,dt,\qquad\text{graph: }L=\int_a^b\sqrt{1+g'(x)^2}\,dx.$$
 <div class="when">"Length of the curve", "distance travelled", "how far does it travel in … seconds", "find \(a\) so that the helix has length 20".</div>
 <p><b>Recipe:</b> differentiate → square and add → <b>expand and look for \(\sin^2+\cos^2\) or a perfect square</b> → take the root (with \(|\cdot|\)) → integrate. If the speed is constant \(c\), then \(L=c\,(b-a)\) with no integral needed.</p>
 </div>
 
 <div class="card">
-<h3>M6 · Work by direct computation <span style="color:var(--muted);font-weight:400">(on the sheet)</span></h3>
+<h3>M6 · Work by direct computation <span style="color:var(--muted);font-weight:400">(on the sheet)</span><span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.3, 5.6</span></h3>
 $$W=\int_a^b\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt .$$
 <div class="when">The field is <b>not</b> conservative (\(P_y\ne Q_x\)), or the question says "use the formula \(W=\int\mathbf F\cdot\mathbf r'\,dt\)" (2023 S1 Q8(b), 2025 S1 Q8(e)ii), or the path is a closed loop of a non-conservative field.</div>
 <p><b>Mini-example.</b> \(\mathbf F=(x-2y,3x+y)\) once anticlockwise round \(x^2+y^2=4\): the integrand is \(8\sin^2t+12\cos^2t\), so \(W=8\pi+12\pi=20\pi\ne0\). The field is not conservative.</p>
 </div>
 
 <div class="card">
-<h3>M7 · Conservative test</h3>
+<h3>M7 · Conservative test<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5.1</span></h3>
 $$\text{2-D: } \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x};\qquad\text{3-D: } P_y=Q_x,\ P_z=R_x,\ Q_z=R_y.$$
 <div class="when">"Show that \(\mathbf F\) is conservative", "is \(\mathbf F\) a gradient field? justify", "determine \(A\) and \(B\) so that \(\mathbf F\) is conservative" (match coefficients of the polynomial identity \(P_y\equiv Q_x\)).</div>
 <p><b>Marker's statement</b> (2024 S2 MS gives <b>2 marks</b> just for it): "A vector field \(\mathbf F=P\mathbf i+Q\mathbf j\) is conservative if \(\partial P/\partial y=\partial Q/\partial x\)." Write it, compute both sides, compare, conclude.</p>
 </div>
 
 <div class="card">
-<h3>M8 · Potential by partial integration, then the fundamental theorem</h3>
+<h3>M8 · Potential by partial integration, then the fundamental theorem<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span></h3>
 $$f=\int P\,dx+g(y),\quad f_y=Q\Rightarrow g'(y);\qquad W=f(\mathbf r(b))-f(\mathbf r(a)).$$
 <div class="when">After showing \(\mathbf F\) is conservative, "find a potential \(f\) with \(\mathbf F=\nabla f\)", then "compute the work along [horrible path]". Evaluate \(\mathbf r\) at the two endpoint times and plug into \(f\).</div>
 <p><b>Mini-example</b> (2025 S2 Q8). \(\mathbf F=(2x\cos y,-x^2\sin y)\), so \(f=x^2\cos y\). The path has \(\mathbf r(0)=(0,0)\) and \(\mathbf r(3)=(3\cos3\pi,\,18\sin3\pi)=(-3,0)\), so \(W=9\cos0-0=9\).</p>
@@ -428,7 +431,7 @@ $$W=f(2,1)-f(1,0)=(8+4+1)-0=\boxed{13}.$$
 </table>
 
 <div class="card q">
-<h3>Type A — The conservative-field finale <span class="marks">flagship · 13–18 marks</span></h3>
+<h3>Type A — The conservative-field finale <span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span><span class="marks">flagship · 13–18 marks</span></h3>
 <p><b>Looks like:</b> "Consider the force field \(\mathbf F(x,y)=\dots\). (a) Show that \(\mathbf F\) is conservative [or: find \(A,B\) so that it is]. (b) Determine a potential function \(f\) such that \(\mathbf F=\nabla f\). (c) Calculate the work done … along the path [an ugly parametrisation]."</p>
 <div class="method"><b>Routine (and where the marks sit, per the 2024 S2 marking scheme):</b>
 <ol>
@@ -466,7 +469,7 @@ $$W=f(-3,0)-f(0,0)=(-3)^2\cos0-0=\boxed{9}.$$
 </div>
 
 <div class="card q">
-<h3>Type B — Motion from acceleration or velocity <span class="marks">~10–13 marks</span></h3>
+<h3>Type B — Motion from acceleration or velocity <span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2</span><span class="marks">~10–13 marks</span></h3>
 <p><b>Looks like:</b> "A diver / particle / two bugs … initial position … initial velocity … acceleration \(\mathbf a=\dots\). Determine the position vector at time \(t\). When does it hit …? Where is it then?"</p>
 <div class="method"><b>Routine:</b> integrate componentwise with constants → fix the constants with \(\mathbf v(0)\) → integrate again → fix with \(\mathbf r(0)\) → box \(\mathbf r(t)\). Then solve the event equation (\(z=0\), distance \(=4\), …) for the <b>first positive</b> \(t\), and substitute back.</div>
 <div class="card" style="background:var(--panel2)">
@@ -495,7 +498,7 @@ $$\boxed{\mathbf r(t)=(2t,\ 0,\ 40-4.9t^2)}.$$
 </div>
 
 <div class="card q">
-<h3>Type C — Speed and arc length of a given curve <span class="marks">~10–13 marks</span></h3>
+<h3>Type C — Speed and arc length of a given curve <span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.1</span><span class="marks">~10–13 marks</span></h3>
 <p><b>Looks like:</b> "Determine the speed at \(t=\dots\)", "determine the distance travelled / the length of the path in \(0\le t\le\dots\)", "find \(a\) such that the helix has length 20", "show that the speed is constant".</p>
 <div class="method"><b>Routine:</b> \(\mathbf r'\) → \(\|\mathbf r'\|^2\) → <b>expand, cancel the cross terms, use \(\sin^2+\cos^2=1\)</b> → recognise a square → \(L=\int\|\mathbf r'\|\,dt\).</div>
 <div class="card" style="background:var(--panel2)">
@@ -520,7 +523,7 @@ $$\begin{aligned}\|\mathbf r'\|^2&=(4t^2\cos^2t-4t^3\sin t\cos t+t^4\sin^2t)+(4t
 </div>
 
 <div class="card q">
-<h3>Type D — Identify, sketch or parametrise a path <span class="marks">3–13 marks (up to 10 for a sketch!)</span></h3>
+<h3>Type D — Identify, sketch or parametrise a path <span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1–5.3</span><span class="marks">3–13 marks (up to 10 for a sketch!)</span></h3>
 <p><b>Looks like:</b> "Show the hexbug moves along a parabolic path; give the Cartesian equation", "sketch the path \(C\); indicate the starting point and the direction of travel", "find a parametric representation of this [conic]", "when does it first return to its starting point?"</p>
 <div class="method"><b>Routine:</b> eliminate \(t\) (trig identity or substitution) → name the curve → table a few \(t\)-values including the endpoints → sketch <b>only the traced portion</b> with an arrow and labelled start/end points.</div>
 <div class="card" style="background:var(--panel2)">
@@ -546,7 +549,7 @@ $$y=4\cos2\pi t=4\big(1-2\sin^2\pi t\big)=4\Big(1-\frac{2x^2}{256}\Big)=4-\frac{
 </div>
 
 <div class="card q">
-<h3>Type E — Direct work integral (non-conservative, or "use the formula") <span class="marks">~4–15 marks</span></h3>
+<h3>Type E — Direct work integral (non-conservative, or "use the formula") <span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.3, 5.6</span><span class="marks">~4–15 marks</span></h3>
 <p><b>Looks like:</b> "Determine whether \(\mathbf F\) is conservative. Determine the work done … along [path]", where the answer to the first part is <b>no</b>. Or "Use the formula \(W=\int_a^b\mathbf F(t)\cdot\mathbf r'(t)\,dt\) to determine …", where they want the direct route even if a potential exists.</p>
 <div class="card" style="background:var(--panel2)">
 <p><b>📄 Real exam question — 2021 S2 Q8 <span class="marks">[15 marks]</span></b></p>
@@ -568,7 +571,7 @@ $$W=\int_0^14(t^4-4t^2+4)\,dt=4\left(\tfrac15-\tfrac43+4\right)=4\cdot\tfrac{43}
 </div>
 
 <div class="card q">
-<h3>Type F — Rates of change along a moving point <span class="marks">cross-over with Ch 5</span></h3>
+<h3>Type F — Rates of change along a moving point <span class="wb" title="Where this is in the course workbook">📘 Workbook §3.6, 5.2</span><span class="marks">cross-over with Ch 5</span></h3>
 <p>2023 S1 Q4 (distance between two bugs, rate at \(t=\pi\)), 2020 S1 Q6(ii) (voltage change along a circle), 2020 S2 Q9(iii) (temperature change felt by the bird, \(\frac{dT}{dt}=-\frac{z'(t)}{100}=-\frac{\sqrt2\,t}{100}\)). The parametrisation supplies \(x(t),y(t),z(t)\). The rest is the chain rule \(\frac{dT}{dt}=\nabla T\cdot\mathbf r'(t)\). See <a href="ch05-gradient-chain-rule.html">Ch 5</a>.</p>
 </div>
 </section>
@@ -707,7 +710,7 @@ $$W=\int_0^14(t^4-4t^2+4)\,dt=4\left(\tfrac15-\tfrac43+4\right)=4\cdot\tfrac{43}
 <p class="tip">How to use the arena: read the "📖 Learn from these" pair first (written the way a marker wants to see it). Then cover the solutions and attempt "✏️ Your turn". Reveal a solution only once you have committed your full answer to paper, including the check lines (start point, direction, \(\nabla f=\mathbf F\)).</p>
 
 <!-- ---------- 8.1 PARAMETRISING ---------- -->
-<h3>8.1 · Parametrising curves (lines, segments, circles, ellipses; identifying paths)</h3>
+<h3>8.1 · Parametrising curves (lines, segments, circles, ellipses; identifying paths)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.1–5.2</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -774,7 +777,7 @@ $$L=2\int_0^{\pi/2}\sqrt2\sin2t\,dt=2\sqrt2\Big[-\tfrac12\cos2t\Big]_0^{\pi/2}=2
 </div>
 
 <!-- ---------- 8.2 MOTION ---------- -->
-<h3>8.2 · Motion: velocity, acceleration, speed; integrating with initial conditions</h3>
+<h3>8.2 · Motion: velocity, acceleration, speed; integrating with initial conditions<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.2</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -841,7 +844,7 @@ $$\mathbf r(t)=(5t,\ 12t,\ 19.6+14.7t-4.9t^2).$$
 </div>
 
 <!-- ---------- 8.3 ARC LENGTH ---------- -->
-<h3>8.3 · Arc length (making the square root collapse)</h3>
+<h3>8.3 · Arc length (making the square root collapse)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.1</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -897,7 +900,7 @@ $$L=\int_1^e\Big(\frac x2+\frac1{2x}\Big)dx=\Big[\frac{x^2}{4}+\frac{\ln x}{2}\B
 </div>
 
 <!-- ---------- 8.4 DIRECT WORK ---------- -->
-<h3>8.4 · Work by direct computation \(\int\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)</h3>
+<h3>8.4 · Work by direct computation \(\int\mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt\)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.4.3, 5.6</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -961,7 +964,7 @@ $$W=\tfrac23+\tfrac25+\tfrac34=\tfrac{40+24+45}{60}=\boxed{\tfrac{109}{60}}.$$
 </div>
 
 <!-- ---------- 8.5 CONSERVATIVE TEST & POTENTIALS ---------- -->
-<h3>8.5 · Conservative test &amp; constructing potentials (2-D and 3-D)</h3>
+<h3>8.5 · Conservative test &amp; constructing potentials (2-D and 3-D)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
@@ -1024,7 +1027,7 @@ $$W=\tfrac23+\tfrac25+\tfrac34=\tfrac{40+24+45}{60}=\boxed{\tfrac{109}{60}}.$$
 </div>
 
 <!-- ---------- 8.6 FTLI ---------- -->
-<h3>8.6 · Fundamental theorem, path independence &amp; closed loops (the 18-mark finale)</h3>
+<h3>8.6 · Fundamental theorem, path independence &amp; closed loops (the 18-mark finale)<span class="wb" title="Where this is in the course workbook">📘 Workbook §5.5</span></h3>
 <h4>📖 Learn from these</h4>
 
 <details>
