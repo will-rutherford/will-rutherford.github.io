@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECON1011 — 2025 S2 Final Exam</title>
+<link rel="stylesheet" href="style.css"><script src="pack.js" defer></script>
+<style>
+.ans{font-weight:700;color:var(--good)}
+.conf{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);margin-left:6px}
+.opts{color:var(--muted);font-size:13.5px}
+svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+@media print{.ans{color:#111}details{display:block}details>*{display:block}}
+</style></head><body>
+<header><h1>2025 S2 Final Exam · Worked solutions</h1>
+<p>ECON1011 Economics for Business · Inspera, 100 marks, 22 marked questions (Q23 is a 0-mark comments box)</p>
+<p>No official answer key. Every answer below is worked from the lecture method and checked in Python.</p>
+<div><span class="badge">100 marks</span><span class="badge blue">Same format as your exam</span><span class="badge gold">✅ official · 🟢 confident · 🟡 judgement call</span></div></header>
+<nav><a href="../index.html">⇄ Switch subject</a><a href="index.html">🏠 Hub</a><a href="print.html">🖨 Print binder</a>
+<a href="t1-demand-supply.html">T1 D&amp;S</a><a href="t2-intervention.html">T2 Intervention</a><a href="t3-market-power.html">T3 Market power</a><a href="t4-macro-policy.html">T4 AD-AS &amp; policy</a><a href="t5-trade.html">T5 Trade</a><a href="t6-climate-games.html">T6 Climate &amp; games</a><a href="t7-growth-inequality.html">T7 Growth</a>
+<a href="index.html#papers">📝 Papers</a></nav>
+<main>
+
+<section id="map">
+<h2>Paper map</h2>
+<div class="card">
+<p>The paper has six scenario blocks: a diagram or table on the left, then questions on the right. Most marks come from dropdowns, multiple choice and numeric boxes read off the diagram. Only <b>Q8, Q16, Q18 and Q19 (15 marks)</b> need typed answers.</p>
+<div class="tablewrap"><table>
+<tr><th>Q</th><th>Topic tab</th><th>Marks</th><th>Question shape</th></tr>
+<tr><td><a href="#q1">1</a></td><td>T1 (+T2 floor)</td><td>12</td><td>D&amp;S grid: equilibrium P &amp; Q, point elasticity + elastic/inelastic, choosing a policy that cuts consumption</td></tr>
+<tr><td><a href="#q2">2</a></td><td>T1</td><td>4</td><td>Substitute banned → which curve shifts, direction of P and Q</td></tr>
+<tr><td><a href="#q3">3</a></td><td>T1</td><td>4</td><td>Same supply shock in two markets with different demand elasticities → bigger ΔP and bigger ΔQ</td></tr>
+<tr><td><a href="#q4">4</a></td><td>T3</td><td>10</td><td>Natural monopoly cause; MR = MC → Q and P off grid; DWL and "units with positive surplus not produced"</td></tr>
+<tr><td><a href="#q5">5</a></td><td>T4</td><td>3</td><td>AD-AS: point A left of LRAS. Which shocks got it there? Self-correction mechanism</td></tr>
+<tr><td><a href="#q6">6</a></td><td>T4</td><td>2</td><td>Pick the <i>fiscal</i> policies that raise Y to potential</td></tr>
+<tr><td><a href="#q7">7</a></td><td>T4</td><td>8</td><td>Two simultaneous shocks (oil cost ↑, export demand ↑) → SRAS/AD shifts, ambiguous Y, P↑</td></tr>
+<tr><td><a href="#q8">8</a></td><td>T4</td><td>4</td><td>Short answer (≤100 words): expansionary or contractionary monetary policy to restore potential Y</td></tr>
+<tr><td><a href="#q9">9</a></td><td>T5</td><td>4</td><td>Labour-hours table → four opportunity costs</td></tr>
+<tr><td><a href="#q10">10</a></td><td>T5</td><td>4</td><td>Terms of trade outside / inside the OC range: who sells what; which ToT give trade</td></tr>
+<tr><td><a href="#q11">11</a></td><td>T5</td><td>4</td><td>Full specialisation outputs; exports and imports to reach a consumption bundle</td></tr>
+<tr><td><a href="#q12">12</a></td><td>T5</td><td>4</td><td>Large-country tariff diagram: imports with and without the tariff</td></tr>
+<tr><td><a href="#q13">13</a></td><td>T5</td><td>6</td><td>Total surplus with / without tariff as area sums; ToT gain vs DWL</td></tr>
+<tr><td><a href="#q14">14</a></td><td>T6</td><td>1</td><td>SMC above PMC → negative externality</td></tr>
+<tr><td><a href="#q15">15</a></td><td>T6</td><td>4</td><td>Market Q vs socially optimal Q off grid</td></tr>
+<tr><td><a href="#q16">16</a></td><td>T6</td><td>3</td><td>Typed: DWL triangle calculation with working</td></tr>
+<tr><td><a href="#q17">17</a></td><td>T6</td><td>3</td><td>Pigouvian tax and its size</td></tr>
+<tr><td><a href="#q18">18</a></td><td>T6</td><td>4</td><td>Typed: does A have a dominant strategy? Explain</td></tr>
+<tr><td><a href="#q19">19</a></td><td>T6</td><td>4</td><td>Typed: does B have a dominant strategy? Explain</td></tr>
+<tr><td><a href="#q20">20</a></td><td>T6</td><td>2</td><td>Nash equilibria (select one or more)</td></tr>
+<tr><td><a href="#q21">21</a></td><td>T7</td><td>4</td><td>Solow diagram: steady-state consumption; save more or less?</td></tr>
+<tr><td><a href="#q22">22</a></td><td>T7</td><td>6</td><td>Lower population growth → which line shifts, which way, new k*</td></tr>
+</table></div>
+<p class="src">Marks by topic: T1 20 · T3 10 · T4 17 · T5 22 · T6 21 · T7 10 = 100. There's no separate T2 block, but Q1's policy part is T2 content (price floors).</p>
+</div>
+</section>
+
+<!-- ============================ BLOCK 1: cigarettes -->
+<section id="b1">
+<h2>Block 1 · Cigarettes in Marlborough (T1) · 20 marks</h2>
+<div class="card">
+<p><b>Scenario.</b> This question concerns the perfectly competitive market for cigarettes in the country of Marlborough. The demand-and-supply diagram is below (drawn to scale).</p>
+<figure><svg viewBox="0 0 480 345" width="480" role="img" aria-label="Cigarette market demand and supply">
+<rect width="480" height="345" fill="#fff"/>
+<g stroke="#999" stroke-dasharray="4 4" stroke-width="1">
+<line x1="60" y1="90" x2="360" y2="90"/><line x1="60" y1="150" x2="260" y2="150"/><line x1="60" y1="210" x2="360" y2="210"/>
+<line x1="160" y1="90" x2="160" y2="300"/><line x1="260" y1="150" x2="260" y2="300"/><line x1="360" y1="90" x2="360" y2="300"/></g>
+<line x1="60" y1="300" x2="455" y2="300" stroke="#111" stroke-width="2"/><line x1="60" y1="300" x2="60" y2="20" stroke="#111" stroke-width="2"/>
+<line x1="90" y1="48" x2="410" y2="240" stroke="#0284c7" stroke-width="3"/>
+<line x1="80" y1="258" x2="420" y2="54" stroke="#d97706" stroke-width="3"/>
+<g font-size="13" fill="#111"><text x="52" y="94" text-anchor="end">$7</text><text x="52" y="154" text-anchor="end">$5</text><text x="52" y="214" text-anchor="end">$3</text>
+<text x="160" y="318" text-anchor="middle">500</text><text x="260" y="318" text-anchor="middle">1000</text><text x="360" y="318" text-anchor="middle">1500</text>
+<text x="66" y="16">Price ($/pack)</text><text x="455" y="336" text-anchor="end">Quantity (packs)</text>
+<text x="414" y="236" fill="#0284c7" font-weight="700">Demand</text><text x="400" y="48" fill="#d97706" font-weight="700">Supply</text></g>
+</svg><figcaption>Demand passes (500, $7), (1000, $5), (1500, $3). Supply passes (500, $3), (1000, $5), (1500, $7).</figcaption></figure>
+</div>
+
+<div class="card q" id="q1"><h3>Q1 <span class="marks">12 marks</span></h3>
+<p>(a) According to the diagram, the equilibrium price in this market is <b>[ ▾ ]</b> <span class="opts">($3 / $5 / $7 / Cannot be determined.)</span> while the equilibrium quantity transacted is <b>[ ▾ ]</b> <span class="opts">(500 / 1500 / 1000 / Cannot be determined.)</span>.</p>
+<p>(b) At the market equilibrium, the price elasticity of demand is <b>[ ▾ ]</b> <span class="opts">(−1.25 / 0.8 / −0.8 / 1.25)</span> (do not use the absolute value) and demand is <b>[ ▾ ]</b> <span class="opts">(elastic / unit elastic / perfectly inelastic / inelastic)</span>.</p>
+<p>(c) If the government wishes to reduce the consumption of cigarettes, one suitable policy will be to implement a <b>[ ▾ ]</b> <span class="opts">(unit subsidy of $4 per pack / price floor of $3 / price floor of $7 / price ceiling of $7)</span> which will then <b>[ ▾ ]</b> <span class="opts">(reduce demand for cigarettes / reduce supply of cigarettes / reduce quantity of cigarettes demanded by smokers / reduce quantity supplied by tobacco companies)</span>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) $5 and 1000 · (b) −1.25, elastic · (c) price floor of $7 → reduce quantity of cigarettes demanded by smokers <span class="conf">🟢 confident</span></p>
+<ol>
+<li><b>Equilibrium:</b> D and S cross at the dashed lines (1000, $5).</li>
+<li><b>Elasticity</b> (<a href="t1-demand-supply.html#methods">T1 methods</a>: the point method, ε = (P/Q) ÷ slope, with slope = ΔP/ΔQ). Slope of D = (3 − 7)/(1500 − 500) = −4/1000 = −0.004. P/Q at equilibrium = 5/1000 = 0.005. ε = 0.005 / −0.004 = <b>−1.25</b>. |ε| &gt; 1, so demand is <b>elastic</b>. (Check: equilibrium is above the midpoint of the linear D, which is the elastic half.)</li>
+<li><b>Policy</b> (<a href="t2-intervention.html#methods">T2 methods</a>): to cut consumption you need a <i>binding</i> price floor, i.e. one set <b>above</b> P* = $5. A $7 floor is binding: Q<sub>d</sub> = 500 &lt; Q<sub>s</sub> = 1500, so only 500 packs are bought. A $3 floor sits below P*, so it doesn't bind. A $7 ceiling sits above P*, so it doesn't bind either. A subsidy <i>raises</i> consumption.</li>
+<li>A price floor doesn't shift any curve. It moves buyers <b>along</b> demand, so it reduces the <b>quantity demanded</b>, not "demand".</li>
+</ol>
+<div class="trap">Two traps. First, the elasticity answer choices include both −1.25 and its inverse, −0.8 (that's what you get from using ΔQ/ΔP the wrong way round, or from Q/P). Second, in part (c), "reduce demand" sounds right but is wrong. A price control is a movement along the curve, not a shift.</div>
+</details></div>
+
+<div class="card q" id="q2"><h3>Q2 <span class="marks">4 marks</span></h3>
+<p>Vapes and cigarettes are close substitutes. Due to increasing concerns over health risks posed by vapes which were heavily marketed to teenagers, the government of Marlborough has banned the sale of vapes in the country.</p>
+<p>This policy will <b>[ ▾ ]</b> <span class="opts">(increase the demand for / decrease the demand for / increase the supply of / decrease the supply of)</span> cigarettes, leading to a(n) <b>[ ▾ ]</b> <span class="opts">(lower / higher / uncertain / more volatile)</span> equilibrium price and a(n) <b>[ ▾ ]</b> <span class="opts">(lower / higher / uncertain / more competitive)</span> quantity transacted in the market for cigarettes.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">increase the demand for · higher price · higher quantity <span class="conf">🟢 confident</span></p>
+<p>Banning a substitute effectively raises its price to infinity, so former vapers switch to cigarettes. Demand for cigarettes shifts right <b>with supply unchanged</b>, so P↑ and Q↑ (<a href="t1-demand-supply.html#sheet">T1 shift table</a>).</p>
+<div class="trap">The ban is on <i>vapes</i>. It isn't a supply-side policy in the cigarette market, so it doesn't shift cigarette supply.</div>
+</details></div>
+
+<div class="card q" id="q3"><h3>Q3 <span class="marks">4 marks</span></h3>
+<p>There are two separate markets for cigarettes: a market for premium cigarettes and a separate market for value cigarettes. Both markets are perfectly competitive. However, demand in the market for premium cigarettes is significantly <b>less price elastic</b> than demand in the value market. The supply curves for the value and premium cigarette markets are identical. Suppose a failure of the tobacco harvest has decreased supply in both markets to the same exact extent.</p>
+<p>(a) Which market will experience a bigger change in equilibrium <b>price</b> due to the tobacco crop failure? <span class="opts">(The market for premium cigarettes / The market for value cigarettes / The price changes in the two markets are the same / There is insufficient information to determine)</span></p>
+<p>(b) Which market will experience a bigger change in equilibrium <b>quantity</b>? <span class="opts">(same four options)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) Premium (inelastic demand) · (b) Value (elastic demand) <span class="conf">🟢 confident</span></p>
+<p>Shift the same supply curve left in both markets. If demand is steep (inelastic), buyers barely cut quantity, so the shock comes out mostly as a <b>price</b> rise. If demand is flat (elastic), price hardly moves and the shock comes out as a <b>quantity</b> fall.</p>
+<div class="tip">Rule: when <b>supply</b> shifts, the more inelastic the <b>demand</b>, the bigger ΔP and the smaller ΔQ. (When demand shifts, the same rule applies to supply elasticity.)</div>
+</details></div>
+</section>
+
+<!-- ============================ BLOCK 2: monopoly -->
+<section id="b2">
+<h2>Block 2 · Zapp Co natural monopoly (T3) · 10 marks</h2>
+<div class="card">
+<p><b>Scenario.</b> Zapp Co is a monopoly in the market for electricity transmission services. The market demand, marginal revenue and marginal cost curves are given in the following diagram.</p>
+<figure><svg viewBox="0 0 470 345" width="470" role="img" aria-label="Monopoly diagram">
+<rect width="470" height="345" fill="#fff"/>
+<polygon points="247.5,132 310,160 247.5,202" fill="#f87171" fill-opacity=".3" stroke="#b91c1c" stroke-width="1"/>
+<g stroke="#999" stroke-dasharray="4 4"><line x1="60" y1="132" x2="247.5" y2="132"/><line x1="60" y1="160" x2="310" y2="160"/><line x1="60" y1="202" x2="247.5" y2="202"/>
+<line x1="247.5" y1="132" x2="247.5" y2="300"/><line x1="310" y1="160" x2="310" y2="300"/></g>
+<line x1="60" y1="300" x2="455" y2="300" stroke="#111" stroke-width="2"/><line x1="60" y1="300" x2="60" y2="22" stroke="#111" stroke-width="2"/>
+<line x1="60" y1="48" x2="410" y2="204.8" stroke="#0284c7" stroke-width="3"/>
+<line x1="60" y1="48" x2="335" y2="273.9" stroke="#0284c7" stroke-width="2.5"/>
+<line x1="110" y1="294.4" x2="410" y2="92.8" stroke="#d97706" stroke-width="3"/>
+<g font-size="13" fill="#111"><text x="52" y="136" text-anchor="end">$120</text><text x="52" y="164" text-anchor="end">$100</text><text x="52" y="206" text-anchor="end">$70</text>
+<text x="247.5" y="318" text-anchor="middle">750</text><text x="310" y="318" text-anchor="middle">1000</text>
+<text x="66" y="18">Price ($)</text><text x="455" y="336" text-anchor="end">Quantity</text>
+<text x="412" y="222" fill="#0284c7" font-weight="700">Demand</text><text x="300" y="262" fill="#0284c7" font-weight="700" text-anchor="end">MR</text><text x="414" y="88" fill="#d97706" font-weight="700">MC</text>
+<text x="252" y="176" font-size="11" font-weight="700" fill="#b91c1c">DWL</text></g>
+</svg><figcaption>MR = MC at (750, $70); demand at Q = 750 is $120; D meets MC at (1000, $100). The original is drawn schematically: its MR line isn't exactly twice as steep as D. Only the labelled points matter.</figcaption></figure>
+</div>
+
+<div class="card q" id="q4"><h3>Q4 <span class="marks">10 marks</span></h3>
+<p>(a) Zapp Co is a natural monopoly. This means that Zapp Co's monopoly over the electricity transmission industry is due to <span class="opts">(government policy / significant economies of scale / network externalities / Zapp Co's control of a key input)</span>.</p>
+<p>(b) According to the diagram, the monopolist will choose a quantity of <b>[ ]</b> and charge a price of $<b>[ ]</b>.</p>
+<p>(c) Compared to a perfectly competitive market, the monopolist creates a <b>[ ▾ ]</b> <span class="opts">(positive externality / negative externality / deadweight loss / higher level of social surplus)</span>. This is because at the monopolist's profit-maximising choice of quantity, <b>[ ▾ ]</b> <span class="opts">(250 units with positive social surplus are not produced / 1000 units with positive social surplus are not produced / 1000 units with negative surplus are produced / 250 units with negative surplus are produced)</span>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) significant economies of scale · (b) Q = 750, P = $120 · (c) deadweight loss; 250 units with positive social surplus are not produced <span class="conf">🟢 confident</span></p>
+<ol>
+<li><b>Natural monopoly</b> = one firm can supply the whole market at a lower average cost than two or more firms could, because of economies of scale (<a href="t3-market-power.html#learn">T3 barriers table</a>). The other options are other barriers to entry: legal barriers, network effects, and control of a key resource.</li>
+<li><b>Profit-max:</b> set MR = MC, which gives Q = <b>750</b>. Then go <b>up to the demand curve</b> for the price: <b>$120</b>, not $70 (<a href="t3-market-power.html#methods">T3 methods</a>).</li>
+<li><b>Competitive benchmark:</b> P = MC on demand, so Q = 1000, P = $100. The units from 750 to 1000 have value to buyers (D) greater than MC, so they carry positive surplus. Not producing them is the <b>DWL</b> (shaded): 1000 − 750 = <b>250 units</b>. If asked for its size, DWL = ½ × 250 × (120 − 70) = $6,250.</li>
+</ol>
+<div class="trap">Price ≠ $70. $70 is where MR = MC, which only sets the <i>quantity</i>. Also, 1000 is the efficient quantity, not the number of units lost.</div>
+</details></div>
+</section>
+
+<!-- ============================ BLOCK 3: AD-AS -->
+<section id="b3">
+<h2>Block 3 · AD-AS shocks &amp; policy (T4) · 17 marks</h2>
+<div class="card">
+<p><b>Scenario (Q5–Q8).</b> The economy was originally in long-run equilibrium. However, a series of external shocks shifted the economy into a short-run but not long-run equilibrium, labelled A in the AD-AS diagram below. (There are no numbers. A sits to the <b>left</b> of LRAS.)</p>
+<figure><svg viewBox="0 0 420 330" width="420" role="img" aria-label="AD-AS diagram with point A left of LRAS">
+<rect width="420" height="330" fill="#fff"/>
+<g stroke="#999" stroke-dasharray="4 4"><line x1="50" y1="173" x2="181" y2="173"/><line x1="181" y1="173" x2="181" y2="290"/></g>
+<line x1="50" y1="290" x2="400" y2="290" stroke="#111" stroke-width="2"/><line x1="50" y1="290" x2="50" y2="25" stroke="#111" stroke-width="2"/>
+<line x1="240" y1="45" x2="240" y2="290" stroke="#111" stroke-width="3"/>
+<line x1="80" y1="90" x2="300" y2="270" stroke="#0284c7" stroke-width="3"/>
+<line x1="80" y1="250" x2="330" y2="60" stroke="#d97706" stroke-width="3"/>
+<circle cx="181" cy="173" r="6" fill="#f59e0b" stroke="#111"/>
+<g font-size="14" fill="#111"><text x="174" y="160" font-weight="700">A</text><text x="42" y="178" text-anchor="end" font-style="italic">P<tspan font-size="10" dy="3">A</tspan></text><text x="181" y="308" text-anchor="middle" font-style="italic">Y<tspan font-size="10" dy="3">A</tspan></text>
+<text x="240" y="40" text-anchor="middle" font-weight="700">LRAS (Ȳ)</text><text x="305" y="282" fill="#0284c7" font-weight="700">AD</text><text x="334" y="58" fill="#d97706" font-weight="700">SRAS</text>
+<text x="56" y="20">Price level</text><text x="400" y="322" text-anchor="end">Real output</text></g>
+</svg><figcaption>A: Y<sub>A</sub> &lt; potential output (LRAS). Recessionary gap.</figcaption></figure>
+</div>
+
+<div class="card q" id="q5"><h3>Q5 <span class="marks">3 marks</span></h3>
+<p>(a) How could the shocks have moved the economy from long-run equilibrium to the new short-run equilibrium A? <b>Select one or more:</b> <span class="opts">(The shocks decreased SRAS / The shocks decreased AD / The shocks increased SRAS / The shocks increased AD)</span></p>
+<p>(b) If the government takes no action, what will naturally cause the economy to return to long-run equilibrium? <span class="opts">(Decrease in AD due to lower wages caused by high unemployment / Increase in SRAS due to lower wages caused by high unemployment / Decrease in SRAS caused by higher wages caused by labour shortage / Increase in AD due to higher wages caused by labour shortage)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) decreased SRAS <u>and</u> decreased AD · (b) Increase in SRAS due to lower wages caused by high unemployment <span class="conf">🟡 (a) judgement call · 🟢 (b)</span></p>
+<p>(a) The original LR equilibrium was on LRAS. The diagram doesn't show where it was or what P was. Starting on LRAS, a <b>leftward AD shift</b> (Y↓, P↓) or a <b>leftward SRAS shift</b> (Y↓, P↑) can each land you at a point left of LRAS. Since we can't tell whether P rose or fell, both are possible, so tick both "decreased" options. A rightward shift of either curve pushes Y <i>above</i> potential, so neither "increased" option can explain A on its own.</p>
+<p class="src">Why 🟡: with "a series of shocks", a big SRAS fall plus a small AD rise could also reach A. The question clearly intends the two "decreased" options, and that's the standard answer (<a href="t4-macro-policy.html#sheet">T4 sheet: below-potential gap</a>).</p>
+<p>(b) Y &lt; Ȳ means unemployment is above its natural rate. Wages fall, firms' costs fall, and <b>SRAS shifts right</b> until the economy is back on LRAS (<a href="t4-macro-policy.html#learn">T4 self-correction</a>).</p>
+<div class="trap">Wages shift <b>SRAS</b>, not AD. Every option that says "AD due to wages" is a distractor.</div>
+</details></div>
+
+<div class="card q" id="q6"><h3>Q6 <span class="marks">2 marks</span></h3>
+<p>Which of the following are <b>fiscal</b> policies that can return the country's real output to potential GDP? <b>Select one or more:</b> <span class="opts">(Increase in transfer payments / Increase in interest rates / Decrease in interest rates / Increase in taxes)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">Increase in transfer payments only <span class="conf">🟢 confident</span></p>
+<p>We need AD to move right (expansionary). Fiscal policy = government spending, transfers and taxes. Higher transfers raise disposable income, so C rises and AD shifts right ✓. Higher taxes are contractionary ✗. Either interest-rate option is <b>monetary</b> policy ✗, even though a rate cut would work.</p>
+<div class="trap">"Decrease in interest rates" is the right direction but the wrong policy type. Read the bold word in the question.</div>
+</details></div>
+
+<div class="card q" id="q7"><h3>Q7 <span class="marks">8 marks</span></h3>
+<p>Now consider the country of Cadia. Recent tensions in the Middle East have reduced the global supply of oil.</p>
+<p>(a) The resulting increase in energy prices also increased the cost of production inputs in Cadia. This will likely have <b>[ ▾ ]</b> <span class="opts">(decreased SRAS / increased SRAS / increased AD / decreased AD)</span> in the Cadian economy.</p>
+<p>(b) At the same time, demand for energy exports from Cadia increased as energy importers overseas sought to replace disrupted supplies from the Middle East. This will likely have <b>[ ▾ ]</b> <span class="opts">(increased SRAS / increased AD / decreased SRAS / decreased AD)</span> in Cadia.</p>
+<p>(c) The overall impact of the two effects is <b>[ ▾ ]</b> <span class="opts">(higher / lower / uncertain effect on / volatile effect on)</span> real output and <b>[ ▾ ]</b> <span class="opts">(higher / lower / uncertain / volatile)</span> price level.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) decreased SRAS · (b) increased AD · (c) uncertain effect on real output, higher price level <span class="conf">🟢 confident</span></p>
+<ul>
+<li>Input costs ↑ → <b>SRAS left</b>: Y↓, P↑.</li>
+<li>Exports (NX) ↑ → <b>AD right</b>: Y↑, P↑.</li>
+<li>Combined: both push P up, so <b>P is definitely higher</b>. They push Y in opposite directions, so the Y effect is <b>uncertain</b> without knowing the sizes of the shifts (<a href="t4-macro-policy.html#methods">T4 combined-shift method</a>).</li>
+</ul>
+<div class="tip">Same logic as combined D&amp;S shifts in T1: the variable both shifts agree on is certain, and the other one is ambiguous.</div>
+</details></div>
+
+<div class="card q" id="q8"><h3>Q8 <span class="marks">4 marks · short answer ≤100 words</span></h3>
+<p>Continue to consider the shifts in AD and SRAS in part (c). Suppose the shift in SRAS was much greater than the shift in AD. Should the Central Bank of Cadia implement expansionary or contractionary monetary policy if its policy objective is to return real output to potential GDP? State and briefly explain your answer in 100 words or less.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">Expansionary monetary policy <span class="conf">🟢 confident</span></p>
+<div class="method"><b>Model answer (about 85 words):</b> Expansionary. Because the SRAS decrease is much larger than the AD increase, the new short-run equilibrium has real output <b>below</b> potential GDP and a higher price level (stagflation). To return output to potential, the central bank should lower the cash rate (or increase the money supply). Lower interest rates raise consumption and investment, shifting AD to the right until it meets SRAS on LRAS. The trade-off is that the price level rises even further, so the bank accepts more inflation to close the output gap.</div>
+<p>Mark-earning points: (1) state <b>expansionary</b>; (2) Y is below Ȳ because the SRAS shift dominates; (3) the mechanism: rates ↓ → C, I ↑ → AD right → Y back to Ȳ; (4) the cost: P rises further (<a href="t4-macro-policy.html#qtypes">T4: policy after a supply shock</a>).</p>
+<div class="trap">Don't answer "contractionary to fight inflation". The question fixes the objective as <i>output</i>. Contractionary policy would push Y even further below potential.</div>
+</details></div>
+</section>
+
+<!-- ============================ BLOCK 4: trade -->
+<section id="b4">
+<h2>Block 4 · Comparative advantage &amp; tariffs (T5) · 22 marks</h2>
+<div class="card">
+<p><b>Scenario (Q9–Q11).</b> Each of Country A and Country B produces two goods: Bread and Cookies. The number of labour hours required to produce one unit of each good in each country is given by the following table. Country A has <b>270</b> labour hours while Country B has <b>200</b> labour hours.</p>
+<div class="tablewrap"><table style="max-width:420px">
+<tr><th></th><th>Bread</th><th>Cookies</th></tr>
+<tr><th>Country A</th><td>3 labour hours</td><td>9 labour hours</td></tr>
+<tr><th>Country B</th><td>2 labour hours</td><td>4 labour hours</td></tr></table></div>
+</div>
+
+<div class="card q" id="q9"><h3>Q9 <span class="marks">4 marks</span></h3>
+<p>Country A's opportunity cost of producing 1 unit of Bread is <b>[ ▾ ]</b> <span class="opts">(1/3 / 3 / 1.5 / 2/3)</span> units of Cookies.<br>
+Country A's opportunity cost of producing 1 unit of Cookies is <b>[ ▾ ]</b> <span class="opts">(1.5 / 2/3 / 3 / 1/3)</span> units of Bread.<br>
+Country B's opportunity cost of producing 1 unit of Bread is <b>[ ▾ ]</b> <span class="opts">(4/9 / 2 / 2.25 / 1/2)</span> units of Cookies.<br>
+Country B's opportunity cost of producing 1 unit of Cookies is <b>[ ▾ ]</b> <span class="opts">(1/2 / 2.25 / 4/9 / 2)</span> units of Bread.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">A: Bread 1/3 C, Cookie 3 B · B: Bread 1/2 C, Cookie 2 B <span class="conf">🟢 confident</span></p>
+<p>With <b>hours per unit</b>, OC of good X = hours(X) ÷ hours(Y) (<a href="t5-trade.html#methods">T5 methods</a>). A: 1 bread uses 3 h, which could make 3/9 = 1/3 cookie. 1 cookie uses 9 h, which could make 9/3 = 3 bread. B: 1 bread = 2/4 = 1/2 cookie. 1 cookie = 4/2 = 2 bread.</p>
+<p>So A has the comparative advantage in <b>Bread</b> (1/3 &lt; 1/2) and B has it in <b>Cookies</b> (2 &lt; 3). B has the absolute advantage in both goods because it needs fewer hours for each.</p>
+<div class="trap">The distractors 2.25 and 4/9 come from comparing across countries (9/4, 4/9). OC is always worked out <i>within</i> one country. The distractors 1.5 and 2/3 come from dividing the hours of the same good across the two countries.</div>
+</details></div>
+
+<div class="card q" id="q10"><h3>Q10 <span class="marks">4 marks</span></h3>
+<p>(a) If the terms of trade is <b>4 Bread for 1 Cookie</b>, which 2 statements will be true? <b>Select two:</b> <span class="opts">(Country A will sell Cookies / Country A will buy Cookies / Country B will sell Cookies / Country B will buy Cookies)</span></p>
+<p>(b) Which two of the following terms of trade will result in trade between the two countries? <b>Select two:</b> <span class="opts">(5 Bread for 2 Cookies / 4 Bread for 1 Cookie / 9 Bread for 5 Cookies / 8 Bread for 3 Cookies)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) Country A will sell Cookies; Country B will sell Cookies · (b) 5 Bread for 2 Cookies; 8 Bread for 3 Cookies <span class="conf">🟢 confident</span></p>
+<p>Write every ToT as <b>bread per cookie</b>, then compare with the OCs of a cookie: A = 3, B = 2. Trade happens only if 2 &lt; ToT &lt; 3.</p>
+<ul>
+<li>(a) At 4 bread per cookie, a cookie sells for more than it costs <i>either</i> country to make (4 &gt; 3 and 4 &gt; 2). Both countries want to <b>sell</b> cookies, nobody wants to buy, and no trade happens.</li>
+<li>(b) 5/2 = 2.5 ✓ · 4/1 = 4 ✗ · 9/5 = 1.8 ✗ (both would want to sell bread) · 8/3 ≈ 2.67 ✓.</li>
+</ul>
+<div class="tip">ToT outside the OC range → both countries sell the same good → no trade. That's what part (a) is testing.</div>
+</details></div>
+
+<div class="card q" id="q11"><h3>Q11 <span class="marks">4 marks</span></h3>
+<p>Suppose the two countries agree on terms of trade of <b>2.5 Bread for 1 Cookie</b>.</p>
+<p>(a) In this scenario, Country A will produce <b>[ ▾ ]</b> <span class="opts">(90 units of Bread / 30 units of Cookies / 90 units of Cookies / 30 units of Bread)</span> while Country B will produce <b>[ ▾ ]</b> <span class="opts">(50 units of Bread / 100 units of Cookies / 100 units of Bread / 50 units of Cookies)</span>.</p>
+<p>(b) Country A will be able to consume 20 units of Cookies and 40 units of Bread by exporting <b>[ ▾ ]</b> <span class="opts">(20 units of Cookies / 10 units of Cookies / 50 units of Bread / 40 units of Bread)</span> in exchange for imports of <b>[ ▾ ]</b> <span class="opts">(10 units of Cookies / 40 units of Bread / 50 units of Bread / 20 units of Cookies)</span>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) A: 90 units of Bread · B: 50 units of Cookies · (b) exports 50 units of Bread, imports 20 units of Cookies <span class="conf">🟢 confident</span></p>
+<ol>
+<li>2.5 is between 2 and 3, so both countries specialise fully in their comparative-advantage good. A makes bread: 270 ÷ 3 = <b>90</b>. B makes cookies: 200 ÷ 4 = <b>50</b>.</li>
+<li>A wants 40 bread and 20 cookies. It has 90 bread, so it exports 90 − 40 = <b>50 bread</b> and imports <b>20 cookies</b>. Check against the ToT: 50 ÷ 20 = 2.5 ✓. B is left with 30 cookies and 50 bread.</li>
+</ol>
+<div class="tip">Sanity check: on its own, A could make 20 cookies (180 h) plus only 30 bread (90 h). Trade gives A 10 extra bread.</div>
+</details></div>
+
+<div class="card">
+<p><b>Scenario (Q12–Q13).</b> Country X produces and consumes widgets and trades widgets in the international market. The government of Country X currently imposes an import unit tariff of $t. The international market price <b>with</b> the import tariff is P<sub>W</sub><sup>t</sup>. If the import tariff is lifted by Country X, the international market price will be P<sub>W</sub>. Country X's domestic demand and supply are given in the following diagram. (This is the <b>large-country</b> case: the tariff pushes the world price down from P<sub>W</sub> to P<sub>W</sub><sup>t</sup>.)</p>
+<figure><svg viewBox="0 0 500 350" width="500" role="img" aria-label="Large-country tariff diagram with areas A to I">
+<rect width="500" height="350" fill="#fff"/>
+<polygon points="140,195 180,170 180,195" fill="#f87171" fill-opacity=".3"/><polygon points="340,170 380,195 340,195" fill="#f87171" fill-opacity=".3"/>
+<rect x="180" y="170" width="160" height="25" fill="#a78bfa" fill-opacity=".25"/><rect x="180" y="195" width="160" height="25" fill="#4ade80" fill-opacity=".3"/>
+<g stroke="#999" stroke-dasharray="4 4"><line x1="140" y1="195" x2="140" y2="320"/><line x1="180" y1="170" x2="180" y2="320"/><line x1="340" y1="170" x2="340" y2="320"/><line x1="380" y1="195" x2="380" y2="320"/></g>
+<g stroke="#111" stroke-width="1.3"><line x1="60" y1="170" x2="470" y2="170"/><line x1="60" y1="195" x2="470" y2="195"/><line x1="60" y1="220" x2="470" y2="220"/></g>
+<line x1="60" y1="320" x2="480" y2="320" stroke="#111" stroke-width="2"/><line x1="60" y1="320" x2="60" y2="15" stroke="#111" stroke-width="2"/>
+<line x1="100" y1="20" x2="500" y2="270" stroke="#0284c7" stroke-width="3"/>
+<line x1="80" y1="232.5" x2="380" y2="45" stroke="#d97706" stroke-width="3"/>
+<g font-size="13" fill="#111"><text x="54" y="174" text-anchor="end">P<tspan font-size="9" dy="-6">t</tspan><tspan font-size="9" dy="9">W</tspan><tspan dy="-3"> + t</tspan></text>
+<text x="54" y="199" text-anchor="end">P<tspan font-size="9" dy="3">W</tspan></text><text x="54" y="224" text-anchor="end">P<tspan font-size="9" dy="-6">t</tspan><tspan font-size="9" dy="9">W</tspan></text>
+<text x="140" y="337" text-anchor="middle">200</text><text x="180" y="337" text-anchor="middle">300</text><text x="340" y="337" text-anchor="middle">700</text><text x="380" y="337" text-anchor="middle">800</text>
+<text x="66" y="13">Price</text><text x="480" y="346" text-anchor="end">Quantity</text>
+<text x="388" y="46" fill="#d97706" font-weight="700">Domestic supply</text><text x="490" y="300" fill="#0284c7" font-weight="700" text-anchor="end">Domestic demand</text></g>
+<g font-size="14" font-weight="700" font-style="italic" fill="#111"><text x="125" y="125">A</text><text x="100" y="188">B</text><text x="164" y="191">C</text><text x="255" y="160">D</text><text x="255" y="188">E</text><text x="349" y="191">F</text><text x="155" y="213">G</text><text x="255" y="213">H</text><text x="355" y="213">I</text></g>
+</svg><figcaption>Lines: P<sub>W</sub><sup>t</sup>+t (domestic price with tariff) &gt; P<sub>W</sub> (free-trade world price) &gt; P<sub>W</sub><sup>t</sup> (world price with tariff). With the tariff: Q<sub>s</sub> = 300, Q<sub>d</sub> = 700. Free trade: Q<sub>s</sub> = 200, Q<sub>d</sub> = 800. A is above P<sub>W</sub><sup>t</sup>+t under demand (left of supply); D is the triangle above P<sub>W</sub><sup>t</sup>+t between S and D; B is between P<sub>W</sub> and P<sub>W</sub><sup>t</sup>+t left of supply.</figcaption></figure>
+</div>
+
+<div class="card q" id="q12"><h3>Q12 <span class="marks">4 marks</span></h3>
+<p>According to the diagram, if the import tariff is in place, Country X will import <b>[ ]</b> units of widgets. If the import tariff is removed, Country X will import <b>[ ]</b> units instead.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">400 with the tariff · 600 without <span class="conf">🟢 confident</span></p>
+<p>Imports = Q<sub>d</sub> − Q<sub>s</sub> at the <b>domestic</b> price. With the tariff, the domestic price is P<sub>W</sub><sup>t</sup>+t, so imports = 700 − 300 = 400. Without it, the price is P<sub>W</sub>, so imports = 800 − 200 = 600.</p>
+<div class="trap">Don't read the quantities at the P<sub>W</sub><sup>t</sup> line. Domestic buyers pay world price <b>plus</b> the tariff.</div>
+</details></div>
+
+<div class="card q" id="q13"><h3>Q13 <span class="marks">6 marks</span></h3>
+<p>(a) Country X's total surplus <b>with</b> the import tariff is: <span class="opts">(A+B / A+B+D / A+B+D+E+H / A+B+C+D+E+F)</span></p>
+<p>(b) Country X's total surplus <b>without</b> the import tariff is: <span class="opts">(same four options)</span></p>
+<p>(c) If area (C+F) is greater than the area representing terms-of-trade gains from the import tariff, then Country X is better off by: <span class="opts">(removing the import tariff / keeping the import tariff / banning imports entirely / there is insufficient information to provide an answer)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) A+B+D+E+H · (b) A+B+C+D+E+F · (c) removing the import tariff <span class="conf">🟢 confident</span></p>
+<div class="tablewrap"><table>
+<tr><th></th><th>With tariff (P = P<sub>W</sub><sup>t</sup>+t)</th><th>Free trade (P = P<sub>W</sub>)</th></tr>
+<tr><td>CS</td><td>A + D</td><td>A + D + B + C + E + F</td></tr>
+<tr><td>PS</td><td>B</td><td>(only the small unlabelled triangle under P<sub>W</sub>, which appears in both columns)</td></tr>
+<tr><td>Tariff revenue</td><td>t × imports = E + H (the tariff spans P<sub>W</sub><sup>t</sup> to P<sub>W</sub><sup>t</sup>+t over 300–700)</td><td>0</td></tr>
+<tr><td><b>Total</b></td><td><b>A+B+D+E+H</b></td><td><b>A+B+C+D+E+F</b></td></tr>
+</table></div>
+<p>Free trade minus tariff = (C + F) − H. <b>C and F are the two DWL triangles</b> (overproduction and underconsumption). <b>H is the terms-of-trade gain</b>: the fall in the world price × imports, paid by foreign exporters. If C+F &gt; H, the tariff costs more than it gains, so <b>remove it</b> (<a href="t5-trade.html#learn">T5 2.13</a>; that page calls the ToT gain "G").</p>
+<div class="trap">Letters differ from the topic page. Here H, not G, is the ToT gain, and G and I are just the strips under P<sub>W</sub> that nobody counts. Always rebuild CS/PS/revenue from the price lines rather than memorising letters.</div>
+</details></div>
+</section>
+
+<!-- ============================ BLOCK 5: externality + game -->
+<section id="b5">
+<h2>Block 5 · Rice externality &amp; regulation game (T6) · 21 marks</h2>
+<div class="card">
+<p><b>Scenario (Q14–Q17).</b> The following diagram depicts the private marginal cost, social marginal cost, and marginal benefits of rice production in the arid country of Aridistan.</p>
+<figure><svg viewBox="0 0 500 350" width="500" role="img" aria-label="Negative externality diagram">
+<rect width="500" height="350" fill="#fff"/>
+<polygon points="260,132 340,110 340,198" fill="#f87171" fill-opacity=".35" stroke="#b91c1c"/>
+<g stroke="#999" stroke-dasharray="4 4"><line x1="60" y1="110" x2="340" y2="110"/><line x1="60" y1="132" x2="260" y2="132"/><line x1="60" y1="198" x2="340" y2="198"/><line x1="60" y1="220" x2="260" y2="220"/>
+<line x1="260" y1="132" x2="260" y2="330"/><line x1="340" y1="110" x2="340" y2="330"/></g>
+<line x1="60" y1="330" x2="480" y2="330" stroke="#111" stroke-width="2"/><line x1="60" y1="330" x2="60" y2="18" stroke="#111" stroke-width="2"/>
+<line x1="140" y1="33" x2="460" y2="297" stroke="#0284c7" stroke-width="3"/>
+<line x1="60" y1="187" x2="460" y2="77" stroke="#d97706" stroke-width="3"/>
+<line x1="60" y1="275" x2="460" y2="165" stroke="#d97706" stroke-width="3"/>
+<g font-size="13" fill="#111"><text x="54" y="114" text-anchor="end">$1000</text><text x="54" y="136" text-anchor="end">$900</text><text x="54" y="202" text-anchor="end">$600</text><text x="54" y="224" text-anchor="end">$500</text>
+<text x="260" y="346" text-anchor="middle">500</text><text x="340" y="346" text-anchor="middle">700</text>
+<text x="66" y="14">Price / cost / benefit ($)</text><text x="480" y="346" text-anchor="end">Quantity</text>
+<text x="400" y="80" fill="#d97706" font-weight="700" text-anchor="end">SMC</text><text x="462" y="160" fill="#d97706" font-weight="700" text-anchor="end">PMC (supply)</text>
+<text x="452" y="290" fill="#0284c7" font-weight="700" text-anchor="end">PMB = SMB</text><text x="312" y="160" font-size="11" font-weight="700" fill="#b91c1c">DWL</text></g>
+</svg><figcaption>SMC passes (500, $900) and (700, $1000). PMC passes (500, $500) and (700, $600). PMB = SMB passes (500, $900) and (700, $600). The vertical gap SMC − PMC is a constant $400.</figcaption></figure>
+</div>
+
+<div class="card q" id="q14"><h3>Q14 <span class="marks">1 mark</span></h3>
+<p>Based on the diagram, the production of rice in Aridistan involves: <span class="opts">(positive externalities / no externalities / negative externalities / answer cannot be determined given information provided)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">negative externalities <span class="conf">🟢 confident</span></p>
+<p>SMC lies <b>above</b> PMC, so production imposes an external cost (here, water use in an arid country). SMB = PMB, so there's no consumption externality.</p>
+</details></div>
+
+<div class="card q" id="q15"><h3>Q15 <span class="marks">4 marks</span></h3>
+<p>According to the diagram, the equilibrium quantity in the competitive market is <b>[ ]</b>. Meanwhile, the socially optimal quantity is <b>[ ]</b>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">Market Q = 700 · Social optimum = 500 <span class="conf">🟢 confident</span></p>
+<p>The market ignores the external cost, so it sets PMB = PMC → (700, $600). The social optimum sets SMB = SMC → (500, $900) (<a href="t6-climate-games.html#methods">T6 methods</a>).</p>
+<div class="trap">Negative externality → the market <b>over</b>produces. The larger quantity is the market one.</div>
+</details></div>
+
+<div class="card q" id="q16"><h3>Q16 <span class="marks">3 marks · typed, working required</span></h3>
+<p>Calculate the deadweight loss associated with the externality of rice production. Show your working. No marks if working is not shown.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">DWL = $40,000 <span class="conf">🟢 confident</span></p>
+<div class="method"><b>Type this:</b> The DWL is the triangle between SMC and SMB from the optimal quantity (500) to the market quantity (700). Base = 700 − 500 = 200 units. Height at Q = 700 = SMC − SMB = $1000 − $600 = $400. DWL = ½ × 200 × 400 = <b>$40,000</b>.</div>
+<div class="trap">The triangle's tip is at (500, $900) and its vertical side is at Q = 700, from $600 up to $1000. Don't use 900 − 600 = 300 as the height. That's the gap at the wrong quantity.</div>
+</details></div>
+
+<div class="card q" id="q17"><h3>Q17 <span class="marks">3 marks</span></h3>
+<p>If the government wants to correct the externality, it can impose a per-unit <b>[ ▾ ]</b> <span class="opts">(tax / subsidy)</span> of the amount <b>[ ▾ ]</b> <span class="opts">($1000 − $900 = $100 / $900 − $600 = $300 / $900 − $500 = $400 / $1000 − $500 = $500)</span>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">tax of $900 − $500 = $400 <span class="conf">🟢 confident</span></p>
+<p>Pigouvian tax = marginal external cost <b>at the social optimum</b> = SMC − PMC at Q = 500 = 900 − 500 = $400. That moves PMC up onto SMC, so the market now clears at 500. (The gap is also $400 at Q = 700, because the lines are parallel.)</p>
+</details></div>
+
+<div class="card">
+<p><b>Scenario (Q18–Q20).</b> Country A and Country B are considering whether to regulate their rice-growing sectors. Each of them can independently choose whether to regulate or to maintain the status quo. The payoff matrix is given below (payoffs are listed as A, B).</p>
+<div class="tablewrap"><table style="max-width:460px;text-align:center">
+<tr><th rowspan="2" colspan="2"></th><th colspan="2">Country B</th></tr>
+<tr><th>Regulate</th><th>Status quo</th></tr>
+<tr><th rowspan="2">Country A</th><th>Regulate</th><td>100, 80</td><td>40, 120</td></tr>
+<tr><th>Status quo</th><td>50, 60</td><td><b>80, 100</b></td></tr></table></div>
+</div>
+
+<div class="card q" id="q18"><h3>Q18 <span class="marks">4 marks · typed</span></h3>
+<p>Does Country A have a dominant strategy? Explain your answer.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">No, A has no dominant strategy <span class="conf">🟢 confident</span></p>
+<div class="method"><b>Type this:</b> No. A's best choice depends on what B does. If B regulates, A gets 100 from Regulate vs 50 from Status quo, so A should Regulate. If B keeps the status quo, A gets 40 from Regulate vs 80 from Status quo, so A should keep the Status quo. No single strategy is best for A whatever B does, so A has no dominant strategy.</div>
+<p>Method (<a href="t6-climate-games.html#payoff">T6 payoff method</a>): fix each column, compare A's <i>first</i> numbers down the column, and underline the best one.</p>
+</details></div>
+
+<div class="card q" id="q19"><h3>Q19 <span class="marks">4 marks · typed</span></h3>
+<p>Refer to the same payoff matrix. Does Country B have a dominant strategy? Explain your answer.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">Yes, Status quo is dominant for B <span class="conf">🟢 confident</span></p>
+<div class="method"><b>Type this:</b> Yes, Status quo. If A regulates, B gets 120 from Status quo vs 80 from Regulate. If A keeps the status quo, B gets 100 from Status quo vs 60 from Regulate. Status quo gives B a higher payoff whatever A does, so it is B's dominant strategy.</div>
+</details></div>
+
+<div class="card q" id="q20"><h3>Q20 <span class="marks">2 marks</span></h3>
+<p>Which of the following is/are Nash equilibrium/equilibria of the game? <b>Select one or more:</b> <span class="opts">((Regulate, Regulate) / (Regulate, Status quo) / (Status quo, Status quo) / (Status quo, Regulate))</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(Status quo, Status quo) only <span class="conf">🟢 confident</span></p>
+<p>B always plays Status quo. A's best response to Status quo is Status quo (80 &gt; 40). Check: neither player gains by deviating alone from (80, 100). A would prefer (Regulate, Regulate), where it gets 100, but B would deviate to Status quo (120 &gt; 80), so that isn't a Nash equilibrium.</p>
+<div class="tip">If one player has a dominant strategy, play it, then take the other player's best response. That gives exactly one NE.</div>
+</details></div>
+</section>
+
+<!-- ============================ BLOCK 6: Solow -->
+<section id="b6">
+<h2>Block 6 · Solow growth model (T7) · 10 marks</h2>
+<div class="card">
+<p><b>Scenario.</b> Consider an economy in which per-capita output y depends only on the capital-labour ratio k; the saving rate is s; the population growth rate is n; and the depreciation rate is δ. The diagram depicts the per-capita output line y = f(k), the saving line s·f(k) (labelled sy), and the maintenance line (n + δ)k. A thin grey line is drawn <b>tangent to f(k) at k<sub>2</sub>, parallel to (n + δ)k</b>.</p>
+<figure><svg viewBox="0 0 480 360" width="480" role="img" aria-label="Solow diagram">
+<rect width="480" height="360" fill="#fff"/>
+<g stroke="#999" stroke-dasharray="4 4">
+<line x1="50" y1="303.3" x2="83.4" y2="303.3"/><line x1="50" y1="255.8" x2="142.8" y2="255.8"/><line x1="50" y1="240.9" x2="83.4" y2="240.9"/><line x1="50" y1="181.6" x2="142.8" y2="181.6"/><line x1="50" y1="33.1" x2="421.1" y2="33.1"/>
+<line x1="83.4" y1="240.9" x2="83.4" y2="330"/><line x1="142.8" y1="181.6" x2="142.8" y2="330"/><line x1="421.1" y1="33.1" x2="421.1" y2="330"/></g>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="2"/><line x1="50" y1="330" x2="50" y2="10" stroke="#111" stroke-width="2"/>
+<line x1="72.8" y1="237.5" x2="247.6" y2="97.7" stroke="#888" stroke-width="1.5"/>
+<line x1="50" y1="330" x2="449" y2="10.8" stroke="#0284c7" stroke-width="3"/>
+<path d="M50.0,330.0 L50.8,316.6 L52.3,306.7 L54.6,297.1 L57.6,287.5 L61.4,278.0 L67.1,266.3 L72.8,256.4 L80.4,245.0 L88.0,235.0 L97.5,223.8 L107.0,213.6 L118.4,202.5 L129.8,192.3 L145.0,179.8 L164.0,165.5 L183.0,152.3 L202.0,140.0 L224.8,126.2 L247.6,113.4 L278.0,97.3 L308.4,82.3 L338.8,68.1 L373.0,53.0 L407.2,38.7 L449.0,22.2" fill="none" stroke="#b91c1c" stroke-width="3"/>
+<path d="M50.0,330.0 L50.8,326.0 L52.3,323.0 L54.6,320.1 L57.6,317.3 L61.4,314.4 L67.1,310.9 L72.8,307.9 L80.4,304.5 L88.0,301.5 L97.5,298.1 L107.0,295.1 L118.4,291.8 L129.8,288.7 L145.0,284.9 L164.0,280.6 L183.0,276.7 L202.0,273.0 L224.8,268.9 L247.6,265.0 L278.0,260.2 L308.4,255.7 L338.8,251.4 L373.0,246.9 L407.2,242.6 L449.0,237.6" fill="none" stroke="#111" stroke-width="2.5"/>
+<g font-size="13" fill="#111" font-style="italic"><text x="44" y="307" text-anchor="end">y₁</text><text x="44" y="259" text-anchor="end">y₂</text><text x="44" y="244" text-anchor="end">y₃</text><text x="44" y="185" text-anchor="end">y₄</text><text x="44" y="37" text-anchor="end">y₅</text>
+<text x="83.4" y="347" text-anchor="middle">k₁</text><text x="142.8" y="347" text-anchor="middle">k₂</text><text x="421.1" y="347" text-anchor="middle">k₃</text><text x="470" y="347" text-anchor="end">k</text>
+<text x="312" y="152" fill="#0284c7" font-weight="700">(n+δ)k</text><text x="330" y="60" fill="#b91c1c" font-weight="700" text-anchor="end">y = f(k)</text><text x="440" y="232" font-weight="700">sy</text></g>
+<g fill="#111"><circle cx="83.4" cy="303.3" r="4"/><circle cx="142.8" cy="181.6" r="4" fill="#888"/></g>
+</svg><figcaption>sy meets (n+δ)k at k₁ (height y₁); f(k₁) = y₃. At k₂, (n+δ)k₂ = y₂ and f(k₂) = y₄, where the tangent is parallel to (n+δ)k. f(k) meets (n+δ)k at k₃ (height y₅).</figcaption></figure>
+</div>
+
+<div class="card q" id="q21"><h3>Q21 <span class="marks">4 marks</span></h3>
+<p>(a) According to the diagram, the steady-state level of consumption is: <span class="opts">(y₂ − y₁ / y₄ − y₂ / y₅ / y₃ − y₁)</span></p>
+<p>(b) According to the diagram, this country can increase steady-state per-capita consumption by: <span class="opts">(decreasing its saving rate / increasing its saving rate / increasing its population growth rate / doing nothing, since per-capita consumption is already maximised)</span></p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">(a) y₃ − y₁ · (b) increasing its saving rate <span class="conf">🟢 confident</span></p>
+<ol>
+<li><b>Steady state</b> is where <b>sy</b> (investment) = (n+δ)k, which is at k₁, <i>not</i> where f(k) crosses the line (k₃) (<a href="t7-growth-inequality.html#methods">T7 methods</a>). At k₁, output = f(k₁) = y₃ and saving/investment = y₁. Consumption = output − saving = <b>y₃ − y₁</b>.</li>
+<li><b>Golden Rule</b> k is where the slope of f equals the slope of (n+δ)k. That's the grey tangent at k₂, with maximum consumption y₄ − y₂. The current k₁ &lt; k₂, so the country is <b>saving too little</b>. Raising s moves k* toward k₂ and raises steady-state consumption.</li>
+</ol>
+<div class="trap">y₄ − y₂ is the <i>Golden Rule</i> consumption, not the current steady state. y₅ is an output level, and it isn't a steady state at all unless s = 1.</div>
+</details></div>
+
+<div class="card q" id="q22"><h3>Q22 <span class="marks">6 marks</span></h3>
+<p>As educational and career opportunities increase, the opportunity costs of motherhood and child rearing increase as well. This often results in lower fertility and population growth rates.</p>
+<p>This will shift the <b>[ ▾ ]</b> <span class="opts">(Saving line / Maintenance line / Per capita output line / Tangent to the output line)</span> <b>[ ▾ ]</b> <span class="opts">(up / down / first up then down / first down then up)</span>. Compared to the original steady state, the new steady-state capital-labour ratio will be <b>[ ▾ ]</b> <span class="opts">(higher / lower / the same as / uncertain)</span>.</p>
+<details><summary>Answer &amp; working</summary>
+<p class="ans">Maintenance line · down · higher <span class="conf">🟢 confident</span></p>
+<p>n is in the maintenance line (n+δ)k. A lower n makes the line flatter, so it rotates <b>down</b>. It now meets sy further right, so <b>k* rises</b> (and with it y*). The saving line and f(k) don't change, because they depend on s and technology, not n.</p>
+<div class="tip">Shift table: s↑ → saving line up → k*↑ · n↑ or δ↑ → maintenance line up → k*↓ · technology ↑ → f and sf up → k*↑.</div>
+</details></div>
+</section>
+
+<section id="lessons">
+<h2>What this paper teaches</h2>
+<div class="card">
+<ul>
+<li><b>Every block is one diagram plus 2–7 questions.</b> Read the labelled points carefully. Every numeric answer here (P*, Q*, ε, monopoly Q/P, imports, DWL, Pigouvian tax) comes straight from the dashed gridlines.</li>
+<li><b>Elasticity on a grid:</b> point method, signed answer, and the inverse (−0.8) is always a distractor. Check: above the midpoint of D means elastic.</li>
+<li><b>"Demand" vs "quantity demanded":</b> price controls and taxes move you <i>along</i> a curve. Only non-price factors (like a substitute being banned) shift it.</li>
+<li><b>Monopoly:</b> MR = MC gives Q, then read up to <b>demand</b> for P. DWL is described as "units with positive social surplus not produced" = Q<sub>comp</sub> − Q<sub>m</sub>.</li>
+<li><b>AD-AS:</b> wages shift SRAS (self-correction). Two simultaneous shocks: one variable is certain, the other is "uncertain". Fiscal vs monetary labels are tested directly. After a supply shock, "restore output" means <b>expansionary</b> policy.</li>
+<li><b>Comparative advantage:</b> OC from hours = own hours ÷ other good's hours. Trade needs the ToT strictly between the two OCs. Outside the range, both countries sell the same good.</li>
+<li><b>Large-country tariff:</b> imports are read at P<sub>W</sub><sup>t</sup>+t. Revenue spans P<sub>W</sub><sup>t</sup> → P<sub>W</sub><sup>t</sup>+t. Remove the tariff if DWL (C+F) &gt; ToT gain. The area letters change between papers, so rebuild them every time.</li>
+<li><b>Externality:</b> DWL height is measured at the <b>market</b> quantity (SMC − SMB there). Pigouvian tax = SMC − PMC at the optimum.</li>
+<li><b>Game theory typed answers:</b> state Yes/No, then give <b>both conditional comparisons</b> with the numbers. One dominant strategy → unique NE.</li>
+<li><b>Solow:</b> steady state is at sy ∩ (n+δ)k. Consumption = f(k*) − sf(k*). The Golden Rule is the tangent point, so k* below it means "save more". Changes in n move the maintenance line.</li>
+</ul>
+<div class="tip"><b>Add to your binder:</b> (1) a one-line "who sells what" rule for ToT outside the OC range; (2) a blank large-country tariff template with CS/PS/revenue/ToT columns to fill in for any lettering; (3) the 4-sentence typed templates for dominant-strategy and monetary-policy-after-a-supply-shock answers (Q8, Q18, Q19).</div>
+</div>
+</section>
+</main></body></html>
