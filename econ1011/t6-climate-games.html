@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECON1011 — T6 Climate Change: Externalities &amp; Game Theory</title>
+<link rel="stylesheet" href="style.css"><script src="pack.js" defer></script>
+<style>
+/* page-local: payoff matrices */
+table.pm{width:auto;margin:10px auto;text-align:center}
+table.pm th,table.pm td{text-align:center;min-width:86px}
+table.pm td.cell{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:15px}
+table.pm .ne{outline:2.5px solid var(--good);outline-offset:-3px}
+.sheet table.pm .ne{outline:2px solid #111}
+table.pm b{color:var(--bad)}
+.sheet table.pm b{color:#b91c1c}
+.sheet table.pm td.cell{font-size:12.5px}
+.sheet figure svg{max-width:330px}
+.sheet figure{margin:4px 0}
+</style>
+</head><body>
+<header><h1>T6 · Climate Change: Externalities &amp; Game Theory</h1>
+<p>Lectures 10–11 (Climate Change Parts 1 &amp; 2) · why markets over-pollute, how a Pigouvian tax fixes it, and why countries can't agree (payoff matrices → Nash)</p>
+<div><span class="badge">Exam: one full question (≈ 20–26 marks)</span><span class="badge gold">Read MSC/MPC/MB off a grid</span><span class="badge blue">2×2 payoff matrix every paper</span></div></header>
+<nav>
+<a href="../index.html">⇄ Switch subject</a><a href="index.html">🏠 Hub</a><a href="print.html">🖨 Print binder</a>
+<a href="t1-demand-supply.html">T1 D&amp;S</a><a href="t2-intervention.html">T2 Intervention</a><a href="t3-market-power.html">T3 Market power</a><a href="t4-macro-policy.html">T4 AD-AS &amp; policy</a><a href="t5-trade.html">T5 Trade</a><a href="t6-climate-games.html">T6 Climate &amp; games</a><a href="t7-growth-inequality.html">T7 Growth</a>
+<a href="#learn">Learn</a><a href="#methods">Methods</a><a href="#qtypes">Question types</a><a href="#traps">Traps</a><a href="#check">Self-check</a><a href="#sheet">📄 Sheet</a>
+</nav>
+<main>
+
+<!-- ===================================================== LEARN ===================================================== -->
+<section id="learn">
+<h2>The big idea</h2>
+<div class="card">
+<p><b>Part 1 (L10):</b> When you burn coal you don't pay for the damage your CO₂ does to everyone else. That unpaid cost is a <b>negative externality</b>. Because buyers and sellers only look at <i>private</i> benefits and costs, the competitive market produces <b>too much</b> (Q<sub>Market</sub> &gt; Q<sub>Eff</sub>) and there is a <b>deadweight loss</b>. Fix: a <b>Pigouvian tax</b> t = MEC (measured at Q<sub>Eff</sub>) shifts supply up onto the MSC curve so the market lands on the efficient quantity.</p>
+<p><b>Part 2 (L11):</b> Cutting emissions is the flip side — a <b>positive externality</b>: the cutting country pays the cost, the whole world gets the benefit. So each country is tempted to <b>free-ride</b>. Game theory shows this as a <b>Prisoner's Dilemma</b>: both countries' dominant strategy is "Status quo", so the <b>Nash equilibrium</b> is (Status quo, Status quo) even though (Reduce, Reduce) is better for both. Changing payoffs (name &amp; shame, domestic political pressure) can turn it into a coordination game or even make "Reduce" dominant.</p>
+<p class="src">Lecture story: IPCC AR6 — "we are cooked"; Stern Review (2006): "Climate change is the greatest market failure the world has ever seen"; Australia's carbon tax (2012–2014); Kyoto Protocol failed (no punishment for cheating) → Paris Agreement (pledge &amp; review, name &amp; shame, ratcheting NDCs).</p>
+</div>
+
+<h3>1 · What is an externality?</h3>
+<div class="card">
+<p>An <b>externality</b> is a cost or benefit that affects a <b>third party</b> (someone not directly involved) in the production or consumption of a good. It arises when a decision-maker <b>does not bear the full cost or enjoy the full benefit</b> of their action.</p>
+<table><tr><th></th><th>Negative externality</th><th>Positive externality</th></tr>
+<tr><td>Meaning</td><td>Decision-maker does not bear the full <b>cost</b> → imposes costs on third parties</td><td>Decision-maker does not receive the full <b>benefit</b> → third parties benefit</td></tr>
+<tr><td>Lecture examples</td><td>Smoking (you're the third party), coal-fired electricity / CO₂, insurance premiums rising from extreme weather</td><td>Covid/flu vaccination (herd immunity), education (employers benefit), GHG <b>abatement</b> (L11), flu vaccine (2026 S1 exam)</td></tr>
+<tr><td>Which curve moves away</td><td>MSC lies <b>above</b> MPC (supply side)</td><td>MSB lies <b>above</b> MPB (demand side)</td></tr>
+<tr><td>Market vs efficient</td><td>Q<sub>Market</sub> &gt; Q<sub>Eff</sub> — <b>over-production</b></td><td>Q<sub>Market</sub> &lt; Q* — <b>under-production</b></td></tr>
+<tr><td>Pigouvian fix</td><td>Per-unit <b>tax</b> = MEC at Q<sub>Eff</sub></td><td>Per-unit <b>subsidy</b> = MEB at Q*</td></tr>
+</table>
+<p>Externalities can occur in <b>production</b> or <b>consumption</b>. A <b>market failure</b> = a competitive market over- or under-produces relative to the socially optimal quantity. Typical causes (L10): <b>externalities, monopoly (price-searchers), asymmetric information</b>. Note: "market fails, government fails too" — intervention isn't automatically the answer.</p>
+<div class="qcaa">You met externalities/market failure in QCAA. Same ideas — but here you must <b>read exact numbers off a graph</b> (Q<sub>Market</sub>, Q<sub>Eff</sub>, tax size, DWL triangle) and use the lecturer's labels (MPC, MEC, MSC, MB/MPB, MSB, MEB).</div>
+</div>
+
+<h3>2 · Private, external and social cost: MSC = MPC + MEC</h3>
+<div class="card">
+<p><b>Total Social Cost = Total Private Cost + Total External Cost</b>: TSC = TPC + TEC. Per extra unit: <b>MSC = MPC + MEC</b> (ΔTSC/ΔQ = ΔTPC/ΔQ + ΔTEC/ΔQ). MPC is just the ordinary "MC" from earlier lectures, and the <b>supply curve is the MPC curve</b>. Totals build up from marginals: <b>TC(Q) = TC(Q−1) + MC(Q)</b>.</p>
+<p><b>Lecture table</b> (MEC = 100 per unit):</p>
+<div class="tablewrap"><table>
+<tr><th>Q</th><th>TPC</th><th>TEC</th><th>TSC</th><th>MPC</th><th>MEC</th><th>MSC</th></tr>
+<tr><td>1</td><td>50</td><td>100</td><td>150</td><td>50</td><td>100</td><td>150</td></tr>
+<tr><td>2</td><td>150</td><td>200</td><td>350</td><td>100</td><td>100</td><td>200</td></tr>
+<tr><td>3</td><td>300</td><td>300</td><td>600</td><td>150</td><td>100</td><td>250</td></tr>
+<tr><td>4</td><td>500</td><td>400</td><td>900</td><td>200</td><td>100</td><td>300</td></tr>
+<tr><td>5</td><td>750</td><td>500</td><td>1250</td><td>250</td><td>100</td><td>350</td></tr></table></div>
+<p>On a graph: <b>area under MPC</b> (up to Q) = TPC; <b>area under MSC</b> = TSC; <b>area between MSC and MPC</b> = TEC. With constant MEC, TEC = MEC × Q.</p>
+<p><b>Worked example.</b> MPC of units 1–3 = 20, 30, 40; MEC = 15 each. TPC(3) = 20+30+40 = <b>90</b>; TEC(3) = 3×15 = <b>45</b>; TSC(3) = 90+45 = <b>135</b>; MSC of the 3rd unit = 40+15 = <b>55</b>.</p>
+</div>
+
+<h3>3 · The negative-externality diagram and the lecture's areas A–F</h3>
+<div class="card">
+<p>Producers only care about private cost → <b>Supply = MPC</b>. Consumers only care about private benefit → <b>Demand = MB (= MPB)</b>. The market equilibrium is still where <b>Demand = Supply</b> → Q<sub>Market</sub>, P<sub>Market</sub>. (The lecturer deliberately does <b>not</b> call this P* or Q*, because a star means <i>socially optimal</i>.)</p>
+<p>Efficiency = maximise <b>Total Social Surplus</b>:</p>
+<div class="method"><b>TSS = CS + PS − TEC = TB − TPC − TEC</b> &nbsp;where CS = TB − P·Q and PS = P·Q − TPC.</div>
+<figure><svg viewBox="0 0 480 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Negative externality diagram with areas A to F" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="480" height="330" fill="#fff"/><line x1="127.8" y1="290.0" x2="127.8" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="127.8" y="305.0" font-size="11" text-anchor="middle" fill="#333">200</text><line x1="203.5" y1="290.0" x2="203.5" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="203.5" y="305.0" font-size="11" text-anchor="middle" fill="#333">400</text><line x1="241.4" y1="290.0" x2="241.4" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="241.4" y="305.0" font-size="11" text-anchor="middle" fill="#333">500</text><line x1="279.2" y1="290.0" x2="279.2" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="279.2" y="305.0" font-size="11" text-anchor="middle" fill="#333">600</text><line x1="355.0" y1="290.0" x2="355.0" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="355.0" y="305.0" font-size="11" text-anchor="middle" fill="#333">800</text><line x1="52.0" y1="251.1" x2="355.0" y2="251.1" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="255.1" font-size="11" text-anchor="end" fill="#333">10</text><line x1="52.0" y1="212.3" x2="355.0" y2="212.3" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="216.3" font-size="11" text-anchor="end" fill="#333">20</text><line x1="52.0" y1="173.4" x2="355.0" y2="173.4" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="177.4" font-size="11" text-anchor="end" fill="#333">30</text><line x1="52.0" y1="154.0" x2="355.0" y2="154.0" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="158.0" font-size="11" text-anchor="end" fill="#333">35</text><line x1="52.0" y1="134.6" x2="355.0" y2="134.6" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="138.6" font-size="11" text-anchor="end" fill="#333">40</text><line x1="52.0" y1="115.1" x2="355.0" y2="115.1" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="119.1" font-size="11" text-anchor="end" fill="#333">45</text><line x1="52.0" y1="95.7" x2="355.0" y2="95.7" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="99.7" font-size="11" text-anchor="end" fill="#333">50</text><line x1="52.0" y1="56.9" x2="355.0" y2="56.9" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="60.9" font-size="11" text-anchor="end" fill="#333">60</text><polygon points="52.0,56.9 203.5,134.6 52.0,212.3" fill="#0284c7" fill-opacity="0.22" stroke="#0284c7" stroke-opacity="0.5" stroke-width="0.8"/><text x="93.7" y="139.6" font-size="14" font-weight="700" text-anchor="middle" fill="#111">A</text><polygon points="52.0,212.3 203.5,134.6 203.5,173.4 52.0,251.1" fill="#7c3aed" fill-opacity="0.15" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="0.8"/><text x="127.8" y="197.9" font-size="14" font-weight="700" text-anchor="middle" fill="#111">B</text><polygon points="52.0,251.1 203.5,173.4 203.5,290.0 52.0,290.0" fill="#d97706" fill-opacity="0.15" stroke="#d97706" stroke-opacity="0.5" stroke-width="0.8"/><text x="127.8" y="260.0" font-size="14" font-weight="700" text-anchor="middle" fill="#111">C</text><polygon points="203.5,134.6 241.4,115.1 241.4,154.0" fill="#dc2626" fill-opacity="0.35" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/><text x="229.3" y="137.6" font-size="12" font-weight="700" text-anchor="middle" fill="#111">D</text><polygon points="203.5,134.6 241.4,154.0 203.5,173.4" fill="#16a34a" fill-opacity="0.25" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/><text x="215.6" y="159.0" font-size="12" font-weight="700" text-anchor="middle" fill="#111">E</text><polygon points="203.5,173.4 241.4,154.0 241.4,290.0 203.5,290.0" fill="#d97706" fill-opacity="0.08" stroke="#d97706" stroke-opacity="0.5" stroke-width="0.8"/><text x="222.4" y="240.6" font-size="14" font-weight="700" text-anchor="middle" fill="#111">F</text><line x1="52.0" y1="290.0" x2="363.0" y2="290.0" stroke="#111" stroke-width="1.6"/><line x1="52.0" y1="290.0" x2="52.0" y2="12.0" stroke="#111" stroke-width="1.6"/><text x="367.0" y="294.0" font-size="12" fill="#111">Q</text><text x="56.0" y="14" font-size="12" fill="#111">P ($/unit)</text><line x1="52.0" y1="56.9" x2="355.0" y2="212.3" stroke="#0284c7" stroke-width="2.4"/><text x="352.4" y="206.4" font-size="12" font-weight="600" fill="#0284c7">D = MB (MPB)</text><line x1="52.0" y1="251.1" x2="339.8" y2="103.5" stroke="#d97706" stroke-width="2.4"/><text x="344.8" y="111.5" font-size="12" font-weight="600" fill="#d97706">S = MPC</text><line x1="52.0" y1="212.3" x2="339.8" y2="64.6" stroke="#7c3aed" stroke-width="2.4" stroke-dasharray="7 4"/><text x="344.8" y="66.6" font-size="12" font-weight="600" fill="#7c3aed">MSC = MPC + MEC</text><line x1="279.2" y1="134.6" x2="279.2" y2="95.7" stroke="#111" stroke-width="1.4" marker-end="url(#ah)" marker-start="url(#ah)"/><text x="284.2" y="119.1" font-size="11" text-anchor="start" fill="#111">MEC = $10</text><circle cx="241.4" cy="154.0" r="4" fill="#111"/><circle cx="203.5" cy="134.6" r="4" fill="#111"/><text x="241.4" y="278.3" font-size="10" text-anchor="middle" fill="#111">Q<tspan font-size='9'>Market</tspan></text><text x="203.5" y="278.3" font-size="10" text-anchor="middle" fill="#111">Q<tspan font-size='9'>Eff</tspan></text></svg><figcaption>Worked numbers: MB: P = 60 − 0.05Q, MPC: P = 10 + 0.05Q, MEC = $10 → MSC: P = 20 + 0.05Q. Labels follow the L10 slides exactly.</figcaption></figure>
+<table>
+<tr><th>At Q<sub>Market</sub> (lecture labels)</th><th>Areas</th><th>Value in this example</th></tr>
+<tr><td>Total private cost TPC (area under MPC)</td><td>C + F</td><td>8000 + 3250 = 11 250</td></tr>
+<tr><td>Total external cost TEC = MEC × Q<sub>Market</sub> (between MSC &amp; MPC)</td><td>B + D + E</td><td>4000 + 500 + 500 = 5000 (=10×500 ✓)</td></tr>
+<tr><td>Total social cost TSC = TPC + TEC</td><td>B + C + D + E + F</td><td>16 250</td></tr>
+<tr><td>Total social benefit TSB (= private benefit, area under demand)</td><td>A + B + C + E + F</td><td>23 750</td></tr>
+<tr><td>Total social surplus TSS = TSB − TSC</td><td><b>A − D</b></td><td>8000 − 500 = 7500</td></tr>
+<tr><td>Deadweight loss</td><td><b>D</b></td><td>½ × (45 − 35) × (500 − 400) = 500</td></tr>
+<tr><td>TSS at Q<sub>Eff</sub> (the maximum)</td><td><b>A</b></td><td>½ × 400 × (60 − 20) = 8000</td></tr>
+</table>
+<p><b>Why D is lost:</b> for units Q<sub>Eff</sub> → Q<sub>Market</sub> (400 → 500) the social cost (MSC) is above the benefit (MB). Not producing them would raise TSS by D.</p>
+<p><b>Efficient output Q<sub>Eff</sub>: where MSC = MB.</b> All units with MB &gt; MSC are produced; none with MB &lt; MSC. Here 60 − 0.05Q = 20 + 0.05Q → Q<sub>Eff</sub> = 400 (P = 40). Market: 60 − 0.05Q = 10 + 0.05Q → Q<sub>Market</sub> = 500 (P = 35).</p>
+<div class="new">QCAA usually stops at "the market over-produces". ECON1011 asks you to <b>compute</b> DWL = ½ × base × height using the <b>vertical gap at Q<sub>Market</sub></b> (MSC − MB there) × (Q<sub>Market</sub> − Q<sub>Eff</sub>), and to identify TPC/TEC/TSB/TSS as sums of lettered areas.</div>
+</div>
+
+<h3>4 · Pigouvian (corrective) tax — "make polluters internalise the external cost"</h3>
+<div class="card">
+<p>Arthur Pigou's idea (also spelt Pigovian): tax the decision-maker so private cost = social cost. "Sin taxes" (tobacco) are Pigouvian in nature; the <i>Pigou Club</i> backs a carbon tax.</p>
+<div class="method"><b>Set t = MEC.</b> Then the sellers' cost becomes <b>MPC₁ = MPC₀ + t = MSC</b>, so the <b>supply curve shifts up onto the MSC curve</b> ("decrease in supply"). New market equilibrium = Demand ∩ Supply₁ = MSC ∩ MSB → output falls to <b>Q<sub>Eff</sub></b>, <b>no deadweight loss</b>.</div>
+<figure><svg viewBox="0 0 480 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pigouvian tax shifts supply up to MSC" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="480" height="330" fill="#fff"/><line x1="136.5" y1="290.0" x2="136.5" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="136.5" y="305.0" font-size="11" text-anchor="middle" fill="#333">200</text><line x1="201.0" y1="290.0" x2="201.0" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="201.0" y="305.0" font-size="11" text-anchor="middle" fill="#333">400</text><line x1="233.2" y1="290.0" x2="233.2" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="233.2" y="305.0" font-size="11" text-anchor="middle" fill="#333">500</text><line x1="265.5" y1="290.0" x2="265.5" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="265.5" y="305.0" font-size="11" text-anchor="middle" fill="#333">600</text><line x1="330.0" y1="290.0" x2="330.0" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="330.0" y="305.0" font-size="11" text-anchor="middle" fill="#333">800</text><line x1="72.0" y1="251.1" x2="330.0" y2="251.1" stroke="#e5e7eb" stroke-width="1"/><text x="66.0" y="255.1" font-size="11" text-anchor="end" fill="#333">10</text><line x1="72.0" y1="212.3" x2="330.0" y2="212.3" stroke="#e5e7eb" stroke-width="1"/><text x="66.0" y="216.3" font-size="11" text-anchor="end" fill="#333">20</text><line x1="72.0" y1="95.7" x2="330.0" y2="95.7" stroke="#e5e7eb" stroke-width="1"/><text x="66.0" y="99.7" font-size="11" text-anchor="end" fill="#333">50</text><line x1="72.0" y1="56.9" x2="330.0" y2="56.9" stroke="#e5e7eb" stroke-width="1"/><text x="66.0" y="60.9" font-size="11" text-anchor="end" fill="#333">60</text><polygon points="72.0,56.9 201.0,134.6 72.0,134.6" fill="#0284c7" fill-opacity="0.18" stroke="#0284c7" stroke-opacity="0.5" stroke-width="0.8"/><text x="107.5" y="116.3" font-size="12" font-weight="700" text-anchor="middle" fill="#111">CS</text><polygon points="72.0,134.6 201.0,134.6 201.0,173.4 72.0,173.4" fill="#7c3aed" fill-opacity="0.18" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="0.8"/><text x="120.4" y="159.0" font-size="10.5" font-weight="700" text-anchor="middle" fill="#111">Tax revenue = t×Q (B)</text><polygon points="72.0,173.4 201.0,173.4 72.0,251.1" fill="#d97706" fill-opacity="0.18" stroke="#d97706" stroke-opacity="0.5" stroke-width="0.8"/><text x="107.5" y="201.7" font-size="12" font-weight="700" text-anchor="middle" fill="#111">PS</text><line x1="72.0" y1="290.0" x2="338.0" y2="290.0" stroke="#111" stroke-width="1.6"/><line x1="72.0" y1="290.0" x2="72.0" y2="12.0" stroke="#111" stroke-width="1.6"/><text x="342.0" y="294.0" font-size="12" fill="#111">Q</text><text x="76.0" y="14" font-size="12" fill="#111">P ($/unit)</text><line x1="72.0" y1="56.9" x2="330.0" y2="212.3" stroke="#0284c7" stroke-width="2.4"/><text x="328.5" y="206.4" font-size="12" font-weight="600" fill="#0284c7">Demand = MB</text><line x1="72.0" y1="251.1" x2="317.1" y2="103.5" stroke="#d97706" stroke-width="2.4"/><text x="322.1" y="111.5" font-size="12" font-weight="600" fill="#d97706">Supply₀ = MPC₀</text><line x1="72.0" y1="212.3" x2="317.1" y2="64.6" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 4"/><text x="322.1" y="66.6" font-size="12" font-weight="600" fill="#d97706">Supply₁ = MPC₀+t = MSC</text><line x1="265.5" y1="134.6" x2="265.5" y2="95.7" stroke="#111" stroke-width="1.4" marker-end="url(#ah)" marker-start="url(#ah)"/><text x="270.5" y="119.1" font-size="11" text-anchor="start" fill="#111">t = MEC = $10</text><line x1="201.0" y1="134.6" x2="201.0" y2="290.0" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="72.0" y1="134.6" x2="201.0" y2="134.6" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><text x="201.0" y="318.0" font-size="11" font-weight="700" text-anchor="middle" fill="#111">Q₁ = Q_Eff = 400</text><text x="66.0" y="138.6" font-size="11" font-weight="700" text-anchor="end" fill="#111">P_B = 40</text><line x1="201.0" y1="173.4" x2="201.0" y2="290.0" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="72.0" y1="173.4" x2="201.0" y2="173.4" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><text x="66.0" y="177.4" font-size="11" font-weight="700" text-anchor="end" fill="#111">P_S = 30</text><circle cx="201.0" cy="134.6" r="4" fill="#111"/><circle cx="233.2" cy="154.0" r="4" fill="#111"/><text x="234.9" y="169.5" font-size="10" text-anchor="start" fill="#111">old eqm (500, 35)</text></svg><figcaption>Same numbers: t = $10. Buyers pay P<sub>B</sub> = 40, sellers keep P<sub>S</sub> = 30. CS = ½×400×20 = 4000, PS = ½×400×20 = 4000, tax revenue = 10×400 = 4000 (= TEC at Q<sub>Eff</sub>, cancels out). TSS = CS + PS + revenue − TEC = 8000 = area A (lecture: "A = TSS(Q<sub>Eff</sub>), B = MEC = Tax strip, C = private cost").</figcaption></figure>
+<p><b>When MEC changes with output</b> (SMC and PMC <i>not parallel</i>): the right tax is the per-unit tax that shifts supply enough to cross demand at Q<sub>Eff</sub> — i.e. <b>t = MEC(Q<sub>Eff</sub>) = MSC(Q<sub>Eff</sub>) − MPC(Q<sub>Eff</sub>)</b>. Not the gap at Q<sub>Market</sub>!</p>
+<figure><svg viewBox="0 0 480 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Non-parallel SMC and PMC: tax equals MEC at efficient quantity" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="480" height="330" fill="#fff"/><line x1="100.3" y1="290.0" x2="100.3" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="100.3" y="305.0" font-size="11" text-anchor="middle" fill="#333">100</text><line x1="148.6" y1="290.0" x2="148.6" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="148.6" y="305.0" font-size="11" text-anchor="middle" fill="#333">200</text><line x1="196.9" y1="290.0" x2="196.9" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="196.9" y="305.0" font-size="11" text-anchor="middle" fill="#333">300</text><line x1="245.1" y1="290.0" x2="245.1" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="245.1" y="305.0" font-size="11" text-anchor="middle" fill="#333">400</text><line x1="293.4" y1="290.0" x2="293.4" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="293.4" y="305.0" font-size="11" text-anchor="middle" fill="#333">500</text><line x1="341.7" y1="290.0" x2="341.7" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="341.7" y="305.0" font-size="11" text-anchor="middle" fill="#333">600</text><line x1="390.0" y1="290.0" x2="390.0" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="390.0" y="305.0" font-size="11" text-anchor="middle" fill="#333">700</text><line x1="52.0" y1="259.8" x2="390.0" y2="259.8" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="263.8" font-size="11" text-anchor="end" fill="#333">5</text><line x1="52.0" y1="229.6" x2="390.0" y2="229.6" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="233.6" font-size="11" text-anchor="end" fill="#333">10</text><line x1="52.0" y1="205.4" x2="390.0" y2="205.4" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="209.4" font-size="11" text-anchor="end" fill="#333">14</text><line x1="52.0" y1="169.1" x2="390.0" y2="169.1" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="173.1" font-size="11" text-anchor="end" fill="#333">20</text><line x1="52.0" y1="144.9" x2="390.0" y2="144.9" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="148.9" font-size="11" text-anchor="end" fill="#333">24</text><line x1="52.0" y1="108.7" x2="390.0" y2="108.7" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="112.7" font-size="11" text-anchor="end" fill="#333">30</text><line x1="52.0" y1="72.4" x2="390.0" y2="72.4" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="76.4" font-size="11" text-anchor="end" fill="#333">36</text><line x1="52.0" y1="48.2" x2="390.0" y2="48.2" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="52.2" font-size="11" text-anchor="end" fill="#333">40</text><polygon points="196.9,144.9 293.4,72.4 293.4,169.1" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/><text x="266.9" y="134.8" font-size="11" font-weight="700" text-anchor="middle" fill="#111">DWL</text><line x1="52.0" y1="290.0" x2="398.0" y2="290.0" stroke="#111" stroke-width="1.6"/><line x1="52.0" y1="290.0" x2="52.0" y2="12.0" stroke="#111" stroke-width="1.6"/><text x="402.0" y="294.0" font-size="12" fill="#111">Q</text><text x="56.0" y="14" font-size="12" fill="#111">Cost/Benefit ($)</text><line x1="52.0" y1="108.7" x2="390.0" y2="193.3" stroke="#0284c7" stroke-width="2.4"/><text x="395.0" y="201.3" font-size="12" font-weight="600" fill="#0284c7">MB</text><line x1="52.0" y1="259.8" x2="390.0" y2="132.8" stroke="#d97706" stroke-width="2.4"/><text x="395.0" y="136.8" font-size="12" font-weight="600" fill="#d97706">PMC</text><line x1="52.0" y1="253.7" x2="365.9" y2="18.0" stroke="#7c3aed" stroke-width="2.4" stroke-dasharray="7 4"/><text x="370.9" y="22.0" font-size="12" font-weight="600" fill="#7c3aed">SMC</text><line x1="196.9" y1="144.9" x2="196.9" y2="290.0" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="52.0" y1="144.9" x2="196.9" y2="144.9" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="293.4" y1="72.4" x2="293.4" y2="290.0" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="52.0" y1="72.4" x2="293.4" y2="72.4" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><circle cx="196.9" cy="144.9" r="4" fill="#111"/><circle cx="293.4" cy="169.1" r="4" fill="#111"/><circle cx="196.9" cy="205.4" r="4" fill="#111"/><text x="202.7" y="220.5" font-size="10" text-anchor="start" fill="#111">PMC(300) = 14</text></svg><figcaption>MB: 30 − 0.02Q; PMC: 5 + 0.03Q; SMC: 6 + 0.06Q. Market: MB = PMC at Q = 500, P = 20. Efficient: MB = SMC at Q = 300 ($24). Tax = SMC(300) − PMC(300) = 24 − 14 = <b>$10</b> (NOT 36 − 20 = $16). DWL = ½ × (36 − 20) × (500 − 300) = <b>1600</b>.</figcaption></figure>
+<p><b>Real world (L10):</b> Gillard government carbon tax 2012 — <b>$20 per tonne CO₂</b>; ANU 2014 study: cut emissions by <b>17 million tonnes</b>; repealed by Abbott government 2014. Practical problems: (1) can MEC be measured accurately (what is the right tax)? (2) politically, how do you get the current generation to pay for future generations' benefit?</p>
+</div>
+
+<h3>5 · Positive externality and the Pigouvian subsidy</h3>
+<div class="card">
+<p>L10 says "see next week's tutorial"; the S1 2026 final (flu vaccination, L13 Q6) examined it. Consumers ignore the benefit to others, so <b>Demand = MPB</b> sits below <b>MSB = MPB + MEB</b>. Supply = MC (no cost externality).</p>
+<ul><li>Market: MPB = MC → Q<sub>Market</sub>. Social optimum: MSB = MC → Q* (bigger). <b>Under-production.</b></li>
+<li><b>Subsidy = MEB at Q*</b> = MSB(Q*) − MPB(Q*). The subsidy shifts the private demand curve <b>up</b> by the subsidy: MPB<sup>Sub</sup> = MPB₀ + Sub. (L13: "if consumers were willing to pay $8 for the 600th unit, a $12 subsidy makes them willing to pay $20, since out-of-pocket stays $20 − $12 = $8".)</li>
+<li><b>DWL</b> = triangle between MSB and MC from Q<sub>Market</sub> to Q*: ½ × (MSB(Q<sub>Market</sub>) − MC(Q<sub>Market</sub>)) × (Q* − Q<sub>Market</sub>). L13 used exactly this: (25 − 12) × (600 − 350) / 2.</li></ul>
+<figure><svg viewBox="0 0 480 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Positive externality: market under-produces; subsidy equals MEB at Q*" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="480" height="330" fill="#fff"/><line x1="123.8" y1="290.0" x2="123.8" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="123.8" y="305.0" font-size="11" text-anchor="middle" fill="#333">100</text><line x1="195.6" y1="290.0" x2="195.6" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="195.6" y="305.0" font-size="11" text-anchor="middle" fill="#333">200</text><line x1="238.6" y1="290.0" x2="238.6" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="238.6" y="305.0" font-size="11" text-anchor="middle" fill="#333">260</text><line x1="267.3" y1="290.0" x2="267.3" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="267.3" y="305.0" font-size="11" text-anchor="middle" fill="#333">300</text><line x1="339.1" y1="290.0" x2="339.1" y2="18.0" stroke="#e5e7eb" stroke-width="1"/><text x="339.1" y="305.0" font-size="11" text-anchor="middle" fill="#333">400</text><line x1="52.0" y1="248.2" x2="375.0" y2="248.2" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="252.2" font-size="11" text-anchor="end" fill="#333">10</text><line x1="52.0" y1="206.3" x2="375.0" y2="206.3" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="210.3" font-size="11" text-anchor="end" fill="#333">20</text><line x1="52.0" y1="189.6" x2="375.0" y2="189.6" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="193.6" font-size="11" text-anchor="end" fill="#333">24</text><line x1="52.0" y1="164.5" x2="375.0" y2="164.5" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="168.5" font-size="11" text-anchor="end" fill="#333">30</text><line x1="52.0" y1="139.4" x2="375.0" y2="139.4" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="143.4" font-size="11" text-anchor="end" fill="#333">36</text><line x1="52.0" y1="114.2" x2="375.0" y2="114.2" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="118.2" font-size="11" text-anchor="end" fill="#333">42</text><line x1="52.0" y1="80.8" x2="375.0" y2="80.8" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="84.8" font-size="11" text-anchor="end" fill="#333">50</text><line x1="52.0" y1="38.9" x2="375.0" y2="38.9" stroke="#e5e7eb" stroke-width="1"/><text x="46.0" y="42.9" font-size="11" text-anchor="end" fill="#333">60</text><polygon points="195.6,114.2 238.6,139.4 195.6,164.5" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/><text x="211.3" y="144.4" font-size="11" font-weight="700" text-anchor="middle" fill="#111">DWL</text><line x1="52.0" y1="290.0" x2="383.0" y2="290.0" stroke="#111" stroke-width="1.6"/><line x1="52.0" y1="290.0" x2="52.0" y2="12.0" stroke="#111" stroke-width="1.6"/><text x="387.0" y="294.0" font-size="12" fill="#111">Q</text><text x="56.0" y="14" font-size="12" fill="#111">P ($/unit)</text><line x1="52.0" y1="80.8" x2="375.0" y2="269.1" stroke="#0284c7" stroke-width="2.4"/><text x="380.0" y="273.1" font-size="12" font-weight="600" fill="#0284c7">D = MPB</text><line x1="52.0" y1="30.6" x2="375.0" y2="218.9" stroke="#0284c7" stroke-width="2.4" stroke-dasharray="7 4"/><text x="344.1" y="193.9" font-size="12" font-weight="600" fill="#0284c7">MSB = MPB + MEB</text><line x1="52.0" y1="248.2" x2="375.0" y2="59.8" stroke="#d97706" stroke-width="2.4"/><text x="365.6" y="72.2" font-size="12" font-weight="600" fill="#d97706">S = MC</text><line x1="324.8" y1="239.8" x2="324.8" y2="189.6" stroke="#111" stroke-width="1.4" marker-end="url(#ah)" marker-start="url(#ah)"/><text x="329.8" y="218.7" font-size="11" text-anchor="start" fill="#111">MEB = $12</text><circle cx="195.6" cy="164.5" r="4" fill="#111"/><circle cx="238.6" cy="139.4" r="4" fill="#111"/><circle cx="238.6" cy="189.6" r="4" fill="#111"/><line x1="238.6" y1="139.4" x2="238.6" y2="290.0" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><line x1="52.0" y1="139.4" x2="238.6" y2="139.4" stroke="#555" stroke-width="1" stroke-dasharray="3 3"/><text x="195.6" y="277.4" font-size="10" text-anchor="middle" fill="#111">Q<tspan font-size='9'>Mkt</tspan></text><text x="247.2" y="277.4" font-size="10" text-anchor="start" fill="#111">Q*</text></svg><figcaption>Rooftop-solar style example: MPB = 50 − 0.1Q, MEB = $12 → MSB = 62 − 0.1Q, MC = 10 + 0.1Q. Q<sub>Market</sub> = 200 (P = 30); Q* = 260 (P = 36). Subsidy = 36 − 24 = <b>$12</b>. DWL = ½ × (42 − 30) × 60 = <b>360</b>.</figcaption></figure>
+<p><b>"Is it worth it?" add-on</b> (L13 style): if the policy has an administrative cost, implement it only if <b>DWL &gt; admin cost</b>. Here: implement if admin cost &lt; $360.</p>
+</div>
+
+<h3>6 · Cap-and-trade and Coase — not in the 2026 lectures</h3>
+<div class="card">
+<div class="new">L10 and L11 cover only <b>Pigouvian taxes/subsidies</b> as the fix. Tradable permits (cap-and-trade) and the Coase theorem are <b>not lectured</b> this semester (Coase appears only in a pre-2024 past paper, which the lecturer says to disregard). Low priority — background only:
+<ul><li><b>Cap-and-trade:</b> government caps total emissions at Q<sub>Eff</sub> and issues that many permits; firms trade them. The permit price ends up = MEC at Q<sub>Eff</sub> — same outcome as the Pigouvian tax, but fixes <i>quantity</i> (tax fixes <i>price</i>).</li>
+<li><b>Coase theorem:</b> if property rights are clear and bargaining (transaction) costs are low, private parties can negotiate to the efficient outcome without government. Fails for climate change (billions of parties, future generations can't bargain).</li></ul></div>
+</div>
+
+<h3>7 · Climate background you may get a dropdown on</h3>
+<div class="card">
+<table>
+<tr><th>Item</th><th>Key facts (from L10/L11)</th></tr>
+<tr><td>IPCC</td><td>UN intergovernmental body, est. <b>1988</b>, 195 member states; does not do research — synthesises literature into Assessment Reports (AR6 Synthesis 2023).</td></tr>
+<tr><td>Targets</td><td>Limit warming to <b>1.5°C</b> above pre-industrial; needs <b>net-zero by 2050</b> (2°C needs net-zero by 2070). Current policies never reach net-zero; NDCs fall short.</td></tr>
+<tr><td>Stern Review (2006, UK)</td><td>Cost of inaction ≈ <b>5% of global GDP per year</b> (up to ~20% with wider risks), vs abatement ≈ <b>1% of GDP per year</b> → "benefits of strong, early action considerably outweigh the costs". "<b>Greatest market failure the world has ever seen</b>."</td></tr>
+<tr><td>Kyoto Protocol</td><td>First <b>binding</b> agreement; signed <b>1997</b>, in force <b>2005</b>. Annex I (industrialised) countries cut GHG avg <b>5.2% by 2008–2012 vs 1990</b>. Developing countries (China, India) exempt from round 1. US pulled out 2001, Canada 2011; US, Russia, Japan, Canada, NZ out of round 2. <b>Why it failed: no punishment for cheating</b> (Barrett 2008) → a Prisoner's Dilemma.</td></tr>
+<tr><td>Paris Agreement</td><td>Signed/effective <b>2016</b>; keep warming &lt;2°C, preferably 1.5°C; 194 countries (98% of emissions). US withdrew 2017, rejoined 2021, withdrew again 2025.</td></tr>
+<tr><td>Pledge &amp; review</td><td>Each country pledges a <b>Nationally Determined Contribution (NDC)</b> — self-defined, public, registered with UNFCCC. Reviewed by UNFCCC; <b>Global Stocktake every 5 years</b> (first 2023: more needs doing). NGO trackers (Climate Action Tracker, CCPI).</td></tr>
+<tr><td>Enforcement</td><td><b>Name and shame</b> — reputational cost of missing your NDC.</td></tr>
+<tr><td>Ratcheting</td><td>NDCs updated <b>every 5 years</b>, each more ambitious → acts as a <b>coordination device</b>.</td></tr>
+<tr><td>Report card</td><td>Even if current NDCs are met → &gt;2°C; implementation gap ~20–25 Gt CO₂-eq; need ~40% cut by 2030. Good news: predicted warming down from 3.7–4.8°C to 2.1–2.9°C.</td></tr>
+</table>
+</div>
+
+<h3>8 · Game theory basics (L11)</h3>
+<div class="card">
+<p>Why a new tool? A competitive market assumes participants have <b>no clout</b>. Countries negotiating emissions clearly do (China + India + US ≈ 50% of CO₂ in 2020), so we need a model of <b>strategic interaction</b>: my payoff depends on my choice <i>and</i> others' choices.</p>
+<p>Every game has: <b>1. Players</b> &nbsp;<b>2. Actions</b> &nbsp;<b>3. Payoffs</b> (for every combination of actions = outcome). Goal: <b>predict the outcome</b>, assuming each player chooses their best option given others' choices. Course scope: <b>simultaneous-move 2 × 2 games</b>.</p>
+<div class="key card" style="border-color:var(--accent)"><b>Payoff-matrix convention (memorise):</b> Player 1 controls the <b>rows</b>; Player 2 controls the <b>columns</b>. Each cell is an <b>outcome</b>. <b>First number = Row player's payoff, second number = Column player's payoff.</b> An outcome is named by <b>actions</b> in the order <b>(Row's action, Column's action)</b> — never by the payoffs: say "(Status quo, Status quo)", not "(0, 0)".</div>
+<p><b>The GHG abatement game (lecture):</b> Reducing costs a country 5. Both reduce → each gets benefit 8 → 8 − 5 = 3. Only one reduces → both get benefit 4; reducer nets 4 − 5 = −1, free-rider gets 4. Neither → 0.</p>
+<table class="pm"><tr><th></th><th></th><th colspan="2">Country B</th></tr>
+<tr><th></th><th></th><th>Reduce</th><th>Status quo</th></tr>
+<tr><th rowspan="2">Country A</th><th>Reduce</th><td class="cell">3, 3</td><td class="cell">−1, <b>4*</b></td></tr>
+<tr><th>Status quo</th><td class="cell"><b>4*</b>, −1</td><td class="cell ne"><b>0*</b>, <b>0*</b></td></tr></table>
+</div>
+
+<h3>9 · Best response → dominant strategy</h3>
+<div class="card">
+<p><b>Best response</b>: the action giving a player the highest payoff <i>given</i> the opponent's action. Mark it with an <b>asterisk</b> next to that player's payoff (lecture's tip).</p>
+<p><b>Dominant strategy</b>: an action that is <b>always a best response, to every one of the opponent's actions</b> — the highest payoff no matter what the opponent does. If a player has one, we expect them to play it.</p>
+<p>In the abatement game: if B Reduces, A gets 3 (Reduce) vs 4 (Status quo) → SQ*; if B plays SQ, A gets −1 vs 0 → SQ*. Status quo is A's best response both times → <b>A's dominant strategy = Status quo</b>. Same for B (compare 3 vs 4, −1 vs 0). Prediction: <b>(Status quo, Status quo)</b>.</p>
+</div>
+
+<h3>10 · The Prisoner's Dilemma and free-riding</h3>
+<div class="card">
+<p>(SQ, SQ) gives 0 each, but (Reduce, Reduce) would give 3 each — <b>not efficient</b>. Dilemma: <b>individual rationality</b> (play your best response) vs <b>joint rationality</b> (pick the outcome best for all).</p>
+<div class="method"><b>Prisoner's Dilemma structure</b> (numbers can differ): (1) <b>both players have a dominant strategy</b>; (2) when both play it, the outcome is <b>collectively inefficient</b> (another cell makes both better off).</div>
+<p>Source of the inefficiency here: <b>free-riding</b> — GHG abatement is a <b>positive externality</b> (you pay the cost, I enjoy the mitigation). Common whenever individuals pay to contribute to a public good (group assignments!). Criminals escape the PD with punishment (Omertà); <b>Kyoto had no punishment</b> for withdrawing, overshooting targets, or developing-country emission growth — so it stayed a PD.</p>
+</div>
+
+<h3>11 · Nash equilibrium &amp; multiple equilibria (name and shame)</h3>
+<div class="card">
+<p><b>Nash equilibrium</b> = an outcome (combination of actions) in which <b>all players are playing their best responses to the other players' chosen actions</b>. Nobody wants to change their mind once they know what the other does → self-enforcing. <b>In a matrix: a cell where BOTH payoffs have a star.</b></p>
+<p><b>Paris "name and shame":</b> cheating when the other reduces now pays only 2 (was 4). Everything else unchanged ("if everybody cheats, there's no shame").</p>
+<table class="pm"><tr><th></th><th></th><th colspan="2">Country B</th></tr>
+<tr><th></th><th></th><th>Reduce</th><th>Cheat</th></tr>
+<tr><th rowspan="2">Country A</th><th>Reduce</th><td class="cell ne"><b>3*</b>, <b>3*</b></td><td class="cell">−1, 2</td></tr>
+<tr><th>Cheat</th><td class="cell">2, −1</td><td class="cell ne"><b>0*</b>, <b>0*</b></td></tr></table>
+<p>A: vs Reduce → 3 &gt; 2 Reduce*; vs Cheat → 0 &gt; −1 Cheat*. Different answers → <b>no dominant strategy</b> (same for B). But <b>two Nash equilibria: (Reduce, Reduce) and (Cheat, Cheat)</b>. This is a <b>coordination problem</b>: if countries trust each other they can coordinate on the good one; once there, it's self-enforcing. Paris <b>ratcheting</b> (NDCs updated every 5 years after observing others) is a coordination device.</p>
+</div>
+
+<h3>12 · Domestic political pressure → dominant strategy → iterated elimination</h3>
+<div class="card">
+<p>Suppose only Country A's government is punished by voters for cheating (whatever B does): A's Cheat payoffs fall to 0 and −2. B's payoffs unchanged.</p>
+<table class="pm"><tr><th></th><th></th><th colspan="2">Country B</th></tr>
+<tr><th></th><th></th><th>Reduce</th><th>Cheat</th></tr>
+<tr><th rowspan="2">Country A</th><th>Reduce</th><td class="cell ne"><b>3*</b>, <b>3*</b></td><td class="cell"><b>−1*</b>, 2</td></tr>
+<tr><th>Cheat</th><td class="cell">0, −1</td><td class="cell">−2, <b>0*</b></td></tr></table>
+<p>A: 3 &gt; 0 and −1 &gt; −2 → <b>Reduce is now A's dominant strategy</b>. B still has none. B expects A to Reduce → B's best response to Reduce is Reduce (3 &gt; 2). Outcome <b>(Reduce, Reduce)</b>, the unique Nash equilibrium. <b>Contagion of political pressure</b>: A's internal pressure changes B's choice.</p>
+<div class="new"><b>Iterative elimination of dominated strategies (IEDS):</b> delete a player's dominated action (here A's Cheat), then find the other player's best response to what's left. The lecture calls this a "special case" and notes it leads to a Nash equilibrium. Real-world reading: when A has a dominant Reduce, it stays in the agreement even if B withdraws (US left Kyoto → others followed; US left Paris → others stayed).</div>
+</div>
+</section>
+
+<!-- ===================================================== METHODS ===================================================== -->
+<section id="methods">
+<h2>Step-by-step methods</h2>
+
+<div class="method"><h4>M1 · Read an externality diagram (dropdown + numeric)</h4><ol>
+<li><b>Type:</b> the "social" curve is on the <b>cost</b> side (SMC/MSC above PMC/MPC) → <b>negative</b>. On the <b>benefit</b> side (SMB/MSB above PMB/MPB) → <b>positive</b>.</li>
+<li><b>Competitive market Q:</b> where the two <b>private</b> curves cross: MB(=MPB) ∩ PMC (negative), or MPB ∩ MC (positive). Ignore the social curve.</li>
+<li><b>Socially optimal Q:</b> where the <b>social</b> curve crosses the other curve: MB ∩ SMC (negative), or SMB ∩ MC (positive).</li>
+<li>Check direction: negative ⇒ optimal &lt; market. Positive ⇒ optimal &gt; market.</li></ol></div>
+
+<div class="method"><h4>M2 · Pigouvian tax / subsidy amount</h4><ol>
+<li>Go to the <b>socially optimal Q</b> (not the market Q).</li>
+<li>Read the two cost (or benefit) curves straight above it.</li>
+<li><b>Tax = SMC(Q<sub>Eff</sub>) − PMC(Q<sub>Eff</sub>)</b> &nbsp;|&nbsp; <b>Subsidy = SMB(Q*) − PMB(Q*)</b>.</li>
+<li>Dropdown choice: tax for negative, subsidy for positive. Never "enforce a price".</li>
+<li>If the curves are parallel the gap is the same everywhere — any Q gives the same answer. If not parallel, the gap at Q<sub>Market</sub> is a distractor.</li></ol></div>
+
+<div class="method"><h4>M3 · Deadweight loss of an externality</h4><ol>
+<li>Locate Q<sub>Market</sub> and Q<sub>Eff</sub> (M1).</li>
+<li>Triangle's apex is the <b>social optimum point</b>; its vertical side is at <b>Q<sub>Market</sub></b>.</li>
+<li><b>Height</b> = vertical gap at Q<sub>Market</sub> between the social curve and the other curve: negative → SMC(Q<sub>Mkt</sub>) − MB(Q<sub>Mkt</sub>); positive → SMB(Q<sub>Mkt</sub>) − MC(Q<sub>Mkt</sub>).</li>
+<li><b>Base</b> = |Q<sub>Market</sub> − Q<sub>Eff</sub>|.</li>
+<li><b>DWL = ½ × height × base.</b> Show working (written questions say "no marks if working not shown").</li>
+<li>Optional add-on: correct only if DWL &gt; administrative cost.</li></ol></div>
+
+<div class="method"><h4>M4 · Equations instead of a graph</h4><ol>
+<li>Market: set MB = MPC, solve Q<sub>Market</sub>; P<sub>Market</sub> = MB(Q<sub>Market</sub>).</li>
+<li>Build MSC = MPC + MEC (add MEC to the intercept if constant). Solve MB = MSC → Q<sub>Eff</sub>.</li>
+<li>Tax = MEC(Q<sub>Eff</sub>). With the tax: P<sub>B</sub> = MB(Q<sub>Eff</sub>), P<sub>S</sub> = P<sub>B</sub> − t.</li>
+<li>DWL = ½ × [MSC(Q<sub>Market</sub>) − MB(Q<sub>Market</sub>)] × (Q<sub>Market</sub> − Q<sub>Eff</sub>).</li>
+<li>TEC at a quantity Q (constant MEC) = MEC × Q.</li></ol></div>
+
+<div class="method"><h4>M5 · Lettered-area questions (negative externality, L10 labels)</h4><ol>
+<li>TPC = area under MPC up to Q. TSC = area under MSC. TEC = between MSC and MPC.</li>
+<li>TSB (= private benefit) = area under demand up to Q.</li>
+<li>TSS = TSB − TSC. At Q<sub>Market</sub>: <b>A − D</b>. At Q<sub>Eff</sub>: <b>A</b>. DWL = <b>D</b>.</li>
+<li>If the exam relabels areas, rebuild with these four rules — don't memorise letters blindly.</li></ol></div>
+
+<div class="method" id="payoff"><h4>M6 · BULLETPROOF: reading a payoff matrix (dominant strategy + Nash)</h4><ol>
+<li><b>Label who owns which number.</b> Write above the table: "Row = <i>Country A</i> = <b>1st</b> number; Column = <i>Country B</i> = <b>2nd</b> number." (Check the question text — the row player isn't always called A.)</li>
+<li><b>Row player's best responses — work column by column.</b> Put your finger on the first column (Column player's first action). Compare only the <b>FIRST numbers</b> in that column (moving <b>up/down</b>). Star the bigger one. Repeat for the second column.<br><i>Say it:</i> "If B plays X, A gets __ from Row1 and __ from Row2 → A's best response is ___."</li>
+<li><b>Column player's best responses — work row by row.</b> Finger on the first row. Compare only the <b>SECOND numbers</b> in that row (moving <b>left/right</b>). Star the bigger one. Repeat for the second row.</li>
+<li><b>Dominant strategy?</b> Row player has one if <b>both of its stars are in the same row</b> → that row's action is dominant. Column player has one if <b>both of its stars are in the same column</b>. Stars in different rows/columns → "No dominant strategy" (its best response depends on the other's action).</li>
+<li><b>Nash equilibria:</b> every cell where <b>both</b> numbers are starred. There can be 1, 2, or (rarely) 0. Name each as <b>(Row action, Column action)</b>.</li>
+<li><b>Sanity checks:</b> (a) If both players have dominant strategies, the NE is the cell where those two actions meet — and it's the only one. (b) If one player has a dominant strategy, the NE is that action + the other's best response to it (= iterated elimination). (c) Is there another cell where <b>both</b> get more than at the NE? Then it's a Prisoner's-Dilemma-type inefficiency.</li>
+<li><b>Ties</b> (not covered in lectures): if two payoffs are equal, star both — both are best responses.</li></ol>
+<p><b>Mnemonic:</b> <i>"Row looks down the column at the first number; Column looks across the row at the second number."</i></p>
+<p><b>Written-answer template</b> (copy of the model answer structure, 4 marks):<br>
+"[Yes/No]. If Country B plays <i>X</i>: <i>R1</i> gives Country A <i>a</i>, <i>R2</i> gives <i>b</i>; <i>a</i> &gt; <i>b</i>, so <i>R1</i> is A's best response to B's <i>X</i>. If Country B plays <i>Y</i>: <i>R1</i> gives <i>c</i>, <i>R2</i> gives <i>d</i>; … so ___ is A's best response to B's <i>Y</i>. [Since ___ is the best response against each and every one of B's actions, it is A's dominant strategy.] / [As no action is the best response to every one of B's actions, A has no dominant strategy.]"</p></div>
+</section>
+
+<!-- ===================================================== QTYPES ===================================================== -->
+<section id="qtypes">
+<h2>How it's examined</h2>
+<p class="src">Calibration: the 2025 S2 final, the S1 2026 final (walked through in L13) and the S2 2026 practice exam each have <b>one externality diagram</b> (one negative, one positive — swap each year) with dropdowns + a DWL calc, then a <b>2 × 2 payoff matrix</b> with "Does A have a dominant strategy? Explain" (4 marks), the same for B (4 marks), and a Nash-equilibrium pick (2 marks, sometimes "select one or more").</p>
+
+<div class="card q"><h3>Q-type 1 · Diagram dropdowns (negative externality, non-parallel curves) <span class="marks">≈10 marks</span></h3>
+<p>Use the non-parallel diagram in Learn §4 (MB, PMC, SMC with gridlines at 14, 20, 24, 36 and Q = 300, 500).</p>
+<p>"The diagram illustrates a [positive / <b>negative</b> / potential / uncertain] externality. The competitive market output is [300 / 400 / <b>500</b> / indeterminable], the socially optimal output is [<b>300</b> / 400 / 500 / indeterminable]. To correct it the government can [enforce a price / <b>impose a tax</b> / provide a subsidy] of [<b>$24 − $14 = $10</b> / $36 − $20 = $16 / $24 − $20 = $4 / $20 − $14 = $6] per unit."</p>
+<details><summary>Reasoning for each choice</summary>
+<ul><li>Social curve is on the cost side, above PMC → negative.</li>
+<li>Market: MB ∩ PMC → 500 (price 20).</li>
+<li>Optimum: MB ∩ SMC → 300 (24).</li>
+<li>Tax at Q<sub>Eff</sub> = 300: SMC 24 − PMC 14 = $10. $16 is the gap at the <i>market</i> Q (distractor). $4 and $6 mix the wrong curves.</li></ul></details></div>
+
+<div class="card q"><h3>Q-type 2 · Calculate the DWL (written, show working) <span class="marks">3–4 marks</span></h3>
+<p>Same diagram: "Calculate the deadweight loss associated with the externality."</p>
+<details><summary>Model answer</summary>
+<p>Market output 500 exceeds the efficient 300. For units 300–500, SMC &gt; MB. DWL is the triangle with vertices (300, 24), (500, 36), (500, 20).<br>
+Height at Q<sub>Market</sub> = SMC(500) − MB(500) = 36 − 20 = 16. Base = 500 − 300 = 200.<br>
+<b>DWL = ½ × 16 × 200 = $1600.</b></p></details></div>
+
+<div class="card q"><h3>Q-type 3 · Positive externality: tax or subsidy, and how much? (+ admin cost) <span class="marks">4 + 4 marks</span></h3>
+<p>Use the positive-externality diagram (MPB, MSB = MPB + $12, MC; Q<sub>Market</sub> = 200, Q* = 260). (a) Tax or subsidy? Amount? (b) The government will act only if DWL exceeds an administrative cost of $400. Will it?</p>
+<details><summary>Model answer</summary>
+<p>(a) Positive externality → under-production → per-unit <b>subsidy</b> = MEB at Q* = MSB(260) − MPB(260) = 36 − 24 = <b>$12</b>. It shifts private demand up by $12 so it meets supply at Q* = 260.<br>
+(b) DWL = ½ × (MSB(200) − MC(200)) × (260 − 200) = ½ × (42 − 30) × 60 = <b>$360</b>. Since $360 &lt; $400 admin cost, the government would <b>not</b> implement it.</p></details></div>
+
+<div class="card q"><h3>Q-type 4 · Payoff matrix: dominant strategies (written) + Nash (select) <span class="marks">4 + 4 + 2 marks</span></h3>
+<p>Country A and B choose whether to <b>Ban</b> or <b>Allow</b> new coal mines.</p>
+<table class="pm"><tr><th></th><th></th><th colspan="2">Country B</th></tr>
+<tr><th></th><th></th><th>Ban</th><th>Allow</th></tr>
+<tr><th rowspan="2">Country A</th><th>Ban</th><td class="cell">4, 5</td><td class="cell">2, 3</td></tr>
+<tr><th>Allow</th><td class="cell">3, 1</td><td class="cell">1, 2</td></tr></table>
+<p>(a) Does A have a dominant strategy? (b) Does B? (c) Nash equilibrium/equilibria: (Ban, Ban) / (Allow, Allow) / (Ban, Ban) and (Allow, Allow) / (Ban, Allow) / none.</p>
+<details><summary>Model answer</summary>
+<p>(a) <b>Yes — Ban.</b> If B Bans: Ban gives A 4, Allow gives 3 → Ban is A's best response. If B Allows: Ban gives A 2, Allow gives 1 → Ban. Ban is the best response to each and every B action → dominant.<br>
+(b) <b>No.</b> If A Bans: Ban gives B 5, Allow gives 3 → Ban. If A Allows: Ban gives B 1, Allow gives 2 → Allow. B's best response depends on A's action → no dominant strategy.<br>
+(c) Stars: A* on 4 and 2 (Ban row); B* on 5 (Ban, Ban) and 2 (Allow, Allow). Only (Ban, Ban) has two stars → <b>(Ban, Ban)</b>. Cross-check with IEDS: A plays its dominant Ban; B's best response to Ban is Ban.</p>
+<table class="pm"><tr><th></th><th></th><th>Ban</th><th>Allow</th></tr>
+<tr><th rowspan="2">A</th><th>Ban</th><td class="cell ne"><b>4*</b>, <b>5*</b></td><td class="cell"><b>2*</b>, 3</td></tr>
+<tr><th>Allow</th><td class="cell">3, 1</td><td class="cell">1, <b>2*</b></td></tr></table></details></div>
+
+<div class="card q"><h3>Q-type 5 · "Is this a Prisoner's Dilemma?" / how does a payoff change alter the game? <span class="marks">MCQ / dropdown</span></h3>
+<p>Two nations choose Green or Pollute. (Green, Green) = 5, 5; (Green, Pollute) = 1, 7; (Pollute, Green) = 7, 1; (Pollute, Pollute) = 2, 2. Then a "name and shame" rule cuts the payoff from Pollute-when-the-other-is-Green from 7 to 4. What changes?</p>
+<details><summary>Answer</summary>
+<p><b>Before:</b> A: vs Green 7 &gt; 5 → Pollute; vs Pollute 2 &gt; 1 → Pollute. Pollute dominant for both (symmetric). NE = (Pollute, Pollute) with 2 each, yet (Green, Green) gives 5 each → <b>Prisoner's Dilemma</b>.<br>
+<b>After</b> (7 → 4): A: vs Green 5 &gt; 4 → Green; vs Pollute 2 &gt; 1 → Pollute. No dominant strategy for either. NE = <b>(Green, Green) and (Pollute, Pollute)</b> — a <b>coordination game</b>, no longer a PD.</p></details></div>
+
+<div class="card q"><h3>Q-type 6 · Concept dropdown / MCQ</h3>
+<p>e.g. "Kyoto failed mainly because [there was no punishment for cheating]", "GHG abatement generates a [positive] externality, creating an incentive to [free-ride]", "The Paris Agreement's core is [pledge and review] of [NDCs]", "Under a Pigouvian tax equal to MEC the supply curve shifts [up] to [MSC]", "A Nash equilibrium is an outcome in which [every player plays a best response to the others' actions]".</p></div>
+</section>
+
+<!-- ===================================================== TRAPS ===================================================== -->
+<section id="traps">
+<h2>Traps &amp; misconceptions</h2>
+<div class="trap"><b>Tax measured at the wrong quantity.</b> Tax = MEC at <b>Q<sub>Eff</sub></b> (SMC − PMC directly above the social optimum). The gap at Q<sub>Market</sub> is the classic distractor (practice exam: $15 − $10 = $5 correct, $18 − $12 = $6 wrong).</div>
+<div class="trap"><b>DWL height at the wrong quantity.</b> Height is the gap at <b>Q<sub>Market</sub></b> between social curve and the other curve (SMC − MB, or SMB − MC). Not the tax, unless curves are parallel.</div>
+<div class="trap"><b>Market Q uses the social curve.</b> The market ignores externalities: market = private ∩ private. Only the optimum uses the social curve.</div>
+<div class="trap"><b>Calling the market outcome P*/Q*.</b> The star means socially optimal. With externalities they differ.</div>
+<div class="trap"><b>Subsidy vs tax.</b> Positive externality → subsidy (shifts demand up). Negative → tax (shifts supply up). "Enforce a price" is never the Pigouvian answer.</div>
+<div class="trap"><b>Mixing up whose payoff is whose.</b> First number = row player. When checking the column player, compare the SECOND numbers across a row.</div>
+<div class="trap"><b>Comparing the wrong pair.</b> For A's best response you hold B's action fixed (one column) and compare A's two rows. Don't compare A's payoffs across a row — that's A comparing B's choices, which A can't control.</div>
+<div class="trap"><b>Answering with payoffs.</b> The NE is "(Status quo, Status quo)", not "(0, 0)". And the order is (Row action, Column action) — "(Status quo, Regulate)" ≠ "(Regulate, Status quo)".</div>
+<div class="trap"><b>"No dominant strategy" ≠ "no Nash equilibrium".</b> The name-and-shame game has no dominant strategies but two NE.</div>
+<div class="trap"><b>Assuming the NE is efficient.</b> In a PD, the NE (both defect) is worse for both than (cooperate, cooperate).</div>
+<div class="trap"><b>Dominant strategy = biggest number in the matrix.</b> No — it's about being best in <i>every</i> column (row player) / <i>every</i> row (column player).</div>
+<div class="trap"><b>TSS at the market = A, not A − D.</b> At Q<sub>Market</sub> social surplus is A − D; D is subtracted because those units cost society more than they're worth.</div>
+<div class="trap"><b>"Select one or more" Nash questions.</b> If there are two double-starred cells, tick both.</div>
+</section>
+
+<!-- ===================================================== CHECK ===================================================== -->
+<section id="check">
+<h2>Quick self-check</h2>
+<details><summary>1. MB: P = 90 − Q, MPC: P = 10 + Q, MEC = $20 (constant). Find Q<sub>Market</sub>, Q<sub>Eff</sub>, tax, DWL.</summary>
+<p>Market: 90 − Q = 10 + Q → Q = 40, P = 50. MSC = 30 + Q; Eff: 90 − Q = 30 + Q → Q = 30 (P = 60). Tax = $20. DWL = ½ × (MSC(40) − MB(40)) × (40 − 30) = ½ × (70 − 50) × 10 = <b>100</b>.</p></details>
+<details><summary>2. In Q1, with the tax, what price do buyers pay and sellers keep? What's the tax revenue?</summary>
+<p>P<sub>B</sub> = MB(30) = 60; P<sub>S</sub> = 60 − 20 = 40 (= MPC(30) ✓). Revenue = 20 × 30 = <b>600</b> (= TEC at Q<sub>Eff</sub>).</p></details>
+<details><summary>3. A graph shows SMC = 18 and PMC = 12 at Q = 2000 (market), and SMC = 15, PMC = 10 at Q = 1200 (optimum). Tax per unit?</summary>
+<p>At Q<sub>Eff</sub> = 1200: 15 − 10 = <b>$5</b>. (The $6 gap at 2000 is the distractor.)</p></details>
+<details><summary>4. In Q3, if MB(2000) = 12, what is the DWL?</summary>
+<p>½ × (18 − 12) × (2000 − 1200) = ½ × 6 × 800 = <b>2400</b>.</p></details>
+<details><summary>5. Matrix (A rows Restrict/Status quo; B cols Restrict/Status quo): (R,R)=2,2; (R,SQ)=4,0; (SQ,R)=1,0; (SQ,SQ)=3,2. Dominant strategies? NE?</summary>
+<p>A: vs R: 2 &gt; 1 → R; vs SQ: 4 &gt; 3 → R → <b>A dominant = Restrict</b>. B: vs A's R: 2 &gt; 0 → R; vs A's SQ: 2 &gt; 0 → SQ → <b>B none</b>. NE: B's best response to Restrict is Restrict → <b>(Restrict, Restrict)</b> only. (This is the practice-exam game.)</p></details>
+<details><summary>6. Which two features define a Prisoner's Dilemma?</summary>
+<p>Both players have a dominant strategy; when both play it the outcome is collectively inefficient (another outcome makes both better off).</p></details>
+<details><summary>7. Matrix: (Up, Left) = 1, 3; (Up, Right) = 4, 1; (Down, Left) = 2, 2; (Down, Right) = 3, 4. Find all NE.</summary>
+<p>Row: vs Left 2 &gt; 1 → Down*; vs Right 4 &gt; 3 → Up*. Column: vs Up 3 &gt; 1 → Left*; vs Down 4 &gt; 2 → Right*. Row stars sit in (Down, Left) and (Up, Right); column stars sit in (Up, Left) and (Down, Right). No cell has both. <b>No Nash equilibrium</b> (in these pure actions) — like Rock-Paper-Scissors.</p></details>
+<details><summary>8. Why is GHG abatement a positive externality, and what problem does that cause?</summary>
+<p>The abating country bears the private cost but the benefit (avoided climate damage) is shared globally → others can <b>free-ride</b> → too little abatement (PD).</p></details>
+<details><summary>9. Kyoto vs Paris: what changed in the game?</summary>
+<p>Kyoto: no punishment for cheating → PD (Status quo dominant). Paris: name and shame lowers the payoff from cheating → coordination game with a good NE (Reduce, Reduce); ratcheting NDCs help coordinate on it; domestic pressure can make Reduce dominant.</p></details>
+<details><summary>10. Stern Review: cost of inaction vs cost of action?</summary>
+<p>Inaction ≈ 5% of global GDP per year (up to 20%); action ≈ 1% of GDP per year.</p></details>
+</section>
+
+<!-- ===================================================== SHEET ===================================================== -->
+<section id="sheet"><div class="sheet" data-topic="T6">
+<span class="tabhead">T6</span>
+<h2>Climate Change: Externalities &amp; Game Theory (L10–L11)</h2>
+
+<h3>Decision table — question wording → what to do</h3>
+<table>
+<tr><th>If the question says / asks…</th><th>Do this / answer is…</th></tr>
+<tr><td>"positive or negative externality?"</td><td>Social curve on <b>cost</b> side (SMC above PMC) → <b>negative</b>. On <b>benefit</b> side (SMB above PMB) → <b>positive</b>.</td></tr>
+<tr><td>"competitive market quantity / equilibrium"</td><td><b>Private ∩ private</b>: MB(=MPB) ∩ PMC (or MPB ∩ MC). Ignore the social curve.</td></tr>
+<tr><td>"socially optimal / efficient quantity"</td><td><b>Social curve ∩ other curve</b>: MB ∩ SMC (neg) or SMB ∩ MC (pos). Neg: Q<sub>Eff</sub> &lt; Q<sub>Mkt</sub>. Pos: Q* &gt; Q<sub>Mkt</sub>.</td></tr>
+<tr><td>"tax or subsidy? how much per unit?"</td><td>Neg → <b>tax = SMC(Q<sub>Eff</sub>) − PMC(Q<sub>Eff</sub>)</b>. Pos → <b>subsidy = SMB(Q*) − PMB(Q*)</b>. Read the gap <b>at the optimum Q</b>, not at the market Q.</td></tr>
+<tr><td>"deadweight loss of the externality"</td><td>½ × [gap at Q<sub>Mkt</sub> between social curve &amp; other curve] × |Q<sub>Mkt</sub> − Q<sub>Eff</sub>|. Show working.</td></tr>
+<tr><td>"implement only if DWL &gt; admin cost"</td><td>Compute DWL; compare; say yes/no.</td></tr>
+<tr><td>"effect of Pigouvian tax on supply"</td><td>Supply shifts <b>up</b> by t to MPC₀ + t = MSC; Q falls to Q<sub>Eff</sub>; DWL = 0.</td></tr>
+<tr><td>"effect of subsidy on demand"</td><td>Private demand shifts <b>up</b> by the subsidy: MPB<sup>Sub</sup> = MPB₀ + Sub; Q rises to Q*.</td></tr>
+<tr><td>"which area is TPC / TEC / TSC / TSB / TSS"</td><td>Under MPC / between MSC &amp; MPC / under MSC / under demand / TSB − TSC (see letters below).</td></tr>
+<tr><td>"Does A have a dominant strategy? Explain"</td><td>M6 steps 1–4; write both "If B plays X…" lines + conclusion.</td></tr>
+<tr><td>"The Nash equilibrium/equilibria is/are"</td><td>Cells with <b>both</b> payoffs starred. Name as (Row action, Column action). Could be 2.</td></tr>
+<tr><td>"Is this a Prisoner's Dilemma?"</td><td>Yes iff both have dominant strategies AND another cell is better for both.</td></tr>
+<tr><td>"why did Kyoto fail / why is climate policy hard?"</td><td>No punishment for cheating → PD; abatement = positive externality → <b>free-riding</b>.</td></tr>
+<tr><td>"what does name &amp; shame / ratcheting do?"</td><td>Lowers payoff from cheating → coordination game (2 NE); ratcheting = coordination device.</td></tr>
+<tr><td>"internal political pressure in one country"</td><td>Makes Reduce <b>dominant</b> for that country → other best-responds Reduce (IEDS) → unique NE (Reduce, Reduce): <b>contagion</b>.</td></tr>
+</table>
+
+<div class="cols">
+<div class="box"><b>Core formulas</b><br>
+TSC = TPC + TEC &nbsp;·&nbsp; <b>MSC = MPC + MEC</b><br>
+<b>MSB = MPB + MEB</b><br>
+TC(Q) = TC(Q−1) + MC(Q)<br>
+TEC (constant MEC) = MEC × Q<br>
+CS = TB − P·Q &nbsp;·&nbsp; PS = P·Q − TPC<br>
+<b>TSS = CS + PS − TEC = TB − TPC − TEC</b><br>
+Efficient: <b>MSC = MB</b> (neg) · <b>MSB = MC</b> (pos)<br>
+Tax: <b>t = MEC(Q<sub>Eff</sub>)</b> → MPC₁ = MPC₀ + t = MSC<br>
+Subsidy = MEB(Q*) → MPB<sup>Sub</sup> = MPB₀ + Sub<br>
+With tax: P<sub>B</sub> = MB(Q<sub>Eff</sub>), P<sub>S</sub> = P<sub>B</sub> − t; revenue = t × Q<sub>Eff</sub> (= TEC there)</div>
+
+<div class="box"><b>Notation (lecturer's)</b><br>
+Supply = MPC (a.k.a. PMC, "MC"). Demand = MB = MPB (= MSB if no positive ext.).<br>
+Market outcome: P<sub>Market</sub>, Q<sub>Market</sub> (or Q₀). Optimum: Q<sub>Eff</sub> = Q*.<br>
+Exam diagrams may say "SMC / PMC / MB" or "Social/Private Marginal Benefit" — same things.</div>
+
+<figure><svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sheet: negative externality areas" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="330" height="230" fill="#fff"/><polygon points="24.0,41.7 131.0,97.1 24.0,152.6" fill="#0284c7" fill-opacity="0.22" stroke="#0284c7" stroke-opacity="0.5" stroke-width="0.8"/><text x="53.4" y="102.1" font-size="12" font-weight="700" text-anchor="middle" fill="#111">A</text><polygon points="24.0,152.6 131.0,97.1 131.0,124.9 24.0,180.3" fill="#7c3aed" fill-opacity="0.15" stroke="#7c3aed" stroke-opacity="0.5" stroke-width="0.8"/><text x="77.5" y="143.7" font-size="12" font-weight="700" text-anchor="middle" fill="#111">B</text><polygon points="24.0,180.3 131.0,124.9 131.0,208.0 24.0,208.0" fill="#d97706" fill-opacity="0.15" stroke="#d97706" stroke-opacity="0.5" stroke-width="0.8"/><text x="77.5" y="188.1" font-size="12" font-weight="700" text-anchor="middle" fill="#111">C</text><polygon points="131.0,97.1 157.8,83.3 157.8,111.0" fill="#dc2626" fill-opacity="0.35" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/><text x="149.7" y="100.5" font-size="10" font-weight="700" text-anchor="middle" fill="#111">D</text><polygon points="131.0,97.1 157.8,111.0 131.0,124.9" fill="#16a34a" fill-opacity="0.25" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/><text x="139.6" y="116.0" font-size="10" font-weight="700" text-anchor="middle" fill="#111">E</text><polygon points="131.0,124.9 157.8,111.0 157.8,208.0 131.0,208.0" fill="#d97706" fill-opacity="0.08" stroke="#d97706" stroke-opacity="0.5" stroke-width="0.8"/><text x="144.4" y="174.2" font-size="12" font-weight="700" text-anchor="middle" fill="#111">F</text><line x1="24.0" y1="208.0" x2="246.0" y2="208.0" stroke="#111" stroke-width="1.6"/><line x1="24.0" y1="208.0" x2="24.0" y2="8.0" stroke="#111" stroke-width="1.6"/><text x="250.0" y="212.0" font-size="12" fill="#111">Q</text><text x="28.0" y="10" font-size="12" fill="#111">P</text><line x1="24.0" y1="41.7" x2="238.0" y2="152.6" stroke="#0284c7" stroke-width="2"/><text x="237.7" y="149.8" font-size="12" font-weight="600" fill="#0284c7">MB</text><line x1="24.0" y1="180.3" x2="238.0" y2="69.4" stroke="#d97706" stroke-width="2"/><text x="243.0" y="73.4" font-size="12" font-weight="600" fill="#d97706">MPC=S</text><line x1="24.0" y1="152.6" x2="238.0" y2="41.7" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 4"/><text x="243.0" y="45.7" font-size="12" font-weight="600" fill="#7c3aed">MSC</text><text x="131.0" y="226.0" font-size="9" text-anchor="middle" fill="#111">Q_Eff</text><text x="157.8" y="226.0" font-size="9" text-anchor="start" fill="#111">Q_Mkt</text></svg></figure>
+<div class="key"><b>Negative externality — L10 areas</b><br>
+TPC = C+F · TEC = B+D+E · TSC = B+C+D+E+F<br>
+TSB = A+B+C+E+F · <b>TSS(Q<sub>Mkt</sub>) = A − D</b> · <b>DWL = D</b> · TSS(Q<sub>Eff</sub>) = A<br>
+With tax at Q<sub>Eff</sub>: A = TSS, B = tax revenue strip (t × Q<sub>Eff</sub>), C = private cost.</div>
+
+<figure><svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sheet: positive externality DWL" style="background:#fff"><defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs><rect width="330" height="230" fill="#fff"/><polygon points="119.1,82.6 147.6,100.6 119.1,118.5" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/><text x="129.6" y="105.6" font-size="9" font-weight="700" text-anchor="middle" fill="#111">DWL</text><line x1="24.0" y1="208.0" x2="246.0" y2="208.0" stroke="#111" stroke-width="1.6"/><line x1="24.0" y1="208.0" x2="24.0" y2="8.0" stroke="#111" stroke-width="1.6"/><text x="250.0" y="212.0" font-size="12" fill="#111">Q</text><text x="28.0" y="10" font-size="12" fill="#111">P</text><line x1="24.0" y1="58.8" x2="238.0" y2="193.1" stroke="#0284c7" stroke-width="2"/><text x="243.0" y="197.1" font-size="12" font-weight="600" fill="#0284c7">MPB=D</text><line x1="24.0" y1="23.0" x2="238.0" y2="157.3" stroke="#0284c7" stroke-width="2" stroke-dasharray="7 4"/><text x="243.0" y="161.3" font-size="12" font-weight="600" fill="#0284c7">MSB</text><line x1="24.0" y1="178.2" x2="238.0" y2="43.8" stroke="#d97706" stroke-width="2"/><text x="228.7" y="56.8" font-size="12" font-weight="600" fill="#d97706">MC=S</text><line x1="180.9" y1="157.3" x2="180.9" y2="121.4" stroke="#111" stroke-width="1.4" marker-end="url(#ah)" marker-start="url(#ah)"/><text x="185.9" y="143.4" font-size="11" text-anchor="start" fill="#111">MEB</text><text x="119.1" y="227.4" font-size="9" text-anchor="end" fill="#111">Q_Mkt</text><text x="148.6" y="227.4" font-size="9" text-anchor="start" fill="#111">Q*</text></svg></figure>
+<div class="key"><b>Positive externality</b>: Q<sub>Mkt</sub> (MPB = MC) &lt; Q* (MSB = MC). DWL triangle between MSB and MC from Q<sub>Mkt</sub> to Q*: ½ × (MSB(Q<sub>Mkt</sub>) − MC(Q<sub>Mkt</sub>)) × (Q* − Q<sub>Mkt</sub>). L13: (25−12)×(600−350)/2. Subsidy = 20 − 8 = $12 (MSB − MPB at Q* = 600).</div>
+
+<div class="box"><b>Procedure: externality diagram</b><ol>
+<li>Type: social curve on cost side → neg; benefit side → pos.</li>
+<li>Q<sub>Mkt</sub>: private ∩ private.</li>
+<li>Q<sub>Eff</sub>: social ∩ other.</li>
+<li>Tax/subsidy: vertical gap social − private <b>at Q<sub>Eff</sub></b>.</li>
+<li>DWL: ½ × (gap at Q<sub>Mkt</sub>, social vs other) × |ΔQ|.</li>
+<li>Check: neg → Q<sub>Eff</sub> &lt; Q<sub>Mkt</sub>; pos → Q* &gt; Q<sub>Mkt</sub>.</li></ol>
+<b>Practice exam check:</b> MB ∩ PMC at 2000 (12); MB ∩ SMC at 1200 (15); PMC(1200) = 10 → tax $15 − $10 = $5.</div>
+
+<div class="box"><b>Procedure: equations</b><ol>
+<li>MB = MPC → Q<sub>Mkt</sub>.</li>
+<li>MSC = MPC + MEC; MB = MSC → Q<sub>Eff</sub>.</li>
+<li>t = MEC(Q<sub>Eff</sub>).</li>
+<li>DWL = ½[MSC(Q<sub>Mkt</sub>) − MB(Q<sub>Mkt</sub>)](Q<sub>Mkt</sub> − Q<sub>Eff</sub>).</li></ol>
+e.g. MB = 90 − Q, MPC = 10 + Q, MEC = 20 → Q<sub>Mkt</sub> = 40, Q<sub>Eff</sub> = 30, t = 20, DWL = ½·20·10 = 100.</div>
+</div>
+
+<div class="sheet-break"></div>
+<h3>Game theory — payoff matrix procedure (M6)</h3>
+<div class="cols">
+<div class="box"><b>Definitions (L11)</b><br>
+<b>Game</b> = players, actions, payoffs. 2×2 simultaneous-move.<br>
+<b>Convention:</b> Player 1 = <b>rows</b>, Player 2 = <b>columns</b>; cell = outcome; <b>1st number → row player, 2nd → column player</b>.<br>
+<b>Best response:</b> action with highest payoff <i>given</i> the opponent's action (mark with *).<br>
+<b>Dominant strategy:</b> action that is <b>always a best response to all</b> of the opponent's actions.<br>
+<b>Nash equilibrium:</b> outcome where <b>all players play best responses to each other's chosen actions</b> (self-enforcing; nobody wants to change). = cell with two stars. Can be more than one.<br>
+<b>Prisoner's Dilemma:</b> both have dominant strategy + resulting outcome collectively inefficient.<br>
+<b>Coordination game:</b> 2 NE (good &amp; bad); need trust/coordination device.<br>
+<b>IEDS:</b> remove dominated action, best-respond to what's left → NE.</div>
+
+<div class="box"><b>Steps</b><ol>
+<li>Write: Row = __ = 1st no.; Col = __ = 2nd no.</li>
+<li><b>Row player:</b> for each <b>column</b>, compare <b>1st numbers up/down</b>; star larger.</li>
+<li><b>Column player:</b> for each <b>row</b>, compare <b>2nd numbers left/right</b>; star larger.</li>
+<li>Row's stars in the <b>same row</b> → dominant = that row. Col's stars in the <b>same column</b> → dominant. Else "no dominant strategy".</li>
+<li>NE = every cell with <b>both</b> numbers starred; name it <b>(Row action, Col action)</b>, never by payoffs.</li>
+<li>Check: one dominant → NE = (that action, other's BR to it). Better cell for both? → PD inefficiency.</li>
+<li>Ties: star both.</li></ol>
+<i>"Row looks DOWN a column at 1st numbers; Column looks ACROSS a row at 2nd numbers."</i></div>
+
+<div class="box"><b>Written answer (4 marks)</b><br>
+"Yes/No. If B plays X: R1 gives A __, R2 gives A __ → __ is A's best response to X. If B plays Y: R1 gives A __, R2 gives A __ → __ is A's best response to Y. Since __ is the best response to each and every one of B's actions, it is A's dominant strategy. / Since A's best response differs with B's action, A has no dominant strategy."</div>
+
+<div class="box"><b>Lecture games (stars shown)</b><br>
+<b>1. GHG abatement = PD</b> (cost 5; benefit 8 both / 4 one)
+<table class="pm"><tr><th></th><th>Reduce</th><th>SQ</th></tr>
+<tr><th>Reduce</th><td class="cell">3, 3</td><td class="cell">−1, <b>4*</b></td></tr>
+<tr><th>SQ</th><td class="cell"><b>4*</b>, −1</td><td class="cell ne"><b>0*</b>, <b>0*</b></td></tr></table>
+SQ dominant for both → NE (SQ, SQ); (Reduce, Reduce) better for both.<br>
+<b>2. Name &amp; shame = coordination</b> (cheat-vs-reduce 4 → 2)
+<table class="pm"><tr><th></th><th>Reduce</th><th>Cheat</th></tr>
+<tr><th>Reduce</th><td class="cell ne"><b>3*</b>, <b>3*</b></td><td class="cell">−1, 2</td></tr>
+<tr><th>Cheat</th><td class="cell">2, −1</td><td class="cell ne"><b>0*</b>, <b>0*</b></td></tr></table>
+No dominant; NE (Reduce, Reduce) &amp; (Cheat, Cheat).<br>
+<b>3. A's internal pressure</b> (A's cheat → 0, −2)
+<table class="pm"><tr><th></th><th>Reduce</th><th>Cheat</th></tr>
+<tr><th>Reduce</th><td class="cell ne"><b>3*</b>, <b>3*</b></td><td class="cell"><b>−1*</b>, 2</td></tr>
+<tr><th>Cheat</th><td class="cell">0, −1</td><td class="cell">−2, <b>0*</b></td></tr></table>
+A: Reduce dominant; B none → IEDS → NE (Reduce, Reduce). Contagion.</div>
+
+<div class="box"><b>Past-paper style checks</b><br>
+Practice (Restrict/SQ): 2,2 | 4,0 / 1,0 | 3,2 → A dominant Restrict; B none; NE (Restrict, Restrict).<br>
+S1 2026 (Contribute/Withdraw): 3,3 | 0,4 / 2,0 | 1,2 → A none; B dominant Withdraw; NE (Withdraw, Withdraw).</div>
+</div>
+
+<h3>Climate facts &amp; policy (dropdown fodder)</h3>
+<div class="cols">
+<div class="box">
+<b>Market failure</b> = competitive market over/under-produces vs social optimum. Causes: externalities, monopoly, asymmetric info. "Market fails, government fails too."<br>
+<b>Externality</b>: cost/benefit to a third party not involved in production/consumption; decision-maker doesn't bear full cost / get full benefit. Neg: smoking, coal power. Pos: vaccination, education, GHG abatement.<br>
+<b>Climate = neg. externality of emissions</b> (Stern: "greatest market failure the world has ever seen"); <b>abatement = pos. externality</b> → free-riding.<br>
+<b>Pigou</b>: corrective tax/subsidy; sin taxes; Pigou Club backs carbon tax. Problems: measuring MEC; getting current generation to pay for future.<br>
+<b>Aus carbon tax</b>: Gillard 2012, $20/t CO₂, cut 17 Mt (ANU 2014), repealed Abbott 2014.<br>
+<b>Not lectured 2026</b>: cap-and-trade (cap at Q<sub>Eff</sub>; permit price = MEC(Q<sub>Eff</sub>) ≡ tax), Coase (bargaining fixes it if property rights clear &amp; transaction costs low).</div>
+<div class="box">
+<b>IPCC</b> 1988, 195 states, synthesises (AR6 2023). Target <b>1.5°C</b>; net-zero by <b>2050</b> (2°C → 2070).<br>
+<b>Stern 2006</b>: inaction ≈ <b>5%</b> world GDP/yr (to 20%); action ≈ <b>1%</b>.<br>
+<b>Kyoto</b>: signed 1997, in force 2005; Annex I cut avg <b>5.2%</b> vs 1990 by 2008–12; developing exempt; US out 2001, Canada 2011; round 2 lost US/Russia/Japan/Canada/NZ. <b>No punishment for cheating</b> (Barrett 2008) → PD.<br>
+<b>Paris</b> 2016; &lt;2°C pref. 1.5°C; 194 countries/98% emissions; US out 2017, in 2021, out 2025. <b>Pledge &amp; review</b> of <b>NDCs</b> (self-set, public, UNFCCC). <b>Global Stocktake</b> every 5 yrs (first 2023). Enforcement = <b>name and shame</b>. <b>Ratcheting</b>: NDCs updated every 5 yrs, more ambitious → coordination device.<br>
+US left Kyoto → others followed; US left Paris → others stayed (payoff structure matters).</div>
+</div>
+
+<h3>Traps</h3>
+<div class="trap">Tax/subsidy gap read at Q<sub>Eff</sub> (optimum), NOT at Q<sub>Mkt</sub>. DWL height read at Q<sub>Mkt</sub>.</div>
+<div class="trap">Market quantity never uses the social curve. Don't label the market outcome Q*.</div>
+<div class="trap">NE named by actions in (Row, Column) order — not payoffs; tick ALL double-starred cells. No dominant strategy ≠ no NE.</div>
+<div class="trap">Row player compares 1st numbers within a column; column player compares 2nd numbers within a row.</div>
+</div></section>
+
+</main></body></html>

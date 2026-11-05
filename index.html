@@ -7,7 +7,8 @@
 <style>
   :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;--line:#2a3340;
     --stat:#34d399;--stat-dark:#062c22;--stat-ink:#032117;
-    --math:#a78bfa;--math-dark:#1e1b4b;--math-ink:#1e1b4b}
+    --math:#a78bfa;--math-dark:#1e1b4b;--math-ink:#1e1b4b;
+    --econ:#f59e0b}
   *{box-sizing:border-box}
   html,body{height:100%}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;display:flex;flex-direction:column}
@@ -34,6 +35,10 @@
   .math:hover{border-color:var(--math)}
   .math .code,.math .go{color:var(--math)}
   .math .badge{background:rgba(167,139,250,.14);color:var(--math);border:1px solid #3b2f80}
+  .econ{border-top:4px solid var(--econ)}
+  .econ:hover{border-color:var(--econ)}
+  .econ .code,.econ .go{color:var(--econ)}
+  .econ .badge{background:rgba(245,158,11,.14);color:var(--econ);border:1px solid #6b4a0d}
   .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
   .links a{font-size:12px;padding:4px 9px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink)}
   .links a:hover{background:rgba(255,255,255,.1)}
@@ -47,6 +52,24 @@
 </header>
 <main>
 <div class="picker">
+
+  <div class="subject econ" data-href="econ1011/index.html">
+    <div class="code">ECON1011</div>
+    <h2><a href="econ1011/index.html">Economics for Business</a></h2>
+    <p>Fast-track hub with seven topic pages (learn fast plus an exam sheet), a printable open-book binder, and worked past papers.</p>
+    <div class="meta">
+      <span class="badge">Exam · Sat 7 Nov 2026</span>
+      <span class="badge">100 marks · 120 min</span>
+      <span class="badge">Open book · FX82</span>
+    </div>
+    <div class="links">
+      <a href="econ1011/index.html">🏠 Hub</a>
+      <a href="econ1011/print.html">🖨 Print binder</a>
+      <a href="econ1011/t1-demand-supply.html">T1 D&amp;S</a>
+      <a href="econ1011/t4-macro-policy.html">T4 AD-AS</a>
+    </div>
+    <a class="go" href="econ1011/index.html">Open ECON1011 →</a>
+  </div>
 
   <div class="subject stat" data-href="stat1301/index.html">
     <div class="code">STAT1301</div>

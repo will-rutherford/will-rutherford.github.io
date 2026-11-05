@@ -1,0 +1,1183 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECON1011 — T2 Market Intervention</title>
+<link rel="stylesheet" href="style.css"><script src="pack.js" defer></script>
+<style>
+.sheet .figgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sheet .figgrid figure{break-inside:avoid}
+@media(max-width:700px){.sheet .figgrid{grid-template-columns:1fr}}
+.sheet figure{margin:4px 0}
+.sheet figcaption{color:#333;font-size:11px}
+</style></head><body>
+<header><h1>T2 · Market Intervention</h1><p>Lecture 4 (Housing Crisis Part 3) + elasticity from L2–3, surplus/DWL from L5, L13 review conventions</p><p>Price ceilings &amp; floors · unit taxes &amp; subsidies · P<sub>B</sub>/P<sub>S</sub>/P<sub>M</sub> · tax incidence · elasticity · surplus &amp; deadweight loss</p><div><span class="badge">~50 min</span><span class="badge gold">Exam Q1-type: grid diagrams</span><span class="badge blue">Open-book sheet at bottom</span></div></header>
+<nav><a href="../index.html">⇄ Switch subject</a><a href="index.html">🏠 Hub</a><a href="print.html">🖨 Print binder</a>
+<a href="t1-demand-supply.html">T1 D&amp;S</a><a href="t2-intervention.html">T2 Intervention</a><a href="t3-market-power.html">T3 Market power</a><a href="t4-macro-policy.html">T4 AD-AS &amp; policy</a><a href="t5-trade.html">T5 Trade</a><a href="t6-climate-games.html">T6 Climate &amp; games</a><a href="t7-growth-inequality.html">T7 Growth</a>
+<a href="#learn">Learn</a><a href="#methods">Methods</a><a href="#qtypes">Question types</a><a href="#traps">Traps</a><a href="#check">Self-check</a><a href="#sheet">Exam sheet</a></nav>
+<main>
+
+<!-- ===================================================== LEARN -->
+<section id="learn">
+<h2>1 · The big idea</h2>
+<div class="card">
+<p>Governments intervene in competitive markets with <b>price controls</b> (ceilings, floors), <b>per-unit taxes</b> and <b>per-unit subsidies</b> (and occasionally quotas). Every one of these drives a <b>wedge</b> between what the market would do on its own and what actually happens. A binding ceiling or floor <b>cuts the quantity traded</b> and creates a shortage or a surplus. A tax drives a gap between what buyers pay (P<sub>B</sub>) and what sellers keep (P<sub>S</sub>), and also cuts quantity. A subsidy raises quantity above the efficient level. Anything that moves quantity away from the competitive Q* creates a <b>deadweight loss</b>. <b>Elasticity</b> decides who carries the burden of a tax (or gets the gain from a subsidy): the <i>less elastic</i> side carries more of it.</p>
+<p><b>Lecture story:</b> Australia's housing/rental crisis. <b>Rent control</b> (a price ceiling) backfires because it causes shortages, black markets and run-down housing. A <b>rental subsidy</b> (NRAS, paid to landlords) gives lower rents and more units, but it costs the budget and mostly helps landlords because rental supply is inelastic. <b>Increasing supply</b> (zoning, Housing Australia Future Fund) fixes the root cause, but slowly.</p>
+</div>
+
+<h2>2 · Concepts, one bite at a time</h2>
+
+<h3>2.1 Price controls: ceiling vs floor, binding vs non-binding</h3>
+<div class="card">
+<ul>
+<li><b>Price ceiling</b> = legal <b>maximum</b> price (e.g. <b>rent control</b>: rent caps or rent freezes).</li>
+<li><b>Price floor</b> = legal <b>minimum</b> price (e.g. <b>minimum wage</b>, AUD 26.44/hr on the slide. In the labour market the <i>employers are the buyers</i>).</li>
+<li>A control only does anything if it is <b>binding</b>. The exam also says <b>"effective"</b> for binding and <b>"ineffective"</b> for non-binding.</li>
+</ul>
+<table><tr><th></th><th>Binding / effective when…</th><th>Result</th><th>Non-binding / ineffective when…</th></tr>
+<tr><td><b>Ceiling</b> (max)</td><td>set <b>BELOW</b> P*</td><td>P = ceiling; Q traded = <b>Q<sub>S</sub></b> (short side); <b>shortage</b> = Q<sub>D</sub> − Q<sub>S</sub></td><td>set at or above P*: P*, Q* unchanged</td></tr>
+<tr><td><b>Floor</b> (min)</td><td>set <b>ABOVE</b> P*</td><td>P = floor; Q traded = <b>Q<sub>D</sub></b> (short side); <b>excess supply</b> = Q<sub>S</sub> − Q<sub>D</sub></td><td>set at or below P*: P*, Q* unchanged</td></tr></table>
+<div class="tip">Memory hook: a <b>ceiling</b> only bites if it is <i>low</i> enough to hit the price; a <b>floor</b> only bites if it is <i>high</i> enough. The quantity traded is always the <b>smaller</b> of Q<sub>D</sub> and Q<sub>S</sub>, because nobody can be forced to buy or sell more than they want.</div>
+<div class="qcaa">Ceiling → shortage, floor → surplus, black markets. Same as QCAA.</div>
+<div class="new"><b>Black-market price</b> under a binding ceiling. Only Q<sub>S</sub> units exist, so desperate renters will bid up to the <b>demand curve's height at Q<sub>S</sub></b>. Read it as: go up from Q<sub>S</sub> to the <b>demand</b> curve, then across to the price axis (lecture: "the black-market rent may be as high as P<sub>BM</sub>, what renters are willing to pay given the quantity available").</div>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<defs><marker id="a1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,240.0 210.0,240.0 210.0,210.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,240.0 50.0,300.0 210.0,240.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="240.0" x2="450.0" y2="240.0" stroke="#111" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="448.0" y="234.0" text-anchor="end" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Rent ceiling $3</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="330.0" y1="240.0" x2="330.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="102.0" y="176.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="130.0" y="230.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="238.0" y="233.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="94.0" y="264.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qs=400</text>
+<text x="333.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qd=700</text>
+<text x="293.0" y="310.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<text x="216.0" y="144.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">black-market rent $6</text>
+<line x1="210.0" y1="258.0" x2="330.0" y2="258.0" stroke="#111" stroke-width="1.2" marker-start="url(#a1)" marker-end="url(#a1)"/>
+<text x="270.0" y="272.0" text-anchor="middle" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">shortage = 300</text>
+</svg><figcaption>Main market: D: P = 10 − Q/100, S: P = 1 + Q/200, so P* = $4, Q* = 600. A binding rent ceiling at $3 gives Q<sub>S</sub> = 400, Q<sub>D</sub> = 700, a shortage of 300 and a black-market rent of $6. Deadweight loss = B + D.</figcaption></figure>
+<div class="card q"><b>Worked example (main market).</b> D: P = 10 − Q/100, S: P = 1 + Q/200.<br>
+Equilibrium: 10 − Q/100 = 1 + Q/200 → 9 = 3Q/200 → <b>Q* = 600, P* = $4</b>.<br>
+• Ceiling $5: above $4, so <b>non-binding</b>. Nothing changes.<br>
+• Ceiling $3: below $4, so <b>binding</b>. Q<sub>S</sub>: 3 = 1 + Q/200 → 400. Q<sub>D</sub>: 3 = 10 − Q/100 → 700. <b>Shortage = 300</b>. Q traded = <b>400</b>. Black-market rent = D at Q = 400 = 10 − 4 = <b>$6</b>.<br>
+• Floor $6: above $4, so <b>binding</b>. Q<sub>D</sub>: 6 = 10 − Q/100 → 400. Q<sub>S</sub>: 6 = 1 + Q/200 → 1000. <b>Excess supply = 600</b>. Q traded = <b>400</b>.</div>
+<p><b>Who wins and who loses (Lecture 4 slides 28 &amp; 34):</b></p>
+<table><tr><th>Binding…</th><th>Buyers</th><th>Sellers</th></tr>
+<tr><td>Ceiling (rent control)</td><td>Lucky renters pay less; many are left homeless or pushed into the black market</td><td><b>Unambiguously worse</b>: lower price AND lower quantity</td></tr>
+<tr><td>Floor (min wage)</td><td><b>Overall bad</b>: higher price and lower quantity</td><td><b>Ambiguous</b>: higher price (good) but lower quantity sold (bad)</td></tr></table>
+<p><b>Unintended consequences of rent control</b> (slides 35–36): <i>price competition</i> (black-market renting, illegal rent-bidding), <i>non-price competition</i> (landlords pick "desirable" tenants: no students, pets, kids or immigrants, which hurts vulnerable renters most), <i>lower quality</i> (less maintenance) and <i>lower long-run supply</i> (landlords sell up, investors are deterred, so the shortage gets worse). Lecture verdict: <b>"Rent control backfires."</b></p>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,150.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,150.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,300.0 210.0,240.0 210.0,210.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="150.0" x2="450.0" y2="150.0" stroke="#111" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="448.0" y="126.0" text-anchor="end" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Price floor $6</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="94.0" y="125.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="130.0" y="185.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="118.0" y="245.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="238.0" y="231.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qd=400</text>
+<text x="293.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<line x1="450.0" y1="150.0" x2="450.0" y2="330" stroke="#555" stroke-dasharray="3 3"/>
+<text x="446.0" y="291.0" text-anchor="end" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qs=1000</text>
+<text x="330.0" y="144.0" text-anchor="middle" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">excess supply = 600</text>
+</svg><figcaption>Binding price floor at $6 in the same market. Q<sub>D</sub> = 400 is traded, Q<sub>S</sub> = 1000, so excess supply is 600. Deadweight loss = C + E.</figcaption></figure>
+</div>
+
+<h3>2.2 Surplus, social surplus and deadweight loss (the area-accounting toolkit)</h3>
+<div class="card">
+<ul>
+<li><b>Demand curve = marginal benefit (MB) curve.</b> The area under D up to Q = total benefit.</li>
+<li><b>Supply curve = marginal cost (MC) curve.</b> The area under S up to Q = total (variable) cost.</li>
+<li><b>Consumer surplus (CS)</b> = area <i>below demand, above the price buyers pay</i>, up to the quantity traded.</li>
+<li><b>Producer surplus (PS)</b> = area <i>above supply, below the price sellers receive</i>, up to the quantity traded.</li>
+<li><b>Social surplus (SS)</b> = CS + PS (+ government revenue − government spending) = total benefit − production cost.</li>
+<li><b>Deadweight loss (DWL)</b> = the SS lost compared with the competitive equilibrium. It is the triangle between D and S over the units <b>not</b> traded (under-production), or over the units that <b>should not</b> have been traded (over-production).</li>
+</ul>
+<div class="qcaa">CS and PS triangles are familiar. Triangle area = ½ × base × height. Rectangle = width × height.</div>
+<div class="new">The lecturer defines SS as <b>total benefit − production cost</b> and says <b>both under-producing and over-producing</b> create a DWL (Lecture 5). So a <b>subsidy also creates a DWL</b>, even though Q rises. Area letters are always taken from the <b>given figure</b>. Read them carefully, because the letters in exam figures will not match the ones on this page.</div>
+<table><tr><th>Main market, before vs after</th><th>No policy</th><th>Ceiling $3</th><th>Floor $6</th><th>Tax $3</th><th>Subsidy $3</th></tr>
+<tr><td>Q traded</td><td>600</td><td>400</td><td>400</td><td>400</td><td>800</td></tr>
+<tr><td>CS</td><td>½·6·600 = 1800</td><td>2000*</td><td>½·4·400 = 800</td><td>½·4·400 = 800</td><td>½·8·800 = 3200</td></tr>
+<tr><td>PS</td><td>½·3·600 = 900</td><td>½·2·400 = 400</td><td>1600</td><td>½·2·400 = 400</td><td>½·4·800 = 1600</td></tr>
+<tr><td>Govt</td><td>0</td><td>0</td><td>0</td><td>+3·400 = +1200</td><td>−3·800 = −2400</td></tr>
+<tr><td>Social surplus</td><td><b>2700</b></td><td>2400</td><td>2400</td><td>2400</td><td>2400</td></tr>
+<tr><td><b>DWL</b></td><td>0</td><td>½·(6−3)·200 = <b>300</b></td><td>½·(6−3)·200 = <b>300</b></td><td>½·3·200 = <b>300</b></td><td>½·3·200 = <b>300</b></td></tr></table>
+<p class="src">*Ceiling CS assumes the 400 units go to the renters who value them most and there is no black market. Floor PS = (6−3)·400 + ½·(3−1)·400 = 1200 + 400 = 1600, assuming the lowest-cost sellers make the sales. A wedge of $3 at Q = 400 gives a DWL of 300 every time: DWL = ½ × (height of wedge) × (Q* − Q).</p>
+<div class="tip">DWL shortcut: <b>DWL = ½ × (vertical gap between D and S at the new Q) × |Q* − Q<sub>new</sub>|</b>. For a tax or subsidy the vertical gap is just the tax or subsidy per unit.</div>
+</div>
+
+<h3>2.3 Per-unit (sales) tax: P<sub>B</sub>, P<sub>S</sub>, P<sub>M</sub></h3>
+<div class="card">
+<p>The lecturer's notation (L4 slide 44, L13 slide 23). Every exam answer is phrased with these three prices:</p>
+<table><tr><th>Symbol</th><th>Name</th><th>Meaning</th><th>Tax collected from sellers</th></tr>
+<tr><td><b>P<sub>M</sub></b></td><td>Market price</td><td>"Sticker price": what the buyer hands the seller</td><td>the price where D meets <b>S with tax</b></td></tr>
+<tr><td><b>P<sub>B</sub></b></td><td>Buyers' price</td><td>what buyers actually pay out of pocket (the price buyers care about)</td><td><b>P<sub>B</sub> = P<sub>M</sub></b></td></tr>
+<tr><td><b>P<sub>S</sub></b></td><td>Sellers' price</td><td>what actually ends up in the seller's pocket (the price sellers care about)</td><td><b>P<sub>S</sub> = P<sub>M</sub> − Tax</b></td></tr></table>
+<p><b>Why supply shifts UP by the tax:</b> the supply curve plots <i>market price</i> against Q<sub>S</sub>, but sellers only care about P<sub>S</sub>. If sellers want P<sub>S</sub> = $5 to supply 12 apples, then with a $2 tax the market price must be P<sub>M</sub> = P<sub>S</sub> + 2 = $7 to get the same 12 apples. Every point on S moves <b>up by exactly the tax</b> (L13 slides 24–27). A unit tax works like a "negative subsidy". It <b>reduces supply</b>, raises P<sub>B</sub>, lowers P<sub>S</sub> and lowers Q.</p>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<defs><marker id="a3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,150.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,150.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,240.0 210.0,240.0 210.0,210.0" fill="#65a30d" fill-opacity="0.28" stroke="#65a30d" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,240.0 50.0,300.0 210.0,240.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="210.0" x2="450.0" y2="60.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="454.0" y="64.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S+tax</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="240.0" x2="210.0" y2="240.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="94.0" y="125.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="130.0" y="185.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="130.0" y="230.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="238.0" y="231.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="94.0" y="264.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">F</text>
+<text x="54" y="146.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B = P_M = $6</text>
+<text x="298.0" y="214.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4</text>
+<text x="54" y="254.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_S = $3</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q_tax=400</text>
+<text x="293.0" y="310.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<line x1="378.0" y1="177.0" x2="378.0" y2="87.0" stroke="#111" stroke-width="1.2" marker-start="url(#a3)" marker-end="url(#a3)"/>
+<text x="382.0" y="132.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">tax $3</text>
+</svg><figcaption>$3 per-unit tax in the main market. S shifts up by $3 to "S+tax". The new equilibrium is where D meets S+tax: Q = 400, P<sub>B</sub> = P<sub>M</sub> = $6, P<sub>S</sub> = $6 − $3 = $3. Revenue = B + D. DWL = C + E.</figcaption></figure>
+<div class="card q"><b>Worked example: $3 tax on sellers (main market).</b><br>
+1. S with tax: P = 1 + Q/200 + 3 = 4 + Q/200.<br>
+2. Solve with D: 10 − Q/100 = 4 + Q/200 → 6 = 3Q/200 → <b>Q<sub>tax</sub> = 400</b>.<br>
+3. P<sub>B</sub> = P<sub>M</sub> = 10 − 4 = <b>$6</b>. P<sub>S</sub> = 6 − 3 = <b>$3</b> (check: original S at Q = 400 is 1 + 2 = 3 ✓).<br>
+4. <b>Consumers' tax burden</b> = increase in buyers' price = P<sub>B</sub> − P* = 6 − 4 = <b>$2 per unit</b>. <b>Sellers' tax burden</b> = fall in sellers' price = P* − P<sub>S</sub> = 4 − 3 = <b>$1 per unit</b>. They sum to 2 + 1 = 3 = tax ✓.<br>
+5. <b>Tax revenue</b> = tax × Q<sub>tax</sub> = 3 × 400 = <b>$1200</b> (= B + D = 2·400 + 1·400).<br>
+6. <b>DWL</b> = ½ × 3 × (600 − 400) = <b>$300</b> (= C + E = 200 + 100).<br>
+Areas: before, CS = A+B+C = 1800 and PS = D+E+F = 900. After, CS = A = 800, PS = F = 400, Govt = B+D = 1200, lost = C+E = 300.</div>
+<div class="new">Burden is measured as the <b>change in each side's own price</b> (L13: "Consumers' tax burden: <i>increase</i> in buyers' price due to the tax"), <b>not</b> as who legally pays the cheque. It doesn't matter whether the tax is levied on buyers or sellers: the market outcome is the same (lecture says the same for subsidies). The lecture always works with the tax collected <b>from sellers</b>, so that is the case to know.</div>
+</div>
+
+<h3>2.4 Per-unit subsidy (rental subsidy / NRAS)</h3>
+<div class="card">
+<ul>
+<li><b>Subsidy</b> = a government payment to suppliers or consumers to encourage production or consumption. There are two kinds. An <b>ad-valorem</b> subsidy is a % of price. A <b>unit</b> subsidy is a fixed $ per unit. <b>The course uses unit subsidies only.</b></li>
+<li>The course pays it <b>to sellers</b> (NRAS paid landlords; the outcome is the same if paid to buyers).</li>
+<li>Prices: <b>P<sub>B</sub> = P<sub>M</sub></b>, <b>P<sub>S</sub> = P<sub>M</sub> + subsidy</b>.</li>
+<li>Supply shifts <b>DOWN (right) by the subsidy</b>, so supply increases. The new P<sub>M</sub> is where D meets S−sub.</li>
+<li>Buyers' gain = P* − P<sub>B</sub>. Sellers' gain = P<sub>S</sub> − P*. Government cost = subsidy × Q<sub>sub</sub>. DWL comes from over-production (Q<sub>sub</sub> &gt; Q*).</li>
+</ul>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="210.0" y1="330.0" x2="450.0" y2="240.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="454.0" y="244.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S−sub</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="270.0" x2="370.0" y2="270.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="370.0" y1="270.0" x2="370.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="180.0" x2="370.0" y2="180.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="370.0" y1="180.0" x2="370.0" y2="270.0" stroke="#111" stroke-width="2"/>
+<text x="376.0" y="222.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">subsidy $3</text>
+<text x="54" y="176.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_S = P_M + sub = $5</text>
+<text x="54" y="206.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4</text>
+<text x="54" y="266.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B = P_M = $2</text>
+<text x="293.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<text x="373.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q_sub=800</text>
+</svg><figcaption>$3 per-unit subsidy to sellers in the main market. S shifts down by $3 to "S−sub". Q = 800, P<sub>B</sub> = P<sub>M</sub> = $2, P<sub>S</sub> = $5.</figcaption></figure>
+<div class="card q"><b>Worked example: $3 subsidy to sellers.</b> S−sub: P = 1 + Q/200 − 3 = −2 + Q/200. Solve with D: 10 − Q/100 = −2 + Q/200 → 12 = 3Q/200 → <b>Q = 800</b>. P<sub>B</sub> = P<sub>M</sub> = 10 − 8 = <b>$2</b>. P<sub>S</sub> = 2 + 3 = <b>$5</b>.<br>
+Renters gain 4 − 2 = <b>$2/unit</b>. Landlords gain 5 − 4 = <b>$1/unit</b>. Govt cost = 3 × 800 = <b>$2400</b>. CS rises by 3200 − 1800 = 1400. PS rises by 1600 − 900 = 700. Net = 1400 + 700 − 2400 = <b>−300 = DWL</b> = ½ × 3 × (800 − 600).</div>
+<p><b>Lecture verdict:</b> a rental subsidy lowers rents <i>and</i> increases the number of rental properties, so it is "probably a better policy than rent controls". But <b>there's no free lunch</b>. The <b>opportunity cost</b> is the social benefit lost from other government programs (education, health, social security) that the money could have funded.</p>
+</div>
+
+<h3>2.5 Elasticity: what it is and exactly how this lecturer calculates it</h3>
+<div class="card">
+<p><b>Price elasticity of demand</b> ε<sub>D</sub> = %ΔQ<sub>D</sub> / %ΔP, where %ΔQ<sub>D</sub> = ΔQ<sub>D</sub>/Q<sub>D</sub> × 100% and %ΔP = ΔP/P × 100%. It is unit-free, unlike slope.</p>
+<div class="new"><b>Sign convention:</b> ε<sub>D</sub> is a <b>negative number</b> (law of demand). The lecturer writes ε<sub>D</sub> = −2 and uses |ε<sub>D</sub>| = 2 only when he says "absolute value". Exam options include both signs, e.g. "−1.25 / 0.8 / −0.8 / 1.25 (do <b>not</b> use the absolute value)", so give the <b>negative</b> number unless told otherwise.</div>
+<div class="new"><b>Method = POINT elasticity on a linear curve, not the QCAA/midpoint formula.</b><br>
+<b>ε<sub>D</sub> = (P/Q<sub>D</sub>) ÷ (ΔP/ΔQ<sub>D</sub>) = slope of ray from origin ÷ slope of demand curve = (1/slope) × (P/Q)</b><br>
+Lecture examples: Week 2 at A = (Q 6, P 8) on a demand from (0, 20) to (10, 0) gives ray 8/6 = 4/3, slope −2, so ε = −2/3. Practice exam at (Q 8, P 12) gives (12/8)/(−20/20) = −3/2. L13 Mario at (Q 36, P 64) gives (64/36)/(−1) = −16/9 ≈ −1.78.</div>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<line x1="50" y1="330" x2="150.0" y2="30.0" stroke="#111" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="154.8" y="39.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ray from origin (slope P/Q)</text>
+<circle cx="130.0" cy="90.0" r="5" fill="#111"/>
+<text x="139.0" y="84.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −4 (elastic)</text>
+<circle cx="250.0" cy="180.0" r="5" fill="#111"/>
+<text x="259.0" y="174.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −1 (unit elastic)</text>
+<circle cx="370.0" cy="270.0" r="5" fill="#111"/>
+<text x="379.0" y="264.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −0.25 (inelastic)</text>
+<line x1="50" y1="90.0" x2="130.0" y2="90.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="130.0" y1="90.0" x2="130.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="166.0" y="102.0" text-anchor="start" font-size="11" fill="#444" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">elastic half (|ε|&gt;1)</text>
+<text x="226.0" y="264.0" text-anchor="start" font-size="11" fill="#444" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">inelastic half (|ε|&lt;1)</text>
+</svg><figcaption>Along one straight demand line the slope is constant but elasticity is not. The upper half is elastic, the midpoint is unit elastic and the lower half is inelastic. At (200, 8): (8/200)/(−1/100) = −4.</figcaption></figure>
+<table><tr><th>|ε<sub>D</sub>|</th><th>Name</th><th>Meaning / curve</th><th>Price ↑ effect on total revenue</th></tr>
+<tr><td>0</td><td>perfectly inelastic</td><td>vertical demand</td><td>TR ↑</td></tr>
+<tr><td>&lt; 1</td><td>inelastic</td><td>1% ↑P gives less than a 1% fall in Q<sub>D</sub></td><td>TR ↑ (price ↓ gives TR ↓)</td></tr>
+<tr><td>= 1</td><td>unit elastic</td><td>midpoint of a linear demand</td><td>TR unchanged (max TR, MR = 0)</td></tr>
+<tr><td>&gt; 1</td><td>elastic</td><td>1% ↑P gives more than a 1% fall in Q<sub>D</sub></td><td>TR ↓ (price ↓ gives TR ↑)</td></tr>
+<tr><td>∞</td><td>perfectly elastic</td><td>horizontal demand</td><td>—</td></tr></table>
+<p><b>Using ε:</b> %ΔQ<sub>D</sub> = ε<sub>D</sub> × %ΔP. E.g. ε<sub>D</sub> = −3 and price ↑1% gives Q<sub>D</sub> ↓3%. Revenue: %ΔTR ≈ %ΔP + %ΔQ<sub>D</sub>.</p>
+<p><b>Determinants of demand elasticity (L3):</b> (1) more close substitutes means more elastic (a single brand is more elastic than "food"); (2) longer time frame means more elastic; (3) luxury is more elastic than necessity; (4) a small share of the budget means more inelastic (salt).</p>
+<p><b>Price elasticity of supply</b> ε<sub>S</sub> = %ΔQ<sub>S</sub>/%ΔP and is <b>positive</b>. A vertical S is perfectly inelastic and a horizontal S is perfectly elastic. The lecturer says "don't worry about calculating it". You need it conceptually: <b>housing supply is inelastic in the short run</b> because it takes time to build, which is why demand increases cause big rent rises.</p>
+<div class="tip">A steeper curve is (relatively) more inelastic <i>when you compare curves through the same point</i>. Never compare elasticity of two points on the same straight line by slope. Use the ray/slope formula.</div>
+</div>
+
+<h3>2.6 Elasticity decides who bears a tax (and who gets a subsidy)</h3>
+<div class="card">
+<p><b>Rule: the LESS elastic side bears MORE of the tax burden (and gets MORE of a subsidy's gain).</b></p>
+<ul><li>Demand more elastic (buyers can walk away), so <b>consumers bear a smaller share</b> and sellers a larger share.</li>
+<li>Demand less elastic, so consumers bear a larger share.</li>
+<li>Subsidy (L4 slide 53): demand more elastic than supply means <b>sellers get the larger share of the gain</b>. Demand less elastic than supply means buyers get the larger share.</li></ul>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="165.0" x2="450.0" y2="240.0" stroke="#0284c7" stroke-width="2.4" stroke-dasharray="7 5"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<line x1="50.0" y1="210.0" x2="450.0" y2="60.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="274.0" y="306.0" text-anchor="start" font-size="12" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D1 (less elastic)</text>
+<text x="450.0" y="258.0" text-anchor="end" font-size="12" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D2 (more elastic)</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<text x="454.0" y="64.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S+tax</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="180.0" x2="130.0" y2="180.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="130.0" y1="180.0" x2="130.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<circle cx="210.0" cy="150.0" r="4.5" fill="#111"/><circle cx="130.0" cy="180.0" r="4.5" fill="#111"/><circle cx="290.0" cy="210.0" r="4.5" fill="#111"/>
+<text x="54" y="146.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B with D1 = $6</text>
+<text x="54" y="176.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B with D2 = $5</text>
+<text x="54" y="224.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4 (both)</text>
+</svg><figcaption>The same S and the same $3 tax. With less elastic D1 (ε = −0.67 at P* = $4, Q* = 600), P<sub>B</sub> rises $4 → $6, so consumers bear $2 of $3. With more elastic D2 (P = 5.5 − Q/400, ε = −2.67 at the same point), P<sub>B</sub> only rises $4 → $5, so consumers bear $1 and sellers bear $2.</figcaption></figure>
+<div class="card q"><b>Housing application (L4 slide 54):</b> rental <b>demand</b> is probably <b>more</b> elastic (housing is a big budget share, so households adjust), while rental <b>supply</b> is <b>inelastic</b> in the short run (building takes time). So <b>landlords capture most of the gain from a rental subsidy</b>. That is the catch in NRAS.</div>
+<div class="new">Optional cross-check (textbook, not on the slides): buyers' share of a tax ≈ ε<sub>S</sub> / (ε<sub>S</sub> + |ε<sub>D</sub>|). Main market at (600, 4): ε<sub>S</sub> = (4/600)·200 = 1.33 and |ε<sub>D</sub>| = 0.67, so buyers' share = 1.33/2 = 2/3, which is $2 of $3 ✓. In the exam, just read P<sub>B</sub> and P<sub>S</sub> off the grid.</div>
+</div>
+
+<h3>2.7 The other policies in Lecture 4</h3>
+<div class="card">
+<ul>
+<li><b>Increasing housing supply</b> (supply shifts right): rents and prices fall and quantity rises. In the rental market, "rich renters" become owners, so <b>rental demand also falls</b>. The tools are zoning and density reform, the Housing Australia Future Fund ($10bn, 30,000 homes), inclusionary zoning and the Housing Accord (1.2m homes in 5 years). The obstacles are NIMBYism, builder bankruptcies, high interest rates, materials costs and labour shortages. It addresses the root cause, but <b>slowly</b>.</li>
+<li><b>Negative gearing reform</b> (side note): removing negative gearing cuts investor <b>demand in the housing (purchase) market</b>, so house prices fall. In the <b>rental market</b>, supply falls (investors sell) <i>and</i> demand falls (renters become owners, since owning and renting are substitutes), so the <b>effect on rent is ambiguous</b>. That is the classic both-curves-shift case.</li>
+<li><b>Quota</b> (theory left out): a cap on quantity supplied makes supply <b>vertical at the quota</b>. It is used when the goal is to restrict quantity (e.g. emissions).</li>
+</ul>
+</div>
+</section>
+
+<!-- ===================================================== METHODS -->
+<section id="methods">
+<h2>3 · Step-by-step methods</h2>
+<div class="method"><b>M1 · Price ceiling / rent control on a grid</b><ol>
+<li>Find P*, Q* (where D crosses S). If D shifts, use the <b>new</b> D.</li>
+<li>Ceiling <b>below</b> P* → binding/effective. At or above → non-binding/ineffective (answer: P*, Q*, no shortage).</li>
+<li>If binding: at the ceiling price read Q<sub>S</sub> (on S) and Q<sub>D</sub> (on D).</li>
+<li>Q traded = <b>Q<sub>S</sub></b>. Shortage = Q<sub>D</sub> − Q<sub>S</sub>.</li>
+<li>Black-market price = <b>height of D at Q<sub>S</sub></b>.</li>
+<li>DWL = ½ × (P<sub>black market</sub> − P<sub>ceiling</sub>) × (Q* − Q<sub>S</sub>).</li></ol></div>
+<div class="method"><b>M2 · Price floor on a grid</b><ol>
+<li>Floor <b>above</b> P* → binding. At or below → non-binding.</li>
+<li>If binding: Q traded = <b>Q<sub>D</sub></b> at the floor. Excess supply = Q<sub>S</sub> − Q<sub>D</sub>.</li>
+<li>DWL = ½ × (P<sub>floor</sub> − height of S at Q<sub>D</sub>) × (Q* − Q<sub>D</sub>).</li>
+<li>CS falls for sure. PS change is ambiguous (+ price rectangle, − lost-units triangle).</li></ol></div>
+<div class="method"><b>M3 · Per-unit tax (on sellers): P<sub>B</sub>, P<sub>S</sub>, burden, revenue, DWL</b><ol>
+<li>Draw/identify <b>S+tax = S shifted UP by the tax</b> (the higher of two parallel supply lines is "Supply with tax").</li>
+<li>New equilibrium = D ∩ (S+tax) gives Q<sub>tax</sub> and <b>P<sub>M</sub> = P<sub>B</sub></b>.</li>
+<li><b>P<sub>S</sub> = P<sub>B</sub> − tax</b> = height of the <i>original</i> S at Q<sub>tax</sub>.</li>
+<li>Consumers' burden/unit = P<sub>B</sub> − P*. Sellers' burden/unit = P* − P<sub>S</sub>. Check: they sum to the tax.</li>
+<li>Revenue = tax × Q<sub>tax</sub>. DWL = ½ × tax × (Q* − Q<sub>tax</sub>).</li>
+<li>If given equations: add the tax to the supply equation's intercept (P = a + bQ becomes P = a + tax + bQ) and solve.</li></ol></div>
+<div class="method"><b>M4 · Per-unit subsidy (to sellers)</b><ol>
+<li>S−sub = S shifted DOWN by the subsidy. D ∩ (S−sub) gives Q<sub>sub</sub> and <b>P<sub>B</sub> = P<sub>M</sub></b>.</li>
+<li><b>P<sub>S</sub> = P<sub>M</sub> + subsidy</b> = height of the original S at Q<sub>sub</sub>.</li>
+<li>Buyer gain = P* − P<sub>B</sub>. Seller gain = P<sub>S</sub> − P*. Govt cost = sub × Q<sub>sub</sub>. DWL = ½ × sub × (Q<sub>sub</sub> − Q*).</li></ol></div>
+<div class="method"><b>M5 · Point elasticity of demand at a point on a linear demand</b><ol>
+<li>Read the point (Q, P).</li>
+<li>Slope of demand = ΔP/ΔQ between any two grid points on D (negative). Use the intercepts if visible: slope = −(P-intercept)/(Q-intercept).</li>
+<li>Slope of ray = P/Q.</li>
+<li><b>ε<sub>D</sub> = (P/Q) ÷ slope</b>. Keep the minus sign. Simplify to a fraction (exam options look like −3/2, −16/9, −1.25).</li>
+<li>Classify: |ε| &gt; 1 elastic, = 1 unit, &lt; 1 inelastic. Shortcut: above the midpoint of a linear D → elastic.</li></ol></div>
+<div class="method"><b>M6 · Using elasticity for predictions</b><ul>
+<li>%ΔQ<sub>D</sub> = ε<sub>D</sub> × %ΔP (e.g. ε = −0.5, P ↑10% gives Q<sub>D</sub> ↓5%).</li>
+<li>TR: elastic → move P and TR in opposite directions. Inelastic → same direction. %ΔTR ≈ %ΔP + %ΔQ.</li>
+<li>A supply shift with <b>inelastic demand</b> gives a <b>big price change and small quantity change</b>. Elastic demand gives the reverse.</li>
+<li>A demand shift with <b>inelastic supply</b> gives a <b>big price change and small quantity change</b> (housing).</li>
+<li>Tax/subsidy: the <b>less elastic side bears more</b> of the burden (gets more of the gain).</li></ul></div>
+<div class="method"><b>M7 · Surplus areas from a lettered figure</b><ol>
+<li>Mark P* and Q*. Before the policy: CS = everything under D above P*. PS = everything above S below P*.</li>
+<li>After: CS = under D above <b>P<sub>B</sub></b> up to new Q. PS = above S below <b>P<sub>S</sub></b> up to new Q. Govt = rectangle tax × Q (tax) or −sub × Q (subsidy).</li>
+<li>DWL = the triangle(s) between D and S over the lost (or excess) units = old SS − new SS.</li></ol></div>
+</section>
+
+<!-- ===================================================== QTYPES -->
+<section id="qtypes">
+<h2>4 · How it's examined</h2>
+<p class="src">Calibrated from the S2 2026 practice exam Q1 (rent ceiling on Robinson Island), S1 2026 final Q1 (bubble-tea tax, walked through in L13), S2 2025 final Q1–3 (cigarettes: elasticity, policy choice, two markets), and 2021 MCQs (DWL of ceilings/floors, tax revenue). The format is "Select alternative" dropdowns plus numeric fill-ins read off a grid drawn to scale.</p>
+
+<div class="card q"><b>QT1 · Rent ceiling with a demand shift (dropdowns).</b> Grid: S passes (200, $200) and (800, $800), i.e. P = Q. D<sub>0</sub>: P = 1000 − Q. D<sub>1</sub>: P = 1400 − Q. Rent ceiling at $600.<br>
+• With D<sub>0</sub>: equilibrium is $500, Q 500. The ceiling of $600 is <b>above</b>, so the control is <b>ineffective</b>.<br>
+• With D<sub>1</sub>: equilibrium without control is <b>$700, Q = 700</b>. With the $600 ceiling, Q<sub>S</sub> = 600 and Q<sub>D</sub> = 1400 − 600 = 800, so <b>quantity transacted = 600</b> and shortage = 200.<br>
+• Black-market rent = D<sub>1</sub> at Q = 600 = 1400 − 600 = <b>$800</b>. DWL = ½ × (800 − 600) × (700 − 600) = <b>$10,000</b>.<br>
+<span class="src">Reasoning cue: quantity transacted is on the <b>supply</b> side, and black-market rent is on the <b>demand</b> curve at that quantity. The distractors will be Q<sub>D</sub> and the ceiling itself.</span></div>
+
+<div class="card q"><b>QT2 · Price control MCQ (concept).</b> "A price floor set above the equilibrium price will NOT result in a/an: (a) surplus of excess Q<sub>S</sub> (b) DWL (c) efficient outcome (d) fall in CS." → <b>(c)</b>. A binding control is never efficient.<br>
+"For a price floor to be effective it must be set ___ the equilibrium price" → <b>above</b>. For a ceiling → <b>below</b>.<br>
+"Which does NOT create a DWL in competitive markets: taxes / a shift in demand / quotas / tariffs" → <b>a shift in demand</b>. The market simply finds a new efficient equilibrium.</div>
+
+<div class="card q"><b>QT3 · Unit tax on a grid: label the curves, then P<sub>B</sub>, P<sub>S</sub>, Q, burden.</b> D: P = 20 − Q/100. S: P = 2 + Q/50. Tax $6 per unit on sellers.<br>
+• Label: the <b>upper</b> parallel supply line is "Supply with tax" and the lower one is "Supply without tax".<br>
+• Before: 20 − Q/100 = 2 + Q/50 → Q* = 600, P* = $14.<br>
+• After: 20 − Q/100 = 8 + Q/50 → <b>Q = 400</b>, <b>P<sub>B</sub> = P<sub>M</sub> = $16</b>, <b>P<sub>S</sub> = $10</b>.<br>
+• Consumers' burden = 16 − 14 = <b>$2/unit</b>. Sellers' burden = 14 − 10 = <b>$4/unit</b>. Revenue = 6 × 400 = <b>$2400</b>. DWL = ½ × 6 × 200 = <b>$600</b>.<br>
+<span class="src">In L13's version the prices were labelled P<sub>1</sub>…P<sub>4</sub>: the price paid by consumers was the D ∩ S+tax height, the price received by producers was the original S at that Q, and the consumers' burden was P<sub>B</sub> − original P. Don't pick P<sub>1</sub> (the S+tax height at the <i>old</i> Q). It's a distractor.</span></div>
+
+<div class="card q"><b>QT4 · Elasticity and tax burden (MCQ).</b> "If demand becomes <b>more elastic</b> while supply is unchanged, will consumers bear a larger or smaller share of the tax burden?" → <b>Smaller share.</b> Buyers can switch away, so the price they pay rises less and sellers absorb more. Check with QT3: demand there is the more elastic side (ε<sub>D</sub> = (14/600)/(−1/100) = −2.33 vs ε<sub>S</sub> = (14/600)×50 = 1.17), and sellers bear $4 of $6 ✓.</div>
+
+<div class="card q"><b>QT5 · Compute ε<sub>D</sub> at equilibrium (don't use the absolute value).</b> Demand passes (200, $10) and (800, $4), and the equilibrium is at Q = 800, P = $4. Options: −2 / −0.5 / 0.5 / 2.<br>
+Slope = (4 − 10)/(800 − 200) = −6/600 = −1/100. Ray = 4/800 = 1/200. ε<sub>D</sub> = (1/200) ÷ (−1/100) = <b>−0.5</b>, so demand is <b>inelastic</b>.<br>
+Follow-up: "a 10% price rise changes Q<sub>D</sub> by…" → −0.5 × 10% = <b>−5%</b>, and total revenue <b>rises</b>.</div>
+
+<div class="card q"><b>QT6 · Pick the policy that achieves a goal.</b> Goal: <i>reduce consumption</i> of cigarettes (P* = $5). Options: unit subsidy of $4 / price floor of $3 / price ceiling of $7 / price floor of $7.<br>
+→ <b>Price floor of $7.</b> It is binding (above $5) and Q traded = Q<sub>D</sub> at $7 &lt; Q*. It works by <b>reducing the quantity of cigarettes demanded by smokers</b> (a movement along D, not a shift of demand). A $3 floor and a $7 ceiling are non-binding, and a subsidy <i>raises</i> Q. A per-unit tax would also work (it reduces supply).<br>
+<span class="src">Goal "make housing affordable AND available": subsidy (P<sub>B</sub> ↓, Q ↑) or increase supply. A ceiling lowers P but reduces Q.</span></div>
+
+<div class="card q"><b>QT7 · Two markets with different elasticities.</b> Premium and value cigarettes have identical supply, and demand for premium is much <b>less</b> elastic. A crop failure decreases supply in both by the same amount. Bigger <b>price</b> change? → <b>Premium</b> (inelastic demand: buyers keep buying, so price does the adjusting). Bigger <b>quantity</b> change? → <b>Value</b> (elastic demand).</div>
+
+<div class="card q"><b>QT8 · Subsidy incidence.</b> "Rental demand is more elastic than rental supply. Who gets the larger share of the gain from a rental subsidy paid to landlords?" → <b>Landlords (sellers)</b>, because they are the less elastic side. Who legally receives it doesn't matter. In the numbers: in the main market (demand <i>less</i> elastic) a $3 subsidy gave renters $2 and landlords $1.</div>
+
+<div class="card q"><b>QT9 · Combined shifts from policy (dropdowns).</b> Negative gearing removed: in the rental market supply ↓ (investors sell) and demand ↓ (renters buy homes). Rent → <b>uncertain</b>. Quantity of rentals → <b>decreases</b>. (Practice exam 1(b) has the mirror case: sailors arrive (D ↑) and building materials arrive (S ↑), so rent is <b>uncertain</b> and quantity <b>increases</b>.)</div>
+</section>
+
+<!-- ===================================================== TRAPS -->
+<section id="traps">
+<h2>5 · Traps &amp; misconceptions</h2>
+<div class="trap"><b>Binding direction.</b> A ceiling binds when it is <b>below</b> P*, a floor when it is <b>above</b> P*. "A ceiling above equilibrium" does nothing. These are free marks.</div>
+<div class="trap"><b>Quantity under a binding control is the SHORT side</b>: Q<sub>S</sub> for a ceiling, Q<sub>D</sub> for a floor. It is never Q<sub>D</sub> under a ceiling, and the exam lists it as a distractor.</div>
+<div class="trap"><b>Black-market rent</b> is read off the <b>demand</b> curve at Q<sub>S</sub>, not off supply and not the old equilibrium price.</div>
+<div class="trap"><b>Re-check binding after a shift.</b> In the practice exam the $500 ceiling is ineffective under D<sub>0</sub> but effective once demand shifts to D<sub>1</sub>.</div>
+<div class="trap"><b>Tax shifts S UP (left); subsidy shifts S DOWN (right)</b>, by exactly the per-unit amount <i>measured vertically</i>, not horizontally.</div>
+<div class="trap"><b>P<sub>S</sub> is on the ORIGINAL supply curve</b> at the new Q (= P<sub>B</sub> − tax). Don't read P<sub>S</sub> off S+tax, and don't use the S+tax height at the old Q*.</div>
+<div class="trap"><b>Burden ≠ who writes the cheque.</b> Consumers' burden = P<sub>B</sub> − P* (original), even though sellers legally remit the tax.</div>
+<div class="trap"><b>Tax revenue uses the NEW quantity</b>: tax × Q<sub>tax</sub>, not tax × Q*.</div>
+<div class="trap"><b>Elasticity sign.</b> The lecturer's ε<sub>D</sub> is negative. If the question says "do not use the absolute value", answer −1.25, not 1.25. "Inelastic" means |ε| &lt; 1.</div>
+<div class="trap"><b>Elasticity ≠ slope.</b> One straight demand line has every elasticity from −∞ to 0. Use (P/Q) ÷ slope at the specific point. <b>Don't use the midpoint/arc formula</b> from QCAA. The course uses the point formula.</div>
+<div class="trap"><b>More elastic demand → consumers bear LESS</b> of a tax (not more). The less elastic side always bears more.</div>
+<div class="trap"><b>A subsidy also creates a DWL</b> (over-production) even though quantity rises. A <b>shift</b> in demand or supply never creates a DWL by itself.</div>
+<div class="trap"><b>Lecture slide typo (L13 slide 30)</b>: the "more elastic demand" burden box reads P<sub>B,1</sub><sup>Tax</sup> − P<sub>M</sub><sup>NoTax</sup>. It should be <b>P<sub>B,2</sub></b>. Trust the logic, not the label.</div>
+<div class="trap"><b>Floor and sellers:</b> the impact on sellers of a binding floor is <b>ambiguous</b> (higher price, fewer sales). A binding ceiling is <b>unambiguously bad</b> for sellers (landlords).</div>
+</section>
+
+<!-- ===================================================== CHECK -->
+<section id="check">
+<h2>6 · Quick self-check</h2>
+<p class="src">Use the main market unless told otherwise: D: P = 10 − Q/100, S: P = 1 + Q/200 (P* = $4, Q* = 600).</p>
+<details><summary>1. A rent ceiling of $5 is imposed. What happens to P, Q?</summary><p>Nothing. $5 is above P* = $4, so the ceiling is <b>non-binding / ineffective</b>. P = $4, Q = 600.</p></details>
+<details><summary>2. Rent ceiling of $2: quantity transacted, shortage, black-market rent, DWL?</summary><p>Q<sub>S</sub>: 2 = 1 + Q/200 → <b>200</b> (transacted). Q<sub>D</sub>: 2 = 10 − Q/100 → 800, so <b>shortage = 600</b>. Black-market rent = D at 200 = <b>$8</b>. DWL = ½ × (8 − 2) × (600 − 200) = <b>$1200</b>.</p></details>
+<details><summary>3. A $1.50 per-unit tax on sellers: Q, P<sub>B</sub>, P<sub>S</sub>, burdens, revenue, DWL?</summary><p>10 − Q/100 = 2.5 + Q/200 → 7.5 = 3Q/200 → <b>Q = 500</b>. P<sub>B</sub> = <b>$5</b>, P<sub>S</sub> = 5 − 1.5 = <b>$3.50</b>. Consumers' burden $1, sellers' $0.50. Revenue = 1.5 × 500 = <b>$750</b>. DWL = ½ × 1.5 × 100 = <b>$75</b>.</p></details>
+<details><summary>4. Price elasticity of demand at Q = 300? Elastic or inelastic?</summary><p>P = 10 − 3 = 7. ε = (7/300) ÷ (−1/100) = −700/300 = <b>−7/3 ≈ −2.33</b>, so <b>elastic</b> (above the midpoint Q = 500).</p></details>
+<details><summary>5. ε<sub>D</sub> = −2 and the price falls 3%. What happens to Q<sub>D</sub> and total revenue?</summary><p>%ΔQ<sub>D</sub> = −2 × (−3%) = <b>+6%</b>. %ΔTR ≈ −3% + 6% = <b>+3%</b>, so TR rises (elastic: price and TR move in opposite directions).</p></details>
+<details><summary>6. Supply is perfectly inelastic (vertical). Who bears a per-unit tax?</summary><p><b>Sellers bear all of it.</b> Q can't change, so P<sub>B</sub> stays at P* and P<sub>S</sub> = P* − tax. The less elastic side bears more, and here supply is completely inelastic.</p></details>
+<details><summary>7. A $1.50 per-unit subsidy to landlords: Q, P<sub>B</sub>, P<sub>S</sub>, govt cost, DWL? Who gains more?</summary><p>S−sub: P = −0.5 + Q/200. Solve: 10.5 = 3Q/200 → <b>Q = 700</b>. P<sub>B</sub> = <b>$3</b>, P<sub>S</sub> = <b>$4.50</b>. Renters gain $1, landlords $0.50, so <b>renters gain more</b> (demand is the less elastic side here). Cost = 1.5 × 700 = <b>$1050</b>. DWL = ½ × 1.5 × 100 = <b>$75</b>.</p></details>
+<details><summary>8. "A price ceiling set below equilibrium will result in: (a) surplus of excess Q<sub>S</sub> (b) shortage due to excess Q<sub>D</sub> (c) efficient outcome (d) increase in PS"</summary><p><b>(b)</b> shortage due to excess quantity demanded.</p></details>
+<details><summary>9. Using the lettered tax figure in 2.3: CS after the tax? Govt revenue? DWL?</summary><p>CS after = <b>A</b>. Revenue = <b>B + D</b>. DWL = <b>C + E</b>. (CS before was A+B+C, PS before D+E+F, PS after F.)</p></details>
+<details><summary>10. Why does the lecturer think a rental subsidy mostly benefits landlords?</summary><p>Rental demand is relatively elastic (housing is a big budget share), while rental supply is inelastic in the short run (it takes time to build). The less elastic side (landlords) captures the larger share of the subsidy's gain.</p></details>
+</section>
+
+<!-- ===================================================== SHEET -->
+<section id="sheet">
+<div class="sheet" data-topic="T2">
+<span class="tabhead">T2</span>
+<h2>Market Intervention: controls, taxes, subsidies, elasticity, surplus</h2>
+
+<h3>Decision table: wording → what to do</h3>
+<table>
+<tr><th>Question says / asks…</th><th>Do this / answer</th></tr>
+<tr><td>"rent ceiling / price ceiling / rent cap at $X": effective?</td><td>Effective (binding) iff X <b>&lt; P*</b>. Otherwise ineffective: P*, Q* unchanged</td></tr>
+<tr><td>"price floor / minimum wage at $X": effective?</td><td>Effective iff X <b>&gt; P*</b></td></tr>
+<tr><td>"quantity transacted" under a binding ceiling / floor</td><td>Ceiling: <b>Q<sub>S</sub></b> at the ceiling. Floor: <b>Q<sub>D</sub></b> at the floor (the short side)</td></tr>
+<tr><td>"shortage" / "excess demand"</td><td>Q<sub>D</sub> − Q<sub>S</sub> at the ceiling</td></tr>
+<tr><td>"surplus" / "excess supply"</td><td>Q<sub>S</sub> − Q<sub>D</sub> at the floor</td></tr>
+<tr><td>"black-market rent/price"</td><td>Height of the <b>demand</b> curve at Q<sub>S</sub></td></tr>
+<tr><td>"demand shifts to D<sub>1</sub>… in the absence of control"</td><td>New D ∩ S. Then <b>re-check</b> whether the control binds</td></tr>
+<tr><td>"label the supply curves after a tax"</td><td>Upper line = <b>Supply with tax</b>. Lower = without</td></tr>
+<tr><td>"price paid by consumers" (tax)</td><td>P<sub>B</sub> = P<sub>M</sub> = D ∩ (S+tax) height</td></tr>
+<tr><td>"price received by producers" (tax)</td><td>P<sub>S</sub> = P<sub>B</sub> − tax = original S at Q<sub>tax</sub></td></tr>
+<tr><td>"consumers' tax burden (per unit)"</td><td>P<sub>B</sub> − P*(original)</td></tr>
+<tr><td>"sellers'/producers' tax burden"</td><td>P* − P<sub>S</sub></td></tr>
+<tr><td>"tax revenue"</td><td>Tax × Q<sub>tax</sub> (NEW Q)</td></tr>
+<tr><td>"deadweight loss" (tax/subsidy)</td><td>½ × (tax or sub) × |Q* − Q<sub>new</sub>|</td></tr>
+<tr><td>"DWL of ceiling/floor"</td><td>½ × (D height − S height at Q<sub>new</sub>) × (Q* − Q<sub>new</sub>)</td></tr>
+<tr><td>"subsidy: price renters pay / landlords receive"</td><td>P<sub>B</sub> = D ∩ (S−sub). P<sub>S</sub> = P<sub>B</sub> + sub</td></tr>
+<tr><td>"govt cost of subsidy"</td><td>Sub × Q<sub>sub</sub></td></tr>
+<tr><td>"demand becomes more elastic: consumers' share of tax?"</td><td><b>Smaller</b> (less elastic side bears more)</td></tr>
+<tr><td>"demand more elastic than supply: who gains more from subsidy?"</td><td><b>Sellers</b> (landlords)</td></tr>
+<tr><td>"price elasticity of demand at the point…" ("do not use absolute value")</td><td>ε<sub>D</sub> = (P/Q) ÷ slope of D. <b>Negative</b></td></tr>
+<tr><td>"elastic / inelastic / unit elastic"</td><td>|ε| &gt; 1 / &lt; 1 / = 1. Linear D: upper half elastic, midpoint unit</td></tr>
+<tr><td>"price ↑ x%, change in Q<sub>D</sub>?"</td><td>%ΔQ<sub>D</sub> = ε × %ΔP</td></tr>
+<tr><td>"which market sees bigger price change after a supply shift"</td><td>The one with <b>less elastic demand</b> (bigger P change, smaller Q change)</td></tr>
+<tr><td>"policy to reduce consumption"</td><td>Binding floor (above P*), unit tax or quota. NOT a subsidy or non-binding control</td></tr>
+<tr><td>"policy to make rentals affordable AND available"</td><td>Subsidy or ↑ supply (ceiling cuts Q)</td></tr>
+<tr><td>"which does NOT create a DWL"</td><td>A shift in demand/supply (taxes, quotas, tariffs, binding controls, subsidies all do)</td></tr>
+<tr><td>"binding control → efficient outcome?"</td><td><b>Never</b> efficient (DWL &gt; 0)</td></tr>
+</table>
+
+<div class="cols">
+<div class="box"><b>Definitions</b><ul>
+<li><b>Price control</b>: legally binding restriction on price. <b>Ceiling</b> = max (rent cap/freeze). <b>Floor</b> = min (min wage $26.44/hr; employers = buyers of labour).</li>
+<li><b>Binding</b> = constrains the price ("effective"). Non-binding has no economic impact.</li>
+<li><b>Unit tax</b>: $ per unit (tobacco excise $1.53/cigarette). Analytically a <b>negative subsidy</b>.</li>
+<li><b>Subsidy</b>: govt payment to encourage production/consumption. Unit = $ per unit (course uses this). Ad-valorem = % of price. Paying it to sellers or buyers gives the <b>same</b> market outcome.</li>
+<li><b>Quota</b>: cap on quantity, so S becomes vertical at the quota.</li>
+<li><b>CS</b> = area under D, above P<sub>B</sub>, up to Q. <b>PS</b> = area above S, below P<sub>S</sub>, up to Q.</li>
+<li><b>SS</b> = CS + PS (+ tax rev − subsidy cost) = total benefit (area under D) − production cost (area under S).</li>
+<li><b>DWL</b> = SS lost vs competitive Q*. Comes from under- OR over-production.</li></ul></div>
+
+<div class="box"><b>Price notation (tax on sellers / subsidy to sellers)</b>
+<table><tr><th></th><th>Tax</th><th>Subsidy</th></tr>
+<tr><td>P<sub>M</sub> (sticker)</td><td>D ∩ S+tax</td><td>D ∩ S−sub</td></tr>
+<tr><td>P<sub>B</sub> (buyer pays)</td><td>= P<sub>M</sub></td><td>= P<sub>M</sub></td></tr>
+<tr><td>P<sub>S</sub> (seller keeps)</td><td>P<sub>M</sub> − tax</td><td>P<sub>M</sub> + sub</td></tr>
+<tr><td>S curve shifts</td><td>UP by tax (S ↓)</td><td>DOWN by sub (S ↑)</td></tr>
+<tr><td>Q</td><td>↓</td><td>↑</td></tr>
+<tr><td>Govt</td><td>+tax × Q</td><td>−sub × Q</td></tr></table>
+Buyer burden + seller burden = tax. Buyer gain + seller gain = subsidy.</div>
+
+<div class="box"><b>Elasticity (lecturer's method)</b><ul>
+<li>ε<sub>D</sub> = %ΔQ<sub>D</sub>/%ΔP, <b>negative</b>. Use |ε<sub>D</sub>| only if told.</li>
+<li><b>Point formula:</b> ε<sub>D</sub> = (P/Q) ÷ (ΔP/ΔQ) = slope of ray ÷ slope of D = (1/slope)·(P/Q).</li>
+<li>Linear D: slope = −(P-int)/(Q-int). Midpoint → ε = −1, MR = 0, TR max.</li>
+<li>%ΔQ<sub>D</sub> = ε<sub>D</sub> × %ΔP. %ΔTR ≈ %ΔP + %ΔQ.</li>
+<li>Elastic: P ↓ gives TR ↑. Inelastic: P ↓ gives TR ↓.</li>
+<li>Vertical = perfectly inelastic (0). Horizontal = perfectly elastic (∞).</li>
+<li>More elastic D: more substitutes, longer time, luxury, big budget share.</li>
+<li>ε<sub>S</sub> = %ΔQ<sub>S</sub>/%ΔP &gt; 0 ("don't worry about calculating"). Housing S is inelastic in the short run.</li>
+<li>Examples: (Q 6, P 8), slope −2 → (8/6)/(−2) = −2/3. (Q 8, P 12), slope −1 → −3/2. (Q 36, P 64), slope −1 → −16/9.</li></ul></div>
+
+<div class="key"><b>Incidence rule:</b> the <b>LESS elastic</b> side bears <b>MORE</b> of a tax and gets <b>MORE</b> of a subsidy. Perfectly inelastic side bears it all. Check: buyers' share ≈ ε<sub>S</sub>/(ε<sub>S</sub> + |ε<sub>D</sub>|) (textbook, not on slides).</div>
+
+<div class="box"><b>Who wins/loses (binding)</b>
+<table><tr><th></th><th>Ceiling</th><th>Floor</th></tr>
+<tr><td>P</td><td>↓ to ceiling</td><td>↑ to floor</td></tr>
+<tr><td>Q</td><td>↓ (= Q<sub>S</sub>)</td><td>↓ (= Q<sub>D</sub>)</td></tr>
+<tr><td>Imbalance</td><td>shortage</td><td>excess supply</td></tr>
+<tr><td>Buyers</td><td>lucky ones gain; others shut out/black market</td><td>bad</td></tr>
+<tr><td>Sellers</td><td>unambiguously bad</td><td>ambiguous</td></tr>
+<tr><td>DWL</td><td>yes</td><td>yes</td></tr></table></div>
+
+<div class="box"><b>Rent-control unintended consequences</b>: black-market renting, illegal rent-bidding, non-price discrimination (no students/pets/kids/immigrants), lower maintenance and quality, landlords exit in the long run (S ↓ further). <b>Subsidy (NRAS)</b>: lower rent + more units, but costs the budget (opportunity cost = other programs) and landlords capture most because rental S is inelastic and D more elastic. <b>↑ Supply</b>: zoning/density, HAFF, Housing Accord. It fixes the root cause slowly; NIMBY, interest rates, materials and labour shortages get in the way. <b>Neg. gearing removal</b>: housing-market D ↓ so prices ↓; rental S ↓ and D ↓ so rent is <b>ambiguous</b>.</div>
+</div>
+
+<h3>Reference diagrams (main market: D: P = 10 − Q/100, S: P = 1 + Q/200, P* = 4, Q* = 600)</h3>
+<div class="figgrid">
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<defs><marker id="a1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,240.0 210.0,240.0 210.0,210.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,240.0 50.0,300.0 210.0,240.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="240.0" x2="450.0" y2="240.0" stroke="#111" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="448.0" y="234.0" text-anchor="end" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Rent ceiling $3</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="330.0" y1="240.0" x2="330.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="102.0" y="176.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="130.0" y="230.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="238.0" y="233.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="94.0" y="264.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qs=400</text>
+<text x="333.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qd=700</text>
+<text x="293.0" y="310.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<text x="216.0" y="144.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">black-market rent $6</text>
+<line x1="210.0" y1="258.0" x2="330.0" y2="258.0" stroke="#111" stroke-width="1.2" marker-start="url(#a1)" marker-end="url(#a1)"/>
+<text x="270.0" y="272.0" text-anchor="middle" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">shortage = 300</text>
+</svg><figcaption><b>Ceiling $3.</b> Before: CS = A+B, PS = C+D+E. After: CS = A+C, PS = E. <b>DWL = B+D</b> = ½·(6−3)·200 = 300. C = transfer from sellers to buyers.</figcaption></figure>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,150.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,150.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,300.0 210.0,240.0 210.0,210.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="150.0" x2="450.0" y2="150.0" stroke="#111" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="448.0" y="126.0" text-anchor="end" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Price floor $6</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="94.0" y="125.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="130.0" y="185.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="118.0" y="245.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="238.0" y="231.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qd=400</text>
+<text x="293.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<line x1="450.0" y1="150.0" x2="450.0" y2="330" stroke="#555" stroke-dasharray="3 3"/>
+<text x="446.0" y="291.0" text-anchor="end" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Qs=1000</text>
+<text x="330.0" y="144.0" text-anchor="middle" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">excess supply = 600</text>
+</svg><figcaption><b>Floor $6.</b> Before: CS = A+B+C, PS = D+E. After: CS = A, PS = B+D. <b>DWL = C+E</b> = 300. B = transfer from buyers to sellers.</figcaption></figure>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<defs><marker id="a3" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker></defs>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<polygon points="50.0,30.0 50.0,150.0 210.0,150.0" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,150.0 50.0,210.0 210.0,210.0 210.0,150.0" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,150.0 210.0,210.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,210.0 50.0,240.0 210.0,240.0 210.0,210.0" fill="#65a30d" fill-opacity="0.28" stroke="#65a30d" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="210.0,210.0 210.0,240.0 290.0,210.0" fill="#dc2626" fill-opacity="0.3" stroke="#dc2626" stroke-opacity="0.5" stroke-width="0.8"/>
+<polygon points="50.0,240.0 50.0,300.0 210.0,240.0" fill="#f59e0b" fill-opacity="0.22" stroke="#f59e0b" stroke-opacity="0.5" stroke-width="0.8"/>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="50.0" y1="210.0" x2="450.0" y2="60.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="454.0" y="64.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S+tax</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="240.0" x2="210.0" y2="240.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="94.0" y="125.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">A</text>
+<text x="130.0" y="185.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">B</text>
+<text x="238.0" y="198.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">C</text>
+<text x="130.0" y="230.0" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">D</text>
+<text x="238.0" y="231.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">E</text>
+<text x="94.0" y="264.5" text-anchor="middle" font-size="15" fill="#111" font-weight="bold">F</text>
+<text x="54" y="146.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B = P_M = $6</text>
+<text x="298.0" y="214.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4</text>
+<text x="54" y="254.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_S = $3</text>
+<text x="213.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q_tax=400</text>
+<text x="293.0" y="310.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<line x1="378.0" y1="177.0" x2="378.0" y2="87.0" stroke="#111" stroke-width="1.2" marker-start="url(#a3)" marker-end="url(#a3)"/>
+<text x="382.0" y="132.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">tax $3</text>
+</svg><figcaption><b>Tax $3.</b> Before: CS = A+B+C, PS = D+E+F. After: CS = A, PS = F, <b>Revenue = B+D</b> (B = buyers' share, D = sellers' share), <b>DWL = C+E</b>. Q 600 → 400, P<sub>B</sub> 6, P<sub>S</sub> 3, revenue 1200, DWL 300.</figcaption></figure>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="14" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<line x1="210.0" y1="330.0" x2="450.0" y2="240.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="454.0" y="244.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S−sub</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="270.0" x2="370.0" y2="270.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="370.0" y1="270.0" x2="370.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="180.0" x2="370.0" y2="180.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="370.0" y1="180.0" x2="370.0" y2="270.0" stroke="#111" stroke-width="2"/>
+<text x="376.0" y="222.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">subsidy $3</text>
+<text x="54" y="176.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_S = P_M + sub = $5</text>
+<text x="54" y="206.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4</text>
+<text x="54" y="266.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B = P_M = $2</text>
+<text x="293.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q*=600</text>
+<text x="373.0" y="324.0" text-anchor="start" font-size="10" fill="#111" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">Q_sub=800</text>
+</svg><figcaption><b>Subsidy $3.</b> Q 600 → 800, P<sub>B</sub> 2, P<sub>S</sub> 5. Govt cost 2400. CS +1400, PS +700, <b>DWL 300</b> (over-production).</figcaption></figure>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<line x1="50.0" y1="165.0" x2="450.0" y2="240.0" stroke="#0284c7" stroke-width="2.4" stroke-dasharray="7 5"/>
+<line x1="50.0" y1="300.0" x2="450.0" y2="150.0" stroke="#d97706" stroke-width="2.4"/>
+<line x1="50.0" y1="210.0" x2="450.0" y2="60.0" stroke="#d97706" stroke-width="2.4" stroke-dasharray="7 5"/>
+<text x="274.0" y="306.0" text-anchor="start" font-size="12" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D1 (less elastic)</text>
+<text x="450.0" y="258.0" text-anchor="end" font-size="12" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D2 (more elastic)</text>
+<text x="454.0" y="154.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S</text>
+<text x="454.0" y="64.0" text-anchor="start" font-size="13" fill="#d97706" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">S+tax</text>
+<line x1="50" y1="210.0" x2="290.0" y2="210.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="150.0" x2="210.0" y2="150.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="210.0" y1="150.0" x2="210.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="50" y1="180.0" x2="130.0" y2="180.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="130.0" y1="180.0" x2="130.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<circle cx="210.0" cy="150.0" r="4.5" fill="#111"/><circle cx="130.0" cy="180.0" r="4.5" fill="#111"/><circle cx="290.0" cy="210.0" r="4.5" fill="#111"/>
+<text x="54" y="146.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B with D1 = $6</text>
+<text x="54" y="176.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P_B with D2 = $5</text>
+<text x="54" y="224.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">P* = $4 (both)</text>
+</svg><figcaption><b>Incidence.</b> Same tax: less elastic D1 means buyers bear $2 of $3. More elastic D2 means buyers bear $1 of $3.</figcaption></figure>
+<figure><svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg" font-family="Arial,sans-serif" font-size="12" role="img">
+<rect x="0" y="0" width="500" height="370" fill="#fff"/>
+<line x1="50.0" y1="30" x2="50.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="50.0" y="346" text-anchor="middle" fill="#444" font-size="11">0</text>
+<line x1="90.0" y1="30" x2="90.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="130.0" y1="30" x2="130.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="130.0" y="346" text-anchor="middle" fill="#444" font-size="11">200</text>
+<line x1="170.0" y1="30" x2="170.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="210.0" y1="30" x2="210.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="210.0" y="346" text-anchor="middle" fill="#444" font-size="11">400</text>
+<line x1="250.0" y1="30" x2="250.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="290.0" y1="30" x2="290.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="290.0" y="346" text-anchor="middle" fill="#444" font-size="11">600</text>
+<line x1="330.0" y1="30" x2="330.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="370.0" y1="30" x2="370.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="370.0" y="346" text-anchor="middle" fill="#444" font-size="11">800</text>
+<line x1="410.0" y1="30" x2="410.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<line x1="450.0" y1="30" x2="450.0" y2="330" stroke="#e3e3e3" stroke-width="1"/>
+<text x="450.0" y="346" text-anchor="middle" fill="#444" font-size="11">1000</text>
+<line x1="50" y1="330.0" x2="450" y2="330.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="334.0" text-anchor="end" fill="#444" font-size="11">0</text>
+<line x1="50" y1="300.0" x2="450" y2="300.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="304.0" text-anchor="end" fill="#444" font-size="11">1</text>
+<line x1="50" y1="270.0" x2="450" y2="270.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="274.0" text-anchor="end" fill="#444" font-size="11">2</text>
+<line x1="50" y1="240.0" x2="450" y2="240.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="244.0" text-anchor="end" fill="#444" font-size="11">3</text>
+<line x1="50" y1="210.0" x2="450" y2="210.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="214.0" text-anchor="end" fill="#444" font-size="11">4</text>
+<line x1="50" y1="180.0" x2="450" y2="180.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="184.0" text-anchor="end" fill="#444" font-size="11">5</text>
+<line x1="50" y1="150.0" x2="450" y2="150.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="154.0" text-anchor="end" fill="#444" font-size="11">6</text>
+<line x1="50" y1="120.0" x2="450" y2="120.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="124.0" text-anchor="end" fill="#444" font-size="11">7</text>
+<line x1="50" y1="90.0" x2="450" y2="90.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="94.0" text-anchor="end" fill="#444" font-size="11">8</text>
+<line x1="50" y1="60.0" x2="450" y2="60.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="64.0" text-anchor="end" fill="#444" font-size="11">9</text>
+<line x1="50" y1="30.0" x2="450" y2="30.0" stroke="#e3e3e3" stroke-width="1"/>
+<text x="44" y="34.0" text-anchor="end" fill="#444" font-size="11">10</text>
+<line x1="50" y1="330" x2="470" y2="330" stroke="#111" stroke-width="1.6"/>
+<line x1="50" y1="330" x2="50" y2="12" stroke="#111" stroke-width="1.6"/>
+<text x="54" y="22" fill="#111" font-weight="bold">Price ($)</text>
+<text x="468" y="360" text-anchor="end" fill="#111" font-weight="bold">Quantity</text>
+<line x1="50.0" y1="30.0" x2="450.0" y2="330.0" stroke="#0284c7" stroke-width="2.4"/>
+<text x="446.0" y="322.0" text-anchor="end" font-size="14" fill="#0284c7" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">D</text>
+<line x1="50" y1="330" x2="150.0" y2="30.0" stroke="#111" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="154.8" y="39.0" text-anchor="start" font-size="11" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ray from origin (slope P/Q)</text>
+<circle cx="130.0" cy="90.0" r="5" fill="#111"/>
+<text x="139.0" y="84.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −4 (elastic)</text>
+<circle cx="250.0" cy="180.0" r="5" fill="#111"/>
+<text x="259.0" y="174.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −1 (unit elastic)</text>
+<circle cx="370.0" cy="270.0" r="5" fill="#111"/>
+<text x="379.0" y="264.0" text-anchor="start" font-size="12" fill="#111" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">ε = −0.25 (inelastic)</text>
+<line x1="50" y1="90.0" x2="130.0" y2="90.0" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<line x1="130.0" y1="90.0" x2="130.0" y2="330" stroke="#555" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="166.0" y="102.0" text-anchor="start" font-size="11" fill="#444" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">elastic half (|ε|&gt;1)</text>
+<text x="226.0" y="264.0" text-anchor="start" font-size="11" fill="#444" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">inelastic half (|ε|&lt;1)</text>
+</svg><figcaption><b>Elasticity on linear D</b>: ε = (P/Q) ÷ slope. Elastic above the midpoint, inelastic below.</figcaption></figure>
+</div>
+
+<h3>Mini procedures</h3>
+<div class="cols">
+<div class="box"><b>Ceiling:</b> 1. P*, Q* (current D). 2. Ceiling &lt; P*? If no, ineffective. 3. Q<sub>S</sub>, Q<sub>D</sub> at the ceiling. 4. Q traded = Q<sub>S</sub>. Shortage = Q<sub>D</sub> − Q<sub>S</sub>. 5. Black-market price = D(Q<sub>S</sub>). 6. DWL = ½(D(Q<sub>S</sub>) − ceiling)(Q* − Q<sub>S</sub>).</div>
+<div class="box"><b>Floor:</b> 1. Floor &gt; P*? 2. Q<sub>D</sub>, Q<sub>S</sub> at the floor. 3. Q traded = Q<sub>D</sub>. Excess S = Q<sub>S</sub> − Q<sub>D</sub>. 4. DWL = ½(floor − S(Q<sub>D</sub>))(Q* − Q<sub>D</sub>).</div>
+<div class="box"><b>Tax:</b> 1. S+tax = S up by tax (equation: add tax to the intercept). 2. D ∩ S+tax gives Q<sub>t</sub>, P<sub>B</sub> = P<sub>M</sub>. 3. P<sub>S</sub> = P<sub>B</sub> − tax. 4. Burdens: P<sub>B</sub> − P*, P* − P<sub>S</sub>. 5. Rev = tax·Q<sub>t</sub>. 6. DWL = ½·tax·(Q* − Q<sub>t</sub>).</div>
+<div class="box"><b>Subsidy:</b> 1. S−sub = S down by sub. 2. D ∩ S−sub gives Q<sub>s</sub>, P<sub>B</sub>. 3. P<sub>S</sub> = P<sub>B</sub> + sub. 4. Gains: P* − P<sub>B</sub>, P<sub>S</sub> − P*. 5. Cost = sub·Q<sub>s</sub>. 6. DWL = ½·sub·(Q<sub>s</sub> − Q*).</div>
+<div class="box"><b>Elasticity at a point:</b> 1. Read (Q, P). 2. Slope of D = ΔP/ΔQ (negative). 3. ε = (P/Q)/slope. 4. Keep the sign and simplify to a fraction. 5. Classify by |ε|.</div>
+<div class="box"><b>Equilibrium from equations:</b> set P<sub>D</sub>(Q) = P<sub>S</sub>(Q) and solve for Q, then substitute back for P. Check on both curves.</div>
+</div>
+<div class="trap">Q under a ceiling = Q<sub>S</sub> (not Q<sub>D</sub>). Black market = demand height. P<sub>S</sub> is on the ORIGINAL S. Revenue uses NEW Q. ε<sub>D</sub> is negative, uses the point formula (not midpoint), and is not the slope. More elastic demand means consumers bear LESS. A subsidy also has a DWL. L13 slide 30 typo: the "more elastic" burden should read P<sub>B,2</sub>.</div>
+</div>
+</section>
+</main></body></html>
