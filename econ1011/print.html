@@ -10,6 +10,28 @@ table.pm{width:auto;margin:10px auto;text-align:center}table.pm th,table.pm td{t
 .sheet table.pm .ne{outline:2px solid #111;outline-offset:-3px}.sheet table.pm b{color:#b91c1c}.sheet table.pm td.cell{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px}
 #T6 .sheet figure svg{max-width:330px}#T7 .sheet figure svg{max-width:340px}
 .fig2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.fig2{grid-template-columns:1fr}}
+
+/* ---- PDF fit: denser type, let boxes/columns flow across pages instead of jumping (no half-empty pages) ---- */
+@media print{
+  @page{size:A4;margin:9mm 10mm 10mm}
+  body{font-size:9.5pt}
+  .sheet{font-size:9.6pt;line-height:1.3}
+  .sheet h2{font-size:15pt;margin:2px 0 6px}
+  .sheet h3{font-size:10.5pt;margin:7px 0 3px;break-after:avoid}
+  .sheet h4{break-after:avoid}
+  .sheet table{font-size:8.6pt}
+  .sheet th,.sheet td{padding:2px 5px}
+  .sheet .cols{column-gap:14px}
+  .sheet .cols>*,.sheet .box,.sheet .key,.sheet .grp,.sheet .tpl{break-inside:auto}
+  .sheet tr,.sheet li,.sheet figure,.sheet svg,.sheet table.pm{break-inside:avoid}
+  .sheet .box,.sheet .key{padding:4px 7px;margin:4px 0}
+  .sheet p{margin:3px 0}
+  .sheet ul,.sheet ol{margin:2px 0 2px 16px}
+  .sheet li{margin:1px 0}
+  .sheet-break{margin:0}
+  #COVER h3{margin-top:6px}
+  #T5 .sheet{font-size:9.2pt}#T5 .sheet table{font-size:8.3pt}
+}
 </style></head><body>
 <header class="noprint"><h1>🖨 ECON1011 Open-Book Binder</h1>
 <p>Every topic's exam sheet in one document. Print it (⌘P → A4, "Background graphics" on), staple or clip each tab, and keep it beside your laptop in the exam.</p>
@@ -19,7 +41,7 @@ table.pm{width:auto;margin:10px auto;text-align:center}table.pm th,table.pm td{t
 <a href="t1-demand-supply.html">T1 D&amp;S</a><a href="t2-intervention.html">T2 Intervention</a><a href="t3-market-power.html">T3 Market power</a><a href="t4-macro-policy.html">T4 AD-AS &amp; policy</a><a href="t5-trade.html">T5 Trade</a><a href="t6-climate-games.html">T6 Climate &amp; games</a><a href="t7-growth-inequality.html">T7 Growth</a>
 </nav>
 <main>
-<section><div class="sheet">
+<section id="COVER"><div class="sheet">
 <span class="tabhead">COVER</span>
 <h2>ECON1011 Economics for Business — Open-Book Binder</h2>
 <p><b>Final exam · Saturday 7 November 2026</b> · Inspera (Safe Exam Browser) on your own laptop · 10 min planning + 120 min · 100 marks · Casio FX82 allowed · any printed/written material allowed.</p>
