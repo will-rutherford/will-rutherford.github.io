@@ -8,7 +8,7 @@
   :root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;--line:#2a3340;
     --stat:#34d399;--stat-dark:#062c22;--stat-ink:#032117;
     --math:#a78bfa;--math-dark:#1e1b4b;--math-ink:#1e1b4b;
-    --econ:#f59e0b}
+    --econ:#f59e0b;--bism:#38bdf8}
   *{box-sizing:border-box}
   html,body{height:100%}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;display:flex;flex-direction:column}
@@ -39,6 +39,10 @@
   .econ:hover{border-color:var(--econ)}
   .econ .code,.econ .go{color:var(--econ)}
   .econ .badge{background:rgba(245,158,11,.14);color:var(--econ);border:1px solid #6b4a0d}
+.bism{border-top:4px solid var(--bism)}
+  .bism:hover{border-color:var(--bism)}
+  .bism .code,.bism .go{color:var(--bism)}
+  .bism .badge{background:rgba(56,189,248,.14);color:var(--bism);border:1px solid #0e4a63}
   .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
   .links a{font-size:12px;padding:4px 9px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink)}
   .links a:hover{background:rgba(255,255,255,.1)}
@@ -107,6 +111,20 @@
       <a href="math1052/exam-2025.html">2025 papers</a>
     </div>
     <a class="go" href="math1052/index.html">Open MATH1052 →</a>
+  </div>
+
+  <div class="subject bism" data-href="bism1201/index.html">
+    <div class="code">BISM1201</div>
+    <h2><a href="bism1201/index.html">Transforming Business with Information Systems</a></h2>
+    <p>Revision hub and flashcards: ISD (Waterfall/Agile-SCRUM), databases, ERDs &amp; 3NF normalisation, business intelligence and Responsible AI.</p>
+    <div class="meta">
+      <span class="badge">Semester 1, 2026 · completed</span>
+      <span class="badge">120 min · MCQ + short answer</span>
+    </div>
+    <div class="links">
+      <a href="bism1201/index.html">🏠 Hub &amp; flashcards</a>
+    </div>
+    <a class="go" href="bism1201/index.html">Open BISM1201 →</a>
   </div>
 
 </div>
