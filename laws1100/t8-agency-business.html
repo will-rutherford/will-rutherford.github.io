@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAWS1100 — Agency &amp; Business Structures</title>
+<link rel="stylesheet" href="style.css"><script src="pack.js" defer></script><style>
+/* T8 sheet: compact so it prints on 3 A4 pages */
+.sheet[data-topic="T8"]{font-size:12px;line-height:1.32}
+.sheet[data-topic="T8"] .say{padding:4px 8px;margin:4px 0;font-size:12px}
+.sheet[data-topic="T8"] .box,.sheet[data-topic="T8"] .key{padding:5px 8px;margin:4px 0}
+.sheet[data-topic="T8"] ol,.sheet[data-topic="T8"] ul{margin:2px 0 2px 16px}
+.sheet[data-topic="T8"] li{margin:1px 0}
+.sheet[data-topic="T8"] table{font-size:11px}
+.sheet[data-topic="T8"] th,.sheet[data-topic="T8"] td{padding:2px 5px}
+@media print{.sheet[data-topic="T8"]{font-size:8.7pt;line-height:1.26}.sheet[data-topic="T8"] .say{font-size:8.7pt}.sheet[data-topic="T8"] table{font-size:8.1pt;margin:4px 0}.sheet[data-topic="T8"] th,.sheet[data-topic="T8"] td{padding:1px 4px;line-height:1.2}.sheet[data-topic="T8"] h3{margin:6px 0 3px}.sheet[data-topic="T8"] .cols>.box{break-inside:auto}}
+</style></head><body>
+<header><h1>T8 · Agency &amp; Partnership (Business Structures)</h1>
+<p>Teaching Week 11 (Law of Agency) · Teaching Week 12 (Business Structures + Agency Q&amp;A)</p>
+<div><span class="badge">Examined 2/11 papers (2023 S2 Q1, 2025 S2 Q2)</span><span class="badge gold">Usually: “Is it a partnership?” → “Was there authority?” → “Who is liable?”</span><span class="badge blue">Statute: Partnership Act 1891 (Qld) ss 5, 8</span></div></header>
+<nav><a href="../index.html">⇄ Switch subject</a><a href="index.html">🏠 Hub</a><a href="ilac.html">ILAC method</a><a href="print.html">🖨 Print binder</a>
+<a href="t1-negligence.html">T1 Negligence</a><a href="t2-other-torts.html">T2 Other torts</a><a href="t3-contract-terms.html">T3 Contract 1–2</a><a href="t4-vitiating.html">T4 Contract 3</a><a href="t5-ip.html">T5 IP</a><a href="t6-acl.html">T6 ACL</a><a href="t7-competition.html">T7 Competition</a><a href="t8-agency-business.html">T8 Agency &amp; partnership</a>
+<a href="#learn">① Learn</a><a href="#spot">② Spot it</a><a href="#script">③ ILAC script</a><a href="#answers">④ Model answers</a><a href="#traps">⑤ Traps</a><a href="#sheet">⑥ Print sheet</a></nav>
+<main>
+
+<!-- ================================================================ -->
+<section id="learn">
+<h2>① Learn it in 20 minutes</h2>
+
+<div class="card">
+<h3>The big picture (read this first)</h3>
+<p>Every agency / partnership exam question is the same story: <b>someone signed or bought something, the people behind them now say “they had no authority”, and a third party wants to be paid.</b> You answer three questions, in this order:</p>
+<ol>
+<li><b>Is there an agency (or a partnership)?</b> Who is principal (P), who is agent (A), who is the third party (3P)? If several people run a business together, test the <b>4 partnership requirements</b> (s 5(1) <i>Partnership Act 1891</i> (Qld)) — because if it is a partnership, every partner is the agent of the others.</li>
+<li><b>Did A have authority?</b> Go through <b>express actual → implied actual → apparent</b>. If ANY one exists, P is bound to 3P and A is not personally liable.</li>
+<li><b>Who pays?</b> If authority → P (and in a partnership, all partners jointly and personally). If no authority → P is not bound; 3P sues <b>A personally for breach of warranty of authority</b>. Then, if relevant, <b>fiduciary duties</b> — P can sue A for going outside instructions.</li>
+</ol>
+<p class="src">Week 12 slide 14: “Potentially multiple issues … Does a partnership exist? (4 requirements) · If a partnership exists, is there authority to act? · Have any fiduciary duties been breached?” Week 13 revision: always finish with Remedies.</p>
+</div>
+
+<div class="card">
+<h3>1. What agency is</h3>
+<ul>
+<li><b>Definition:</b> “a legal relationship in which one person (the agent) is authorised to act on behalf of another (the principal) in dealings with a third party.” Any of the three can be an individual or a corporation.</li>
+<li>The relationship is <b>fiduciary</b>: A must act in P’s best interests, avoid conflicts, and act within the scope of their authority.</li>
+<li>A makes the contract between P and 3P but <b>is not a party to it and is not liable under it</b> — P is. A has a separate contract with P: the <b>contract of agency</b>.</li>
+<li><b>Caution — the label “agent” is not decisive.</b> The key question is whether the person has authority to bind the principal with third parties. An employee who just promotes/sells without power to bind the owner is not necessarily an agent.</li>
+<li><b>Capacity:</b> P needs full contractual capacity (and can’t authorise A to do what P couldn’t legally do). A does <i>not</i> need full capacity — even a minor can be an agent.</li>
+<li><b>Outcome (slide 28):</b> privity of contract is established between P and 3P, provided the agency was disclosed and A acted within actual or apparent authority.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>2. Actual authority — comes from agreement between P and A</h3>
+<p><span class="case">Freeman &amp; Lockyer v Buckhurst Park Properties Ltd [1964]</span> (Lord Diplock): “An actual authority is a legal relationship between principal and agent created by a consensual agreement to which they alone are parties.”</p>
+<h4>(a) Express actual authority</h4>
+<p>P expressly authorises A, in writing or orally, e.g. by deed (power of attorney), other writing, or orally. (Duration / scope / commission are practical tips, <b>not</b> elements you need to prove.)</p>
+<h4>(b) Implied actual authority</h4>
+<p>Whenever A is expressly authorised, there is implied authority to do <b>all things necessarily incidental</b> to carrying out the express instructions (the main task), and to give <b>business efficacy</b> to them. Appointment to a position often implies authority to make the contracts that position normally makes. <span class="case">Peterson v Moloney (1951)</span> — implied authority was <b>not</b> found (use as the “against” case).</p>
+<ul>
+<li>Real estate agent appointed to sell → implied authority to give buyers information about the house.</li>
+<li>Partners → implied authority to act for the others in matters incidental to the partnership business.</li>
+<li>Company officers (<span class="case">Giltrap City Ltd v Commerce Commission [2004]</span>: the more senior the role, the more implied authority): single director or Chair alone → generally none; MD/CEO alone → contracts in the ordinary course of business; Company Secretary → administrative contracts only.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>3. Apparent (ostensible) authority — comes from P’s representation to 3P</h3>
+<p>Where P leads 3P to <b>reasonably believe</b> A has authority, P is bound even though A had no actual authority — even if P expressly told A not to do it (slide 26). It protects third parties, who usually can’t see A’s actual authority. <b>Three elements</b> (slide 21):</p>
+<ol>
+<li><b>Lack of knowledge</b> — 3P did not know A lacked actual authority;</li>
+<li><b>Holding out</b> — <i>P</i> held A out as having authority (by words or conduct, e.g. appointing A to a position, or letting A act for P in the past);</li>
+<li><b>Reasonable reliance</b> — 3P reasonably relied on P’s representation when dealing with A.</li>
+</ol>
+<table><tr><th>Case</th><th>Facts → held → use</th></tr>
+<tr><td class="case">Panorama v Fidelis Furnishing Fabrics (1971)</td><td>Company secretary hired cars in FFF’s name; used some personally. FFF refused to pay, saying no actual authority. <b>Held:</b> FFF bound — hiring cars was within the usual authority of a company secretary, so within apparent authority. <b>Use</b> when A’s position/role makes the deal look normal.</td></tr>
+<tr><td class="case">Essington v Regency (2004)</td><td>Agent purported to vary a contract. <b>Held:</b> no apparent authority — the principal had done nothing to represent the agent could make contractual changes. <b>Use</b> when the only “representation” came from A (A cannot create own authority by claiming it).</td></tr>
+<tr><td class="case">Summers v Solomon (1857)</td><td>Supplier didn’t know A’s employment had ended → P still bound; A kept apparent authority.</td></tr>
+<tr><td class="case">Tooth v Laws (1888)</td><td>Key question is whether 3P knew A’s actual authority had been withdrawn.</td></tr>
+</table>
+<p><b>Termination/withdrawal:</b> ending A’s actual authority does not end apparent authority. P must <b>expressly inform</b> 3P that A is no longer authorised (duty to inform, slide 24).</p>
+</div>
+
+<div class="card">
+<h3>4. Agency of necessity (rare — only if facts scream emergency)</h3>
+<p>Four requirements: (1) A has possession/control of P’s property; (2) the property is under threat; (3) A cannot contact P for instructions; (4) A acts in good faith to protect it. <span class="case">Springer v Great Western Railway [1921]</span> — failed requirement 3: they could have contacted the principal and did not.</p>
+</div>
+
+<div class="card">
+<h3>5. Personal liability of the agent — breach of warranty of authority</h3>
+<p>Order (slide 29): <b>first</b> decide authority; <b>then, if none</b>, ask whether A is personally liable to 3P. A is liable if: (1) A claimed to be contracting on behalf of P; (2) A did not in fact have authority; (3) 3P relied on that representation and would not have contracted without it. <span class="case">Oliana Foods Pty Ltd v Culinary Co [2020]</span>. A may also be liable in deceit, negligence, or under s 18 ACL (mention only).</p>
+</div>
+
+<div class="card">
+<h3>6. Agent’s fiduciary duties to the principal &amp; principal’s duties to the agent</h3>
+<table><tr><th>Duty of A</th><th>Meaning</th><th>Authority</th></tr>
+<tr><td>Follow instructions</td><td>Obey P’s lawful instructions; personally liable to P for harm caused by disobeying (not liable for refusing unlawful ones).</td><td class="case">Bertram Armstrong v Godfray (1830)</td></tr>
+<tr><td>Communicate information</td><td>Tell P anything a reasonable agent would see as relevant — secret profits/commissions, bribes, conflicts.</td><td class="case">John D Wood v Knatchbull (2002); Hewson v Sydney (1968)</td></tr>
+<tr><td>Act in person</td><td>No delegating / sub-agents without P’s permission. Agent appointed another agent to sell property → breach.</td><td class="case">John McCann v Pow (1975)</td></tr>
+<tr><td>Due care, skill, diligence</td><td>Do what a reasonable agent would; otherwise liable in negligence.</td><td class="case">Provincial Insurance v Consolidated Wood (1991)</td></tr>
+<tr><td>Act in P’s interests</td><td>No conflict of interest, secret commission, secret profit, bribes.</td><td class="case">Hewson v Sydney (1968)</td></tr>
+<tr><td>Confidentiality</td><td>Don’t disclose/use P’s information for own benefit.</td><td>(slide 39)</td></tr>
+<tr><td>Keep accounts</td><td>Proper records; keep P’s money/property separate.</td><td>(slide 40)</td></tr>
+</table>
+<p>These duties arise in equity and are often also written into the contract of agency — so a breach can be <b>both</b> a breach of fiduciary duty <b>and</b> a breach of contract.</p>
+<p><b>Agent’s entitlements (= principal’s duties):</b> no inherent right to remuneration (only if agreed); inherent right to <b>indemnity</b> and reimbursement for payments, expenses and liabilities incurred carrying out P’s instructions; a <b>lien</b> over P’s property in A’s possession if P refuses to pay.</p>
+<p><b>Principal’s liability for A’s torts/crimes:</b> depends on control. Independent contractor → P unlikely to be liable. Employee → P more likely vicariously liable for torts committed while carrying out P’s instructions.</p>
+</div>
+
+<div class="card">
+<h3>7. Business structures (Week 12)</h3>
+<table>
+<tr><th>Structure</th><th>Key law points</th></tr>
+<tr><td><b>Sole trader</b></td><td>Owns and runs the business personally; may employ staff; all profits; no formalities. Main disadvantage: <b>unlimited personal liability</b>; no continuity; hard to raise capital.</td></tr>
+<tr><td><b>Partnership</b></td><td>“The relation which subsists between persons carrying on a business in common with a view of profit” — <b>s 5(1) Partnership Act 1891 (Qld)</b>. No registration or written agreement needed; exists if the 4 requirements are met <i>regardless of the parties’ intention</i>. “Mutual liability”: each partner is <b>principal and agent</b> of the others → unlimited personal liability. <span class="case">Kendall v Hamilton (1879)</span> — partners jointly (and jointly and severally for torts/crimes of a fellow partner) liable. Not a separate legal entity (but can sue and be sued); no perpetual succession. Max usually 20 partners (s 115 Corporations Act 2001 (Cth)), except professional partnerships (reg 2A.1.01 — law firms 400, accountants 1000).</td></tr>
+<tr><td><b>Joint venture</b></td><td>Contractual arrangement for a commercial enterprise by parties who keep distinct identities, for a finite time/specific project. Whether it is really a partnership is decided by applying the partnership requirements — <span class="case">Canny v Volume (1974); Palermo v Palermo (2014)</span>. More autonomy, no relationship of trust/good faith usually, easier exit; needs a detailed contract.</td></tr>
+<tr><td><b>Trust</b></td><td>Listed in the Week 12 overview but <b>no slide content</b>. If needed only: a trustee holds property for beneficiaries (Week 6: trustees are an exception to privity; Week 7: trustee–beneficiary is a relationship of influence). Don’t build an ILAC around trusts.</td></tr>
+<tr><td><b>Company</b></td><td>Registered with ASIC under the Corporations Act 2001 (Cth); becomes a <b>separate legal entity</b> — owns its own assets, incurs its own debts, sues and is sued, continues if owners sell. <span class="case">Salomon v Salomon (1897)</span>: although Salomon ran the business and was majority shareholder, he and the company were separate, so he could be a secured creditor and seize company assets. At least 1 shareholder (s 114); pty co ≥1 director, public ≥3; director must be an individual, 18+, not disqualified. Directors manage; shareholders vote only on limited matters — <span class="case">Automatic v Cunninghame (1906)</span>. Constitution and/or replaceable rules (s 134). Directors appointed/removed/paid under Pt 2D.3; breach of duty → disqualification, fines, compensation, account of profits, criminal penalty if fraudulent. Shareholders: limited liability (limited by shares) to unpaid share price; rights to vote, dividends, information.</td></tr>
+<tr><td><b>Franchise</b></td><td>Contract where franchisor lets franchisee use its products, trade mark, system and name for a fee/percentage. Regulated by the mandatory <b>Franchising Code of Conduct</b> (given force by Pt IVB CCA, enforced by ACCC): disclosure, 7-day cooling-off, banned terms, dispute resolution. <span class="case">Burger King v Hungry Jacks (2001)</span> — relationship breakdown.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>8. Partnership law — the exam engine</h3>
+<h4>The 4 requirements (s 5(1) PA)</h4>
+<table>
+<tr><th>Requirement</th><th>Rule + authority</th><th>Facts that satisfy / defeat it</th></tr>
+<tr><td>1. Persons</td><td>At least 2; generally ≤20 (s 115 CA).</td><td>Count them.</td></tr>
+<tr><td>2. Carrying on a business</td><td>“Business” includes trade, occupation or profession (s 3 PA). “Carrying on” needs some continuity/repetition. One-off transaction usually not a partnership — <span class="case">Smith v Anderson (1880)</span>. Partnership starts when they begin working together to set up an identifiable business — <span class="case">Khan v Miah [2000]</span>. Key = business intent.</td><td>Years of trading, website, regular clients, performances ✔ · single project ✘</td></tr>
+<tr><td>3. In common</td><td>Each acts on behalf of the others as well as themselves (each partner is agent of the others). Employer/employee carry on business together but aren’t partners — <span class="case">Degiorgio v Dunn (2004)</span>. Silent partners still count and are still liable.</td><td>Joint bank account, shared office, equal say / majority vote, introduced to clients as part of team ✔ · paid a fixed wage, no say, no profit share ✘</td></tr>
+<tr><td>4. With a view of profit</td><td>They must be seeking profit; still a partnership if they expect/make a loss — <span class="case">Minter v Minter (2000)</span>. Non-profit → unincorporated association.</td><td>Profits split ✔</td></tr>
+</table>
+<h4>Authority of partners</h4>
+<ul>
+<li><b>Express</b> — granted by the other partners.</li>
+<li><b>Implied</b> — all the usual things necessary to carry out express authority and carry on the firm’s business: selling firm property, <b>buying goods of the kind usually employed in the firm’s business</b>, hiring employees, borrowing, incurring and paying debts. <b>Can be overridden</b> by the partnership agreement or express instructions to the contrary — <span class="case">Construction v Hexyl (1985)</span>.</li>
+<li><b>Apparent — s 8 PA</b>: every partner is agent of the firm; acts done “for carrying on in the usual way business of the kind carried on by the firm” bind the firm, <b>unless</b> the partner had no authority <b>and</b> the 3P knew that, or did not know/believe they were a partner. So where a partner lacks actual authority, the others are still liable if <b>4 requirements</b>:
+<ol><li>the partner was carrying on business <b>of the kind</b> carried on by the firm — <span class="case">Mercantile v Garrod (1962)</span> (court looks at what the firm’s usual business actually is and what transactions a firm of that kind would usually engage in);</li>
+<li>it was done in the <b>usual way</b> — <span class="case">Goldberg v Jenkins (1889)</span> (if not done the usual way, the 3P should suspect a lack of authority);</li>
+<li>3P <b>knew or believed</b> they were a partner;</li>
+<li>3P did <b>not know or suspect</b> the lack of actual authority — relied in good faith without notice — <span class="case">Crouch v IPG (2013)</span>.</li></ol></li>
+<li>The partnership agreement binds only the partners, <b>not</b> third parties (slide 10) — so a secret internal limit (e.g. “needs another partner’s permission”) does not stop apparent authority unless the 3P knew of it.</li>
+</ul>
+<h4>Partners’ fiduciary duties (to each other)</h4>
+<ul>
+<li>Not to profit personally from their position/information — <span class="case">Chan v Zaccharia (1984)</span>;</li>
+<li>No undisclosed conflict of interest;</li>
+<li>Full disclosure of all matters likely to affect the partnership — <span class="case">Law v Law (1905)</span>; s 31 PA;</li>
+<li>Account for private profits made without consent — <span class="case">Birtchnell v Equity (1929)</span>; s 32 PA;</li>
+<li>Not to compete with the firm — s 33 PA.</li>
+</ul>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="spot">
+<h2>② Spot it</h2>
+<div class="tablewrap"><table>
+<tr><th>Facts in the question look like…</th><th>Issue / cause of action</th><th>Go to</th></tr>
+<tr><td>2+ people running a business, splitting profits, joint account, “no formal agreement”, introduced as “part of the team”</td><td>Does a partnership exist? (s 5(1) PA, 4 requirements)</td><td><a href="#s-part">Script A</a></td></tr>
+<tr><td>Someone is called an “employee” / gets a salary but also shares profits</td><td>“In common” — partner vs employee (<i>Degiorgio v Dunn</i>)</td><td><a href="#s-part">Script A, req 3</a></td></tr>
+<tr><td>“had no authority”, “refuse to pay”, “demand a refund”, “signed on behalf of”</td><td>Was the agent/partner authorised? Express → implied → apparent</td><td><a href="#s-auth">Script B</a></td></tr>
+<tr><td>A secret internal rule: “needs approval of another member”, spending limit, “only for equipment”</td><td>Express authority limited; implied overridden (<i>Construction v Hexyl</i>); but does 3P know the rule? (apparent)</td><td><a href="#s-auth">Script B</a></td></tr>
+<tr><td>3P is a regular supplier; A bought from them before “on behalf of the band/firm”</td><td>Holding out by past dealings → apparent authority</td><td><a href="#s-auth">Script B</a></td></tr>
+<tr><td>A tells 3P “I’m authorised…” but P never said so</td><td>A can’t create own apparent authority (<i>Essington</i>)</td><td><a href="#s-auth">Script B</a></td></tr>
+<tr><td>A tells 3P they still need the others’ approval / it’s a new direction / unusually large / personal item / sent to home address</td><td>Not business of the kind / not usual way / 3P on notice → no apparent authority</td><td><a href="#s-auth">Script B, s 8 reqs</a></td></tr>
+<tr><td>A was sacked / authority withdrawn but kept dealing with old suppliers</td><td>Apparent authority survives until 3P is told (<i>Summers v Solomon; Tooth v Laws</i>)</td><td><a href="#s-auth">Script B</a></td></tr>
+<tr><td>Who pays if there was NO authority?</td><td>Agent personally — breach of warranty of authority (<i>Oliana Foods</i>)</td><td><a href="#s-bwa">Script C</a></td></tr>
+<tr><td>A ignored instructions, took a secret commission, sold below the price, delegated</td><td>Breach of agent’s fiduciary duties (and contract of agency)</td><td><a href="#s-fid">Script D</a></td></tr>
+<tr><td>A partner made a private profit / competed / hid information</td><td>Breach of partners’ fiduciary duties (ss 31–33 PA)</td><td><a href="#s-fid">Script D</a></td></tr>
+<tr><td>Emergency, P unreachable, A protecting P’s goods</td><td>Agency of necessity (<i>Springer</i>)</td><td><a href="#learn">Learn §4</a></td></tr>
+<tr><td>“company”, “shareholder”, “director” — is X personally liable?</td><td>Separate legal entity (<i>Salomon</i>) — check it is actually incorporated!</td><td><a href="#learn">Learn §7</a></td></tr>
+</table></div>
+</section>
+
+<!-- ================================================================ -->
+<section id="script">
+<h2>③ ILAC SCRIPT — write it in this order</h2>
+<div class="method"><b>Booklet order for a 25-mark agency/partnership question:</b>
+<ol>
+<li>Opener (1 line).</li>
+<li><b>Issue 1</b> — Partnership? (skip only if it is clearly a single principal + agent, e.g. home owner + real estate agent).</li>
+<li><b>Issue 2</b> — Authority for transaction #1 (express → implied → apparent). If there are two purchases, do <b>Issue 3</b> separately for transaction #2 — the facts are always chosen so one is authorised and one is not.</li>
+<li><b>Issue 4</b> — Agent personally liable (breach of warranty of authority) — only for a transaction with no authority.</li>
+<li>(If the question is from the principal’s side) fiduciary duties.</li>
+<li><b>Remedies</b> — who pays whom, how much.</li>
+</ol></div>
+
+<div class="ilac">
+<h3>Opener</h3>
+<div class="say">Whether <span class="blank">[3P]</span> can recover <span class="blank">[$X / the price of the …]</span> depends upon three issues: first, whether <span class="blank">[A, B and C]</span> are in partnership; second, whether <span class="blank">[A]</span> had authority to bind <span class="blank">[the firm / P]</span> when <span class="blank">[signing / purchasing …]</span>; and third, if not, whether <span class="blank">[A]</span> is personally liable to <span class="blank">[3P]</span>.</div>
+</div>
+
+<!-- Script A -->
+<div class="ilac" id="s-part">
+<h3>Script A — Does a partnership exist?</h3>
+<span class="lab i">ISSUE</span>
+<div class="say">Were <span class="blank">[A, B and C]</span> carrying on business in partnership under the <i>Partnership Act 1891</i> (Qld), such that each was the agent of the others?</div>
+<span class="lab l">LAW</span>
+<div class="say">A partnership is “the relation which subsists between persons carrying on a business in common with a view of profit”: <i>Partnership Act 1891</i> (Qld) (‘PA’) s 5(1). There are no registration requirements or formalities, and a partnership agreement may be written, oral or wholly implied from the partners’ conduct; a partnership exists whenever the four requirements are satisfied, regardless of the parties’ intention. The key concept is mutual liability: each partner is both principal and agent of the other partners, and each has unlimited personal liability for the firm’s contracts and debts: <span class="case">Kendall v Hamilton (1879)</span>.</div>
+<div class="say"><b>Persons:</b> at least two persons are required, and generally no more than 20: <i>Corporations Act 2001</i> (Cth) s 115.</div>
+<div class="say"><b>Carrying on a business:</b> ‘business’ includes any trade, occupation or profession (PA s 3), and ‘carrying on’ requires some continuity or repetition of trading activities. A single transaction or one-off project is usually not a partnership: <span class="case">Smith v Anderson (1880)</span>. However, a partnership commences from the date the parties begin working together to establish an identifiable business: <span class="case">Khan v Miah [2000]</span>.</div>
+<div class="say"><b>In common:</b> each person must act on behalf of the others as well as themselves. An employer and employee carry on a business together but are not partners, because while the employee acts on behalf of the employer, the employer does not act on behalf of the employee: <span class="case">Degiorgio v Dunn (2004)</span>. Not all partners need take an active part; even silent partners are liable.</div>
+<div class="say"><b>With a view of profit:</b> the parties must be seeking a profit; it remains a partnership even if they expect or make a loss: <span class="case">Minter v Minter (2000)</span>.</div>
+<span class="lab a">APPLICATION</span>
+<div class="say"><b>Persons:</b> there are <span class="blank">[three]</span> persons, <span class="blank">[names]</span>, which is within the limit in s 115, so this requirement is satisfied.</div>
+<div class="say"><b>Business:</b> <span class="blank">[name]</span> has operated <span class="blank">[an event planning business / as a band]</span> since <span class="blank">[date]</span>, <span class="blank">[performing across Australia for two years / with a website and growing client base]</span>. Unlike <span class="case">Smith v Anderson</span>, this is not a one-off project but a continuing trade, so they are carrying on a business. <span class="blank">[Late joiner:]</span> Consistent with <span class="case">Khan v Miah</span>, <span class="blank">[Robert]</span> became a partner from the time he began working in the business in <span class="blank">[date]</span>.</div>
+<div class="say"><b>In common — for:</b> they <span class="blank">[share an office / manage finances through a joint account / split profits equally / decide by majority vote / were introduced to clients as part of the team]</span>, which shows each acting on behalf of the others. The absence of a formal agreement is irrelevant, as the agreement may be implied from conduct.</div>
+<div class="say"><b>In common — against:</b> <span class="blank">[X]</span> may argue that <span class="blank">[Y]</span> is merely an employee, like the employee in <span class="case">Degiorgio v Dunn</span>, because <span class="blank">[Y receives a salary / pursues individual freelance work]</span>. However, this is unlikely to succeed because <span class="blank">[Y]</span> <span class="blank">[shares in the profits / can draw on the joint account / has an equal vote]</span> — rights an employee would not have; the <span class="blank">[salary]</span> merely compensates <span class="blank">[extra responsibilities]</span>.</div>
+<div class="say"><b>Profit:</b> the business has <span class="blank">[generated $800,000 in profits / profits split equally]</span>, so it is clearly carried on with a view of profit (<span class="case">Minter v Minter</span>).</div>
+<span class="lab c">CONCLUSION</span>
+<div class="say">On the balance of probabilities, <span class="blank">[A, B and C]</span> are partners under s 5(1) PA, so each is the agent of the firm and of the other partners.</div>
+</div>
+
+<!-- Script B -->
+<div class="ilac" id="s-auth">
+<h3>Script B — Did the agent / partner have authority?</h3>
+<span class="lab i">ISSUE</span>
+<div class="say">Is <span class="blank">[P / the firm and its partners]</span> bound by the contract <span class="blank">[A]</span> made with <span class="blank">[3P]</span> for <span class="blank">[the stage / drum set]</span>, on the basis that <span class="blank">[A]</span> had authority under the law of agency?</div>
+<span class="lab l">LAW</span>
+<div class="say">Agency is a legal relationship in which one person (the agent) is authorised to act on behalf of another (the principal) in dealings with a third party. If the agent acts within the scope of their authority, the resulting contract is between the principal and the third party and the agent incurs no personal liability. An agent may be authorised by actual authority — express or implied — or by apparent authority.</div>
+<div class="say"><b>Actual authority</b> “is a legal relationship between principal and agent created by a consensual agreement to which they alone are parties”: <span class="case">Freeman &amp; Lockyer v Buckhurst Park Properties Ltd [1964]</span>. <b>Express</b> actual authority is given by the principal in writing (including by deed, a power of attorney) or orally. <b>Implied</b> actual authority extends to all things necessarily incidental to carrying out the express instructions, or needed to give them business efficacy; it is not found merely because it would be convenient: <span class="case">Peterson v Moloney (1951)</span>.</div>
+<div class="say"><i>(Partnership add-on:)</i> Each partner has implied authority to do the usual things necessary to carry on the firm’s business, such as buying goods of the kind usually employed in that business, borrowing money and incurring debts. Implied authority can be overridden by the partnership agreement or express instructions to the contrary: <span class="case">Construction v Hexyl (1985)</span>.</div>
+<div class="say"><b>Apparent authority</b> arises where the principal leads a third party to reasonably believe the agent has authority; the principal is then bound even if the agent had no actual authority, and even if the principal expressly prohibited the act. Three requirements must be met: (1) the third party did not know the agent lacked actual authority; (2) the principal held the agent out as having authority, for example by appointing them to a position or by allowing them to act in the past; and (3) the third party reasonably relied on that representation. In <span class="case">Panorama v Fidelis Furnishing Fabrics (1971)</span>, a company secretary hired cars in the company’s name, partly for personal use; the company was bound because hiring cars fell within a secretary’s usual, and therefore apparent, authority. The representation must come from the principal, not the agent: in <span class="case">Essington v Regency (2004)</span> there was no apparent authority to vary a contract because the principal had done nothing to represent that the agent could do so.</div>
+<div class="say"><i>(Partnership — use instead of / as well as the 3 elements:)</i> Under s 8 PA, every partner is an agent of the firm, and acts done “for carrying on in the usual way business of the kind carried on by the firm” bind the firm and the partners, unless the partner had no authority and the third party knew this or did not know or believe them to be a partner. Accordingly, where a partner lacks actual authority, the firm is still bound if: (1) the partner was carrying on business of the kind carried on by the firm — assessed by what the firm’s usual business actually is and what transactions a firm of that kind would usually engage in: <span class="case">Mercantile v Garrod (1962)</span>; (2) the business was carried on in the usual way, as otherwise the other party should suspect a lack of authority: <span class="case">Goldberg v Jenkins (1889)</span>; (3) the third party knew or believed the person was a partner; and (4) the third party did not know or suspect the lack of authority, relying in good faith and without notice: <span class="case">Crouch v IPG (2013)</span>. The partnership agreement binds only the partners, not third parties.</div>
+<span class="lab a">APPLICATION</span>
+<p><b>Relationship:</b></p>
+<div class="say"><span class="blank">[P]</span> is the principal, <span class="blank">[A]</span> is the agent and <span class="blank">[3P]</span> is the third party. <i>(Partnership:)</i> As established above, <span class="blank">[A]</span> is a partner and therefore an agent of the firm and of <span class="blank">[B and C]</span> (s 8 PA).</div>
+<p><b>Express:</b></p>
+<div class="say"><span class="blank">[A]</span> was expressly authorised to <span class="blank">[spend up to $50,000 on upgrading musical equipment with another member’s permission / sell to the first buyer over $1 million]</span>. The <span class="blank">[purchase / sale]</span> <span class="blank">[fell within / fell outside]</span> this because <span class="blank">[it was musical equipment under $50,000 / but no permission was obtained / the price was below $1 million]</span>. There is no evidence that <span class="blank">[B and C]</span> expressly authorised <span class="blank">[A]</span> to <span class="blank">[…]</span>; indeed they were <span class="blank">[“furious” / “outraged”]</span> on learning of it.</div>
+<p><b>Implied:</b></p>
+<div class="say"><span class="blank">[3P]</span> will argue that <span class="blank">[A]</span> had implied authority because <span class="blank">[buying band equipment / event equipment]</span> is a usual thing necessary to carry on the firm’s business. However, <span class="blank">[the firm only ever hired equipment / decisions were made by majority vote / the agreement required another member’s permission]</span>, and as in <span class="case">Construction v Hexyl</span>, implied authority is overridden by that express arrangement. As in <span class="case">Peterson v Moloney</span>, implied authority is unlikely to be found.</div>
+<p><b>Apparent — the 3 elements / s 8 PA:</b></p>
+<div class="say"><b>Kind of business (for):</b> <span class="blank">[a drum set is exactly the equipment a touring band uses]</span>, so similar to <span class="case">Panorama</span>, the purchase falls within what a partner of such a firm would usually do. <b>(against):</b> <span class="blank">[the firm runs small functions for under 100 guests and a $180,000 custom-built stage is for large-scale concerts and festivals — a new kind of business / a painting is a personal item unrelated to performing music]</span>, so applying <span class="case">Mercantile v Garrod</span>, it is not a transaction a firm of this kind would usually engage in.</div>
+<div class="say"><b>Usual way:</b> <span class="blank">[A]</span> <span class="blank">[regularly buys equipment from 3P on behalf of the band, paid with the band card and had it sent to the studio]</span> — the usual way. <i>OR</i> The firm usually <span class="blank">[hires]</span> equipment, so <span class="blank">[buying a $180,000 item / delivering to a home address]</span> was not the usual way, and as in <span class="case">Goldberg v Jenkins</span> <span class="blank">[3P]</span> should have suspected a lack of authority.</div>
+<div class="say"><b>Holding out / knew or believed A a partner:</b> <span class="blank">[B and C]</span> held <span class="blank">[A]</span> out as having authority by <span class="blank">[introducing him to clients as part of the team and updating promotional materials / allowing her to buy band equipment from 3P on previous occasions]</span>. This is a representation by the principals themselves, unlike <span class="case">Essington v Regency</span>. <i>(If only A spoke:)</i> <span class="blank">[A]</span>’s own statement that <span class="blank">[“I am authorised…”]</span> cannot create authority (<span class="case">Essington</span>), but <span class="blank">[P]</span> held A out by <span class="blank">[the sign / appointment]</span>.</div>
+<div class="say"><b>No knowledge / reasonable reliance:</b> there is no evidence <span class="blank">[3P]</span> knew of <span class="blank">[the internal permission requirement / the $1 million limit]</span>, which binds only the partners, so <span class="blank">[3P]</span> relied in good faith. <i>OR</i> <span class="blank">[A]</span> told <span class="blank">[3P]</span> that <span class="blank">[he still needed to convince B and C]</span>, so <span class="blank">[3P]</span> was on notice of the lack of authority and cannot satisfy requirement 4 (<span class="case">Crouch v IPG</span>).</div>
+<span class="lab c">CONCLUSION</span>
+<div class="say">On the balance of probabilities, <span class="blank">[A]</span> <span class="blank">[had / did not have]</span> apparent authority, so <span class="blank">[P / the firm and partners B and C]</span> <span class="blank">[is / are not]</span> bound to pay <span class="blank">[3P]</span> for <span class="blank">[item]</span>.</div>
+</div>
+
+<!-- Script C -->
+<div class="ilac" id="s-bwa">
+<h3>Script C — Is the agent personally liable to the third party?</h3>
+<span class="lab i">ISSUE</span>
+<div class="say">Can <span class="blank">[3P]</span> hold <span class="blank">[A]</span> personally liable for breach of warranty of authority?</div>
+<span class="lab l">LAW</span>
+<div class="say">Where an agent lacks authority, the agent will be personally liable to the third party for breach of warranty of authority if: (1) the agent claimed to be making the contract on behalf of the principal; (2) the agent did not in fact have authority; and (3) the third party relied upon the representation and would not have entered into the contract without it: <span class="case">Oliana Foods Pty Ltd v Culinary Co [2020]</span>. The agent may also be liable in deceit or negligence, or for misleading conduct under s 18 of the Australian Consumer Law.</div>
+<span class="lab a">APPLICATION</span>
+<div class="say">First, <span class="blank">[A]</span> <span class="blank">[signed the agreement “on behalf of CT Events” / charged it to the band’s card]</span>, representing that <span class="blank">[A]</span> was contracting for <span class="blank">[the firm]</span>. Second, as concluded above, <span class="blank">[A]</span> had no actual or apparent authority. Third, <span class="blank">[3P]</span> would not have <span class="blank">[supplied a $180,000 stage]</span> to <span class="blank">[A]</span> personally; it contracted because it believed <span class="blank">[the firm]</span> stood behind the deal. <i>Against:</i> <span class="blank">[A]</span> may argue <span class="blank">[3P]</span> did not rely on any representation of authority because <span class="blank">[A told it he still needed approval]</span>.</div>
+<span class="lab c">CONCLUSION</span>
+<div class="say">On the balance of probabilities, <span class="blank">[A]</span> is personally liable to <span class="blank">[3P]</span> for breach of warranty of authority.</div>
+</div>
+
+<!-- Script D -->
+<div class="ilac" id="s-fid">
+<h3>Script D — Did the agent / partner breach fiduciary duties? (when advising the principal)</h3>
+<span class="lab i">ISSUE</span>
+<div class="say">Did <span class="blank">[A]</span> breach the fiduciary duties owed to <span class="blank">[P / the other partners]</span>?</div>
+<span class="lab l">LAW</span>
+<div class="say">Agents owe fiduciary duties to their principal because of the relationship of trust and confidence between them; these duties arise in equity and are often also terms of the contract of agency. They include the duty to follow the principal’s lawful instructions, failing which the agent is personally liable for the resulting harm (<span class="case">Bertram Armstrong v Godfray (1830)</span>); to exercise due care, skill and diligence (<span class="case">Provincial Insurance v Consolidated Wood (1991)</span>); to act in person (<span class="case">John McCann v Pow (1975)</span>); to act in the principal’s interests and avoid conflicts, secret profits and commissions (<span class="case">Hewson v Sydney (1968)</span>); to communicate relevant information (<span class="case">John D Wood v Knatchbull (2002)</span>); to keep confidentiality; and to keep proper accounts.</div>
+<div class="say"><i>(Partners:)</i> Partners owe each other fiduciary duties at common law and under the PA, including not to profit personally from their position (<span class="case">Chan v Zaccharia (1984)</span>), to disclose all matters affecting the partnership (<span class="case">Law v Law (1905)</span>; s 31 PA), to account for private profits made without consent (<span class="case">Birtchnell v Equity (1929)</span>; s 32 PA), and not to compete with the firm (s 33 PA).</div>
+<span class="lab a">APPLICATION</span>
+<div class="say"><span class="blank">[A]</span> breached the duty to follow instructions because <span class="blank">[P instructed in writing to sell only for over $1 million, yet A accepted $850,000]</span>, as in <span class="case">Bertram Armstrong v Godfray</span>. <span class="blank">[A]</span> also failed to act in <span class="blank">[P]</span>’s interests and with due care, since <span class="blank">[accepting $350,000 below valuation]</span> is not what a reasonable agent would do. As the instructions were in writing, this is also a breach of the contract of agency.</div>
+<span class="lab c">CONCLUSION</span>
+<div class="say">Therefore, <span class="blank">[A]</span> breached <span class="blank">[the duties to follow instructions and act in P’s interests]</span>, and <span class="blank">[P]</span> may recover damages from <span class="blank">[A]</span> for the loss.</div>
+</div>
+
+<div class="ilac">
+<h3>Remedies (always finish with this)</h3>
+<div class="say"><b>If authority:</b> <span class="blank">[3P]</span> may enforce the contract against <span class="blank">[P / the firm]</span> and claim <span class="blank">[$X]</span>. As partners have unlimited personal liability and are jointly liable for the firm’s debts (<span class="case">Kendall v Hamilton</span>), <span class="blank">[3P]</span> may sue <span class="blank">[A, B and C]</span> and recover from their personal assets; a partnership is not a separate legal entity, although it may be sued in the firm name.</div>
+<div class="say"><b>If no authority:</b> <span class="blank">[P]</span> is not bound and may <span class="blank">[return the goods / recover the payment]</span>; <span class="blank">[3P]</span>’s remedy is damages against <span class="blank">[A]</span> personally for breach of warranty of authority.</div>
+<div class="say"><b>Internal:</b> <span class="blank">[P / B and C]</span> may also sue <span class="blank">[A]</span> for breach of fiduciary duty and the contract of agency / partnership, to recover <span class="blank">[the deposit / loss]</span>; an agent who acted outside instructions has no right to indemnity for that act, and has no right to remuneration unless agreed.</div>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="answers">
+<h2>④ Full model answers</h2>
+
+<!-- ============ ANSWER 1: 2025 S2 Q2 ============ -->
+<h3>Model answer 1 — 2025 Semester 2, Question 2 (StageCorp v CT Events) <span class="marks">25 marks</span></h3>
+<details><summary>Question text (click)</summary>
+<div class="card q">
+<p>In mid-2022, Callum and Tessa launched an event planning business in Sydney called CT Events, specialising in small corporate functions and private celebrations with fewer than 100 guests. To minimise costs, they did not buy equipment but instead arranged to hire equipment from a hire company. They created a website and developed a growing social media presence under the CT Events name, and the business steadily expanded.</p>
+<p>In early 2023, Callum and Tessa invited their friend, Robert, to join the business. Robert brought considerable experience in design and business management. Although the business continued operating as CT Events and no formal agreement was made, Callum and Tessa began introducing Robert to clients as part of the team, and the promotional materials were updated to include him.</p>
+<p>They all began working out of a shared office and managed finances through a joint account. Profits from business projects were split equally, although each person occasionally pursued individual freelance work. CT Events’s business decisions were made informally, with disagreements resolved by majority vote.</p>
+<p>In August 2024, while Callum and Tessa were working at an event, Robert signed a $180,000 contract with StageCorp Pty Ltd to purchase a custom-built stage. He paid an $18,000 deposit from the joint account and signed the agreement on behalf of CT Events. Robert told StageCorp’s representative that his long-term goal was to expand the business into large-scale concerts and festivals, and that owning stage equipment would help them remain competitive – provided he could convince Callum and Tessa to support the idea.</p>
+<p>Two months later, the stage was delivered to the office. Callum and Tessa, outraged by the purchase, informed StageCorp that CT Events would not be paying for it, stating that the stage would be returned. They argued Robert had no authority to make the purchase on behalf of the business.</p>
+<p>The General Manager of StageCorp now seeks your advice on the best course of action to recover the remaining $162,000 that is owed. <i>Please use ILAC to answer this question.</i></p>
+</div></details>
+<div class="method"><b>Answer plan (5 lines)</b>
+<ol><li>Issue 1 Partnership? 4 reqs — 3 persons; business since 2022 (<i>Khan v Miah</i> for Robert); in common (joint account, equal profits, majority vote, “part of the team”) vs freelance work (<i>Degiorgio</i>); profit → YES.</li>
+<li>Issue 2 Authority? Express — none. Implied — hire-only + majority vote override (<i>Construction v Hexyl</i>) → no.</li>
+<li>Apparent s 8 — kind of business? (small events vs concerts: <i>Mercantile v Garrod</i>) usual way? ($180k purchase when they only hire: <i>Goldberg</i>) believed partner ✔ (holding out); no notice ✘ (“provided he could convince Callum and Tessa”: <i>Crouch</i>) → NO.</li>
+<li>Issue 3 Robert personally liable — breach of warranty of authority (<i>Oliana Foods</i>) → likely YES.</li>
+<li>Remedies: primary claim vs Robert; alternative vs all three partners jointly (<i>Kendall v Hamilton</i>) if a court finds apparent authority.</li></ol></div>
+
+<div class="answer">
+<p>Whether StageCorp Pty Ltd (‘StageCorp’) can recover the remaining $162,000 depends upon three issues: first, whether Callum, Tessa and Robert carry on CT Events in partnership; second, whether Robert had authority to bind CT Events and its partners to the stage contract; and third, if he did not, whether Robert is personally liable to StageCorp. As CT Events operates in Sydney, the New South Wales partnership legislation would technically apply; this answer applies the <i>Partnership Act 1891</i> (Qld) (‘PA’), on the assumption that the relevant provisions are equivalent.</p>
+<p class="note">Flagging the jurisdiction assumption shows you read the facts carefully — the exam instructions invite you to state assumptions.</p>
+
+<h3>Issue 1: Partnership</h3>
+<p><b>Issue:</b> Were Callum, Tessa and Robert carrying on CT Events in partnership under the PA, such that each was the agent of the others?</p>
+<p><b>Law:</b> A partnership is “the relation which subsists between persons carrying on a business in common with a view of profit”: PA s 5(1). No registration or formalities are required, and the partnership agreement may be written, oral or wholly implied from the parties’ conduct. A partnership exists whenever the four requirements are satisfied, regardless of the parties’ intention. Each partner is both a principal and an agent of the others, and each has unlimited personal liability for the firm’s debts: <span class="case">Kendall v Hamilton (1879)</span>.</p>
+<p>First, there must be at least two <i>persons</i>, and generally no more than 20: <i>Corporations Act 2001</i> (Cth) s 115. Second, they must be <i>carrying on a business</i>, which includes a trade, occupation or profession (PA s 3) and requires some continuity or repetition of activity; a one-off project is usually not a partnership: <span class="case">Smith v Anderson (1880)</span>. A partnership begins from the date the parties begin working together in an identifiable business: <span class="case">Khan v Miah [2000]</span>. Third, the business must be carried on <i>in common</i>, meaning each acts on behalf of the others as well as themselves. An employer and employee are not partners, because the employer does not act on the employee’s behalf: <span class="case">Degiorgio v Dunn (2004)</span>. Fourth, the business must be carried on <i>with a view of profit</i>, even if a loss is in fact made: <span class="case">Minter v Minter (2000)</span>.</p>
+<p><b>Application:</b></p>
+<p><i>Persons.</i> There are three persons — Callum, Tessa and Robert — well within the limit of 20. This requirement is satisfied.</p>
+<p><i>Carrying on a business.</i> CT Events has operated as an event planning business since mid-2022, with a website, a growing social media presence and a steadily expanding client base. Unlike <span class="case">Smith v Anderson</span>, this is a continuing trade, not a single project. Robert joined in early 2023 and began working out of the shared office; consistent with <span class="case">Khan v Miah</span>, he became a partner from the time he began working in the business, despite no formal agreement being made.</p>
+<p><i>In common.</i> The three work from a shared office, manage finances through a joint account, split profits equally and resolve disagreements by majority vote. Callum and Tessa introduced Robert to clients “as part of the team” and updated promotional materials to include him. These facts show each acting on behalf of the others, not one acting for an employer. Callum and Tessa may argue that Robert was merely brought in for his design and management experience, and that each person’s individual freelance work shows they were not truly in business together. However, unlike the employee in <span class="case">Degiorgio v Dunn</span>, Robert receives an equal share of profits, has access to the joint account and has an equal vote — none of which is consistent with employment. Occasional freelance work does not change the character of the CT Events business itself (although it may raise a separate issue of competing with the firm under s 33 PA, which is not relevant to StageCorp).</p>
+<p><i>View of profit.</i> Profits from projects are split equally, so the business is clearly carried on with a view of profit (<span class="case">Minter v Minter</span>).</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Callum, Tessa and Robert are partners in CT Events under s 5(1) PA, so Robert is an agent of the firm and of Callum and Tessa.</p>
+
+<h3>Issue 2: Robert’s authority to purchase the stage</h3>
+<p><b>Issue:</b> Are CT Events and its partners bound by the $180,000 contract Robert signed with StageCorp, on the basis that Robert had authority under the law of agency?</p>
+<p><b>Law:</b> Agency is a legal relationship in which one person (the agent) is authorised to act on behalf of another (the principal) in dealings with a third party. Where the agent acts within their authority, the contract is between the principal and the third party. Authority may be actual (express or implied) or apparent.</p>
+<p><i>Actual authority</i> is “a legal relationship between principal and agent created by a consensual agreement to which they alone are parties”: <span class="case">Freeman &amp; Lockyer v Buckhurst Park Properties Ltd [1964]</span>. Express authority is given in writing or orally. Partners have implied authority to do the usual things necessary to carry on the firm’s business, such as buying goods of the kind usually employed in that business and incurring debts; but implied authority may be overridden by the partnership agreement or express instructions to the contrary: <span class="case">Construction v Hexyl (1985)</span>. Implied authority will not always be found: <span class="case">Peterson v Moloney (1951)</span>.</p>
+<p><i>Apparent authority.</i> Under s 8 PA, every partner is an agent of the firm, and acts “for carrying on in the usual way business of the kind carried on by the firm” bind the firm and the partners, unless the partner had no authority and the third party knew this, or did not know or believe them to be a partner. Accordingly, where a partner lacks actual authority, the firm is still bound if: (1) the partner was carrying on business of the kind carried on by the firm, judged by what the firm’s usual business actually is and what transactions such a firm would usually engage in: <span class="case">Mercantile v Garrod (1962)</span>; (2) the business was carried on in the usual way, because otherwise the third party should suspect a lack of authority: <span class="case">Goldberg v Jenkins (1889)</span>; (3) the third party knew or believed the person to be a partner; and (4) the third party did not know or suspect that the partner lacked authority, relying in good faith and without notice: <span class="case">Crouch v IPG (2013)</span>. This reflects the general rule that apparent authority depends on the principal holding the agent out, not on the agent’s own claims: <span class="case">Essington v Regency (2004)</span>.</p>
+<p class="note">Notice: s 8 gives FOUR requirements for partners — use them (not just the three general agency elements) when it is a partnership question.</p>
+<p><b>Application:</b></p>
+<p><i>Express actual authority.</i> There is no evidence that Callum or Tessa expressly authorised Robert to buy a stage. The purchase was made while they were working at an event, and they were “outraged” on learning of it. Robert himself acknowledged he still needed to “convince Callum and Tessa”. There was no express authority.</p>
+<p><i>Implied actual authority.</i> StageCorp will argue that buying event equipment is a usual thing necessary to carry on an event planning business. However, CT Events deliberately did not buy equipment — it hired it to minimise costs — and decisions were made by majority vote. That established practice operates, as in <span class="case">Construction v Hexyl</span>, to override any implied authority for one partner alone to commit the firm to a $180,000 purchase. As in <span class="case">Peterson v Moloney</span>, implied authority is unlikely to be found.</p>
+<p><i>Apparent authority — business of the kind carried on by the firm.</i> StageCorp will argue that a stage is event equipment and CT Events is an events business. However, applying <span class="case">Mercantile v Garrod</span>, the court looks at what CT Events’ business actually is: small corporate functions and private celebrations of fewer than 100 guests. A custom-built stage was, on Robert’s own words, for expanding into “large-scale concerts and festivals” — a different kind of business. This requirement is probably not met.</p>
+<p><i>Usual way.</i> Even if the stage were within the firm’s kind of business, CT Events’ usual way was to hire equipment, not buy it, and a $180,000 custom-built purchase by one partner is out of proportion to a small events business. As in <span class="case">Goldberg v Jenkins</span>, a transaction not carried out in the usual way should have caused StageCorp to suspect a lack of authority.</p>
+<p><i>Knew or believed Robert to be a partner.</i> This requirement is satisfied. Robert signed “on behalf of CT Events” and paid the deposit from the joint account, and Callum and Tessa themselves held Robert out by introducing him to clients as part of the team and including him in promotional materials. Unlike <span class="case">Essington v Regency</span>, the holding out came from the principals, not merely from Robert.</p>
+<p><i>No knowledge or suspicion of lack of authority.</i> This is StageCorp’s greatest difficulty. Robert told StageCorp’s representative that the purchase was part of his own “long-term goal” and would help — “provided he could convince Callum and Tessa to support the idea”. StageCorp was therefore on notice that Callum and Tessa had not yet agreed, and that Robert needed their approval. StageCorp did not rely in good faith and without notice (<span class="case">Crouch v IPG</span>); a reasonable supplier would have sought confirmation from the other partners before accepting a $180,000 order.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Robert had no actual or apparent authority, so CT Events and Callum and Tessa are not bound by the stage contract.</p>
+
+<h3>Issue 3: Robert’s personal liability</h3>
+<p><b>Issue:</b> Can StageCorp hold Robert personally liable for breach of warranty of authority?</p>
+<p><b>Law:</b> Where an agent lacks authority, the agent is personally liable to the third party for breach of warranty of authority if: (1) the agent claimed to make the contract on behalf of the principal; (2) the agent did not in fact have authority; and (3) the third party relied on the representation and would not have contracted without it: <span class="case">Oliana Foods Pty Ltd v Culinary Co [2020]</span>. The agent may also be liable in deceit, negligence or under s 18 of the Australian Consumer Law.</p>
+<p><b>Application:</b> First, Robert signed the agreement “on behalf of CT Events” and paid the deposit from the firm’s joint account, representing that he was contracting for the firm. Second, as concluded in Issue 2, he had no authority. Third, StageCorp would not have built a $180,000 custom stage for Robert personally; it contracted because it believed an established business stood behind the order. Robert may argue that StageCorp cannot have relied on any claim of authority, because he disclosed that he still needed his partners’ support. However, by nonetheless signing a binding contract in the firm’s name and paying a deposit from the firm’s account, Robert represented that the firm was committed, and StageCorp proceeded on that basis.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Robert is personally liable to StageCorp for breach of warranty of authority.</p>
+
+<h3>Remedies and advice</h3>
+<p>StageCorp’s best course is to claim damages against Robert personally for breach of warranty of authority, for the loss caused by having no enforceable contract with CT Events — up to the $162,000 balance, less what StageCorp can recover by taking back and reselling the stage, which Callum and Tessa have offered to return. In the alternative, StageCorp may argue that Robert had apparent authority under s 8 PA. If a court accepted that argument, the firm would be bound and Callum, Tessa and Robert would be jointly and personally liable for the $162,000 (<span class="case">Kendall v Hamilton</span>), as a partnership is not a separate legal entity, and StageCorp could recover from their personal assets. Given Robert’s statement that he still needed to convince his partners, this alternative is weaker. Separately, Callum and Tessa may pursue Robert for breach of his fiduciary duties to the partnership (for example, failing to disclose matters affecting the firm under s 31 PA) to recover the $18,000 deposit taken from the joint account, but that is a matter between the partners.</p>
+<p class="note">Remedies answers the actual question asked (“best course of action to recover $162,000”) — say WHO to sue first and why.</p>
+</div>
+
+<!-- ============ ANSWER 2: 2023 S2 Q1 ============ -->
+<h3>Model answer 2 — 2023 Semester 2, Question 1 (Bob, the drum set and the painting) <span class="marks">25 marks</span></h3>
+<details><summary>Question text (click)</summary>
+<div class="card q">
+<p>Maxine is the lead singer of a band called “Pop Rocks” in Queensland. Her brother, Kevin, is the band’s pianist and her close friend, Roxanne, plays the drums. Pop Rocks has been performing in various major cities across Australia for two years, during which time it has generated $800,000 in profits.</p>
+<p>Maxine, Kevin and Roxanne each receive a 20% share in the profits from all performances. Roxanne, who has a degree in Business Management, is also the marketing manager and is responsible for organising Pop Rocks’s upcoming performances. She is paid a salary of $50,000 per annum to compensate her for her extra responsibilities.</p>
+<p>All remaining profits go into a shared bank account. There is a credit card linked to that account and it is agreed that each band member has the right to spend money from the account (up to a $50,000 limit) providing that the purchase relates to the upgrade of musical equipment and providing they obtain permission from at least one other member.</p>
+<p>Due to Pop Rocks’s success, Roxanne decides that she needs to upgrade her drum kit in the leadup to their upcoming Christmas performances. She visits her favourite music store “Futuristic Sounds” and purchases the best electronic drum set on the market, valued at $45,000. Bob, the owner of the store, gives Roxanne a 20% discount because she regularly buys band equipment from him on behalf of the band and because he is a huge fan of their music. The final price is $36,000. Roxanne pays for the equipment using the credit card linked to the shared account and tells Bob to send the equipment to the normal address (which is the band’s recording studio).</p>
+<p>As she is leaving the store, Roxanne notices a signed, limited-edition painting of her favourite musician Welvis Tesley, hanging on the wall besides the door. Despite the listing price being $15,000, Bob agrees to sell the painting to Roxanne for $10,000. She says to Bob, “Put it on the same card, but send it to my home address.”</p>
+<p>The following week, Kevin and Maxine are furious to learn about Roxanne’s purchases. They demand a full refund from Bob for both items and claim that Roxanne, who is their employee, had no authority to make either purchase and that Bob had no right accepting her purchases on the company card. Bob comes to you seeking advice on these matters.</p>
+<p>Advise Bob as to who is liable for the purchase of the electronic drum set and the limited-edition painting under the law of agency. <i>Please use ILAC to answer this question.</i></p>
+</div></details>
+<div class="method"><b>Answer plan (5 lines)</b>
+<ol><li>Issue 1 Partnership — 3 persons, 2 years’ performing, profit shares + shared account vs “employee”/salary (<i>Degiorgio</i>) → partners; “company card” but no company.</li>
+<li>Issue 2 Drum set — express: within purpose + limit but no permission ✘; implied overridden (<i>Construction v Hexyl</i>) ✘; apparent s 8: band equipment ✔, usual way (regular supplier, band card, studio) ✔, Bob believed she acted for band ✔, didn’t know of permission rule ✔ (<i>Panorama</i>) → band BOUND.</li>
+<li>Issue 3 Painting — not musical equipment, personal, home address: not kind of business (<i>Mercantile</i>), not usual way (<i>Goldberg</i>), no holding out (<i>Essington</i>) → band NOT bound.</li>
+<li>Issue 4 Roxanne personally liable for painting (<i>Oliana Foods</i>) → YES.</li>
+<li>Remedies: Bob keeps $36k; refund $10k to the band account &amp; recover $10k from Roxanne; band may also pursue Roxanne (s 32 PA).</li></ol></div>
+
+<div class="answer">
+<p>Whether Bob must refund Maxine and Kevin depends upon three issues: first, whether Maxine, Kevin and Roxanne carry on Pop Rocks in partnership, so that Roxanne is their agent; second, whether Roxanne had authority to bind the band to the drum set and to the painting; and third, for any purchase made without authority, whether Roxanne is personally liable to Bob. Although Kevin and Maxine refer to a “company card”, there are no facts suggesting Pop Rocks has been incorporated under the <i>Corporations Act 2001</i> (Cth); I assume it has not.</p>
+<p class="note">Kevin and Maxine’s words (“employee”, “company card”) are bait. Testing the partnership requirements is how you neutralise “employee”.</p>
+
+<h3>Issue 1: Partnership</h3>
+<p><b>Issue:</b> Are Maxine, Kevin and Roxanne partners in Pop Rocks under the <i>Partnership Act 1891</i> (Qld) (‘PA’), such that Roxanne is an agent of the others?</p>
+<p><b>Law:</b> A partnership is “the relation which subsists between persons carrying on a business in common with a view of profit”: PA s 5(1). It exists whenever four requirements are met, regardless of formality or intention, and each partner is both principal and agent of the others (PA s 8), with unlimited personal liability (<span class="case">Kendall v Hamilton (1879)</span>). The requirements are: (1) at least two persons (and generally no more than 20: <i>Corporations Act 2001</i> (Cth) s 115); (2) carrying on a business — a trade, occupation or profession (s 3) with continuity, not a one-off transaction (<span class="case">Smith v Anderson (1880)</span>); (3) in common — each acting for the others as well as themselves, which distinguishes partners from an employer and employee (<span class="case">Degiorgio v Dunn (2004)</span>); and (4) with a view of profit (<span class="case">Minter v Minter (2000)</span>).</p>
+<p><b>Application:</b> There are three persons. Pop Rocks has performed in major cities across Australia for two years, generating $800,000 in profit — a continuing trade, unlike the one-off venture in <span class="case">Smith v Anderson</span>. The profit requirement is plainly satisfied.</p>
+<p>The key dispute is whether Roxanne is acting “in common” or is, as Kevin and Maxine claim, their employee. In support of their claim, Roxanne is paid a $50,000 salary and holds the role of marketing manager, which resembles employment as in <span class="case">Degiorgio v Dunn</span>. However, Roxanne receives the same 20% profit share as Maxine and Kevin, and has the same right to spend from the shared account. These are the rights of a co-owner acting on behalf of all members, not an employee. Her salary is expressly paid only to compensate her “extra responsibilities”, which does not change her status as a band member.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Maxine, Kevin and Roxanne are partners, so Roxanne is an agent of the firm and of Maxine and Kevin.</p>
+
+<h3>Issue 2: The electronic drum set</h3>
+<p><b>Issue:</b> Are Maxine, Kevin and Roxanne (the firm) liable to Bob for the $36,000 drum set, on the basis that Roxanne had authority to purchase it under the law of agency?</p>
+<p><b>Law:</b> Agency is a legal relationship in which an agent is authorised to act on behalf of a principal in dealings with a third party. If the agent acts within their authority, the contract binds the principal and the third party, and the agent incurs no personal liability. Authority may be actual or apparent.</p>
+<p>Actual authority is created by consensual agreement between principal and agent: <span class="case">Freeman &amp; Lockyer v Buckhurst Park Properties Ltd [1964]</span>. It may be express (written or oral) or implied. A partner has implied authority to do the usual things needed to carry on the firm’s business, including buying goods of the kind usually employed in that business; however, implied authority can be overridden by the partnership agreement or express instructions to the contrary: <span class="case">Construction v Hexyl (1985)</span>.</p>
+<p>Apparent authority arises where the principal leads a third party to reasonably believe the agent has authority, by appointing the agent to a position or allowing them to act in the past; the principal is bound even if it expressly told the agent not to act. In <span class="case">Panorama v Fidelis Furnishing Fabrics (1971)</span>, a company secretary hired cars in the company’s name without actual authority, partly for personal use; the company was bound because such contracts were within the secretary’s usual, and therefore apparent, authority. For partners, s 8 PA provides that the firm is bound where the partner: (1) carries on business of the kind carried on by the firm (<span class="case">Mercantile v Garrod (1962)</span>); (2) in the usual way (<span class="case">Goldberg v Jenkins (1889)</span>); (3) the third party knew or believed them to be a partner; and (4) the third party did not know or suspect the lack of authority, relying in good faith without notice (<span class="case">Crouch v IPG (2013)</span>). The partnership agreement binds only the partners, not third parties.</p>
+<p><b>Application:</b></p>
+<p><i>Express authority.</i> The members agreed that each could spend up to $50,000 on upgrading musical equipment, with the permission of at least one other member. The drum set is musical equipment and its $36,000 price is within the limit. However, there is no evidence that Roxanne obtained Maxine’s or Kevin’s permission — both were furious to learn of the purchase. Roxanne therefore acted outside her express authority.</p>
+<p><i>Implied authority.</i> Buying band equipment is a usual part of carrying on a band’s business. However, as in <span class="case">Construction v Hexyl</span>, the members’ express agreement requiring permission overrides any wider implied authority. Roxanne lacked actual authority.</p>
+<p><i>Apparent authority.</i> First, a drum set is exactly the type of goods a touring band uses, and was bought to upgrade equipment for the band’s Christmas performances; it is business of the kind carried on by the firm. Second, it was carried out in the usual way: Roxanne “regularly buys band equipment” from Bob “on behalf of the band”, paid on the card linked to the band’s shared account, and had the drum set sent to the “normal address”, the band’s recording studio. Third, Bob knew Roxanne as a member of the band who bought on its behalf; Maxine and Kevin held her out as having authority by allowing these purchases in the past. Similar to <span class="case">Panorama</span>, where the secretary’s position made the car hire look normal, Roxanne’s established role made this purchase appear authorised. Fourth, there is no evidence that Bob knew of the internal permission requirement, which binds only the members. Maxine and Kevin may argue that the 20% discount should have made Bob suspicious; however, the discount was explained by Bob’s regular dealings with the band and his being a fan, and does not suggest any lack of authority.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Roxanne had apparent authority, so Maxine, Kevin and Roxanne are liable for the drum set and are not entitled to a refund.</p>
+
+<h3>Issue 3: The limited-edition painting</h3>
+<p><b>Issue:</b> Are Maxine, Kevin and Roxanne liable to Bob for the $10,000 painting, on the basis that Roxanne had authority to purchase it under the law of agency?</p>
+<p><b>Law:</b> The law set out in Issue 2 applies. In addition, apparent authority requires a representation by the principal; an agent cannot create their own authority: <span class="case">Essington v Regency (2004)</span>, where an agent had no apparent authority to vary a contract because the principal had done nothing to represent that the agent could do so.</p>
+<p><b>Application:</b> Roxanne had no express authority, because a painting is not “musical equipment” and no permission was obtained; nor any implied authority, because buying artwork is not a usual thing needed to carry on a band’s business. As to apparent authority, first, a signed painting of Roxanne’s “favourite musician” is a personal item, not a transaction a band would usually engage in (<span class="case">Mercantile v Garrod</span>). Second, it was not done in the usual way: Roxanne asked Bob to send it to her home address rather than the band’s studio, and as in <span class="case">Goldberg v Jenkins</span>, this departure should have made Bob suspect a lack of authority. Third, while Maxine and Kevin had held Roxanne out as able to buy <i>band equipment</i>, they had never represented that she could buy art; as in <span class="case">Essington v Regency</span>, Roxanne’s own instruction to “put it on the same card” cannot create authority. Bob may argue he reasonably assumed any purchase on the band’s card was authorised, but given the personal nature of the item and the home delivery, that reliance is not reasonable.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Roxanne had no authority to buy the painting, so Maxine and Kevin are not liable for it.</p>
+
+<h3>Issue 4: Roxanne’s personal liability for the painting</h3>
+<p><b>Issue:</b> Can Bob hold Roxanne personally liable for the painting?</p>
+<p><b>Law:</b> An agent who lacks authority is personally liable to the third party for breach of warranty of authority if: (1) the agent claimed to contract on behalf of the principal; (2) the agent had no authority; and (3) the third party relied on that representation and would not otherwise have contracted: <span class="case">Oliana Foods Pty Ltd v Culinary Co [2020]</span>.</p>
+<p><b>Application:</b> By telling Bob to put the painting “on the same card” — the band’s card — Roxanne represented that the band was paying. She had no authority (Issue 3), and Bob, who discounted the item because of his relationship with the band, accepted payment on the basis that the band’s card would honour it. Alternatively, if Roxanne is treated as having bought the painting for herself, she is simply the buyer and personally liable under the contract of sale.</p>
+<p><b>Conclusion:</b> Either way, Roxanne is personally liable to Bob for the $10,000.</p>
+
+<h3>Remedies</h3>
+<p>Bob may retain the $36,000 for the drum set; the firm is bound, and Maxine, Kevin and Roxanne are jointly and personally liable for it (<span class="case">Kendall v Hamilton</span>). As to the painting, Bob may need to refund the $10,000 charged to the band’s account, but he may recover $10,000 (or damages for breach of warranty of authority) from Roxanne personally, or seek the return of the painting. Bob should also be advised that Maxine and Kevin may separately pursue Roxanne for breach of her fiduciary duty as a partner not to use her position for private profit and to account for it (<span class="case">Birtchnell v Equity (1929)</span>; s 32 PA) — but that is a matter between the partners.</p>
+</div>
+
+<!-- ============ ANSWER 3: Week 12 Q&A ============ -->
+<h3>Model answer 3 — Week 12 Agency Q&amp;A (Cristina, Davo and Patrizia) — the lecturer’s template, filled in</h3>
+<details><summary>Question text (click)</summary>
+<div class="card q">
+<p>Cristina is a home owner in St Lucia, Brisbane. She has put her house on the market and wants to sell it as fast as possible, as she is moving Interstate. Her house is valued at around $1.2 million. Whilst the house is on the market, Cristina is called away overseas for 2 months, due to an urgent family matter where she has to look after her sick Mum.</p>
+<p>Davo is a real estate agent with his own real estate agency business in St Lucia. As Cristina will be away for 2 months, she appoints Davo during that time (in writing) to sell her house to the first buyer who makes an offer over $1 million. She also instructs Davo to put up a “For Sale” sign at the front of her property with the words: “All enquiries to David Barnes at ‘Dave’s Real Estate’, St Lucia.”</p>
+<p>One week after Cristina leaves, Patrizia (a 1st home buyer) sees the sign and contacts Dave’s Real Estate. She inspects the house and makes an offer of $850,000. Davo says nothing to Patrizia about Cristina’s instruction to him to sell the property for over $1 million. Instead, Davo says: “I am authorized by the owner to accept any offer that I determine to be reasonable. Your offer is more than reasonable. Congratulations.” Davo accepts Patrizia’s $850,000 offer on Cristina’s behalf and organizes the paperwork.</p>
+<p>After 2 months, Cristina returns from overseas and is annoyed at what has happened. She now wishes to rescind the contract or sue Patrizia for the $150,000. Please advise Cristina on who will be liable in this situation and what remedies may result.</p>
+</div></details>
+<div class="method"><b>Answer plan</b> (the lecturer used 2 issues — mirror it)
+<ol><li>Issue 1 Authority — express: sell over $1m ✘; implied: sign, show, give information ✔ but not to sell below $1m → outside actual authority.</li>
+<li>Apparent: Patrizia didn’t know of $1m limit ✔; Cristina held Davo out (appointed him, her sign directs all enquiries to him) ✔ — but Davo’s own claim can’t count (<i>Essington</i>); reliance reasonable ✔ (<i>Panorama</i>) → contract binds Cristina.</li>
+<li>Issue 2 Fiduciary duties — follow instructions (<i>Bertram Armstrong</i>), act in P’s interests (<i>Hewson</i>), due care (<i>Provincial Insurance</i>), communicate (<i>John D Wood</i>) → breached; also breach of the written contract of agency.</li>
+<li>Conclusion: no rescission, no claim against Patrizia; damages from Davo (≥$150,000).</li></ol></div>
+
+<div class="answer">
+<p>Cristina’s position depends upon two issues: first, whether Davo had authority to bind Cristina to the sale to Patrizia; and second, whether Davo breached the fiduciary duties he owed to Cristina.</p>
+
+<h3>Issue 1: Davo’s authority</h3>
+<p><b>Issue:</b> Did Davo have authority to act on behalf of his principal, Cristina, when accepting Patrizia’s $850,000 offer, so that Cristina is bound by the contract?</p>
+<p><b>Law:</b> Agency is a legal relationship in which one person (the agent) is authorised to act on behalf of another (the principal) in dealings with a third party. The relationship gives rise to obligations on both principal and agent which are both contractual and fiduciary in nature. An agent may be authorised by actual authority — express or implied — or by apparent authority. If the agent acts within the scope of their authority, the resulting contract is between the principal and the third party, and the agent incurs no personal liability.</p>
+<p><i>Express actual authority</i> is authority expressly given by the principal to the agent, in writing (including by deed, such as a power of attorney) or orally; actual authority arises from a consensual agreement to which principal and agent alone are parties: <span class="case">Freeman &amp; Lockyer v Buckhurst Park Properties Ltd [1964]</span>. <i>Implied actual authority</i> is the authority to do all things necessarily incidental to carrying out the express instructions, or needed to give them business efficacy; for example, a real estate agent appointed to sell a house has implied authority to give buyers information about it. Implied authority is not found merely because it would be convenient: <span class="case">Peterson v Moloney (1951)</span>.</p>
+<p><i>Apparent authority:</i> if the principal allows a third party to believe the agent has authority, the principal will be bound to honour the agent’s dealings with the third party even if the agent was not actually authorised, and even if the principal told the agent not to act that way. The three requirements are that: (1) the third party did not know the agent lacked actual authority; (2) the principal held the agent out as having authority, for example by appointing them to a particular position; and (3) the third party reasonably relied on the principal’s representation. In <span class="case">Panorama v Fidelis Furnishing Fabrics (1971)</span>, a company secretary without actual authority hired cars in the company’s name; the company was bound because the contracts fell within the usual authority of the secretary’s position. However, the representation must come from the principal: an agent cannot create their own authority by claiming it: <span class="case">Essington v Regency (2004)</span>.</p>
+<p><b>Application:</b> A relationship of principal and agent exists: Cristina is the principal, Davo is the agent and Patrizia is the third party.</p>
+<p><i>Actual authority.</i> Cristina gave Davo express authority, in writing, to sell the house to the first buyer offering over $1 million, and to put up a “For Sale” sign directing enquiries to him. Davo also had implied authority to do things necessarily incidental to that task, such as answering enquiries, showing Patrizia through the house and providing information about it. However, in accepting $850,000, Davo acted outside his actual authority, which was expressly confined to offers over $1 million.</p>
+<p><i>Apparent authority.</i> As was the case in <span class="case">Panorama</span>, where the company was bound by contracts within the usual authority of the position it had given the secretary, Patrizia would argue that Davo had apparent authority. First, Patrizia did not know of the $1 million limit — Davo said nothing to her about it. Second, Cristina herself held Davo out as her agent with authority to deal with buyers: she appointed him as her selling agent and instructed him to erect a sign at her property stating “All enquiries to David Barnes”. Cristina will rely on <span class="case">Essington v Regency</span> to argue that Davo’s statement that he was “authorized by the owner to accept any offer that I determine to be reasonable” came only from the agent and cannot create authority. That is correct as far as it goes, but Patrizia does not rely on Davo’s words alone; Cristina’s own appointment of Davo and her sign are representations by the principal. Third, Patrizia, a first home buyer, saw the sign, contacted the agency it named and dealt with the agent Cristina had appointed; her reliance was reasonable.</p>
+<p><b>Conclusion:</b> On the balance of probabilities, Davo had apparent authority to act on behalf of Cristina, so Patrizia can enforce the contract against Cristina and the contract will not be rescinded.</p>
+
+<h3>Issue 2: Davo’s fiduciary duties</h3>
+<p><b>Issue:</b> Did Davo breach the fiduciary duties he owed to Cristina?</p>
+<p><b>Law:</b> Agents owe fiduciary duties to their principal as a result of the relationship of trust and confidence between them. These include the duty to follow the principal’s lawful instructions, a breach of which makes the agent personally liable to the principal for the resulting harm (<span class="case">Bertram Armstrong v Godfray (1830)</span>); to act in the principal’s interests and not put the agent’s interests in conflict with them (<span class="case">Hewson v Sydney (1968)</span>); to exercise due care, skill and diligence, failing to do what a reasonable agent would do in the circumstances (<span class="case">Provincial Insurance v Consolidated Wood (1991)</span>); and to communicate relevant information to the principal (<span class="case">John D Wood v Knatchbull (2002)</span>). These duties may also be imposed as contractual duties under the agency agreement.</p>
+<p><b>Application:</b> It is likely that Davo breached his fiduciary duties to Cristina because: first, he disobeyed her lawful, written instruction to sell only for over $1 million, as in <span class="case">Bertram Armstrong v Godfray</span>; second, accepting $850,000 for a house valued at around $1.2 million was contrary to Cristina’s interests, and is not what a reasonable agent exercising due care and skill would do; and third, he did not communicate the below-threshold offer to Cristina before accepting it — although she was overseas, there is no suggestion she could not be contacted. Since the instructions were in writing, this is also a breach of the terms of the contract of agency, which amounts to a breach of contract by Davo.</p>
+<p><b>Conclusion:</b> Davo has breached his fiduciary duties and his contract of agency with Cristina.</p>
+
+<h3>Remedies</h3>
+<p>On the balance of probabilities, a court would likely decide that Patrizia can enforce the contract under apparent authority, so Cristina cannot rescind it, and she has no claim against Patrizia, an innocent third party who acted in good faith. However, Cristina is entitled to damages from Davo for the loss caused by his breaches — at least the $150,000 difference between the sale price and her $1 million minimum (and arguably more, given the $1.2 million valuation). Davo has no right to remuneration for the sale unless the agency agreement provides for it, and he cannot claim an indemnity for acting outside Cristina’s instructions.</p>
+<p class="note">This mirrors the lecturer’s own template conclusion: “Patrizia can enforce … However, Davo has breached his … Therefore Cristina would be entitled to [damages] from Davo.”</p>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="traps">
+<h2>⑤ Traps</h2>
+<div class="trap">Stopping after “no actual authority”. ALWAYS go on to apparent authority — that is where the marks are, and the facts are written to make it arguable.</div>
+<div class="trap">Treating the agent’s own words (“I’m authorised…”) as holding out. The representation must come from the <b>principal</b> (<i>Essington v Regency</i>). Look for what P did: appointment, title, past dealings, signs, promotional materials.</div>
+<div class="trap">Accepting a party’s label. “Employee”, “company card”, “agent”, “joint venture” — test the facts against s 5(1) PA (and check whether any company was actually registered) before using the label.</div>
+<div class="trap">Forgetting that a secret internal limit (spending cap, “needs another member’s permission”) binds only the partners — it stops <i>actual</i> authority but not <i>apparent</i> authority unless the third party knew of it.</div>
+<div class="trap">Missing the “notice” fact. A single line like “provided he could convince Callum and Tessa” or “send it to my home address” is the examiner telling you requirement 2 or 4 of s 8 fails.</div>
+<div class="trap">Two purchases = two separate authority analyses. Don’t lump them together — one is usually authorised, the other not.</div>
+<div class="trap">Skipping the agent’s personal liability. If you find no authority, the third party is not left empty-handed: breach of warranty of authority (<i>Oliana Foods</i>). That is the “remedy” for the person you’re advising.</div>
+<div class="trap">Out-of-course doctrines: <b>ratification</b> and <b>undisclosed principal</b> are not in the LAWS1100 slides. Don’t build an issue on them (citing outside material is a red flag). Slide 28 only says privity arises “provided the existence of the agency was disclosed”.</div>
+<div class="trap">Using company law (<i>Salomon</i>, directors) for a partnership. A partnership is NOT a separate legal entity — partners are personally liable (<i>Kendall v Hamilton</i>).</div>
+<div class="tip">Jurisdiction: facts set in Sydney etc. — say you are applying the <i>Partnership Act 1891</i> (Qld) as taught and assume the local Act is equivalent.</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="sheet">
+<h2>⑥ Printable open-book sheet</h2>
+<p class="noprint"><button class="printbtn" onclick="window.print()">🖨 Print this page</button> — or use the <a href="print.html">print binder</a>.</p>
+<div class="sheet" data-topic="T8">
+<span class="tabhead">T8</span><h2>Agency &amp; Partnership — exam sheet</h2>
+
+<div class="key"><b>Writing order:</b> Opener → <b>I1</b> Partnership? (s 5(1) PA, 4 reqs) → <b>I2</b> Authority for transaction 1 (express → implied → apparent / s 8) → <b>I3</b> Authority for transaction 2 → <b>I4</b> Agent personally liable? (<i>Oliana Foods</i>) → [fiduciary duties if advising P] → <b>Remedies</b>. Each issue: <b>I</b> (one-line question?) <b>L</b> (define area → rules + cases w/ facts) <b>A</b> (mirror L; both sides; “Similar to / Unlike”) <b>C</b> (“On the balance of probabilities…”).</div>
+
+<h3>Opener</h3>
+<div class="say">Whether [3P] can recover [$X] depends upon three issues: first, whether [A, B and C] are in partnership; second, whether [A] had authority to bind [the firm] when [purchasing …]; and third, if not, whether [A] is personally liable to [3P].</div>
+
+<div class="cols">
+<div class="box"><b>I1 — Partnership</b><br><b>Issue:</b> Were [A, B, C] carrying on business in partnership under the <i>Partnership Act 1891</i> (Qld), such that each was the agent of the others?<br>
+<b>Law:</b> “the relation which subsists between persons carrying on a business in common with a view of profit” — <b>s 5(1) PA</b>. No formalities; agreement may be implied from conduct; exists regardless of intention. Each partner = principal + agent of others; unlimited personal liability — <i>Kendall v Hamilton (1879)</i>.
+<ol><li><b>Persons</b> ≥2, ≤20 (s 115 CA; prof. exceptions reg 2A.1.01).</li>
+<li><b>Carrying on a business</b> — trade/occupation/profession (s 3); continuity; one-off ≠ partnership <i>Smith v Anderson (1880)</i>; starts when they begin working together <i>Khan v Miah [2000]</i>.</li>
+<li><b>In common</b> — each acts for the others; employer/employee ≠ partners <i>Degiorgio v Dunn (2004)</i>; silent partners still liable.</li>
+<li><b>View of profit</b> — even if loss <i>Minter v Minter (2000)</i>.</li></ol>
+<b>Facts ✔:</b> joint account · equal profit split · majority vote · shared office · “part of the team” · promo materials · years of trading.<br><b>Facts ✘:</b> fixed salary only, no profit share/no say · single project · freelance on the side (weak).</div>
+
+<div class="box"><b>I2/I3 — Authority</b><br><b>Issue:</b> Is [P / the firm] bound by the contract [A] made with [3P] for [item], on the basis that [A] had authority under the law of agency?<br>
+<b>Law opener:</b> Agency is a legal relationship in which one person (the agent) is authorised to act on behalf of another (the principal) in dealings with a third party. If A acts within authority, the contract is between P and 3P and A incurs no personal liability. Authority: actual (express / implied) or apparent.<br>
+<b>Actual</b> = consensual agreement between P and A alone — <i>Freeman &amp; Lockyer v Buckhurst Park [1964]</i>.<br>
+<b>Express</b> — writing (deed/power of attorney) or oral.<br>
+<b>Implied</b> — all things necessarily incidental to express instructions / business efficacy; not found in <i>Peterson v Moloney (1951)</i>. Partners: usual things to carry on the business — sell firm property, buy goods of the kind usually used, hire staff, borrow, incur/pay debts; <b>overridden</b> by agreement/express contrary instruction — <i>Construction v Hexyl (1985)</i>.<br>
+Company officers: director/Chair alone → none; MD/CEO → ordinary course; Secretary → administrative — <i>Giltrap City v Commerce Commission [2004]</i>.</div>
+
+<div class="box"><b>Apparent — general (3 elements)</b><br>P leads 3P to reasonably believe A has authority → P bound even if A had none / was told not to.
+<ol><li><b>Lack of knowledge</b> — 3P didn’t know A lacked authority;</li>
+<li><b>Holding out</b> by <u>P</u> — appointment to position / past dealings;</li>
+<li><b>Reasonable reliance</b> on P’s representation.</li></ol>
+<i>Panorama v Fidelis (1971)</i> — co. secretary hired cars (some personal use); within usual → apparent authority; company bound.<br>
+<i>Essington v Regency (2004)</i> — agent varied contract; P did nothing to represent authority → none. A can’t create own authority.<br>
+Withdrawal: apparent authority survives until 3P told — <i>Summers v Solomon (1857)</i>; <i>Tooth v Laws (1888)</i>; P has duty to inform 3P.</div>
+
+<div class="box"><b>Apparent — partners (s 8 PA, 4 reqs)</b><br>Every partner is agent of the firm; acts “for carrying on in the usual way business of the kind carried on by the firm” bind the firm unless no authority AND 3P knew / didn’t believe them a partner.
+<ol><li>Business <b>of the kind</b> carried on by firm — what is the firm’s actual business + what deals such a firm usually does — <i>Mercantile v Garrod (1962)</i>;</li>
+<li>Done in the <b>usual way</b> — otherwise 3P should suspect — <i>Goldberg v Jenkins (1889)</i>;</li>
+<li>3P <b>knew/believed</b> they were a partner;</li>
+<li>3P <b>didn’t know/suspect</b> lack of authority — good faith, no notice — <i>Crouch v IPG (2013)</i>.</li></ol>
+Partnership agreement binds partners only, not 3Ps.</div>
+</div>
+
+<div class="sheet-break"></div>
+<h3>Application starters (authority)</h3>
+<div class="say">[P] is the principal, [A] the agent and [3P] the third party. As established, [A] is a partner and therefore an agent of the firm and of [B and C] (s 8 PA).</div>
+<div class="say"><b>Express:</b> [A] was expressly authorised to [spend up to $X on … with permission]. The purchase [fell within / outside] this because [no permission was obtained / not musical equipment / price below limit]. [B and C] were [“furious”], showing no express authority.</div>
+<div class="say"><b>Implied:</b> [3P] will argue buying [equipment] is a usual thing to carry on the business. However, [the firm only hired / majority vote / permission rule] overrides this, as in <i>Construction v Hexyl</i>.</div>
+<div class="say"><b>Kind of business:</b> [item] is [exactly what a … uses] → within the firm’s business, similar to <i>Panorama</i>. / [item] is [personal / for a different, larger-scale business], so applying <i>Mercantile v Garrod</i> it is not a transaction a firm of this kind would usually engage in.</div>
+<div class="say"><b>Usual way:</b> [A] regularly buys from [3P] on behalf of [firm], paid on the firm card, delivered to the [studio] — the usual way. / [home delivery / $180k purchase when they always hire] is not the usual way; as in <i>Goldberg v Jenkins</i>, [3P] should have suspected.</div>
+<div class="say"><b>Holding out:</b> [B and C] held [A] out by [introducing as part of the team / past purchases / the sign], a representation by the principals themselves, unlike <i>Essington v Regency</i>. / [A]’s own claim that [“I am authorised…”] cannot create authority (<i>Essington</i>).</div>
+<div class="say"><b>Notice:</b> no evidence [3P] knew of [the internal rule], which binds only the partners. / [A] told [3P] [he still needed B and C’s approval], so [3P] was on notice and did not rely in good faith (<i>Crouch v IPG</i>).</div>
+<div class="say"><b>C:</b> On the balance of probabilities, [A] [had / did not have] apparent authority, so [the firm and partners] [are / are not] bound to pay [3P] for [item].</div>
+
+<div class="cols">
+<div class="box"><b>I4 — Agent personally liable (no authority)</b><br><b>Issue:</b> Can [3P] hold [A] personally liable for breach of warranty of authority?<br>
+<b>Law:</b> A liable if (1) A claimed to contract on behalf of P; (2) A had no authority; (3) 3P relied and wouldn’t have contracted otherwise — <i>Oliana Foods v Culinary Co [2020]</i>. Also possibly deceit, negligence, s 18 ACL.<br>
+<b>A:</b> signed “on behalf of [firm]” / used firm card → (1); Issue 2 → (2); [3P] wouldn’t have [built $180k stage] for [A] personally → (3). Against: A disclosed he needed approval → no reliance.</div>
+
+<div class="box"><b>Agency of necessity</b> (only if emergency): A has P’s property · property under threat · can’t contact P · good faith. <i>Springer v GWR [1921]</i> — failed: could have contacted P.<br><br>
+<b>Capacity:</b> P needs full capacity; A needn’t (even a minor).<br>
+<b>Outcome:</b> privity between P and 3P if agency disclosed + A within actual/apparent authority; A not party, not liable.<br>
+<b>P liable for A’s torts?</b> Employee → likely vicarious (within instructions); independent contractor → unlikely.</div>
+
+<div class="box"><b>Fiduciary duties — agent → principal</b><br><b>Law:</b> Agents owe fiduciary duties to P from the relationship of trust and confidence; often also contract terms.
+<ul><li>Follow lawful instructions — <i>Bertram Armstrong v Godfray (1830)</i></li>
+<li>Due care, skill, diligence (else negligence) — <i>Provincial Insurance v Consolidated Wood (1991)</i></li>
+<li>Act in person (no sub-agent) — <i>John McCann v Pow (1975)</i> (agent appointed another agent to sell → breach)</li>
+<li>Act in P’s interests; no secret profit/commission/bribe — <i>Hewson v Sydney (1968)</i></li>
+<li>Communicate relevant info — <i>John D Wood v Knatchbull (2002)</i></li>
+<li>Confidentiality · keep accounts, keep P’s money separate</li></ul>
+<b>P’s duties to A:</b> pay only if agreed · indemnify/reimburse expenses within instructions · A has lien if unpaid.</div>
+
+<div class="box"><b>Fiduciary duties — partners ↔ partners</b>
+<ul><li>No personal profit from position/info — <i>Chan v Zaccharia (1984)</i></li>
+<li>No undisclosed conflict</li>
+<li>Full disclosure — <i>Law v Law (1905)</i>; s 31 PA</li>
+<li>Account for private profits — <i>Birtchnell v Equity (1929)</i>; s 32 PA</li>
+<li>Don’t compete with firm — s 33 PA</li></ul></div>
+</div>
+
+<div class="box"><b>Remedies lines</b><br>
+<b>Authority →</b> [3P] may enforce against [P / firm] for [$X]. Partners are jointly and personally liable (<i>Kendall v Hamilton</i>); a partnership is not a separate legal entity (though it may be sued), so [3P] can recover from [A, B and C]’s personal assets.<br>
+<b>No authority →</b> [P] not bound; may return goods / recover payment. [3P] claims damages from [A] personally (breach of warranty of authority) — up to [$ balance], less what it recovers by reselling returned goods.<br>
+<b>Internal →</b> [P / partners] may sue [A] for breach of fiduciary duty / contract of agency for [loss / deposit]; no indemnity for unauthorised acts; no pay unless agreed.</div>
+
+<h3>Case table</h3>
+<table>
+<tr><th>Case</th><th>Facts / held (from slides)</th><th>Use it when</th></tr>
+<tr><td>Freeman &amp; Lockyer v Buckhurst Park [1964]</td><td>Lord Diplock: actual authority = consensual agreement between P and A alone</td><td>Defining actual authority</td></tr>
+<tr><td>Peterson v Moloney (1951)</td><td>Implied authority NOT found</td><td>Arguing against implied authority</td></tr>
+<tr><td>Giltrap City v Commerce Commission [2004]</td><td>More senior role → more implied authority</td><td>Company officers</td></tr>
+<tr><td>Panorama v Fidelis Furnishing Fabrics (1971)</td><td>Co. secretary hired cars (partly personal); no actual authority; within usual → apparent; company bound</td><td>A’s role makes deal look normal</td></tr>
+<tr><td>Essington v Regency (2004)</td><td>Agent varied contract; P made no representation → no apparent authority</td><td>Only A claimed authority</td></tr>
+<tr><td>Summers v Solomon (1857)</td><td>Supplier unaware employment ended → P bound</td><td>Authority withdrawn, 3P not told</td></tr>
+<tr><td>Tooth v Laws (1888)</td><td>Did 3P know authority withdrawn?</td><td>Same</td></tr>
+<tr><td>Springer v Great Western Railway [1921]</td><td>Agency of necessity failed — could have contacted P</td><td>Emergency facts</td></tr>
+<tr><td>Oliana Foods v Culinary Co [2020]</td><td>Breach of warranty of authority — 3 reqs</td><td>No authority → sue A</td></tr>
+<tr><td>Bertram Armstrong v Godfray (1830)</td><td>Duty to follow lawful instructions</td><td>A ignored instructions</td></tr>
+<tr><td>John D Wood v Knatchbull (2002); Hewson v Sydney (1968)</td><td>Duty to communicate; act in P’s interests / no secret profit</td><td>Secret commission, conflict, withheld info</td></tr>
+<tr><td>John McCann v Pow (1975)</td><td>Agent appointed another agent to sell → breach of duty to act in person</td><td>Delegation</td></tr>
+<tr><td>Provincial Insurance v Consolidated Wood (1991)</td><td>Duty of due care and skill</td><td>Careless agent</td></tr>
+<tr><td>Kendall v Hamilton (1879)</td><td>Partners jointly (and jointly &amp; severally for torts/crimes) liable</td><td>Who pays — remedies</td></tr>
+<tr><td>Smith v Anderson (1880)</td><td>One-off transaction usually not a partnership</td><td>“Carrying on”</td></tr>
+<tr><td>Khan v Miah [2000]</td><td>Partnership starts when they begin working to set up the business</td><td>Late joiner / pre-launch</td></tr>
+<tr><td>Degiorgio v Dunn (2004)</td><td>Employer/employee are not partners</td><td>“They’re just our employee”</td></tr>
+<tr><td>Minter v Minter (2000)</td><td>Still a partnership despite loss</td><td>Business losing money</td></tr>
+<tr><td>Construction v Hexyl (1985)</td><td>Implied authority overridden by agreement / contrary instructions</td><td>Internal limit / permission rule</td></tr>
+<tr><td>Mercantile v Garrod (1962)</td><td>Business “of the kind” = firm’s actual business + usual transactions of such a firm</td><td>s 8 req 1</td></tr>
+<tr><td>Goldberg v Jenkins (1889)</td><td>Not in the usual way → 3P should suspect; firm not bound</td><td>s 8 req 2</td></tr>
+<tr><td>Crouch v IPG (2013)</td><td>3P must rely in good faith without notice</td><td>s 8 req 4 / notice facts</td></tr>
+<tr><td>Chan v Zaccharia (1984); Law v Law (1905); Birtchnell v Equity (1929)</td><td>Partner fiduciary duties: no personal profit; disclosure (s 31); account (s 32); no competing (s 33)</td><td>Partner v partner</td></tr>
+<tr><td>Canny v Volume (1974); Palermo v Palermo (2014)</td><td>JV vs partnership decided by partnership requirements</td><td>“It’s a joint venture”</td></tr>
+<tr><td>Salomon v Salomon (1897)</td><td>Company separate legal entity; Salomon could be secured creditor of his own company</td><td>Company debts / owners’ liability</td></tr>
+<tr><td>Automatic v Cunninghame (1906)</td><td>Directors manage; shareholders vote on limited matters</td><td>Who controls a company</td></tr>
+<tr><td>Burger King v Hungry Jacks (2001)</td><td>Franchise relationship breakdown</td><td>Franchise disadvantage</td></tr>
+</table>
+
+<div class="cols">
+<div class="box"><b>Business structures — one-liners</b><br>
+<b>Sole trader:</b> owns/runs personally; no formalities; unlimited personal liability.<br>
+<b>Partnership:</b> s 5(1) PA; mutual liability; unlimited joint liability (<i>Kendall</i>); not a separate entity; ≤20 (s 115 CA).<br>
+<b>Joint venture:</b> contract for a finite project, parties keep distinct identities; test partnership reqs (<i>Canny v Volume; Palermo</i>).<br>
+<b>Trust:</b> listed only — trustee holds property for beneficiaries (no slide content).<br>
+<b>Company:</b> registered with ASIC; separate legal entity (<i>Salomon</i>); ≥1 shareholder (s 114); pty ≥1 director, public ≥3; director: individual, 18+, not disqualified; constitution / replaceable rules (s 134); directors manage (<i>Automatic v Cunninghame</i>); shareholders’ liability limited to share price (limited by shares).<br>
+<b>Franchise:</b> contract to use franchisor’s name/system for fee; Franchising Code (Pt IVB CCA, ACCC): disclosure, 7-day cooling off, banned terms, dispute resolution.</div>
+
+<div class="box"><b>Exam fact triggers</b>
+<ul><li>“no formal agreement”, joint account, equal split → partnership ✔</li>
+<li>“our employee” + profit share → still partner (<i>Degiorgio</i> distinguished)</li>
+<li>“needs permission of another member” → no express; implied overridden; apparent turns on 3P’s knowledge</li>
+<li>“regularly buys from him on behalf of the band” → holding out by past dealings</li>
+<li>“send it to my home address”, personal item → not usual way / not kind</li>
+<li>“provided he could convince [partners]” → 3P on notice → s 8 req 4 fails</li>
+<li>“they only hire equipment” / small events vs concerts → not usual way / not kind</li>
+<li>“I am authorised…” (A’s words only) → <i>Essington</i>; sign/appointment by P → holding out</li>
+<li>“company card” w/o incorporation; facts outside Qld → state assumption</li><li><b>Not in course:</b> ratification, undisclosed principal</li></ul></div>
+</div>
+</div>
+</section>
+</main></body></html>
