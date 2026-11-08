@@ -1,0 +1,100 @@
+/* LAWS1100 pack — shared styles. Dark on screen, clean black-on-white when printed. */
+:root{--bg:#0e1117;--panel:#171c26;--panel2:#1e2530;--ink:#e8edf4;--muted:#9aa7b8;
+  --accent:#f43f5e;--accent2:#38bdf8;--good:#4ade80;--warn:#fbbf24;--bad:#f87171;--gold:#fbbf24;--line:#2a3340;--code:#0a0e14;--h3:#fde68a;
+  --dem:#38bdf8;--sup:#f59e0b;--shift:#4ade80;--area:#f87171}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+header{background:linear-gradient(135deg,#3f0a17,#0b2740);padding:30px 20px 24px;border-bottom:1px solid var(--line);text-align:center}
+header h1{margin:0 0 6px;font-size:28px}header p{margin:2px;color:var(--muted)}
+.badge{display:inline-block;background:var(--accent);color:#2a0008;font-weight:700;padding:3px 10px;border-radius:20px;font-size:12px;margin:6px 4px 0}
+.badge.gold{background:var(--gold);color:#3a2a00}
+.badge.blue{background:var(--accent2);color:#04202e}
+nav{position:sticky;top:0;z-index:50;background:rgba(14,17,23,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+nav a{background:var(--panel2);padding:6px 11px;border-radius:8px;font-size:12.5px;color:var(--ink);border:1px solid var(--line)}
+nav a:hover{background:var(--accent);color:#2a0008}
+main{max-width:960px;margin:0 auto;padding:22px 16px 80px}
+section{margin:34px 0;scroll-margin-top:58px}
+h2{font-size:22px;border-left:4px solid var(--accent);padding-left:12px}
+h3{font-size:17px;color:var(--h3)}
+h4{font-size:13px;color:var(--gold);margin:16px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:12px 0}
+.q{border-left:5px solid var(--accent2);background:linear-gradient(90deg,rgba(14,165,233,.08),transparent)}
+.qcaa{background:rgba(56,189,248,.08);border:1px solid #1e4a63;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+.qcaa:before{content:"🎓 FROM QCAA — ";color:var(--accent2);font-weight:700}
+.new{background:rgba(244,63,94,.1);border:1px solid #6b1a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+.new:before{content:"🆕 NEW AT UNI — ";color:var(--accent);font-weight:700}
+.method{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font-size:14px}
+.method ol,.method ul{margin:6px 0 0 18px;padding:0}.method li{margin:4px 0}
+.trap{background:rgba(248,113,113,.08);border:1px solid #5f2a2a;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+.trap:before{content:"⚠️ TRAP — ";color:var(--bad);font-weight:700}
+.tip{background:rgba(74,222,128,.08);border:1px solid #245040;border-radius:8px;padding:9px 13px;margin:8px 0;font-size:14px}
+.tip:before{content:"✓ ";color:var(--good);font-weight:700}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0 16px}
+details[open]{padding-bottom:12px}
+summary{cursor:pointer;padding:13px 0;font-weight:600;color:var(--h3);list-style:none}
+summary:before{content:"▸ ";color:var(--accent)}
+details[open] summary:before{content:"▾ "}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--h3)}
+.tablewrap{overflow-x:auto}
+.mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.marks{float:right;color:var(--muted);font-size:13px;font-weight:400}
+.src{color:var(--muted);font-size:12.5px}
+figure{margin:12px 0;text-align:center}
+figure svg{max-width:100%;height:auto;background:#fff;border-radius:8px}
+figcaption{color:var(--muted);font-size:13px;margin-top:4px}
+/* ---------- The printable exam sheet ---------- */
+.sheet{background:#fff;color:#111;border-radius:12px;padding:22px 26px;font-size:13px;line-height:1.4}
+.sheet h2{color:#111;border-left-color:#b45309;font-size:20px;margin-top:0}
+.sheet h3{color:#7c2d12;font-size:14.5px;margin:12px 0 4px;border-bottom:1px solid #ddd;padding-bottom:2px}
+.sheet h4{color:#92400e}
+.sheet a{color:#92400e}
+.sheet table{font-size:12px}
+.sheet th,.sheet td{border-color:#bbb;padding:4px 7px}
+.sheet th{background:#f3f3f3;color:#111}
+.sheet .box{border:1.5px solid #111;border-radius:6px;padding:7px 10px;margin:6px 0;break-inside:avoid}
+.sheet .key{background:#fff7e6;border:1px solid #f0c36d;border-radius:6px;padding:6px 10px;margin:6px 0;break-inside:avoid}
+.sheet .trap{background:#fdecec;border-color:#e3a5a5;color:#111}
+.sheet .tip{background:#ecf8ef;border-color:#9fd3ad;color:#111}
+.sheet .cols{columns:2;column-gap:22px}
+.sheet .cols>*{break-inside:avoid}
+.sheet ul,.sheet ol{margin:4px 0 4px 18px;padding:0}
+.sheet li{margin:2px 0}
+.sheet .tabhead{display:inline-block;background:#111;color:#fff;font-weight:700;padding:2px 10px;border-radius:4px;font-size:11px;letter-spacing:.6px}
+@media(max-width:700px){.sheet{padding:16px}.sheet .cols{columns:1}}
+.printbtn{display:inline-block;background:var(--accent);color:#2a0008;font-weight:700;padding:8px 14px;border-radius:8px;border:0;cursor:pointer;font-size:14px}
+/* ---------- Print ---------- */
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;color:#111;font-size:11.5pt}
+  header{background:none;border:0;padding:0 0 6px}
+  header p{color:#333}
+  nav,.noprint,.printbtn{display:none!important}
+  main{max-width:none;padding:0}
+  .card,details,.method,.qcaa,.new{background:#fff;border-color:#999;color:#111}
+  h2{border-left-color:#b45309;color:#111}h3,summary{color:#7c2d12}
+  th{background:#eee;color:#111}th,td{border-color:#999}
+  .sheet{border-radius:0;padding:0}
+  .sheet-break{break-before:page}
+  a{color:#111}
+}
+/* ---------- LAWS1100 additions: ILAC answer blocks ---------- */
+.ilac{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 20px 14px;margin:14px 0}
+.ilac .lab{display:inline-block;font-weight:800;font-size:11.5px;letter-spacing:.8px;padding:2px 9px;border-radius:5px;margin:12px 0 4px;color:#111}
+.lab.i{background:#38bdf8}.lab.l{background:#fbbf24}.lab.a{background:#4ade80}.lab.c{background:#f472b6}
+.say{background:var(--code);border-left:4px solid var(--accent);border-radius:6px;padding:9px 13px;margin:8px 0;font-size:14.5px}
+.say:before{content:"✍️ WRITE: ";color:var(--accent);font-weight:700;font-size:12px}
+.blank{color:var(--warn);font-weight:700}
+.case{color:#fde68a;font-style:italic}
+.answer{background:#fbfaf6;color:#161616;border-radius:12px;padding:20px 26px;font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.55}
+.answer h3,.answer h4{color:#7f1d1d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.answer .case{color:#7f1d1d}
+.answer .note{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:12.5px;background:#eef6ff;border:1px solid #b9d6f5;border-radius:6px;padding:5px 9px;color:#123}
+.sheet .say{background:#fff7f8;border-left-color:#be123c;color:#111}
+.sheet .say:before{color:#be123c}
+.sheet .case{color:#7f1d1d}
+@media print{.answer{background:#fff;padding:0;font-size:11pt}.ilac{background:#fff;border-color:#999}.say{background:#fff;border-left-color:#be123c;color:#111}.case{color:#7f1d1d}}
